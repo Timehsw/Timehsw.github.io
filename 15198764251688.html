@@ -1,0 +1,792 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  用hexo搭建博客 - Time渐行渐远
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Time渐行渐远" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:dmlcoding.com ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_blank" href="collections.html">COLLECTION</a></li>
+        
+        <li id=""><a target="_blank" href="tools.html">TOOLS</a></li>
+        
+        <li id=""><a target="_blank" href="About.html">ABOUT</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Time渐行渐远</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="BigData.html">BigData</a></li>
+        
+            <li><a href="Python.html">Python</a></li>
+        
+            <li><a href="Linux.html">Linux</a></li>
+        
+            <li><a href="Life.html">Life</a></li>
+        
+            <li><a href="Spark.html">Spark</a></li>
+        
+            <li><a href="Yarn.html">Yarn</a></li>
+        
+            <li><a href="Scala.html">Scala</a></li>
+        
+            <li><a href="VPS.html">VPS</a></li>
+        
+            <li><a href="MachineLearning.html">MachineLearning</a></li>
+        
+            <li><a href="Writer.html">Writer</a></li>
+        
+            <li><a href="Shell.html">Shell</a></li>
+        
+            <li><a href="Algorithm.html">Algorithm</a></li>
+        
+            <li><a href="Mac.html">Mac</a></li>
+        
+            <li><a href="Presto.html">Presto</a></li>
+        
+            <li><a href="Mysql.html">Mysql</a></li>
+        
+            <li><a href="Maven.html">Maven</a></li>
+        
+            <li><a href="Kafka.html">Kafka</a></li>
+        
+            <li><a href="Java.html">Java</a></li>
+        
+            <li><a href="DevTools.html">DevTools</a></li>
+        
+            <li><a href="Hbase.html">Hbase</a></li>
+        
+            <li><a href="ELK.html">ELK</a></li>
+        
+            <li><a href="Druid.html">Druid</a></li>
+        
+            <li><a href="Docker.html">Docker</a></li>
+        
+            <li><a href="DesignPattern.html">DesignPattern</a></li>
+        
+            <li><a href="Computer.html">Computer</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>用hexo搭建博客</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2017/3/4</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='VPS.html'>VPS</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h1 id="toc_0">总结</h1>
+
+<p>安装好 hexo 后,用 Markdown 写好文章后,设置好部署模式.会把内容编译好,上传到 GitHub, 进行博客的渲染.<br/>
+主题在 theme 文件夹下.可以随意更改.<br/>
+如果要加页面,并且页面是分类页面还是标签等等,直接到文章中进行设置即可.<br/>
+好好看看这个主题的设置<a href="http://theme-next.iissnan.com/theme-settings.html">http://theme-next.iissnan.com/theme-settings.html</a><br/>
+好好看看hexo <a href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a></p>
+
+<span id="more"></span><!-- more -->
+
+<h1 id="toc_1">发布文章的步骤：</h1>
+
+<ul>
+<li>1、hexo new 创建文章</li>
+<li>2、Markdown语法编辑文章</li>
+<li>3、hexo new page categories 新建页面</li>
+<li>4、部署（所有打开bash都是在blog目录下）
+<code>
+hexo clean #清除缓存 网页正常情况下可以忽略此条命令
+hexo generate #生成
+hexo server #启动服务预览，非必要，可本地浏览网页
+hexo deploy #部署发布
+</code>
+简写Tips：
+<code>
+hexo n &quot;我的博客&quot; == hexo new &quot;我的博客&quot; #新建文章
+hexo p == hexo publish
+hexo g == hexo generate#生成
+hexo s == hexo server #启动服务预览
+hexo d == hexo deploy#部署
+</code></li>
+</ul>
+
+<hr/>
+
+<h1 id="toc_2">安装 hexo</h1>
+
+<p>mac电脑直接用下面的命令就可以很简单的安装成功<br/>
+```</p>
+
+<h1 id="toc_3">安装mac下的神器,brew包管理器</h1>
+
+<p>ruby -e &quot;$(curl -fsSL <a href="https://raw.githubusercontent.com/Homebrew/install/master/install)">https://raw.githubusercontent.com/Homebrew/install/master/install)</a>&quot;</p>
+
+<h1 id="toc_4">更新 brew</h1>
+
+<p>brew update</p>
+
+<h1 id="toc_5">先用brew安装node</h1>
+
+<p>brew install node</p>
+
+<h1 id="toc_6">然后用node安装hexo就行了</h1>
+
+<p>npm install -g hexo-cli</p>
+
+<h1 id="toc_7">验证成功与否</h1>
+
+<h1 id="toc_8">输入 hexo 有提示就成了</h1>
+
+<pre><code>
+为了后面用npm下载依赖更快速,这里建议把npm的镜像改成淘宝源,可以使用下面的几种方法来修改npm镜像源
+
+1.临时使用
+</code></pre>
+
+<p>npm --registry <a href="https://registry.npm.taobao.org">https://registry.npm.taobao.org</a> install express<br/>
+<code><br/>
+2.持久使用<br/>
+</code><br/>
+npm config set registry <a href="https://registry.npm.taobao.org">https://registry.npm.taobao.org</a></p>
+
+<h1 id="toc_9">配置后可通过下面方式来验证是否成功</h1>
+
+<p>npm config get registry</p>
+
+<h1 id="toc_10">或</h1>
+
+<p>npm info express<br/>
+<code><br/>
+3.通过cnpm使用<br/>
+</code><br/>
+npm install -g cnpm --registry=<a href="https://registry.npm.taobao.org">https://registry.npm.taobao.org</a></p>
+
+<h1 id="toc_11">使用</h1>
+
+<p>cnpm install express<br/>
+```</p>
+
+<h1 id="toc_12">初始化博客</h1>
+
+<pre><code>// 建立一个博客文件夹，并初始化博客，&lt;folder&gt;为文件夹的名称，可以随便起名字
+$ hexo init &lt;folder&gt;
+成功提示:
+INFO  Start blogging with Hexo!
+// 进入博客文件夹，&lt;folder&gt;为文件夹的名称
+$ cd &lt;folder&gt;
+// node.js的命令，根据博客既定的dependencies配置安装所有的依赖包
+$ npm install
+</code></pre>
+
+<ul>
+<li>执行完 hexo init test/ 命令后, test 文件下出现了这些
+<code>
+hushiweideMacBook-Pro:test hushiwei$ ll
+total 24
+drwxr-xr-x 9 hushiwei staff 306 3 2 10:05 ./
+drwxr-xr-x 3 hushiwei staff 102 3 2 09:53 ../
+-rw-r--r-- 1 hushiwei staff 65 3 2 10:00 .gitignore
+-rw-r--r-- 1 hushiwei staff 1483 3 2 10:00 _config.yml
+drwxr-xr-x 287 hushiwei staff 9758 3 2 10:06 node_modules/
+-rw-r--r-- 1 hushiwei staff 443 3 2 10:00 package.json
+drwxr-xr-x 5 hushiwei staff 170 3 2 10:00 scaffolds/
+drwxr-xr-x 3 hushiwei staff 102 3 2 10:00 source/
+drwxr-xr-x 3 hushiwei staff 102 3 2 10:00 themes/
+</code></li>
+</ul>
+
+<h1 id="toc_13">因为你初始化hexo 之后source目录下自带一篇hello world文章, 所以直接执行下方命令</h1>
+
+<pre><code>$ hexo generate
+</code></pre>
+
+<h1 id="toc_14">启动本地服务器</h1>
+
+<pre><code>$ hexo server
+</code></pre>
+
+<h1 id="toc_15">在浏览器输入 <a href="http://localhost:4000/%E5%B0%B1%E5%8F%AF%E4%BB%A5%E7%9C%8B%E8%A7%81%E7%BD%91%E9%A1%B5%E5%92%8C%E6%A8%A1%E6%9D%BF%E4%BA%86">http://localhost:4000/就可以看见网页和模板了</a></h1>
+
+<pre><code>INFO Start processing
+INFO Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.
+</code></pre>
+
+<p>访问<a href="http://localhost:4000/%EF%BC%8C">http://localhost:4000/，</a><br/>
+便可以看到网站初步的模样，不要激动，我们还要把网页发布到Github上去。</p>
+
+<p>我们只需要在 配置文件中把 deploy 改成这样就行了.<br/>
+repo 这个 GitHub 的仓库我们需要提前在 GitHub 上建好.<br/>
+仓库名为:Timehsw.github.io(Timehsw为我的 GitHub 用户名)<br/>
+然后设置 ssh 免密码登录即可.不需要再 GitHub 上配置其他的什么东西了.真的非常简单.<br/>
+<code><br/>
+deploy:<br/>
+  type: git<br/>
+  repo: https://github.com/Timehsw/Timehsw.github.io.git<br/>
+  branch: master<br/>
+</code></p>
+
+<h1 id="toc_16">部署到github上后,如何找到自己的博客地址?</h1>
+
+<p>部署到github上后,打开自己这个项目,然后找到 <strong>setting</strong> 选项卡.拉到Github Pages,这里会显示出你的博客地址.<br/>
+我因为是做了域名映射,所以这里显示的是我的域名.<br/>
+<img src="/images/pics/gitpagesite.png" alt="blogsite"/><br/>
+<strong>注意:</strong> 为了让你的博客地址短小好看,请务必在新建这个项目的时候,取项目的名字为<em>你的github用户名加上.github.io</em></p>
+
+<p>就像我这样取就行了<br/>
+<img src="/images/pics/githubblogname.png" alt="blogname"/></p>
+
+<h1 id="toc_17">搭建一个可以显示数学公式的hexo博客</h1>
+
+<blockquote>
+<p>利用MathJax来渲染LaTeX数学公式</p>
+</blockquote>
+
+<h2 id="toc_18">安装方式也很简单，在博客文件夹下执行</h2>
+
+<pre><code>npm install hexo-math --save
+hexo math install
+</code></pre>
+
+<h2 id="toc_19">然后写博客的时候就可以用上了</h2>
+
+<p>如果不会用MathJax写公式,可以借助于这个网站,非常方便<br/>
+<a href="https://webdemo.myscript.com/views/math.html">在线数学公式编辑器</a></p>
+
+<h2 id="toc_20">示例</h2>
+
+<p>看图片所示<br/>
+<img src="/images/pics/mathweb.png" alt="在线数学公式编辑器"/></p>
+
+<h1 id="toc_21">配置博客</h1>
+
+<p>基于上一步，我们对博客修改相应的配置，我们用到_config.yml文件，下面是该文件的默认参数信息：<br/>
+```</p>
+
+<h1 id="toc_22">Hexo Configuration</h1>
+
+<h2 id="toc_23">Docs: <a href="http://hexo.io/docs/configuration.html">http://hexo.io/docs/configuration.html</a></h2>
+
+<h2 id="toc_24">Source: <a href="https://github.com/hexojs/hexo/">https://github.com/hexojs/hexo/</a></h2>
+
+<h1 id="toc_25">Site #站点信息</h1>
+
+<p>title: #标题<br/>
+subtitle: #副标题<br/>
+description: #站点描述，给搜索引擎看的<br/>
+author: #作者<br/>
+email: #电子邮箱<br/>
+language: zh-CN #语言</p>
+
+<h1 id="toc_26">URL #链接格式</h1>
+
+<p>url: #网址<br/>
+root: / #根目录<br/>
+permalink: :year/:month/:day/:title/ #文章的链接格式<br/>
+tag_dir: tags #标签目录<br/>
+archive_dir: archives #存档目录<br/>
+category_dir: categories #分类目录<br/>
+code_dir: downloads/code<br/>
+permalink_defaults:</p>
+
+<h1 id="toc_27">Directory #目录</h1>
+
+<p>source_dir: source #源文件目录<br/>
+public_dir: public #生成的网页文件目录</p>
+
+<h1 id="toc_28">Writing #写作</h1>
+
+<p>new_post_name: :title.md #新文章标题<br/>
+default_layout: post #默认的模板，包括 post、page、photo、draft（文章、页面、照片、草稿）<br/>
+titlecase: false #标题转换成大写<br/>
+external_link: true #在新选项卡中打开连接<br/>
+filename_case: 0<br/>
+render_drafts: false<br/>
+post_asset_folder: false<br/>
+relative_link: false<br/>
+highlight: #语法高亮<br/>
+  enable: true #是否启用<br/>
+  line_number: true #显示行号<br/>
+  tab_replace:</p>
+
+<h1 id="toc_29">Category &amp; Tag #分类和标签</h1>
+
+<p>default_category: uncategorized #默认分类<br/>
+category_map:<br/>
+tag_map:</p>
+
+<h1 id="toc_30">Archives</h1>
+
+<p>2: 开启分页<br/>
+1: 禁用分页<br/>
+0: 全部禁用<br/>
+archive: 2<br/>
+category: 2<br/>
+tag: 2</p>
+
+<h1 id="toc_31">Server #本地服务器</h1>
+
+<p>port: 4000 #端口号<br/>
+server_ip: localhost #IP 地址<br/>
+logger: false<br/>
+logger_format: dev</p>
+
+<h1 id="toc_32">Date / Time format #日期时间格式</h1>
+
+<p>date_format: YYYY-MM-DD #参考<a href="http://momentjs.com/docs/#/displaying/format/">http://momentjs.com/docs/#/displaying/format/</a><br/>
+time_format: H:mm:ss</p>
+
+<h1 id="toc_33">Pagination #分页</h1>
+
+<p>per_page: 10 #每页文章数，设置成 0 禁用分页<br/>
+pagination_dir: page</p>
+
+<h1 id="toc_34">Disqus #Disqus评论，替换为多说</h1>
+
+<p>disqus_shortname:</p>
+
+<h1 id="toc_35">Extensions #拓展插件</h1>
+
+<p>theme: landscape-plus #主题<br/>
+exclude_generator:<br/>
+plugins: #插件，例如生成 RSS 和站点地图的<br/>
+- hexo-generator-feed<br/>
+- hexo-generator-sitemap</p>
+
+<h1 id="toc_36">Deployment #部署，将 lmintlcx 改成用户名</h1>
+
+<p>deploy:<br/>
+  type: git<br/>
+  repo: 刚刚github创库地址.git<br/>
+  branch: master<br/>
+```<br/>
++ 注意<br/>
+特别提醒，在每个参数的：后都要加一个空格</p>
+
+<ul>
+<li>修改网站相关信息
+<code>
+title: Time渐行渐远
+subtitle:Coding Changing The World
+description: 时间渐行渐远
+author: Hushiwei
+language: zh-CN
+timezone: Asia/Shanghai
+</code>
+# 配置部署（修改成自己的）
+<code>
+deploy:
+type: git
+repo: https://github.com/Timehsw/Timehsw.github.io.git
+branch: master
+</code></li>
+</ul>
+
+<h1 id="toc_37">增加站内搜索Local Search</h1>
+
+<h2 id="toc_38">安装 hexo-generator-searchdb，在站点的根目录下执行以下命令：</h2>
+
+<pre><code class="language-$xslt">$ npm install hexo-generator-searchdb --save
+</code></pre>
+
+<h2 id="toc_39">编辑 站点配置文件，新增以下内容到任意位置：</h2>
+
+<pre><code>search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+</code></pre>
+
+<h2 id="toc_40">编辑 主题配置文件，启用本地搜索功能：</h2>
+
+<pre><code class="language-$xslt"># Local search
+local_search:
+  enable: true
+</code></pre>
+
+<h1 id="toc_41">绑定自己的域名(可选)</h1>
+
+<h2 id="toc_42">首先获取 gitpage 的 ip 地址</h2>
+
+<pre><code class="language-$xslt">hushiweideMacBook-Pro:myblog hushiwei$ ping timehsw.github.io
+PING github.map.fastly.net (151.101.100.133): 56 data bytes
+64 bytes from 151.101.100.133: icmp_seq=0 ttl=52 time=63.278 ms
+64 bytes from 151.101.100.133: icmp_seq=1 ttl=52 time=63.262 ms
+64 bytes from 151.101.100.133: icmp_seq=2 ttl=52 time=64.162 ms
+64 bytes from 151.101.100.133: icmp_seq=3 ttl=52 time=64.281 ms
+^C
+--- github.map.fastly.net ping statistics ---
+
+</code></pre>
+
+<p><strong>注意:</strong> 这里ip可能会变,多ping几次,发现ip不变后,再进行下面的域名和ip的映射.</p>
+
+<h2 id="toc_43">设置域名与 ip 的解析</h2>
+
+<p>如图所示,增加两条即可,除了 ip 地址写成自己的,其他的都一样.<br/>
+<img src="/images/pics/gitpage.png" alt="gitpage"/></p>
+
+<h2 id="toc_44">增加 CNAME</h2>
+
+<p>在 hexo 博客的 <strong>source</strong> 文件夹下新建一个名为<strong>CNAME</strong>的文件,无后缀名.内容为你的域名.即可</p>
+
+<h1 id="toc_45">问题</h1>
+
+<ul>
+<li>部署的时候出现
+<code>
+hushiweideMacBook-Pro:test hushiwei$ hexo deploy
+ERROR Deployer not found: git
+</code></li>
+<li>解决办法
+<code>
+npm install hexo-deployer-git --save
+重新 deploy 即可
+</code></li>
+<li>阅读全文
+<code>$xslt
+&lt;!-- more --&gt;
+</code>
+用这个手动截断更合适</li>
+</ul>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15198778631324.html" 
+          title="Previous Post: 二进制加法与逻辑门的关系">&laquo; 二进制加法与逻辑门的关系</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15198748607194.html" 
+          title="Next Post: 学习摩尔斯码">学习摩尔斯码 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="/Users/hushiwei/Pictures/Pictures/wei.png" /></div>
+            
+                <h1>Time渐行渐远</h1>
+                <div class="site-des">Coding Changing The World</div>
+                <div class="social">
+
+
+
+
+
+
+
+
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:hsw_v5@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="BigData.html"><strong>BigData</strong></a>
+        
+            <a href="Python.html"><strong>Python</strong></a>
+        
+            <a href="Linux.html"><strong>Linux</strong></a>
+        
+            <a href="Life.html"><strong>Life</strong></a>
+        
+            <a href="Spark.html"><strong>Spark</strong></a>
+        
+            <a href="Yarn.html"><strong>Yarn</strong></a>
+        
+            <a href="Scala.html"><strong>Scala</strong></a>
+        
+            <a href="VPS.html"><strong>VPS</strong></a>
+        
+            <a href="MachineLearning.html"><strong>MachineLearning</strong></a>
+        
+            <a href="Writer.html"><strong>Writer</strong></a>
+        
+            <a href="Shell.html"><strong>Shell</strong></a>
+        
+            <a href="Algorithm.html"><strong>Algorithm</strong></a>
+        
+            <a href="Mac.html"><strong>Mac</strong></a>
+        
+            <a href="Presto.html"><strong>Presto</strong></a>
+        
+            <a href="Mysql.html"><strong>Mysql</strong></a>
+        
+            <a href="Maven.html"><strong>Maven</strong></a>
+        
+            <a href="Kafka.html"><strong>Kafka</strong></a>
+        
+            <a href="Java.html"><strong>Java</strong></a>
+        
+            <a href="DevTools.html"><strong>DevTools</strong></a>
+        
+            <a href="Hbase.html"><strong>Hbase</strong></a>
+        
+            <a href="ELK.html"><strong>ELK</strong></a>
+        
+            <a href="Druid.html"><strong>Druid</strong></a>
+        
+            <a href="Docker.html"><strong>Docker</strong></a>
+        
+            <a href="DesignPattern.html"><strong>DesignPattern</strong></a>
+        
+            <a href="Computer.html"><strong>Computer</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15198768495613.html">Elasticsearch：用Curator辅助Marvel，实现自动删除旧marvel索引</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198743666304.html">PythonVirtualenv总结</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198746079468.html">机器学习实战之朴素贝叶斯</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198745641385.html">Presto的学习笔记</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198769093559.html">二八定律与长尾理论</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+
+  </body>
+</html>

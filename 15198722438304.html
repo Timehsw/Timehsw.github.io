@@ -1,0 +1,517 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  Ubuntu/Deepin下用Shadowsocks实现翻墙上网 - Time渐行渐远
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Time渐行渐远" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:dmlcoding.com ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_blank" href="collections.html">COLLECTION</a></li>
+        
+        <li id=""><a target="_blank" href="tools.html">TOOLS</a></li>
+        
+        <li id=""><a target="_blank" href="About.html">ABOUT</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Time渐行渐远</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="BigData.html">BigData</a></li>
+        
+            <li><a href="Python.html">Python</a></li>
+        
+            <li><a href="Linux.html">Linux</a></li>
+        
+            <li><a href="Life.html">Life</a></li>
+        
+            <li><a href="Spark.html">Spark</a></li>
+        
+            <li><a href="Yarn.html">Yarn</a></li>
+        
+            <li><a href="Scala.html">Scala</a></li>
+        
+            <li><a href="VPS.html">VPS</a></li>
+        
+            <li><a href="MachineLearning.html">MachineLearning</a></li>
+        
+            <li><a href="Writer.html">Writer</a></li>
+        
+            <li><a href="Shell.html">Shell</a></li>
+        
+            <li><a href="Algorithm.html">Algorithm</a></li>
+        
+            <li><a href="Mac.html">Mac</a></li>
+        
+            <li><a href="Presto.html">Presto</a></li>
+        
+            <li><a href="Mysql.html">Mysql</a></li>
+        
+            <li><a href="Maven.html">Maven</a></li>
+        
+            <li><a href="Kafka.html">Kafka</a></li>
+        
+            <li><a href="Java.html">Java</a></li>
+        
+            <li><a href="DevTools.html">DevTools</a></li>
+        
+            <li><a href="Hbase.html">Hbase</a></li>
+        
+            <li><a href="ELK.html">ELK</a></li>
+        
+            <li><a href="Druid.html">Druid</a></li>
+        
+            <li><a href="Docker.html">Docker</a></li>
+        
+            <li><a href="DesignPattern.html">DesignPattern</a></li>
+        
+            <li><a href="Computer.html">Computer</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>Ubuntu/Deepin下用Shadowsocks实现翻墙上网</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2016/12/11</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='VPS.html'>VPS</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h2 id="toc_0">下载安装小飞机</h2>
+
+<pre><code>sudo add-apt-repository ppa:hzwhuang/ss-qt5
+
+sudo apt-get update
+
+sudo apt-get install shadowsocks-qt5
+</code></pre>
+
+<span id="more"></span><!-- more -->
+
+<p><img src="media/15198722438304/shadowsocksSoft.png" alt="shadowsocksSoft"/></p>
+
+<h2 id="toc_1">配置代理</h2>
+
+<ul>
+<li>配置账号</li>
+</ul>
+
+<p>如图所示</p>
+
+<p>点击连接，配置自己的代理服务器的IP地址，密码，端口等。仿照我填的那样填写。</p>
+
+<p><img src="media/15198722438304/SocksConf.png" alt="SocksConf"/></p>
+
+<p>然后，点击测试延迟，看看有没有出现延迟，出现了，那么就是连接上了。</p>
+
+<p><img src="media/15198722438304/SocksConf2.png" alt="SocksConf2"/></p>
+
+<h2 id="toc_2">本地配置</h2>
+
+<p>代理那里，方法请选择<strong>手动</strong>，Socks主机位置填写的是你Shadowsocks里的本地地址IP，我的都是<strong>127.0.0.1</strong>，端口也是一样。<br/>
+然后，点击应用到整个系统。</p>
+
+<ul>
+<li>Ubuntu这里是这样的</li>
+</ul>
+
+<p><img src="media/15198722438304/ubuntuSocks.png" alt="ubuntuSocks"/></p>
+
+<ul>
+<li>Deepin是这样的</li>
+</ul>
+
+<p><img src="media/15198722438304/deepinSocks.png" alt="deepinSocks"/></p>
+
+<h2 id="toc_3">浏览器插件</h2>
+
+<p>此时你并不能科学上网，因为这个方式并不是所谓&quot;全局代理&quot;，所以你需要配置一下你的浏览器。我所使用的是Chrome，然后安装SwitchySharp插件，市场访问不了可以搜一下墙内的资源，跨平台所以win的也能用，拖放进去而已。<br/>
+记住要打开Chrome的扩展界面，才可以把离线插件拖进行进行安装。为了方便大家安装，这里我提供下载链接。链接失效请联系我.<br/>
+<a href="https://pan.baidu.com/s/1i5Pr3TF">下载地址</a>  密码: fjfq</p>
+
+<h2 id="toc_4">Chrome代理设置</h2>
+
+<ol>
+<li>首先，我们确保已在Chrome浏览器中安装好了Proxy SwitchySharp扩展.</li>
+</ol>
+
+<p><img src="media/15198722438304/proxy1.png" alt="proxy1"/></p>
+
+<p>进入选项页后，我们在情景模式中，新建一个模式。<br/>
+名称随便填写<br/>
+然后按照我的截图那样填写，千万不要填错了。<br/>
+shadowsocks使用的就是SOCKS v5的协议，ip和端口号要跟系统设置的一致。<br/>
+然后点击保存。</p>
+
+<p><img src="media/15198722438304/proxy2.png" alt="proxy2"/></p>
+
+<p>2.设置切换规则</p>
+
+<p>然后点击“切换规则”，分别新建两条规则。</p>
+
+<ul>
+<li><p>本地规则，选择正则表达式<br/>
+目的是让浏览器可以访问局域网等此类网址时候，不适用任何代理，即可直接访问。<br/>
+<code><br/>
+192\.168\.|localhost<br/>
+</code></p></li>
+<li><p>国外规则，选择正则表达式<br/>
+让我们访问国外的网址的时候，就可以通过代理进行翻墙访问了。<br/>
+<code><br/>
+(fbcdn|akamaihd|pixnet)\.net|wretch\.cc|t\.co|goo\.gl|(google(usercontent|apis)*|chrome|staticflickr|imdb|ytimg|gstatic|html5rocks|amazonaws|github|tumblr|addthis|wordpress|blogger|(blog|app)spot|friendfeed|twitter|facebook|youtube|dropbox|feedburner|googleapis|android)\.com<br/>
+</code></p></li>
+</ul>
+
+<p><img src="media/15198722438304/proxy3.png" alt="proxy3"/></p>
+
+<h2 id="toc_5">自动切换代理</h2>
+
+<p>最后保存之后，再点击浏览器上面的Proxy SwitchySharp扩展图标，点击勾选其中的<strong>自动却换模式</strong>,即可在浏览网页<br/>
+时，让扩展自动根据之前的规则来判断使用何种代理了，而不需要我们自己受到切换了了。</p>
+
+<p>最后，根据自己的情况设置是否开机自启动。</p>
+
+<h2 id="toc_6">完成</h2>
+
+<p>可以自由翻墙了。。。</p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15198774988536.html" 
+          title="Previous Post: 配置Ubuntu/Deepin下要安装的常用软件">&laquo; 配置Ubuntu/Deepin下要安装的常用软件</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15198754878999.html" 
+          title="Next Post: linux创建软硬链接">linux创建软硬链接 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="/Users/hushiwei/Pictures/Pictures/wei.png" /></div>
+            
+                <h1>Time渐行渐远</h1>
+                <div class="site-des">Coding Changing The World</div>
+                <div class="social">
+
+
+
+
+
+
+
+
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:hsw_v5@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="BigData.html"><strong>BigData</strong></a>
+        
+            <a href="Python.html"><strong>Python</strong></a>
+        
+            <a href="Linux.html"><strong>Linux</strong></a>
+        
+            <a href="Life.html"><strong>Life</strong></a>
+        
+            <a href="Spark.html"><strong>Spark</strong></a>
+        
+            <a href="Yarn.html"><strong>Yarn</strong></a>
+        
+            <a href="Scala.html"><strong>Scala</strong></a>
+        
+            <a href="VPS.html"><strong>VPS</strong></a>
+        
+            <a href="MachineLearning.html"><strong>MachineLearning</strong></a>
+        
+            <a href="Writer.html"><strong>Writer</strong></a>
+        
+            <a href="Shell.html"><strong>Shell</strong></a>
+        
+            <a href="Algorithm.html"><strong>Algorithm</strong></a>
+        
+            <a href="Mac.html"><strong>Mac</strong></a>
+        
+            <a href="Presto.html"><strong>Presto</strong></a>
+        
+            <a href="Mysql.html"><strong>Mysql</strong></a>
+        
+            <a href="Maven.html"><strong>Maven</strong></a>
+        
+            <a href="Kafka.html"><strong>Kafka</strong></a>
+        
+            <a href="Java.html"><strong>Java</strong></a>
+        
+            <a href="DevTools.html"><strong>DevTools</strong></a>
+        
+            <a href="Hbase.html"><strong>Hbase</strong></a>
+        
+            <a href="ELK.html"><strong>ELK</strong></a>
+        
+            <a href="Druid.html"><strong>Druid</strong></a>
+        
+            <a href="Docker.html"><strong>Docker</strong></a>
+        
+            <a href="DesignPattern.html"><strong>DesignPattern</strong></a>
+        
+            <a href="Computer.html"><strong>Computer</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15198768495613.html">Elasticsearch：用Curator辅助Marvel，实现自动删除旧marvel索引</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198743666304.html">PythonVirtualenv总结</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198746079468.html">机器学习实战之朴素贝叶斯</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198745641385.html">Presto的学习笔记</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198769093559.html">二八定律与长尾理论</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+
+  </body>
+</html>

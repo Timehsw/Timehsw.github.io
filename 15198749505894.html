@@ -1,0 +1,714 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  监控SparkStreaming程序脚本 - Time渐行渐远
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Time渐行渐远" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:dmlcoding.com ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_blank" href="collections.html">COLLECTION</a></li>
+        
+        <li id=""><a target="_blank" href="tools.html">TOOLS</a></li>
+        
+        <li id=""><a target="_blank" href="About.html">ABOUT</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Time渐行渐远</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="BigData.html">BigData</a></li>
+        
+            <li><a href="Python.html">Python</a></li>
+        
+            <li><a href="Linux.html">Linux</a></li>
+        
+            <li><a href="Life.html">Life</a></li>
+        
+            <li><a href="Spark.html">Spark</a></li>
+        
+            <li><a href="Yarn.html">Yarn</a></li>
+        
+            <li><a href="Scala.html">Scala</a></li>
+        
+            <li><a href="VPS.html">VPS</a></li>
+        
+            <li><a href="MachineLearning.html">MachineLearning</a></li>
+        
+            <li><a href="Writer.html">Writer</a></li>
+        
+            <li><a href="Shell.html">Shell</a></li>
+        
+            <li><a href="Algorithm.html">Algorithm</a></li>
+        
+            <li><a href="Mac.html">Mac</a></li>
+        
+            <li><a href="Presto.html">Presto</a></li>
+        
+            <li><a href="Mysql.html">Mysql</a></li>
+        
+            <li><a href="Maven.html">Maven</a></li>
+        
+            <li><a href="Kafka.html">Kafka</a></li>
+        
+            <li><a href="Java.html">Java</a></li>
+        
+            <li><a href="DevTools.html">DevTools</a></li>
+        
+            <li><a href="Hbase.html">Hbase</a></li>
+        
+            <li><a href="ELK.html">ELK</a></li>
+        
+            <li><a href="Druid.html">Druid</a></li>
+        
+            <li><a href="Docker.html">Docker</a></li>
+        
+            <li><a href="DesignPattern.html">DesignPattern</a></li>
+        
+            <li><a href="Computer.html">Computer</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>监控SparkStreaming程序脚本</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2017/8/15</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='Spark.html'>Spark</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p>虽然Spark on yarn非常的稳定,一般情况下是不会出问题的.但是我们的SparkStreaming程序是一直运行着出实时报表的.<br/>
+我们必须得对SparkStreaming程序进行监控,在程序退出后,能够及时的重启.<br/>
+基于此需求,我想到了通过调用yarn的rest接口来获取提交到yarn上的任务</p>
+
+<span id="more"></span><!-- more -->
+
+<h1 id="toc_0">思路</h1>
+
+<p>调用yarn提供的rest接口来获取所有正在运行的任务<br/>
+<code><br/>
+curl --compressed -H &quot;Accept: application/json&quot; -X GET &quot;http://master:8088/ws/v1/cluster/apps?states=RUNNING&quot;<br/>
+</code><br/>
+如果对别的接口有兴趣,可以看看官网.<br/>
++ <a href="https://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-site/ResourceManagerRest.html">https://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-site/ResourceManagerRest.html</a><br/>
++ <a href="http://www.winseliu.com/blog/2014/12/07/hadoop-mr-rest-api/">http://www.winseliu.com/blog/2014/12/07/hadoop-mr-rest-api/</a></p>
+
+<h1 id="toc_1">脚本</h1>
+
+<p>脚本也很简单,简单看看就明白了</p>
+
+<pre><code># -*- coding: utf-8 -*-
+&#39;&#39;&#39;
+    Created by hushiwei on 2018/1/5.
+    监控SparkStreaming程序
+    一旦挂了,执行重启,同时发送邮件和微信报警
+&#39;&#39;&#39;
+
+import os
+import subprocess
+import json
+import logging
+import time
+import urllib2
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.header import Header
+
+wechats = &quot;HuShiwei&quot;
+sendEmails = [&#39;hsw_v5@163.com&#39;, &#39;xxxx@gm825.com&#39;]
+
+urlRun = &#39;curl --compressed -H &quot;Accept: application/json&quot; -X GET &quot;http://u007:8089/ws/v1/cluster/apps?states=RUNNING&quot;&#39;
+urlAcc = &#39;curl --compressed -H &quot;Accept: application/json&quot; -X GET &quot;http://u007:8089/ws/v1/cluster/apps?states=ACCEPTED&quot;&#39;
+
+monitorPrograms = {
+    &quot;com.xxxx.streaming.ADXStreaming&quot;: &quot;/home/hadoop/statistics/ad/adxstreaming/start_adx_streaming_yarn.sh&quot;,
+    &quot;com.xxxx.online.streaming.DSPStreaming&quot;: &quot;/home/hadoop/statistics/ad/dsp_ad_puton/dsp_ad_puton_streaming/start_dsp_streaming_yarn_test.sh&quot;,
+    &quot;com.xxxx.streaming.CPDAppStreaming&quot;: &quot;/home/hadoop/statistics/ad/dsp_app_promotion/start_dsp_app_promotion_yarn.sh&quot;
+}
+
+
+class WeChat(object):
+    &#39;&#39;&#39;
+    发送微信工具类
+    &#39;&#39;&#39;
+
+    def __init__(self, corpid, corpsecret, tokenpath):
+        self.corpid = corpid
+        self.corpsecret = corpsecret
+        self.tokenpath = tokenpath
+        self.logger = logging.getLogger(&#39;wechat&#39;)
+
+    def saveToken(self):
+        &#39;&#39;&#39;
+        :return:
+        &#39;&#39;&#39;
+        try:
+            with open(self.tokenpath, &#39;r&#39;) as f:
+                token = f.read()
+                if len(token) &lt; 10:
+                    token = self.getToken()
+                    self.logger.info(&quot;Can not get token from %s,prepare to get token on api which token is %s&quot; % (
+                        self.tokenpath, token))
+                    return token
+                else:
+                    return token
+        except IOError:
+            token = self.getToken()
+            self.logger.info(
+                &quot;Can not get token from %s,prepare to get token on api which token is %s&quot; % (self.tokenpath, token))
+            return token
+
+    def getToken(self):
+        Url = &#39;https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=%s&amp;corpsecret=%s&#39; % (self.corpid, self.corpsecret)
+        req = urllib2.Request(Url)
+        result = urllib2.urlopen(req)
+        json_access_token = json.loads(result.read())
+        access_token = json_access_token[&#39;access_token&#39;]
+
+        with open(self.tokenpath, &#39;w&#39;) as f:
+            f.write(access_token)
+        return access_token
+
+    def setMessage(self, wechatids, text):
+        token = self.saveToken()
+        message = self.makeMessage(text)
+        submiturl = &#39;https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={0}&#39;.format(token)
+        data = {&quot;touser&quot;: wechatids, &quot;msgtype&quot;: &quot;text&quot;, &quot;agentid&quot;: &quot;1000002&quot;, &quot;text&quot;: {&quot;content&quot;: message}, &quot;safe&quot;: &quot;0&quot;}
+        data = json.dumps(data, ensure_ascii=False)
+
+        send_request = urllib2.Request(submiturl, data)
+
+        self.logger.info(&quot;Send wechat %s&quot; % text)
+
+        response = json.loads(urllib2.urlopen(send_request).read())
+
+        if response[&#39;errcode&#39;] == 42001 or response[&#39;errcode&#39;] == 40014:
+            self.logger.info(&quot;Send wechat errorcode : %s&quot; % response[&#39;errcode&#39;])
+            os.remove(self.tokenpath)
+            self.setMessage(wechatids, text)
+
+    def makeMessage(self, text):
+        def date():
+            date = time.strftime(&#39;%m-%d %H:%M:%S&#39;, time.localtime())
+            return date
+
+        return &quot;%s \nCall Time:%s&quot; % (text, date())
+
+
+class Message(object):
+    &#39;&#39;&#39;
+    构造邮箱发送的内容
+    &#39;&#39;&#39;
+
+    def format_str(self, strs):
+        if not isinstance(strs, unicode):
+            strs = unicode(strs)
+        return strs
+
+    def __init__(self, from_user, to_user, subject, content, with_attach=False):
+        &#39;&#39;&#39;
+
+        :param from_user: 谁发过来的邮件
+        :param to_user: 发给谁
+        :param subject: 邮件主题
+        :param content: 邮件内容
+        :param with_attach: 邮件是否包含附件
+        &#39;&#39;&#39;
+
+        if with_attach:
+            self._message = MIMEMultipart()
+            self._message.attach(MIMEText(content, &#39;plain&#39;, &#39;utf-8&#39;))
+        else:
+            self._message = MIMEText(content, &#39;plain&#39;, &#39;utf-8&#39;)
+
+        self._message[&#39;Subject&#39;] = Header(subject, &#39;utf-8&#39;)
+        self._message[&#39;From&#39;] = Header(self.format_str(from_user), &#39;utf-8&#39;)
+        self._message[&#39;To&#39;] = Header(self.format_str(to_user), &#39;utf-8&#39;)
+        self._with_attach = with_attach
+
+    def attach(self, file_path):
+        if self._with_attach == False:
+            print &quot;Please init the Message with attr &#39;with_attach = True&#39;&quot;
+            exit(1)
+        if os.path.isfile(file_path) == False:
+            print &quot;The file doesn`t exist!&quot;
+            exit(1)
+        atta = MIMEText(open(file_path, &#39;rb&#39;).read(), &#39;base64&#39;, &#39;utf-8&#39;)
+        atta[&#39;Content-Type&#39;] = &#39;application/octet-stream&#39;
+        atta[&#39;Content-Disposition&#39;] = &#39;attachment; filename=&quot;%s&quot;&#39; % Header(os.path.basename(file_path), &#39;utf-8&#39;)
+        self._message.attach(atta)
+
+    def getMessage(self):
+        return self._message.as_string()
+
+
+class SMTPClient(object):
+    &#39;&#39;&#39;
+    发送邮件工具类
+    &#39;&#39;&#39;
+
+    def __init__(self, hostname, port, user, passwd):
+        &#39;&#39;&#39;
+        初始化相关参数
+        :param hostname: QQ邮箱:smtp.qq.com
+        :param port: QQ邮箱ssl加密端口:465
+        :param user: QQ邮箱账号
+        :param passwd: QQ邮箱授权秘钥,在web qq邮箱上获取
+        &#39;&#39;&#39;
+        self._HOST = hostname
+        self._PORT = port
+        self._USER = user
+        self._PASS = passwd
+
+    def send(self, receivers, msg):
+        &#39;&#39;&#39;
+        发送邮件方法
+        :param receivers: 邮件接收者,可以是多个.为列表
+        :param msg: 发送的邮件内容
+        :return:
+        &#39;&#39;&#39;
+        if isinstance(msg, Message) == False:
+            print &quot;Error Message Instance!&quot;
+            exit(1)
+        try:
+            smtpObj = smtplib.SMTP_SSL(self._HOST, self._PORT)
+            smtpObj.connect(self._HOST)
+            smtpObj.login(self._USER, self._PASS)
+            smtpObj.sendmail(self._USER, receivers, msg.getMessage())
+            return (1, &quot;邮件发送成功&quot;)
+        except smtplib.SMTPException, e:
+            return (0, &quot;Error: 无法发送邮件%s&quot; % e)
+
+
+def run_it(cmd):
+    &#39;&#39;&#39;
+    通过python执行shell命令
+    :param cmd:
+    :return:
+    &#39;&#39;&#39;
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True,
+                         stderr=subprocess.PIPE)
+    # print (&#39;running:%s&#39; % cmd)
+    out, err = p.communicate()
+    if p.returncode != 0:
+        print (&quot;Non zero exit code:%s executing: %s \nerr course ---&gt; %s&quot; % (p.returncode, cmd, err))
+    return out
+
+
+def reStartSparkScript(scriptPath):
+    &#39;&#39;&#39;
+    执行spark脚本
+    1.cd到脚本所在路径
+    2.在改路径执行脚本
+    :param scripyPath:
+    :return:
+    &#39;&#39;&#39;
+    logger = logging.getLogger(&quot;Main&quot;)
+    scriptDir, script = os.path.split(scriptPath)
+    os.chdir(scriptDir)
+    run_it(&quot;sh %s&quot; % script)
+    logger.info(&quot;exec [ %s ] on [ %s ] &quot; % (script, scriptDir))
+
+
+def collectMonitorStatus(yarnRestApi):
+    &#39;&#39;&#39;
+    从Yarn的Running接口或者Accept接口中获取我们需要监控的程序状态
+    :param str: yarn的running接口或者accept接口
+    :return:
+    &#39;&#39;&#39;
+    strUrl = run_it(yarnRestApi)
+    result = []
+    obj = json.loads(strUrl)
+    if obj[&#39;apps&#39;] is None:
+        return result
+    else:
+        apps = obj[&#39;apps&#39;][&#39;app&#39;]
+        result = [(app[&#39;name&#39;], app[&#39;state&#39;]) for app in apps if app[&#39;name&#39;] in monitorPrograms]
+        return result
+
+
+def checkMonitorApps():
+    &#39;&#39;&#39;
+    调用yarn的running接口和accept接口
+    判断这里面是否有我们需要监控的spark程序
+        如果没有就执行报警和重启
+    :return:
+    &#39;&#39;&#39;
+
+    logging.basicConfig(level=logging.INFO,
+                        format=&#39;%(asctime)s - %(message)s&#39;,
+                        datefmt=&#39;%Y-%m-%d %H:%M:%S&#39;)
+
+    logger = logging.getLogger(&quot;Main&quot;)
+
+    smpt_client = SMTPClient(&#39;smtp.qq.com&#39;, 465, &#39;694244330@qq.com&#39;, &#39;xxxxxx&#39;)
+    wechat_client = WeChat(&#39;xxxxxxxxxxxxxx&#39;, &#39;xxxxxxxxxxxxxxxxxxxxxxxxx&#39;, &#39;/tmp/token.txt&#39;)
+
+    runningStatus = collectMonitorStatus(urlRun)
+    acceptStatus = collectMonitorStatus(urlAcc)
+
+    runningAcceptApps = dict(runningStatus + acceptStatus)
+
+    logger.info(&quot;SparkStreaming ON Yarn Running And Accept ===&gt;%s &quot; % str(runningAcceptApps))
+
+    for monitor in monitorPrograms:
+        if monitor not in runningAcceptApps:
+            logging.info(&quot;[ %s ] is not running or accept,prepare to restart!&quot; % monitor)
+            msg = Message(&quot;694244330@qq.com&quot;, &quot;hushwiei&quot;, monitor, &#39;%s is failed, prepare to resart! -- %s&#39; % (
+                monitor, time.strftime(&#39;%Y-%m-%d %H:%M:%S&#39;, time.localtime())))
+            smpt_client.send(sendEmails, msg)
+            wechat_client.setMessage(wechats, &quot;%s is not running or accept,prepare to restart!&quot; % monitor)
+            reStartSparkScript(monitorPrograms[monitor])
+
+
+def main():
+    checkMonitorApps()
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+
+
+</code></pre>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15198752296399.html" 
+          title="Previous Post: ITerm2下使用ssh访问Linux(包括堡垒机)">&laquo; ITerm2下使用ssh访问Linux(包括堡垒机)</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15198728348034.html" 
+          title="Next Post: YARN 资源分配的配置参数">YARN 资源分配的配置参数 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="/Users/hushiwei/Pictures/Pictures/wei.png" /></div>
+            
+                <h1>Time渐行渐远</h1>
+                <div class="site-des">Coding Changing The World</div>
+                <div class="social">
+
+
+
+
+
+
+
+
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:hsw_v5@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="BigData.html"><strong>BigData</strong></a>
+        
+            <a href="Python.html"><strong>Python</strong></a>
+        
+            <a href="Linux.html"><strong>Linux</strong></a>
+        
+            <a href="Life.html"><strong>Life</strong></a>
+        
+            <a href="Spark.html"><strong>Spark</strong></a>
+        
+            <a href="Yarn.html"><strong>Yarn</strong></a>
+        
+            <a href="Scala.html"><strong>Scala</strong></a>
+        
+            <a href="VPS.html"><strong>VPS</strong></a>
+        
+            <a href="MachineLearning.html"><strong>MachineLearning</strong></a>
+        
+            <a href="Writer.html"><strong>Writer</strong></a>
+        
+            <a href="Shell.html"><strong>Shell</strong></a>
+        
+            <a href="Algorithm.html"><strong>Algorithm</strong></a>
+        
+            <a href="Mac.html"><strong>Mac</strong></a>
+        
+            <a href="Presto.html"><strong>Presto</strong></a>
+        
+            <a href="Mysql.html"><strong>Mysql</strong></a>
+        
+            <a href="Maven.html"><strong>Maven</strong></a>
+        
+            <a href="Kafka.html"><strong>Kafka</strong></a>
+        
+            <a href="Java.html"><strong>Java</strong></a>
+        
+            <a href="DevTools.html"><strong>DevTools</strong></a>
+        
+            <a href="Hbase.html"><strong>Hbase</strong></a>
+        
+            <a href="ELK.html"><strong>ELK</strong></a>
+        
+            <a href="Druid.html"><strong>Druid</strong></a>
+        
+            <a href="Docker.html"><strong>Docker</strong></a>
+        
+            <a href="DesignPattern.html"><strong>DesignPattern</strong></a>
+        
+            <a href="Computer.html"><strong>Computer</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15198768495613.html">Elasticsearch：用Curator辅助Marvel，实现自动删除旧marvel索引</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198743666304.html">PythonVirtualenv总结</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198746079468.html">机器学习实战之朴素贝叶斯</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198745641385.html">Presto的学习笔记</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198769093559.html">二八定律与长尾理论</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+
+  </body>
+</html>

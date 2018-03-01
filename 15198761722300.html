@@ -1,0 +1,1226 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  Java多线程总结笔记 - Time渐行渐远
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Time渐行渐远" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:dmlcoding.com ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_blank" href="collections.html">COLLECTION</a></li>
+        
+        <li id=""><a target="_blank" href="tools.html">TOOLS</a></li>
+        
+        <li id=""><a target="_blank" href="About.html">ABOUT</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Time渐行渐远</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="BigData.html">BigData</a></li>
+        
+            <li><a href="Python.html">Python</a></li>
+        
+            <li><a href="Linux.html">Linux</a></li>
+        
+            <li><a href="Life.html">Life</a></li>
+        
+            <li><a href="Spark.html">Spark</a></li>
+        
+            <li><a href="Yarn.html">Yarn</a></li>
+        
+            <li><a href="Scala.html">Scala</a></li>
+        
+            <li><a href="VPS.html">VPS</a></li>
+        
+            <li><a href="MachineLearning.html">MachineLearning</a></li>
+        
+            <li><a href="Writer.html">Writer</a></li>
+        
+            <li><a href="Shell.html">Shell</a></li>
+        
+            <li><a href="Algorithm.html">Algorithm</a></li>
+        
+            <li><a href="Mac.html">Mac</a></li>
+        
+            <li><a href="Presto.html">Presto</a></li>
+        
+            <li><a href="Mysql.html">Mysql</a></li>
+        
+            <li><a href="Maven.html">Maven</a></li>
+        
+            <li><a href="Kafka.html">Kafka</a></li>
+        
+            <li><a href="Java.html">Java</a></li>
+        
+            <li><a href="DevTools.html">DevTools</a></li>
+        
+            <li><a href="Hbase.html">Hbase</a></li>
+        
+            <li><a href="ELK.html">ELK</a></li>
+        
+            <li><a href="Druid.html">Druid</a></li>
+        
+            <li><a href="Docker.html">Docker</a></li>
+        
+            <li><a href="DesignPattern.html">DesignPattern</a></li>
+        
+            <li><a href="Computer.html">Computer</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>Java多线程总结笔记</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2016/12/6</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='Java.html'>Java</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h2 id="toc_0">多线程的概述</h2>
+
+<h3 id="toc_1">进程和线程</h3>
+
+<blockquote>
+<ul>
+<li>进程:是一个正在运行的程序,每个进程执行,都有一个执行顺序,该顺序是一个执行路径,或者叫一个控制单元</li>
+<li>线程:进程中的一个独立控制单元,线程在控制着进程的执行,一个进程中至少有一个线程(控制单元)</li>
+</ul>
+</blockquote>
+
+<span id="more"></span><!-- more -->
+
+<h2 id="toc_2">简单实现多线程</h2>
+
+<blockquote>
+<p>常用的实现多线程的两种方法,继承Thread类,实现Runnable接口</p>
+</blockquote>
+
+<h3 id="toc_3">继承javalangThread类</h3>
+
+<ul>
+<li>步骤：
+
+<ul>
+<li>1、首先，定义类继承Thread；</li>
+<li>2、复写Thread类中的run方法；目的：将自定义代码存储在run方法中，让线程执行</li>
+<li>3、调用线程的start方法(该方法有两个作用：启动线程和调用run()方法)</li>
+</ul></li>
+</ul>
+
+<p><strong>代码示例:</strong></p>
+
+<pre><code>public class BasicThread extends Thread {
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 10; i++) {
+            System.out.println(&quot;Thread ID: &quot;+i);
+        }
+    }
+}
+
+public class MainFunction {
+    public static void main(String[] args) {
+        BasicThread basicThread = new BasicThread();
+        basicThread.start();
+        for (int i = 0; i &lt; 10; i++) {
+            System.out.println(&quot;Main Function ID: &quot;+i);
+        }
+    }
+}
+</code></pre>
+
+<p>要点:继承Thread类,重写run方法.</p>
+
+<h3 id="toc_4">实现javalangRunnable接口</h3>
+
+<ul>
+<li>步骤：
+
+<ul>
+<li>1、定义类实现Runnable接口</li>
+<li>2、复写接口中的run方法</li>
+<li>3、创建实现Runnable接口对象</li>
+<li>4、创建Thread类对象，将实现Runnable接口的对象作为实际参数传递给Thread类的构造函数</li>
+<li>5、调用Thread类的start方法，开启接口</li>
+</ul></li>
+</ul>
+
+<p><strong>代码示例:</strong></p>
+
+<pre><code>public class BasicRunnable implements Runnable {
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 10; i++) {
+            System.out.println(Thread.currentThread().getName()+&quot; ---&gt; &quot;+i);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+public class MainRunnable {
+    public static void main(String[] args) {
+        Thread thread = new Thread(new BasicRunnable());
+        thread.setName(&quot;Child Thread&quot;);
+        thread.start();
+        for (int i = 0; i &lt; 10; i++) {
+            System.out.println(Thread.currentThread()+&quot; ---&gt; &quot;+i);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+</code></pre>
+
+<h3 id="toc_5">为什么要重写run方法</h3>
+
+<p>因为Thread类定义了一个用于存储线程要运行的代码的方法,该方法就是run方法.也就是说Thread类中run方法,用于<br/>
+存储线程要运行的代码.主线程中的代码存储于main方法中.</p>
+
+<h2 id="toc_6">继承Thread类和实现Runnable接口有什么区别？</h2>
+
+<ul>
+<li>继承Thread类:线程代码存放在Thread子类的run方法中</li>
+<li>实现Runnable接口:线程代码存放在Runnable实现类的run方法中</li>
+<li>实现Runnable接口避免了单继承的局限性,在定义线程时建议使用实现方式来完成</li>
+</ul>
+
+<h2 id="toc_7">线程数据共享问题---锁</h2>
+
+<p><strong>问题:</strong> 当多个线程共享同一个数据时,导致共享数据出现错误<br/>
+<strong>解决方案:</strong> 当一个线程执行时,其他的线程不能参与执行.<br/>
+<strong>锁:</strong> 对象如图锁,持有锁的线程才能在同步中执行,没有锁的线程,即使获取了CPU的执行权,也进不去.<br/>
++ 同步的前提:<br/>
+    + 必须要有两个或两个以上的线程访问共享数据<br/>
+    + 必须是多个线程使用同一个锁<br/>
++ 好处:解决了多线程安全问题<br/>
++ 弊端:多个线程都需要判断锁,较为消耗资源</p>
+
+<p>伪代码:</p>
+
+<pre><code>synchronized(监视器对象){
+//需要被同步的代码
+}
+</code></pre>
+
+<h3 id="toc_8">synchronized同步代码块</h3>
+
+<p>虽然Java允许使用任何对象作为监视器对象.但想一下同步的目的:阻止多个线程同时对同一个共享资源并发访问,<br/>
+因此通常使用可能被并发访问的资源作为同步监视器对象.</p>
+
+<p>经典案例:模拟银行取钱操作</p>
+
+<p>账户对象:</p>
+
+<pre><code>public class Account {
+    private double balance;//账户余额
+
+    public Account(double balance) {
+        this.balance = balance;
+    }
+
+    /**
+     * 取钱
+     * @param drawBalance
+     * @return
+     */
+    public double drawMoney(double drawBalance) {
+        balance = balance - drawBalance;
+        return balance;
+    }
+
+    /**
+     * 查询余额
+     * @return
+     */
+    public double getBalance() {
+        return balance;
+    }
+}
+</code></pre>
+
+<p>取钱线程:</p>
+
+<pre><code>public class DrawThread extends Thread {
+    private Account account;
+    private double drawBalance;
+
+    public DrawThread(String name, Account account, double drawBalance) {
+        super(name);
+        this.account=account;
+        this.drawBalance=drawBalance;
+    }
+    @Override
+    public void run() {
+        while (true) {
+//            同步代码块,将共享访问的Account对象作为锁
+            synchronized (account) {
+                if (account.getBalance()&lt;drawBalance) {
+                    System.out.println(Thread.currentThread()+&quot; : 余额不足,当前余额: &quot;+account.getBalance());
+                    break;
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                account.drawMoney(drawBalance);
+                System.out.println(Thread.currentThread()+&quot;取钱成功,取走金额: &quot;+drawBalance+&quot; ,当前余额: &quot;+account.getBalance());
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>测试取钱:</p>
+
+<pre><code>public class DrawTest {
+    public static void main(String[] args) {
+        Account account = new Account(1000);
+        new DrawThread(&quot;A账户: &quot;,account,500).start();
+        new DrawThread(&quot;B账户: &quot;,account,300).start();
+        new DrawThread(&quot;C账户: &quot;,account,100).start();
+    }
+}
+
+结果输出:
+Thread[B账户: ,5,main]取钱成功,取走金额: 300.0 ,当前余额: 700.0
+Thread[B账户: ,5,main]取钱成功,取走金额: 300.0 ,当前余额: 400.0
+Thread[B账户: ,5,main]取钱成功,取走金额: 300.0 ,当前余额: 100.0
+Thread[B账户: ,5,main] : 余额不足,当前余额: 100.0
+Thread[C账户: ,5,main]取钱成功,取走金额: 100.0 ,当前余额: 0.0
+Thread[C账户: ,5,main] : 余额不足,当前余额: 0.0
+Thread[A账户: ,5,main] : 余额不足,当前余额: 0.0
+</code></pre>
+
+<h3 id="toc_9">synchronized同步方法</h3>
+
+<blockquote>
+<p>同步方法是使用synchronized关键字来修饰某个方法,则该方法就被称为同步方法.</p>
+</blockquote>
+
+<ul>
+<li>伪代码:</li>
+</ul>
+
+<pre><code>public synchronized void disPlay(){}
+</code></pre>
+
+<ul>
+<li>特点:
+
+<ul>
+<li>1.对于同步方法而言,无需指定同步监视器对象.同步方法的同步监视器对象是this.</li>
+<li>2.一个对象的一个同步方法被调用,这个对象的其他同步方法都用不了.</li>
+</ul></li>
+</ul>
+
+<p>代码说明:</p>
+
+<p>业务类:</p>
+
+<pre><code>public class Working {
+    public synchronized void tom() {
+        System.out.println(&quot;tom in...&quot;+&quot;\n&quot;+&quot;tom say: Hello Jerry &quot;);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(&quot;tom out...&quot;);
+    }
+
+    public synchronized void jerry() {
+        System.out.println(&quot;jerry in...&quot;+&quot;\n&quot;+&quot;jerry say: Hello Tom&quot;);
+        System.out.println(&quot;jerry out...&quot;);
+
+    }
+}
+</code></pre>
+
+<p>线程类:</p>
+
+<pre><code>public class JerryThread extends Thread {
+    private Working working;
+
+    public JerryThread(Working working) {
+        this.working = working;
+    }
+    @Override
+    public void run() {
+        working.jerry();
+    }
+}
+
+public class TomThread extends Thread {
+    private Working working;
+
+    public TomThread(Working working) {
+        this.working = working;
+    }
+
+    @Override
+    public void run() {
+        working.tom();
+    }
+}
+</code></pre>
+
+<p>测试类:</p>
+
+<pre><code>public class SynFunction {
+    public static void main(String[] args) {
+        Working working = new Working();
+        TomThread tomThread = new TomThread(working);
+        JerryThread jerryThread = new JerryThread(working);
+        tomThread.start();
+        jerryThread.start();
+    }
+}
+
+输出结果:
+jerry in...
+jerry say: Hello Tom
+jerry out...
+tom in...
+tom say: Hello Jerry
+tom out...
+</code></pre>
+
+<p>从输出可以印证之前说的同步方法的特点:当一个对象的同步方法被调用,它的其他同步方法都用不了.</p>
+
+<h3 id="toc_10">死锁</h3>
+
+<p>死锁现象: 当两个线程互相等待对方释放同步监视器时就会发生死锁.Java虚拟机没有检测,也没有采取措施来处理死锁情况,<br/>
+所以多线程应该避免死锁的出现.一旦程序出现死锁,整个程序既不会发生异常,也不会有任何提示.只是所有线程都处于阻塞状态.</p>
+
+<p>一般这种情况发生在:同步中嵌套同步,但锁不同.<br/>
+比如:a线程锁定一个资源,同时想获取b线程的资源.b线程锁定一个资源,同时想获取a线程的资源.</p>
+
+<p>代码示例:</p>
+
+<p>线程1:</p>
+
+<pre><code>public class Thread1 extends Thread {
+    @Override
+    public void run() {
+        synchronized (Object.class) {
+            System.out.println(Thread.currentThread().getName()+&quot;...外层锁&quot;);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            synchronized (String.class) {
+                System.out.println(&quot;haha,锁主了&quot;);
+
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>线程2:</p>
+
+<pre><code>public class Thread2 extends Thread {
+    @Override
+    public void run() {
+        synchronized (String.class) {
+            System.out.println(Thread.currentThread().getName()+&quot;...外层锁&quot;);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            synchronized (Object.class) {
+                System.out.println(&quot;haha,我也锁主了&quot;);
+
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>测试类:</p>
+
+<pre><code>public class LockFunction {
+    public static void main(String[] args) {
+        Thread1 thread1 = new Thread1();
+        Thread2 thread2 = new Thread2();
+        thread1.start();
+        thread2.start();
+    }
+}
+
+输出:
+Thread-0...外层锁
+Thread-1...外层锁
+
+</code></pre>
+
+<h2 id="toc_11">线程通信</h2>
+
+<blockquote>
+<p>当多个线程访问同一个资源,每个线程的实现功能不一样,而每个线程之间需要协调发展(两种线程交替运行)</p>
+</blockquote>
+
+<p>例如:</p>
+
+<pre><code>    老师：我们开始上课；
+    学生A：老师等一下，我要去厕所；
+    老师：OK，你快点，那我wait()了，等你回来notify我一下。
+</code></pre>
+
+<p>线程通信的前提:<strong>同步环境</strong></p>
+
+<p>代码说明:<br/>
+加入了存钱的业务,现在分别有两个不同的业务了.</p>
+
+<p>银行类:</p>
+
+<pre><code>public class Bank {
+    private double money;
+    boolean flag = false;
+
+    public Bank(double money) {
+        this.money = money;
+    }
+
+    /**
+     * 取钱方法
+     * @param drawMoney
+     * @return
+     */
+    public double drawMoney(double drawMoney) {
+        money = money - drawMoney;
+        return money;
+    }
+
+    /**
+     * 存钱
+     * @param saveMoney
+     * @return
+     */
+    public double saveMoney(double saveMoney) {
+        money = money + saveMoney;
+        return money;
+    }
+
+    /**
+     * 查询余额
+     * @return
+     */
+    public double getMoney() {
+        return money;
+    }
+}
+
+</code></pre>
+
+<p>存钱类:</p>
+
+<pre><code>public class SaveThread extends Thread {
+    private Bank bank;
+    private double saveMoney;
+
+    public SaveThread(String threadName, Bank bank, double saveMoney) {
+        super(threadName);
+        this.bank=bank;
+        this.saveMoney = saveMoney;
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            synchronized (bank) {
+                if (bank.flag) {
+                    try {
+                        bank.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                bank.saveMoney(saveMoney);
+                System.out.println(Thread.currentThread().getName() + &quot; 存款成功,存款金额: &quot; + saveMoney + &quot;,账户余额:&quot; + bank.getMoney());
+                bank.flag = true;
+                bank.notify();
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>取钱类:</p>
+
+<pre><code>public class DrawThread extends Thread {
+    private Bank bank;
+    private double drawMoney;
+
+    public DrawThread(String threadName, Bank bank, double drawMoney) {
+        super(threadName);
+        this.bank = bank;
+        this.drawMoney = drawMoney;
+    }
+    @Override
+    public void run() {
+        while (true) {
+            synchronized (bank) {
+                if (!bank.flag) {
+                    try {
+                        bank.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (bank.getMoney() &lt; drawMoney) {
+                    System.out.println(&quot;余额不足,当前余额是: &quot; + bank.getMoney());
+                    break;
+                }
+                bank.drawMoney(drawMoney);
+                System.out.println(Thread.currentThread().getName()+&quot; 取款成功,取款金额是: &quot;+drawMoney+&quot;,账户余额: &quot;+bank.getMoney());
+                bank.flag = false;
+                bank.notify();
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>测试类:</p>
+
+<pre><code>public class BankTest {
+    public static void main(String[] args) {
+        Bank bank = new Bank(5000);
+        new DrawThread(&quot;取钱线程&quot;,bank,500).start();
+        new SaveThread(&quot;存钱线程&quot;,bank,200).start();
+    }
+}
+
+输出:
+存钱线程存款成功,存款金额: 200.0,账户余额:5200.0
+取钱线程 取款成功,取款金额是: 500.0,账户余额: 4700.0
+存钱线程存款成功,存款金额: 200.0,账户余额:4900.0
+取钱线程 取款成功,取款金额是: 500.0,账户余额: 4400.0
+存钱线程存款成功,存款金额: 200.0,账户余额:4600.0
+取钱线程 取款成功,取款金额是: 500.0,账户余额: 4100.0
+存钱线程存款成功,存款金额: 200.0,账户余额:4300.0
+取钱线程 取款成功,取款金额是: 500.0,账户余额: 3800.0
+存钱线程存款成功,存款金额: 200.0,账户余额:4000.0
+取钱线程 取款成功,取款金额是: 500.0,账户余额: 3500.0
+存钱线程存款成功,存款金额: 200.0,账户余额:3700.0
+取钱线程 取款成功,取款金额是: 500.0,账户余额: 3200.0
+存钱线程存款成功,存款金额: 200.0,账户余额:3400.0
+取钱线程 取款成功,取款金额是: 500.0,账户余额: 2900.0
+存钱线程存款成功,存款金额: 200.0,账户余额:3100.0
+取钱线程 取款成功,取款金额是: 500.0,账户余额: 2600.0
+存钱线程存款成功,存款金额: 200.0,账户余额:2800.0
+取钱线程 取款成功,取款金额是: 500.0,账户余额: 2300.0
+存钱线程存款成功,存款金额: 200.0,账户余额:2500.0
+取钱线程 取款成功,取款金额是: 500.0,账户余额: 2000.0
+存钱线程存款成功,存款金额: 200.0,账户余额:2200.0
+取钱线程 取款成功,取款金额是: 500.0,账户余额: 1700.0
+存钱线程存款成功,存款金额: 200.0,账户余额:1900.0
+取钱线程 取款成功,取款金额是: 500.0,账户余额: 1400.0
+存钱线程存款成功,存款金额: 200.0,账户余额:1600.0
+取钱线程 取款成功,取款金额是: 500.0,账户余额: 1100.0
+存钱线程存款成功,存款金额: 200.0,账户余额:1300.0
+取钱线程 取款成功,取款金额是: 500.0,账户余额: 800.0
+存钱线程存款成功,存款金额: 200.0,账户余额:1000.0
+取钱线程 取款成功,取款金额是: 500.0,账户余额: 500.0
+存钱线程存款成功,存款金额: 200.0,账户余额:700.0
+取钱线程 取款成功,取款金额是: 500.0,账户余额: 200.0
+存钱线程存款成功,存款金额: 200.0,账户余额:400.0
+余额不足,当前余额是: 400.0
+</code></pre>
+
+<h2 id="toc_12">线程学习的经典案例-生产者消费者案例</h2>
+
+<blockquote>
+<p>大多数设计模式中,都会有一个第三者来进行解耦.在生产者和消费者模式中,我们需要一个第三者来对此进行解耦</p>
+</blockquote>
+
+<h3 id="toc_13">为什么要用生产者和消费者模式?</h3>
+
+<p>在线程世界里，<strong>生产者就是生产数据的线程，消费者就是消费数据的线程</strong>。在多线程开发当中，<br/>
+如果生产者处理速度很快，而消费者处理速度很慢，那么生产者就必须等待消费者处理完，<br/>
+才能继续生产数据。同样的道理，如果消费者的处理能力大于生产者，那么消费者就必须等待<br/>
+生产者。为了解决这个问题于是引入了生产者和消费者模式。</p>
+
+<h3 id="toc_14">什么是生产者消费者模式</h3>
+
+<p>生产者消费者模式是通过一个容器来解决生产者和消费者的强耦合问题。生产者和消费者<br/>
+彼此之间不直接通讯，而通过阻塞队列来进行通讯，所以生产者生产完数据之后不用等待<br/>
+消费者处理，直接扔给阻塞队列，消费者不找生产者要数据，而是直接从阻塞队列里取，<br/>
+阻塞队列就相当于一个缓冲区，平衡了生产者和消费者的处理能力。</p>
+
+<p>这个阻塞队列就是用来给生产者和消费者解耦的。纵观大多数设计模式，都会找一个第三者出<br/>
+来进行解耦，如工厂模式的第三者是工厂类，模板模式的第三者是模板类。在学习一些设计模<br/>
+式的过程中，如果先找到这个模式的第三者，能帮助我们快速熟悉一个设计模式。</p>
+
+<h3 id="toc_15">单生产者单消费者</h3>
+
+<p>一个生产者线程，一个消费者线程.过程看代码注释,非常详细了.希望我以后看见我的注释就能回想起一切.</p>
+
+<p>资源类：</p>
+
+<pre><code>public class Resource {
+    private int num = 0;
+    boolean flag = false;
+
+    public Resource(int num) {
+        this.num = num;
+    }
+
+//    生产资源
+    public synchronized void createNum() {
+//        flag为true表示有资源。那么生产者就不能生产了，生产者线程就开始wait等待
+        if (flag) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+//        如果到了这里，表示：生产者已经被唤醒了，那么意味着资源已经被消费了，生产者要开始生产了
+        num++;
+        System.out.println(Thread.currentThread().getName()+&quot; 生产者线程: ---&gt; &quot;+num);
+//        生产者生产完资源后，把flag标记为true.表示有资源了
+        flag = true;
+//        有资源后，生产者去唤醒消费者去消费资源
+        notify();
+    }
+
+    //    消费资源
+    public synchronized void destory() {
+//        因为flag为true时候有资源，那么！flag表示没用资源了，因此消费者线程就需要等待了，等待生产者线程去生产资源
+        if (!flag) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+//        到了这里，说明消费者线程被生产者线程唤醒了，那么也意味着有资源了
+        System.out.println(Thread.currentThread().getName()+&quot; 消费者线程: ---&gt; &quot;+num);
+//        消费了数据，那么消费者就得把flag标记为false，表示没用数据了，提醒生产者得去生产数据了
+        flag = false;
+//        接下来就得去唤醒生产者去生产数据了
+        notify();
+    }
+}
+
+</code></pre>
+
+<p>生产者线程:</p>
+
+<pre><code>public class Producer implements Runnable {
+    private Resource resource;
+
+    public Producer(Resource resource) {
+        this.resource = resource;
+    }
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            resource.createNum();
+        }
+    }
+}
+</code></pre>
+
+<p>消费者线程:</p>
+
+<pre><code>public class Consumer implements Runnable {
+    private Resource resource;
+
+    public Consumer(Resource resource) {
+        this.resource = resource;
+    }
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            resource.destory();
+        }
+    }
+}
+</code></pre>
+
+<p>测试类:</p>
+
+<pre><code>public class Test {
+    public static void main(String[] args) {
+        Resource resource = new Resource(50);
+        new Thread(new Producer(resource)).start();
+        new Thread(new Consumer(resource)).start();
+    }
+}
+
+输出结果:
+Thread-0 生产者线程: ---&gt; 51
+Thread-1 消费者线程: ---&gt; 51
+Thread-0 生产者线程: ---&gt; 52
+Thread-1 消费者线程: ---&gt; 52
+Thread-0 生产者线程: ---&gt; 53
+Thread-1 消费者线程: ---&gt; 53
+Thread-0 生产者线程: ---&gt; 54
+Thread-1 消费者线程: ---&gt; 54
+Thread-0 生产者线程: ---&gt; 55
+Thread-1 消费者线程: ---&gt; 55
+Thread-0 生产者线程: ---&gt; 56
+Thread-1 消费者线程: ---&gt; 56
+</code></pre>
+
+<p>单生产者和单消费者没有问题.</p>
+
+<h3 id="toc_16">多生产者多消费者</h3>
+
+<blockquote>
+<p>两个生产者两个消费者.生产者生产一个,消费者消费一个.</p>
+</blockquote>
+
+<p>测试代码:</p>
+
+<pre><code>public class Test {
+    public static void main(String[] args) {
+        Resource resource = new Resource(0);
+        new Thread(new Producer(resource)).start();
+        new Thread(new Producer(resource)).start();
+        new Thread(new Consumer(resource)).start();
+        new Thread(new Consumer(resource)).start();
+    }
+}
+输出:
+
+Thread-1 生产者线程: ---&gt; 105
+Thread-3 消费者线程: -----------&gt; 105
+Thread-2 消费者线程: -----------&gt; 105
+</code></pre>
+
+<p>这里出现了问题.105生产了一次,消费了两次.<br/>
+为了在做实验的时候,看出问题.我们不能把线程的等待时间设置得过长,不然可能没法暴露出问题.然后输出打印的时候,让消费者和生产者的输出格式不一样,是为了更快的定位到问题.<br/>
+所以,在这里我修改了消费者的输出.所以会和上面的不太一样.</p>
+
+<ul>
+<li>原因分析
+
+<ul>
+<li>当两个线程同时操作生产者生产或者消费者消费时，如果有生产者或者消费者的两个线程都wait()时，再次notify(),由于其中一个线程已经改变了标记而另外一个线程再次往下直接执行的时候没有判断标记而导致的。</li>
+<li>if判断标记，只有一次，会导致不该运行的线程运行了。出现了数据错误的情况。</li>
+</ul></li>
+<li>解决方案
++while判断标记，解决了线程获取执行权后，是否要运行！也就是每次wait()后再notify()时先再次判断标记</li>
+</ul>
+
+<p><strong>注意:</strong><br/>
++ 把单消费者单生产者改为多消费者和多生产者时候.<br/>
+    + 1.把if改为while<br/>
+    + 2.把notify改为notifyAll(不然会出现锁死)</p>
+
+<p>代码:</p>
+
+<pre><code>public class Resource {
+    private int num = 0;
+    boolean flag = false;
+
+    public Resource(int num) {
+        this.num = num;
+    }
+
+//    生产资源
+    public synchronized void createNum() {
+//        flag为true表示有资源。那么生产者就不能生产了，生产者线程就开始wait等待
+        while (flag) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+//        如果到了这里，表示：生产者已经被唤醒了，那么意味着资源已经被消费了，生产者要开始生产了
+        num++;
+        System.out.println(Thread.currentThread().getName()+&quot; 生产者线程: ---&gt; &quot;+num);
+//        生产者生产完资源后，把flag标记为true.表示有资源了
+        flag = true;
+//        有资源后，生产者去唤醒消费者去消费资源
+//        notify();
+        notifyAll();
+    }
+
+    //    消费资源
+    public synchronized void destory() {
+//        因为flag为true时候有资源，那么！flag表示没用资源了，因此消费者线程就需要等待了，等待生产者线程去生产资源
+        while (!flag) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+//        到了这里，说明消费者线程被生产者线程唤醒了，那么也意味着有资源了
+        System.out.println(Thread.currentThread().getName()+&quot; 消费者线程: -----------&gt; &quot;+num);
+//        消费了数据，那么消费者就得把flag标记为false，表示没用数据了，提醒生产者得去生产数据了
+        flag = false;
+//        接下来就得去唤醒生产者去生产数据了
+//        notify();
+        notifyAll();
+    }
+}
+</code></pre>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15198742884636.html" 
+          title="Previous Post: Java数据结构之队列">&laquo; Java数据结构之队列</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15198730789776.html" 
+          title="Next Post: 使用Spark分析泄露的2000W开房数据和600W条CSDN用户数据">使用Spark分析泄露的2000W开房数据和600W条CSDN用户数据 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="/Users/hushiwei/Pictures/Pictures/wei.png" /></div>
+            
+                <h1>Time渐行渐远</h1>
+                <div class="site-des">Coding Changing The World</div>
+                <div class="social">
+
+
+
+
+
+
+
+
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:hsw_v5@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="BigData.html"><strong>BigData</strong></a>
+        
+            <a href="Python.html"><strong>Python</strong></a>
+        
+            <a href="Linux.html"><strong>Linux</strong></a>
+        
+            <a href="Life.html"><strong>Life</strong></a>
+        
+            <a href="Spark.html"><strong>Spark</strong></a>
+        
+            <a href="Yarn.html"><strong>Yarn</strong></a>
+        
+            <a href="Scala.html"><strong>Scala</strong></a>
+        
+            <a href="VPS.html"><strong>VPS</strong></a>
+        
+            <a href="MachineLearning.html"><strong>MachineLearning</strong></a>
+        
+            <a href="Writer.html"><strong>Writer</strong></a>
+        
+            <a href="Shell.html"><strong>Shell</strong></a>
+        
+            <a href="Algorithm.html"><strong>Algorithm</strong></a>
+        
+            <a href="Mac.html"><strong>Mac</strong></a>
+        
+            <a href="Presto.html"><strong>Presto</strong></a>
+        
+            <a href="Mysql.html"><strong>Mysql</strong></a>
+        
+            <a href="Maven.html"><strong>Maven</strong></a>
+        
+            <a href="Kafka.html"><strong>Kafka</strong></a>
+        
+            <a href="Java.html"><strong>Java</strong></a>
+        
+            <a href="DevTools.html"><strong>DevTools</strong></a>
+        
+            <a href="Hbase.html"><strong>Hbase</strong></a>
+        
+            <a href="ELK.html"><strong>ELK</strong></a>
+        
+            <a href="Druid.html"><strong>Druid</strong></a>
+        
+            <a href="Docker.html"><strong>Docker</strong></a>
+        
+            <a href="DesignPattern.html"><strong>DesignPattern</strong></a>
+        
+            <a href="Computer.html"><strong>Computer</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15198768495613.html">Elasticsearch：用Curator辅助Marvel，实现自动删除旧marvel索引</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198743666304.html">PythonVirtualenv总结</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198746079468.html">机器学习实战之朴素贝叶斯</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198745641385.html">Presto的学习笔记</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198769093559.html">二八定律与长尾理论</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+
+  </body>
+</html>

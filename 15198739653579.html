@@ -1,0 +1,621 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  Linux 文件同步工具——rsync - Time渐行渐远
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Time渐行渐远" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:dmlcoding.com ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_blank" href="collections.html">COLLECTION</a></li>
+        
+        <li id=""><a target="_blank" href="tools.html">TOOLS</a></li>
+        
+        <li id=""><a target="_blank" href="About.html">ABOUT</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Time渐行渐远</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="BigData.html">BigData</a></li>
+        
+            <li><a href="Python.html">Python</a></li>
+        
+            <li><a href="Linux.html">Linux</a></li>
+        
+            <li><a href="Life.html">Life</a></li>
+        
+            <li><a href="Spark.html">Spark</a></li>
+        
+            <li><a href="Yarn.html">Yarn</a></li>
+        
+            <li><a href="Scala.html">Scala</a></li>
+        
+            <li><a href="VPS.html">VPS</a></li>
+        
+            <li><a href="MachineLearning.html">MachineLearning</a></li>
+        
+            <li><a href="Writer.html">Writer</a></li>
+        
+            <li><a href="Shell.html">Shell</a></li>
+        
+            <li><a href="Algorithm.html">Algorithm</a></li>
+        
+            <li><a href="Mac.html">Mac</a></li>
+        
+            <li><a href="Presto.html">Presto</a></li>
+        
+            <li><a href="Mysql.html">Mysql</a></li>
+        
+            <li><a href="Maven.html">Maven</a></li>
+        
+            <li><a href="Kafka.html">Kafka</a></li>
+        
+            <li><a href="Java.html">Java</a></li>
+        
+            <li><a href="DevTools.html">DevTools</a></li>
+        
+            <li><a href="Hbase.html">Hbase</a></li>
+        
+            <li><a href="ELK.html">ELK</a></li>
+        
+            <li><a href="Druid.html">Druid</a></li>
+        
+            <li><a href="Docker.html">Docker</a></li>
+        
+            <li><a href="DesignPattern.html">DesignPattern</a></li>
+        
+            <li><a href="Computer.html">Computer</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>Linux 文件同步工具——rsync</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2017/3/22</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='Linux.html'>Linux</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h2 id="toc_0">介绍</h2>
+
+<p>rsync是类unix系统下的数据镜像备份工具，从软件的命名上就可以看出来了——remote sync</p>
+
+<span id="more"></span><!-- more -->
+
+<h2 id="toc_1">rsync服务器安装与搭建</h2>
+
+<h3 id="toc_2">软件包安装</h3>
+
+<pre><code class="language-$xslt">　　# sudo apt-get  install  rsync  注：在debian、ubuntu 等在线安装方法；
+　　# yum install rsync    注：Fedora、Redhat 等在线安装方法；
+　　# rpm -ivh rsync       注：Fedora、Redhat 等rpm包安装方法；
+</code></pre>
+
+<p>其它Linux发行版，请用相应的软件包管理方法来安装。</p>
+
+<h3 id="toc_3">源码包安装</h3>
+
+<pre><code class="language-$xslt">　　tar xvf  rsync-xxx.tar.gz
+　　cd rsync-xxx
+　　./configure --prefix=/usr  ;make ;make install   注：在用源码包编译安装之前，您得安装gcc等编译工具才行；
+</code></pre>
+
+<h2 id="toc_4">rsync 服务端配置</h2>
+
+<blockquote>
+<p>安装好 rsync 软件后,只需要创建配置好两个文件,然后开启 rsync 服务就可以了</p>
+</blockquote>
+
+<p>服务器配置文件(/etc/rsyncd.conf)，该文件默认不存在，请创建它。具体步骤如下</p>
+
+<ul>
+<li><p>用root用户创建：<br/>
+```$xslt</p>
+
+<h1 id="toc_5">touch /etc/rsyncd.conf  #创建rsyncd.conf，这是rsync服务器的配置文件。</h1>
+
+<h1 id="toc_6">touch /etc/rsyncd.secrets  #创建rsyncd.secrets ，这是用户密码文件。这个密码文件很好的哦，你可以设置一个用户名：密码的数值对，然后在客户端设置一个密码文件，只写密码就可以了，一会细讲。</h1>
+
+<h1 id="toc_7">chmod 600 /etc/rsyncd.secrets  #将rsyncd.secrets这个密码文件的文件属性设为root拥有, 且权限要设为600, 否则无法备份成功!</h1>
+
+<pre><code></code></pre></li>
+</ul>
+
+<h3 id="toc_8">修改rsyncd.conf文件</h3>
+
+<blockquote>
+<p>rsyncd.conf是rsync服务器主要配置文件</p>
+</blockquote>
+
+<p>比如我想要把远程机器上的文件,拉到这个服务器上的/home/root/tmp_hsw位置</p>
+
+<pre><code class="language-$xslt">
+vi /etc/rsyncd.conf
+
+pid file = /var/run/rsyncd.pid
+port = 873
+uid = root
+gid = root
+
+use chroot = yes
+read only = no
+
+#limit access to private LANs
+hosts allow= 10.10.25.14
+hosts deny=*
+
+max connections = 5
+#motd file = /etc/rsyncd.motd
+
+#This will give you a separate log file
+log file = /var/log/rsync.log
+
+#This will log every file transferred - up to 85,000+ per user, per sync
+transfer logging = yes
+
+log format = %t %a %m %f %b
+syslog facility = local3
+timeout = 300
+
+[getcoolpaddata]
+path = /home/root/tmp_hsw/testRsync
+list=yes
+ignore errors
+auth users = root
+secrets file = /etc/rsyncd.secrets
+comment = This is test for get coolpad data
+#exclude = easylife/  samba/
+
+</code></pre>
+
+<ul>
+<li>注意: 关于auth users是必须在服务器上存在的真实的系统用户，如果你想用多个用户以,号隔开，比如auth users = easylife,root</li>
+</ul>
+
+<h4 id="toc_9">解释rsyncd.conf文件配置项</h4>
+
+<blockquote>
+<p>在rsync 服务器中，全局定义有几个比较关健的，根据我们前面所给的配置文件 rsyncd.conf 文件</p>
+</blockquote>
+
+<ul>
+<li>全局配置
+
+<ul>
+<li>pid file = /var/run/rsyncd.pid              注：告诉进程写到 /var/run/rsyncd.pid 文件中；</li>
+<li>port = 873                                  注：指定运行端口，默认是873，您可以自己指定；</li>
+<li>uid = root<br/></li>
+<li>gid = root                                  注：服务器端传输文件时，要发哪个用户和用户组来执行，默认是nobody。 如果用nobody 用户和用户组，可能遇到权限问题，有些文件从服务器上拉不下来。所以我就偷懒，为了方便，用了root 。不过您可以在定义要同步的目录时定义的模块中指定用户来解决权限的问题。</li>
+<li>use chroot = yes</li>
+<li>read only = yes                             注：read only 是只读选择，也就是说，不让客户端上传文件到服务器上。还有一个 write only选项，自己尝试是做什么用的吧；</li>
+<li>hosts allow= 10.10.25.14                    注: 允许访问的主机 IP</li>
+<li>max connections = 5                         注：客户端最多连接数</li>
+<li>log file = /var/log/rsync.log               注：rsync 服务器的日志；</li>
+<li>transfer logging = yes                      注：这是传输文件的日志 </li>
+<li>log format = %t %a %m %f %b</li>
+<li>syslog facility = local3</li>
+<li>timeout = 300</li>
+</ul></li>
+</ul>
+
+<blockquote>
+<p>模块定义什么呢？主要是定义服务器哪个目录要被同步。每个模块都要以[name]形式。这个名字就是在rsync 客户端看到的名字，其实有点象Samba服务器提供的共享名。而服务器真正同步的数据是通过path 指定的。我们可以根据自己的需要，来指定多个模块。每个模块要指定认证用户，密码文件、并排除并不是必须的文件</p>
+</blockquote>
+
+<ul>
+<li>模块定义
+
+<ul>
+<li>[getcoolpaddata]  #模块它为我们提供了一个链接的名字，在本模块中链接到了/home/root/tmp_hsw/testRsync目录；要用[name] 形式</li>
+<li>path = /home    #指定文件目录所在位置，这是必须指定的 </li>
+<li>auth users = root   #认证用户是root  ，是必须在服务器上存在的用户</li>
+<li>list=yes   #list 意思是把rsync 服务器上提供同步数据的目录在服务器上模块是否显示列出来。默认是yes 。如果你不想列出来，就no ；如果是no是比较安全的，至少别人不知道你的服务器上提供了哪些目录。你自己知道就行了；</li>
+<li>ignore errors  #忽略IO错误</li>
+<li>secrets file = /etc/rsyncd.secrets   #密码存在哪个文件</li>
+<li>comment = linuxsir home  data  #注释可以自己定义</li>
+<li>exclude = beinan/ samba/     # exclude是排除的意思，也就是说，要把/home目录下的easylife和samba排除在外； easylife/和samba/目录之间有空格分开</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_10">设定密码文件/etc/rsyncd.secrets</h3>
+
+<p>密码文件格式很简单，rsyncd.secrets的内容格式为：</p>
+
+<p>　　用户名:密码</p>
+
+<p>比如:<br/>
+```$xslt<br/>
+vi /etc/rsyncd.secrets</p>
+
+<p>root:rsy123456<br/>
+```</p>
+
+<p>修改权限<br/>
+<code>$xslt<br/>
+chown root.root rsyncd.secrets 　#修改属主<br/>
+chmod 600 rsyncd.secrets     #修改权限<br/>
+</code><br/>
++ 注意<br/>
+    + 1、将rsyncd.secrets这个密码文件的文件属性设为root拥有, 且权限要设为600, 否则无法备份成功! 出于安全目的，文件的属性必需是只有属主可读。<br/>
+    + 2、这里的密码值得注意，为了安全你不能把系统用户的密码写在这里。比如你的系统用户root密码是 helloworld，为了安全你可以让rsync中的rsyncd.secrets文件中的密码为为123456。这样，在客户端连接的时候，也是用这个123456会使用这个rsyncd.secrets作为认证文件，不和os有任何牵连。</p>
+
+<h2 id="toc_11">配置客户端</h2>
+
+<blockquote>
+<p>上面两个配置文件都是在启动 rsycn的服务器端,然而在我们的客户端,我们安装了 rsync后,只需要创建一个密码文件,里面放上服务器上定义的密码即可了</p>
+</blockquote>
+
+<pre><code class="language-$xslt">root: vi /etc/rsyncd.passwd
+rsy123456
+</code></pre>
+
+<h2 id="toc_12">启动rsync服务器及防火墙的设置</h2>
+
+<blockquote>
+<p>启动rsync服务器相当简单</p>
+</blockquote>
+
+<pre><code class="language-$xslt">--daemon参数方式，是让rsync以服务器模式运行
+
+# /usr/bin/rsync --daemon  --config=/etc/rsyncd/rsyncd.conf 　#--config用于指定rsyncd.conf的位置,如果在/etc下可以不写
+
+</code></pre>
+
+<h2 id="toc_13">简单使用</h2>
+
+<p>把客户端/home/root/tmp_hsw 路径下的文件同步到服务器下.路径为 path 里面定义的</p>
+
+<pre><code class="language-$xslt">rsync -avz --progress  --password-file=/etc/rsyncd.passwd --delete /home/root/tmp_hsw root@10.10.25.13::getcoolpaddata/
+</code></pre>
+
+<h2 id="toc_14">总结</h2>
+
+<p>1.在客户端的时候,你想用客户端的哪个用户传输数据,那么客户端上面的/etc/rsyncd.passwd文件就得是这个用户文件,并且权限是600<br/>
+2.都使用 root 用户肯定是没有问题的<br/>
+3.在服务端的时候,如果不想用 root 用户.那么那两个配置文件的权限都得是 root 用户,然后再 rsync.conf 里面把 uid,cid,auth users改成普通用户即可.</p>
+
+<h2 id="toc_15">参考</h2>
+
+<p>配置过程参考文章:<a href="http://blog.csdn.net/cymm_liu/article/details/31347531">http://blog.csdn.net/cymm_liu/article/details/31347531</a></p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15198747024709.html" 
+          title="Previous Post: mysql赋给用户权限grant all privileges on">&laquo; mysql赋给用户权限grant all privileges on</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15198735152940.html" 
+          title="Next Post: Shell Skills">Shell Skills &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="/Users/hushiwei/Pictures/Pictures/wei.png" /></div>
+            
+                <h1>Time渐行渐远</h1>
+                <div class="site-des">Coding Changing The World</div>
+                <div class="social">
+
+
+
+
+
+
+
+
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:hsw_v5@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="BigData.html"><strong>BigData</strong></a>
+        
+            <a href="Python.html"><strong>Python</strong></a>
+        
+            <a href="Linux.html"><strong>Linux</strong></a>
+        
+            <a href="Life.html"><strong>Life</strong></a>
+        
+            <a href="Spark.html"><strong>Spark</strong></a>
+        
+            <a href="Yarn.html"><strong>Yarn</strong></a>
+        
+            <a href="Scala.html"><strong>Scala</strong></a>
+        
+            <a href="VPS.html"><strong>VPS</strong></a>
+        
+            <a href="MachineLearning.html"><strong>MachineLearning</strong></a>
+        
+            <a href="Writer.html"><strong>Writer</strong></a>
+        
+            <a href="Shell.html"><strong>Shell</strong></a>
+        
+            <a href="Algorithm.html"><strong>Algorithm</strong></a>
+        
+            <a href="Mac.html"><strong>Mac</strong></a>
+        
+            <a href="Presto.html"><strong>Presto</strong></a>
+        
+            <a href="Mysql.html"><strong>Mysql</strong></a>
+        
+            <a href="Maven.html"><strong>Maven</strong></a>
+        
+            <a href="Kafka.html"><strong>Kafka</strong></a>
+        
+            <a href="Java.html"><strong>Java</strong></a>
+        
+            <a href="DevTools.html"><strong>DevTools</strong></a>
+        
+            <a href="Hbase.html"><strong>Hbase</strong></a>
+        
+            <a href="ELK.html"><strong>ELK</strong></a>
+        
+            <a href="Druid.html"><strong>Druid</strong></a>
+        
+            <a href="Docker.html"><strong>Docker</strong></a>
+        
+            <a href="DesignPattern.html"><strong>DesignPattern</strong></a>
+        
+            <a href="Computer.html"><strong>Computer</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15198768495613.html">Elasticsearch：用Curator辅助Marvel，实现自动删除旧marvel索引</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198743666304.html">PythonVirtualenv总结</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198746079468.html">机器学习实战之朴素贝叶斯</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198745641385.html">Presto的学习笔记</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198769093559.html">二八定律与长尾理论</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+
+  </body>
+</html>

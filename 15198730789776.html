@@ -1,0 +1,602 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  使用Spark分析泄露的2000W开房数据和600W条CSDN用户数据 - Time渐行渐远
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Time渐行渐远" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:dmlcoding.com ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_blank" href="collections.html">COLLECTION</a></li>
+        
+        <li id=""><a target="_blank" href="tools.html">TOOLS</a></li>
+        
+        <li id=""><a target="_blank" href="About.html">ABOUT</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Time渐行渐远</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="BigData.html">BigData</a></li>
+        
+            <li><a href="Python.html">Python</a></li>
+        
+            <li><a href="Linux.html">Linux</a></li>
+        
+            <li><a href="Life.html">Life</a></li>
+        
+            <li><a href="Spark.html">Spark</a></li>
+        
+            <li><a href="Yarn.html">Yarn</a></li>
+        
+            <li><a href="Scala.html">Scala</a></li>
+        
+            <li><a href="VPS.html">VPS</a></li>
+        
+            <li><a href="MachineLearning.html">MachineLearning</a></li>
+        
+            <li><a href="Writer.html">Writer</a></li>
+        
+            <li><a href="Shell.html">Shell</a></li>
+        
+            <li><a href="Algorithm.html">Algorithm</a></li>
+        
+            <li><a href="Mac.html">Mac</a></li>
+        
+            <li><a href="Presto.html">Presto</a></li>
+        
+            <li><a href="Mysql.html">Mysql</a></li>
+        
+            <li><a href="Maven.html">Maven</a></li>
+        
+            <li><a href="Kafka.html">Kafka</a></li>
+        
+            <li><a href="Java.html">Java</a></li>
+        
+            <li><a href="DevTools.html">DevTools</a></li>
+        
+            <li><a href="Hbase.html">Hbase</a></li>
+        
+            <li><a href="ELK.html">ELK</a></li>
+        
+            <li><a href="Druid.html">Druid</a></li>
+        
+            <li><a href="Docker.html">Docker</a></li>
+        
+            <li><a href="DesignPattern.html">DesignPattern</a></li>
+        
+            <li><a href="Computer.html">Computer</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>使用Spark分析泄露的2000W开房数据和600W条CSDN用户数据</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2016/12/1</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='Spark.html'>Spark</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h2 id="toc_0">2000W开房数据</h2>
+
+<h3 id="toc_1">数据格式</h3>
+
+<span id="more"></span><!-- more -->
+
+<blockquote>
+<p>Name,CardNo,Descriot,CtfTp,CtfId,Gender,Birthday,Address,Zip,Dirty,District1,<br/>
+District2,District3,District4,District5,District6,FirstNm,LastNm,Duty,Mobile,Tel,<br/>
+Fax,EMail,Nation,Taste,Education,Company,CTel,CAddress,CZip,Family,Version,id</p>
+</blockquote>
+
+<h3 id="toc_2">数据预览</h3>
+
+<p>为了保护用户隐私,相关数据打码了.<br/>
+<img src="media/15198730789776/kaifanguser.png" alt="kaifanguse"/></p>
+
+<h3 id="toc_3">开房数据分析</h3>
+
+<blockquote>
+<p>因为是单机local模式运行,用其中一个文件作为测试数据.感兴趣的可以全部加载进来,放在集群里跑一跑.<br/>
+sortbykey是对每个分区中的数据进行排序,如果想要全局排序,把分区数设置为1</p>
+</blockquote>
+
+<ul>
+<li>分析开房次数TOP10用户(第0,3,4三个字段确定唯一的用户)</li>
+</ul>
+
+<pre><code>    val conf = new SparkConf().setAppName(&quot;KaiFan&quot;).setMaster(&quot;local[*]&quot;)
+    val sc = new SparkContext(conf)
+    //    酒店开房数据的字段
+    //    Name,CardNo,Descriot,CtfTp,CtfId,Gender,Birthday,Address,Zip,Dirty,District1,District2,District3,District4,District5,District6,FirstNm,LastNm,Duty,Mobile,Tel,Fax,EMail,Nation,Taste,Education,Company,CTel,CAddress,CZip,Family,Version,id
+    var hotel1RDD = sc.textFile(&quot;G:\\2000W\\1-200W.csv&quot;)
+    //    var hotel2RDD = sc.textFile(&quot;G:\\2000W\\200W-400W.csv&quot;)
+    //    var hotel3RDD = sc.textFile(&quot;G:\\2000W\\400W-600W.csv&quot;)
+    //    var hotel4RDD = sc.textFile(&quot;G:\\2000W\\600W-800W.csv&quot;)
+    //    var hotel5RDD = sc.textFile(&quot;G:\\2000W\\800W-1000W.csv&quot;)
+    //    var hotel6RDD = sc.textFile(&quot;G:\\2000W\\1000W-1200W.csv&quot;)
+    //    var hotel7RDD = sc.textFile(&quot;G:\\2000W\\1200W-1400W.csv&quot;)
+    //    var hotel8RDD = sc.textFile(&quot;G:\\2000W\\1400W-1600W.csv&quot;)
+    //    var hotel9RDD = sc.textFile(&quot;G:\\2000W\\1600w-1800w.csv&quot;)
+    //    var hotel10RDD = sc.textFile(&quot;G:\\2000W\\1800w-2000w.csv&quot;)
+
+    //    var hotelRDD = hotel1RDD ++ hotel2RDD ++ hotel3RDD ++ hotel4RDD ++ hotel5RDD ++ hotel6RDD ++ hotel7RDD ++ hotel8RDD ++ hotel9RDD ++ hotel10RDD
+    var hotelRDD = hotel1RDD
+
+    //    分析开房次数TOP10用户(第0,3,4三个字段确定唯一的用户)
+    val tmpRDD=hotelRDD.map(line=&gt;line.toString().split(&quot;,&quot;)).filter(_.length==33)
+    val result=tmpRDD.map(arr=&gt; (arr(0),arr(3),arr(4))).map(arr=&gt;(arr,1)).reduceByKey(_+_).sortBy(arr=&gt;arr._2,false)
+    result.take(10).foreach(println)
+</code></pre>
+
+<ul>
+<li>统计一天中,各个小时离店的人数</li>
+</ul>
+
+<p>先去除脏数据,然后从时间字段里过滤出小时部分.然后统计小时的词频</p>
+
+<pre><code>    val hourRDD = hotelRDD.map(line =&gt; line.toString().split(&quot;,&quot;)).filter(_.length == 33).filter(arr =&gt; arr(31).trim.length != 0)
+      .map(arr =&gt; arr(31)).map(str =&gt; str.split(&quot;[- :]&quot;)).filter(arr =&gt; arr.length == 6)
+      .map(arr =&gt; arr(3).toInt).map(hour =&gt; (hour, 1)).reduceByKey(_ + _).map { case (x, y) =&gt; (y, x)}
+
+      // 用sortbykey进行排序,然后再取前10
+    val sortedHourRDD=hourRDD.sortByKey(false, 1)
+    sortedHourRDD.take(10).foreach(println)
+
+    println(&quot;--------------------------------&quot;)
+    // 对未排序的序列,调用top(n)算子,底层帮你排序,然后取topn数据.
+    hourRDD.top(10).foreach(println)
+</code></pre>
+
+<ul>
+<li>性别分布统计</li>
+</ul>
+
+<pre><code>//    性别分布统计
+    val sexRDD=hotelRDD.map(line=&gt; line.toString().split(&quot;,&quot;)).filter(_.length==33).filter(arr=&gt;arr(31).trim.length!=0)
+      .map(arr=&gt;arr(5))
+//      过滤掉脏数据
+      .filter(_.trim.length==1)
+      .filter(sex=&gt;(sex==&quot;F&quot; || sex==&quot;M&quot;))
+      .map((_,1))
+//      对性别字段进行统计
+      .reduceByKey(_+_)
+
+    sexRDD.foreach(println)
+</code></pre>
+
+<ul>
+<li>开房的年龄分布</li>
+</ul>
+
+<pre><code>    //    年龄分布统计(从身份证中截取出身年份,然后用今年减去即可)
+    val ageRDD = hotelRDD.map(line =&gt; line.toString().split(&quot;,&quot;)).filter(_.length == 33)
+      .filter(arr =&gt; arr(3) == &quot;ID&quot;) //只取ID类型的用户
+      .filter(arr =&gt; arr(4).length == 18) //确保身份证号的位数是对的
+      .map(_ (4))
+      .filter(&quot;^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([0-9]|X)$&quot;.r.pattern.matcher(_).matches())
+      .map(num =&gt; num.substring(6, 10)) // 取出年份
+      .map(2016 - _.toInt)
+      .filter(age =&gt; (age &gt; 0 &amp;&amp; age &lt; 110))
+      .map((_, 1))
+      .reduceByKey(_ + _)
+      .map { case (x, y) =&gt; (y, x) }
+      .sortByKey(false, 1)
+
+    println(ageRDD.count())
+    ageRDD.foreach(println)
+</code></pre>
+
+<h2 id="toc_4">CSDN用户数据分析</h2>
+
+<h3 id="toc_5">数据格式预览</h3>
+
+<blockquote>
+<p>以免泄露别人的信息,以下的信息我做了额外的增加</p>
+</blockquote>
+
+<pre><code>zdgs # 12344fd321 # zdfdag@csdn.net
+LaafoZheng # 6702fsd03313747 # chenfdagming_zheng@163.com
+fstfaao # 730df413 # fstafao@tom.com
+hufdwolf # 25352gf63 # hujiadfye@263.net
+cafaddcjl # KIC43aafdk6! # ccegfdsdcjl@21cn.com
+</code></pre>
+
+<h3 id="toc_6">数据分析</h3>
+
+<ul>
+<li>分析最多人使用的TOPn个密码</li>
+</ul>
+
+<pre><code>    val csdnRDD = sc.textFile(&quot;G:\\600W-CSDN\\csdnuser.txt&quot;)
+    println(s&quot;csdn一共泄露了: ${csdnRDD.count()} 个用户数据&quot;)
+    //     cafaddcjl # KIC43aafdk6! # ccegfdsdcjl@21cn.com
+    //    分析最多人使用的TOPn个密码
+    val pwRDD = csdnRDD.map(line =&gt; line.toString.split(&quot; # &quot;))
+      .map(_ (1))
+      .map((_, 1)).reduceByKey(_ + _)
+      .map { case (x, y) =&gt; (y, x) }.sortByKey(false)
+      .map { case (x, y) =&gt; (y, x) }
+    println(&quot;最常用的前50个密码: &quot;)
+    pwRDD.take(50).foreach(println)
+</code></pre>
+
+<ul>
+<li>统计使用纯数字作为密码的人数</li>
+</ul>
+
+<pre><code>    val numPwRDD = csdnRDD.map(line =&gt; line.toString.split(&quot; # &quot;))
+      .map(_ (1))
+      .filter(&quot;\\d+&quot;.r.pattern.matcher(_).matches())
+      .map((_, 1)).reduceByKey(_ + _).sortBy(_._2, false)
+    println(&quot;最常用的前20个纯数字密码: &quot;)
+    numPwRDD.take(20).foreach(println)
+</code></pre>
+
+<p><img src="media/15198730789776/numPW.png" alt="numP"/></p>
+
+<ul>
+<li>统计使用纯字母作为密码的人数</li>
+</ul>
+
+<pre><code>    val letterRDD = csdnRDD.map(line =&gt; line.toString.split(&quot; # &quot;))
+      .map(_ (1))
+      .filter(&quot;[a-zA-Z]+&quot;.r.pattern.matcher(_).matches())
+      .map((_, 1)).reduceByKey(_ + _).sortBy(_._2, false)
+    println(&quot;最常用的前20个纯字母密码: &quot;)
+    letterRDD.take(20).foreach(println)
+</code></pre>
+
+<p><img src="media/15198730789776/letterPW.png" alt="letterP"/></p>
+
+<hr/>
+
+<ul>
+<li>声明:
+
+<ul>
+<li>统计指标来源与网络上的博客</li>
+<li>数据也来自于网络,想要数据的可以联系我</li>
+</ul></li>
+</ul>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15198761722300.html" 
+          title="Previous Post: Java多线程总结笔记">&laquo; Java多线程总结笔记</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15198755293272.html" 
+          title="Next Post: ssh 隧道转发">ssh 隧道转发 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="/Users/hushiwei/Pictures/Pictures/wei.png" /></div>
+            
+                <h1>Time渐行渐远</h1>
+                <div class="site-des">Coding Changing The World</div>
+                <div class="social">
+
+
+
+
+
+
+
+
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:hsw_v5@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="BigData.html"><strong>BigData</strong></a>
+        
+            <a href="Python.html"><strong>Python</strong></a>
+        
+            <a href="Linux.html"><strong>Linux</strong></a>
+        
+            <a href="Life.html"><strong>Life</strong></a>
+        
+            <a href="Spark.html"><strong>Spark</strong></a>
+        
+            <a href="Yarn.html"><strong>Yarn</strong></a>
+        
+            <a href="Scala.html"><strong>Scala</strong></a>
+        
+            <a href="VPS.html"><strong>VPS</strong></a>
+        
+            <a href="MachineLearning.html"><strong>MachineLearning</strong></a>
+        
+            <a href="Writer.html"><strong>Writer</strong></a>
+        
+            <a href="Shell.html"><strong>Shell</strong></a>
+        
+            <a href="Algorithm.html"><strong>Algorithm</strong></a>
+        
+            <a href="Mac.html"><strong>Mac</strong></a>
+        
+            <a href="Presto.html"><strong>Presto</strong></a>
+        
+            <a href="Mysql.html"><strong>Mysql</strong></a>
+        
+            <a href="Maven.html"><strong>Maven</strong></a>
+        
+            <a href="Kafka.html"><strong>Kafka</strong></a>
+        
+            <a href="Java.html"><strong>Java</strong></a>
+        
+            <a href="DevTools.html"><strong>DevTools</strong></a>
+        
+            <a href="Hbase.html"><strong>Hbase</strong></a>
+        
+            <a href="ELK.html"><strong>ELK</strong></a>
+        
+            <a href="Druid.html"><strong>Druid</strong></a>
+        
+            <a href="Docker.html"><strong>Docker</strong></a>
+        
+            <a href="DesignPattern.html"><strong>DesignPattern</strong></a>
+        
+            <a href="Computer.html"><strong>Computer</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15198768495613.html">Elasticsearch：用Curator辅助Marvel，实现自动删除旧marvel索引</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198743666304.html">PythonVirtualenv总结</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198746079468.html">机器学习实战之朴素贝叶斯</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198745641385.html">Presto的学习笔记</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198769093559.html">二八定律与长尾理论</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+
+  </body>
+</html>

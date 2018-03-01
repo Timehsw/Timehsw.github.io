@@ -1,0 +1,808 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  ELK搭建使用 - Time渐行渐远
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Time渐行渐远" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:dmlcoding.com ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_blank" href="collections.html">COLLECTION</a></li>
+        
+        <li id=""><a target="_blank" href="tools.html">TOOLS</a></li>
+        
+        <li id=""><a target="_blank" href="About.html">ABOUT</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Time渐行渐远</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="BigData.html">BigData</a></li>
+        
+            <li><a href="Python.html">Python</a></li>
+        
+            <li><a href="Linux.html">Linux</a></li>
+        
+            <li><a href="Life.html">Life</a></li>
+        
+            <li><a href="Spark.html">Spark</a></li>
+        
+            <li><a href="Yarn.html">Yarn</a></li>
+        
+            <li><a href="Scala.html">Scala</a></li>
+        
+            <li><a href="VPS.html">VPS</a></li>
+        
+            <li><a href="MachineLearning.html">MachineLearning</a></li>
+        
+            <li><a href="Writer.html">Writer</a></li>
+        
+            <li><a href="Shell.html">Shell</a></li>
+        
+            <li><a href="Algorithm.html">Algorithm</a></li>
+        
+            <li><a href="Mac.html">Mac</a></li>
+        
+            <li><a href="Presto.html">Presto</a></li>
+        
+            <li><a href="Mysql.html">Mysql</a></li>
+        
+            <li><a href="Maven.html">Maven</a></li>
+        
+            <li><a href="Kafka.html">Kafka</a></li>
+        
+            <li><a href="Java.html">Java</a></li>
+        
+            <li><a href="DevTools.html">DevTools</a></li>
+        
+            <li><a href="Hbase.html">Hbase</a></li>
+        
+            <li><a href="ELK.html">ELK</a></li>
+        
+            <li><a href="Druid.html">Druid</a></li>
+        
+            <li><a href="Docker.html">Docker</a></li>
+        
+            <li><a href="DesignPattern.html">DesignPattern</a></li>
+        
+            <li><a href="Computer.html">Computer</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>ELK搭建使用</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2017/9/17</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='ELK.html'>ELK</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <blockquote>
+<p>elk搭建记录,学习资料.</p>
+</blockquote>
+
+<h1 id="toc_0">ELK学习资料</h1>
+
+<ul>
+<li><a href="https://www.gitbook.com/book/chenryn/elk-stack-guide-cn/details">ELKstack 中文指南</a></li>
+<li><a href="https://www.gitbook.com/book/looly/elasticsearch-the-definitive-guide-cn/details">Elasticsearch权威指南（中文版）</a></li>
+<li>.....</li>
+</ul>
+
+<span id="more"></span><!-- more -->
+
+<h1 id="toc_1">ELK下载</h1>
+
+<p>历史版本下载地址 : <a href="https://www.elastic.co/downloads/past-releases">https://www.elastic.co/downloads/past-releases</a><br/>
++ elasticsearch : 2.4.0<br/>
++ logstash : 2.4.0<br/>
++ kibana : 4.6.2</p>
+
+<h1 id="toc_2">安装准备</h1>
+
+<pre><code>[root@U006 opt]# cd /opt
+[root@U006 opt]# mkdir elk
+[root@U006 opt]# chown -R hadoop:hadoop elk
+[root@U006 opt]# su hadoop
+[hadoop@U006 opt]$ cd /opt/elk/
+[hadoop@U006 elk]$ mkdir jars
+[hadoop@U006 jars]$ pwd
+/opt/elk/jars
+
+# 上传jar包
+
+[hadoop@U006 jars]$ ll
+total 116996
+-rw-r--r-- 1 hadoop hadoop 27364449 Sep 18 09:36 elasticsearch-2.4.0.tar.gz
+-rw-r--r-- 1 hadoop hadoop 34125464 Sep 18 09:37 kibana-4.6.2-linux-x86_64.tar.gz
+-rw-r--r-- 1 hadoop hadoop 58310656 Sep 18 09:41 logstash-2.4.0.tar.gz
+
+</code></pre>
+
+<pre><code>[hadoop@U006 elk]$ ll
+total 16
+drwxrwxr-x  6 hadoop hadoop 4096 Sep 18 09:45 elasticsearch-2.4.0
+drwxrwxr-x  2 hadoop hadoop 4096 Sep 18 09:40 jars
+drwxrwxr-x 11 hadoop hadoop 4096 Oct 21  2016 kibana-4.6.2-linux-x86_64
+drwxrwxr-x  5 hadoop hadoop 4096 Sep 18 09:47 logstash-2.4.0
+</code></pre>
+
+<h1 id="toc_3">安装elasticsearch</h1>
+
+<blockquote>
+<p>测试环境搭建,单节点为例</p>
+</blockquote>
+
+<pre><code># 解压elasticsearch
+tar -zxvf elasticsearch-2.4.0.tar.gz -C /opt/elk/
+</code></pre>
+
+<h2 id="toc_4">修改配置文件config/elasticsearch.yml</h2>
+
+<pre><code>[hadoop@U006 config]$ pwd
+/opt/elk/elasticsearch-2.4.0/config
+
+[hadoop@U006 config]$ ll
+total 8
+-rw-rw-r-- 1 hadoop hadoop 3192 Aug 24  2016 elasticsearch.yml
+-rw-rw-r-- 1 hadoop hadoop 2571 Aug 24  2016 logging.yml
+
+[hadoop@U006 elasticsearch-2.4.0]$ vim config/elasticsearch.yml
+
+# 打开这三个配置的注释
+ cluster.name: test_elasticsearch # es集群名字
+ node.name: node1 # 该节点在es中的名字
+ network.host: 0.0.0.0 # 任意节点可以访问
+</code></pre>
+
+<h2 id="toc_5">启动es</h2>
+
+<pre><code>./bin/elasticsearch
+./bin/elasticsearch -d #后台启动
+</code></pre>
+
+<pre><code>[hadoop@U006 elasticsearch-2.4.0]$ ./bin/elasticsearch
+[2017-09-18 10:08:50,300][WARN ][bootstrap                ] unable to install syscall filter: seccomp unavailable: requires kernel 3.5+ with CONFIG_SECCOMP and CONFIG_SECCOMP_FILTER compiled in
+[2017-09-18 10:08:51,697][INFO ][node                     ] [node1] version[2.4.0], pid[3098], build[ce9f0c7/2016-08-29T09:14:17Z]
+[2017-09-18 10:08:51,697][INFO ][node                     ] [node1] initializing ...
+[2017-09-18 10:08:52,332][INFO ][plugins                  ] [node1] modules [lang-groovy, reindex, lang-expression], plugins [], sites []
+[2017-09-18 10:08:52,363][INFO ][env                      ] [node1] using [1] data paths, mounts [[/home (/dev/mapper/VolGroup-lv_home)]], net usable_space [195.3gb], net total_space [857.4gb], spins? [possibly], types [ext4]
+[2017-09-18 10:08:52,363][INFO ][env                      ] [node1] heap size [989.8mb], compressed ordinary object pointers [true]
+[2017-09-18 10:08:54,472][INFO ][node                     ] [node1] initialized
+[2017-09-18 10:08:54,473][INFO ][node                     ] [node1] starting ...
+[2017-09-18 10:08:54,675][INFO ][transport                ] [node1] publish_address {10.10.25.13:9300}, bound_addresses {[::]:9300}
+[2017-09-18 10:08:54,685][INFO ][discovery                ] [node1] test_elasticsearch/oAbAZR_tTaGAJU-5yd3BqQ
+[2017-09-18 10:08:57,757][INFO ][cluster.service          ] [node1] new_master {node1}{oAbAZR_tTaGAJU-5yd3BqQ}{10.10.25.13}{10.10.25.13:9300}, reason: zen-disco-join(elected_as_master, [0] joins received)
+[2017-09-18 10:08:57,798][INFO ][http                     ] [node1] publish_address {10.10.25.13:9200}, bound_addresses {[::]:9200}
+[2017-09-18 10:08:57,799][INFO ][node                     ] [node1] started
+[2017-09-18 10:08:57,811][INFO ][gateway                  ] [node1] recovered [0] indices into cluster_state
+</code></pre>
+
+<p>打开<a href="http://10.10.25.13:9200/">http://10.10.25.13:9200/</a> 将会看到以下内容.返回数据中包含配置的cluster.name和node.name,以及es的版本等信息.<br/>
+<img src="media/15198769472354/es-startresult.png" alt="es-startresult"/></p>
+
+<h2 id="toc_6">安装插件</h2>
+
+<h3 id="toc_7">elasticsearch-head 插件安装</h3>
+
+<h4 id="toc_8">下载安装</h4>
+
+<pre><code># 进入bin目录下
+[hadoop@U006 bin]$ ./plugin install mobz/elasticsearch-head
+-&gt; Installing mobz/elasticsearch-head...
+Trying https://github.com/mobz/elasticsearch-head/archive/master.zip ...
+Downloading ...............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................DONE
+Verifying https://github.com/mobz/elasticsearch-head/archive/master.zip checksums if available ...
+NOTE: Unable to verify checksum for downloaded plugin (unable to find .sha1 or .md5 file to verify)
+Installed head into /opt/elk/elasticsearch-2.4.0/plugins/head
+
+</code></pre>
+
+<h4 id="toc_9">使用说明</h4>
+
+<blockquote>
+<p>head插件是一个用浏览器跟ES集群交互的插件，可以查看集群状态、集群的doc内容、执行搜索和普通的Rest请求等。</p>
+</blockquote>
+
+<p>在浏览器中直接访问接口 <a href="http://10.10.25.13:9200/_plugin/head/">http://10.10.25.13:9200/_plugin/head/</a> ,可以看到es集群状态<br/>
+<img src="media/15198769472354/es-plugin-head.png" alt="es-plugin-head"/></p>
+
+<h3 id="toc_10">安装Marvel插件</h3>
+
+<h4 id="toc_11">下载安装</h4>
+
+<pre><code># ./bin/plugin install license
+# ./bin/plugin install marvel-agent
+
+[hadoop@U006 elasticsearch-2.4.0]$ ./bin/plugin install license
+-&gt; Installing license...
+Trying https://download.elastic.co/elasticsearch/release/org/elasticsearch/plugin/license/2.4.0/license-2.4.0.zip ...
+Downloading .......DONE
+Verifying https://download.elastic.co/elasticsearch/release/org/elasticsearch/plugin/license/2.4.0/license-2.4.0.zip checksums if available ...
+Downloading .DONE
+Installed license into /opt/elk/elasticsearch-2.4.0/plugins/license
+[hadoop@U006 elasticsearch-2.4.0]$ ./bin/plugin install marvel-agent
+-&gt; Installing marvel-agent...
+Trying https://download.elastic.co/elasticsearch/release/org/elasticsearch/plugin/marvel-agent/2.4.0/marvel-agent-2.4.0.zip ...
+Downloading ..........DONE
+Verifying https://download.elastic.co/elasticsearch/release/org/elasticsearch/plugin/marvel-agent/2.4.0/marvel-agent-2.4.0.zip checksums if available ...
+Downloading .DONE
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@     WARNING: plugin requires additional permissions     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+* java.lang.RuntimePermission setFactory
+* javax.net.ssl.SSLPermission setHostnameVerifier
+See http://docs.oracle.com/javase/8/docs/technotes/guides/security/permissions.html
+for descriptions of what these permissions allow and the associated risks.
+
+Continue with installation? [y/N]y
+Installed marvel-agent into /opt/elk/elasticsearch-2.4.0/plugins/marvel-agent
+
+
+# 安装的插件都会出现在es的plugins目录下
+[hadoop@U006 elasticsearch-2.4.0]$ ll
+total 56
+drwxrwxr-x 2 hadoop hadoop  4096 Sep 18 09:45 bin
+drwxrwxr-x 3 hadoop hadoop  4096 Sep 18 10:05 config
+drwxrwxr-x 3 hadoop hadoop  4096 Sep 18 09:59 data
+drwxrwxr-x 2 hadoop hadoop  4096 Sep 18 09:45 lib
+-rw-rw-r-- 1 hadoop hadoop 11358 Aug 24  2016 LICENSE.txt
+drwxrwxr-x 2 hadoop hadoop  4096 Sep 18 09:59 logs
+drwxrwxr-x 5 hadoop hadoop  4096 Aug 29  2016 modules
+-rw-rw-r-- 1 hadoop hadoop   150 Aug 24  2016 NOTICE.txt
+drwxrwxr-x 3 hadoop hadoop  4096 Sep 18 10:15 plugins
+-rw-rw-r-- 1 hadoop hadoop  8700 Aug 24  2016 README.textile
+[hadoop@U006 elasticsearch-2.4.0]$ cd plugins/
+[hadoop@U006 plugins]$ ll
+total 12
+drwxrwxr-x 6 hadoop hadoop 4096 Sep 18 10:15 head
+drwxrwxr-x 2 hadoop hadoop 4096 Sep 18 10:34 license
+drwxrwxr-x 2 hadoop hadoop 4096 Sep 18 10:34 marvel-agent
+</code></pre>
+
+<h4 id="toc_12">使用说明</h4>
+
+<blockquote>
+<p>Marvel是Elasticsearch的管理和监控工具，在开发环境下免费使用。它包含了一个叫做Sense的交互式控制台，<br/>
+使用户方便的通过浏览器直接与Elasticsearch进行交互。<br/>
+marvel插件主要会和kibana进行配置使用,待会看kibana也需要安装marvel插件</p>
+</blockquote>
+
+<h2 id="toc_13">注意</h2>
+
+<ul>
+<li>如何之前在config/elasticsearch.yml的文件中,没有修改network.host项.那么你只能用localhost或者127.0.0.1访问es了.</li>
+<li>注意配置yml结尾的配置文件都需要冒号后面加空格才行</li>
+</ul>
+
+<h1 id="toc_14">安装kibana</h1>
+
+<h2 id="toc_15">解压安装</h2>
+
+<pre><code>tar -zxvf kibana-4.6.2-linux-x86_64.tar.gz -C /opt/elk/
+
+</code></pre>
+
+<h2 id="toc_16">修改config/kibana.yml的elasticsearch.url属性即可。</h2>
+
+<p><img src="media/15198769472354/kibana-config.png" alt="kibana-config"/></p>
+
+<h2 id="toc_17">安装插件</h2>
+
+<h3 id="toc_18">安装Marvel插件</h3>
+
+<blockquote>
+<p>在安装es的时候,已经给es安装了marvel插件,现在给kibana也安装上marvel插件</p>
+</blockquote>
+
+<h4 id="toc_19">下载</h4>
+
+<pre><code>[hadoop@U006 kibana-4.6.2-linux-x86_64]$ bin/kibana plugin --install elasticsearch/marvel/latest
+Installing marvel
+Attempting to transfer from https://download.elastic.co/elasticsearch/marvel/marvel-latest.tar.gz
+.....
+Transfer complete
+Extracting plugin archive
+Extraction complete
+Optimizing and caching browser bundles...
+Plugin installation complete
+
+</code></pre>
+
+<h4 id="toc_20">启动验证</h4>
+
+<pre><code>bin/elasticsearch
+bin/kibana
+
+</code></pre>
+
+<p>查看<a href="http://10.10.25.13:5601/app/marvel">http://10.10.25.13:5601/app/marvel</a> 页面：<br/>
+<img src="media/15198769472354/kibana-marvel1.png" alt="kibana-marve"/><br/>
+<img src="media/15198769472354/kibana-marvel2.png" alt="kibana-marve"/></p>
+
+<h3 id="toc_21">安装sense插件</h3>
+
+<blockquote>
+<p>Sense是flask写的elasticsearch查询工具。<br/>
+支持es查询语言自动提示，es结构自动提示，支持两种主题，支持查询历史记录，支持快捷键。</p>
+</blockquote>
+
+<h4 id="toc_22">下载</h4>
+
+<pre><code>[hadoop@U006 kibana-4.6.2-linux-x86_64]$ ./bin/kibana plugin --install elastic/sense
+Installing sense
+Attempting to transfer from https://download.elastic.co/elastic/sense/sense-latest.tar.gz
+.....
+Transfer complete
+Extracting plugin archive
+Extraction complete
+Optimizing and caching browser bundles...
+Plugin installation complete
+
+</code></pre>
+
+<h4 id="toc_23">使用说明</h4>
+
+<p>启动es和kibana<br/>
+查看<a href="http://10.10.25.13:5601/app/sense">http://10.10.25.13:5601/app/sense</a> 页面：<br/>
+<img src="media/15198769472354/kibana-sense.png" alt="kibana-sense"/></p>
+
+<h1 id="toc_24">安装logstash</h1>
+
+<h2 id="toc_25">解压安装即可</h2>
+
+<pre><code>tar -zxvf logstash-2.4.0.tar.gz -C /opt/elk/
+
+</code></pre>
+
+<h2 id="toc_26">配置logstash的配置文件</h2>
+
+<p>此文件input为从log4j接收日志.output为输出到es集群,进行搜索.</p>
+
+<p>字段具体意思可以看官网 <a href="https://www.elastic.co/guide/en/logstash/current/plugins-inputs-log4j.html">https://www.elastic.co/guide/en/logstash/current/plugins-inputs-log4j.html</a></p>
+
+<pre><code>[hadoop@U006 logstash-2.4.0]$ vim logstash_log4j_to_es.conf
+input {
+        log4j {
+                 mode =&gt; &quot;server&quot;
+                 host =&gt; &quot;10.10.25.13&quot;
+                 port =&gt; 4567
+                 type =&gt; &quot;log4j&quot;
+         }
+}
+output{
+        elasticsearch{
+                action =&gt; &quot;index&quot;
+                hosts =&gt; &quot;10.10.25.13:9200&quot;
+                index =&gt; &quot;test_log&quot;
+        }
+}
+
+</code></pre>
+
+<p><img src="media/15198769472354/logstash-file1.png" alt="logstash-file1"/></p>
+
+<h2 id="toc_27">启动logstash</h2>
+
+<pre><code>bin/logstash agent -f logstash_log4j_to_es.conf
+# 或者
+bin/logstash -f logstash_log4j_to_es.conf
+
+[hadoop@U006 logstash-2.4.0]$ bin/logstash -f logstash_log4j_to_es.conf
+Settings: Default pipeline workers: 24
+log4j:WARN No appenders could be found for logger (org.apache.http.client.protocol.RequestAuthCache).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+Pipeline main started
+</code></pre>
+
+<h1 id="toc_28">ELK框架的综合实际使用</h1>
+
+<blockquote>
+<p>在工作中,我们会使用ELK对业务日志进行收集分析.<br/>
+也就是把项目中的log4j日志用logstash进行收集,然后输出到es中进行索引搜索.最后使用Kibana进行可视化的搜索展示.</p>
+</blockquote>
+
+<h2 id="toc_29">启动elk</h2>
+
+<pre><code>bin/elasticsearch
+bin/kibana
+bin/logstash -f logstash_log4j_to_es.conf
+</code></pre>
+
+<p>打开：<a href="http://10.10.25.13:5601">http://10.10.25.13:5601</a><br/>
+<img src="media/15198769472354/kibana-index.png" alt="kibana-index"/></p>
+
+<p>如图所以,这里有个WARN警告:没有默认的索引模式,需要创建一个才能继续.<br/>
+那么我们就创建一个索引.</p>
+
+<h2 id="toc_30">创建索引</h2>
+
+<p>Kibana界面日志检索只有当第一条日志通过Logstash进入ElasticSearch后，才能配置Kibana索引。</p>
+
+<p>1、在“Index name or pattern”项下，填入一个elasticsearch的索引名，也即是Logstash配置文件中output项下的index对应的名称；在你这里应该是将“logstash-* ” 改成“test_log”<br/>
+2、在“Time-field name”，选用默认的配置：“@timestamp”<br/>
+3、点击“create”即可</p>
+
+<p><img src="media/15198769472354/kibana-index2.png" alt="kibana-index2"/></p>
+
+<h2 id="toc_31">log4j日志接入</h2>
+
+<h3 id="toc_32">编写log4j的测试代码</h3>
+
+<pre><code>public class TestFunc {
+
+  Logger logger = LoggerFactory.getLogger(TestFunc.class);
+
+  @Test
+  public void testlog4j() throws Exception {
+    while (true) {
+      long s_time = System.currentTimeMillis();
+      logger.info(&quot;当前时间戳: &quot;+s_time+&quot; i am info info hadoop&quot;);
+      logger.warn(&quot;当前时间戳: &quot;+s_time+&quot; i am info warn spark hushiwei nice&quot;);
+      logger.error(&quot;当前时间戳: &quot;+s_time+&quot; i am info error elk&quot;);
+      Thread.sleep(1000L);
+
+    }
+  }
+  }
+</code></pre>
+
+<h3 id="toc_33">log4j的配置</h3>
+
+<p>log4j.properties<br/>
+remotehost填写logstash的服务器地址.也就是那个input项里面的地址.<br/>
+<code><br/>
+log4j.rootLogger=INFO,socket<br/>
+log4j.appender.socket=org.apache.log4j.net.SocketAppender<br/>
+log4j.appender.socket.RemoteHost=10.10.25.13<br/>
+log4j.appender.socket.Port=4567<br/>
+log4j.appender.socket.LocationInfo=true<br/>
+</code></p>
+
+<h2 id="toc_34">执行代码,输出log4j日志,观察kibana页面变化</h2>
+
+<p>索引日志里面的信息</p>
+
+<p><img src="media/15198769472354/kibana-index3.png" alt="kibana-index3"/></p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15198769093559.html" 
+          title="Previous Post: 二八定律与长尾理论">&laquo; 二八定律与长尾理论</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15198744609518.html" 
+          title="Next Post: Python读取文件编码及内容">Python读取文件编码及内容 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="/Users/hushiwei/Pictures/Pictures/wei.png" /></div>
+            
+                <h1>Time渐行渐远</h1>
+                <div class="site-des">Coding Changing The World</div>
+                <div class="social">
+
+
+
+
+
+
+
+
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:hsw_v5@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="BigData.html"><strong>BigData</strong></a>
+        
+            <a href="Python.html"><strong>Python</strong></a>
+        
+            <a href="Linux.html"><strong>Linux</strong></a>
+        
+            <a href="Life.html"><strong>Life</strong></a>
+        
+            <a href="Spark.html"><strong>Spark</strong></a>
+        
+            <a href="Yarn.html"><strong>Yarn</strong></a>
+        
+            <a href="Scala.html"><strong>Scala</strong></a>
+        
+            <a href="VPS.html"><strong>VPS</strong></a>
+        
+            <a href="MachineLearning.html"><strong>MachineLearning</strong></a>
+        
+            <a href="Writer.html"><strong>Writer</strong></a>
+        
+            <a href="Shell.html"><strong>Shell</strong></a>
+        
+            <a href="Algorithm.html"><strong>Algorithm</strong></a>
+        
+            <a href="Mac.html"><strong>Mac</strong></a>
+        
+            <a href="Presto.html"><strong>Presto</strong></a>
+        
+            <a href="Mysql.html"><strong>Mysql</strong></a>
+        
+            <a href="Maven.html"><strong>Maven</strong></a>
+        
+            <a href="Kafka.html"><strong>Kafka</strong></a>
+        
+            <a href="Java.html"><strong>Java</strong></a>
+        
+            <a href="DevTools.html"><strong>DevTools</strong></a>
+        
+            <a href="Hbase.html"><strong>Hbase</strong></a>
+        
+            <a href="ELK.html"><strong>ELK</strong></a>
+        
+            <a href="Druid.html"><strong>Druid</strong></a>
+        
+            <a href="Docker.html"><strong>Docker</strong></a>
+        
+            <a href="DesignPattern.html"><strong>DesignPattern</strong></a>
+        
+            <a href="Computer.html"><strong>Computer</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15198768495613.html">Elasticsearch：用Curator辅助Marvel，实现自动删除旧marvel索引</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198743666304.html">PythonVirtualenv总结</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198746079468.html">机器学习实战之朴素贝叶斯</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198745641385.html">Presto的学习笔记</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198769093559.html">二八定律与长尾理论</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+
+  </body>
+</html>

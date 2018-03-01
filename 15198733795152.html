@@ -1,0 +1,656 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  spark开发中遇到的问题 - Time渐行渐远
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Time渐行渐远" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:dmlcoding.com ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_blank" href="collections.html">COLLECTION</a></li>
+        
+        <li id=""><a target="_blank" href="tools.html">TOOLS</a></li>
+        
+        <li id=""><a target="_blank" href="About.html">ABOUT</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Time渐行渐远</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="BigData.html">BigData</a></li>
+        
+            <li><a href="Python.html">Python</a></li>
+        
+            <li><a href="Linux.html">Linux</a></li>
+        
+            <li><a href="Life.html">Life</a></li>
+        
+            <li><a href="Spark.html">Spark</a></li>
+        
+            <li><a href="Yarn.html">Yarn</a></li>
+        
+            <li><a href="Scala.html">Scala</a></li>
+        
+            <li><a href="VPS.html">VPS</a></li>
+        
+            <li><a href="MachineLearning.html">MachineLearning</a></li>
+        
+            <li><a href="Writer.html">Writer</a></li>
+        
+            <li><a href="Shell.html">Shell</a></li>
+        
+            <li><a href="Algorithm.html">Algorithm</a></li>
+        
+            <li><a href="Mac.html">Mac</a></li>
+        
+            <li><a href="Presto.html">Presto</a></li>
+        
+            <li><a href="Mysql.html">Mysql</a></li>
+        
+            <li><a href="Maven.html">Maven</a></li>
+        
+            <li><a href="Kafka.html">Kafka</a></li>
+        
+            <li><a href="Java.html">Java</a></li>
+        
+            <li><a href="DevTools.html">DevTools</a></li>
+        
+            <li><a href="Hbase.html">Hbase</a></li>
+        
+            <li><a href="ELK.html">ELK</a></li>
+        
+            <li><a href="Druid.html">Druid</a></li>
+        
+            <li><a href="Docker.html">Docker</a></li>
+        
+            <li><a href="DesignPattern.html">DesignPattern</a></li>
+        
+            <li><a href="Computer.html">Computer</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>spark开发中遇到的问题</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2017/9/12</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='Spark.html'>Spark</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h1 id="toc_0">spark连接mysql</h1>
+
+<h2 id="toc_1">问题描述</h2>
+
+<pre><code>总是报no suitable driver以及   jdbc.mysql.driver类似这样的错误
+</code></pre>
+
+<span id="more"></span><!-- more -->
+
+<h2 id="toc_2">解决办法1</h2>
+
+<pre><code>1.提交任务的时候带上这个，手动指定mysql jar包的位置
+                    SPARK_CLASSPATH=/usr/local/spark-1.4.1-bin-hadoop2.6/lib/mysql-connector-java-5.1.38.jar ./bin/spark-submit --class sparkDemo /root/data/demon-parent-1.0-SNAPSHOT-jar-with-dependencies.jar hdfs://192.168.119.100:9000/examples/custom.txt
+</code></pre>
+
+<h2 id="toc_3">解决办法2</h2>
+
+<pre><code>修改了这个配置SPARK_HOME/conf/spark-env.sh文件，在里面加上了这个参数，就OK了
+
+export SPARK_CLASSPATH=$SPATH_CLASSPATH:/usr/hdp/2.4.0.0-169/spark/lib/mysql-connector-java-5.1.38.jar
+
+</code></pre>
+
+<h1 id="toc_4">在spark中使用hive抛出错误</h1>
+
+<h1 id="toc_5">报错日志</h1>
+
+<pre><code>17/08/09 12:11:51 WARN DataNucleus.Persistence: Error creating validator of type org.datanucleus.properties.CorePropertyValidator
+ClassLoaderResolver for class &quot;&quot; gave error on creation : {1}
+org.datanucleus.exceptions.NucleusUserException: ClassLoaderResolver for class &quot;&quot; gave error on creation : {1}
+    at org.datanucleus.NucleusContext.getClassLoaderResolver(NucleusContext.java:1087)
+    at org.datanucleus.PersistenceConfiguration.validatePropertyValue(PersistenceConfiguration.java:797)
+    at org.datanucleus.PersistenceConfiguration.setProperty(PersistenceConfiguration.java:714)
+    at org.datanucleus.PersistenceConfiguration.setPersistenceProperties(PersistenceConfiguration.java:693)
+    at org.datanucleus.NucleusContext.&lt;init&gt;(NucleusContext.java:273)
+    at org.datanucleus.NucleusContext.&lt;init&gt;(NucleusContext.java:247)
+    at org.datanucleus.NucleusContext.&lt;init&gt;(NucleusContext.java:225)
+    at org.datanucleus.api.jdo.JDOPersistenceManagerFactory.&lt;init&gt;(JDOPersistenceManagerFactory.java:416)
+    at org.datanucleus.api.jdo.JDOPersistenceManagerFactory.createPersistenceManagerFactory(JDOPersistenceManagerFactory.java:301)
+    at org.datanucleus.api.jdo.JDOPersistenceManagerFactory.getPersistenceManagerFactory(JDOPersistenceManagerFactory.java:202)
+</code></pre>
+
+<h1 id="toc_6">问题分析</h1>
+
+<p>看日志应该是缺少了hive的一些包,在网上搜了一下,是下面几个包<br/>
+```<br/>
+[hadoop@U007 lib]\( pwd<br/>
+/opt/spark-1.6.0/lib<br/>
+[hadoop@U007 lib]\) ll<br/>
+total 305220<br/>
+-rw-r--r-- 1 hadoop hadoop    339666 Apr 15  2016 datanucleus-api-jdo-3.2.6.jar<br/>
+-rw-r--r-- 1 hadoop hadoop   1890075 Apr 15  2016 datanucleus-core-3.2.10.jar<br/>
+-rw-r--r-- 1 hadoop hadoop   1809447 Apr 15  2016 datanucleus-rdbms-3.2.9.jar<br/>
+...</p>
+
+<pre><code>
+所以在提交spark任务的时候,把这几个包加入到classpath中即可
+
+# 解决办法
+在提交spark的脚本中加上这几个jar包和hive-site.xml文件
+如下
+
+</code></pre>
+
+<p>nohup spark-submit \<br/>
+ --master yarn \<br/>
+ --deploy-mode cluster \<br/>
+ --class ${className} \<br/>
+ --driver-memory 4g \<br/>
+ --executor-memory 2g \<br/>
+ --executor-cores 4 \<br/>
+ --num-executors 4 \<br/>
+ --jars ./lib/datanucleus-api-jdo-3.2.6.jar,./lib/datanucleus-core-3.2.10.jar,./lib/datanucleus-rdbms<br/>
+-3.2.9.jar  \<br/>
+ --files ./lib/hive-site.xml \<br/>
+ ./app-jar-with-dependencies.jar \</p>
+
+<pre><code>
+加上--jars 和 --files即可
+
+# 在spark中将数据插入hive动态分区
+## 问题描述
+当我用standalone以及yarn-client模式进行提交任务的时候,不会报错.但是当我改成yarn-cluster模式进行提交任务,有时候就会报下面的错
+## 报错日志
+</code></pre>
+
+<p>17/08/09 10:08:01 ERROR scheduler.JobScheduler: Error running job streaming job 1502188440000 ms.0<br/>
+java.lang.NoSuchMethodException: org.apache.hadoop.hive.ql.metadata.Hive.loadDynamicPartitions(org.apache.hadoop.fs.Path, java.lang.String, java.util.Map, boolean, int, boolean, boolean)<br/>
+    at java.lang.Class.getMethod(Class.java:1670)<br/>
+    at org.apache.spark.sql.hive.client.Shim.findMethod(HiveShim.scala:114)<br/>
+    at org.apache.spark.sql.hive.client.Shim_v0_12.loadDynamicPartitionsMethod\(lzycompute(HiveShim.scala:168)<br/>
+    at org.apache.spark.sql.hive.client.Shim_v0_12.loadDynamicPartitionsMethod(HiveShim.scala:167)<br/>
+    at org.apache.spark.sql.hive.client.Shim_v0_12.loadDynamicPartitions(HiveShim.scala:261)<br/>
+    at org.apache.spark.sql.hive.client.ClientWrapper\)\(anonfun\)loadDynamicPartitions\(1.apply\)mcV\(sp(ClientWrapper.scala:560)<br/>
+    at org.apache.spark.sql.hive.client.ClientWrapper\)\(anonfun\)loadDynamicPartitions\(1.apply(ClientWrapper.scala:560)<br/>
+    at org.apache.spark.sql.hive.client.ClientWrapper\)\(anonfun\)loadDynamicPartitions\(1.apply(ClientWrapper.scala:560)<br/>
+    at org.apache.spark.sql.hive.client.ClientWrapper\)\(anonfun\)withHiveState\(1.apply(ClientWrapper.scala:279)<br/>
+    at org.apache.spark.sql.hive.client.ClientWrapper.liftedTree1\)1(ClientWrapper.scala:226)<br/>
+    at org.apache.spark.sql.hive.client.ClientWrapper.retryLocked(ClientWrapper.scala:225)<br/>
+    at org.apache.spark.sql.hive.client.ClientWrapper.withHiveState(ClientWrapper.scala:268)<br/>
+    at org.apache.spark.sql.hive.client.ClientWrapper.loadDynamicPartitions(ClientWrapper.scala:559)<br/>
+    at org.apache.spark.sql.hive.execution.InsertIntoHiveTable.sideEffectResult\(lzycompute(InsertIntoHiveTable.scala:225)<br/>
+    at org.apache.spark.sql.hive.execution.InsertIntoHiveTable.sideEffectResult(InsertIntoHiveTable.scala:127)<br/>
+    at org.apache.spark.sql.hive.execution.InsertIntoHiveTable.doExecute(InsertIntoHiveTable.scala:276)<br/>
+    at org.apache.spark.sql.execution.SparkPlan\)\(anonfun\)execute\(5.apply(SparkPlan.scala:132)<br/>
+    at org.apache.spark.sql.execution.SparkPlan\)\(anonfun\)execute\(5.apply(SparkPlan.scala:130)<br/>
+    at org.apache.spark.rdd.RDDOperationScope\).withScope(RDDOperationScope.scala:150)<br/>
+    at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:130)<br/>
+    at org.apache.spark.sql.execution.QueryExecution.toRdd\(lzycompute(QueryExecution.scala:55)<br/>
+    at org.apache.spark.sql.execution.QueryExecution.toRdd(QueryExecution.scala:55)<br/>
+    at org.apache.spark.sql.DataFrame.&lt;init&gt;(DataFrame.scala:145)<br/>
+    at org.apache.spark.sql.DataFrame.&lt;init&gt;(DataFrame.scala:130)<br/>
+    at org.apache.spark.sql.DataFrame\).apply(DataFrame.scala:52)<br/>
+    at org.apache.spark.sql.SQLContext.sql(SQLContext.scala:817)<br/>
+```</p>
+
+<h2 id="toc_7">分析</h2>
+
+<p>用client模式的时候,是在13上运行的.没有问题<br/>
+用cluster模式的时候,有时候报错,有时候没有报错<br/>
+那不禁让我猜想,为啥cluster模式时而报错时而不报错呢?</p>
+
+<p>然后我用client模式,在14上提交,不出我所料,基本上每个job都抛出了那个错误.<br/>
+所以定位到问题就是,除了13这个节点外,别的节点缺少了什么包,导致抛出了错误.<br/>
+因为抛出来的错误是java.lang.NoSuchMethodException:,所以肯定是缺少了什么包.<br/>
+之前cluster模式时而报错时而不报错的原因肯定是,当不报错的时候,正好driver端是在13上</p>
+
+<p>现在的问题就是找出别的机器缺少什么包了.</p>
+
+<p>然后我在spark的环境变量里面发现了这个参数<br/>
+<code><br/>
+spark.sql.hive.metastore.jars : /usr/lib/hive/lib/*:/opt/spark-1.6.0/lib/spark-assembly-1.6.0-hadoop2.4.0.jar<br/>
+</code></p>
+
+<p>我去,13上有这个/usr/lib/hive/lib/* 路径<br/>
+14和15上都没有,,,<br/>
+问题找到了</p>
+
+<h2 id="toc_8">解决办法1</h2>
+
+<p>把13上这个路径/usr/lib/hive/lib/* 拷贝到14和15上,各自都有一份.这样无论driver端在哪里,都能找到相应的jar包.<br/>
+就这样愉快的解决了.<br/>
+所以遇到问题,慢慢分析,不要像无头苍蝇一样.<br/>
+在网上搜的解决办法,都无法解决这个问题.所以有时候,具体问题具体分析,要慢慢的分析到出错原因.找到了原因,bug就能迎刃而解.</p>
+
+<h2 id="toc_9">解决办法2</h2>
+
+<p>在spark的配置文件中把 <code>spark.sql.hive.metastore.jars</code> 给删了.因为你总不能在每个节点上去拷贝hive的一些依赖吧,如果以后hive升级了,还得替换hive的jar包,太麻烦.所以改成下面的解决办法更好.</p>
+
+<p>在pom文件中加上hive的依赖</p>
+
+<pre><code>&lt;!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core_2.10 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
+    &lt;artifactId&gt;spark-core_2.10&lt;/artifactId&gt;
+    &lt;version&gt;1.6.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- https://mvnrepository.com/artifact/org.apache.spark/spark-mllib_2.10 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
+    &lt;artifactId&gt;spark-mllib_2.10&lt;/artifactId&gt;
+    &lt;version&gt;1.6.0&lt;/version&gt;
+    &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
+    &lt;artifactId&gt;spark-streaming_2.10&lt;/artifactId&gt;
+    &lt;version&gt;1.6.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
+    &lt;artifactId&gt;spark-streaming-kafka_2.10&lt;/artifactId&gt;
+    &lt;version&gt;1.6.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
+    &lt;artifactId&gt;spark-sql_2.10&lt;/artifactId&gt;
+    &lt;version&gt;1.6.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
+    &lt;artifactId&gt;spark-hive_2.10&lt;/artifactId&gt;
+    &lt;version&gt;1.6.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;mysql&lt;/groupId&gt;
+    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+    &lt;version&gt;5.1.32&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.hive&lt;/groupId&gt;
+    &lt;artifactId&gt;hive-jdbc&lt;/artifactId&gt;
+    &lt;version&gt;0.13.1&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- https://mvnrepository.com/artifact/org.apache.hive/hive-exec --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.hive&lt;/groupId&gt;
+    &lt;artifactId&gt;hive-exec&lt;/artifactId&gt;
+    &lt;version&gt;0.13.1&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<h1 id="toc_10">sparkstreaming读取kafka数据</h1>
+
+<h2 id="toc_11">问题描述Couldn&#39;t find leaders for Set</h2>
+
+<p>SparkStreaming程序从Kafka读数据的程序运行期间报了描述中的异常.<br/>
+通过监控分析发现,是由于有一个Broker挂掉了。可是对应Topic的replica设置的2，就算挂掉一个，应该有replica顶上啊。<br/>
+后来发现，这是由于存在Partition的Replica没有跟Leader保持同步更新，也就是通常所说的“没追上”。 查看某个Topic是否存在没追上的情况：</p>
+
+<p>查看某个Topic是否存在没追上的情况：<br/>
+<code><br/>
+kafka-topics.sh --describe --zookeeper XXX --topic XXX<br/>
+</code></p>
+
+<h2 id="toc_12">报错日志</h2>
+
+<pre><code>17/10/13 09:41:13 ERROR DirectKafkaInputDStream: ArrayBuffer(java.nio.channels.ClosedChannelException, org.apache.spark.SparkException: Couldn&#39;t find leader offsets for Set([dsp_request_event,2]))
+17/10/13 09:41:13 ERROR StreamingContext: Error starting the context, marking it as stopped
+org.apache.spark.SparkException: ArrayBuffer(java.nio.channels.ClosedChannelException, org.apache.spark.SparkException: Couldn&#39;t find leader offsets for Set([dsp_request_event,2]))
+    at org.apache.spark.streaming.kafka.DirectKafkaInputDStream.latestLeaderOffsets(DirectKafkaInputDStream.scala:123)
+    at org.apache.spark.streaming.kafka.DirectKafkaInputDStream.compute(DirectKafkaInputDStream.scala:145)
+    at org.apache.spark.streaming.dstream.DStream$$anonfun$getOrCompute$1$$anonfun$1$$anonfun$apply$7.apply(DStream.scala:352)
+    at org.apache.spark.streaming.dstream.DStream$$anonfun$getOrCompute$1$$anonfun$1$$anonfun$apply$7.apply(DStream.scala:352)
+</code></pre>
+
+<h2 id="toc_13">解决办法</h2>
+
+<p>观察其中的Replicas和Isr是否一致，如果出现Isr少于Replicas，则对应Partition存在没追上的情况<br/>
+解决方法：<br/>
+增大num.replica.fetchers的值，此参数是Replicas从Leader同步数据的线程数，默认为1，增大此参数即增大了同步IO。经过测试，增大此值后，不再有追不上的情况<br/>
+确定问题已解决的方法：<br/>
+启动出现问题的SparkStreaming程序，在程序正常计算的状态下，kill掉任意一个Broker后，再观察运行情况。在增大同步线程数之前，kill后SparkStreaming会报同样的异常，而增大后程序依然正常运行，问题解决。</p>
+
+<p>参考:<a href="http://blog.csdn.net/yanshu2012/article/details/53995159">http://blog.csdn.net/yanshu2012/article/details/53995159</a></p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15198744609518.html" 
+          title="Previous Post: Python读取文件编码及内容">&laquo; Python读取文件编码及内容</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15198767503226.html" 
+          title="Next Post: 诗经 <<伐檀>>">诗经 <<伐檀>> &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="/Users/hushiwei/Pictures/Pictures/wei.png" /></div>
+            
+                <h1>Time渐行渐远</h1>
+                <div class="site-des">Coding Changing The World</div>
+                <div class="social">
+
+
+
+
+
+
+
+
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:hsw_v5@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="BigData.html"><strong>BigData</strong></a>
+        
+            <a href="Python.html"><strong>Python</strong></a>
+        
+            <a href="Linux.html"><strong>Linux</strong></a>
+        
+            <a href="Life.html"><strong>Life</strong></a>
+        
+            <a href="Spark.html"><strong>Spark</strong></a>
+        
+            <a href="Yarn.html"><strong>Yarn</strong></a>
+        
+            <a href="Scala.html"><strong>Scala</strong></a>
+        
+            <a href="VPS.html"><strong>VPS</strong></a>
+        
+            <a href="MachineLearning.html"><strong>MachineLearning</strong></a>
+        
+            <a href="Writer.html"><strong>Writer</strong></a>
+        
+            <a href="Shell.html"><strong>Shell</strong></a>
+        
+            <a href="Algorithm.html"><strong>Algorithm</strong></a>
+        
+            <a href="Mac.html"><strong>Mac</strong></a>
+        
+            <a href="Presto.html"><strong>Presto</strong></a>
+        
+            <a href="Mysql.html"><strong>Mysql</strong></a>
+        
+            <a href="Maven.html"><strong>Maven</strong></a>
+        
+            <a href="Kafka.html"><strong>Kafka</strong></a>
+        
+            <a href="Java.html"><strong>Java</strong></a>
+        
+            <a href="DevTools.html"><strong>DevTools</strong></a>
+        
+            <a href="Hbase.html"><strong>Hbase</strong></a>
+        
+            <a href="ELK.html"><strong>ELK</strong></a>
+        
+            <a href="Druid.html"><strong>Druid</strong></a>
+        
+            <a href="Docker.html"><strong>Docker</strong></a>
+        
+            <a href="DesignPattern.html"><strong>DesignPattern</strong></a>
+        
+            <a href="Computer.html"><strong>Computer</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15198768495613.html">Elasticsearch：用Curator辅助Marvel，实现自动删除旧marvel索引</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198743666304.html">PythonVirtualenv总结</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198746079468.html">机器学习实战之朴素贝叶斯</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198745641385.html">Presto的学习笔记</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198769093559.html">二八定律与长尾理论</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+
+  </body>
+</html>
