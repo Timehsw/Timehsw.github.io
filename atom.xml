@@ -4,13 +4,50 @@
   <title><![CDATA[Time渐行渐远]]></title>
   <link href="http://dmlcoding.com/atom.xml" rel="self"/>
   <link href="http://dmlcoding.com/"/>
-  <updated>2018-03-01T15:25:12+08:00</updated>
+  <updated>2018-03-02T13:49:32+08:00</updated>
   <id>http://dmlcoding.com/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[思考]]></title>
+    <link href="http://dmlcoding.com/15199545224004.html"/>
+    <updated>2018-03-02T09:35:22+08:00</updated>
+    <id>http://dmlcoding.com/15199545224004.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">为什么有些人能够突飞猛进?</h2>
+
+<ul>
+<li>智商高</li>
+<li>有想法,有思路</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[kafka-sparkstreaming长时间运行后异常退出原因分析]]></title>
+    <link href="http://dmlcoding.com/15199040835190.html"/>
+    <updated>2018-03-01T19:34:43+08:00</updated>
+    <id>http://dmlcoding.com/15199040835190.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">报错信息</h2>
+
+<pre><code>Couldn`t find leader offsets for set([xxxxxxxxxxx,xx])
+
+# 或者
+numRecords must not be negative
+</code></pre>
+
+<h2 id="toc_1">分析过程</h2>
+
+<p>从博客中已经找不到直接的解决方案，那么只能从源码入手，从而看看能不能定位到问题所在。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Elasticsearch：用Curator辅助Marvel，实现自动删除旧marvel索引]]></title>
@@ -3433,93 +3470,6 @@ Tesseract. Here are some symbols: !@#$%&quot;&amp;&#39;()</p>
 <li>hfile.block.cache.size(读多的场景下,适当增大这个参数的值)</li>
 <li>hbase.regionserver.global.memstore.upperLimit(写多的场景下,适当增大这个参数的值)</li>
 </ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[年中总结]]></title>
-    <link href="http://dmlcoding.com/15198716087210.html"/>
-    <updated>2018-03-01T10:33:28+08:00</updated>
-    <id>http://dmlcoding.com/15198716087210.html</id>
-    <content type="html"><![CDATA[
-<p><img src="media/15198716087210/1.jpg" alt="1"/></p>
-
-<p>写了这么多句,没有写出一句有意思的话;<br/>
-写了这么多篇,没有写出一篇有深意的文章;<br/>
-不是流水账,仍似流水账;</p>
-
-<span id="more"></span><!-- more -->
-
-<h1 id="toc_0">我干了些啥</h1>
-
-<blockquote>
-<p>2017已经过去了一半</p>
-</blockquote>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[机器学习实战之逻辑回归]]></title>
-    <link href="http://dmlcoding.com/15198753668603.html"/>
-    <updated>2018-03-01T11:36:06+08:00</updated>
-    <id>http://dmlcoding.com/15198753668603.html</id>
-    <content type="html"><![CDATA[
-<p>不知道什么是逻辑回归,但是也许看完接下来的文章,你会有个大概的印象吧</p>
-
-<span id="more"></span><!-- more -->
-
-<h1 id="toc_0">简单介绍Logistic回归</h1>
-
-<h2 id="toc_1">Logistic回归用到的知识点</h2>
-
-<ul>
-<li>Sigmoid函数和Logistic回归分类器</li>
-<li>最优化理论初步</li>
-<li>梯度下降最优化算法</li>
-<li>数据中的缺失项处理</li>
-</ul>
-
-<h2 id="toc_2">Logistic回归的一般过程</h2>
-
-<ul>
-<li>1.收集数据:采用任意方法收集数据</li>
-<li>2.准备数据:由于需要进行距离计算,因此要求数据类型为数值型.另外,结构化数据格式则最佳.</li>
-<li>3.分析数据:采用任意方法对数据进行分析.</li>
-<li>4.训练算法:大部分时间将用于训练,训练的目的是为了找到最佳的分类回归系数.</li>
-<li>5.使用算法:首先,我们需要一些输入数据,并将其转换成对应的结构化数值;接着,基于训练好的回归系数就可以对这些数值进行简单的回归计算,判定他们属于哪个类别;在这之后,我们就可以在输出的类别上做一些其他分析工作.</li>
-</ul>
-
-<h1 id="toc_3">基于Logistic回归和Sigmoid函数的分类</h1>
-
-<h2 id="toc_4">Logistic回归</h2>
-
-<ul>
-<li>优点
-
-<ul>
-<li>计算代价不高</li>
-<li>易于理解和实现</li>
-</ul></li>
-<li>缺点
-
-<ul>
-<li>容易欠拟合</li>
-<li>分类精度可能不高</li>
-</ul></li>
-<li>适用类型
-
-<ul>
-<li>数值型(数值型目标变量则可以从无限的数值集合中取值，如0.100，42.001等 (数值型目标变量主要用于回归分析))</li>
-<li>标称型数据(标称型目标变量的结果只在有限目标集中取值，如真与假(标称型目标变量主要用于分类))</li>
-</ul></li>
-</ul>
-
-<p>基本公式:<br/>
-Sigmoid函数具体的计算公式</p>
-
-<math xmlns="http://www.w3.org/1998/Math/MathML">  <mstyle displaystyle="true">    <mi> &#x03C3;<!--greek small letter sigma--> </mi>    <mfenced>      <mrow>        <mi> z </mi>      </mrow>    </mfenced>    <mo> = </mo>    <mfrac>      <mrow>        <mn> 1 </mn>      </mrow>      <mrow>        <mn> 1 </mn>        <mo> + </mo>        <msup>          <mrow>            <mi> e </mi>          </mrow>          <mrow>            <mo> - </mo>            <mi> z </mi>          </mrow>        </msup>      </mrow>    </mfrac>  </mstyle></math>
 
 ]]></content>
   </entry>

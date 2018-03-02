@@ -153,6 +153,75 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
+                <a class="clearlink" href="15198744182911.html">
+                
+                  <h1>python 高级特性之切片</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>python很方便实用,如果你不会切片.那么你真的错过了什么叫方便和实用.</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15198744182911.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/6/21</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Python.html'>Python</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15198765526677.html">
+                
+                  <h1>Git常用命令以及笔记</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>平时一直是用Intellij进行开发,git命令也不会用命令行去输入.导致有些命令都不太熟悉了,每次用到的时候都是google.<br/>
+今天把平时用到的命令做个笔记记录一下.</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15198765526677.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/6/20</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='DevTools.html'>DevTools</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="15198713708585.html">
                 
                   <h1>zabbix 部署文档</h1>
@@ -240,117 +309,6 @@
                   <div class="more-left left">
                    <a href="15198738146695.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2017/4/15</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15198747024709.html">
-                
-                  <h1>mysql赋给用户权限grant all privileges on</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h1 id="toc_0">权限问题</h1>
-
-<ul>
-<li><p>问题<br/>
-<code><br/>
-遇到了 SQLException: access denied for  @&#39;localhost&#39; (using password: no)<br/>
-</code></p></li>
-<li><p>解决办法<br/>
-<code><br/>
-grant all privileges on *.* to joe@localhost identified by &#39;1&#39;;<br/>
-flush privileges;<br/>
-</code><br/>
-&lt;!-- more --&gt;</p></li>
-</ul>
-
-<h1 id="toc_1">详细介绍</h1>
-
-<pre><code>MySQL&gt; grant 权限1,权限2,…权限n on 数据库名称.表名称 to 用户名@用户地址 identified by ‘连接口令’;
-
-</code></pre>
-
-<ul>
-<li><code>权限1,权限2,…权限n</code>代表select,insert,update,delete,create,drop,index,alter,grant,references,reload,shutdown,process,file等14个权限。</li>
-<li>当权限1,权限2,…权限n被all privileges或者all代替，表示赋予用户全部权限。</li>
-<li>当数据库名称.表名称被<em>.</em>代替，表示赋予用户操作服务器上所有数据库所有表的权限。</li>
-<li>用户地址可以是localhost，也可以是ip地址、机器名字、域名。也可以用’%&#39;表示从任何地址连接。</li>
-<li>‘连接口令’不能为空，否则创建失败。</li>
-</ul>
-
-<h2 id="toc_2">实例</h2>
-
-<pre><code>mysql&gt;grant select,insert,update,delete,create,drop on vtdc.employee to joe@10.163.225.87 identified by ‘123′;
-给来自10.163.225.87的用户joe分配可对数据库vtdc的employee表进行select,insert,update,delete,create,drop等操作的权限，并设定口令为123。
-
-mysql&gt;grant all privileges on vtdc.* to joe@10.163.225.87 identified by ‘123′;
-给来自10.163.225.87的用户joe分配可对数据库vtdc所有表进行所有操作的权限，并设定口令为123。
-
-mysql&gt;grant all privileges on *.* to joe@10.163.225.87 identified by ‘123′;
-给来自10.163.225.87的用户joe分配可对所有数据库的所有表进行所有操作的权限，并设定口令为123。
-
-mysql&gt;grant all privileges on *.* to joe@localhost identified by ‘123′;
-给本机用户joe分配可对所有数据库的所有表进行所有操作的权限，并设定口令为123。
-</code></pre>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2017/4/9</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Mysql.html'>Mysql</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15198739653579.html">
-                
-                  <h1>Linux 文件同步工具——rsync</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">介绍</h2>
-
-<p>rsync是类unix系统下的数据镜像备份工具，从软件的命名上就可以看出来了——remote sync</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15198739653579.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/3/22</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
@@ -485,6 +443,18 @@ mysql&gt;grant all privileges on *.* to joe@localhost identified by ‘123′;
 	      
 		      
 			      <li class="post">
+			        <a href="15199545224004.html">思考</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15199040835190.html">kafka-sparkstreaming长时间运行后异常退出原因分析</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15198768495613.html">Elasticsearch：用Curator辅助Marvel，实现自动删除旧marvel索引</a>
 			      </li>
 		     
@@ -498,18 +468,6 @@ mysql&gt;grant all privileges on *.* to joe@localhost identified by ‘123′;
 		      
 			      <li class="post">
 			        <a href="15198746079468.html">机器学习实战之朴素贝叶斯</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15198745641385.html">Presto的学习笔记</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15198769093559.html">二八定律与长尾理论</a>
 			      </li>
 		     
 		  
