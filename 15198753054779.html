@@ -131,6 +131,8 @@
             <li><a href="DesignPattern.html">DesignPattern</a></li>
         
             <li><a href="Computer.html">Computer</a></li>
+        
+            <li><a href="Redis.html">Redis</a></li>
          
 
       </ul>
@@ -201,54 +203,65 @@ xxx.app已损坏,打不开.你应该将它移到废纸篓</p>
 brew update
 </code></pre>
 
-<h1 id="toc_3">安装brew cask</h1>
+<h1 id="toc_3">brew常用命令</h1>
+
+<pre><code>brew install xxx 安装xxx
+brew uninstall xxx 卸载xxx
+brew list 列出已安装的软件
+brew update 更新brew
+brew home 用浏览器打开brew的官方网站
+brew info 显示软件信息
+brew deps 显示包依赖
+</code></pre>
+
+<h1 id="toc_4">安装brew cask</h1>
 
 <pre><code>ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot; &lt; /dev/null 2&gt; /dev/null ; brew install caskroom/cask/brew-cask 2&gt; /dev/null
 
 </code></pre>
 
-<h1 id="toc_4">安装reds可视化客户端</h1>
+<h1 id="toc_5">安装reds可视化客户端</h1>
 
 <pre><code>brew cask install rdm
 </code></pre>
 
-<h1 id="toc_5">重新安装 python</h1>
+<h1 id="toc_6">重新安装 python</h1>
 
 <p>Python会被安装到/usr/local/bin目录下<br/>
 <code><br/>
 brew install python<br/>
 </code></p>
 
-<h1 id="toc_6">然后安装 ipython</h1>
+<h1 id="toc_7">然后安装 ipython</h1>
 
 <pre><code>sudo pip install ipython
 </code></pre>
 
-<h1 id="toc_7">然后安装 jupyter notebook</h1>
+<h1 id="toc_8">然后安装 jupyter notebook</h1>
 
 <p>执行ipynb文件,好东西.<br/>
 ```</p>
 
-<h1 id="toc_8">安装</h1>
+<h1 id="toc_9">安装</h1>
 
 <p>sudo pip install jupyter</p>
 
-<h1 id="toc_9">运行</h1>
+<h1 id="toc_10">运行</h1>
 
 <p>jupyter notebook<br/>
 ```</p>
 
-<h1 id="toc_10">安装 wget</h1>
+<h1 id="toc_11">安装 wget</h1>
 
 <pre><code>brew install wget
 </code></pre>
 
-<h1 id="toc_11">安装 node</h1>
+<h1 id="toc_12">安装 node</h1>
 
 <pre><code>brew install node
 </code></pre>
 
-<h1 id="toc_12">安装hexo</h1>
+<h1 id="toc_13">安装hexo</h1>
 
 <ul>
 <li>下载
@@ -261,7 +274,7 @@ npm install -g hexo-cli
 </code></li>
 </ul>
 
-<h1 id="toc_13">配置 GitHub</h1>
+<h1 id="toc_14">配置 GitHub</h1>
 
 <pre><code>重新打开bash，输入：
 ssh-keygen -t rsa -C &quot;Github的注册邮箱地址&quot;
@@ -271,16 +284,16 @@ Your public key has been saved in /Users/hushiwei/.ssh
 New SSH key ——Title：blog —— Key：输入刚才复制的—— Add SSH key
 </code></pre>
 
-<h1 id="toc_14">安装pip(如果重新用 brew 安装了 python,那么 pip 已经安装了)</h1>
+<h1 id="toc_15">安装pip(如果重新用 brew 安装了 python,那么 pip 已经安装了)</h1>
 
 <pre><code>wget https://bootstrap.pypa.io/get-pip.py
 sudo python get-pip.py
 
 </code></pre>
 
-<h1 id="toc_15">安装jdk</h1>
+<h1 id="toc_16">安装jdk</h1>
 
-<h1 id="toc_16">配置scala,maven,环境变量</h1>
+<h1 id="toc_17">配置scala,maven,环境变量</h1>
 
 <ul>
 <li>maven和Scala
@@ -302,7 +315,7 @@ PATH=$SCALA_HOME/bin:$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH:/usr/local/bin:
 </code></li>
 </ul>
 
-<h1 id="toc_17">安装MySQL</h1>
+<h1 id="toc_18">安装MySQL</h1>
 
 <ul>
 <li>下载
@@ -432,6 +445,8 @@ PATH=$SCALA_HOME/bin:$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH:/usr/local/bin:
             <a href="DesignPattern.html"><strong>DesignPattern</strong></a>
         
             <a href="Computer.html"><strong>Computer</strong></a>
+        
+            <a href="Redis.html"><strong>Redis</strong></a>
          
         </p>
 
@@ -448,6 +463,18 @@ PATH=$SCALA_HOME/bin:$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH:/usr/local/bin:
 	      
 		      
 			      <li class="post">
+			        <a href="15202200627560.html">查看linux系统负荷</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15202199373374.html">MacbookPro 修改应用的默认语言</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15199545224004.html">思考</a>
 			      </li>
 		     
@@ -461,18 +488,6 @@ PATH=$SCALA_HOME/bin:$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH:/usr/local/bin:
 		      
 			      <li class="post">
 			        <a href="15198768495613.html">Elasticsearch：用Curator辅助Marvel，实现自动删除旧marvel索引</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15198743666304.html">PythonVirtualenv总结</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15198746079468.html">机器学习实战之朴素贝叶斯</a>
 			      </li>
 		     
 		  

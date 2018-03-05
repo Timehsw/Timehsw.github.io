@@ -4,13 +4,114 @@
   <title><![CDATA[Time渐行渐远]]></title>
   <link href="http://dmlcoding.com/atom.xml" rel="self"/>
   <link href="http://dmlcoding.com/"/>
-  <updated>2018-03-02T13:49:32+08:00</updated>
+  <updated>2018-03-05T14:25:20+08:00</updated>
   <id>http://dmlcoding.com/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[查看linux系统负荷]]></title>
+    <link href="http://dmlcoding.com/15202200627560.html"/>
+    <updated>2018-03-05T11:21:02+08:00</updated>
+    <id>http://dmlcoding.com/15202200627560.html</id>
+    <content type="html"><![CDATA[
+<h1 id="toc_0">uptime</h1>
+
+<pre><code>~ uptime
+17:54:40 up 846 days, 55 min, 10 users,  load average: 0.36, 0.33, 0.48
+</code></pre>
+
+<span id="more"></span><!-- more -->
+
+<ul>
+<li>这行信息的后半部部分,显示 **load average.  **它的意思是系统的平均负荷.</li>
+<li>通过里面的三个数字,我们可以从中判断系统负荷是大还是小</li>
+<li>这3个数字,分别代表1分钟,5分钟,15分钟内系统的平均负荷.</li>
+<li>当CPU完全空闲的时候,平均负荷为0;当CPU工作量饱和的时候,平均负荷为1(假设只有一个核)</li>
+<li>那么很显然,load average的值越低,比如0.2或者0.3,就说明电脑的工作量越小,系统负荷比较轻</li>
+</ul>
+
+<p>参考文档</p>
+
+<p><a href="http://blog.scoutapp.com/articles/2009/07/31/understanding-load-averages">http://blog.scoutapp.com/articles/2009/07/31/understanding-load-averages</a></p>
+
+<p>总结:</p>
+
+<p>假设服务器有16个核.</p>
+
+<p>那么当load average的值小于16的时候,表示现在系统负荷轻.当load average的值大于16就表示负荷过大了.</p>
+
+<p>查看服务器有多少个CPU核心</p>
+
+<p><u><strong>grep -c &#39;model name&#39; /proc/cpuinfo</strong></u></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MacbookPro 修改应用的默认语言]]></title>
+    <link href="http://dmlcoding.com/15202199373374.html"/>
+    <updated>2018-03-05T11:18:57+08:00</updated>
+    <id>http://dmlcoding.com/15202199373374.html</id>
+    <content type="html"><![CDATA[
+<p>当我把macbook pro的默认系统语言从中文改成英文后,其他的应用的语言也都变成了英文了.</p>
+
+<p>但是比如地图应用,我还是希望用中文呢?</p>
+
+<h1 id="toc_0">将地图Maps应用的语言改成中文</h1>
+
+<span id="more"></span><!-- more -->
+
+<p>第一步</p>
+
+<pre><code>You don&#39;t need to change language setting. 
+You can simply set it in the Maps App&#39;s Menu at [View]-&gt; [Labels]-&gt; [Always Show Labels in English].
+ Then cancel it.
+</code></pre>
+
+<p>第二步</p>
+
+<pre><code>defaults write com.apple.Maps AppleLanguages &#39;(zh-CN)&#39;
+</code></pre>
+
+<hr/>
+
+<pre><code># 英文 -&gt; 简体中文
+defaults write com.google.Chrome AppleLanguages &#39;(zh-CN)&#39;
+
+# 简体中文 -&gt; 英文
+defaults write com.google.Chrome AppleLanguages &#39;(en-US)&#39;
+
+# 英文优先，简体中文第二。反之改一下顺序
+defaults write com.google.Chrome AppleLanguages &quot;(en-US,zh-CN)&quot;
+</code></pre>
+
+<h1 id="toc_1">Calendar</h1>
+
+<pre><code>defaults write com.apple.iCal AppleLanguages &#39;(zh-CN)&#39;
+</code></pre>
+
+<p>那么问题来了,从上面可以知道只要修改每个应用的系统语言即可</p>
+
+<h1 id="toc_2">如何找到应用的包名</h1>
+
+<p>以<strong>滴答清单</strong>为例</p>
+
+<pre><code># 在&quot;&quot;双引号中输入应用名称,执行下面的命令即可返回应用的包名
+hushiwei@hsw ~  osascript -e &#39;id of app &quot;Wunderlist&quot;&#39;
+com.wunderkinder.wunderlistdesktop
+</code></pre>
+
+<p>知道了应用的包名,那么就可以执行上面的命令来修改应用的语言了</p>
+
+<pre><code>defaults write com.wunderkinder.wunderlistdesktop AppleLanguages &#39;(zh-CN)&#39;
+</code></pre>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[思考]]></title>
@@ -3320,156 +3421,6 @@ plt.show()
 </code></pre>
 
 <p><img src="media/15198750755456/subplot.png" alt="subplot"/></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[机器视觉处理与Tesseract介绍]]></title>
-    <link href="http://dmlcoding.com/15198725905052.html"/>
-    <updated>2018-03-01T10:49:50+08:00</updated>
-    <id>http://dmlcoding.com/15198725905052.html</id>
-    <content type="html"><![CDATA[
-<p>在读取和处理图像、图像相关的机器学习以及创建图像等任务中，Python 一直都是非常出色的语言。虽然有很多库可以进行图像处理，但目前我只接触到Tesseract.</p>
-
-<span id="more"></span><!-- more -->
-
-<h1 id="toc_0">Tesseract</h1>
-
-<p>Tesseract 是一个 OCR 库,目前由 Google 赞助(Google 也是一家以 OCR 和机器学习技术闻名于世的公司)。Tesseract 是目前公认最优秀、最精确的开源 OCR 系统。 除了极高的精确度,Tesseract 也具有很高的灵活性。它可以通过训练识别出任何字体，也可以识别出任何 Unicode 字符。</p>
-
-<h1 id="toc_1">安装Tesseract</h1>
-
-<h2 id="toc_2">Windows 系统</h2>
-
-<pre><code>下载可执行安装文件https://code.google.com/p/tesseract-ocr/downloads/list安装。
-</code></pre>
-
-<h2 id="toc_3">Linux 系统</h2>
-
-<pre><code>可以通过 apt-get 安装: $sudo apt-get tesseract-ocr
-</code></pre>
-
-<h2 id="toc_4">Mac OS X系统</h2>
-
-<p>用 Homebrew(<a href="http://brew.sh/)%E7%AD%89%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%8F%AF%E4%BB%A5%E5%BE%88%E6%96%B9%E4%BE%BF%E5%9C%B0%E5%AE%89%E8%A3%85">http://brew.sh/)等第三方库可以很方便地安装</a><br/>
-<code><br/>
-brew install tesseract<br/>
-</code><br/>
-要使用 Tesseract 的功能，比如后面的示例中训练程序识别字母，要先在系统中设置一个新的环境变量 $TESSDATA_PREFIX，让 Tesseract 知道训练的数据文件存储在哪里，然后搞一份tessdata数据文件，放到Tesseract目录下。</p>
-
-<p>在大多数 Linux 系统和 Mac OS X 系统上,你可以这么设置:<br/>
-<code><br/>
- $export TESSDATA_PREFIX=/usr/local/share/Tesseract<br/>
-</code><br/>
-或者<br/>
-<code><br/>
-hushiwei@localhost  ~  more ~/.bash_profile<br/>
-alias l=&#39;ls -lF&#39;<br/>
-alias ll=&#39;ls -alF&#39;<br/>
-JAVA_HOME=`/usr/libexec/java_home`<br/>
-SCALA_HOME=/Users/hushiwei/devApps/scala-2.10.5<br/>
-MAVEN_HOME=/Users/hushiwei/devApps/maven-3.3.9<br/>
-TESSDATA_PREFIX=/Users/hushiwei/devApps/Tesseract<br/>
-</code><br/>
-在 Windows 系统上也类似,你可以通过下面这行命令设置环境变量:<br/>
-```</p>
-
-<h1 id="toc_5">setx TESSDATA_PREFIX C:\Program Files\Tesseract OCR\Tesseract</h1>
-
-<pre><code># 安装pytesseract
-Tesseract 是一个 Python 的命令行工具，不是通过 import 语句导入的库。安装之后,要用 tesseract 命令在 Python 的外面运行，但我们可以通过 pip 安装支持Python 版本的 Tesseract库：
-</code></pre>
-
-<p>pip install pytesseract<br/>
-```</p>
-
-<h1 id="toc_6">简单示例</h1>
-
-<p>目前只能处理规范的文字,那么什么算<code>格式规范</code>呢?<br/>
-格式规范的文字具有以下特点:<br/>
-+ 使用一个标准字体(不包含手写体、草书,或者十分“花哨的”字体) • 虽然被复印或拍照,字体还是很清晰,没有多余的痕迹或污点<br/>
-+ 排列整齐,没有歪歪斜斜的字<br/>
-+ 没有超出图片范围,也没有残缺不全,或紧紧贴在图片的边缘</p>
-
-<p>格式规范的图片示例<br/>
-<img src="media/15198725905052/test.png" alt="test"/></p>
-
-<h2 id="toc_7">命令行方式</h2>
-
-<p>那么试一试Tesseract,,看看效果如何.用起来也是非常简单.读取图片,然后把结果写入到一个文本文件中<br/>
-<code><br/>
-hushiwei@localhost  ~/Desktop  tesseract test.png text<br/>
-Tesseract Open Source OCR Engine v3.05.01 with Leptonica<br/>
-Warning. Invalid resolution 0 dpi. Using 70 instead.<br/>
-</code><br/>
-接着打开这个文本看看效果<br/>
-```<br/>
-hushiwei@localhost  ~/Desktop  more text.txt<br/>
-This is some text, written in Arial, that will be read by<br/>
-Tesseract. Here are some symbols: !@#$%&quot;&amp;&#39;()</p>
-
-<pre><code>
-除了一个小符号没有识别出来,其他的字符基本上都识别对了.
-
-## python代码方式进行识别
-
-用之前安装的`pytesseract`模块,就可以很方便的完成我们想要的效果
-
-</code></pre>
-
-<p>import pytesseract</p>
-
-<p>from PIL import Image</p>
-
-<h1 id="toc_8">打开一个图片</h1>
-
-<p>image=Image.open(&#39;test.png&#39;)</p>
-
-<h1 id="toc_9">调用pytesseract的image_to_string方法识别出图片中的文字,返回识别出来的文字</h1>
-
-<p>text=pytesseract.image_to_string(image)</p>
-
-<h1 id="toc_10">打印文字看看效果</h1>
-
-<p>print text<br/>
-```</p>
-
-<p>输出结果<br/>
-```<br/>
-This is some text, written in Arial, that will be read by<br/>
-Tesseract. Here are some symbols: !@#$%&quot;&amp;&#39;()</p>
-
-<p>Process finished with exit code 0</p>
-
-<pre><code>
-
-</code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Hbase笔记]]></title>
-    <link href="http://dmlcoding.com/15198765095343.html"/>
-    <updated>2018-03-01T11:55:09+08:00</updated>
-    <id>http://dmlcoding.com/15198765095343.html</id>
-    <content type="html"><![CDATA[
-<p>在开发hbase过程中,遇到的一些问题.还有些许知识点的总结</p>
-
-<span id="more"></span><!-- more -->
-
-<h1 id="toc_0">hbase的内存分配</h1>
-
-<blockquote>
-<p>HBase的默认堆分配策略，40%给blockcache，40%给memstore<br/>
-在HBase中，有两个在内存中的结构消费了绝大多数的heap空间。BlockCache缓存读操作的HFile block，Memstore缓存近期的写操作。</p>
-</blockquote>
-
-<ul>
-<li>hfile.block.cache.size(读多的场景下,适当增大这个参数的值)</li>
-<li>hbase.regionserver.global.memstore.upperLimit(写多的场景下,适当增大这个参数的值)</li>
-</ul>
 
 ]]></content>
   </entry>

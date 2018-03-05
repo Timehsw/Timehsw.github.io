@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  思考 - Time渐行渐远
+  三言两语Redis - Time渐行渐远
   
   </title>
   
@@ -155,14 +155,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>思考</h1>
+          <h1>三言两语Redis</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2018/3/2</span>
+          <span class="date">2017/5/15</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='Life.html'>Life</a></span>
+              <span class="posted-in"><a href='Redis.html'>Redis</a></span>
            
          
           <span class="comments">
@@ -175,12 +175,104 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <h2 id="toc_0">为什么有些人能够突飞猛进?</h2>
+      <h2 id="toc_0">redis的数据结构与对象</h2>
 
 <ul>
-<li>智商高</li>
-<li>有想法,有思路</li>
+<li>数据库键总是一个字符串对象(string object)</li>
+<li>而数据库键的值可以是... 这五种对象中的其中一种
+
+<ul>
+<li>字符串对象(string object)</li>
+<li>列表对象(list object)</li>
+<li>哈希对象(hash object)</li>
+<li>集合对象(set object)</li>
+<li>有序集合对象(sorted set object)</li>
+</ul></li>
 </ul>
+
+<h2 id="toc_1">list</h2>
+
+<h3 id="toc_2">redis常用命令</h3>
+
+<table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>说明</th>
+<th>举例</th>
+<th>备注</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>lpush</td>
+<td>在list的左侧插入一个新元素</td>
+<td>lpush mylist “1&quot;</td>
+<td></td>
+</tr>
+<tr>
+<td>rpush</td>
+<td>在list的右侧插入一个新元素</td>
+<td>rpush mylist “2&quot;</td>
+<td></td>
+</tr>
+<tr>
+<td>lrange</td>
+<td>从list中指定一个范围来提取元素</td>
+<td>lrange mylist 0 -1 </td>
+<td>列出mylist中从编号0到倒数第一个元素</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_3">说明</h3>
+
+<p>redis中的list底层实现不是数组,而是链表.那么在头部和尾部插入一个新元素时候,其时间复杂度是常数级别的.有利必有弊,同时,链表型的lists的元素定位会比较慢.</p>
+
+<h3 id="toc_4">list应用场景</h3>
+
+<ul>
+<li>我们可以利用lists来实现一个消息队列，而且可以确保先后顺序，不必像MySQL那样还需要通过ORDER BY来进行排序</li>
+<li>利用LRANGE还可以很方便的实现分页的功能</li>
+<li>在博客系统中，每片博文的评论也可以存入一个单独的list中</li>
+</ul>
+
+<h2 id="toc_5">redis的原子性</h2>
+
+<pre><code>127.0.0.1:6379&gt; set mynum &quot;2&quot;
+OK
+127.0.0.1:6379&gt; get mynum
+&quot;2&quot;
+127.0.0.1:6379&gt; incr mynum
+(integer) 3
+127.0.0.1:6379&gt; incr mynum
+(integer) 4
+127.0.0.1:6379&gt; incr mynum
+(integer) 5
+</code></pre>
+
+<p>由于INCR等指令本身就具有原子操作的特性，所以我们完全可以利用redis的INCR、INCRBY、DECR、DECRBY等指令来实现原子计数的效果，假如，在某种场景下有3个客户端同时读取了mynum的值（值为2），然后对其同时进行了加1的操作，那么，最后mynum的值一定是5。不少网站都利用redis的这个特性来实现业务上的统计计数需求</p>
+
+<h2 id="toc_6">redis持久化</h2>
+
+<blockquote>
+<p>redis提供了两种持久化的方式,分别是RDB(Redis DataBase)和AOF(Append Only File)</p>
+</blockquote>
+
+<h3 id="toc_7">RDB(Redis DataBase)</h3>
+
+<p>简而言之，就是在不同的时间点，将redis存储的数据生成快照并存储到磁盘等介质上.</p>
+
+<h3 id="toc_8">AOF(Append Only File)</h3>
+
+<p>将redis执行过的所有写指令记录下来，在下次redis重新启动时，只要把这些写指令从前到后再重复执行一遍，就可以实现数据恢复了</p>
+
+<h3 id="toc_9">补充</h3>
+
+<p>其实RDB和AOF两种方式也可以同时使用，在这种情况下，如果redis重启的话，则会优先采用AOF方式来进行数据恢复，这是因为AOF方式的数据恢复完整度更高。</p>
+
+<p>如果没有数据持久化的需求，也完全可以关闭RDB和AOF方式，这样的话，redis将变成一个纯内存数据库，就像memcache一样.</p>
 
 
     
@@ -191,16 +283,16 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15202199373374.html" 
-          title="Previous Post: MacbookPro 修改应用的默认语言">&laquo; MacbookPro 修改应用的默认语言</a>
+          <a href="15198765526677.html" 
+          title="Previous Post: Git常用命令以及笔记">&laquo; Git常用命令以及笔记</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15199040835190.html" 
-          title="Next Post: kafka-sparkstreaming长时间运行后异常退出原因分析">kafka-sparkstreaming长时间运行后异常退出原因分析 &raquo;</a>
+          <a  href="15202199632361.html" 
+          title="Next Post: 加强MacBook的预览功能">加强MacBook的预览功能 &raquo;</a>
       
       </p>
         </div>

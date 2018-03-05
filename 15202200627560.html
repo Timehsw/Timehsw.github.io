@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  思考 - Time渐行渐远
+  查看linux系统负荷 - Time渐行渐远
   
   </title>
   
@@ -155,14 +155,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>思考</h1>
+          <h1>查看linux系统负荷</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2018/3/2</span>
+          <span class="date">2018/3/5</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='Life.html'>Life</a></span>
+              <span class="posted-in"><a href='Linux.html'>Linux</a></span>
            
          
           <span class="comments">
@@ -175,12 +175,35 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <h2 id="toc_0">为什么有些人能够突飞猛进?</h2>
+      <h1 id="toc_0">uptime</h1>
+
+<pre><code>~ uptime
+17:54:40 up 846 days, 55 min, 10 users,  load average: 0.36, 0.33, 0.48
+</code></pre>
+
+<span id="more"></span><!-- more -->
 
 <ul>
-<li>智商高</li>
-<li>有想法,有思路</li>
+<li>这行信息的后半部部分,显示 **load average.  **它的意思是系统的平均负荷.</li>
+<li>通过里面的三个数字,我们可以从中判断系统负荷是大还是小</li>
+<li>这3个数字,分别代表1分钟,5分钟,15分钟内系统的平均负荷.</li>
+<li>当CPU完全空闲的时候,平均负荷为0;当CPU工作量饱和的时候,平均负荷为1(假设只有一个核)</li>
+<li>那么很显然,load average的值越低,比如0.2或者0.3,就说明电脑的工作量越小,系统负荷比较轻</li>
 </ul>
+
+<p>参考文档</p>
+
+<p><a href="http://blog.scoutapp.com/articles/2009/07/31/understanding-load-averages">http://blog.scoutapp.com/articles/2009/07/31/understanding-load-averages</a></p>
+
+<p>总结:</p>
+
+<p>假设服务器有16个核.</p>
+
+<p>那么当load average的值小于16的时候,表示现在系统负荷轻.当load average的值大于16就表示负荷过大了.</p>
+
+<p>查看服务器有多少个CPU核心</p>
+
+<p><u><strong>grep -c &#39;model name&#39; /proc/cpuinfo</strong></u></p>
 
 
     
@@ -191,16 +214,13 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15202199373374.html" 
-          title="Previous Post: MacbookPro 修改应用的默认语言">&laquo; MacbookPro 修改应用的默认语言</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15199040835190.html" 
-          title="Next Post: kafka-sparkstreaming长时间运行后异常退出原因分析">kafka-sparkstreaming长时间运行后异常退出原因分析 &raquo;</a>
+          <a  href="15202199373374.html" 
+          title="Next Post: MacbookPro 修改应用的默认语言">MacbookPro 修改应用的默认语言 &raquo;</a>
       
       </p>
         </div>

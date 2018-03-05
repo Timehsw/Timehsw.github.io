@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  思考 - Time渐行渐远
+  Mac Brew 服务管理Redis,MySQL - Time渐行渐远
   
   </title>
   
@@ -155,14 +155,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>思考</h1>
+          <h1>Mac Brew 服务管理Redis,MySQL</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2018/3/2</span>
+          <span class="date">2017/5/4</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='Life.html'>Life</a></span>
+              <span class="posted-in"><a href='Mac.html'>Mac</a></span>
            
          
           <span class="comments">
@@ -175,12 +175,121 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <h2 id="toc_0">为什么有些人能够突飞猛进?</h2>
+      <p>当我在macbook上用brew安装了redis或者mysql服务后,我希望可以方便的查看服务的运行状态,方便的启动停止服务.<br/>
+然而brew没有这个功能,但是通过安装brewservices就可以管理通过brew安装的相关服务了.这样在开发的过程中就非常的方便了.</p>
+
+<h1 id="toc_0">安装Homebrew</h1>
+
+<pre><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre>
+
+<span id="more"></span><!-- more -->
+
+<h1 id="toc_1">安装brewservices</h1>
+
+<blockquote>
+<p>安装这个服务后,我们就可以方便的启动停止用brew安装的相关服务了.比如mysql,redis...</p>
+</blockquote>
+
+<h2 id="toc_2">安装</h2>
+
+<pre><code>brew tap homebrew/services
+</code></pre>
+
+<h2 id="toc_3">使用</h2>
 
 <ul>
-<li>智商高</li>
-<li>有想法,有思路</li>
+<li>查看服务</li>
 </ul>
+
+<pre><code>~ brew services list
+Name  Status  User Plist
+mysql stopped
+redis stopped
+</code></pre>
+
+<ul>
+<li>启动服务</li>
+</ul>
+
+<pre><code>启动mysql服务
+~ brew services start mysql
+  ==&gt; Successfully started mysql (label: homebrew.mxcl.mysql)
+查看服务状态,redis仍然还是停止的
+~ brew services list
+  Name  Status  User     Plist
+  mysql started hushiwei /Users/hushiwei/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+  redis stopped
+</code></pre>
+
+<ul>
+<li>停止服务</li>
+</ul>
+
+<pre><code>brew services stop mysql
+</code></pre>
+
+<h1 id="toc_4">安装MySQL</h1>
+
+<pre><code>brew info mysql
+brew install mysql
+</code></pre>
+
+<h2 id="toc_5">额外配置</h2>
+
+<pre><code># 安装brew服务
+brew tap homebrew/services
+# 启动mysql服务
+brew services start mysql 或者 mysql.server start mysql.server stop
+# 查看mysql的版本
+mysql -V
+
+# 配置mysql的root密码
+mysqladmin -u root password &#39;yourpassword&#39;
+
+mysql -uroot -p
+</code></pre>
+
+<h1 id="toc_6">安装redis</h1>
+
+<pre><code>brew install redis
+</code></pre>
+
+<ul>
+<li>redis 配置文件的位置 
+<code>
+/usr/local/etc/redis.conf
+</code></li>
+<li>使用配置文件启动redis server 
+<code>
+/usr/local/etc/redis.conf
+</code></li>
+<li>卸载redis和它的文件 
+<code>
+brew uninstall redis 
+rm ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
+</code></li>
+<li>测试redis server是否启动 
+<code>
+/usr/local/bin/redis-cli ping 或者 redis-cli ping
+</code>
+## brew service管理redis
+``<code>
+# 启动redis服务
+hushiwei@hsw  ~  brew services start redis
+==&gt; Successfully started</code>redis` (label: homebrew.mxcl.redis)</li>
+</ul>
+
+<h1 id="toc_7">停止redis服务</h1>
+
+<p>hushiwei@hsw ~ brew services stop redis<br/>
+Stopping <code>redis</code>... (might take a while)<br/>
+==&gt; Successfully stopped <code>redis</code> (label: homebrew.mxcl.redis)</p>
+
+<h1 id="toc_8">启动redis客户端</h1>
+
+<p>/usr/local/bin/redis-cli 或者 redis-cli<br/>
+```</p>
 
 
     
@@ -191,16 +300,16 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15202199373374.html" 
-          title="Previous Post: MacbookPro 修改应用的默认语言">&laquo; MacbookPro 修改应用的默认语言</a>
+          <a href="15202199632361.html" 
+          title="Previous Post: 加强MacBook的预览功能">&laquo; 加强MacBook的预览功能</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15199040835190.html" 
-          title="Next Post: kafka-sparkstreaming长时间运行后异常退出原因分析">kafka-sparkstreaming长时间运行后异常退出原因分析 &raquo;</a>
+          <a  href="15198713708585.html" 
+          title="Next Post: zabbix 部署文档">zabbix 部署文档 &raquo;</a>
       
       </p>
         </div>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  思考 - Time渐行渐远
+  MacbookPro 修改应用的默认语言 - Time渐行渐远
   
   </title>
   
@@ -155,14 +155,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>思考</h1>
+          <h1>MacbookPro 修改应用的默认语言</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2018/3/2</span>
+          <span class="date">2018/3/5</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='Life.html'>Life</a></span>
+              <span class="posted-in"><a href='Mac.html'>Mac</a></span>
            
          
           <span class="comments">
@@ -175,12 +175,58 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <h2 id="toc_0">为什么有些人能够突飞猛进?</h2>
+      <p>当我把macbook pro的默认系统语言从中文改成英文后,其他的应用的语言也都变成了英文了.</p>
 
-<ul>
-<li>智商高</li>
-<li>有想法,有思路</li>
-</ul>
+<p>但是比如地图应用,我还是希望用中文呢?</p>
+
+<h1 id="toc_0">将地图Maps应用的语言改成中文</h1>
+
+<span id="more"></span><!-- more -->
+
+<p>第一步</p>
+
+<pre><code>You don&#39;t need to change language setting. 
+You can simply set it in the Maps App&#39;s Menu at [View]-&gt; [Labels]-&gt; [Always Show Labels in English].
+ Then cancel it.
+</code></pre>
+
+<p>第二步</p>
+
+<pre><code>defaults write com.apple.Maps AppleLanguages &#39;(zh-CN)&#39;
+</code></pre>
+
+<hr/>
+
+<pre><code># 英文 -&gt; 简体中文
+defaults write com.google.Chrome AppleLanguages &#39;(zh-CN)&#39;
+
+# 简体中文 -&gt; 英文
+defaults write com.google.Chrome AppleLanguages &#39;(en-US)&#39;
+
+# 英文优先，简体中文第二。反之改一下顺序
+defaults write com.google.Chrome AppleLanguages &quot;(en-US,zh-CN)&quot;
+</code></pre>
+
+<h1 id="toc_1">Calendar</h1>
+
+<pre><code>defaults write com.apple.iCal AppleLanguages &#39;(zh-CN)&#39;
+</code></pre>
+
+<p>那么问题来了,从上面可以知道只要修改每个应用的系统语言即可</p>
+
+<h1 id="toc_2">如何找到应用的包名</h1>
+
+<p>以<strong>滴答清单</strong>为例</p>
+
+<pre><code># 在&quot;&quot;双引号中输入应用名称,执行下面的命令即可返回应用的包名
+hushiwei@hsw ~  osascript -e &#39;id of app &quot;Wunderlist&quot;&#39;
+com.wunderkinder.wunderlistdesktop
+</code></pre>
+
+<p>知道了应用的包名,那么就可以执行上面的命令来修改应用的语言了</p>
+
+<pre><code>defaults write com.wunderkinder.wunderlistdesktop AppleLanguages &#39;(zh-CN)&#39;
+</code></pre>
 
 
     
@@ -191,16 +237,16 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15202199373374.html" 
-          title="Previous Post: MacbookPro 修改应用的默认语言">&laquo; MacbookPro 修改应用的默认语言</a>
+          <a href="15202200627560.html" 
+          title="Previous Post: 查看linux系统负荷">&laquo; 查看linux系统负荷</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15199040835190.html" 
-          title="Next Post: kafka-sparkstreaming长时间运行后异常退出原因分析">kafka-sparkstreaming长时间运行后异常退出原因分析 &raquo;</a>
+          <a  href="15199545224004.html" 
+          title="Next Post: 思考">思考 &raquo;</a>
       
       </p>
         </div>
