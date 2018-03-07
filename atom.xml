@@ -4,13 +4,113 @@
   <title><![CDATA[Time渐行渐远]]></title>
   <link href="http://dmlcoding.com/atom.xml" rel="self"/>
   <link href="http://dmlcoding.com/"/>
-  <updated>2018-03-05T14:25:20+08:00</updated>
+  <updated>2018-03-07T15:19:15+08:00</updated>
   <id>http://dmlcoding.com/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[kafka-sparkstreaming自己维护offset]]></title>
+    <link href="http://dmlcoding.com/15203071412162.html"/>
+    <updated>2018-03-06T11:32:21+08:00</updated>
+    <id>http://dmlcoding.com/15203071412162.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">auto.offset.reset</h2>
+
+<p>By default, it will start consuming from the latest offset of each Kafka partition. If you set configuration auto.offset.reset in Kafka parameters to smallest, then it will start consuming from the smallest offset.</p>
+
+<h2 id="toc_1">OffsetRange</h2>
+
+<p>topic主题,分区ID,起始offset,结束offset</p>
+
+<h2 id="toc_2">重写思路</h2>
+
+<p>因为spark源码中<code>KafkaCluster</code>类被限制在<strong>[spark]</strong>包下,所以我们如果想要在项目中调用这个类,那么只能在项目中也新建包<code>org.apache.spark.streaming.kafka</code>.然后再该包下面写调用的逻辑.这里面就可以引用<code>KafkaCluster</code>类了.这个类里面封装了很多实用的方法,比如:获取主题和分区,获取offset等等...</p>
+
+<p>这些api,spark里面都有现成的,我们现在就是需要组织起来!<br/>
+<code><br/>
+offsetRanges = rdd.asInstanceOf[HasOffsetRanges].offsetRanges<br/>
+</code></p>
+
+<p>简单说一下<br/>
+1. 在zookeeper上读取offset前先根据实际情况更新<code>fromOffsets</code><br/>
+    1.1 如果是一个新的groupid,那么会从最新的开始读<br/>
+    1.2 如果是存在的groupid,根据配置<code>auto.offset.reset</code><br/>
+        1.2.1 <code>smallest</code> : 那么会从开始读,获取最开始的offset.<br/>
+        1.2.2 <code>largest</code> : 那么会从最新的位置开始读取,获取最新的offset.</p>
+
+<ol>
+<li>根据topic获取topic和该topics下所有的partitions</li>
+</ol>
+
+<pre><code>val partitionsE = kc.getPartitions(topics)
+</code></pre>
+
+<ol>
+<li>传入上面获取到的topics和该分区所有的partitions</li>
+</ol>
+
+<pre><code>val consumerOffsetsE = kc.getConsumerOffsets(groupId, partitions)
+</code></pre>
+
+<ol>
+<li>获取到该topic下所有分区的offset了.最后还是调用spark中封装好了的api</li>
+</ol>
+
+<pre><code>KafkaUtils.createDirectStream[K, V, KD, VD, (K, V, String)](
+                ssc, kafkaParams, consumerOffsets, (mmd: MessageAndMetadata[K, V]) =&gt; ( mmd.key, mmd.message, mmd.topic))
+</code></pre>
+
+<ol>
+<li>更新zookeeper中的kafka消息的偏移量
+<code>
+kc.setConsumerOffsets(groupId, Map((topicAndPartition, offsets.untilOffset)))
+</code></li>
+</ol>
+
+<h2 id="toc_3">问题</h2>
+
+<p>sparkstreaming-kafka的源码中是自己把offset维护在kafka集群中了?<br/>
+<code><br/>
+./kafka-consumer-groups.sh --bootstrap-server 10.10.25.13:9092 --describe  --group heheda<br/>
+</code><br/>
+因为用命令行工具可以查到,这个工具可以查到基于javaapi方式的offset,查不到在zookeeper中的</p>
+
+<p>网上的自己维护offset,是把offset维护在zookeeper中了?<br/>
+用这个方式产生的groupid,在命令行工具中查不到,但是也是调用的源码中的方法呢?<br/>
+难道spark提供了这个方法,但是自己却没有用是吗?</p>
+
+<h2 id="toc_4">自己维护和用原生的区别</h2>
+
+<p>区别只在于,自己维护offset,会先去zk中获取offset,逻辑处理完成后再更新zk中的offset.<br/>
+然而,在代码层面,区别在于调用了不同的<code>KafkaUtils.createDirectStream</code></p>
+
+<h3 id="toc_5">自己维护</h3>
+
+<p>自己维护的offset,这个方法会传入offset.因为在此之前我们已经从zk中获取到了起始offset<br/>
+<code><br/>
+KafkaUtils.createDirectStream[K, V, KD, VD, (K, V, String)](<br/>
+                ssc, kafkaParams, consumerOffsets, (mmd: MessageAndMetadata[K, V]) =&gt; ( mmd.key, mmd.message, mmd.topic))<br/>
+</code></p>
+
+<h3 id="toc_6">原生的</h3>
+
+<p>接受的是一个topic,底层会根据topic去获取存储在kafka中的起始offset<br/>
+<code><br/>
+KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, myTopic)<br/>
+</code></p>
+
+<p>接下来这个方法里面会调用<code>getFromOffsets</code>来获取起始的offset<br/>
+<code><br/>
+val kc = new KafkaCluster(kafkaParams)<br/>
+val fromOffsets = getFromOffsets(kc, kafkaParams, topics)<br/>
+</code></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[查看linux系统负荷]]></title>
@@ -145,7 +245,76 @@ numRecords must not be negative
 
 <h2 id="toc_1">分析过程</h2>
 
-<p>从博客中已经找不到直接的解决方案，那么只能从源码入手，从而看看能不能定位到问题所在。</p>
+<p>从博客中已经找不到直接的解决方案，那么只能从源码入手，从而看看能不能定位到问题所在。<br/>
+从这一行代码开始跟踪<br/>
+```<br/>
+KafkaUtils.createDirectStream<a href="ssc,%20kafkaParams,%20myTopic">String, String, StringDecoder, StringDecoder</a></p>
+
+<pre><code>发现了,先调用`getFromOffsets(kc, kafkaParams, topics)`获取到了起始offset.然后创建了一个
+`DirectKafkaInputDStream`对象.点进去
+
+</code></pre>
+
+<p>def createDirectStream<a href="ssc:%20StreamingContext,%0A%20%20%20%20%20%20kafkaParams:%20Map%5BString,%20String%5D,%0A%20%20%20%20%20%20topics:%20Set%5BString%5D"><br/>
+    K: ClassTag,<br/>
+    V: ClassTag,<br/>
+    KD &lt;: Decoder[K]: ClassTag,<br/>
+    VD &lt;: Decoder[V]: ClassTag</a>: InputDStream[(K, V)] = {<br/>
+    val messageHandler = (mmd: MessageAndMetadata[K, V]) =&gt; (mmd.key, mmd.message)<br/>
+    val kc = new KafkaCluster(kafkaParams)<br/>
+    val fromOffsets = getFromOffsets(kc, kafkaParams, topics)<br/>
+    new DirectKafkaInputDStream<a href="ssc,%20kafkaParams,%20fromOffsets,%20messageHandler">K, V, KD, VD, (K, V)</a><br/>
+  }</p>
+
+<pre><code>
+找到这个对象里面的`compute`方法,重点从这个方法的逻辑开始分析
+</code></pre>
+
+<p>override def compute(validTime: Time): Option[KafkaRDD[K, V, U, T, R]] = {<br/>
+    val untilOffsets = clamp(latestLeaderOffsets(maxRetries))<br/>
+    val rdd = KafkaRDD<a href="context.sparkContext,%20kafkaParams,%20currentOffsets,%20untilOffsets,%20messageHandler">K, V, U, T, R</a></p>
+
+<pre><code>// Report the record number and metadata of this batch interval to InputInfoTracker.
+val offsetRanges = currentOffsets.map { case (tp, fo) =&gt;
+  val uo = untilOffsets(tp)
+  OffsetRange(tp.topic, tp.partition, fo, uo.offset)
+}
+val description = offsetRanges.filter { offsetRange =&gt;
+  // Don&#39;t display empty ranges.
+  offsetRange.fromOffset != offsetRange.untilOffset
+}.map { offsetRange =&gt;
+  s&quot;topic: ${offsetRange.topic}\tpartition: ${offsetRange.partition}\t&quot; +
+    s&quot;offsets: ${offsetRange.fromOffset} to ${offsetRange.untilOffset}&quot;
+}.mkString(&quot;\n&quot;)
+// Copy offsetRanges to immutable.List to prevent from being modified by the user
+val metadata = Map(
+  &quot;offsets&quot; -&gt; offsetRanges.toList,
+  StreamInputInfo.METADATA_KEY_DESCRIPTION -&gt; description)
+val inputInfo = StreamInputInfo(id, rdd.count, metadata)
+ssc.scheduler.inputInfoTracker.reportInfo(validTime, inputInfo)
+
+currentOffsets = untilOffsets.map(kv =&gt; kv._1 -&gt; kv._2.offset)
+Some(rdd)
+</code></pre>
+
+<p>}<br/>
+```</p>
+
+<p>分析过程不仔细说了,感兴趣的在compute方法处打个断点,跟踪一下相关变量的值,应该就能明白一个大概了.</p>
+
+<h2 id="toc_2">解决办法</h2>
+
+<p>综上所述,解决办法为添加以下参数:</p>
+
+<pre><code>--conf spark.streaming.kafka.maxRetries=50 \
+--conf spark.yarn.maxAppAttempts=10 \
+--conf spark.yarn.am.attemptFailuresValidityInterval=1h \
+</code></pre>
+
+<p>注意:<br/>
+1. spark.yarn.maxAppAttempts参数不能超过hadoop集群yarn.resourcemanager.am.max-attempts的最大值，如果超过将会取两者较小值<br/>
+2. 由于kafka切换leader导致的数据丢失,然后造成sparkstreaming程序报错,异常退出的情况下.我这通通常都是重启kafka,删除checkpoint,再重启sparkstreaming了.<br/>
+3. 后面我们不用原生的方式来存储offset.而是自己维护offset,那么以后更新迭代后就不用再删除checkpoint了,对业务的影响也最小了.</p>
 
 ]]></content>
   </entry>
@@ -3138,289 +3307,6 @@ jstack命令用于生成虚拟机当前时刻的线程快照(一般称为threadd
 </tr>
 </tbody>
 </table>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[python 可视化包-Matplotlib]]></title>
-    <link href="http://dmlcoding.com/15198750755456.html"/>
-    <updated>2018-03-01T11:31:15+08:00</updated>
-    <id>http://dmlcoding.com/15198750755456.html</id>
-    <content type="html"><![CDATA[
-<p>Matplotlib是Python中最常用的可视化工具之一，可以非常方便地创建海量类型地2D图表和一些基本的3D图表。</p>
-
-<span id="more"></span><!-- more -->
-
-<h1 id="toc_0">安装方式</h1>
-
-<pre><code># ubuntu上安装
-sudo apt install python-matplotlib
-# mac上安装
-pip install matplotlib
-</code></pre>
-
-<h1 id="toc_1">快速入门</h1>
-
-<h2 id="toc_2">快速入门小例子1之画单个图</h2>
-
-<p>我们只要有x轴的数和y轴的数,那么就可以在坐标轴上画出图来了.<br/>
-```<br/>
-import numpy as np<br/>
-import matplotlib as mpl<br/>
-import matplotlib.pyplot as plt</p>
-
-<h1 id="toc_3">通过rcParams设置全局横纵轴字体大小</h1>
-
-<p>mpl.rcParams[&#39;xtick.labelsize&#39;]=24<br/>
-mpl.rcParams[&#39;ytick.labelsize&#39;]=24</p>
-
-<h1 id="toc_4">x轴的点</h1>
-
-<p>x1 = np.arange(11)</p>
-
-<h1 id="toc_5">y轴的点</h1>
-
-<p>y1 = [<br/>
-    1.0847275042134147E-4,<br/>
-    2.0106877828356476E-4,<br/>
-    1.1836360644802181E-4,<br/>
-    0.043453404423487926,<br/>
-    0.03113001646083574,<br/>
-    0.06,<br/>
-    0.012709253496067191,<br/>
-    0.06,<br/>
-    3.284899860591644E-4,<br/>
-    0.015235253124714847,<br/>
-    0.0034946847451197242,<br/>
-]</p>
-
-<h1 id="toc_6">创建一个图,名字为ctr</h1>
-
-<p>plt.figure(&quot;ctr&quot;)</p>
-
-<h1 id="toc_7">在图上绘制</h1>
-
-<p>plt.plot(x1,y1)</p>
-
-<h1 id="toc_8">将当前figure的图像保存到文件result.png</h1>
-
-<p>plt.savefig(&#39;result.pn<br/>
-g&#39;)</p>
-
-<h1 id="toc_9">一定要加上这句才能让画好的图显示在屏幕上</h1>
-
-<p>plt.show()</p>
-
-<pre><code>
-如图所示:
-![ct](media/15198750755456/ctr1.png)
-
-看上面就没有几行代码,但是就画出了一个图.所以用Matplotlib可以非常方便的绘制我们想要的图形.这里这是用最简单的例子说明一下.
-
-## 快速入门小例子2之把两组坐标画在一个图上进行比较
-
-这里我们有两组数据,希望能够方便的比较这两组数据的差异,那么我们就可以把趋势都画在一个图上
-</code></pre>
-
-<p>import numpy as np<br/>
-import matplotlib as mpl<br/>
-import matplotlib.pyplot as plt</p>
-
-<h1 id="toc_10">通过rcParams设置全局横纵轴字体大小</h1>
-
-<p>mpl.rcParams[&#39;xtick.labelsize&#39;]=24<br/>
-mpl.rcParams[&#39;ytick.labelsize&#39;]=24</p>
-
-<h1 id="toc_11">x轴的点</h1>
-
-<p>x1 = np.arange(11)</p>
-
-<h1 id="toc_12">y轴的点</h1>
-
-<p>y1 = [<br/>
-    1.0847275042134147E-4,<br/>
-    2.0106877828356476E-4,<br/>
-    1.1836360644802181E-4,<br/>
-    0.043453404423487926,<br/>
-    0.03113001646083574,<br/>
-    0.06,<br/>
-    0.012709253496067191,<br/>
-    0.06,<br/>
-    3.284899860591644E-4,<br/>
-    0.015235253124714847,<br/>
-    0.0034946847451197242,<br/>
-]</p>
-
-<h1 id="toc_13">创建一个图,名字为ctr</h1>
-
-<h1 id="toc_14">plt.figure(&quot;ctr&quot;)</h1>
-
-<h1 id="toc_15">在图上绘制</h1>
-
-<h1 id="toc_16">plt.plot(x1,y1)</h1>
-
-<p>x2 = np.arange(11)</p>
-
-<p>y2 = [<br/>
-    3.529088519807792E-5,<br/>
-    1.1895968858318187E-4,<br/>
-    0.0013049292594645469,<br/>
-    0.046417845349992326,<br/>
-    0.03282177644291713,<br/>
-    0.06,<br/>
-    0.013313023920004725,<br/>
-    0.06,<br/>
-    3.554547063283854E-4,<br/>
-    0.014309633417956262,<br/>
-    0.0034946847451197242,<br/>
-]</p>
-
-<h1 id="toc_17">plt.figure(&quot;ctrEstimate&quot;)</h1>
-
-<h1 id="toc_18">plt.plot(x2,y2,&#39;k&#39;)</h1>
-
-<h1 id="toc_19">两个图画一起</h1>
-
-<p>plt.figure(&#39;ctr &amp; ctrEstimate&#39;)<br/>
-plt.plot(x1, y1)</p>
-
-<h1 id="toc_20">scatter可以方便出散点图</h1>
-
-<h1 id="toc_21">plt.scatter(x1,y11,c=&#39;red&#39;,marker=&#39;v&#39;)</h1>
-
-<h1 id="toc_22">plt.scatter(x2,y22,marker=&#39;<sup>&#39;)</sup></h1>
-
-<h1 id="toc_23">&#39;r&#39;表示用红色线</h1>
-
-<p>plt.plot(x2, y2, &#39;r&#39;)</p>
-
-<p>plt.show()<br/>
-```<br/>
-如图所示:<br/>
-<img src="media/15198750755456/ctr2.png" alt="ct"/></p>
-
-<h2 id="toc_24">入门小例子3之多布局</h2>
-
-<p>在一张图上构建多个布局画多张图<br/>
-```<br/>
-import matplotlib as mpl<br/>
-import matplotlib.pyplot as plt</p>
-
-<h1 id="toc_25">通过rcParams设置全局横纵轴字体大小</h1>
-
-<p>mpl.rcParams[&#39;xtick.labelsize&#39;]=24<br/>
-mpl.rcParams[&#39;ytick.labelsize&#39;]=24</p>
-
-<p>x=range(10)</p>
-
-<p>y=[5,4,3,2,1,6,7,8,9,0]</p>
-
-<p>fig=plt.figure(&quot;one figure many subplot&quot;)<br/>
-ax=fig.add_subplot(131)<br/>
-ax.set_title(&#39;Histogram&#39;)<br/>
-ax.bar(x,y)</p>
-
-<p>ax=fig.add_subplot(132)<br/>
-ax.set_title(&#39;line chart&#39;)<br/>
-ax.plot(x,y)</p>
-
-<p>ax=fig.add_subplot(133)<br/>
-ax.set_title(u&#39;Scatter plot&#39;)<br/>
-ax.scatter(x,y)</p>
-
-<p>plt.show()<br/>
-```<br/>
-如图所示</p>
-
-<p><img src="media/15198750755456/figure.png" alt="figure"/></p>
-
-<h1 id="toc_26">matplotlib画图api解释</h1>
-
-<p>单独的讲解api很无聊.直接写代码画图,代码里都有详细的说明</p>
-
-<h2 id="toc_27">画2维的柱图和饼图</h2>
-
-<pre><code>
-import numpy as np
-
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-
-mpl.rcParams[&#39;axes.titlesize&#39;] = 20
-mpl.rcParams[&#39;xtick.labelsize&#39;] = 16
-mpl.rcParams[&#39;ytick.labelsize&#39;] = 16
-mpl.rcParams[&#39;axes.labelsize&#39;] = 16
-mpl.rcParams[&#39;xtick.major.size&#39;] = 0
-mpl.rcParams[&#39;ytick.major.size&#39;] = 0
-
-# 包含了狗,猫和猎豹的最高奔跑速度,还有对应的可视化颜色
-speed_map = {
-    &#39;dog&#39;: (48, &#39;#7199cf&#39;),
-    &#39;cat&#39;: (45, &#39;#4fc4aa&#39;),
-    &#39;cheetah&#39;: (120, &#39;#e1a7a2&#39;)
-}
-
-# 整体图的标图
-fig=plt.figure(&#39;Bar chart &amp; Pie chart&#39;)
-
-# 在整张图上加入一个子图,121的意思是在一个1行2列的子图中的第一张
-ax=fig.add_subplot(121)
-ax.set_title(&quot;Running speed - bar chart&quot;)
-
-# 生成x轴每个元素的位置 0 1 2
-xticks=np.arange(3)
-
-# 定义柱状图每个柱的宽度
-bar_width=0.5
-
-# 动物名称
-animals=speed_map.keys()
-
-# 奔跑速度
-speeds=[x[0] for x in speed_map.values()]
-
-# 对应颜色
-colors=[x[1] for x in speed_map.values()]
-
-# 画柱状图,横轴是动物标签的位置,纵轴是速度,定义柱的宽度,同时设置柱的边缘为透明
-bars=ax.bar(xticks,speeds,width=bar_width,edgecolor=&#39;none&#39;)
-
-# 设置y轴的标图
-ax.set_ylabel(&#39;Speed(km/h)&#39;)
-
-# x轴每个标签的具体位置,设置为每个柱的中央
-ax.set_xticks(xticks+bar_width/2)
-
-# 设置每个标签的名字
-ax.set_xticklabels(animals)
-
-# 设置x轴的范围
-ax.set_xlim([bar_width/2-0.5,3-bar_width/2])
-
-# 设置y轴的范围
-ax.set_ylim([0,125])
-
-# 给每个bar分配指定的颜色
-for bar,color in zip(bars,colors):
-    bar.set_color(color)
-
-
-# 在122位置加入新的图
-ax=fig.add_subplot(122)
-ax.set_title(&#39;Running speed - pie chart&#39;)
-labels=[&#39;{}\n{} km/h&#39;.format(animal,speed) for animal,speed in zip(animals,speeds)]
-
-# 画饼状图,并指定标签和对应颜色
-ax.pie(speeds,labels=labels,colors=colors)
-# ax.plot(speeds)
-
-
-plt.show()
-
-</code></pre>
-
-<p><img src="media/15198750755456/subplot.png" alt="subplot"/></p>
 
 ]]></content>
   </entry>

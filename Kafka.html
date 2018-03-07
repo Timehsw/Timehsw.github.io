@@ -172,7 +172,76 @@ numRecords must not be negative
 
 <h2 id="toc_1">分析过程</h2>
 
-<p>从博客中已经找不到直接的解决方案，那么只能从源码入手，从而看看能不能定位到问题所在。</p>
+<p>从博客中已经找不到直接的解决方案，那么只能从源码入手，从而看看能不能定位到问题所在。<br/>
+从这一行代码开始跟踪<br/>
+```<br/>
+KafkaUtils.createDirectStream<a href="ssc,%20kafkaParams,%20myTopic">String, String, StringDecoder, StringDecoder</a></p>
+
+<pre><code>发现了,先调用`getFromOffsets(kc, kafkaParams, topics)`获取到了起始offset.然后创建了一个
+`DirectKafkaInputDStream`对象.点进去
+
+</code></pre>
+
+<p>def createDirectStream<a href="ssc:%20StreamingContext,%0A%20%20%20%20%20%20kafkaParams:%20Map%5BString,%20String%5D,%0A%20%20%20%20%20%20topics:%20Set%5BString%5D"><br/>
+    K: ClassTag,<br/>
+    V: ClassTag,<br/>
+    KD &lt;: Decoder[K]: ClassTag,<br/>
+    VD &lt;: Decoder[V]: ClassTag</a>: InputDStream[(K, V)] = {<br/>
+    val messageHandler = (mmd: MessageAndMetadata[K, V]) =&gt; (mmd.key, mmd.message)<br/>
+    val kc = new KafkaCluster(kafkaParams)<br/>
+    val fromOffsets = getFromOffsets(kc, kafkaParams, topics)<br/>
+    new DirectKafkaInputDStream<a href="ssc,%20kafkaParams,%20fromOffsets,%20messageHandler">K, V, KD, VD, (K, V)</a><br/>
+  }</p>
+
+<pre><code>
+找到这个对象里面的`compute`方法,重点从这个方法的逻辑开始分析
+</code></pre>
+
+<p>override def compute(validTime: Time): Option[KafkaRDD[K, V, U, T, R]] = {<br/>
+    val untilOffsets = clamp(latestLeaderOffsets(maxRetries))<br/>
+    val rdd = KafkaRDD<a href="context.sparkContext,%20kafkaParams,%20currentOffsets,%20untilOffsets,%20messageHandler">K, V, U, T, R</a></p>
+
+<pre><code>// Report the record number and metadata of this batch interval to InputInfoTracker.
+val offsetRanges = currentOffsets.map { case (tp, fo) =&gt;
+  val uo = untilOffsets(tp)
+  OffsetRange(tp.topic, tp.partition, fo, uo.offset)
+}
+val description = offsetRanges.filter { offsetRange =&gt;
+  // Don&#39;t display empty ranges.
+  offsetRange.fromOffset != offsetRange.untilOffset
+}.map { offsetRange =&gt;
+  s&quot;topic: ${offsetRange.topic}\tpartition: ${offsetRange.partition}\t&quot; +
+    s&quot;offsets: ${offsetRange.fromOffset} to ${offsetRange.untilOffset}&quot;
+}.mkString(&quot;\n&quot;)
+// Copy offsetRanges to immutable.List to prevent from being modified by the user
+val metadata = Map(
+  &quot;offsets&quot; -&gt; offsetRanges.toList,
+  StreamInputInfo.METADATA_KEY_DESCRIPTION -&gt; description)
+val inputInfo = StreamInputInfo(id, rdd.count, metadata)
+ssc.scheduler.inputInfoTracker.reportInfo(validTime, inputInfo)
+
+currentOffsets = untilOffsets.map(kv =&gt; kv._1 -&gt; kv._2.offset)
+Some(rdd)
+</code></pre>
+
+<p>}<br/>
+```</p>
+
+<p>分析过程不仔细说了,感兴趣的在compute方法处打个断点,跟踪一下相关变量的值,应该就能明白一个大概了.</p>
+
+<h2 id="toc_2">解决办法</h2>
+
+<p>综上所述,解决办法为添加以下参数:</p>
+
+<pre><code>--conf spark.streaming.kafka.maxRetries=50 \
+--conf spark.yarn.maxAppAttempts=10 \
+--conf spark.yarn.am.attemptFailuresValidityInterval=1h \
+</code></pre>
+
+<p>注意:<br/>
+1. spark.yarn.maxAppAttempts参数不能超过hadoop集群yarn.resourcemanager.am.max-attempts的最大值，如果超过将会取两者较小值<br/>
+2. 由于kafka切换leader导致的数据丢失,然后造成sparkstreaming程序报错,异常退出的情况下.我这通通常都是重启kafka,删除checkpoint,再重启sparkstreaming了.<br/>
+3. 后面我们不用原生的方式来存储offset.而是自己维护offset,那么以后更新迭代后就不用再删除checkpoint了,对业务的影响也最小了.</p>
 
                         
                       </div>
@@ -185,6 +254,40 @@ numRecords must not be negative
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='Spark.html'>Spark</a></span>
+          				  
+          					    <span class="posted-in"><a href='Kafka.html'>Kafka</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15203217572488.html">
+                
+                  <h1>kafka相关命令说明</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>每次使用kafka都少不了需要用到这些命令,好记性不如烂笔头.</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15203217572488.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2016/12/26</span>
+                    <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='Kafka.html'>Kafka</a></span>
           				   
@@ -356,6 +459,12 @@ numRecords must not be negative
 	      
 		      
 			      <li class="post">
+			        <a href="15203071412162.html">kafka-sparkstreaming自己维护offset</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15202200627560.html">查看linux系统负荷</a>
 			      </li>
 		     
@@ -375,12 +484,6 @@ numRecords must not be negative
 		      
 			      <li class="post">
 			        <a href="15199040835190.html">kafka-sparkstreaming长时间运行后异常退出原因分析</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15198768495613.html">Elasticsearch：用Curator辅助Marvel，实现自动删除旧marvel索引</a>
 			      </li>
 		     
 		  

@@ -155,6 +155,128 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
+                <a class="clearlink" href="15203071412162.html">
+                
+                  <h1>kafka-sparkstreaming自己维护offset</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">auto.offset.reset</h2>
+
+<p>By default, it will start consuming from the latest offset of each Kafka partition. If you set configuration auto.offset.reset in Kafka parameters to smallest, then it will start consuming from the smallest offset.</p>
+
+<h2 id="toc_1">OffsetRange</h2>
+
+<p>topic主题,分区ID,起始offset,结束offset</p>
+
+<h2 id="toc_2">重写思路</h2>
+
+<p>因为spark源码中<code>KafkaCluster</code>类被限制在<strong>[spark]</strong>包下,所以我们如果想要在项目中调用这个类,那么只能在项目中也新建包<code>org.apache.spark.streaming.kafka</code>.然后再该包下面写调用的逻辑.这里面就可以引用<code>KafkaCluster</code>类了.这个类里面封装了很多实用的方法,比如:获取主题和分区,获取offset等等...</p>
+
+<p>这些api,spark里面都有现成的,我们现在就是需要组织起来!<br/>
+<code><br/>
+offsetRanges = rdd.asInstanceOf[HasOffsetRanges].offsetRanges<br/>
+</code></p>
+
+<p>简单说一下<br/>
+1. 在zookeeper上读取offset前先根据实际情况更新<code>fromOffsets</code><br/>
+    1.1 如果是一个新的groupid,那么会从最新的开始读<br/>
+    1.2 如果是存在的groupid,根据配置<code>auto.offset.reset</code><br/>
+        1.2.1 <code>smallest</code> : 那么会从开始读,获取最开始的offset.<br/>
+        1.2.2 <code>largest</code> : 那么会从最新的位置开始读取,获取最新的offset.</p>
+
+<ol>
+<li>根据topic获取topic和该topics下所有的partitions</li>
+</ol>
+
+<pre><code>val partitionsE = kc.getPartitions(topics)
+</code></pre>
+
+<ol>
+<li>传入上面获取到的topics和该分区所有的partitions</li>
+</ol>
+
+<pre><code>val consumerOffsetsE = kc.getConsumerOffsets(groupId, partitions)
+</code></pre>
+
+<ol>
+<li>获取到该topic下所有分区的offset了.最后还是调用spark中封装好了的api</li>
+</ol>
+
+<pre><code>KafkaUtils.createDirectStream[K, V, KD, VD, (K, V, String)](
+                ssc, kafkaParams, consumerOffsets, (mmd: MessageAndMetadata[K, V]) =&gt; ( mmd.key, mmd.message, mmd.topic))
+</code></pre>
+
+<ol>
+<li>更新zookeeper中的kafka消息的偏移量
+<code>
+kc.setConsumerOffsets(groupId, Map((topicAndPartition, offsets.untilOffset)))
+</code></li>
+</ol>
+
+<h2 id="toc_3">问题</h2>
+
+<p>sparkstreaming-kafka的源码中是自己把offset维护在kafka集群中了?<br/>
+<code><br/>
+./kafka-consumer-groups.sh --bootstrap-server 10.10.25.13:9092 --describe  --group heheda<br/>
+</code><br/>
+因为用命令行工具可以查到,这个工具可以查到基于javaapi方式的offset,查不到在zookeeper中的</p>
+
+<p>网上的自己维护offset,是把offset维护在zookeeper中了?<br/>
+用这个方式产生的groupid,在命令行工具中查不到,但是也是调用的源码中的方法呢?<br/>
+难道spark提供了这个方法,但是自己却没有用是吗?</p>
+
+<h2 id="toc_4">自己维护和用原生的区别</h2>
+
+<p>区别只在于,自己维护offset,会先去zk中获取offset,逻辑处理完成后再更新zk中的offset.<br/>
+然而,在代码层面,区别在于调用了不同的<code>KafkaUtils.createDirectStream</code></p>
+
+<h3 id="toc_5">自己维护</h3>
+
+<p>自己维护的offset,这个方法会传入offset.因为在此之前我们已经从zk中获取到了起始offset<br/>
+<code><br/>
+KafkaUtils.createDirectStream[K, V, KD, VD, (K, V, String)](<br/>
+                ssc, kafkaParams, consumerOffsets, (mmd: MessageAndMetadata[K, V]) =&gt; ( mmd.key, mmd.message, mmd.topic))<br/>
+</code></p>
+
+<h3 id="toc_6">原生的</h3>
+
+<p>接受的是一个topic,底层会根据topic去获取存储在kafka中的起始offset<br/>
+<code><br/>
+KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, myTopic)<br/>
+</code></p>
+
+<p>接下来这个方法里面会调用<code>getFromOffsets</code>来获取起始的offset<br/>
+<code><br/>
+val kc = new KafkaCluster(kafkaParams)<br/>
+val fromOffsets = getFromOffsets(kc, kafkaParams, topics)<br/>
+</code></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/3/6</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Spark.html'>Spark</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="15202200627560.html">
                 
                   <h1>查看linux系统负荷</h1>
@@ -286,7 +408,76 @@ numRecords must not be negative
 
 <h2 id="toc_1">分析过程</h2>
 
-<p>从博客中已经找不到直接的解决方案，那么只能从源码入手，从而看看能不能定位到问题所在。</p>
+<p>从博客中已经找不到直接的解决方案，那么只能从源码入手，从而看看能不能定位到问题所在。<br/>
+从这一行代码开始跟踪<br/>
+```<br/>
+KafkaUtils.createDirectStream<a href="ssc,%20kafkaParams,%20myTopic">String, String, StringDecoder, StringDecoder</a></p>
+
+<pre><code>发现了,先调用`getFromOffsets(kc, kafkaParams, topics)`获取到了起始offset.然后创建了一个
+`DirectKafkaInputDStream`对象.点进去
+
+</code></pre>
+
+<p>def createDirectStream<a href="ssc:%20StreamingContext,%0A%20%20%20%20%20%20kafkaParams:%20Map%5BString,%20String%5D,%0A%20%20%20%20%20%20topics:%20Set%5BString%5D"><br/>
+    K: ClassTag,<br/>
+    V: ClassTag,<br/>
+    KD &lt;: Decoder[K]: ClassTag,<br/>
+    VD &lt;: Decoder[V]: ClassTag</a>: InputDStream[(K, V)] = {<br/>
+    val messageHandler = (mmd: MessageAndMetadata[K, V]) =&gt; (mmd.key, mmd.message)<br/>
+    val kc = new KafkaCluster(kafkaParams)<br/>
+    val fromOffsets = getFromOffsets(kc, kafkaParams, topics)<br/>
+    new DirectKafkaInputDStream<a href="ssc,%20kafkaParams,%20fromOffsets,%20messageHandler">K, V, KD, VD, (K, V)</a><br/>
+  }</p>
+
+<pre><code>
+找到这个对象里面的`compute`方法,重点从这个方法的逻辑开始分析
+</code></pre>
+
+<p>override def compute(validTime: Time): Option[KafkaRDD[K, V, U, T, R]] = {<br/>
+    val untilOffsets = clamp(latestLeaderOffsets(maxRetries))<br/>
+    val rdd = KafkaRDD<a href="context.sparkContext,%20kafkaParams,%20currentOffsets,%20untilOffsets,%20messageHandler">K, V, U, T, R</a></p>
+
+<pre><code>// Report the record number and metadata of this batch interval to InputInfoTracker.
+val offsetRanges = currentOffsets.map { case (tp, fo) =&gt;
+  val uo = untilOffsets(tp)
+  OffsetRange(tp.topic, tp.partition, fo, uo.offset)
+}
+val description = offsetRanges.filter { offsetRange =&gt;
+  // Don&#39;t display empty ranges.
+  offsetRange.fromOffset != offsetRange.untilOffset
+}.map { offsetRange =&gt;
+  s&quot;topic: ${offsetRange.topic}\tpartition: ${offsetRange.partition}\t&quot; +
+    s&quot;offsets: ${offsetRange.fromOffset} to ${offsetRange.untilOffset}&quot;
+}.mkString(&quot;\n&quot;)
+// Copy offsetRanges to immutable.List to prevent from being modified by the user
+val metadata = Map(
+  &quot;offsets&quot; -&gt; offsetRanges.toList,
+  StreamInputInfo.METADATA_KEY_DESCRIPTION -&gt; description)
+val inputInfo = StreamInputInfo(id, rdd.count, metadata)
+ssc.scheduler.inputInfoTracker.reportInfo(validTime, inputInfo)
+
+currentOffsets = untilOffsets.map(kv =&gt; kv._1 -&gt; kv._2.offset)
+Some(rdd)
+</code></pre>
+
+<p>}<br/>
+```</p>
+
+<p>分析过程不仔细说了,感兴趣的在compute方法处打个断点,跟踪一下相关变量的值,应该就能明白一个大概了.</p>
+
+<h2 id="toc_2">解决办法</h2>
+
+<p>综上所述,解决办法为添加以下参数:</p>
+
+<pre><code>--conf spark.streaming.kafka.maxRetries=50 \
+--conf spark.yarn.maxAppAttempts=10 \
+--conf spark.yarn.am.attemptFailuresValidityInterval=1h \
+</code></pre>
+
+<p>注意:<br/>
+1. spark.yarn.maxAppAttempts参数不能超过hadoop集群yarn.resourcemanager.am.max-attempts的最大值，如果超过将会取两者较小值<br/>
+2. 由于kafka切换leader导致的数据丢失,然后造成sparkstreaming程序报错,异常退出的情况下.我这通通常都是重启kafka,删除checkpoint,再重启sparkstreaming了.<br/>
+3. 后面我们不用原生的方式来存储offset.而是自己维护offset,那么以后更新迭代后就不用再删除checkpoint了,对业务的影响也最小了.</p>
 
                         
                       </div>
@@ -301,45 +492,6 @@ numRecords must not be negative
           					    <span class="posted-in"><a href='Spark.html'>Spark</a></span>
           				  
           					    <span class="posted-in"><a href='Kafka.html'>Kafka</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15198768495613.html">
-                
-                  <h1>Elasticsearch：用Curator辅助Marvel，实现自动删除旧marvel索引</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>Marvel几乎是所有Elasticsearch用户的标配。Marvel保留观测数据的代价是，<br/>
-它默认每天会新建一个index，命名规律像是这样：.marvel-2017-12-10。<br/>
-marvel自建的索引一天可以产生大概500M的数据，而且将会越来越多，占的容量也将越来越大。<br/>
-有没有什么办法能让它自动过期？比如说只保留最近两天的观测数据，其他的都抛弃掉。</p>
-
-<p>当然有办法,curator就可以帮你实现.</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15198768495613.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/12/11</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ELK.html'>ELK</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -473,6 +625,12 @@ marvel自建的索引一天可以产生大概500M的数据，而且将会越来�
 	      
 		      
 			      <li class="post">
+			        <a href="15203071412162.html">kafka-sparkstreaming自己维护offset</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15202200627560.html">查看linux系统负荷</a>
 			      </li>
 		     
@@ -492,12 +650,6 @@ marvel自建的索引一天可以产生大概500M的数据，而且将会越来�
 		      
 			      <li class="post">
 			        <a href="15199040835190.html">kafka-sparkstreaming长时间运行后异常退出原因分析</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15198768495613.html">Elasticsearch：用Curator辅助Marvel，实现自动删除旧marvel索引</a>
 			      </li>
 		     
 		  
