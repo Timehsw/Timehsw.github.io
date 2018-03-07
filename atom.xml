@@ -4,7 +4,7 @@
   <title><![CDATA[Time渐行渐远]]></title>
   <link href="http://dmlcoding.com/atom.xml" rel="self"/>
   <link href="http://dmlcoding.com/"/>
-  <updated>2018-03-07T15:19:15+08:00</updated>
+  <updated>2018-03-07T15:26:13+08:00</updated>
   <id>http://dmlcoding.com/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -22,6 +22,8 @@
 
 <p>By default, it will start consuming from the latest offset of each Kafka partition. If you set configuration auto.offset.reset in Kafka parameters to smallest, then it will start consuming from the smallest offset.</p>
 
+<span id="more"></span><!-- more -->
+
 <h2 id="toc_1">OffsetRange</h2>
 
 <p>topic主题,分区ID,起始offset,结束offset</p>
@@ -30,10 +32,10 @@
 
 <p>因为spark源码中<code>KafkaCluster</code>类被限制在<strong>[spark]</strong>包下,所以我们如果想要在项目中调用这个类,那么只能在项目中也新建包<code>org.apache.spark.streaming.kafka</code>.然后再该包下面写调用的逻辑.这里面就可以引用<code>KafkaCluster</code>类了.这个类里面封装了很多实用的方法,比如:获取主题和分区,获取offset等等...</p>
 
-<p>这些api,spark里面都有现成的,我们现在就是需要组织起来!<br/>
-<code><br/>
-offsetRanges = rdd.asInstanceOf[HasOffsetRanges].offsetRanges<br/>
-</code></p>
+<p>这些api,spark里面都有现成的,我们现在就是需要组织起来!</p>
+
+<pre><code>offsetRanges = rdd.asInstanceOf[HasOffsetRanges].offsetRanges
+</code></pre>
 
 <p>简单说一下<br/>
 1. 在zookeeper上读取offset前先根据实际情况更新<code>fromOffsets</code><br/>
@@ -65,19 +67,20 @@ offsetRanges = rdd.asInstanceOf[HasOffsetRanges].offsetRanges<br/>
 </code></pre>
 
 <ol>
-<li>更新zookeeper中的kafka消息的偏移量
-<code>
-kc.setConsumerOffsets(groupId, Map((topicAndPartition, offsets.untilOffset)))
-</code></li>
+<li>更新zookeeper中的kafka消息的偏移量</li>
 </ol>
+
+<pre><code>kc.setConsumerOffsets(groupId, Map((topicAndPartition, offsets.untilOffset)))
+</code></pre>
 
 <h2 id="toc_3">问题</h2>
 
-<p>sparkstreaming-kafka的源码中是自己把offset维护在kafka集群中了?<br/>
-<code><br/>
-./kafka-consumer-groups.sh --bootstrap-server 10.10.25.13:9092 --describe  --group heheda<br/>
-</code><br/>
-因为用命令行工具可以查到,这个工具可以查到基于javaapi方式的offset,查不到在zookeeper中的</p>
+<p>sparkstreaming-kafka的源码中是自己把offset维护在kafka集群中了?</p>
+
+<pre><code>./kafka-consumer-groups.sh --bootstrap-server 10.10.25.13:9092 --describe  --group heheda
+</code></pre>
+
+<p>因为用命令行工具可以查到,这个工具可以查到基于javaapi方式的offset,查不到在zookeeper中的</p>
 
 <p>网上的自己维护offset,是把offset维护在zookeeper中了?<br/>
 用这个方式产生的groupid,在命令行工具中查不到,但是也是调用的源码中的方法呢?<br/>
@@ -90,24 +93,29 @@ kc.setConsumerOffsets(groupId, Map((topicAndPartition, offsets.untilOffset)))
 
 <h3 id="toc_5">自己维护</h3>
 
-<p>自己维护的offset,这个方法会传入offset.因为在此之前我们已经从zk中获取到了起始offset<br/>
-<code><br/>
-KafkaUtils.createDirectStream[K, V, KD, VD, (K, V, String)](<br/>
-                ssc, kafkaParams, consumerOffsets, (mmd: MessageAndMetadata[K, V]) =&gt; ( mmd.key, mmd.message, mmd.topic))<br/>
-</code></p>
+<p>自己维护的offset,这个方法会传入offset.因为在此之前我们已经从zk中获取到了起始offset</p>
+
+<pre><code>KafkaUtils.createDirectStream[K, V, KD, VD, (K, V, String)](
+                ssc, kafkaParams, consumerOffsets, (mmd: MessageAndMetadata[K, V]) =&gt; ( mmd.key, mmd.message, mmd.topic))
+</code></pre>
 
 <h3 id="toc_6">原生的</h3>
 
-<p>接受的是一个topic,底层会根据topic去获取存储在kafka中的起始offset<br/>
-<code><br/>
-KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, myTopic)<br/>
-</code></p>
+<p>接受的是一个topic,底层会根据topic去获取存储在kafka中的起始offset</p>
 
-<p>接下来这个方法里面会调用<code>getFromOffsets</code>来获取起始的offset<br/>
-<code><br/>
-val kc = new KafkaCluster(kafkaParams)<br/>
-val fromOffsets = getFromOffsets(kc, kafkaParams, topics)<br/>
-</code></p>
+<pre><code>KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, myTopic)
+</code></pre>
+
+<p>接下来这个方法里面会调用<code>getFromOffsets</code>来获取起始的offset</p>
+
+<pre><code>val kc = new KafkaCluster(kafkaParams)
+val fromOffsets = getFromOffsets(kc, kafkaParams, topics)
+</code></pre>
+
+<h2 id="toc_7">代码</h2>
+
+<p>这个代码,网上很多,GitHub上也有现成的了.这里我就不贴出来了!<br/>
+这里主要还是学习代码的实现思路!</p>
 
 ]]></content>
   </entry>
@@ -243,62 +251,68 @@ com.wunderkinder.wunderlistdesktop
 numRecords must not be negative
 </code></pre>
 
+<span id="more"></span><!-- more -->
+
 <h2 id="toc_1">分析过程</h2>
 
 <p>从博客中已经找不到直接的解决方案，那么只能从源码入手，从而看看能不能定位到问题所在。<br/>
-从这一行代码开始跟踪<br/>
-```<br/>
-KafkaUtils.createDirectStream<a href="ssc,%20kafkaParams,%20myTopic">String, String, StringDecoder, StringDecoder</a></p>
+从这一行代码开始跟踪</p>
 
-<pre><code>发现了,先调用`getFromOffsets(kc, kafkaParams, topics)`获取到了起始offset.然后创建了一个
-`DirectKafkaInputDStream`对象.点进去
+<pre><code>KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, myTopic)
 
 </code></pre>
 
-<p>def createDirectStream<a href="ssc:%20StreamingContext,%0A%20%20%20%20%20%20kafkaParams:%20Map%5BString,%20String%5D,%0A%20%20%20%20%20%20topics:%20Set%5BString%5D"><br/>
-    K: ClassTag,<br/>
-    V: ClassTag,<br/>
-    KD &lt;: Decoder[K]: ClassTag,<br/>
-    VD &lt;: Decoder[V]: ClassTag</a>: InputDStream[(K, V)] = {<br/>
-    val messageHandler = (mmd: MessageAndMetadata[K, V]) =&gt; (mmd.key, mmd.message)<br/>
-    val kc = new KafkaCluster(kafkaParams)<br/>
-    val fromOffsets = getFromOffsets(kc, kafkaParams, topics)<br/>
-    new DirectKafkaInputDStream<a href="ssc,%20kafkaParams,%20fromOffsets,%20messageHandler">K, V, KD, VD, (K, V)</a><br/>
-  }</p>
+<p>发现了,先调用<code>getFromOffsets(kc, kafkaParams, topics)</code>获取到了起始offset.然后创建了一个<br/>
+<code>DirectKafkaInputDStream</code>对象.点进去</p>
 
-<pre><code>
-找到这个对象里面的`compute`方法,重点从这个方法的逻辑开始分析
+<pre><code>  def createDirectStream[
+    K: ClassTag,
+    V: ClassTag,
+    KD &lt;: Decoder[K]: ClassTag,
+    VD &lt;: Decoder[V]: ClassTag] (
+      ssc: StreamingContext,
+      kafkaParams: Map[String, String],
+      topics: Set[String]
+  ): InputDStream[(K, V)] = {
+    val messageHandler = (mmd: MessageAndMetadata[K, V]) =&gt; (mmd.key, mmd.message)
+    val kc = new KafkaCluster(kafkaParams)
+    val fromOffsets = getFromOffsets(kc, kafkaParams, topics)
+    new DirectKafkaInputDStream[K, V, KD, VD, (K, V)](
+      ssc, kafkaParams, fromOffsets, messageHandler)
+  }
+
 </code></pre>
 
-<p>override def compute(validTime: Time): Option[KafkaRDD[K, V, U, T, R]] = {<br/>
-    val untilOffsets = clamp(latestLeaderOffsets(maxRetries))<br/>
-    val rdd = KafkaRDD<a href="context.sparkContext,%20kafkaParams,%20currentOffsets,%20untilOffsets,%20messageHandler">K, V, U, T, R</a></p>
+<p>找到这个对象里面的<code>compute</code>方法,重点从这个方法的逻辑开始分析</p>
 
-<pre><code>// Report the record number and metadata of this batch interval to InputInfoTracker.
-val offsetRanges = currentOffsets.map { case (tp, fo) =&gt;
-  val uo = untilOffsets(tp)
-  OffsetRange(tp.topic, tp.partition, fo, uo.offset)
-}
-val description = offsetRanges.filter { offsetRange =&gt;
-  // Don&#39;t display empty ranges.
-  offsetRange.fromOffset != offsetRange.untilOffset
-}.map { offsetRange =&gt;
-  s&quot;topic: ${offsetRange.topic}\tpartition: ${offsetRange.partition}\t&quot; +
-    s&quot;offsets: ${offsetRange.fromOffset} to ${offsetRange.untilOffset}&quot;
-}.mkString(&quot;\n&quot;)
-// Copy offsetRanges to immutable.List to prevent from being modified by the user
-val metadata = Map(
-  &quot;offsets&quot; -&gt; offsetRanges.toList,
-  StreamInputInfo.METADATA_KEY_DESCRIPTION -&gt; description)
-val inputInfo = StreamInputInfo(id, rdd.count, metadata)
-ssc.scheduler.inputInfoTracker.reportInfo(validTime, inputInfo)
+<pre><code>  override def compute(validTime: Time): Option[KafkaRDD[K, V, U, T, R]] = {
+    val untilOffsets = clamp(latestLeaderOffsets(maxRetries))
+    val rdd = KafkaRDD[K, V, U, T, R](
+      context.sparkContext, kafkaParams, currentOffsets, untilOffsets, messageHandler)
 
-currentOffsets = untilOffsets.map(kv =&gt; kv._1 -&gt; kv._2.offset)
-Some(rdd)
+    // Report the record number and metadata of this batch interval to InputInfoTracker.
+    val offsetRanges = currentOffsets.map { case (tp, fo) =&gt;
+      val uo = untilOffsets(tp)
+      OffsetRange(tp.topic, tp.partition, fo, uo.offset)
+    }
+    val description = offsetRanges.filter { offsetRange =&gt;
+      // Don&#39;t display empty ranges.
+      offsetRange.fromOffset != offsetRange.untilOffset
+    }.map { offsetRange =&gt;
+      s&quot;topic: ${offsetRange.topic}\tpartition: ${offsetRange.partition}\t&quot; +
+        s&quot;offsets: ${offsetRange.fromOffset} to ${offsetRange.untilOffset}&quot;
+    }.mkString(&quot;\n&quot;)
+    // Copy offsetRanges to immutable.List to prevent from being modified by the user
+    val metadata = Map(
+      &quot;offsets&quot; -&gt; offsetRanges.toList,
+      StreamInputInfo.METADATA_KEY_DESCRIPTION -&gt; description)
+    val inputInfo = StreamInputInfo(id, rdd.count, metadata)
+    ssc.scheduler.inputInfoTracker.reportInfo(validTime, inputInfo)
+
+    currentOffsets = untilOffsets.map(kv =&gt; kv._1 -&gt; kv._2.offset)
+    Some(rdd)
+  }
 </code></pre>
-
-<p>}<br/>
-```</p>
 
 <p>分析过程不仔细说了,感兴趣的在compute方法处打个断点,跟踪一下相关变量的值,应该就能明白一个大概了.</p>
 

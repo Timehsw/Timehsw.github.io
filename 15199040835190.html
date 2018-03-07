@@ -44,9 +44,9 @@
         
         <li id=""><a target="_self" href="archives.html">Archives</a></li>
         
-        <li id=""><a target="_blank" href="collections.html">COLLECTION</a></li>
+        <li id=""><a target="_self" href="collections.html">COLLECTION</a></li>
         
-        <li id=""><a target="_blank" href="tools.html">TOOLS</a></li>
+        <li id=""><a target="_self" href="tools.html">TOOLS</a></li>
         
         <li id=""><a target="_blank" href="about.html">ABOUT</a></li>
         
@@ -185,62 +185,68 @@
 numRecords must not be negative
 </code></pre>
 
+<span id="more"></span><!-- more -->
+
 <h2 id="toc_1">分析过程</h2>
 
 <p>从博客中已经找不到直接的解决方案，那么只能从源码入手，从而看看能不能定位到问题所在。<br/>
-从这一行代码开始跟踪<br/>
-```<br/>
-KafkaUtils.createDirectStream<a href="ssc,%20kafkaParams,%20myTopic">String, String, StringDecoder, StringDecoder</a></p>
+从这一行代码开始跟踪</p>
 
-<pre><code>发现了,先调用`getFromOffsets(kc, kafkaParams, topics)`获取到了起始offset.然后创建了一个
-`DirectKafkaInputDStream`对象.点进去
+<pre><code>KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, myTopic)
 
 </code></pre>
 
-<p>def createDirectStream<a href="ssc:%20StreamingContext,%0A%20%20%20%20%20%20kafkaParams:%20Map%5BString,%20String%5D,%0A%20%20%20%20%20%20topics:%20Set%5BString%5D"><br/>
-    K: ClassTag,<br/>
-    V: ClassTag,<br/>
-    KD &lt;: Decoder[K]: ClassTag,<br/>
-    VD &lt;: Decoder[V]: ClassTag</a>: InputDStream[(K, V)] = {<br/>
-    val messageHandler = (mmd: MessageAndMetadata[K, V]) =&gt; (mmd.key, mmd.message)<br/>
-    val kc = new KafkaCluster(kafkaParams)<br/>
-    val fromOffsets = getFromOffsets(kc, kafkaParams, topics)<br/>
-    new DirectKafkaInputDStream<a href="ssc,%20kafkaParams,%20fromOffsets,%20messageHandler">K, V, KD, VD, (K, V)</a><br/>
-  }</p>
+<p>发现了,先调用<code>getFromOffsets(kc, kafkaParams, topics)</code>获取到了起始offset.然后创建了一个<br/>
+<code>DirectKafkaInputDStream</code>对象.点进去</p>
 
-<pre><code>
-找到这个对象里面的`compute`方法,重点从这个方法的逻辑开始分析
+<pre><code>  def createDirectStream[
+    K: ClassTag,
+    V: ClassTag,
+    KD &lt;: Decoder[K]: ClassTag,
+    VD &lt;: Decoder[V]: ClassTag] (
+      ssc: StreamingContext,
+      kafkaParams: Map[String, String],
+      topics: Set[String]
+  ): InputDStream[(K, V)] = {
+    val messageHandler = (mmd: MessageAndMetadata[K, V]) =&gt; (mmd.key, mmd.message)
+    val kc = new KafkaCluster(kafkaParams)
+    val fromOffsets = getFromOffsets(kc, kafkaParams, topics)
+    new DirectKafkaInputDStream[K, V, KD, VD, (K, V)](
+      ssc, kafkaParams, fromOffsets, messageHandler)
+  }
+
 </code></pre>
 
-<p>override def compute(validTime: Time): Option[KafkaRDD[K, V, U, T, R]] = {<br/>
-    val untilOffsets = clamp(latestLeaderOffsets(maxRetries))<br/>
-    val rdd = KafkaRDD<a href="context.sparkContext,%20kafkaParams,%20currentOffsets,%20untilOffsets,%20messageHandler">K, V, U, T, R</a></p>
+<p>找到这个对象里面的<code>compute</code>方法,重点从这个方法的逻辑开始分析</p>
 
-<pre><code>// Report the record number and metadata of this batch interval to InputInfoTracker.
-val offsetRanges = currentOffsets.map { case (tp, fo) =&gt;
-  val uo = untilOffsets(tp)
-  OffsetRange(tp.topic, tp.partition, fo, uo.offset)
-}
-val description = offsetRanges.filter { offsetRange =&gt;
-  // Don&#39;t display empty ranges.
-  offsetRange.fromOffset != offsetRange.untilOffset
-}.map { offsetRange =&gt;
-  s&quot;topic: ${offsetRange.topic}\tpartition: ${offsetRange.partition}\t&quot; +
-    s&quot;offsets: ${offsetRange.fromOffset} to ${offsetRange.untilOffset}&quot;
-}.mkString(&quot;\n&quot;)
-// Copy offsetRanges to immutable.List to prevent from being modified by the user
-val metadata = Map(
-  &quot;offsets&quot; -&gt; offsetRanges.toList,
-  StreamInputInfo.METADATA_KEY_DESCRIPTION -&gt; description)
-val inputInfo = StreamInputInfo(id, rdd.count, metadata)
-ssc.scheduler.inputInfoTracker.reportInfo(validTime, inputInfo)
+<pre><code>  override def compute(validTime: Time): Option[KafkaRDD[K, V, U, T, R]] = {
+    val untilOffsets = clamp(latestLeaderOffsets(maxRetries))
+    val rdd = KafkaRDD[K, V, U, T, R](
+      context.sparkContext, kafkaParams, currentOffsets, untilOffsets, messageHandler)
 
-currentOffsets = untilOffsets.map(kv =&gt; kv._1 -&gt; kv._2.offset)
-Some(rdd)
+    // Report the record number and metadata of this batch interval to InputInfoTracker.
+    val offsetRanges = currentOffsets.map { case (tp, fo) =&gt;
+      val uo = untilOffsets(tp)
+      OffsetRange(tp.topic, tp.partition, fo, uo.offset)
+    }
+    val description = offsetRanges.filter { offsetRange =&gt;
+      // Don&#39;t display empty ranges.
+      offsetRange.fromOffset != offsetRange.untilOffset
+    }.map { offsetRange =&gt;
+      s&quot;topic: ${offsetRange.topic}\tpartition: ${offsetRange.partition}\t&quot; +
+        s&quot;offsets: ${offsetRange.fromOffset} to ${offsetRange.untilOffset}&quot;
+    }.mkString(&quot;\n&quot;)
+    // Copy offsetRanges to immutable.List to prevent from being modified by the user
+    val metadata = Map(
+      &quot;offsets&quot; -&gt; offsetRanges.toList,
+      StreamInputInfo.METADATA_KEY_DESCRIPTION -&gt; description)
+    val inputInfo = StreamInputInfo(id, rdd.count, metadata)
+    ssc.scheduler.inputInfoTracker.reportInfo(validTime, inputInfo)
+
+    currentOffsets = untilOffsets.map(kv =&gt; kv._1 -&gt; kv._2.offset)
+    Some(rdd)
+  }
 </code></pre>
-
-<p>}<br/>
-```</p>
 
 <p>分析过程不仔细说了,感兴趣的在compute方法处打个断点,跟踪一下相关变量的值,应该就能明白一个大概了.</p>
 
