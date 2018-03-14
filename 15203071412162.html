@@ -133,6 +133,8 @@
             <li><a href="Computer.html">Computer</a></li>
         
             <li><a href="Redis.html">Redis</a></li>
+        
+            <li><a href="Zookeeper.html">Zookeeper</a></li>
          
 
       </ul>
@@ -274,6 +276,14 @@ val fromOffsets = getFromOffsets(kc, kafkaParams, topics)
 <p>这个代码,网上很多,GitHub上也有现成的了.这里我就不贴出来了!<br/>
 这里主要还是学习代码的实现思路!</p>
 
+<h2 id="toc_8">如何引用spark源码中限制了包的代码</h2>
+
+<ol>
+<li>新建和源码中同等的包名,如上所述.</li>
+<li>把你需要的源码拷贝一份出来,但是可能源码里面又引用了别的,这个不一定好使.</li>
+<li>在你需要引用的那个类里,把这个类的包名改成与你需要引用的包名一样.最简单的办法了</li>
+</ol>
+
 
     
 
@@ -282,6 +292,9 @@ val fromOffsets = getFromOffsets(kc, kafkaParams, topics)
       <div class="row">
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15205677979326.html" 
+          title="Previous Post: 分布式应用浅谈">&laquo; 分布式应用浅谈</a>
       
         </p>
         </div>
@@ -326,7 +339,7 @@ val fromOffsets = getFromOffsets(kc, kafkaParams, topics)
 
 
 
-
+<a target="_blank" class="weibo" href="http://weibo.com/hswnice" title="weibo">Weibo</a>
 <a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:hsw_v5@163.com" title="Email">Email</a>
@@ -396,6 +409,8 @@ val fromOffsets = getFromOffsets(kc, kafkaParams, topics)
             <a href="Computer.html"><strong>Computer</strong></a>
         
             <a href="Redis.html"><strong>Redis</strong></a>
+        
+            <a href="Zookeeper.html"><strong>Zookeeper</strong></a>
          
         </p>
 
@@ -412,6 +427,24 @@ val fromOffsets = getFromOffsets(kc, kafkaParams, topics)
 	      
 		      
 			      <li class="post">
+			        <a href="15209079363420.html">大数据框架-开源协议</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15205689785115.html">Zookeeper笔记</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15205677979326.html">分布式应用浅谈</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15203071412162.html">kafka-sparkstreaming自己维护offset</a>
 			      </li>
 		     
@@ -419,24 +452,6 @@ val fromOffsets = getFromOffsets(kc, kafkaParams, topics)
 		      
 			      <li class="post">
 			        <a href="15202200627560.html">查看linux系统负荷</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15202199373374.html">MacbookPro 修改应用的默认语言</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15199545224004.html">思考</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15199040835190.html">kafka-sparkstreaming长时间运行后异常退出原因分析</a>
 			      </li>
 		     
 		  

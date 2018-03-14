@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  项目中配置文件的读取 - Time渐行渐远
+  Zookeeper - Time渐行渐远
   
   </title>
   
@@ -148,174 +148,113 @@
        
 
  <script type="text/javascript">
-  $(function(){
-    $('#menu_item_index').addClass('is_active');
-  });
+	$(function(){
+		$('#menu_item_index').addClass('is_active');
+	});
 </script>
 <div class="row">
-  <div class="large-8 medium-8 columns">
-      <div class="markdown-body article-wrap">
-       <div class="article">
-          
-          <h1>项目中配置文件的读取</h1>
-     
-        <div class="read-more clearfix">
-          <span class="date">2017/6/25</span>
+	<div class="large-8 medium-8 columns">
+		<div class="markdown-body home-categories">
+		
+			<div class="article">
+                <a class="clearlink" href="15205689785115.html">
+                
+                  <h1>Zookeeper笔记</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">基础知识</h2>
 
-          <span>posted in&nbsp;</span> 
-          
-              <span class="posted-in"><a href='Scala.html'>Scala</a></span>
-           
-         
-          <span class="comments">
-            
+<h3 id="toc_1">znode</h3>
 
-            
-          </span>
+<h3 id="toc_2">基础api</h3>
 
-        </div>
-      </div><!-- article -->
+<pre><code># 创建一个test_node节点,并包含数据testdata
+[zk: localhost:2181(CONNECTED) 12] create /test_note testdata
+Created /test_note
+[zk: localhost:2181(CONNECTED) 13] ls /test_note
+[]
+[zk: localhost:2181(CONNECTED) 14] get /test_note
+testdata
+cZxid = 0x1cc0015709f
+ctime = Fri Mar 09 12:15:41 CST 2018
+mZxid = 0x1cc0015709f
+mtime = Fri Mar 09 12:15:41 CST 2018
+pZxid = 0x1cc0015709f
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 8
+numChildren = 0
 
-      <div class="article-content">
-      <p>在工作中,我们一般都不会把变化的地方写死.比如开发环境和测试环境的服务器地址,等等之类的信息.这些我们都会写入到配置文件中,方便修改.</p>
-
-<span id="more"></span><!-- more -->
-
-<h1 id="toc_0">com.typesafe.config加载任意位置的配置文件</h1>
-
-<blockquote>
-<p>typesafe下的config包可以用来读取配置文件，支持多种形式。</p>
-</blockquote>
-
-<h2 id="toc_1">Overview</h2>
-
-<blockquote>
-<p>Typesafe的Config库，纯Java写成、零外部依赖、代码精简、功能灵活、API友好。支持Java properties、JSON、JSON超集格式HOCON以及环境变量。它也是Akka的配置管理库.</p>
-</blockquote>
-
-<p>如果没引上,使用如下依赖</p>
-
-<pre><code>&lt;!-- https://mvnrepository.com/artifact/com.typesafe/config --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.typesafe&lt;/groupId&gt;
-    &lt;artifactId&gt;config&lt;/artifactId&gt;
-    &lt;version&gt;1.3.1&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
-
-<ul>
-<li>纯java实现，无任何依赖<br/></li>
-<li>可以合并各种格式的配置文件<br/></li>
-<li>可以通过文件、urls、classpath加载配置<br/></li>
-<li>支持多层嵌套的配置方式<br/></li>
-<li>可以转换长短，大小等单位<br/></li>
-<li>类型转换<br/></li>
-</ul>
-
-<h2 id="toc_2">加载配置文件的两种方式</h2>
-
-<p>目录结构<br/>
-<code><br/>
- hushiwei@localhost  ~/IdeaProjects/testProject/src/main  tree<br/>
-.<br/>
-├── java<br/>
-│   └── com<br/>
-│       └── husw<br/>
-├── resources<br/>
-│   ├── conf<br/>
-│   │   └── application.conf<br/>
-│   ├── testlog.txt<br/>
-│   └── log4j.properties<br/>
-└── scala<br/>
-</code></p>
-
-<p>配置文件示例<br/>
-```<br/>
-kafka {<br/>
-  topics = &quot;test_imp&quot; #注释<br/>
-  brokers = &quot;192.168.1.1:9092,192.168.2.1:9092&quot;<br/>
-  groupid=&quot;test_group1&quot;<br/>
-  offset_reset=&quot;smallest&quot; #smallest and largest<br/>
-}<br/>
-spark {<br/>
-  app_name = &quot;dsp_count&quot;<br/>
-  mode = &quot;local[2]&quot; #&quot;yarn-client&quot;<br/>
-  queue = &quot;normal&quot;<br/>
-  duration = 2<br/>
-  numFilesPerBatch = 1<br/>
-  stagingdir = &quot;/tmp/spark/checkpoint&quot;<br/>
-}</p>
-
-<pre><code>
-### 加载resources目录下的配置文件
-
-默认读取resources目录下的文件
-</code></pre>
-
-<p>val config = ConfigFactory.load(&quot;conf/application.conf&quot;)</p>
-
-<pre><code>
-### 加载任意指定位置的配置文件
-
-路径可以写任意的绝对路径,或者相对路径
-</code></pre>
-
-<p>val config = ConfigFactory.parseFile(new File(&quot;src/main/resources/conf/application.conf&quot;))</p>
-
-<pre><code>
-### 获取配置文件中的键值
-
-读取配置文件后返回了config对象.
-直接调用config对象相应的api即可获取配置数据了
-[Api文档](http://typesafehub.github.io/config/latest/api/com/typesafe/config/ConfigFactory.html)
-示例
-</code></pre>
-
-<pre><code>val topics = config.getString(&quot;kafka.topics&quot;).split(&quot;,&quot;).toSet
-println(topics)
-</code></pre>
-
-<pre><code>若要知道更详细的api说明,点击上面的链接即可.
+[zk: localhost:2181(CONNECTED) 15] delete /test_note
+[zk: localhost:2181(CONNECTED) 16] get /test_note
+Node does not exist: /test_note
 
 </code></pre>
 
+<h2 id="toc_3">主-从模式的例子</h2>
 
-    
+<pre><code># -e 表示临时性
+# 创建一个临时性的znode,节点名称为master_example ,数据为master1.example.com:2223
+# 一个临时节点会在会话过期或关闭时自动被删除
+create -e /master_example &quot;master1.example.com:2223&quot;
 
-      </div>
+# 列出目录树
+ls /
 
-      <div class="row">
-        <div class="large-6 columns">
-        <p class="text-left" style="padding:15px 0px;">
-      
-          <a href="15198774045262.html" 
-          title="Previous Post: Ubuntu16.04使用Docker部署Gitlab">&laquo; Ubuntu16.04使用Docker部署Gitlab</a>
-      
-        </p>
-        </div>
-        <div class="large-6 columns">
-      <p class="text-right" style="padding:15px 0px;">
-      
-          <a  href="15198744182911.html" 
-          title="Next Post: python 高级特性之切片">python 高级特性之切片 &raquo;</a>
-      
-      </p>
-        </div>
-      </div>
-      <div class="comments-wrap">
-        <div class="share-comments">
-          
+# 获取master_example znode的元数据和数据
+get /master_example
+</code></pre>
 
-          
+<p>如果再次执行创建master_example的命令会报<code>Node already exists: /master_example</code></p>
 
-          
-        </div>
-      </div>
-    </div><!-- article-wrap -->
-  </div><!-- large 8 -->
+<pre><code># 在master_example上设置一个监视点
+stat /master_example true
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/3/9</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Zookeeper.html'>Zookeeper</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+              
 
 
-
+			<div class="row">
+			  <div class="large-6 columns">
+			  <p class="text-left" style="padding-top:25px;">
+			   
+			  </p>
+			  </div>
+			  <div class="large-6 columns">
+			<p class="text-right" style="padding-top:25px;">
+			
+			</p>
+			  </div>
+			</div>
+		</div>
+	</div><!-- large 8 -->
 
  <div class="large-4 medium-4 columns">
   <div class="hide-for-small">

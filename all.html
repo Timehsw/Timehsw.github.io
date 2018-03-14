@@ -133,6 +133,8 @@
             <li><a href="Computer.html">Computer</a></li>
         
             <li><a href="Redis.html">Redis</a></li>
+        
+            <li><a href="Zookeeper.html">Zookeeper</a></li>
          
 
       </ul>
@@ -154,6 +156,161 @@
 	<div class="large-8 medium-8 columns">
 		<div class="markdown-body home-categories">
 		
+			<div class="article">
+                <a class="clearlink" href="15209079363420.html">
+                
+                  <h1>大数据框架-开源协议</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>知道我们经常用的开源框架的开源协议么?</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15209079363420.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/3/13</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='BigData.html'>BigData</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15205689785115.html">
+                
+                  <h1>Zookeeper笔记</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">基础知识</h2>
+
+<h3 id="toc_1">znode</h3>
+
+<h3 id="toc_2">基础api</h3>
+
+<pre><code># 创建一个test_node节点,并包含数据testdata
+[zk: localhost:2181(CONNECTED) 12] create /test_note testdata
+Created /test_note
+[zk: localhost:2181(CONNECTED) 13] ls /test_note
+[]
+[zk: localhost:2181(CONNECTED) 14] get /test_note
+testdata
+cZxid = 0x1cc0015709f
+ctime = Fri Mar 09 12:15:41 CST 2018
+mZxid = 0x1cc0015709f
+mtime = Fri Mar 09 12:15:41 CST 2018
+pZxid = 0x1cc0015709f
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 8
+numChildren = 0
+
+[zk: localhost:2181(CONNECTED) 15] delete /test_note
+[zk: localhost:2181(CONNECTED) 16] get /test_note
+Node does not exist: /test_note
+
+</code></pre>
+
+<h2 id="toc_3">主-从模式的例子</h2>
+
+<pre><code># -e 表示临时性
+# 创建一个临时性的znode,节点名称为master_example ,数据为master1.example.com:2223
+# 一个临时节点会在会话过期或关闭时自动被删除
+create -e /master_example &quot;master1.example.com:2223&quot;
+
+# 列出目录树
+ls /
+
+# 获取master_example znode的元数据和数据
+get /master_example
+</code></pre>
+
+<p>如果再次执行创建master_example的命令会报<code>Node already exists: /master_example</code></p>
+
+<pre><code># 在master_example上设置一个监视点
+stat /master_example true
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/3/9</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Zookeeper.html'>Zookeeper</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15205677979326.html">
+                
+                  <h1>分布式应用浅谈</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">分布式应用的架构</h2>
+
+<h2 id="toc_1">分布式应用的需求</h2>
+
+<h2 id="toc_2">分布式应用面临的问题</h2>
+
+<h2 id="toc_3">分布式应用的解决方案</h2>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/3/9</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='BigData.html'>BigData</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
 			<div class="article">
                 <a class="clearlink" href="15203071412162.html">
                 
@@ -228,124 +385,6 @@
                 </div>
               </div><!-- article -->
         
-			<div class="article">
-                <a class="clearlink" href="15202199373374.html">
-                
-                  <h1>MacbookPro 修改应用的默认语言</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>当我把macbook pro的默认系统语言从中文改成英文后,其他的应用的语言也都变成了英文了.</p>
-
-<p>但是比如地图应用,我还是希望用中文呢?</p>
-
-<h1 id="toc_0">将地图Maps应用的语言改成中文</h1>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15202199373374.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/3/5</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Mac.html'>Mac</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15199545224004.html">
-                
-                  <h1>思考</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">为什么有些人能够突飞猛进?</h2>
-
-<ul>
-<li>智商高</li>
-<li>有想法,有思路</li>
-</ul>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2018/3/2</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Life.html'>Life</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15199040835190.html">
-                
-                  <h1>kafka-sparkstreaming长时间运行后异常退出原因分析</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">报错信息</h2>
-
-<pre><code>Couldn`t find leader offsets for set([xxxxxxxxxxx,xx])
-
-# 或者
-numRecords must not be negative
-</code></pre>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15199040835190.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/3/1</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Spark.html'>Spark</a></span>
-          				  
-          					    <span class="posted-in"><a href='Kafka.html'>Kafka</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
               
 
 
@@ -381,7 +420,7 @@ numRecords must not be negative
 
 
 
-
+<a target="_blank" class="weibo" href="http://weibo.com/hswnice" title="weibo">Weibo</a>
 <a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:hsw_v5@163.com" title="Email">Email</a>
@@ -451,6 +490,8 @@ numRecords must not be negative
             <a href="Computer.html"><strong>Computer</strong></a>
         
             <a href="Redis.html"><strong>Redis</strong></a>
+        
+            <a href="Zookeeper.html"><strong>Zookeeper</strong></a>
          
         </p>
 
@@ -467,6 +508,24 @@ numRecords must not be negative
 	      
 		      
 			      <li class="post">
+			        <a href="15209079363420.html">大数据框架-开源协议</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15205689785115.html">Zookeeper笔记</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15205677979326.html">分布式应用浅谈</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15203071412162.html">kafka-sparkstreaming自己维护offset</a>
 			      </li>
 		     
@@ -474,24 +533,6 @@ numRecords must not be negative
 		      
 			      <li class="post">
 			        <a href="15202200627560.html">查看linux系统负荷</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15202199373374.html">MacbookPro 修改应用的默认语言</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15199545224004.html">思考</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15199040835190.html">kafka-sparkstreaming长时间运行后异常退出原因分析</a>
 			      </li>
 		     
 		  

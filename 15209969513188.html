@@ -1,0 +1,942 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  Elasticsearch基本概念 - Time渐行渐远
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Time渐行渐远" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:dmlcoding.com ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li id=""><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li id=""><a target="_blank" href="about.html">ABOUT</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Time渐行渐远</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="BigData.html">BigData</a></li>
+        
+            <li><a href="Python.html">Python</a></li>
+        
+            <li><a href="Linux.html">Linux</a></li>
+        
+            <li><a href="Life.html">Life</a></li>
+        
+            <li><a href="Spark.html">Spark</a></li>
+        
+            <li><a href="Yarn.html">Yarn</a></li>
+        
+            <li><a href="Scala.html">Scala</a></li>
+        
+            <li><a href="VPS.html">VPS</a></li>
+        
+            <li><a href="MachineLearning.html">MachineLearning</a></li>
+        
+            <li><a href="Writer.html">Writer</a></li>
+        
+            <li><a href="Shell.html">Shell</a></li>
+        
+            <li><a href="Algorithm.html">Algorithm</a></li>
+        
+            <li><a href="Mac.html">Mac</a></li>
+        
+            <li><a href="Presto.html">Presto</a></li>
+        
+            <li><a href="Mysql.html">Mysql</a></li>
+        
+            <li><a href="Maven.html">Maven</a></li>
+        
+            <li><a href="Kafka.html">Kafka</a></li>
+        
+            <li><a href="Java.html">Java</a></li>
+        
+            <li><a href="DevTools.html">DevTools</a></li>
+        
+            <li><a href="Hbase.html">Hbase</a></li>
+        
+            <li><a href="ELK.html">ELK</a></li>
+        
+            <li><a href="Druid.html">Druid</a></li>
+        
+            <li><a href="Docker.html">Docker</a></li>
+        
+            <li><a href="DesignPattern.html">DesignPattern</a></li>
+        
+            <li><a href="Computer.html">Computer</a></li>
+        
+            <li><a href="Redis.html">Redis</a></li>
+        
+            <li><a href="Zookeeper.html">Zookeeper</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>Elasticsearch基本概念</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2017/9/20</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='ELK.html'>ELK</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h2 id="toc_0">Node 与 Cluster</h2>
+
+<p>Elastic 本质上是一个分布式数据库，允许多台服务器协同工作，每台服务器可以运行多个 Elastic 实例。</p>
+
+<p>单个 Elastic 实例称为一个节点（node）。一组节点构成一个集群（cluster）。</p>
+
+<span id="more"></span><!-- more -->
+
+<h2 id="toc_1">Index</h2>
+
+<p>Elastic 会索引所有字段，经过处理后写入一个反向索引（Inverted Index）。查找数据的时候，直接查找该索引。</p>
+
+<p>所以，Elastic 数据管理的顶层单位就叫做 Index（索引）。它是单个数据库的同义词。每个 Index （即数据库）的名字必须是小写。</p>
+
+<p>下面的命令可以查看当前节点的所有 Index。</p>
+
+<pre><code>
+$ curl -X GET &#39;http://localhost:9200/_cat/indices?v&#39;
+
+</code></pre>
+
+<h2 id="toc_2">Document</h2>
+
+<p>Index 里面单条的记录称为 Document（文档）。许多条 Document 构成了一个 Index。</p>
+
+<p>Document 使用 JSON 格式表示，下面是一个例子。</p>
+
+<pre><code>
+ {
+   &quot;user&quot;: &quot;张三&quot;,
+   &quot;title&quot;: &quot;工程师&quot;,
+   &quot;desc&quot;: &quot;数据库管理&quot;
+ }
+ 
+</code></pre>
+
+<p>同一个 Index 里面的 Document，不要求有相同的结构（scheme），但是最好保持相同，这样有利于提高搜索效率。</p>
+
+<h2 id="toc_3">Type</h2>
+
+<p>Document 可以分组，比如<code>weather</code>这个 Index 里面，可以按城市分组（北京和上海），也可以按气候分组（晴天和雨天）。这种分组就叫做 Type，它是虚拟的逻辑分组，用来过滤 Document。</p>
+
+<p>不同的 Type 应该有相似的结构（schema），举例来说，<code>id</code>字段不能在这个组是字符串，在另一个组是数值。这是与关系型数据库的表的<a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/mapping.html">一个区别</a>。性质完全不同的数据（比如<code>products</code>和<code>logs</code>）应该存成两个 Index，而不是一个 Index 里面的两个 Type（虽然可以做到）。</p>
+
+<p>下面的命令可以列出每个 Index 所包含的 Type。</p>
+
+<pre><code> 
+ $ curl &#39;localhost:9200/_mapping?pretty=true&#39;
+ 
+</code></pre>
+
+<p>根据<a href="https://www.elastic.co/blog/index-type-parent-child-join-now-future-in-elasticsearch">规划</a>，Elastic 6.x 版只允许每个 Index 包含一个 Type，7.x 版将会彻底移除 Type。</p>
+
+<h2 id="toc_4">Shards &amp; Replicas</h2>
+
+<p>一个index能够存储非常大量的数据，有时可能会超过单个节点硬件的限制。例如。一个index存储一超过1TB的数据，这对于单个节点有可能是负担不起的。为了解决这个问题，es可以讲index分片到不同的shards中。当你创建一个index，你可以定义你想要的shards数量。每一个shard对于自己来说都是一个拥有所有功能并且有独立的index，可以被放到任何node上。<br/>
+分片有两个重要的优势：</p>
+
+<ul>
+<li>它允许你水平 分割/扩展 你的内容。</li>
+<li>它允许你并行处理不同分片上的数据来提高效率。 为了保证高可用性，可以为每个分片节点设置备份节点。</li>
+</ul>
+
+<p>对于如何进行分片以及进行聚合操作时文档是怎样merge的，es都自动管理了，并且对用户是透明的。</p>
+
+<p>在网络环境中，当某个服务失效了，failover机制是非常有效的高可用保障。es也提供了对于index分片的复制。<br/>
+复制机制有两个重要特点：</p>
+
+<ul>
+<li>它提供了高可用性以防一个shard/node失效。值得注意的是，一个shard复制不要和它本身放在同一个节点。</li>
+<li>它通过对所有复制shard的并行搜索来提高你系统的吞吐量。</li>
+</ul>
+
+<h1 id="toc_5">探索集群</h1>
+
+<p>现在我们已经让节点和集群运行起来了，下一步怎么和es进行沟通交流呢？幸运的是，es提供了一个非常好用的restAPI。通过api我们可以做这些事情：</p>
+
+<ul>
+<li>检查集群，节点和index的健康状况，状态和统计数据。</li>
+<li>管理集群、节点和index的数据和元数据。</li>
+<li>执行CRUD和一些针对index的搜索操作。</li>
+<li>执行高级的搜索操作，例如分页，排序，过滤，脚本，聚合以及其他。</li>
+</ul>
+
+<h2 id="toc_6">集群的健康监测</h2>
+
+<p>接下来，我们对集群进行一个基本的简单的健康监测。前文提到了，因为es通过restAPI来进行操作，所以可以使用curl或者postman等。<br/>
+检测cluster的健康状况，我们可以使用_cat API。</p>
+
+<pre><code>[hadoop@U006 ~]$ curl &#39;localhost:9200/_cat/health?v&#39;
+epoch      timestamp cluster            status node.total node.data shards pri relo init unassign pending_tasks max_task_wait_time active_shards_percent
+1521000953 12:15:53  test_elasticsearch yellow          1         1     39  39    0    0       39             0                  -                 50.0%
+</code></pre>
+
+<p>其中status显示了当前的健康状况。<br/>
+status的定义如下：</p>
+
+<ul>
+<li>green ： everything is ok。</li>
+<li>yellow： 所有数据可用，但是一些备份节点的数据尚未被分配。</li>
+<li>red ： 一些数据不可用。</li>
+</ul>
+
+<h2 id="toc_7">查看节点的状况</h2>
+
+<pre><code>[hadoop@U006 ~]$ curl &#39;localhost:9200/_cat/nodes?v&#39;
+host        ip          heap.percent ram.percent load node.role master name
+10.10.25.13 10.10.25.13           11          84 2.54 d         *      node1
+</code></pre>
+
+<h2 id="toc_8">查询所有的index</h2>
+
+<pre><code>[hadoop@U006 ~]$ curl &#39;localhost:9200/_cat/indices?v&#39;
+health status index                   pri rep docs.count docs.deleted store.size pri.store.size
+yellow open   .marvel-es-1-2017.10.25   1   1      20639          640      7.5mb          7.5mb
+yellow open   .marvel-es-1-2017.10.24   1   1     185123          862     66.6mb         66.6mb
+yellow open   .marvel-es-1-2017.10.23   1   1     184771          862     66.2mb         66.2mb
+yellow open   .marvel-es-1-2017.10.22   1   1     182271          862     65.6mb         65.6mb
+yellow open   test_log                  5   1      84539            0     17.2mb         17.2mb
+yellow open   website                   5   1          2            0      7.8kb          7.8kb
+</code></pre>
+
+<h1 id="toc_9">新建和删除 Index</h1>
+
+<h2 id="toc_10">新建 Index</h2>
+
+<p>新建 Index，可以直接向 Elastic 服务器发出 PUT 请求。下面的例子是新建一个名叫<code>weather</code>的 Index。</p>
+
+<pre><code> 
+ $ curl -X PUT &#39;localhost:9200/weather&#39;
+ 
+</code></pre>
+
+<p>服务器返回一个 JSON 对象，里面的<code>acknowledged</code>字段表示操作成功。</p>
+
+<pre><code> 
+ {
+   &quot;acknowledged&quot;:true,
+   &quot;shards_acknowledged&quot;:true
+ }
+ 
+</code></pre>
+
+<h2 id="toc_11">删除 Index</h2>
+
+<p>然后，我们发出 DELETE 请求，删除这个 Index。</p>
+
+<pre><code> 
+ $ curl -X DELETE &#39;localhost:9200/weather&#39;
+ 
+</code></pre>
+
+<h1 id="toc_12">数据操作</h1>
+
+<h2 id="toc_13">新增记录</h2>
+
+<p>向指定的 /Index/Type 发送 PUT 请求，就可以在 Index 里面新增一条记录。比如，向<code>/accounts/person</code>发送请求，就可以新增一条人员记录。</p>
+
+<pre><code> 
+ $ curl -X PUT &#39;localhost:9200/accounts/person/1&#39; -d &#39;
+ {
+   &quot;user&quot;: &quot;张三&quot;,
+   &quot;title&quot;: &quot;工程师&quot;,
+   &quot;desc&quot;: &quot;数据库管理&quot;
+ }&#39; 
+ 
+</code></pre>
+
+<p>服务器返回的 JSON 对象，会给出 Index、Type、Id、Version 等信息。</p>
+
+<pre><code> 
+ {
+   &quot;_index&quot;:&quot;accounts&quot;,
+   &quot;_type&quot;:&quot;person&quot;,
+   &quot;_id&quot;:&quot;1&quot;,
+   &quot;_version&quot;:1,
+   &quot;result&quot;:&quot;created&quot;,
+   &quot;_shards&quot;:{&quot;total&quot;:2,&quot;successful&quot;:1,&quot;failed&quot;:0},
+   &quot;created&quot;:true
+ }
+ 
+</code></pre>
+
+<p>如果你仔细看，会发现请求路径是<code>/accounts/person/1</code>，最后的<code>1</code>是该条记录的 Id。它不一定是数字，任意字符串（比如<code>abc</code>）都可以。</p>
+
+<p>新增记录的时候，也可以不指定 Id，这时要改成 POST 请求。</p>
+
+<pre><code> 
+ $ curl -X POST &#39;localhost:9200/accounts/person&#39; -d &#39;
+ {
+   &quot;user&quot;: &quot;李四&quot;,
+   &quot;title&quot;: &quot;工程师&quot;,
+   &quot;desc&quot;: &quot;系统管理&quot;
+ }&#39;
+ 
+</code></pre>
+
+<p>上面代码中，向<code>/accounts/person</code>发出一个 POST 请求，添加一个记录。这时，服务器返回的 JSON 对象里面，<code>_id</code>字段就是一个随机字符串。</p>
+
+<pre><code> 
+ {
+   &quot;_index&quot;:&quot;accounts&quot;,
+   &quot;_type&quot;:&quot;person&quot;,
+   &quot;_id&quot;:&quot;AV3qGfrC6jMbsbXb6k1p&quot;,
+   &quot;_version&quot;:1,
+   &quot;result&quot;:&quot;created&quot;,
+   &quot;_shards&quot;:{&quot;total&quot;:2,&quot;successful&quot;:1,&quot;failed&quot;:0},
+   &quot;created&quot;:true
+ }
+ 
+</code></pre>
+
+<p>注意，如果没有先创建 Index（这个例子是<code>accounts</code>），直接执行上面的命令，Elastic 也不会报错，而是直接生成指定的 Index。所以，打字的时候要小心，不要写错 Index 的名称。</p>
+
+<h2 id="toc_14">查看记录</h2>
+
+<p>向<code>/Index/Type/Id</code>发出 GET 请求，就可以查看这条记录。</p>
+
+<pre><code> 
+ $ curl &#39;localhost:9200/accounts/person/1?pretty=true&#39;
+ 
+</code></pre>
+
+<p>上面代码请求查看<code>/accounts/person/1</code>这条记录，URL 的参数<code>pretty=true</code>表示以易读的格式返回。</p>
+
+<p>返回的数据中，<code>found</code>字段表示查询成功，<code>_source</code>字段返回原始记录。</p>
+
+<pre><code> 
+ {
+   &quot;_index&quot; : &quot;accounts&quot;,
+   &quot;_type&quot; : &quot;person&quot;,
+   &quot;_id&quot; : &quot;1&quot;,
+   &quot;_version&quot; : 1,
+   &quot;found&quot; : true,
+   &quot;_source&quot; : {
+     &quot;user&quot; : &quot;张三&quot;,
+     &quot;title&quot; : &quot;工程师&quot;,
+     &quot;desc&quot; : &quot;数据库管理&quot;
+   }
+ }
+ 
+</code></pre>
+
+<p>如果 Id 不正确，就查不到数据，<code>found</code>字段就是<code>false</code>。</p>
+
+<pre><code> 
+ $ curl &#39;localhost:9200/weather/beijing/abc?pretty=true&#39;
+ 
+ {
+   &quot;_index&quot; : &quot;accounts&quot;,
+   &quot;_type&quot; : &quot;person&quot;,
+   &quot;_id&quot; : &quot;abc&quot;,
+   &quot;found&quot; : false
+ }
+ 
+</code></pre>
+
+<h2 id="toc_15">删除记录</h2>
+
+<p>删除记录就是发出 DELETE 请求。</p>
+
+<pre><code> 
+ $ curl -X DELETE &#39;localhost:9200/accounts/person/1&#39;
+ 
+</code></pre>
+
+<p>这里先不要删除这条记录，后面还要用到。</p>
+
+<h2 id="toc_16">更新记录</h2>
+
+<p>更新记录就是使用 PUT 请求，重新发送一次数据。</p>
+
+<pre><code> 
+ $ curl -X PUT &#39;localhost:9200/accounts/person/1&#39; -d &#39;
+ {
+     &quot;user&quot; : &quot;张三&quot;,
+     &quot;title&quot; : &quot;工程师&quot;,
+     &quot;desc&quot; : &quot;数据库管理，软件开发&quot;
+ }&#39; 
+ 
+ {
+   &quot;_index&quot;:&quot;accounts&quot;,
+   &quot;_type&quot;:&quot;person&quot;,
+   &quot;_id&quot;:&quot;1&quot;,
+   &quot;_version&quot;:2,
+   &quot;result&quot;:&quot;updated&quot;,
+   &quot;_shards&quot;:{&quot;total&quot;:2,&quot;successful&quot;:1,&quot;failed&quot;:0},
+   &quot;created&quot;:false
+ }
+ 
+</code></pre>
+
+<p>上面代码中，我们将原始数据从&quot;数据库管理&quot;改成&quot;数据库管理，软件开发&quot;。 返回结果里面，有几个字段发生了变化。</p>
+
+<pre><code> 
+ &quot;_version&quot; : 2,
+ &quot;result&quot; : &quot;updated&quot;,
+ &quot;created&quot; : false
+ 
+</code></pre>
+
+<p>可以看到，记录的 Id 没变，但是版本（version）从<code>1</code>变成<code>2</code>，操作类型（result）从<code>created</code>变成<code>updated</code>，<code>created</code>字段变成<code>false</code>，因为这次不是新建记录。</p>
+
+<h1 id="toc_17">数据查询</h1>
+
+<h2 id="toc_18">返回所有记录</h2>
+
+<p>使用 GET 方法，直接请求<code>/Index/Type/_search</code>，就会返回所有记录。</p>
+
+<pre><code>
+ $ curl &#39;localhost:9200/accounts/person/_search&#39;
+ 
+ {
+   &quot;took&quot;:2,
+   &quot;timed_out&quot;:false,
+   &quot;_shards&quot;:{&quot;total&quot;:5,&quot;successful&quot;:5,&quot;failed&quot;:0},
+   &quot;hits&quot;:{
+     &quot;total&quot;:2,
+     &quot;max_score&quot;:1.0,
+     &quot;hits&quot;:[
+       {
+         &quot;_index&quot;:&quot;accounts&quot;,
+         &quot;_type&quot;:&quot;person&quot;,
+         &quot;_id&quot;:&quot;AV3qGfrC6jMbsbXb6k1p&quot;,
+         &quot;_score&quot;:1.0,
+         &quot;_source&quot;: {
+           &quot;user&quot;: &quot;李四&quot;,
+           &quot;title&quot;: &quot;工程师&quot;,
+           &quot;desc&quot;: &quot;系统管理&quot;
+         }
+       },
+       {
+         &quot;_index&quot;:&quot;accounts&quot;,
+         &quot;_type&quot;:&quot;person&quot;,
+         &quot;_id&quot;:&quot;1&quot;,
+         &quot;_score&quot;:1.0,
+         &quot;_source&quot;: {
+           &quot;user&quot; : &quot;张三&quot;,
+           &quot;title&quot; : &quot;工程师&quot;,
+           &quot;desc&quot; : &quot;数据库管理，软件开发&quot;
+         }
+       }
+     ]
+   }
+ }
+ 
+</code></pre>
+
+<p>上面代码中，返回结果的 <code>took</code>字段表示该操作的耗时（单位为毫秒），<code>timed_out</code>字段表示是否超时，<code>hits</code>字段表示命中的记录，里面子字段的含义如下。</p>
+
+<blockquote>
+<ul>
+<li><code>total</code>：返回记录数，本例是2条。</li>
+<li><code>max_score</code>：最高的匹配程度，本例是<code>1.0</code>。</li>
+<li><code>hits</code>：返回的记录组成的数组。</li>
+</ul>
+</blockquote>
+
+<p>返回的记录中，每条记录都有一个<code>_score</code>字段，表示匹配的程序，默认是按照这个字段降序排列。</p>
+
+<h2 id="toc_19">全文搜索</h2>
+
+<p>Elastic 的查询非常特别，使用自己的<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.5/query-dsl.html">查询语法</a>，要求 GET 请求带有数据体。</p>
+
+<pre><code> 
+ $ curl &#39;localhost:9200/accounts/person/_search&#39;  -d &#39;
+ {
+   &quot;query&quot; : { &quot;match&quot; : { &quot;desc&quot; : &quot;软件&quot; }}
+ }&#39;
+ 
+</code></pre>
+
+<p>上面代码使用 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.5/query-dsl-match-query.html">Match 查询</a>，指定的匹配条件是<code>desc</code>字段里面包含&quot;软件&quot;这个词。返回结果如下。</p>
+
+<pre><code> 
+ {
+   &quot;took&quot;:3,
+   &quot;timed_out&quot;:false,
+   &quot;_shards&quot;:{&quot;total&quot;:5,&quot;successful&quot;:5,&quot;failed&quot;:0},
+   &quot;hits&quot;:{
+     &quot;total&quot;:1,
+     &quot;max_score&quot;:0.28582606,
+     &quot;hits&quot;:[
+       {
+         &quot;_index&quot;:&quot;accounts&quot;,
+         &quot;_type&quot;:&quot;person&quot;,
+         &quot;_id&quot;:&quot;1&quot;,
+         &quot;_score&quot;:0.28582606,
+         &quot;_source&quot;: {
+           &quot;user&quot; : &quot;张三&quot;,
+           &quot;title&quot; : &quot;工程师&quot;,
+           &quot;desc&quot; : &quot;数据库管理，软件开发&quot;
+         }
+       }
+     ]
+   }
+ }
+ 
+</code></pre>
+
+<p>Elastic 默认一次返回10条结果，可以通过<code>size</code>字段改变这个设置。</p>
+
+<pre><code> 
+ $ curl &#39;localhost:9200/accounts/person/_search&#39;  -d &#39;
+ {
+   &quot;query&quot; : { &quot;match&quot; : { &quot;desc&quot; : &quot;管理&quot; }},
+   &quot;size&quot;: 1
+ }&#39;
+ 
+</code></pre>
+
+<p>上面代码指定，每次只返回一条结果。</p>
+
+<p>还可以通过<code>from</code>字段，指定位移。</p>
+
+<pre><code> 
+ $ curl &#39;localhost:9200/accounts/person/_search&#39;  -d &#39;
+ {
+   &quot;query&quot; : { &quot;match&quot; : { &quot;desc&quot; : &quot;管理&quot; }},
+   &quot;from&quot;: 1,
+   &quot;size&quot;: 1
+ }&#39;
+ 
+</code></pre>
+
+<p>上面代码指定，从位置1开始（默认是从位置0开始），只返回一条结果。</p>
+
+<h2 id="toc_20">逻辑运算</h2>
+
+<p>如果有多个搜索关键字， Elastic 认为它们是<code>or</code>关系。</p>
+
+<pre><code> 
+ $ curl &#39;localhost:9200/accounts/person/_search&#39;  -d &#39;
+ {
+   &quot;query&quot; : { &quot;match&quot; : { &quot;desc&quot; : &quot;软件 系统&quot; }}
+ }&#39;
+ 
+</code></pre>
+
+<p>上面代码搜索的是<code>软件 or 系统</code>。</p>
+
+<p>如果要执行多个关键词的<code>and</code>搜索，必须使用<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.5/query-dsl-bool-query.html">布尔查询</a>。</p>
+
+<pre><code> 
+ $ curl &#39;localhost:9200/accounts/person/_search&#39;  -d &#39;
+ {
+   &quot;query&quot;: {
+     &quot;bool&quot;: {
+       &quot;must&quot;: [
+         { &quot;match&quot;: { &quot;desc&quot;: &quot;软件&quot; } },
+         { &quot;match&quot;: { &quot;desc&quot;: &quot;系统&quot; } }
+       ]
+     }
+   }
+ }&#39;
+ 
+</code></pre>
+
+<h2 id="toc_21">使用过滤器</h2>
+
+<p>之前提到的score是一个数字，它用来评价当前返回的文档和我们需要的文档的匹配程度。分数越高的匹配程度越好。<br/>
+但是查询并不是总需要产生score，尤其是它们只是用来过滤文档的时候。es能够自动的优化查询并不计算这些无用的score。<br/>
+上文中的bool query也支持filter语句。filter语句可以在不改变score的情况下使用查询语句来限定文档。</p>
+
+<pre><code>curl -XPOST &#39;localhost:9200/customer/_search?pretty&#39; -d &#39;
+{
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;must&quot;: { &quot;match_all&quot;: {} },
+      &quot;filter&quot;: {
+        &quot;range&quot;: {
+          &quot;age&quot;: {
+            &quot;gte&quot;: 20000,
+            &quot;lte&quot;: 30000
+          }
+        }
+      }
+    }
+  }
+}&#39;
+</code></pre>
+
+<h2 id="toc_22">执行聚合</h2>
+
+<p>聚合可以对数据进行分组并对分组进行数据统计。类似于SQL中的group by。在es中，可以一次性返回查询结果和聚合结果。</p>
+
+<pre><code>curl -XPOST &#39;localhost:9200/customer/_search?pretty&#39; -d &#39;
+{
+  &quot;size&quot;: 0,
+  &quot;aggs&quot;: {
+    &quot;group_by_name&quot;: {
+      &quot;terms&quot;: {
+        &quot;field&quot;: &quot;name&quot;
+      }
+    }
+  }
+}&#39;
+</code></pre>
+
+<h1 id="toc_23">参考链接</h1>
+
+<ul>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html">ElasticSearch 官方手册</a></li>
+<li><a href="https://www.elastic.co/blog/a-practical-introduction-to-elasticsearch">A Practical Introduction to Elasticsearch</a></li>
+</ul>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15198745641385.html" 
+          title="Previous Post: Presto的学习笔记">&laquo; Presto的学习笔记</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15198769093559.html" 
+          title="Next Post: 二八定律与长尾理论">二八定律与长尾理论 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://s.gravatar.com/avatar/2d9bdeec5ad2754d8a47063df1346ee8?s=80" /></div>
+            
+                <h1>Time渐行渐远</h1>
+                <div class="site-des">Coding Changing The World</div>
+                <div class="social">
+
+
+
+
+
+
+
+<a target="_blank" class="weibo" href="http://weibo.com/hswnice" title="weibo">Weibo</a>
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:hsw_v5@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="BigData.html"><strong>BigData</strong></a>
+        
+            <a href="Python.html"><strong>Python</strong></a>
+        
+            <a href="Linux.html"><strong>Linux</strong></a>
+        
+            <a href="Life.html"><strong>Life</strong></a>
+        
+            <a href="Spark.html"><strong>Spark</strong></a>
+        
+            <a href="Yarn.html"><strong>Yarn</strong></a>
+        
+            <a href="Scala.html"><strong>Scala</strong></a>
+        
+            <a href="VPS.html"><strong>VPS</strong></a>
+        
+            <a href="MachineLearning.html"><strong>MachineLearning</strong></a>
+        
+            <a href="Writer.html"><strong>Writer</strong></a>
+        
+            <a href="Shell.html"><strong>Shell</strong></a>
+        
+            <a href="Algorithm.html"><strong>Algorithm</strong></a>
+        
+            <a href="Mac.html"><strong>Mac</strong></a>
+        
+            <a href="Presto.html"><strong>Presto</strong></a>
+        
+            <a href="Mysql.html"><strong>Mysql</strong></a>
+        
+            <a href="Maven.html"><strong>Maven</strong></a>
+        
+            <a href="Kafka.html"><strong>Kafka</strong></a>
+        
+            <a href="Java.html"><strong>Java</strong></a>
+        
+            <a href="DevTools.html"><strong>DevTools</strong></a>
+        
+            <a href="Hbase.html"><strong>Hbase</strong></a>
+        
+            <a href="ELK.html"><strong>ELK</strong></a>
+        
+            <a href="Druid.html"><strong>Druid</strong></a>
+        
+            <a href="Docker.html"><strong>Docker</strong></a>
+        
+            <a href="DesignPattern.html"><strong>DesignPattern</strong></a>
+        
+            <a href="Computer.html"><strong>Computer</strong></a>
+        
+            <a href="Redis.html"><strong>Redis</strong></a>
+        
+            <a href="Zookeeper.html"><strong>Zookeeper</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15209079363420.html">大数据框架-开源协议</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15205689785115.html">Zookeeper笔记</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15205677979326.html">分布式应用浅谈</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15203071412162.html">kafka-sparkstreaming自己维护offset</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15202200627560.html">查看linux系统负荷</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?2a025c7742b90ad62b1e767e1b7f2f29";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </body>
+</html>
