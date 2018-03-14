@@ -4,7 +4,7 @@
   <title><![CDATA[Time渐行渐远]]></title>
   <link href="http://dmlcoding.com/atom.xml" rel="self"/>
   <link href="http://dmlcoding.com/"/>
-  <updated>2018-03-14T14:34:52+08:00</updated>
+  <updated>2018-03-14T14:37:30+08:00</updated>
   <id>http://dmlcoding.com/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -130,6 +130,8 @@
 <h2 id="toc_0">基础知识</h2>
 
 <h3 id="toc_1">znode</h3>
+
+<span id="more"></span><!-- more -->
 
 <h3 id="toc_2">基础api</h3>
 

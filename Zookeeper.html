@@ -168,52 +168,6 @@
 
 <h3 id="toc_1">znode</h3>
 
-<h3 id="toc_2">基础api</h3>
-
-<pre><code># 创建一个test_node节点,并包含数据testdata
-[zk: localhost:2181(CONNECTED) 12] create /test_note testdata
-Created /test_note
-[zk: localhost:2181(CONNECTED) 13] ls /test_note
-[]
-[zk: localhost:2181(CONNECTED) 14] get /test_note
-testdata
-cZxid = 0x1cc0015709f
-ctime = Fri Mar 09 12:15:41 CST 2018
-mZxid = 0x1cc0015709f
-mtime = Fri Mar 09 12:15:41 CST 2018
-pZxid = 0x1cc0015709f
-cversion = 0
-dataVersion = 0
-aclVersion = 0
-ephemeralOwner = 0x0
-dataLength = 8
-numChildren = 0
-
-[zk: localhost:2181(CONNECTED) 15] delete /test_note
-[zk: localhost:2181(CONNECTED) 16] get /test_note
-Node does not exist: /test_note
-
-</code></pre>
-
-<h2 id="toc_3">主-从模式的例子</h2>
-
-<pre><code># -e 表示临时性
-# 创建一个临时性的znode,节点名称为master_example ,数据为master1.example.com:2223
-# 一个临时节点会在会话过期或关闭时自动被删除
-create -e /master_example &quot;master1.example.com:2223&quot;
-
-# 列出目录树
-ls /
-
-# 获取master_example znode的元数据和数据
-get /master_example
-</code></pre>
-
-<p>如果再次执行创建master_example的命令会报<code>Node already exists: /master_example</code></p>
-
-<pre><code># 在master_example上设置一个监视点
-stat /master_example true
-</code></pre>
 
                         
                       </div>
@@ -221,7 +175,7 @@ stat /master_example true
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="15205689785115.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2018/3/9</span>
                     <span>posted in&nbsp;</span> 
           				  
