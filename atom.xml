@@ -4,7 +4,7 @@
   <title><![CDATA[Time渐行渐远]]></title>
   <link href="http://dmlcoding.com/atom.xml" rel="self"/>
   <link href="http://dmlcoding.com/"/>
-  <updated>2018-03-14T14:37:30+08:00</updated>
+  <updated>2018-03-21T11:25:53+08:00</updated>
   <id>http://dmlcoding.com/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -190,6 +190,8 @@ stat /master_example true
     <id>http://dmlcoding.com/15205677979326.html</id>
     <content type="html"><![CDATA[
 <h2 id="toc_0">分布式应用的架构</h2>
+
+<span id="more"></span><!-- more -->
 
 <h2 id="toc_1">分布式应用的需求</h2>
 
@@ -525,6 +527,1010 @@ numRecords must not be negative
 1. spark.yarn.maxAppAttempts参数不能超过hadoop集群yarn.resourcemanager.am.max-attempts的最大值，如果超过将会取两者较小值<br/>
 2. 由于kafka切换leader导致的数据丢失,然后造成sparkstreaming程序报错,异常退出的情况下.我这通通常都是重启kafka,删除checkpoint,再重启sparkstreaming了.<br/>
 3. 后面我们不用原生的方式来存储offset.而是自己维护offset,那么以后更新迭代后就不用再删除checkpoint了,对业务的影响也最小了.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[python-matplotlib note]]></title>
+    <link href="http://dmlcoding.com/15213431815968.html"/>
+    <updated>2018-03-18T11:19:41+08:00</updated>
+    <id>http://dmlcoding.com/15213431815968.html</id>
+    <content type="html"><![CDATA[
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[python-pandas note]]></title>
+    <link href="http://dmlcoding.com/15212549634720.html"/>
+    <updated>2018-03-17T10:49:23+08:00</updated>
+    <id>http://dmlcoding.com/15212549634720.html</id>
+    <content type="html"><![CDATA[
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[python-numpy note]]></title>
+    <link href="http://dmlcoding.com/15212548392809.html"/>
+    <updated>2018-03-17T10:47:19+08:00</updated>
+    <id>http://dmlcoding.com/15212548392809.html</id>
+    <content type="html"><![CDATA[
+<h1 id="toc_0">numpy创建ndarray</h1>
+
+<ul>
+<li>一种由相同元素组成的多维数组,元素数量是事先给定好的</li>
+<li>元素的数据类型由dtype对象来指定,每个ndarry只有一种dtype类型</li>
+<li>ndarray的大小固定,创建好数组大小是不会再发生改变的</li>
+</ul>
+
+<pre><code class="language-python">import numpy as np
+</code></pre>
+
+<pre><code class="language-python"># 可以用help方法来查看这个函数的使用方法
+help(np.array)
+</code></pre>
+
+<h2 id="toc_1">用python内置数组创建ndarray</h2>
+
+<pre><code class="language-python"># 用一维数组创建
+np.array([1,2,3])
+</code></pre>
+
+<pre><code>array([1, 2, 3])
+</code></pre>
+
+<pre><code class="language-python"># 用元组创建
+np.array((1,2,3))
+</code></pre>
+
+<pre><code>array([1, 2, 3])
+</code></pre>
+
+<pre><code class="language-python"># 用多维数组
+np.array([[1,2,3,4],
+          [5,6,7,8]])
+</code></pre>
+
+<pre><code>array([[1, 2, 3, 4],
+       [5, 6, 7, 8]])
+</code></pre>
+
+<pre><code class="language-python"># 创建三维数组
+np.array([[[1,2,3],[2,3,4]],[[4,5,6],[7,8,9]]
+])
+</code></pre>
+
+<pre><code>array([[[1, 2, 3],
+        [2, 3, 4]],
+
+       [[4, 5, 6],
+        [7, 8, 9]]])
+</code></pre>
+
+<h2 id="toc_2">用numpy内置函数创建ndarray</h2>
+
+<pre><code class="language-python"># 通过zeros创建数组,创建元素全为零的数组
+# 参数为一个元组,元组表示你想创建一个几维的数组
+# 创建一个3*3的数组,元素初始化都为0
+np.zeros((3,3))
+
+# 创建一个2*3*3的三维数组,元素初始化都为0
+np.zeros((2,3,3))
+</code></pre>
+
+<pre><code>array([[[0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.]],
+
+       [[0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.]]])
+</code></pre>
+
+<pre><code class="language-python"># 通过ones创建数组,创意元素都为1的数组
+np.ones((3,4))
+</code></pre>
+
+<pre><code>array([[1., 1., 1., 1.],
+       [1., 1., 1., 1.],
+       [1., 1., 1., 1.]])
+</code></pre>
+
+<pre><code class="language-python"># 通过empty创建未初始化的数组
+np.empty((2,3))
+</code></pre>
+
+<pre><code>array([[0., 0., 0.],
+       [0., 0., 0.]])
+</code></pre>
+
+<h2 id="toc_3">ndarray的其他创建方式</h2>
+
+<pre><code class="language-python"># arange函数,类似python内置的range
+np.arange(9)
+</code></pre>
+
+<pre><code>array([0, 1, 2, 3, 4, 5, 6, 7, 8])
+</code></pre>
+
+<pre><code class="language-python">np.arange(1,9)
+</code></pre>
+
+<pre><code>array([1, 2, 3, 4, 5, 6, 7, 8])
+</code></pre>
+
+<pre><code class="language-python">np.arange(1,9,2)
+np.arange(9,1,-1)
+</code></pre>
+
+<pre><code>array([9, 8, 7, 6, 5, 4, 3, 2])
+</code></pre>
+
+<pre><code class="language-python"># linspace函数,生成等差数列
+# 生成1到10的数,一共有5个元素
+np.linspace(1,10,5)
+</code></pre>
+
+<pre><code>array([ 1.  ,  3.25,  5.5 ,  7.75, 10.  ])
+</code></pre>
+
+<pre><code class="language-python"># logspace生成等比数列
+# 10的0次方开始,到10的2次方结束,一共生成5个元素
+np.logspace(0,2,5)
+</code></pre>
+
+<pre><code>array([  1.        ,   3.16227766,  10.        ,  31.6227766 ,
+       100.        ])
+</code></pre>
+
+<pre><code class="language-python"># 修改base为2,默认底数是10
+np.logspace(0,2,5,base=2)
+</code></pre>
+
+<pre><code>array([1.        , 1.41421356, 2.        , 2.82842712, 4.        ])
+</code></pre>
+
+<pre><code class="language-python"># random函数,生成随机数
+np.random.random((3,3))
+</code></pre>
+
+<pre><code>array([[0.32521681, 0.46044314, 0.19938466],
+       [0.38477235, 0.20250328, 0.93452861],
+       [0.0615017 , 0.1795197 , 0.32724319]])
+</code></pre>
+
+<pre><code class="language-python"># randint 生成随机整数,从1到9,一共是个3*3的数组
+np.random.randint(1,9,size=(3,3))
+</code></pre>
+
+<pre><code>array([[6, 1, 2],
+       [2, 5, 5],
+       [6, 7, 3]])
+</code></pre>
+
+<pre><code class="language-python"># randn 返回一个样本,具有标准正态分布
+np.random.randn(3,3)
+</code></pre>
+
+<pre><code>array([[-0.57476519,  0.45673427,  0.26634586],
+       [-1.98015823, -1.25879457, -1.18650781],
+       [ 0.90624497, -1.16062802,  0.49804173]])
+</code></pre>
+
+<pre><code class="language-python"># rand 生成0到1直接的随机数
+np.random.rand(9)
+</code></pre>
+
+<pre><code>array([0.23177845, 0.33177202, 0.72181294, 0.24416673, 0.41005128,
+       0.6275457 , 0.40247175, 0.90591392, 0.46705692])
+</code></pre>
+
+<h1 id="toc_4">ndarray对象属性</h1>
+
+<h2 id="toc_5">修改ndarray对象类型dtype</h2>
+
+<pre><code class="language-python"># ndim 数组维度的个数,轴的个数被称作秩
+arr=np.random.randint(1,9,size=(3,3))
+print(arr.ndim)
+</code></pre>
+
+<pre><code>2
+</code></pre>
+
+<pre><code class="language-python"># shape 数组的维度
+arr=np.random.randint(1,9,size=(3,3))
+print(arr.shape)
+</code></pre>
+
+<pre><code>(3, 3)
+</code></pre>
+
+<pre><code class="language-python"># dtype ndarray的元素类型
+arr=np.random.randint(1,9,size=(3,3))
+print(arr.dtype)
+
+# itemsize数组中每个元素的字节大小
+print(arr.itemsize)
+
+# size ndarray里面的元素个数
+print(arr.size)
+</code></pre>
+
+<pre><code>int64
+8
+9
+</code></pre>
+
+<pre><code class="language-python">arr2=np.array([1,2,3,4])
+# 查看元素类型
+print(arr2.dtype)
+
+# 修改元素类型
+arr3=arr2.astype(float)
+print(arr3.dtype)
+arr4=np.array([1,2,3,4],dtype=float)
+print(arr4.dtype)
+</code></pre>
+
+<pre><code>int64
+float64
+float64
+</code></pre>
+
+<h2 id="toc_6">修改ndarray的形状shape</h2>
+
+<pre><code class="language-python"># 修改ndarray形状,要求修改后乘积不变
+arr=np.random.randint(1,9,size=(2,5))
+print(arr)
+print(arr.shape)
+arr.shape=(5,2)
+print(arr)
+</code></pre>
+
+<pre><code>[[5 8 8 1 8]
+ [5 5 8 5 6]]
+(2, 5)
+[[5 8]
+ [8 1]
+ [8 5]
+ [5 8]
+ [5 6]]
+</code></pre>
+
+<pre><code class="language-python">arr=np.random.randint(1,9,size=(2,5))
+# -1 系统帮你算另外一部分
+arr.shape=(5,-1)
+arr
+</code></pre>
+
+<pre><code>array([[2, 8],
+       [1, 7],
+       [8, 7],
+       [3, 7],
+       [8, 5]])
+</code></pre>
+
+<pre><code class="language-python"># reshape修改后,创建的数组和原先的数组映射.修改后就都修改了
+arr=np.arange(9)
+print(arr)
+arr2=arr.reshape(3,3)
+print(arr2)
+arr2[0][1]=100
+print(arr)
+print(arr2)
+</code></pre>
+
+<pre><code>[0 1 2 3 4 5 6 7 8]
+[[0 1 2]
+ [3 4 5]
+ [6 7 8]]
+[  0 100   2   3   4   5   6   7   8]
+[[  0 100   2]
+ [  3   4   5]
+ [  6   7   8]]
+</code></pre>
+
+<pre><code class="language-python">arr=np.arange(9).reshape(3,3)
+arr
+</code></pre>
+
+<pre><code>array([[0, 1, 2],
+       [3, 4, 5],
+       [6, 7, 8]])
+</code></pre>
+
+<h1 id="toc_7">numpy的基本操作</h1>
+
+<h2 id="toc_8">数组与标量,数组之间的运算</h2>
+
+<ul>
+<li>1.数组不用循环即可对每个元素执行批量的算术运算操作,这个过程叫做矢量化,即用数组表达式代替循环的做法</li>
+<li>2.矢量化数组运算性能比纯Python方式快上一两个数据级</li>
+<li>3.大小相等的两个数组之间的任何算术运算都会将其运算应用到元素级别的操作上</li>
+</ul>
+
+<p><strong>在numpy中,大小相等的数组之间的的运算,为元素级运算,即只用于位置相同的元素之间,所得的运算结果组成一个新的数组,运算结果的位置跟操作数位置相同</strong></p>
+
+<h3 id="toc_9">数组与标量之间的运算</h3>
+
+<pre><code class="language-python">arr=np.arange(9).reshape(3,3)
+print(arr)
+print(arr+2)
+print(arr*2)
+</code></pre>
+
+<pre><code>[[0 1 2]
+ [3 4 5]
+ [6 7 8]]
+[[ 2  3  4]
+ [ 5  6  7]
+ [ 8  9 10]]
+[[ 0  2  4]
+ [ 6  8 10]
+ [12 14 16]]
+</code></pre>
+
+<h3 id="toc_10">数组与数组之间的运算</h3>
+
+<pre><code class="language-python">arr=np.array([1,1,2,3])
+arr2=np.array([2,1,6,3])
+arr3=arr+arr2
+arr3
+</code></pre>
+
+<pre><code>array([3, 2, 8, 6])
+</code></pre>
+
+<pre><code class="language-python">arr1=np.array([
+    [10,20,30],
+    [40,50,60]
+])
+arr2=np.array([
+    [1,2,3],
+    [4,5,6]
+])
+print(arr1)
+print(arr2)
+</code></pre>
+
+<pre><code>[[10 20 30]
+ [40 50 60]]
+[[1 2 3]
+ [4 5 6]]
+</code></pre>
+
+<pre><code class="language-python">print(arr1+arr2)
+</code></pre>
+
+<pre><code>[[11 22 33]
+ [44 55 66]]
+</code></pre>
+
+<h2 id="toc_11">数组的矩阵积</h2>
+
+<ul>
+<li>矩阵:多维数组即矩阵</li>
+<li>矩阵积(matrix product):两个二维矩阵(行和列的矩阵)满足第一个矩阵的列数与第二个矩阵的行数相同,那么可以进行矩阵的乘法,即矩阵积,矩阵积不是元素级的运算.也称为点积,数量积.</li>
+<li>[M,N]*[N,Y]=<a href="%E7%B1%BB%E4%BC%BC%E8%BF%99%E6%A0%B7">M,Y</a></li>
+<li>dot函数来实现</li>
+</ul>
+
+<pre><code class="language-python"># 每行为每个部门1,2,3,每列为每个产品A,B,C
+# 那么就是3个部门,3个产品
+arr=np.array([
+    [120,60,220],
+    [115,23,201],
+    [132,48,230]
+])
+
+# 每行为产品A,B,C,列为产品单价和产品体积
+arr2=np.array([
+    [12.34,0.04],
+    [204.56,2.34],
+    [9.89,0.45]
+])
+
+
+</code></pre>
+
+<pre><code class="language-python"># 求每个部门的总收入,以及每个部门的产品共占了多少体积
+# 为了实现这个需求,就可以将两个矩阵进行相乘
+
+# 举例: 120*12+60*204.56+220*9.89=15930.2 
+# 行列对应元素相乘后累加
+# 矩阵相乘使用dot函数
+arr.dot(arr2)
+</code></pre>
+
+<pre><code>array([[15930.2 ,   244.2 ],
+       [ 8111.87,   148.87],
+       [13722.46,   221.1 ]])
+</code></pre>
+
+<h2 id="toc_12">ndarray多维数组的索引和切片</h2>
+
+<p>|  | 0 | 1  |  2 |  3 |<br/>
+|:-|:--|:---|:---|:---|<br/>
+| 0 |0,0|0,1|0,2 |0,3 |<br/>
+| 1 |1,0|1,1|1,2 |1,3 |<br/>
+| 2 |2,0|2,1|2,2 |2,3 |</p>
+
+<pre><code class="language-python">arr=np.random.randint(1,9,size=(2,3,3))
+print(arr)
+</code></pre>
+
+<pre><code>[[[4 5 1]
+  [3 5 3]
+  [3 7 5]]
+
+ [[8 3 1]
+  [3 8 3]
+  [3 1 7]]]
+</code></pre>
+
+<h3 id="toc_13">ndarray的索引</h3>
+
+<p>和python的列表索引也是一样的</p>
+
+<pre><code class="language-python"># 一个中括号表示一个维度
+print(arr[0][0][1])
+
+# 通过逗号分隔,每部分是一个维度.比用中括号看起来更简单
+print(arr[0,0,1])
+</code></pre>
+
+<pre><code>5
+5
+</code></pre>
+
+<h3 id="toc_14">ndarray的切片</h3>
+
+<p>和python的列表切片也是一样的</p>
+
+<pre><code class="language-python"># 冒号代表对这一维度的所有进行切片
+print(arr[:,:,:])
+
+# 取每一维度的第一列
+print(arr[:,:,0])
+print(arr[:,:,0:2])
+</code></pre>
+
+<pre><code>[[[4 5 1]
+  [3 5 3]
+  [3 7 5]]
+
+ [[8 3 1]
+  [3 8 3]
+  [3 1 7]]]
+[[4 3 3]
+ [8 3 3]]
+[[[4 5]
+  [3 5]
+  [3 7]]
+
+ [[8 3]
+  [3 8]
+  [3 1]]]
+</code></pre>
+
+<pre><code class="language-python">num=np.array([
+    [0,1,2,3,4],
+    [5,6,7,8,9]
+])
+</code></pre>
+
+<pre><code class="language-python"># 取第一行的所有元素
+num[1,:]
+
+# 取第一列的所有元素
+num[:,0]
+# 取第二列的所有元素
+num[:,1]
+</code></pre>
+
+<pre><code>array([1, 6])
+</code></pre>
+
+<h3 id="toc_15">ndarray的高级索引</h3>
+
+<p>如果一个ndarray是非元组序列,数据类型为<strong>整数</strong>或<strong>布尔值</strong>的ndarray,或者至少一个元素为序列对象的元组,我们就能够用它来索引ndarray</p>
+
+<p>高级索引始终返回数据的副本.与此相反,切片只提供了一个视图.</p>
+
+<h4 id="toc_16">整数索引</h4>
+
+<pre><code class="language-python">x=np.array([
+    [1,2],
+    [3,4],
+    [5,6]
+])
+
+y=x[[0,1,2],[0,1,0]]
+
+# 该结果包括数组中(0,0)，(1,1)和(2,0)位置处的元素。
+print(y)
+</code></pre>
+
+<pre><code>[1 4 5]
+</code></pre>
+
+<pre><code class="language-python"># 下面的示例获取了 4X3 数组中的每个角处的元素。 
+# 行索引是[0,0]和[3,3]，而列索引是[0,2]和[0,2]。
+x=np.array([
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [9,10,11]
+])
+print(&#39;数组原样:&#39;)
+print(x)
+print(&#39;~&#39;*30)
+rows=np.array([[0,0],[3,3]])
+cols=np.array([[0,2],[0,2]])
+y=x[rows,cols]
+print(&#39;这个数组的每个角处的元素是:&#39;)
+print(y)
+</code></pre>
+
+<pre><code>数组原样:
+[[ 0  1  2]
+ [ 3  4  5]
+ [ 6  7  8]
+ [ 9 10 11]]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+这个数组的每个角处的元素是:
+[[ 0  2]
+ [ 9 11]]
+</code></pre>
+
+<h4 id="toc_17">布尔索引</h4>
+
+<p>当结果对象是布尔运算(例如比较运算符)的结果时,将使用此类型的高级索引.<br/><br/>
+过滤空值,挺好.</p>
+
+<pre><code class="language-python"># 这个例子中，大于 5 的元素会作为布尔索引的结果返回。
+x=np.array([
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [9,10,11]
+])
+
+print(x&gt;5)
+
+print(&#39;大于5的元素是:&#39;)
+print(x[x&gt;5])
+
+</code></pre>
+
+<pre><code>[[False False False]
+ [False False False]
+ [ True  True  True]
+ [ True  True  True]]
+大于5的元素是:
+[ 6  7  8  9 10 11]
+</code></pre>
+
+<pre><code class="language-python"># 这个例子使用了`~(取补运算符)`来过滤NaN
+a=np.array([np.nan,1,2,np.nan,3,4,5])
+print(a)
+print(a[~np.isnan(a)])
+</code></pre>
+
+<pre><code>[nan  1.  2. nan  3.  4.  5.]
+[1. 2. 3. 4. 5.]
+</code></pre>
+
+<pre><code class="language-python"># 从数组中过滤掉非复数元素
+a = np.array([1,  2+6j,  5,  3.5+5j])  
+print(a[np.iscomplex(a)])
+</code></pre>
+
+<pre><code>[2. +6.j 3.5+5.j]
+</code></pre>
+
+<h1 id="toc_18">Numpy-广播</h1>
+
+<ul>
+<li>广播是指Numpy在算术运算期间处理不同形状的数组的能力.</li>
+<li>对数组的算术运算通常在相应的元素上进行.</li>
+<li>如果两个阵列具有完全相同的形状,则这些操作被无缝执行.</li>
+</ul>
+
+<pre><code class="language-python"># 当两个数组的形状相同,运算没毛病
+a=np.array([1,2,3,4])
+b=np.array([10,20,30,40])
+c=a*b
+print(c)
+</code></pre>
+
+<pre><code>[ 10  40  90 160]
+</code></pre>
+
+<p>如果两个数组的维数不相同,则元素到元素的操作是不可能的.<br/>
+然而,在Numpy中仍然可以对形状不相似的数组进行操作,<strong>因为它拥有广播功能.</strong><br/>
+较小的数组会广播到较大数组的大小,以便使它们的形状可兼容.</p>
+
+<p>如果满足一下规则,则可以进行广播:<br/>
++ ndim较小的数组会在前面追加一个长度为1的维度.<br/>
++ 输出数组的每个维度的大小是输入数组该维度大小的最大值.</p>
+
+<p>未完待续...</p>
+
+<h1 id="toc_19">NumPy-数组上的迭代</h1>
+
+<ul>
+<li>Numpy包含一个迭代器对象numpy.nditer.</li>
+<li>她是一个有效的多维迭代器对象,可以用于在数组上进行迭代.</li>
+<li>数组的每个元素可使用python的标准Iterator接口来访问</li>
+</ul>
+
+<h2 id="toc_20">迭代方式</h2>
+
+<pre><code class="language-python">a=np.arange(0,60,5).reshape(3,4)
+print(&#39;--- 原始数组 ---&#39;)
+print(a)
+print(&#39;~&#39;*30)
+print(&#39;--- 进行迭代 ---&#39;)
+for x in np.nditer(a):
+    print(x)
+</code></pre>
+
+<pre><code>--- 原始数组 ---
+[[ 0  5 10 15]
+ [20 25 30 35]
+ [40 45 50 55]]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--- 进行迭代 ---
+0
+5
+10
+15
+20
+25
+30
+35
+40
+45
+50
+55
+</code></pre>
+
+<pre><code class="language-python">b=a.T
+print(&#39;--- 原始数组进行转置 ---&#39;)
+print(b)
+for x in np.nditer(b):
+    print(x,end=&#39; &#39;)
+</code></pre>
+
+<pre><code>--- 原始数组进行转置 ---
+[[ 0 20 40]
+ [ 5 25 45]
+ [10 30 50]
+ [15 35 55]]
+0 5 10 15 20 25 30 35 40 45 50 55 
+</code></pre>
+
+<h2 id="toc_21">迭代顺序</h2>
+
+<p>如果相同元素使用 F 风格顺序存储，则迭代器选择以更有效的方式对数组进行迭代。</p>
+
+<pre><code class="language-python">a=np.arange(0,60,5).reshape(3,4)
+print(&#39;原始数组&#39;)
+print(a)
+b=a.T
+print(&#39;原始数组的转置&#39;)
+print(b)
+print(&#39;以 C 风格顺序排序&#39;)
+c=b.copy(order=&#39;C&#39;)
+print(c)
+print(&quot;以 C 来进行迭代&quot;)
+for x in np.nditer(c):
+    print(x,end=&#39; &#39;)
+
+print(&#39;以 F 风格顺序排序&#39;)
+c=b.copy(order=&#39;F&#39;)
+print(c)
+print(&quot;以 F 来进行迭代&quot;)
+for x in np.nditer(c):
+    print(x,end=&#39; &#39;)
+
+</code></pre>
+
+<pre><code>原始数组
+[[ 0  5 10 15]
+ [20 25 30 35]
+ [40 45 50 55]]
+原始数组的转置
+[[ 0 20 40]
+ [ 5 25 45]
+ [10 30 50]
+ [15 35 55]]
+以 C 风格顺序排序
+[[ 0 20 40]
+ [ 5 25 45]
+ [10 30 50]
+ [15 35 55]]
+以 C 来进行迭代
+0 20 40 5 25 45 10 30 50 15 35 55 以 F 风格顺序排序
+[[ 0 20 40]
+ [ 5 25 45]
+ [10 30 50]
+ [15 35 55]]
+以 F 来进行迭代
+0 5 10 15 20 25 30 35 40 45 50 55 
+</code></pre>
+
+<pre><code class="language-python"># 可以通过显示提醒,来强制nditer对象使用某种顺序
+a=np.arange(0,60,5).reshape(3,4)
+print(&quot;以 C 来进行迭代:&quot;)
+for x in np.nditer(a,order=&#39;C&#39;):
+    print(x,end=&#39; &#39;)
+print(&#39;\n&#39;+&#39;~&#39;*40)
+print(&quot;以 F 来进行迭代:&quot;)
+for x in np.nditer(a,order=&#39;F&#39;):
+    print(x,end=&#39; &#39;)
+</code></pre>
+
+<pre><code>以 C 来进行迭代:
+0 5 10 15 20 25 30 35 40 45 50 55 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+以 F 来进行迭代:
+0 20 40 5 25 45 10 30 50 15 35 55 
+</code></pre>
+
+<h2 id="toc_22">迭代器修改数组的值</h2>
+
+<ul>
+<li>nditer对象有另一个可选参数<code>op_flags</code>.其默认值为只读.</li>
+<li>但可以设置为读写或只写模式.</li>
+<li>这将允许使用此迭代器修改数组的元素</li>
+</ul>
+
+<pre><code class="language-python">a=np.arange(0,60,5).reshape(3,4)
+print(&quot;原始数组:&quot;)
+print(a)
+for x in np.nditer(a,op_flags=[&#39;readwrite&#39;]):
+    x[...]=2*x
+
+print(&#39;修改后的数组是:&#39;)
+print(a)
+</code></pre>
+
+<pre><code>原始数组:
+[[ 0  5 10 15]
+ [20 25 30 35]
+ [40 45 50 55]]
+修改后的数组是:
+[[  0  10  20  30]
+ [ 40  50  60  70]
+ [ 80  90 100 110]]
+</code></pre>
+
+<h2 id="toc_23">迭代器外部循环</h2>
+
+<p>nditer类的构造器拥有<code>flags</code>参数</p>
+
+<pre><code class="language-python"># 迭代器遍历每列的一维数组
+print(a)
+print(&quot;~&quot;*50)
+for x in np.nditer(a,flags=[&#39;external_loop&#39;],order=&#39;F&#39;):
+    print(x,end=&#39; &#39;)
+</code></pre>
+
+<pre><code>[[  0  10  20  30]
+ [ 40  50  60  70]
+ [ 80  90 100 110]]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[ 0 40 80] [10 50 90] [ 20  60 100] [ 30  70 110] 
+</code></pre>
+
+<h1 id="toc_24">ndarray-数组拉伸与合并</h1>
+
+<ul>
+<li>数组拉伸np.tile（A，rep）函数可以将数组A进行拉伸，沿着A的维度重复rep次</li>
+<li>对于ndarray数组而言，多个数组可以执行合并操作，合并的方式有多种。</li>
+<li>Stack(arrays,axis=0):沿着新的轴加入一系列数组</li>
+<li>vstack（）：堆栈数组垂直顺序（行）</li>
+<li>hstack（）：堆栈数组水平顺序（列）</li>
+</ul>
+
+<pre><code class="language-python">arr=np.array([[3,9],[1,2]])
+arr
+</code></pre>
+
+<pre><code>array([[3, 9],
+       [1, 2]])
+</code></pre>
+
+<pre><code class="language-python"># 横向拉伸2次
+np.tile(arr,2)
+</code></pre>
+
+<pre><code>array([[3, 9, 3, 9],
+       [1, 2, 1, 2]])
+</code></pre>
+
+<pre><code class="language-python">np.tile(arr,6)
+</code></pre>
+
+<pre><code>array([[3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9],
+       [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2]])
+</code></pre>
+
+<pre><code class="language-python">np.tile(arr,(3,1))
+</code></pre>
+
+<pre><code>array([[3, 9],
+       [1, 2],
+       [3, 9],
+       [1, 2],
+       [3, 9],
+       [1, 2]])
+</code></pre>
+
+<pre><code class="language-python">np.tile(arr,(3,4))
+</code></pre>
+
+<pre><code>array([[3, 9, 3, 9, 3, 9, 3, 9],
+       [1, 2, 1, 2, 1, 2, 1, 2],
+       [3, 9, 3, 9, 3, 9, 3, 9],
+       [1, 2, 1, 2, 1, 2, 1, 2],
+       [3, 9, 3, 9, 3, 9, 3, 9],
+       [1, 2, 1, 2, 1, 2, 1, 2]])
+</code></pre>
+
+<h2 id="toc_25">stack</h2>
+
+<blockquote>
+<p>Stack(arrays,axis=0):沿着新的轴加入一系列数组</p>
+</blockquote>
+
+<p>相当于加一层维度</p>
+
+<pre><code class="language-python">a=[1,2,3]
+b=[4,5,6]
+</code></pre>
+
+<pre><code class="language-python"># 默认axis=0
+np.stack((a,))
+</code></pre>
+
+<pre><code>array([[1, 2, 3]])
+</code></pre>
+
+<pre><code class="language-python">np.stack((a,b))
+</code></pre>
+
+<pre><code>array([[1, 2, 3],
+       [4, 5, 6]])
+</code></pre>
+
+<pre><code class="language-python">np.stack((a,),axis=1)
+</code></pre>
+
+<pre><code>array([[1],
+       [2],
+       [3]])
+</code></pre>
+
+<h1 id="toc_26">常用一元函数</h1>
+
+<p><img src="media/15212548392809/15213430309763.jpg" alt=""/></p>
+
+<p><img src="media/15212548392809/15213430461194.jpg" alt=""/></p>
+
+<pre><code class="language-python">arr=np.array([-1,2,-3])
+arr
+</code></pre>
+
+<pre><code>array([-1,  2, -3])
+</code></pre>
+
+<pre><code class="language-python"># 取绝对值
+np.abs(arr)
+</code></pre>
+
+<pre><code>array([1, 2, 3])
+</code></pre>
+
+<pre><code class="language-python"># 计算各个元素的正负号
+np.sign(arr)
+</code></pre>
+
+<pre><code>array([-1,  1, -1])
+</code></pre>
+
+<pre><code class="language-python"># 向上取整
+np.ceil([1.2,1.4,1.7])
+</code></pre>
+
+<pre><code>array([ 2.,  2.,  2.])
+</code></pre>
+
+<pre><code class="language-python"># 向下取整
+np.floor([1.2,1.3,1.6])
+</code></pre>
+
+<pre><code>array([ 1.,  1.,  1.])
+</code></pre>
+
+<pre><code class="language-python"># 四舍五入取整
+np.rint([1.2,1.3,1.6])
+</code></pre>
+
+<pre><code>array([ 1.,  1.,  2.])
+</code></pre>
+
+<pre><code class="language-python"># 分别返回一个数的小数部分和整数部分
+np.modf([1.2,7.8])
+</code></pre>
+
+<pre><code>(array([ 0.2,  0.8]), array([ 1.,  7.]))
+</code></pre>
+
+<h1 id="toc_27">常用二元函数</h1>
+
+<p><img src="media/15212548392809/15213430758071.jpg" alt=""/></p>
+
+<pre><code class="language-python"># 元素级的求模计算(除法取余)
+np.mod(4,3) # 1
+np.mod([4,8],[3,5]) # [1,3]
+</code></pre>
+
+<pre><code>array([1, 3])
+</code></pre>
+
+<h1 id="toc_28">聚合函数</h1>
+
+<ul>
+<li>求和:np.sum()</li>
+<li>平均值:np.mean</li>
+<li>最大值:np.max</li>
+<li>最小值:np.min</li>
+<li>总体标准差:np.std</li>
+<li>......</li>
+</ul>
+
+<pre><code class="language-python">arr.sum()
+</code></pre>
+
+<pre><code>-2
+</code></pre>
+
+<h1 id="toc_29">where</h1>
+
+<pre><code class="language-python">arr1=np.array(
+    [
+    [1,2,np.NaN],
+    [4,5,np.NaN]
+])
+arr1
+</code></pre>
+
+<pre><code>array([[  1.,   2.,  nan],
+       [  4.,   5.,  nan]])
+</code></pre>
+
+<pre><code class="language-python">condition=np.isnan(arr1)
+</code></pre>
+
+<pre><code class="language-python">np.where(condition,0,arr1)
+</code></pre>
+
+<pre><code>array([[ 1.,  2.,  0.],
+       [ 4.,  5.,  0.]])
+</code></pre>
+
+<h1 id="toc_30">unique</h1>
+
+<pre><code class="language-python">np.unique([1,2,3,3,3,3,4,5,6,6,6,6])
+</code></pre>
+
+<pre><code>array([1, 2, 3, 4, 5, 6])
+</code></pre>
 
 ]]></content>
   </entry>
@@ -2943,525 +3949,6 @@ org.apache.spark.SparkException: ArrayBuffer(java.nio.channels.ClosedChannelExce
 启动出现问题的SparkStreaming程序，在程序正常计算的状态下，kill掉任意一个Broker后，再观察运行情况。在增大同步线程数之前，kill后SparkStreaming会报同样的异常，而增大后程序依然正常运行，问题解决。</p>
 
 <p>参考:<a href="http://blog.csdn.net/yanshu2012/article/details/53995159">http://blog.csdn.net/yanshu2012/article/details/53995159</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[诗经 <<伐檀>>]]></title>
-    <link href="http://dmlcoding.com/15198767503226.html"/>
-    <updated>2018-03-01T11:59:10+08:00</updated>
-    <id>http://dmlcoding.com/15198767503226.html</id>
-    <content type="html"><![CDATA[
-<p><img src="media/15198767503226/fatan.png" alt="fatan"/></p>
-
-<span id="more"></span><!-- more -->
-
-<blockquote>
-<p>抄一首诗,换个心情...</p>
-</blockquote>
-
-<h1 id="toc_0">伐檀</h1>
-
-<p>坎坎伐檀兮，置之河之干兮，河水清且涟猗。<br/>
-不稼不穑，胡取禾三百廛[1]兮？<br/>
-不狩不猎，胡瞻尔庭有县[2]貆兮？<br/>
-彼君子兮，不素餐兮！</p>
-
-<p>坎坎伐辐兮，置之河之侧兮，河水清且直猗。<br/>
-不稼不穑，胡取禾三百亿兮？<br/>
-不狩不猎，胡瞻尔庭有县特[3]兮？<br/>
-彼君子兮，不素食兮！</p>
-
-<p>坎坎伐轮兮，置之河之漘[4]兮，河水清且沦猗。<br/>
-不稼不穑，胡取禾三百囷[5]兮？<br/>
-不狩不猎，胡瞻尔庭有县鹑兮？<br/>
-彼君子兮，不素飧兮！</p>
-
-<h1 id="toc_1">伐檀白话</h1>
-
-<p>砍伐檀树声坎坎啊，<br/>
-棵棵放倒堆河边啊，<br/>
-河水清清微波转哟。<br/>
-不播种来不收割，<br/>
-为何三百捆禾往家搬啊？<br/>
-不冬狩来不夜猎，<br/>
-为何见你庭院猪獾悬啊？<br/>
-那些老爷君子啊，<br/>
-不会白吃闲饭啊！</p>
-
-<p>砍下檀树做车辐啊，<br/>
-放在河边堆一处啊。<br/>
-河水清清直流注哟。<br/>
-不播种来不收割，<br/>
-为何三百捆禾要独取啊？<br/>
-不冬狩来不夜猎，<br/>
-为何见你庭院兽悬柱啊？<br/>
-那些老爷君子啊，<br/>
-不会白吃饱腹啊！</p>
-
-<p>砍下檀树做车轮啊，<br/>
-棵棵放倒河边屯啊。<br/>
-河水清清起波纹啊。<br/>
-不播种来不收割，<br/>
-为何三百捆禾要独吞啊？<br/>
-不冬狩来不夜猎，<br/>
-为何见你庭院挂鹌鹑啊？<br/>
-那些老爷君子啊，<br/>
-可不白吃腥荤啊！</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ITerm2下使用ssh访问Linux(包括堡垒机)]]></title>
-    <link href="http://dmlcoding.com/15198752296399.html"/>
-    <updated>2018-03-01T11:33:49+08:00</updated>
-    <id>http://dmlcoding.com/15198752296399.html</id>
-    <content type="html"><![CDATA[
-<p>mac下没有xshell,虽然有SecurtCRT,但是真的太丑了.我还是比较喜欢用Iterm2来进行远程连接.<br/>
-这样不可避免的会碰到要记录远程密码,如果每次都输入,那就太麻烦了.</p>
-
-<span id="more"></span><!-- more -->
-
-<h1 id="toc_0">Iterm2下使用ssh访问Linux</h1>
-
-<p>通过情况下,Iterm2访问远程Linux使用ssh命令,如下:<br/>
-<code><br/>
-ssh &lt;用户名&gt;@&lt;ip&gt;<br/>
-</code><br/>
-然后输入访问密码即可登录进去.有时候远程访问的默认端口如果不是22,那就需要额外加上<code>-p</code>参数跟上远程访问端口进行登录了.<br/>
-很明显如果每次都要输入访问密码,那在开发过程中是相当的不方便的.</p>
-
-<p>这里有两个方式实现免密登录.都是用Iterm2的Profiles功能加上脚本来实现.</p>
-
-<h2 id="toc_1">方式1:使用spawn脚本文件</h2>
-
-<p>将远程访问的相关内容写成一个脚本,然后在Profile里面调用即可.<br/>
-<code><br/>
-cd /Users/hushiwei/.ssh/<br/>
-$ touch filename<br/>
-</code></p>
-
-<p>脚本内容<br/>
-```</p>
-
-<h1 id="toc_2">!/usr/bin/expect -f</h1>
-
-<p>set user &lt;用户名&gt;<br/>
-  set host <ip地址><br/>
-  set password &lt;密码&gt;<br/>
-  set timeout -1</p>
-
-<p>spawn ssh \(user@\)host<br/>
-  expect &quot;<em>assword:</em>&quot;<br/>
-  send &quot;$password\r&quot;<br/>
-  interact<br/>
-  expect eof<br/>
-```</p>
-
-<p>如何调用呢?<br/>
-在command中使用命令.command在哪看下面的图你就知道了.<br/>
-<code><br/>
-expect &lt;保存的脚本完整路径&gt;<br/>
-</code></p>
-
-<h2 id="toc_3">方式2:使用sshpass(推荐方式)</h2>
-
-<p>brew安装sshpass<br/>
-<code><br/>
-brew install https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb<br/>
-</code></p>
-
-<p>然后把密码写入到一个文件中<br/>
-<code><br/>
-hushiwei@localhost  ~/sshpass  pwd<br/>
-/Users/hushiwei/sshpass<br/>
-hushiwei@localhost  ~/sshpass  more pass<br/>
-passwd123<br/>
-</code><br/>
-参考图中进行配置<br/>
-<img src="media/15198752296399/sshpass.png" alt="sshpass"/></p>
-
-<p>command写上命令<br/>
-<code><br/>
-/usr/local/bin/sshpass -f /Users/hushiwei/sshpass/pass ssh -p22 用户名@密码<br/>
-</code><br/>
-然后在iterm2的菜单栏选择Profiles,然后点击刚刚的配置,即可免密自动登录到服务器上</p>
-
-<ul>
-<li>注意:首先用命令行登录一次</li>
-</ul>
-
-<h1 id="toc_4">iterm2登录堡垒机</h1>
-
-<p>通过SSH和密钥文件(.pem格式)登录服务器［可能是堡垒机］</p>
-
-<h2 id="toc_5">首先修改下密钥文件权限</h2>
-
-<pre><code>sudo chmod 600 /Users/hushiwei/sshpass/Jumpserver/hushiwei.pem
-</code></pre>
-
-<h2 id="toc_6">其次，终端可直接命令连接</h2>
-
-<pre><code>ssh -i /Users/hushiwei/sshpass/Jumpserver/hushiwei.pem hushiwei@xxx.xxx.xxx.xxx
-</code></pre>
-
-<p>注：首次连接时，会弹出密钥文件密码输入框，可以输入并保存！</p>
-
-<p>除了直接命令连接外，也可参考上面Profiles功能，配置好，直接在Profile里调用！简单脚本如下：</p>
-
-<h2 id="toc_7">配置Profile脚本自动登录堡垒机</h2>
-
-<p>脚本文件 vim jumpserver<br/>
-```<br/>
-hushiwei@localhost  ~/sshpass/Jumpserver  more jumpserver</p>
-
-<h1 id="toc_8">!/usr/bin/expect -f</h1>
-
-<p>set user hushiwei<br/>
- set host xxx.xxx.xxx.xxx<br/>
- set empath /Users/hushiwei/sshpass/Jumpserver/hushiwei.pem<br/>
- set timeout -1</p>
-
-<p>spawn ssh -i \(empath \)user@$host<br/>
- interact<br/>
- expect eof<br/>
-```</p>
-
-<p>命令行执行<br/>
-```<br/>
-hushiwei@localhost  ~/sshpass/Jumpserver  expect /Users/hushiwei/sshpass/Jumpserver/jumpserver<br/>
-spawn ssh -i /Users/hushiwei/sshpass/Jumpserver/hushiwei.pem <a href="mailto:hushiwei@xxx.xxx.xxx.xxx">hushiwei@xxx.xxx.xxx.xxx</a><br/>
-Last login: Fri Aug 18 11:06:16 2017 from xxx.xxx.xxx.xxx</p>
-
-<h3 id="toc_9">欢迎使用Jumpserver开源跳板机系统</h3>
-
-<pre><code>   1) 输入 ID 直接登录 或 输入部分 IP,主机名,备注 进行搜索登录(如果唯一).
-   2) 输入 / + IP, 主机名 or 备注 搜索. 如: /ip
-   3) 输入 P/p 显示您有权限的主机.
-   4) 输入 G/g 显示您有权限的主机组.
-   5) 输入 G/g + 组ID 显示该组下主机. 如: g1
-   6) 输入 E/e 批量执行命令.
-   7) 输入 U/u 批量上传文件.
-   8) 输入 D/d 批量下载文件.
-   9) 输入 H/h 帮助.
-   0) 输入 Q/q 退出.
-</code></pre>
-
-<p>Opt or ID&gt;:<br/>
-<code><br/>
-参考上面的Profile功能,配置好,直接在Profile里调用即可<br/>
-</code></p>
-
-<h1 id="toc_10">在Command里面写入以下即可</h1>
-
-<p>expect /Users/hushiwei/sshpass/Jumpserver/jumpserver<br/>
-```</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[监控SparkStreaming程序脚本]]></title>
-    <link href="http://dmlcoding.com/15198749505894.html"/>
-    <updated>2018-03-01T11:29:10+08:00</updated>
-    <id>http://dmlcoding.com/15198749505894.html</id>
-    <content type="html"><![CDATA[
-<p>虽然Spark on yarn非常的稳定,一般情况下是不会出问题的.但是我们的SparkStreaming程序是一直运行着出实时报表的.<br/>
-我们必须得对SparkStreaming程序进行监控,在程序退出后,能够及时的重启.<br/>
-基于此需求,我想到了通过调用yarn的rest接口来获取提交到yarn上的任务</p>
-
-<span id="more"></span><!-- more -->
-
-<h1 id="toc_0">思路</h1>
-
-<p>调用yarn提供的rest接口来获取所有正在运行的任务<br/>
-<code><br/>
-curl --compressed -H &quot;Accept: application/json&quot; -X GET &quot;http://master:8088/ws/v1/cluster/apps?states=RUNNING&quot;<br/>
-</code><br/>
-如果对别的接口有兴趣,可以看看官网.<br/>
-+ <a href="https://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-site/ResourceManagerRest.html">https://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-site/ResourceManagerRest.html</a><br/>
-+ <a href="http://www.winseliu.com/blog/2014/12/07/hadoop-mr-rest-api/">http://www.winseliu.com/blog/2014/12/07/hadoop-mr-rest-api/</a></p>
-
-<h1 id="toc_1">脚本</h1>
-
-<p>脚本也很简单,简单看看就明白了</p>
-
-<pre><code># -*- coding: utf-8 -*-
-&#39;&#39;&#39;
-    Created by hushiwei on 2018/1/5.
-    监控SparkStreaming程序
-    一旦挂了,执行重启,同时发送邮件和微信报警
-&#39;&#39;&#39;
-
-import os
-import subprocess
-import json
-import logging
-import time
-import urllib2
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from email.header import Header
-
-wechats = &quot;HuShiwei&quot;
-sendEmails = [&#39;hsw_v5@163.com&#39;, &#39;xxxx@gm825.com&#39;]
-
-urlRun = &#39;curl --compressed -H &quot;Accept: application/json&quot; -X GET &quot;http://u007:8089/ws/v1/cluster/apps?states=RUNNING&quot;&#39;
-urlAcc = &#39;curl --compressed -H &quot;Accept: application/json&quot; -X GET &quot;http://u007:8089/ws/v1/cluster/apps?states=ACCEPTED&quot;&#39;
-
-monitorPrograms = {
-    &quot;com.xxxx.streaming.ADXStreaming&quot;: &quot;/home/hadoop/statistics/ad/adxstreaming/start_adx_streaming_yarn.sh&quot;,
-    &quot;com.xxxx.online.streaming.DSPStreaming&quot;: &quot;/home/hadoop/statistics/ad/dsp_ad_puton/dsp_ad_puton_streaming/start_dsp_streaming_yarn_test.sh&quot;,
-    &quot;com.xxxx.streaming.CPDAppStreaming&quot;: &quot;/home/hadoop/statistics/ad/dsp_app_promotion/start_dsp_app_promotion_yarn.sh&quot;
-}
-
-
-class WeChat(object):
-    &#39;&#39;&#39;
-    发送微信工具类
-    &#39;&#39;&#39;
-
-    def __init__(self, corpid, corpsecret, tokenpath):
-        self.corpid = corpid
-        self.corpsecret = corpsecret
-        self.tokenpath = tokenpath
-        self.logger = logging.getLogger(&#39;wechat&#39;)
-
-    def saveToken(self):
-        &#39;&#39;&#39;
-        :return:
-        &#39;&#39;&#39;
-        try:
-            with open(self.tokenpath, &#39;r&#39;) as f:
-                token = f.read()
-                if len(token) &lt; 10:
-                    token = self.getToken()
-                    self.logger.info(&quot;Can not get token from %s,prepare to get token on api which token is %s&quot; % (
-                        self.tokenpath, token))
-                    return token
-                else:
-                    return token
-        except IOError:
-            token = self.getToken()
-            self.logger.info(
-                &quot;Can not get token from %s,prepare to get token on api which token is %s&quot; % (self.tokenpath, token))
-            return token
-
-    def getToken(self):
-        Url = &#39;https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=%s&amp;corpsecret=%s&#39; % (self.corpid, self.corpsecret)
-        req = urllib2.Request(Url)
-        result = urllib2.urlopen(req)
-        json_access_token = json.loads(result.read())
-        access_token = json_access_token[&#39;access_token&#39;]
-
-        with open(self.tokenpath, &#39;w&#39;) as f:
-            f.write(access_token)
-        return access_token
-
-    def setMessage(self, wechatids, text):
-        token = self.saveToken()
-        message = self.makeMessage(text)
-        submiturl = &#39;https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={0}&#39;.format(token)
-        data = {&quot;touser&quot;: wechatids, &quot;msgtype&quot;: &quot;text&quot;, &quot;agentid&quot;: &quot;1000002&quot;, &quot;text&quot;: {&quot;content&quot;: message}, &quot;safe&quot;: &quot;0&quot;}
-        data = json.dumps(data, ensure_ascii=False)
-
-        send_request = urllib2.Request(submiturl, data)
-
-        self.logger.info(&quot;Send wechat %s&quot; % text)
-
-        response = json.loads(urllib2.urlopen(send_request).read())
-
-        if response[&#39;errcode&#39;] == 42001 or response[&#39;errcode&#39;] == 40014:
-            self.logger.info(&quot;Send wechat errorcode : %s&quot; % response[&#39;errcode&#39;])
-            os.remove(self.tokenpath)
-            self.setMessage(wechatids, text)
-
-    def makeMessage(self, text):
-        def date():
-            date = time.strftime(&#39;%m-%d %H:%M:%S&#39;, time.localtime())
-            return date
-
-        return &quot;%s \nCall Time:%s&quot; % (text, date())
-
-
-class Message(object):
-    &#39;&#39;&#39;
-    构造邮箱发送的内容
-    &#39;&#39;&#39;
-
-    def format_str(self, strs):
-        if not isinstance(strs, unicode):
-            strs = unicode(strs)
-        return strs
-
-    def __init__(self, from_user, to_user, subject, content, with_attach=False):
-        &#39;&#39;&#39;
-
-        :param from_user: 谁发过来的邮件
-        :param to_user: 发给谁
-        :param subject: 邮件主题
-        :param content: 邮件内容
-        :param with_attach: 邮件是否包含附件
-        &#39;&#39;&#39;
-
-        if with_attach:
-            self._message = MIMEMultipart()
-            self._message.attach(MIMEText(content, &#39;plain&#39;, &#39;utf-8&#39;))
-        else:
-            self._message = MIMEText(content, &#39;plain&#39;, &#39;utf-8&#39;)
-
-        self._message[&#39;Subject&#39;] = Header(subject, &#39;utf-8&#39;)
-        self._message[&#39;From&#39;] = Header(self.format_str(from_user), &#39;utf-8&#39;)
-        self._message[&#39;To&#39;] = Header(self.format_str(to_user), &#39;utf-8&#39;)
-        self._with_attach = with_attach
-
-    def attach(self, file_path):
-        if self._with_attach == False:
-            print &quot;Please init the Message with attr &#39;with_attach = True&#39;&quot;
-            exit(1)
-        if os.path.isfile(file_path) == False:
-            print &quot;The file doesn`t exist!&quot;
-            exit(1)
-        atta = MIMEText(open(file_path, &#39;rb&#39;).read(), &#39;base64&#39;, &#39;utf-8&#39;)
-        atta[&#39;Content-Type&#39;] = &#39;application/octet-stream&#39;
-        atta[&#39;Content-Disposition&#39;] = &#39;attachment; filename=&quot;%s&quot;&#39; % Header(os.path.basename(file_path), &#39;utf-8&#39;)
-        self._message.attach(atta)
-
-    def getMessage(self):
-        return self._message.as_string()
-
-
-class SMTPClient(object):
-    &#39;&#39;&#39;
-    发送邮件工具类
-    &#39;&#39;&#39;
-
-    def __init__(self, hostname, port, user, passwd):
-        &#39;&#39;&#39;
-        初始化相关参数
-        :param hostname: QQ邮箱:smtp.qq.com
-        :param port: QQ邮箱ssl加密端口:465
-        :param user: QQ邮箱账号
-        :param passwd: QQ邮箱授权秘钥,在web qq邮箱上获取
-        &#39;&#39;&#39;
-        self._HOST = hostname
-        self._PORT = port
-        self._USER = user
-        self._PASS = passwd
-
-    def send(self, receivers, msg):
-        &#39;&#39;&#39;
-        发送邮件方法
-        :param receivers: 邮件接收者,可以是多个.为列表
-        :param msg: 发送的邮件内容
-        :return:
-        &#39;&#39;&#39;
-        if isinstance(msg, Message) == False:
-            print &quot;Error Message Instance!&quot;
-            exit(1)
-        try:
-            smtpObj = smtplib.SMTP_SSL(self._HOST, self._PORT)
-            smtpObj.connect(self._HOST)
-            smtpObj.login(self._USER, self._PASS)
-            smtpObj.sendmail(self._USER, receivers, msg.getMessage())
-            return (1, &quot;邮件发送成功&quot;)
-        except smtplib.SMTPException, e:
-            return (0, &quot;Error: 无法发送邮件%s&quot; % e)
-
-
-def run_it(cmd):
-    &#39;&#39;&#39;
-    通过python执行shell命令
-    :param cmd:
-    :return:
-    &#39;&#39;&#39;
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True,
-                         stderr=subprocess.PIPE)
-    # print (&#39;running:%s&#39; % cmd)
-    out, err = p.communicate()
-    if p.returncode != 0:
-        print (&quot;Non zero exit code:%s executing: %s \nerr course ---&gt; %s&quot; % (p.returncode, cmd, err))
-    return out
-
-
-def reStartSparkScript(scriptPath):
-    &#39;&#39;&#39;
-    执行spark脚本
-    1.cd到脚本所在路径
-    2.在改路径执行脚本
-    :param scripyPath:
-    :return:
-    &#39;&#39;&#39;
-    logger = logging.getLogger(&quot;Main&quot;)
-    scriptDir, script = os.path.split(scriptPath)
-    os.chdir(scriptDir)
-    run_it(&quot;sh %s&quot; % script)
-    logger.info(&quot;exec [ %s ] on [ %s ] &quot; % (script, scriptDir))
-
-
-def collectMonitorStatus(yarnRestApi):
-    &#39;&#39;&#39;
-    从Yarn的Running接口或者Accept接口中获取我们需要监控的程序状态
-    :param str: yarn的running接口或者accept接口
-    :return:
-    &#39;&#39;&#39;
-    strUrl = run_it(yarnRestApi)
-    result = []
-    obj = json.loads(strUrl)
-    if obj[&#39;apps&#39;] is None:
-        return result
-    else:
-        apps = obj[&#39;apps&#39;][&#39;app&#39;]
-        result = [(app[&#39;name&#39;], app[&#39;state&#39;]) for app in apps if app[&#39;name&#39;] in monitorPrograms]
-        return result
-
-
-def checkMonitorApps():
-    &#39;&#39;&#39;
-    调用yarn的running接口和accept接口
-    判断这里面是否有我们需要监控的spark程序
-        如果没有就执行报警和重启
-    :return:
-    &#39;&#39;&#39;
-
-    logging.basicConfig(level=logging.INFO,
-                        format=&#39;%(asctime)s - %(message)s&#39;,
-                        datefmt=&#39;%Y-%m-%d %H:%M:%S&#39;)
-
-    logger = logging.getLogger(&quot;Main&quot;)
-
-    smpt_client = SMTPClient(&#39;smtp.qq.com&#39;, 465, &#39;694244330@qq.com&#39;, &#39;xxxxxx&#39;)
-    wechat_client = WeChat(&#39;xxxxxxxxxxxxxx&#39;, &#39;xxxxxxxxxxxxxxxxxxxxxxxxx&#39;, &#39;/tmp/token.txt&#39;)
-
-    runningStatus = collectMonitorStatus(urlRun)
-    acceptStatus = collectMonitorStatus(urlAcc)
-
-    runningAcceptApps = dict(runningStatus + acceptStatus)
-
-    logger.info(&quot;SparkStreaming ON Yarn Running And Accept ===&gt;%s &quot; % str(runningAcceptApps))
-
-    for monitor in monitorPrograms:
-        if monitor not in runningAcceptApps:
-            logging.info(&quot;[ %s ] is not running or accept,prepare to restart!&quot; % monitor)
-            msg = Message(&quot;694244330@qq.com&quot;, &quot;hushwiei&quot;, monitor, &#39;%s is failed, prepare to resart! -- %s&#39; % (
-                monitor, time.strftime(&#39;%Y-%m-%d %H:%M:%S&#39;, time.localtime())))
-            smpt_client.send(sendEmails, msg)
-            wechat_client.setMessage(wechats, &quot;%s is not running or accept,prepare to restart!&quot; % monitor)
-            reStartSparkScript(monitorPrograms[monitor])
-
-
-def main():
-    checkMonitorApps()
-
-
-if __name__ == &#39;__main__&#39;:
-    main()
-
-
-</code></pre>
 
 ]]></content>
   </entry>

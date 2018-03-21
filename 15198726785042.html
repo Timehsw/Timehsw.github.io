@@ -270,6 +270,14 @@ total 16
 </ul></li>
 </ul>
 
+<h1 id="toc_4">注意</h1>
+
+<ol>
+<li>重新生成公钥后,<code>id_rsa.pub</code>和<code>id_rsa</code>会变,但是<code>authorized_keys</code>文件不会变,这也意味着曾经授权免密登录的主机,仍然可以免密登录过来.</li>
+<li>当主机名修改后,公钥可能就不好使了.</li>
+<li>当用more命令去查看<code>id_rsa.pub</code>文件里面的公钥,然后复制的时候,可能会在换行的地方加上了换行符,然后配置免密的时候,可能就配置不成功了.所以查看文件再复制的时候,还是用cat命令比较好.</li>
+</ol>
+
 
     
 
