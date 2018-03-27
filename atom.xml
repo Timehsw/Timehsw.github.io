@@ -4,7 +4,7 @@
   <title><![CDATA[Time渐行渐远]]></title>
   <link href="http://dmlcoding.com/atom.xml" rel="self"/>
   <link href="http://dmlcoding.com/"/>
-  <updated>2018-03-27T18:12:43+08:00</updated>
+  <updated>2018-03-27T18:17:25+08:00</updated>
   <id>http://dmlcoding.com/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -30,6 +30,8 @@
 <h2 id="toc_0">离散型随机变量</h2>
 
 <p>在理解这两个词之前</p>
+
+<span id="more"></span><!-- more --> 
 
 <ul>
 <li>概率分布函数</li>
