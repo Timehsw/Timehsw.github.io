@@ -135,6 +135,8 @@
             <li><a href="Redis.html">Redis</a></li>
         
             <li><a href="Zookeeper.html">Zookeeper</a></li>
+        
+            <li><a href="BlockChain.html">BlockChain</a></li>
          
 
       </ul>
@@ -160,7 +162,7 @@
           <h1>python-matplotlib note</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2017/12/15</span>
+          <span class="date">2017/7/27</span>
 
           <span>posted in&nbsp;</span> 
           
@@ -177,7 +179,435 @@
       </div><!-- article -->
 
       <div class="article-content">
-      
+      <p>图片都没有,很正常,我从jupyter中导出来的.粘贴到博客,还得弄图片,图片就不上传了!</p>
+
+<h1 id="toc_0">matplotlib介绍</h1>
+
+<ul>
+<li>Python最常用的绘图库，提供了一整套十分适合交互式绘图的命令API，比较方便的就可以将其嵌入到GUI应用程序中!</li>
+<li>官网文档:<a href="http://matplotlib.org/examples/index.html">http://matplotlib.org/examples/index.html</a></li>
+</ul>
+
+<span id="more"></span><!-- more -->
+
+<h1 id="toc_1">基本使用</h1>
+
+<pre><code class="language-python"># 导入方式为基本惯例
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+
+# 显示情况
+#在GUI显示
+#%matplotlib tk
+
+# 在行内显示
+# 默认就是这个,可以不写
+%matplotlib inline 
+</code></pre>
+
+<pre><code class="language-python"># 画一个线性图
+# 调用plot的.plot方法绘制一些坐标
+# 这个.plot需要许多参数，但前两个是&#39;x&#39;和&#39;y&#39;坐标，
+# 我们放入列表。 这意味着，根据这些列表我们拥有 3 个坐标：(1,5) (2,7)和(3,4)。
+
+plt.plot([1,2,3],[5,7,4])
+# 显示图片
+plt.show()
+</code></pre>
+
+<p><img src="output_3_0.png" alt="png"/></p>
+
+<h1 id="toc_2">matplotlib figure图形</h1>
+
+<p>figure：图形，matplotlib中的所有图像都是位于figure对象中，一个图像只能有一个figure对象。matplotlib 的 figure 就是一个 单独的 figure 小窗口, 小窗口里面还可以有更多的小图片.</p>
+
+<pre><code class="language-python">x=np.arange(-3,3,0.1)
+y1=np.sin(x)
+y2=np.cos(x)
+# 创建一个图形
+plt.figure()
+plt.plot(x,y1)
+# 如果要创建两个单独的图形,那么就再创建一个figure
+# 不然就注释这一行,则两个都显示在一个图形里面
+#plt.figure(num=3,figsize=(8,5))
+plt.plot(x,y2)
+plt.show()
+</code></pre>
+
+<p><img src="output_5_0.png" alt="png"/></p>
+
+<h1 id="toc_3">matplotlib-颜色,标记和线型</h1>
+
+<p>plot(x,y,color=&#39;red&#39;,linestyle=&#39;dashed&#39;,marker=&#39;o&#39;...)</p>
+
+<p>绘图中用到的直线属性包括:<br/>
++ LineStyle：线形<br/>
++ LineWidth：线宽<br/>
++ Color：颜色<br/>
++ Marker：标记点的形状<br/>
++ label:用于图例的标签</p>
+
+<p><strong>Plot()</strong><br/>
+绘制线条或标记轴,参数是一个可变长度参数,允许多个X,Y对可选的格式字符串</p>
+
+<pre><code class="language-python"># 举例.两对坐标可以写在一个方法里面
+x=np.arange(-3,3,0.1)
+y1=np.sin(x)
+y2=np.cos(x)
+plt.plot(x,y1,x,y2)
+plt.show()
+</code></pre>
+
+<p><img src="output_8_0.png" alt="png"/></p>
+
+<p>plot(y): 如果只接收一个值,就默认是Y值,那么X默认为0到n,使用默认的线条样式和颜色</p>
+
+<pre><code class="language-python">plt.plot(y1)
+plt.show()
+</code></pre>
+
+<p><img src="output_10_0.png" alt="png"/></p>
+
+<pre><code class="language-python">plt.plot([1,2,3],[5,7,4],color=&#39;red&#39;)
+plt.plot([4,5,6],[5,7,7],color=&#39;green&#39;)
+plt.plot([1,5,7],[5,7,7],color=&#39;blue&#39;,linestyle=&#39;dashed&#39;)
+plt.plot([1,5,7],[5,7,7],color=&#39;blue&#39;,linestyle=&#39;dashed&#39;,marker=&#39;o&#39;)
+plt.show()
+</code></pre>
+
+<p><img src="output_11_0.png" alt="png"/></p>
+
+<pre><code class="language-python"># 简写
+plt.plot([1,2,3],[5,7,4],&#39;ro--&#39;)
+plt.show()
+</code></pre>
+
+<p><img src="output_12_0.png" alt="png"/></p>
+
+<h1 id="toc_4">matplotlib-刻度,标题,标签和图例</h1>
+
+<p>legend ()：生成默认图例, matplotlib 中的 legend 图例就是为了帮我们展示出每个数据对应的图像名称. 更好的让读者认识到你的数据结构.</p>
+
+<p>xlabel、ylabel:设置X轴Y轴标签 <br/>
+title：设置标题<br/>
+xlim、ylim：控制图标的范围<br/>
+xticks、yticks: 控制图标的刻度<br/>
+gca获取当前坐标轴信息。使用spines设置边框,使用set_color设置边框颜色：默认白色</p>
+
+<p>解决中文显示问题<br/>
+mpl.rcParams[&#39;font.sans-serif&#39;] = [&#39;SimHei&#39;]<br/>
+mpl.rcParams[&#39;axes.unicode_minus&#39;] = False</p>
+
+<pre><code class="language-python">x1 = [1,2,3]
+y1 = [5,7,4]
+x2 = [1,2,3]
+y2 = [10,14,12]
+plt.figure()
+plt.plot(x1,y1,&#39;ro--&#39;,label = &#39;First Line&#39;) #设置线条标签
+plt.plot(x2,y2,&#39;b-&#39;,label = &#39;Second Line&#39;)
+#设置标题、标签
+plt.xlabel(&#39;月份&#39;)#X轴标签
+plt.ylabel(&#39;美元单位/亿&#39;)#Y轴标签
+plt.title(&#39;进出口数据&#39;)#标题
+#设置X轴范围
+plt.xlim(0,6)
+#设置y轴范围
+plt.ylim(0,15)
+#设置X轴刻度
+plt.xticks(np.linspace(1,6,6),[str(i) + &#39;月&#39; for i in range(1,7)])
+#设置y轴刻度 
+plt.yticks(np.arange(0,16,3),[&#39;0&#39;,&#39;300&#39;,&#39;600&#39;,&#39;900&#39;,&#39;1200&#39;,&#39;1500&#39;])
+#获取坐标轴信息
+ax = plt.gca()
+#设置边框
+ax.spines[&#39;right&#39;].set_color(&#39;none&#39;)
+ax.spines[&#39;top&#39;].set_color(&#39;none&#39;)
+
+#legend 生成默认图例
+plt.legend()
+
+plt.show()
+</code></pre>
+
+<p><img src="output_14_0.png" alt="png"/></p>
+
+<h1 id="toc_5">subplot子图</h1>
+
+<pre><code class="language-python">x1=[1,2,3]
+y1=[5,7,4]
+x2=[1,2,3]
+y1=[10,14,12]
+plt.figure(num=1)
+plt.subplot(221)
+plt.plot(x1,y1,&#39;r-&#39;)
+plt.subplot(223)
+plt.plot(x2,y2,&#39;b--&#39;)
+
+plt.show()
+</code></pre>
+
+<p><img src="output_16_0.png" alt="png"/></p>
+
+<pre><code class="language-python">import matplotlib.pyplot as plt   
+import numpy as np
+
+# 设置在jupyter中matplotlib的显示情况
+
+#获取figure对象
+fig = plt.figure(figsize = (8,6))
+#在figure上创建对象
+ax1 = fig.add_subplot(221)
+ax2 = fig.add_subplot(222)
+ax3 = fig.add_subplot(212)
+
+#在ax1上绘图
+ax1.plot(np.random.randn(50).cumsum(),&#39;g-&#39;)
+#在ax2上绘图
+ax2.plot(np.random.randn(50).cumsum(),&#39;b--&#39;)
+#在ax3
+ax3.plot(np.random.randn(50).cumsum(),&#39;k--&#39;)
+
+plt.show()
+</code></pre>
+
+<p><img src="output_17_0.png" alt="png"/></p>
+
+<h1 id="toc_6">subplots 快捷方式</h1>
+
+<p>Sublots():返回一个图像和多个子图<br/>
+参数：  nrows=x, ncols=x, sharex=True, sharey=False, <br/>
+            gridspec_kw={&#39;height_ratios&#39;:[2,2,1,1]}<br/>
+例：<br/>
+fig, ax = plt.subplots(2,2),其中参数分别代表子图的行数和列数，一共有 2x2 个图像。函数返回一个figure图像和一个子图ax的array列表。</p>
+
+<pre><code class="language-python">fig,axes=plt.subplots(2,2)
+print(fig)
+print(axes)
+</code></pre>
+
+<pre><code>Figure(432x288)
+[[&lt;matplotlib.axes._subplots.AxesSubplot object at 0x114a9fef0&gt;
+  &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1149c9978&gt;]
+ [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1146f7a20&gt;
+  &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1147187b8&gt;]]
+</code></pre>
+
+<p><img src="output_19_1.png" alt="png"/></p>
+
+<pre><code class="language-python">import matplotlib.pyplot as plt
+
+fig, axes = plt.subplots( nrows=4, ncols=1, sharex=True, sharey=False ) #gridspec_kw={&#39;height_ratios&#39;:[2,2,1,1]}
+
+fig.suptitle(&#39;test&#39;, fontsize=20)#设置fig标题
+
+axes[0].plot(range(10),&#39;ro-&#39;) 
+axes[1].plot(range(10),&#39;bo-&#39;) 
+axes[2].plot(range(10),&#39;go-&#39;) 
+axes[3].plot(range(10),&#39;mo-&#39;) 
+
+plt.show()
+</code></pre>
+
+<p><img src="output_20_0.png" alt="png"/></p>
+
+<pre><code class="language-python">import matplotlib.pyplot as plt
+import numpy as np
+
+fig, axes = plt.subplots(2,2,sharex=True, sharey=True )
+
+for i in range(2):
+    for j in range(2):
+        axes[i,j].hist(np.random.randn(100),10,color = &#39;g&#39;,alpha = 0.75)
+plt.subplots_adjust(wspace = 0.3,hspace = 0.3) #调整子图之间的距离
+fig.suptitle(&#39;test&#39;, fontsize=20)
+#plt.savefig(&#39;aaa.png&#39;,dpi = 50)
+plt.show()
+</code></pre>
+
+<p><img src="output_21_0.png" alt="png"/></p>
+
+<pre><code class="language-python">import matplotlib.pyplot as plt
+import numpy as np
+
+x=np.arange(1,7)
+y=np.random.randint(10,size=(6))
+fig,ax=plt.subplots()
+fig.suptitle(&quot;random num&quot;)
+ax.set_title(&quot;pic1&quot;)
+ax.plot(x,y)
+plt.show()
+</code></pre>
+
+<p><img src="output_22_0.png" alt="png"/></p>
+
+<h1 id="toc_7">matplotlib-柱状图</h1>
+
+<pre><code>matplotlib.pyplot. bar (*args, **kwargs)
+bar(x, height, width, bottom, *, align=&#39;center&#39;, **kwargs)
+参数：
+    x:数据标量
+    height：高
+    width:宽
+    bottom：底端对应Y轴
+    align:对齐  center居中 
+    如果为 &quot;居中&quot;, 则将x参数解释为条形中心的坐标。如果 &quot;边缘&quot;, 将条形按其左边缘对齐要对齐右边缘的条形图, 可传递负的宽度和对align=&#39;edge&#39;
+</code></pre>
+
+<pre><code class="language-python">import matplotlib.pyplot as plt
+import numpy as np
+
+plt.figure(figsize=(8,6))
+plt.bar([1,3,5,7,9,11],[5,2,7,8,2,6],align = &#39;center&#39;,label=&quot;Example one&quot;,color = &#39;y&#39;,edgecolor = &#39;r&#39;)
+
+plt.bar([2,4,6,8,10,12],[8,6,2,5,6,3], label=&quot;Example two&quot;, color=&#39;g&#39;)
+plt.legend()
+plt.xlabel(&#39;bar number&#39;)
+plt.ylabel(&#39;bar height&#39;)
+
+#设置x轴刻度标签
+plt.xticks(np.arange(1,13),[str(i)+&#39;月&#39; for i in range(1,13)])
+
+plt.title(&#39;&#39;)
+
+plt.show()
+</code></pre>
+
+<p><img src="output_1_0.png" alt="png"/></p>
+
+<pre><code>用柱状图表示第一季度的进出口数据
+进口数据：
+    1月份  600亿美元
+    2月份  700亿美元
+    3月份  800亿美元
+出口数据：
+    1月份  500亿美元
+    2月份  900亿美元
+    3月份  1000亿美元
+</code></pre>
+
+<pre><code class="language-python">import matplotlib.pyplot as plt
+import numpy as np
+
+x = [1,2,3]
+y1 = [600,700,800]
+y2 = [500,900,1000]
+plt.figure(figsize=(8,5))
+plt.bar(x,y1,0.1,align = &#39;edge&#39;,label=&quot;进口 单位/美元&quot;,color = &#39;y&#39;)
+plt.bar(x,y2,-0.1,align = &#39;edge&#39; ,label=&quot;出口 单位/美元&quot;, color=&#39;r&#39;)
+
+for m,n in zip(x,y1):
+    plt.text(m+0.08, n+10, &#39;%.2f&#39; %n, ha=&#39;center&#39;, va= &#39;bottom&#39;)
+
+for m,n in zip(x,y2):
+    plt.text(m-0.08, n+10, &#39;%.2f&#39; %n, ha=&#39;center&#39;, va= &#39;bottom&#39;)
+    
+plt.legend()
+plt.xlabel(&#39;第一季度/月&#39;)
+plt.ylabel(&#39;进出口额/美元&#39;)
+
+#设置x轴刻度标签
+plt.xticks(np.arange(1,4),[str(i)+&#39;月&#39; for i in range(1,4)])
+
+plt.title(&#39;第一季度进出口数据&#39;)
+
+plt.show()
+</code></pre>
+
+<p><img src="output_3_0.png" alt="png"/></p>
+
+<h1 id="toc_8">matplotlib-直方图</h1>
+
+<pre><code>matplotlib.pyplot.hist(x, bins=10, range=None,normed=False, weights=None, cumulative=False,bottom=None, histtype=&#39;bar&#39;, align=&#39;mid&#39;,
+                       orientation=u&#39;vertical&#39;, rwidth=None, log=False,color=None, label=None, stacked=False, hold=None,**kwargs) 
+– x: 一个列表或者多个列表（表示不同数据集，长度可以不一致）
+– range: 元组
+– weights: x里每个元素对bin高度的贡献（默认为1）
+– bottom: 数字或者长度为bins的列表
+– histtype: [&#39;bar&#39; | &#39;barstacked&#39; | &#39;step&#39; | &#39;stepfilled&#39;] 
+– align: [&#39;left&#39; | &#39;mid&#39; | &#39;right&#39;] 
+– orientation: [&#39;horizontal&#39; | &#39;vertical&#39;] 
+– rwidth: bar相对bin的宽度
+– color: 一种颜色或者颜色列表（针对不同数据集）
+</code></pre>
+
+<pre><code class="language-python">import matplotlib.pyplot as plt
+#频率分布直方图
+data = ([1,1,2,3,3,3,3,3,4,5])    
+plt.hist(data,10, normed=1)
+plt.show()
+</code></pre>
+
+<p><img src="output_5_0.png" alt="png"/></p>
+
+<pre><code class="language-python">import matplotlib.pyplot as plt
+import numpy as np
+
+#展现出10000个随机数满足 平均值是100 标准差是15 呈现的一个正态分布曲线
+mu, sigma = 100, 15
+x = mu + sigma * np.random.randn(10000)
+
+plt.hist(x, 100, normed=1, facecolor=&#39;g&#39;, alpha=0.75)
+
+plt.title(&#39;直方图&#39;)
+plt.text(60, 0.025,r&#39;$\mu=100,\sigma=15$&#39;)#添加文本
+plt.axis([40, 160, 0, 0.03])
+plt.grid(True)
+plt.show()
+</code></pre>
+
+<p><img src="output_6_0.png" alt="png"/></p>
+
+<h1 id="toc_9">matplotlib-散点图</h1>
+
+<pre><code>matplotlib.pyplot. scatter (x, y, s=none, c=none, marker=none, cmap= None, 
+                            norm=none, vmin=none, vmax=none, alpha=none, Linewidths=none,
+                            verts=none, edgecolors=none, hold=none, data= None, **kwargs)
+参数：
+    x,y:相同长度的数组序列
+    s  :散点的大小标量或形同数组，可选参数，默认20
+    c  :散点的色彩或颜色序列，可选
+    maker:标记风格，可选，默认是‘o’
+    norm:数据的亮度
+    alpha:散点的透明度
+</code></pre>
+
+<pre><code class="language-python">import matplotlib.pyplot as plt
+import numpy as np
+x = [1,2,3,4,5,6,7,8]
+y = [5,2,4,2,1,4,5,2]
+T = np.random.rand(8)*125
+plt.scatter(x,y, label=&#39;散点分布&#39;, c=T, s=25, marker=&quot;o&quot;,alpha = 0.5)
+
+plt.xlabel(&#39;x&#39;)
+plt.ylabel(&#39;y&#39;)
+plt.title(&#39;散点图&#39;)
+plt.legend()
+plt.show()
+</code></pre>
+
+<p><img src="output_8_0.png" alt="png"/></p>
+
+<pre><code class="language-python">import matplotlib.pyplot as plt
+import numpy as np
+
+plt.figure(figsize=(8,6))
+n=1000
+#rand 均匀分布和 randn高斯分布
+x=np.random.randn(1,n)
+y=np.random.randn(1,n)
+T=np.arctan2(x,y) #np.random.rand(n) * 125
+
+plt.scatter(x,y,c=T,s=30,alpha=0.4,marker=&#39;o&#39;)
+#T:散点的颜色
+#s：散点的大小
+#alpha:是透明程度
+plt.show()
+
+</code></pre>
+
+<p><img src="output_9_0.png" alt="png"/></p>
+
 
     
 
@@ -187,16 +617,16 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15199040835190.html" 
-          title="Previous Post: kafka-sparkstreaming长时间运行后异常退出原因分析">&laquo; kafka-sparkstreaming长时间运行后异常退出原因分析</a>
+          <a href="15198759869483.html" 
+          title="Previous Post: 深入理解Java虚拟机之JDK命令行工具(一)">&laquo; 深入理解Java虚拟机之JDK命令行工具(一)</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15212549634720.html" 
-          title="Next Post: python-pandas note">python-pandas note &raquo;</a>
+          <a  href="15198750755456.html" 
+          title="Next Post: python 可视化包-Matplotlib">python 可视化包-Matplotlib &raquo;</a>
       
       </p>
         </div>
@@ -305,6 +735,8 @@
             <a href="Redis.html"><strong>Redis</strong></a>
         
             <a href="Zookeeper.html"><strong>Zookeeper</strong></a>
+        
+            <a href="BlockChain.html"><strong>BlockChain</strong></a>
          
         </p>
 
@@ -321,31 +753,31 @@
 	      
 		      
 			      <li class="post">
-			        <a href="15209079363420.html">大数据框架-开源协议</a>
+			        <a href="15221149143615.html">概率分布函数和概率密度函数</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15205689785115.html">Zookeeper笔记</a>
+			        <a href="15220339795263.html">分布式系统的一致性</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15205677979326.html">分布式应用浅谈</a>
+			        <a href="15217143404677.html">docker 错误</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15203071412162.html">kafka-sparkstreaming自己维护offset</a>
+			        <a href="15216998348495.html">mac 搭建 区块链开发环境</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15202200627560.html">查看linux系统负荷</a>
+			        <a href="15216328231070.html">LeetCode解题思路</a>
 			      </li>
 		     
 		  

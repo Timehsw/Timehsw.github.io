@@ -135,6 +135,8 @@
             <li><a href="Redis.html">Redis</a></li>
         
             <li><a href="Zookeeper.html">Zookeeper</a></li>
+        
+            <li><a href="BlockChain.html">BlockChain</a></li>
          
 
       </ul>
@@ -160,7 +162,7 @@
           <h1>python-pandas note</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2017/12/13</span>
+          <span class="date">2017/7/24</span>
 
           <span>posted in&nbsp;</span> 
           
@@ -177,7 +179,347 @@
       </div><!-- article -->
 
       <div class="article-content">
-      
+      <h1 id="toc_0">基本数据结构</h1>
+
+<h2 id="toc_1">Series</h2>
+
+<p>一种类似于一维数组的对象，是由一组数据(各种NumPy数据类型)以及一组与之相关的数据标签(即索引)组成。<br/><br/>
+仅由一组数据也可产生简单的Series对象。注意：Series中的索引值是可以重复的</p>
+
+<span id="more"></span><!-- more -->
+
+<h3 id="toc_2">Series的创建方式</h3>
+
+<ul>
+<li>通过一维数组创建</li>
+<li>通过字典创建</li>
+</ul>
+
+<h4 id="toc_3">通过一维数组创建Series</h4>
+
+<pre><code class="language-python">import pandas as pd
+import numpy as np
+</code></pre>
+
+<pre><code class="language-python">ser01=pd.Series(np.array([1,2,3,4]))
+ser01
+</code></pre>
+
+<pre><code>0    1
+1    2
+2    3
+3    4
+dtype: int64
+</code></pre>
+
+<pre><code class="language-python">ser01.dtype
+</code></pre>
+
+<pre><code>dtype(&#39;int64&#39;)
+</code></pre>
+
+<pre><code class="language-python"># 查看ser01的索引
+ser01.index
+</code></pre>
+
+<pre><code>RangeIndex(start=0, stop=4, step=1)
+</code></pre>
+
+<pre><code class="language-python"># 查看ser01的值
+ser01.values
+</code></pre>
+
+<pre><code>array([1, 2, 3, 4])
+</code></pre>
+
+<pre><code class="language-python"># 重置索引
+ser01.index=[&#39;hadoop&#39;,&#39;spark&#39;,&#39;flume&#39;,&#39;kafka&#39;]
+</code></pre>
+
+<pre><code class="language-python">ser01
+</code></pre>
+
+<pre><code>0    1
+1    2
+2    3
+3    4
+dtype: int64
+</code></pre>
+
+<pre><code class="language-python"># 指定类型,指定索引进行创建
+pd.Series([1,2,3,4,5],dtype=&#39;float&#39;,index=list(&#39;abcde&#39;))
+</code></pre>
+
+<pre><code>a    1.0
+b    2.0
+c    3.0
+d    4.0
+e    5.0
+dtype: float64
+</code></pre>
+
+<h4 id="toc_4">通过字典创建Series</h4>
+
+<pre><code class="language-python">dic={
+    &#39;hadoop&#39;:90,
+    &#39;spark&#39;:100,
+    &#39;kafka&#39;:80
+}
+
+# 通过字典创建的时候,字典的key就是索引了.字典的值就是Series的值
+ser02=pd.Series(dic)
+ser02
+</code></pre>
+
+<pre><code>hadoop     90
+kafka      80
+spark     100
+dtype: int64
+</code></pre>
+
+<pre><code class="language-python">ser02.values
+</code></pre>
+
+<pre><code>array([ 90,  80, 100])
+</code></pre>
+
+<h3 id="toc_5">Series值的获取</h3>
+
+<pre><code class="language-python">ser03=pd.Series(np.arange(1,6),index=list(&#39;abcde&#39;))
+ser03
+</code></pre>
+
+<pre><code>a    1
+b    2
+c    3
+d    4
+e    5
+dtype: int64
+</code></pre>
+
+<pre><code class="language-python"># 通过索引拿
+ser03[&#39;a&#39;]
+</code></pre>
+
+<pre><code>1
+</code></pre>
+
+<pre><code class="language-python">ser03[&#39;c&#39;]
+</code></pre>
+
+<pre><code>3
+</code></pre>
+
+<pre><code class="language-python">ser03[[&#39;a&#39;,&#39;c&#39;]]
+</code></pre>
+
+<pre><code>a    1
+c    3
+dtype: int64
+</code></pre>
+
+<pre><code class="language-python"># 通过下标拿
+ser03[1]
+</code></pre>
+
+<pre><code>2
+</code></pre>
+
+<pre><code class="language-python">...... ,
+</code></pre>
+
+<h2 id="toc_6">DataFrame</h2>
+
+<p>一个表格型的数据结构，包含有一组有序的列，每列可以是不同的值类型(数值、字符串、布尔型等)，<br/><br/>
+DataFrame即有行索引也有列索引，可以被看做是由Series组成的字典。</p>
+
+<pre><code class="language-python">df=pd.DataFrame({
+    &#39;order_id&#39;:[&#39;1001&#39;,&#39;1002&#39;,&#39;1003&#39;,&#39;1004&#39;,&#39;1005&#39;,&#39;1006&#39;],
+    &#39;member_id&#39;:[&#39;a01&#39;,&#39;a02&#39;,&#39;a03&#39;,&#39;a01&#39;,&#39;a02&#39;,&#39;a03&#39;],
+    &#39;order_amt&#39;:[90,76,89,98,68,89],
+    &#39;gender&#39;:[&#39;man&#39;,&#39;women&#39;,&#39;man&#39;,&#39;women&#39;,&#39;man&#39;,&#39;man&#39;]
+})
+df
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gender</th>
+      <th>member_id</th>
+      <th>order_amt</th>
+      <th>order_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>man</td>
+      <td>a01</td>
+      <td>90</td>
+      <td>1001</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>women</td>
+      <td>a02</td>
+      <td>76</td>
+      <td>1002</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>man</td>
+      <td>a03</td>
+      <td>89</td>
+      <td>1003</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>women</td>
+      <td>a01</td>
+      <td>98</td>
+      <td>1004</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>man</td>
+      <td>a02</td>
+      <td>68</td>
+      <td>1005</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>man</td>
+      <td>a03</td>
+      <td>89</td>
+      <td>1006</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="toc_7">去重</h3>
+
+<pre><code class="language-python">df[&#39;member_id&#39;].unique()
+</code></pre>
+
+<pre><code>array([&#39;a01&#39;, &#39;a02&#39;, &#39;a03&#39;], dtype=object)
+</code></pre>
+
+<h2 id="toc_8">简单聚合统计</h2>
+
+<pre><code class="language-python">df.order_amt.value_counts()
+</code></pre>
+
+<pre><code>89    2
+98    1
+68    1
+76    1
+90    1
+Name: order_amt, dtype: int64
+</code></pre>
+
+<pre><code class="language-python">df
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gender</th>
+      <th>member_id</th>
+      <th>order_amt</th>
+      <th>order_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>man</td>
+      <td>a01</td>
+      <td>90</td>
+      <td>1001</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>women</td>
+      <td>a02</td>
+      <td>76</td>
+      <td>1002</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>man</td>
+      <td>a03</td>
+      <td>89</td>
+      <td>1003</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>women</td>
+      <td>a01</td>
+      <td>98</td>
+      <td>1004</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>man</td>
+      <td>a02</td>
+      <td>68</td>
+      <td>1005</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>man</td>
+      <td>a03</td>
+      <td>89</td>
+      <td>1006</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-python">df.groupby(&#39;gender&#39;)[&#39;order_amt&#39;].count()
+</code></pre>
+
+<pre><code>gender
+man      4
+women    2
+Name: order_amt, dtype: int64
+</code></pre>
+
+<pre><code class="language-python">df.groupby(
+</code></pre>
+
 
     
 
@@ -187,16 +529,16 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15213431815968.html" 
-          title="Previous Post: python-matplotlib note">&laquo; python-matplotlib note</a>
+          <a href="15198725905052.html" 
+          title="Previous Post: 机器视觉处理与Tesseract介绍">&laquo; 机器视觉处理与Tesseract介绍</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15212548392809.html" 
-          title="Next Post: python-numpy note">python-numpy note &raquo;</a>
+          <a  href="15198765095343.html" 
+          title="Next Post: Hbase笔记">Hbase笔记 &raquo;</a>
       
       </p>
         </div>
@@ -305,6 +647,8 @@
             <a href="Redis.html"><strong>Redis</strong></a>
         
             <a href="Zookeeper.html"><strong>Zookeeper</strong></a>
+        
+            <a href="BlockChain.html"><strong>BlockChain</strong></a>
          
         </p>
 
@@ -321,31 +665,31 @@
 	      
 		      
 			      <li class="post">
-			        <a href="15209079363420.html">大数据框架-开源协议</a>
+			        <a href="15221149143615.html">概率分布函数和概率密度函数</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15205689785115.html">Zookeeper笔记</a>
+			        <a href="15220339795263.html">分布式系统的一致性</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15205677979326.html">分布式应用浅谈</a>
+			        <a href="15217143404677.html">docker 错误</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15203071412162.html">kafka-sparkstreaming自己维护offset</a>
+			        <a href="15216998348495.html">mac 搭建 区块链开发环境</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15202200627560.html">查看linux系统负荷</a>
+			        <a href="15216328231070.html">LeetCode解题思路</a>
 			      </li>
 		     
 		  

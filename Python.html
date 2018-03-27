@@ -135,6 +135,8 @@
             <li><a href="Redis.html">Redis</a></li>
         
             <li><a href="Zookeeper.html">Zookeeper</a></li>
+        
+            <li><a href="BlockChain.html">BlockChain</a></li>
          
 
       </ul>
@@ -157,22 +159,28 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15213431815968.html">
+                <a class="clearlink" href="15219482100406.html">
                 
-                  <h1>python-matplotlib note</h1>
+                  <h1>字符串编码转换</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	
+                        	<ul>
+<li>乱码之类的几乎都是由汉字引起的。</li>
+<li>任何平台的任何编码 都能和 Unicode 互相转换</li>
+<li>UTF-8 与 GBK 互相转换，那就先把UTF-8转换成Unicode，再从Unicode转换成GBK，反之同理。</li>
+</ul>
+
+
                         
                       </div>
                   </div>
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
-                    <span class="date">2017/12/15</span>
+                   <a href="15219482100406.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/10/4</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='Python.html'>Python</a></span>
@@ -189,22 +197,26 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15212549634720.html">
+                <a class="clearlink" href="15219476833792.html">
                 
-                  <h1>python-pandas note</h1>
+                  <h1>json和jsonPATH[整理自网络]</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	
+                        	<p>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式，它使得人们很容易的进行阅读和编写。同时也方便了机器进行解析和生成。适用于进行数据交互的场景，比如网站前台与后台之间的数据交互。</p>
+
+<p>JSON和XML的比较可谓不相上下。</p>
+
+
                         
                       </div>
                   </div>
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
-                    <span class="date">2017/12/13</span>
+                   <a href="15219476833792.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/10/3</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='Python.html'>Python</a></span>
@@ -221,986 +233,716 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15212548392809.html">
+                <a class="clearlink" href="15219455706450.html">
                 
-                  <h1>python-numpy note</h1>
+                  <h1>xml和xpath[整理自网络]</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h1 id="toc_0">numpy创建ndarray</h1>
+                        	<h2 id="toc_0">什么是XML</h2>
 
 <ul>
-<li>一种由相同元素组成的多维数组,元素数量是事先给定好的</li>
-<li>元素的数据类型由dtype对象来指定,每个ndarry只有一种dtype类型</li>
-<li>ndarray的大小固定,创建好数组大小是不会再发生改变的</li>
+<li>XML 指可扩展标记语言（EXtensible Markup Language）</li>
+<li>XML 是一种标记语言，很类似 HTML</li>
+<li>XML 的设计宗旨是传输数据，而非显示数据</li>
+<li>XML 的标签需要我们自行定义。</li>
+<li>XML 被设计为具有自我描述性。</li>
+<li>XML 是 W3C 的推荐标准</li>
 </ul>
 
-<pre><code class="language-python">import numpy as np
-</code></pre>
-
-<pre><code class="language-python"># 可以用help方法来查看这个函数的使用方法
-help(np.array)
-</code></pre>
-
-<h2 id="toc_1">用python内置数组创建ndarray</h2>
-
-<pre><code class="language-python"># 用一维数组创建
-np.array([1,2,3])
-</code></pre>
-
-<pre><code>array([1, 2, 3])
-</code></pre>
-
-<pre><code class="language-python"># 用元组创建
-np.array((1,2,3))
-</code></pre>
-
-<pre><code>array([1, 2, 3])
-</code></pre>
-
-<pre><code class="language-python"># 用多维数组
-np.array([[1,2,3,4],
-          [5,6,7,8]])
-</code></pre>
-
-<pre><code>array([[1, 2, 3, 4],
-       [5, 6, 7, 8]])
-</code></pre>
-
-<pre><code class="language-python"># 创建三维数组
-np.array([[[1,2,3],[2,3,4]],[[4,5,6],[7,8,9]]
-])
-</code></pre>
-
-<pre><code>array([[[1, 2, 3],
-        [2, 3, 4]],
-
-       [[4, 5, 6],
-        [7, 8, 9]]])
-</code></pre>
-
-<h2 id="toc_2">用numpy内置函数创建ndarray</h2>
-
-<pre><code class="language-python"># 通过zeros创建数组,创建元素全为零的数组
-# 参数为一个元组,元组表示你想创建一个几维的数组
-# 创建一个3*3的数组,元素初始化都为0
-np.zeros((3,3))
-
-# 创建一个2*3*3的三维数组,元素初始化都为0
-np.zeros((2,3,3))
-</code></pre>
-
-<pre><code>array([[[0., 0., 0.],
-        [0., 0., 0.],
-        [0., 0., 0.]],
-
-       [[0., 0., 0.],
-        [0., 0., 0.],
-        [0., 0., 0.]]])
-</code></pre>
-
-<pre><code class="language-python"># 通过ones创建数组,创意元素都为1的数组
-np.ones((3,4))
-</code></pre>
-
-<pre><code>array([[1., 1., 1., 1.],
-       [1., 1., 1., 1.],
-       [1., 1., 1., 1.]])
-</code></pre>
-
-<pre><code class="language-python"># 通过empty创建未初始化的数组
-np.empty((2,3))
-</code></pre>
-
-<pre><code>array([[0., 0., 0.],
-       [0., 0., 0.]])
-</code></pre>
-
-<h2 id="toc_3">ndarray的其他创建方式</h2>
-
-<pre><code class="language-python"># arange函数,类似python内置的range
-np.arange(9)
-</code></pre>
-
-<pre><code>array([0, 1, 2, 3, 4, 5, 6, 7, 8])
-</code></pre>
-
-<pre><code class="language-python">np.arange(1,9)
-</code></pre>
-
-<pre><code>array([1, 2, 3, 4, 5, 6, 7, 8])
-</code></pre>
-
-<pre><code class="language-python">np.arange(1,9,2)
-np.arange(9,1,-1)
-</code></pre>
-
-<pre><code>array([9, 8, 7, 6, 5, 4, 3, 2])
-</code></pre>
-
-<pre><code class="language-python"># linspace函数,生成等差数列
-# 生成1到10的数,一共有5个元素
-np.linspace(1,10,5)
-</code></pre>
-
-<pre><code>array([ 1.  ,  3.25,  5.5 ,  7.75, 10.  ])
-</code></pre>
-
-<pre><code class="language-python"># logspace生成等比数列
-# 10的0次方开始,到10的2次方结束,一共生成5个元素
-np.logspace(0,2,5)
-</code></pre>
-
-<pre><code>array([  1.        ,   3.16227766,  10.        ,  31.6227766 ,
-       100.        ])
-</code></pre>
-
-<pre><code class="language-python"># 修改base为2,默认底数是10
-np.logspace(0,2,5,base=2)
-</code></pre>
-
-<pre><code>array([1.        , 1.41421356, 2.        , 2.82842712, 4.        ])
-</code></pre>
-
-<pre><code class="language-python"># random函数,生成随机数
-np.random.random((3,3))
-</code></pre>
-
-<pre><code>array([[0.32521681, 0.46044314, 0.19938466],
-       [0.38477235, 0.20250328, 0.93452861],
-       [0.0615017 , 0.1795197 , 0.32724319]])
-</code></pre>
-
-<pre><code class="language-python"># randint 生成随机整数,从1到9,一共是个3*3的数组
-np.random.randint(1,9,size=(3,3))
-</code></pre>
-
-<pre><code>array([[6, 1, 2],
-       [2, 5, 5],
-       [6, 7, 3]])
-</code></pre>
-
-<pre><code class="language-python"># randn 返回一个样本,具有标准正态分布
-np.random.randn(3,3)
-</code></pre>
-
-<pre><code>array([[-0.57476519,  0.45673427,  0.26634586],
-       [-1.98015823, -1.25879457, -1.18650781],
-       [ 0.90624497, -1.16062802,  0.49804173]])
-</code></pre>
-
-<pre><code class="language-python"># rand 生成0到1直接的随机数
-np.random.rand(9)
-</code></pre>
-
-<pre><code>array([0.23177845, 0.33177202, 0.72181294, 0.24416673, 0.41005128,
-       0.6275457 , 0.40247175, 0.90591392, 0.46705692])
-</code></pre>
-
-<h1 id="toc_4">ndarray对象属性</h1>
-
-<h2 id="toc_5">修改ndarray对象类型dtype</h2>
-
-<pre><code class="language-python"># ndim 数组维度的个数,轴的个数被称作秩
-arr=np.random.randint(1,9,size=(3,3))
-print(arr.ndim)
-</code></pre>
-
-<pre><code>2
-</code></pre>
-
-<pre><code class="language-python"># shape 数组的维度
-arr=np.random.randint(1,9,size=(3,3))
-print(arr.shape)
-</code></pre>
-
-<pre><code>(3, 3)
-</code></pre>
-
-<pre><code class="language-python"># dtype ndarray的元素类型
-arr=np.random.randint(1,9,size=(3,3))
-print(arr.dtype)
-
-# itemsize数组中每个元素的字节大小
-print(arr.itemsize)
-
-# size ndarray里面的元素个数
-print(arr.size)
-</code></pre>
-
-<pre><code>int64
-8
-9
-</code></pre>
-
-<pre><code class="language-python">arr2=np.array([1,2,3,4])
-# 查看元素类型
-print(arr2.dtype)
-
-# 修改元素类型
-arr3=arr2.astype(float)
-print(arr3.dtype)
-arr4=np.array([1,2,3,4],dtype=float)
-print(arr4.dtype)
-</code></pre>
-
-<pre><code>int64
-float64
-float64
-</code></pre>
-
-<h2 id="toc_6">修改ndarray的形状shape</h2>
-
-<pre><code class="language-python"># 修改ndarray形状,要求修改后乘积不变
-arr=np.random.randint(1,9,size=(2,5))
-print(arr)
-print(arr.shape)
-arr.shape=(5,2)
-print(arr)
-</code></pre>
-
-<pre><code>[[5 8 8 1 8]
- [5 5 8 5 6]]
-(2, 5)
-[[5 8]
- [8 1]
- [8 5]
- [5 8]
- [5 6]]
-</code></pre>
+<p>W3School官方文档：<a href="http://www.w3school.com.cn/xml/index.asp">http://www.w3school.com.cn/xml/index.asp</a></p>
 
-<pre><code class="language-python">arr=np.random.randint(1,9,size=(2,5))
-# -1 系统帮你算另外一部分
-arr.shape=(5,-1)
-arr
-</code></pre>
-
-<pre><code>array([[2, 8],
-       [1, 7],
-       [8, 7],
-       [3, 7],
-       [8, 5]])
-</code></pre>
-
-<pre><code class="language-python"># reshape修改后,创建的数组和原先的数组映射.修改后就都修改了
-arr=np.arange(9)
-print(arr)
-arr2=arr.reshape(3,3)
-print(arr2)
-arr2[0][1]=100
-print(arr)
-print(arr2)
-</code></pre>
-
-<pre><code>[0 1 2 3 4 5 6 7 8]
-[[0 1 2]
- [3 4 5]
- [6 7 8]]
-[  0 100   2   3   4   5   6   7   8]
-[[  0 100   2]
- [  3   4   5]
- [  6   7   8]]
-</code></pre>
-
-<pre><code class="language-python">arr=np.arange(9).reshape(3,3)
-arr
-</code></pre>
-
-<pre><code>array([[0, 1, 2],
-       [3, 4, 5],
-       [6, 7, 8]])
-</code></pre>
-
-<h1 id="toc_7">numpy的基本操作</h1>
-
-<h2 id="toc_8">数组与标量,数组之间的运算</h2>
-
-<ul>
-<li>1.数组不用循环即可对每个元素执行批量的算术运算操作,这个过程叫做矢量化,即用数组表达式代替循环的做法</li>
-<li>2.矢量化数组运算性能比纯Python方式快上一两个数据级</li>
-<li>3.大小相等的两个数组之间的任何算术运算都会将其运算应用到元素级别的操作上</li>
-</ul>
-
-<p><strong>在numpy中,大小相等的数组之间的的运算,为元素级运算,即只用于位置相同的元素之间,所得的运算结果组成一个新的数组,运算结果的位置跟操作数位置相同</strong></p>
-
-<h3 id="toc_9">数组与标量之间的运算</h3>
-
-<pre><code class="language-python">arr=np.arange(9).reshape(3,3)
-print(arr)
-print(arr+2)
-print(arr*2)
-</code></pre>
-
-<pre><code>[[0 1 2]
- [3 4 5]
- [6 7 8]]
-[[ 2  3  4]
- [ 5  6  7]
- [ 8  9 10]]
-[[ 0  2  4]
- [ 6  8 10]
- [12 14 16]]
-</code></pre>
-
-<h3 id="toc_10">数组与数组之间的运算</h3>
-
-<pre><code class="language-python">arr=np.array([1,1,2,3])
-arr2=np.array([2,1,6,3])
-arr3=arr+arr2
-arr3
-</code></pre>
-
-<pre><code>array([3, 2, 8, 6])
-</code></pre>
-
-<pre><code class="language-python">arr1=np.array([
-    [10,20,30],
-    [40,50,60]
-])
-arr2=np.array([
-    [1,2,3],
-    [4,5,6]
-])
-print(arr1)
-print(arr2)
-</code></pre>
-
-<pre><code>[[10 20 30]
- [40 50 60]]
-[[1 2 3]
- [4 5 6]]
-</code></pre>
-
-<pre><code class="language-python">print(arr1+arr2)
-</code></pre>
-
-<pre><code>[[11 22 33]
- [44 55 66]]
-</code></pre>
-
-<h2 id="toc_11">数组的矩阵积</h2>
-
-<ul>
-<li>矩阵:多维数组即矩阵</li>
-<li>矩阵积(matrix product):两个二维矩阵(行和列的矩阵)满足第一个矩阵的列数与第二个矩阵的行数相同,那么可以进行矩阵的乘法,即矩阵积,矩阵积不是元素级的运算.也称为点积,数量积.</li>
-<li>[M,N]*[N,Y]=<a href="%E7%B1%BB%E4%BC%BC%E8%BF%99%E6%A0%B7">M,Y</a></li>
-<li>dot函数来实现</li>
-</ul>
-
-<pre><code class="language-python"># 每行为每个部门1,2,3,每列为每个产品A,B,C
-# 那么就是3个部门,3个产品
-arr=np.array([
-    [120,60,220],
-    [115,23,201],
-    [132,48,230]
-])
-
-# 每行为产品A,B,C,列为产品单价和产品体积
-arr2=np.array([
-    [12.34,0.04],
-    [204.56,2.34],
-    [9.89,0.45]
-])
-
-
-</code></pre>
-
-<pre><code class="language-python"># 求每个部门的总收入,以及每个部门的产品共占了多少体积
-# 为了实现这个需求,就可以将两个矩阵进行相乘
-
-# 举例: 120*12+60*204.56+220*9.89=15930.2 
-# 行列对应元素相乘后累加
-# 矩阵相乘使用dot函数
-arr.dot(arr2)
-</code></pre>
-
-<pre><code>array([[15930.2 ,   244.2 ],
-       [ 8111.87,   148.87],
-       [13722.46,   221.1 ]])
-</code></pre>
-
-<h2 id="toc_12">ndarray多维数组的索引和切片</h2>
-
-<p>|  | 0 | 1  |  2 |  3 |<br/>
-|:-|:--|:---|:---|:---|<br/>
-| 0 |0,0|0,1|0,2 |0,3 |<br/>
-| 1 |1,0|1,1|1,2 |1,3 |<br/>
-| 2 |2,0|2,1|2,2 |2,3 |</p>
-
-<pre><code class="language-python">arr=np.random.randint(1,9,size=(2,3,3))
-print(arr)
-</code></pre>
-
-<pre><code>[[[4 5 1]
-  [3 5 3]
-  [3 7 5]]
-
- [[8 3 1]
-  [3 8 3]
-  [3 1 7]]]
-</code></pre>
-
-<h3 id="toc_13">ndarray的索引</h3>
-
-<p>和python的列表索引也是一样的</p>
+<h4 id="toc_1">XML 和 HTML 的区别</h4>
 
-<pre><code class="language-python"># 一个中括号表示一个维度
-print(arr[0][0][1])
+<table>
+<thead>
+<tr>
+<th>数据格式</th>
+<th style="text-align: center">描述</th>
+<th>设计目标</th>
+</tr>
+</thead>
 
-# 通过逗号分隔,每部分是一个维度.比用中括号看起来更简单
-print(arr[0,0,1])
-</code></pre>
-
-<pre><code>5
-5
-</code></pre>
-
-<h3 id="toc_14">ndarray的切片</h3>
-
-<p>和python的列表切片也是一样的</p>
-
-<pre><code class="language-python"># 冒号代表对这一维度的所有进行切片
-print(arr[:,:,:])
-
-# 取每一维度的第一列
-print(arr[:,:,0])
-print(arr[:,:,0:2])
-</code></pre>
-
-<pre><code>[[[4 5 1]
-  [3 5 3]
-  [3 7 5]]
-
- [[8 3 1]
-  [3 8 3]
-  [3 1 7]]]
-[[4 3 3]
- [8 3 3]]
-[[[4 5]
-  [3 5]
-  [3 7]]
-
- [[8 3]
-  [3 8]
-  [3 1]]]
-</code></pre>
-
-<pre><code class="language-python">num=np.array([
-    [0,1,2,3,4],
-    [5,6,7,8,9]
-])
-</code></pre>
+<tbody>
+<tr>
+<td>XML</td>
+<td style="text-align: center">Extensible Markup Language <code>（可扩展标记语言）</code></td>
+<td>被设计为传输和存储数据，其焦点是数据的内容。</td>
+</tr>
+<tr>
+<td>HTML</td>
+<td style="text-align: center">HyperText Markup Language <code>（超文本标记语言）</code></td>
+<td>显示数据以及如何更好显示数据。</td>
+</tr>
+<tr>
+<td>HTML DOM</td>
+<td style="text-align: center">Document Object Model for HTML <code>(文档对象模型)</code></td>
+<td>通过 HTML DOM，可以访问所有的 HTML 元素，连同它们所包含的文本和属性。可以对其中的内容进行修改和删除，同时也可以创建新的元素。</td>
+</tr>
+</tbody>
+</table>
 
-<pre><code class="language-python"># 取第一行的所有元素
-num[1,:]
+<h5 id="toc_2">XML文档示例</h5>
 
-# 取第一列的所有元素
-num[:,0]
-# 取第二列的所有元素
-num[:,1]
-</code></pre>
-
-<pre><code>array([1, 6])
-</code></pre>
-
-<h3 id="toc_15">ndarray的高级索引</h3>
-
-<p>如果一个ndarray是非元组序列,数据类型为<strong>整数</strong>或<strong>布尔值</strong>的ndarray,或者至少一个元素为序列对象的元组,我们就能够用它来索引ndarray</p>
-
-<p>高级索引始终返回数据的副本.与此相反,切片只提供了一个视图.</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 
-<h4 id="toc_16">整数索引</h4>
+&lt;bookstore&gt; 
 
-<pre><code class="language-python">x=np.array([
-    [1,2],
-    [3,4],
-    [5,6]
-])
+  &lt;book category=&quot;cooking&quot;&gt; 
+    &lt;title lang=&quot;en&quot;&gt;Everyday Italian&lt;/title&gt;  
+    &lt;author&gt;Giada De Laurentiis&lt;/author&gt;  
+    &lt;year&gt;2005&lt;/year&gt;  
+    &lt;price&gt;30.00&lt;/price&gt; 
+  &lt;/book&gt;  
 
-y=x[[0,1,2],[0,1,0]]
+  &lt;book category=&quot;children&quot;&gt; 
+    &lt;title lang=&quot;en&quot;&gt;Harry Potter&lt;/title&gt;  
+    &lt;author&gt;J K. Rowling&lt;/author&gt;  
+    &lt;year&gt;2005&lt;/year&gt;  
+    &lt;price&gt;29.99&lt;/price&gt; 
+  &lt;/book&gt;  
 
-# 该结果包括数组中(0,0)，(1,1)和(2,0)位置处的元素。
-print(y)
-</code></pre>
+  &lt;book category=&quot;web&quot;&gt; 
+    &lt;title lang=&quot;en&quot;&gt;XQuery Kick Start&lt;/title&gt;  
+    &lt;author&gt;James McGovern&lt;/author&gt;  
+    &lt;author&gt;Per Bothner&lt;/author&gt;  
+    &lt;author&gt;Kurt Cagle&lt;/author&gt;  
+    &lt;author&gt;James Linn&lt;/author&gt;  
+    &lt;author&gt;Vaidyanathan Nagarajan&lt;/author&gt;  
+    &lt;year&gt;2003&lt;/year&gt;  
+    &lt;price&gt;49.99&lt;/price&gt; 
+  &lt;/book&gt; 
 
-<pre><code>[1 4 5]
-</code></pre>
+  &lt;book category=&quot;web&quot; cover=&quot;paperback&quot;&gt; 
+    &lt;title lang=&quot;en&quot;&gt;Learning XML&lt;/title&gt;  
+    &lt;author&gt;Erik T. Ray&lt;/author&gt;  
+    &lt;year&gt;2003&lt;/year&gt;  
+    &lt;price&gt;39.95&lt;/price&gt; 
+  &lt;/book&gt; 
 
-<pre><code class="language-python"># 下面的示例获取了 4X3 数组中的每个角处的元素。 
-# 行索引是[0,0]和[3,3]，而列索引是[0,2]和[0,2]。
-x=np.array([
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [9,10,11]
-])
-print(&#39;数组原样:&#39;)
-print(x)
-print(&#39;~&#39;*30)
-rows=np.array([[0,0],[3,3]])
-cols=np.array([[0,2],[0,2]])
-y=x[rows,cols]
-print(&#39;这个数组的每个角处的元素是:&#39;)
-print(y)
-</code></pre>
+&lt;/bookstore&gt;
 
-<pre><code>数组原样:
-[[ 0  1  2]
- [ 3  4  5]
- [ 6  7  8]
- [ 9 10 11]]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-这个数组的每个角处的元素是:
-[[ 0  2]
- [ 9 11]]
 </code></pre>
 
-<h4 id="toc_17">布尔索引</h4>
+<h5 id="toc_3">HTML DOM 模型示例</h5>
 
-<p>当结果对象是布尔运算(例如比较运算符)的结果时,将使用此类型的高级索引.<br/><br/>
-过滤空值,挺好.</p>
+<p>HTML DOM 定义了访问和操作 HTML 文档的标准方法，以树结构方式表达 HTML 文档。</p>
 
-<pre><code class="language-python"># 这个例子中，大于 5 的元素会作为布尔索引的结果返回。
-x=np.array([
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [9,10,11]
-])
+<p><img src="media/15219455706450/15219456473425.jpg" alt=""/></p>
 
-print(x&gt;5)
+<hr/>
 
-print(&#39;大于5的元素是:&#39;)
-print(x[x&gt;5])
-
-</code></pre>
-
-<pre><code>[[False False False]
- [False False False]
- [ True  True  True]
- [ True  True  True]]
-大于5的元素是:
-[ 6  7  8  9 10 11]
-</code></pre>
+<h3 id="toc_4">XML的节点关系</h3>
 
-<pre><code class="language-python"># 这个例子使用了`~(取补运算符)`来过滤NaN
-a=np.array([np.nan,1,2,np.nan,3,4,5])
-print(a)
-print(a[~np.isnan(a)])
-</code></pre>
+<h4 id="toc_5">1. 父（Parent）</h4>
 
-<pre><code>[nan  1.  2. nan  3.  4.  5.]
-[1. 2. 3. 4. 5.]
-</code></pre>
+<p>每个元素以及属性都有一个父。</p>
 
-<pre><code class="language-python"># 从数组中过滤掉非复数元素
-a = np.array([1,  2+6j,  5,  3.5+5j])  
-print(a[np.iscomplex(a)])
-</code></pre>
+<p>下面是一个简单的XML例子中，book 元素是 title、author、year 以及 price 元素的父：</p>
 
-<pre><code>[2. +6.j 3.5+5.j]
-</code></pre>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 
-<h1 id="toc_18">Numpy-广播</h1>
-
-<ul>
-<li>广播是指Numpy在算术运算期间处理不同形状的数组的能力.</li>
-<li>对数组的算术运算通常在相应的元素上进行.</li>
-<li>如果两个阵列具有完全相同的形状,则这些操作被无缝执行.</li>
-</ul>
-
-<pre><code class="language-python"># 当两个数组的形状相同,运算没毛病
-a=np.array([1,2,3,4])
-b=np.array([10,20,30,40])
-c=a*b
-print(c)
-</code></pre>
+&lt;book&gt;
+  &lt;title&gt;Harry Potter&lt;/title&gt;
+  &lt;author&gt;J K. Rowling&lt;/author&gt;
+  &lt;year&gt;2005&lt;/year&gt;
+  &lt;price&gt;29.99&lt;/price&gt;
+&lt;/book&gt;
 
-<pre><code>[ 10  40  90 160]
 </code></pre>
-
-<p>如果两个数组的维数不相同,则元素到元素的操作是不可能的.<br/>
-然而,在Numpy中仍然可以对形状不相似的数组进行操作,<strong>因为它拥有广播功能.</strong><br/>
-较小的数组会广播到较大数组的大小,以便使它们的形状可兼容.</p>
 
-<p>如果满足一下规则,则可以进行广播:<br/>
-+ ndim较小的数组会在前面追加一个长度为1的维度.<br/>
-+ 输出数组的每个维度的大小是输入数组该维度大小的最大值.</p>
+<h4 id="toc_6">2. 子（Children）</h4>
 
-<p>未完待续...</p>
+<p>元素节点可有零个、一个或多个子。</p>
 
-<h1 id="toc_19">NumPy-数组上的迭代</h1>
+<p>在下面的例子中，title、author、year 以及 price 元素都是 book 元素的子：</p>
 
-<ul>
-<li>Numpy包含一个迭代器对象numpy.nditer.</li>
-<li>她是一个有效的多维迭代器对象,可以用于在数组上进行迭代.</li>
-<li>数组的每个元素可使用python的标准Iterator接口来访问</li>
-</ul>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 
-<h2 id="toc_20">迭代方式</h2>
+&lt;book&gt;
+  &lt;title&gt;Harry Potter&lt;/title&gt;
+  &lt;author&gt;J K. Rowling&lt;/author&gt;
+  &lt;year&gt;2005&lt;/year&gt;
+  &lt;price&gt;29.99&lt;/price&gt;
+&lt;/book&gt;
 
-<pre><code class="language-python">a=np.arange(0,60,5).reshape(3,4)
-print(&#39;--- 原始数组 ---&#39;)
-print(a)
-print(&#39;~&#39;*30)
-print(&#39;--- 进行迭代 ---&#39;)
-for x in np.nditer(a):
-    print(x)
 </code></pre>
 
-<pre><code>--- 原始数组 ---
-[[ 0  5 10 15]
- [20 25 30 35]
- [40 45 50 55]]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
---- 进行迭代 ---
-0
-5
-10
-15
-20
-25
-30
-35
-40
-45
-50
-55
-</code></pre>
-
-<pre><code class="language-python">b=a.T
-print(&#39;--- 原始数组进行转置 ---&#39;)
-print(b)
-for x in np.nditer(b):
-    print(x,end=&#39; &#39;)
-</code></pre>
+<h4 id="toc_7">3. 同胞（Sibling）</h4>
 
-<pre><code>--- 原始数组进行转置 ---
-[[ 0 20 40]
- [ 5 25 45]
- [10 30 50]
- [15 35 55]]
-0 5 10 15 20 25 30 35 40 45 50 55 
-</code></pre>
-
-<h2 id="toc_21">迭代顺序</h2>
-
-<p>如果相同元素使用 F 风格顺序存储，则迭代器选择以更有效的方式对数组进行迭代。</p>
-
-<pre><code class="language-python">a=np.arange(0,60,5).reshape(3,4)
-print(&#39;原始数组&#39;)
-print(a)
-b=a.T
-print(&#39;原始数组的转置&#39;)
-print(b)
-print(&#39;以 C 风格顺序排序&#39;)
-c=b.copy(order=&#39;C&#39;)
-print(c)
-print(&quot;以 C 来进行迭代&quot;)
-for x in np.nditer(c):
-    print(x,end=&#39; &#39;)
-
-print(&#39;以 F 风格顺序排序&#39;)
-c=b.copy(order=&#39;F&#39;)
-print(c)
-print(&quot;以 F 来进行迭代&quot;)
-for x in np.nditer(c):
-    print(x,end=&#39; &#39;)
+<p>拥有相同的父的节点</p>
 
-</code></pre>
+<p>在下面的例子中，title、author、year 以及 price 元素都是同胞：</p>
 
-<pre><code>原始数组
-[[ 0  5 10 15]
- [20 25 30 35]
- [40 45 50 55]]
-原始数组的转置
-[[ 0 20 40]
- [ 5 25 45]
- [10 30 50]
- [15 35 55]]
-以 C 风格顺序排序
-[[ 0 20 40]
- [ 5 25 45]
- [10 30 50]
- [15 35 55]]
-以 C 来进行迭代
-0 20 40 5 25 45 10 30 50 15 35 55 以 F 风格顺序排序
-[[ 0 20 40]
- [ 5 25 45]
- [10 30 50]
- [15 35 55]]
-以 F 来进行迭代
-0 5 10 15 20 25 30 35 40 45 50 55 
-</code></pre>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 
-<pre><code class="language-python"># 可以通过显示提醒,来强制nditer对象使用某种顺序
-a=np.arange(0,60,5).reshape(3,4)
-print(&quot;以 C 来进行迭代:&quot;)
-for x in np.nditer(a,order=&#39;C&#39;):
-    print(x,end=&#39; &#39;)
-print(&#39;\n&#39;+&#39;~&#39;*40)
-print(&quot;以 F 来进行迭代:&quot;)
-for x in np.nditer(a,order=&#39;F&#39;):
-    print(x,end=&#39; &#39;)
-</code></pre>
+&lt;book&gt;
+  &lt;title&gt;Harry Potter&lt;/title&gt;
+  &lt;author&gt;J K. Rowling&lt;/author&gt;
+  &lt;year&gt;2005&lt;/year&gt;
+  &lt;price&gt;29.99&lt;/price&gt;
+&lt;/book&gt;
 
-<pre><code>以 C 来进行迭代:
-0 5 10 15 20 25 30 35 40 45 50 55 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-以 F 来进行迭代:
-0 20 40 5 25 45 10 30 50 15 35 55 
 </code></pre>
 
-<h2 id="toc_22">迭代器修改数组的值</h2>
-
-<ul>
-<li>nditer对象有另一个可选参数<code>op_flags</code>.其默认值为只读.</li>
-<li>但可以设置为读写或只写模式.</li>
-<li>这将允许使用此迭代器修改数组的元素</li>
-</ul>
-
-<pre><code class="language-python">a=np.arange(0,60,5).reshape(3,4)
-print(&quot;原始数组:&quot;)
-print(a)
-for x in np.nditer(a,op_flags=[&#39;readwrite&#39;]):
-    x[...]=2*x
-
-print(&#39;修改后的数组是:&#39;)
-print(a)
-</code></pre>
+<h4 id="toc_8">4. 先辈（Ancestor）</h4>
 
-<pre><code>原始数组:
-[[ 0  5 10 15]
- [20 25 30 35]
- [40 45 50 55]]
-修改后的数组是:
-[[  0  10  20  30]
- [ 40  50  60  70]
- [ 80  90 100 110]]
-</code></pre>
+<p>某节点的父、父的父，等等。</p>
 
-<h2 id="toc_23">迭代器外部循环</h2>
+<p>在下面的例子中，title 元素的先辈是 book 元素和 bookstore 元素：</p>
 
-<p>nditer类的构造器拥有<code>flags</code>参数</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 
-<pre><code class="language-python"># 迭代器遍历每列的一维数组
-print(a)
-print(&quot;~&quot;*50)
-for x in np.nditer(a,flags=[&#39;external_loop&#39;],order=&#39;F&#39;):
-    print(x,end=&#39; &#39;)
-</code></pre>
+&lt;bookstore&gt;
 
-<pre><code>[[  0  10  20  30]
- [ 40  50  60  70]
- [ 80  90 100 110]]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-[ 0 40 80] [10 50 90] [ 20  60 100] [ 30  70 110] 
-</code></pre>
+&lt;book&gt;
+  &lt;title&gt;Harry Potter&lt;/title&gt;
+  &lt;author&gt;J K. Rowling&lt;/author&gt;
+  &lt;year&gt;2005&lt;/year&gt;
+  &lt;price&gt;29.99&lt;/price&gt;
+&lt;/book&gt;
 
-<h1 id="toc_24">ndarray-数组拉伸与合并</h1>
-
-<ul>
-<li>数组拉伸np.tile（A，rep）函数可以将数组A进行拉伸，沿着A的维度重复rep次</li>
-<li>对于ndarray数组而言，多个数组可以执行合并操作，合并的方式有多种。</li>
-<li>Stack(arrays,axis=0):沿着新的轴加入一系列数组</li>
-<li>vstack（）：堆栈数组垂直顺序（行）</li>
-<li>hstack（）：堆栈数组水平顺序（列）</li>
-</ul>
-
-<pre><code class="language-python">arr=np.array([[3,9],[1,2]])
-arr
-</code></pre>
+&lt;/bookstore&gt;
 
-<pre><code>array([[3, 9],
-       [1, 2]])
 </code></pre>
 
-<pre><code class="language-python"># 横向拉伸2次
-np.tile(arr,2)
-</code></pre>
+<h4 id="toc_9">5. 后代（Descendant）</h4>
 
-<pre><code>array([[3, 9, 3, 9],
-       [1, 2, 1, 2]])
-</code></pre>
+<p>某个节点的子，子的子，等等。</p>
 
-<pre><code class="language-python">np.tile(arr,6)
-</code></pre>
+<p>在下面的例子中，bookstore 的后代是 book、title、author、year 以及 price 元素：</p>
 
-<pre><code>array([[3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9],
-       [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2]])
-</code></pre>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 
-<pre><code class="language-python">np.tile(arr,(3,1))
-</code></pre>
+&lt;bookstore&gt;
 
-<pre><code>array([[3, 9],
-       [1, 2],
-       [3, 9],
-       [1, 2],
-       [3, 9],
-       [1, 2]])
-</code></pre>
+&lt;book&gt;
+  &lt;title&gt;Harry Potter&lt;/title&gt;
+  &lt;author&gt;J K. Rowling&lt;/author&gt;
+  &lt;year&gt;2005&lt;/year&gt;
+  &lt;price&gt;29.99&lt;/price&gt;
+&lt;/book&gt;
 
-<pre><code class="language-python">np.tile(arr,(3,4))
-</code></pre>
+&lt;/bookstore&gt;
 
-<pre><code>array([[3, 9, 3, 9, 3, 9, 3, 9],
-       [1, 2, 1, 2, 1, 2, 1, 2],
-       [3, 9, 3, 9, 3, 9, 3, 9],
-       [1, 2, 1, 2, 1, 2, 1, 2],
-       [3, 9, 3, 9, 3, 9, 3, 9],
-       [1, 2, 1, 2, 1, 2, 1, 2]])
 </code></pre>
 
-<h2 id="toc_25">stack</h2>
+<h2 id="toc_10">什么是XPath？</h2>
 
 <blockquote>
-<p>Stack(arrays,axis=0):沿着新的轴加入一系列数组</p>
+<p>XPath (XML Path Language) 是一门在 XML 文档中查找信息的语言，可用来在 XML 文档中对元素和属性进行遍历。</p>
+
+<p>W3School官方文档：<a href="http://www.w3school.com.cn/xpath/index.asp">http://www.w3school.com.cn/xpath/index.asp</a></p>
 </blockquote>
 
-<p>相当于加一层维度</p>
+<h3 id="toc_11">XPath 开发工具</h3>
 
-<pre><code class="language-python">a=[1,2,3]
-b=[4,5,6]
+<ol>
+<li>开源的XPath表达式编辑工具:XMLQuire(XML格式文件可用)</li>
+<li>Chrome插件 XPath Helper</li>
+<li>Firefox插件 XPath Checker</li>
+</ol>
+
+<h3 id="toc_12">选取节点</h3>
+
+<p>XPath 使用路径表达式来选取 XML 文档中的节点或者节点集。这些路径表达式和我们在常规的电脑文件系统中看到的表达式非常相似。</p>
+
+<p>下面列出了最常用的路径表达式：</p>
+
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>nodename</td>
+<td>选取此节点的所有子节点。</td>
+</tr>
+<tr>
+<td>/</td>
+<td>从根节点选取。</td>
+</tr>
+<tr>
+<td>//</td>
+<td>从匹配选择的当前节点选择文档中的节点，而不考虑它们的位置。</td>
+</tr>
+<tr>
+<td>.</td>
+<td>选取当前节点。</td>
+</tr>
+<tr>
+<td>..</td>
+<td>选取当前节点的父节点。</td>
+</tr>
+<tr>
+<td>@</td>
+<td>选取属性。</td>
+</tr>
+</tbody>
+</table>
+
+<p>在下面的表格中，我们已列出了一些路径表达式以及表达式的结果：</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>路径表达式</th>
+<th>结果</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>bookstore</td>
+<td>选取 bookstore 元素的所有子节点。</td>
+<td></td>
+</tr>
+<tr>
+<td>/bookstore</td>
+<td>选取根元素 bookstore。注释：假如路径起始于正斜杠( / )，则此路径始终代表到某元素的绝对路径！</td>
+<td></td>
+</tr>
+<tr>
+<td>bookstore/book</td>
+<td>选取属于 bookstore 的子元素的所有 book 元素。</td>
+<td></td>
+</tr>
+<tr>
+<td>//book</td>
+<td>选取所有 book 子元素，而不管它们在文档中的位置。</td>
+<td></td>
+</tr>
+<tr>
+<td>bookstore//book</td>
+<td>选择属于 bookstore 元素的后代的所有 book 元素，而不管它们位于 bookstore 之下的什么位置。</td>
+<td></td>
+</tr>
+<tr>
+<td>//@lang</td>
+<td>选取名为 lang 的所有属性。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_13">谓语（Predicates）</h3>
+
+<p>谓语用来查找某个特定的节点或者包含某个指定的值的节点，被嵌在方括号中。</p>
+
+<p>在下面的表格中，我们列出了带有谓语的一些路径表达式，以及表达式的结果：</p>
+
+<table>
+<thead>
+<tr>
+<th>路径表达式</th>
+<th>结果</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>/bookstore/book[1]</td>
+<td>选取属于 bookstore 子元素的第一个 book 元素。</td>
+</tr>
+<tr>
+<td>/bookstore/book[last()]</td>
+<td>选取属于 bookstore 子元素的最后一个 book 元素。</td>
+</tr>
+<tr>
+<td>/bookstore/book[last()-1]</td>
+<td>选取属于 bookstore 子元素的倒数第二个 book 元素。</td>
+</tr>
+<tr>
+<td>/bookstore/book[position()35.00]</td>
+<td>选取 bookstore 元素的所有 book 元素，且其中的 price 元素的值须大于 35.00。</td>
+</tr>
+<tr>
+<td>/bookstore/book[price&gt;35.00]/title</td>
+<td>选取 bookstore 元素中的 book 元素的所有 title 元素，且其中的 price 元素的值须大于 35.00。</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_14">选取未知节点</h3>
+
+<p>XPath 通配符可用来选取未知的 XML 元素。</p>
+
+<table>
+<thead>
+<tr>
+<th>通配符</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>*</td>
+<td>匹配任何元素节点。</td>
+</tr>
+<tr>
+<td>@*</td>
+<td>匹配任何属性节点。</td>
+</tr>
+<tr>
+<td>node()</td>
+<td>匹配任何类型的节点。</td>
+</tr>
+</tbody>
+</table>
+
+<p>在下面的表格中，我们列出了一些路径表达式，以及这些表达式的结果：</p>
+
+<table>
+<thead>
+<tr>
+<th>路径表达式</th>
+<th>结果</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>/bookstore/*</td>
+<td>选取 bookstore 元素的所有子元素。</td>
+</tr>
+<tr>
+<td>//*</td>
+<td>选取文档中的所有元素。</td>
+</tr>
+<tr>
+<td>//title[@*]</td>
+<td>选取所有带有属性的 title 元素。</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_15">选取若干路径</h3>
+
+<p>通过在路径表达式中使用“|”运算符，您可以选取若干个路径。</p>
+
+<p>实例</p>
+
+<p>在下面的表格中，我们列出了一些路径表达式，以及这些表达式的结果：</p>
+
+<table>
+<thead>
+<tr>
+<th>路径表达式</th>
+<th>结果</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>//book/title</td>
+<td>//book/price</td>
+</tr>
+<tr>
+<td>//title</td>
+<td>//price</td>
+</tr>
+<tr>
+<td>/bookstore/book/title</td>
+<td>//price</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_16">XPath的运算符</h3>
+
+<p>下面列出了可用在 XPath 表达式中的运算符：</p>
+
+<p><img src="media/15219455706450/15219457279252.jpg" alt=""/></p>
+
+<h5 id="toc_17">这些就是XPath的语法内容，在运用到Python抓取时要先转换为xml。</h5>
+
+<h2 id="toc_18">lxml库</h2>
+
+<blockquote>
+<p>lxml 是 一个HTML/XML的解析器，主要的功能是如何解析和提取 HTML/XML 数据。</p>
+
+<p>lxml和正则一样，也是用 C 实现的，是一款高性能的 Python HTML/XML 解析器，我们可以利用之前学习的XPath语法，来快速的定位特定元素以及节点信息。</p>
+
+<p>lxml python 官方文档：<a href="http://lxml.de/index.html">http://lxml.de/index.html</a></p>
+
+<p>需要安装C语言库，可使用 pip 安装：<code>pip install lxml</code> （或通过wheel方式安装）</p>
+</blockquote>
+
+<h3 id="toc_19">初步使用</h3>
+
+<p>我们利用它来解析 HTML 代码，简单示例：</p>
+
+<pre><code># lxml_test.py
+
+# 使用 lxml 的 etree 库
+from lxml import etree 
+
+text = &#39;&#39;&#39;
+&lt;div&gt;
+    &lt;ul&gt;
+         &lt;li class=&quot;item-0&quot;&gt;&lt;a href=&quot;link1.html&quot;&gt;first item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-1&quot;&gt;&lt;a href=&quot;link2.html&quot;&gt;second item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-inactive&quot;&gt;&lt;a href=&quot;link3.html&quot;&gt;third item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-1&quot;&gt;&lt;a href=&quot;link4.html&quot;&gt;fourth item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-0&quot;&gt;&lt;a href=&quot;link5.html&quot;&gt;fifth item&lt;/a&gt; # 注意，此处缺少一个 &lt;/li&gt; 闭合标签
+     &lt;/ul&gt;
+ &lt;/div&gt;
+&#39;&#39;&#39;
+
+#利用etree.HTML，将字符串解析为HTML文档
+html = etree.HTML(text) 
+
+# 按字符串序列化HTML文档
+result = etree.tostring(html) 
+
+print(result)
+
 </code></pre>
 
-<pre><code class="language-python"># 默认axis=0
-np.stack((a,))
+<p>输出结果：</p>
+
+<pre><code>&lt;html&gt;&lt;body&gt;
+&lt;div&gt;
+    &lt;ul&gt;
+         &lt;li class=&quot;item-0&quot;&gt;&lt;a href=&quot;link1.html&quot;&gt;first item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-1&quot;&gt;&lt;a href=&quot;link2.html&quot;&gt;second item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-inactive&quot;&gt;&lt;a href=&quot;link3.html&quot;&gt;third item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-1&quot;&gt;&lt;a href=&quot;link4.html&quot;&gt;fourth item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-0&quot;&gt;&lt;a href=&quot;link5.html&quot;&gt;fifth item&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+ &lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;
+
 </code></pre>
 
-<pre><code>array([[1, 2, 3]])
+<p>lxml 可以自动修正 html 代码，例子里不仅补全了 li 标签，还添加了 body，html 标签。</p>
+
+<h3 id="toc_20">文件读取：</h3>
+
+<p>除了直接读取字符串，lxml还支持从文件里读取内容。我们新建一个hello.html文件：</p>
+
+<pre><code>&lt;!-- hello.html --&gt;
+
+&lt;div&gt;
+    &lt;ul&gt;
+         &lt;li class=&quot;item-0&quot;&gt;&lt;a href=&quot;link1.html&quot;&gt;first item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-1&quot;&gt;&lt;a href=&quot;link2.html&quot;&gt;second item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-inactive&quot;&gt;&lt;a href=&quot;link3.html&quot;&gt;&lt;span class=&quot;bold&quot;&gt;third item&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-1&quot;&gt;&lt;a href=&quot;link4.html&quot;&gt;fourth item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-0&quot;&gt;&lt;a href=&quot;link5.html&quot;&gt;fifth item&lt;/a&gt;&lt;/li&gt;
+     &lt;/ul&gt;
+ &lt;/div&gt;
+
 </code></pre>
 
-<pre><code class="language-python">np.stack((a,b))
+<p>再利用 etree.parse() 方法来读取文件。</p>
+
+<pre><code># lxml_parse.py
+
+from lxml import etree
+
+# 读取外部文件 hello.html
+html = etree.parse(&#39;./hello.html&#39;)
+result = etree.tostring(html, pretty_print=True)
+
+print(result)
+
 </code></pre>
 
-<pre><code>array([[1, 2, 3],
-       [4, 5, 6]])
+<p>输出结果与之前相同：</p>
+
+<pre><code>&lt;html&gt;&lt;body&gt;
+&lt;div&gt;
+    &lt;ul&gt;
+         &lt;li class=&quot;item-0&quot;&gt;&lt;a href=&quot;link1.html&quot;&gt;first item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-1&quot;&gt;&lt;a href=&quot;link2.html&quot;&gt;second item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-inactive&quot;&gt;&lt;a href=&quot;link3.html&quot;&gt;third item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-1&quot;&gt;&lt;a href=&quot;link4.html&quot;&gt;fourth item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-0&quot;&gt;&lt;a href=&quot;link5.html&quot;&gt;fifth item&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+ &lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;
+
 </code></pre>
 
-<pre><code class="language-python">np.stack((a,),axis=1)
+<h3 id="toc_21">XPath实例测试</h3>
+
+<h4 id="toc_22">1. 获取所有的 <code>&lt;li&gt;</code> 标签</h4>
+
+<pre><code># xpath_li.py
+
+from lxml import etree
+
+html = etree.parse(&#39;hello.html&#39;)
+print type(html)  # 显示etree.parse() 返回类型
+
+result = html.xpath(&#39;//li&#39;)
+
+print result  # 打印&lt;li&gt;标签的元素集合
+print len(result)
+print type(result)
+print type(result[0])
+
 </code></pre>
 
-<pre><code>array([[1],
-       [2],
-       [3]])
+<p>输出结果：</p>
+
+<pre><code>&lt;type &#39;lxml.etree._ElementTree&#39;&gt;
+[&lt;Element li at 0x1014e0e18&gt;, &lt;Element li at 0x1014e0ef0&gt;, &lt;Element li at 0x1014e0f38&gt;, &lt;Element li at 0x1014e0f80&gt;, &lt;Element li at 0x1014e0fc8&gt;]
+5
+&lt;type &#39;list&#39;&gt;
+&lt;type &#39;lxml.etree._Element&#39;&gt;
+
 </code></pre>
 
-<h1 id="toc_26">常用一元函数</h1>
+<h4 id="toc_23">2. 继续获取<code>&lt;li&gt;</code> 标签的所有 <code>class</code>属性</h4>
 
-<p><img src="media/15212548392809/15213430309763.jpg" alt=""/></p>
+<pre><code># xpath_li.py
 
-<p><img src="media/15212548392809/15213430461194.jpg" alt=""/></p>
+from lxml import etree
 
-<pre><code class="language-python">arr=np.array([-1,2,-3])
-arr
+html = etree.parse(&#39;hello.html&#39;)
+result = html.xpath(&#39;//li/@class&#39;)
+
+print result
+
 </code></pre>
 
-<pre><code>array([-1,  2, -3])
+<p>运行结果</p>
+
+<pre><code>[&#39;item-0&#39;, &#39;item-1&#39;, &#39;item-inactive&#39;, &#39;item-1&#39;, &#39;item-0&#39;]
+
 </code></pre>
 
-<pre><code class="language-python"># 取绝对值
-np.abs(arr)
+<h4 id="toc_24">3. 继续获取<code>&lt;li&gt;</code>标签下<code>hre</code> 为 <code>link1.html</code> 的 <code>&lt;a&gt;</code> 标签</h4>
+
+<pre><code># xpath_li.py
+
+from lxml import etree
+
+html = etree.parse(&#39;hello.html&#39;)
+result = html.xpath(&#39;//li/a[@href=&quot;link1.html&quot;]&#39;)
+
+print result
+
 </code></pre>
 
-<pre><code>array([1, 2, 3])
+<p>运行结果</p>
+
+<pre><code>[&lt;Element a at 0x10ffaae18&gt;]
+
 </code></pre>
 
-<pre><code class="language-python"># 计算各个元素的正负号
-np.sign(arr)
+<h4 id="toc_25">4. 获取<code>&lt;li&gt;</code> 标签下的所有 <code>&lt;span&gt;</code> 标签</h4>
+
+<pre><code># xpath_li.py
+
+from lxml import etree
+
+html = etree.parse(&#39;hello.html&#39;)
+
+#result = html.xpath(&#39;//li/span&#39;)
+#注意这么写是不对的：
+#因为 / 是用来获取子元素的，而 &lt;span&gt; 并不是 &lt;li&gt; 的子元素，所以，要用双斜杠
+
+result = html.xpath(&#39;//li//span&#39;)
+
+print result
+
 </code></pre>
 
-<pre><code>array([-1,  1, -1])
+<p>运行结果</p>
+
+<pre><code>[&lt;Element span at 0x10d698e18&gt;]
+
 </code></pre>
 
-<pre><code class="language-python"># 向上取整
-np.ceil([1.2,1.4,1.7])
+<h4 id="toc_26">5. 获取 <code>&lt;li&gt;</code> 标签下的<code>&lt;a&gt;</code>标签里的所有 class</h4>
+
+<pre><code># xpath_li.py
+
+from lxml import etree
+
+html = etree.parse(&#39;hello.html&#39;)
+result = html.xpath(&#39;//li/a//@class&#39;)
+
+print result
+
 </code></pre>
 
-<pre><code>array([ 2.,  2.,  2.])
+<p>运行结果</p>
+
+<pre><code>[&#39;blod&#39;]
+
 </code></pre>
 
-<pre><code class="language-python"># 向下取整
-np.floor([1.2,1.3,1.6])
+<h4 id="toc_27">6. 获取最后一个 <code>&lt;li&gt;</code> 的 <code>&lt;a&gt;</code> 的 href</h4>
+
+<pre><code># xpath_li.py
+
+from lxml import etree
+
+html = etree.parse(&#39;hello.html&#39;)
+
+result = html.xpath(&#39;//li[last()]/a/@href&#39;)
+# 谓语 [last()] 可以找到最后一个元素
+
+print result
+
 </code></pre>
 
-<pre><code>array([ 1.,  1.,  1.])
+<p>运行结果</p>
+
+<pre><code>[&#39;link5.html&#39;]
+
 </code></pre>
 
-<pre><code class="language-python"># 四舍五入取整
-np.rint([1.2,1.3,1.6])
+<h4 id="toc_28">7. 获取倒数第二个元素的内容</h4>
+
+<pre><code># xpath_li.py
+
+from lxml import etree
+
+html = etree.parse(&#39;hello.html&#39;)
+result = html.xpath(&#39;//li[last()-1]/a&#39;)
+
+# text 方法可以获取元素内容
+print result[0].text
+
 </code></pre>
 
-<pre><code>array([ 1.,  1.,  2.])
+<p>运行结果</p>
+
+<pre><code>fourth item
+
 </code></pre>
 
-<pre><code class="language-python"># 分别返回一个数的小数部分和整数部分
-np.modf([1.2,7.8])
+<h4 id="toc_29">8. 获取 <code>class</code> 值为 <code>bold</code> 的标签名</h4>
+
+<pre><code># xpath_li.py
+
+from lxml import etree
+
+html = etree.parse(&#39;hello.html&#39;)
+
+result = html.xpath(&#39;//*[@class=&quot;bold&quot;]&#39;)
+
+# tag方法可以获取标签名
+print result[0].tag
+
 </code></pre>
 
-<pre><code>(array([ 0.2,  0.8]), array([ 1.,  7.]))
-</code></pre>
+<p>运行结果</p>
 
-<h1 id="toc_27">常用二元函数</h1>
+<pre><code>span
 
-<p><img src="media/15212548392809/15213430758071.jpg" alt=""/></p>
-
-<pre><code class="language-python"># 元素级的求模计算(除法取余)
-np.mod(4,3) # 1
-np.mod([4,8],[3,5]) # [1,3]
-</code></pre>
-
-<pre><code>array([1, 3])
-</code></pre>
-
-<h1 id="toc_28">聚合函数</h1>
-
-<ul>
-<li>求和:np.sum()</li>
-<li>平均值:np.mean</li>
-<li>最大值:np.max</li>
-<li>最小值:np.min</li>
-<li>总体标准差:np.std</li>
-<li>......</li>
-</ul>
-
-<pre><code class="language-python">arr.sum()
-</code></pre>
-
-<pre><code>-2
-</code></pre>
-
-<h1 id="toc_29">where</h1>
-
-<pre><code class="language-python">arr1=np.array(
-    [
-    [1,2,np.NaN],
-    [4,5,np.NaN]
-])
-arr1
-</code></pre>
-
-<pre><code>array([[  1.,   2.,  nan],
-       [  4.,   5.,  nan]])
-</code></pre>
-
-<pre><code class="language-python">condition=np.isnan(arr1)
-</code></pre>
-
-<pre><code class="language-python">np.where(condition,0,arr1)
-</code></pre>
-
-<pre><code>array([[ 1.,  2.,  0.],
-       [ 4.,  5.,  0.]])
-</code></pre>
-
-<h1 id="toc_30">unique</h1>
-
-<pre><code class="language-python">np.unique([1,2,3,3,3,3,4,5,6,6,6,6])
-</code></pre>
-
-<pre><code>array([1, 2, 3, 4, 5, 6])
 </code></pre>
 
                         
@@ -1210,7 +952,7 @@ arr1
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2017/12/12</span>
+                    <span class="date">2017/10/2</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='Python.html'>Python</a></span>
@@ -1227,16 +969,18 @@ arr1
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15198743666304.html">
+                <a class="clearlink" href="15219449578725.html">
                 
-                  <h1>PythonVirtualenv总结</h1>
+                  <h1>python-requests[整理自网络]</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>我的电脑是macbookpro.我在电脑里面分别装了python2.7和python3.6.</p>
+                        	<h2 id="toc_0">Requests: 让 HTTP 服务人类</h2>
 
-<p>当我用pip安装了virtual后,我如果想要对应版本的python</p>
+<p>虽然Python的标准库中 urllib2 模块已经包含了平常我们使用的大多数功能，但是它的 API 使用起来让人感觉不太好，而 Requests 自称 “HTTP for Humans”，说明使用更简洁方便。</p>
+
+<p>Requests 继承了urllib2的所有特性。Requests支持HTTP连接保持和连接池，支持使用cookie保持会话，支持文件上传，支持自动确定响应内容的编码，支持国际化的 URL 和 POST 数据自动编码。</p>
 
 
                         
@@ -1245,8 +989,8 @@ arr1
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15198743666304.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/11/29</span>
+                   <a href="15219449578725.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/10/1</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='Python.html'>Python</a></span>
@@ -1409,6 +1153,8 @@ arr1
             <a href="Redis.html"><strong>Redis</strong></a>
         
             <a href="Zookeeper.html"><strong>Zookeeper</strong></a>
+        
+            <a href="BlockChain.html"><strong>BlockChain</strong></a>
          
         </p>
 
@@ -1425,31 +1171,31 @@ arr1
 	      
 		      
 			      <li class="post">
-			        <a href="15209079363420.html">大数据框架-开源协议</a>
+			        <a href="15221149143615.html">概率分布函数和概率密度函数</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15205689785115.html">Zookeeper笔记</a>
+			        <a href="15220339795263.html">分布式系统的一致性</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15205677979326.html">分布式应用浅谈</a>
+			        <a href="15217143404677.html">docker 错误</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15203071412162.html">kafka-sparkstreaming自己维护offset</a>
+			        <a href="15216998348495.html">mac 搭建 区块链开发环境</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15202200627560.html">查看linux系统负荷</a>
+			        <a href="15216328231070.html">LeetCode解题思路</a>
 			      </li>
 		     
 		  

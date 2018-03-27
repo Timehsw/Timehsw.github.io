@@ -135,6 +135,8 @@
             <li><a href="Redis.html">Redis</a></li>
         
             <li><a href="Zookeeper.html">Zookeeper</a></li>
+        
+            <li><a href="BlockChain.html">BlockChain</a></li>
          
 
       </ul>
@@ -187,7 +189,7 @@
 
 <h3 id="toc_2">软件包安装</h3>
 
-<pre><code class="language-$xslt">　　# sudo apt-get  install  rsync  注：在debian、ubuntu 等在线安装方法；
+<pre><code>　　# sudo apt-get  install  rsync  注：在debian、ubuntu 等在线安装方法；
 　　# yum install rsync    注：Fedora、Redhat 等在线安装方法；
 　　# rpm -ivh rsync       注：Fedora、Redhat 等rpm包安装方法；
 </code></pre>
@@ -196,7 +198,7 @@
 
 <h3 id="toc_3">源码包安装</h3>
 
-<pre><code class="language-$xslt">　　tar xvf  rsync-xxx.tar.gz
+<pre><code>　　tar xvf  rsync-xxx.tar.gz
 　　cd rsync-xxx
 　　./configure --prefix=/usr  ;make ;make install   注：在用源码包编译安装之前，您得安装gcc等编译工具才行；
 </code></pre>
@@ -209,20 +211,16 @@
 
 <p>服务器配置文件(/etc/rsyncd.conf)，该文件默认不存在，请创建它。具体步骤如下</p>
 
-<ul>
-<li><p>用root用户创建：<br/>
-```$xslt</p>
+<p>用root用户创建：</p>
 
-<h1 id="toc_5">touch /etc/rsyncd.conf  #创建rsyncd.conf，这是rsync服务器的配置文件。</h1>
+<pre><code>    touch /etc/rsyncd.conf  #创建rsyncd.conf，这是rsync服务器的配置文件。
+    touch /etc/rsyncd.secrets  #创建rsyncd.secrets ，这是用户密码文件。这个密码文件很好的哦，你可以设置一个用户名：密码的数值对，然后在客户端设置一个密码文件，只写密码就可以了，一会细讲。
 
-<h1 id="toc_6">touch /etc/rsyncd.secrets  #创建rsyncd.secrets ，这是用户密码文件。这个密码文件很好的哦，你可以设置一个用户名：密码的数值对，然后在客户端设置一个密码文件，只写密码就可以了，一会细讲。</h1>
+    chmod 600 /etc/rsyncd.secrets  #将rsyncd.secrets这个密码文件的文件属性设为root拥有, 且权限要设为600, 否则无法备份成功!
+    
+</code></pre>
 
-<h1 id="toc_7">chmod 600 /etc/rsyncd.secrets  #将rsyncd.secrets这个密码文件的文件属性设为root拥有, 且权限要设为600, 否则无法备份成功!</h1>
-
-<pre><code></code></pre></li>
-</ul>
-
-<h3 id="toc_8">修改rsyncd.conf文件</h3>
+<h3 id="toc_5">修改rsyncd.conf文件</h3>
 
 <blockquote>
 <p>rsyncd.conf是rsync服务器主要配置文件</p>
@@ -273,7 +271,7 @@ comment = This is test for get coolpad data
 <li>注意: 关于auth users是必须在服务器上存在的真实的系统用户，如果你想用多个用户以,号隔开，比如auth users = easylife,root</li>
 </ul>
 
-<h4 id="toc_9">解释rsyncd.conf文件配置项</h4>
+<h4 id="toc_6">解释rsyncd.conf文件配置项</h4>
 
 <blockquote>
 <p>在rsync 服务器中，全局定义有几个比较关健的，根据我们前面所给的配置文件 rsyncd.conf 文件</p>
@@ -318,7 +316,7 @@ comment = This is test for get coolpad data
 </ul></li>
 </ul>
 
-<h3 id="toc_10">设定密码文件/etc/rsyncd.secrets</h3>
+<h3 id="toc_7">设定密码文件/etc/rsyncd.secrets</h3>
 
 <p>密码文件格式很简单，rsyncd.secrets的内容格式为：</p>
 
@@ -340,7 +338,7 @@ chmod 600 rsyncd.secrets     #修改权限<br/>
     + 1、将rsyncd.secrets这个密码文件的文件属性设为root拥有, 且权限要设为600, 否则无法备份成功! 出于安全目的，文件的属性必需是只有属主可读。<br/>
     + 2、这里的密码值得注意，为了安全你不能把系统用户的密码写在这里。比如你的系统用户root密码是 helloworld，为了安全你可以让rsync中的rsyncd.secrets文件中的密码为为123456。这样，在客户端连接的时候，也是用这个123456会使用这个rsyncd.secrets作为认证文件，不和os有任何牵连。</p>
 
-<h2 id="toc_11">配置客户端</h2>
+<h2 id="toc_8">配置客户端</h2>
 
 <blockquote>
 <p>上面两个配置文件都是在启动 rsycn的服务器端,然而在我们的客户端,我们安装了 rsync后,只需要创建一个密码文件,里面放上服务器上定义的密码即可了</p>
@@ -350,7 +348,7 @@ chmod 600 rsyncd.secrets     #修改权限<br/>
 rsy123456
 </code></pre>
 
-<h2 id="toc_12">启动rsync服务器及防火墙的设置</h2>
+<h2 id="toc_9">启动rsync服务器及防火墙的设置</h2>
 
 <blockquote>
 <p>启动rsync服务器相当简单</p>
@@ -362,20 +360,20 @@ rsy123456
 
 </code></pre>
 
-<h2 id="toc_13">简单使用</h2>
+<h2 id="toc_10">简单使用</h2>
 
 <p>把客户端/home/root/tmp_hsw 路径下的文件同步到服务器下.路径为 path 里面定义的</p>
 
 <pre><code class="language-$xslt">rsync -avz --progress  --password-file=/etc/rsyncd.passwd --delete /home/root/tmp_hsw root@10.10.25.13::getcoolpaddata/
 </code></pre>
 
-<h2 id="toc_14">总结</h2>
+<h2 id="toc_11">总结</h2>
 
 <p>1.在客户端的时候,你想用客户端的哪个用户传输数据,那么客户端上面的/etc/rsyncd.passwd文件就得是这个用户文件,并且权限是600<br/>
 2.都使用 root 用户肯定是没有问题的<br/>
 3.在服务端的时候,如果不想用 root 用户.那么那两个配置文件的权限都得是 root 用户,然后再 rsync.conf 里面把 uid,cid,auth users改成普通用户即可.</p>
 
-<h2 id="toc_15">参考</h2>
+<h2 id="toc_12">参考</h2>
 
 <p>配置过程参考文章:<a href="http://blog.csdn.net/cymm_liu/article/details/31347531">http://blog.csdn.net/cymm_liu/article/details/31347531</a></p>
 
@@ -388,8 +386,8 @@ rsy123456
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15198747024709.html" 
-          title="Previous Post: mysql赋给用户权限grant all privileges on">&laquo; mysql赋给用户权限grant all privileges on</a>
+          <a href="15220377896292.html" 
+          title="Previous Post: grep-sed-awk">&laquo; grep-sed-awk</a>
       
         </p>
         </div>
@@ -506,6 +504,8 @@ rsy123456
             <a href="Redis.html"><strong>Redis</strong></a>
         
             <a href="Zookeeper.html"><strong>Zookeeper</strong></a>
+        
+            <a href="BlockChain.html"><strong>BlockChain</strong></a>
          
         </p>
 
@@ -522,31 +522,31 @@ rsy123456
 	      
 		      
 			      <li class="post">
-			        <a href="15209079363420.html">大数据框架-开源协议</a>
+			        <a href="15221149143615.html">概率分布函数和概率密度函数</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15205689785115.html">Zookeeper笔记</a>
+			        <a href="15220339795263.html">分布式系统的一致性</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15205677979326.html">分布式应用浅谈</a>
+			        <a href="15217143404677.html">docker 错误</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15203071412162.html">kafka-sparkstreaming自己维护offset</a>
+			        <a href="15216998348495.html">mac 搭建 区块链开发环境</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15202200627560.html">查看linux系统负荷</a>
+			        <a href="15216328231070.html">LeetCode解题思路</a>
 			      </li>
 		     
 		  

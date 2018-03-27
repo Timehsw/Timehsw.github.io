@@ -4,13 +4,348 @@
   <title><![CDATA[Time渐行渐远]]></title>
   <link href="http://dmlcoding.com/atom.xml" rel="self"/>
   <link href="http://dmlcoding.com/"/>
-  <updated>2018-03-21T11:25:53+08:00</updated>
+  <updated>2018-03-27T18:12:43+08:00</updated>
   <id>http://dmlcoding.com/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[概率分布函数和概率密度函数]]></title>
+    <link href="http://dmlcoding.com/15221149143615.html"/>
+    <updated>2018-03-27T09:41:54+08:00</updated>
+    <id>http://dmlcoding.com/15221149143615.html</id>
+    <content type="html"><![CDATA[
+<blockquote>
+<p>研究一个随机变量,不只要看它能取哪些值,更重要的是它取各种值的概率如何!</p>
+</blockquote>
+
+<ul>
+<li>概率分布函数</li>
+<li>概率密度函数</li>
+</ul>
+
+<h2 id="toc_0">离散型随机变量</h2>
+
+<p>在理解这两个词之前</p>
+
+<ul>
+<li>概率分布函数</li>
+<li>概率密度函数</li>
+</ul>
+
+<p>先理解这两个词</p>
+
+<ul>
+<li>概率函数: 就是用函数的形式来表达概率.也叫分布律.</li>
+<li>概率分布: 表达随机变量所有可能取值的分布情况.注意:是所有的取值</li>
+<li>分布函数: 即,概率分布函数,</li>
+</ul>
+
+<p><img src="media/15221149143615/15221166166372.png" alt=""/></p>
+
+<p>概率分布函数: 它是概率函数各个取值的累加结果.也叫累积概率函数</p>
+
+<ul>
+<li>分布函数</li>
+</ul>
+
+<h2 id="toc_1">连续型随机变量</h2>
+
+<ul>
+<li>概率密度函数: 等同于概率函数,why?</li>
+</ul>
+
+<p>在连续型随机变量中为啥要将概率函数叫成概率密度函数呢?<br/>
+参考陈希孺老师所著的《概率论与数理统计》<br/>
+<img src="media/15221149143615/15221159306143.png" alt=""/><br/>
+<img src="media/15221149143615/15221159405543.png" alt=""/></p>
+
+<p>概率密度函数用数学公式表示就是一个定积分的函数，定积分在数学中是用来求面积的，而在这里，你就把概率表示为面积即可！<br/>
+<img src="media/15221149143615/15221159485806.png" alt=""/></p>
+
+<p>左边是F(x)<code>连续型随机变量分布函数</code>画出的图形，右边是f(x)<code>连续型随机变量的概率密度函数</code>画出的图像，它们之间的关系就是，概率密度函数是分布函数的导函数。</p>
+
+<p>两张图一对比，你就会发现，如果用右图中的面积来表示概率，利用图形就能很清楚的看出，哪些取值的概率更大！这样看起来是不是特别直观，特别爽！！所以，我们在表示连续型随机变量的概率时，用f(x)概率密度函数来表示，是非常好的！</p>
+
+<h1 id="toc_2">参考</h1>
+
+<p><a href="https://www.jianshu.com/p/b570b1ba92bb">应该如何理解概率分布函数和概率密度函数?</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[分布式系统的一致性]]></title>
+    <link href="http://dmlcoding.com/15220339795263.html"/>
+    <updated>2018-03-26T11:12:59+08:00</updated>
+    <id>http://dmlcoding.com/15220339795263.html</id>
+    <content type="html"><![CDATA[
+<p><img src="media/15220339795263/15221454798314.jpg" alt=""/></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[docker 错误]]></title>
+    <link href="http://dmlcoding.com/15217143404677.html"/>
+    <updated>2018-03-22T18:25:40+08:00</updated>
+    <id>http://dmlcoding.com/15217143404677.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">net/http: TLS handshake timeout</h2>
+
+<p>下载镜像的时候出现<code>net/http: TLS handshake timeout</code>,<br/>
+原因是docker默认镜像拉取地址为国外仓库下载速度较慢，则会报错“net/http: TLS handshake timeout”。</p>
+
+<span id="more"></span><!-- more -->
+
+<p>此时，只需要将拉取地址改为国内镜像仓库即可。</p>
+
+<p>标准格式为：<br/>
+<code><br/>
+$ docker pull registry.docker-cn.com/myname/myrepo:mytag<br/>
+</code><br/>
+例：<br/>
+<code><br/>
+$ docker pull registry.docker-cn.com/library/ubuntu:16.04<br/>
+</code></p>
+
+<p>为了永久性保留更改，您可以修改 /etc/docker/daemon.json 文件并添加上 registry-mirrors 键值。</p>
+
+<pre><code>{
+  &quot;registry-mirrors&quot;: [&quot;https://registry.docker-cn.com&quot;]
+}
+</code></pre>
+
+<p>修改保存后重启 Docker 以使配置生效。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[mac 搭建 区块链开发环境]]></title>
+    <link href="http://dmlcoding.com/15216998348495.html"/>
+    <updated>2018-03-22T14:23:54+08:00</updated>
+    <id>http://dmlcoding.com/15216998348495.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li><a href="https://docs.docker.com/docker-for-mac/install/">官方安装文档</a></li>
+<li><a href="https://docs.docker.com/docker-for-mac/">官方使用文档</a></li>
+</ul>
+
+<span id="more"></span><!-- more -->
+
+<h1 id="toc_0">用docker下载ubuntu镜像</h1>
+
+<pre><code># 下载ubuntu镜像
+docker pull ubuntu
+# 进入镜像中
+docker run -it ubuntu /bin/bash
+# 查看ubuntu的发行版本
+cat /etc/issue
+
+</code></pre>
+
+<p>新开一个终端查看</p>
+
+<pre><code> hushiwei@hsw  ~/Docker  docker images
+REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
+ubuntu                latest              f975c5035748        2 weeks ago         112MB
+</code></pre>
+
+<h2 id="toc_1">进入镜像后,即生成了一个容器.更新容易里面的系统</h2>
+
+<p>跟新apt-get,安装常用开发工具</p>
+
+<pre><code>apt-get update
+apt-get install vim
+apt-get install sudo
+</code></pre>
+
+<h2 id="toc_2">提高安全意识,添加普通用户</h2>
+
+<pre><code>adduser deploy
+su deploy
+</code></pre>
+
+<h2 id="toc_3">给普通用户sudo权限</h2>
+
+<pre><code># root下执行
+chmod 777 /etc/sudoers
+vim /etc/sudoers
+</code></pre>
+
+<p>在/etc/sudoers文件里面添加一行,表示给deploy用户sudo权限,并且不需要密码<br/>
+<img src="media/15216998348495/15217671764613.jpg" alt=""/></p>
+
+<p>把这个文件的权限改回去</p>
+
+<pre><code>chmod 440 /etc/sudoers
+</code></pre>
+
+<h1 id="toc_4">在容器中进行区块链环境的搭建</h1>
+
+<p>注意:目前为止,我们还没退出容器过.</p>
+
+<h2 id="toc_5">安装curl,nodejs</h2>
+
+<pre><code>sudo apt-get install curl
+
+# 安装nodejs的版本
+root@a43d121b81a0:~# curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+# 完成后输出
+## Run `apt-get install nodejs` (as root) to install Node.js v8.x LTS Carbon and npm
+
+# 然后安装nodejs
+apt-get install nodejs
+
+# 查看版本
+node -v
+
+npm -v
+</code></pre>
+
+<h2 id="toc_6">安装testrpc,truffle</h2>
+
+<pre><code># 安装淘宝镜像,速度快
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+
+sudo cnpm install -g ethereumjs-testrpc
+# 完成后输入testrpc,进行校验
+
+sudo cnpm install -g truffle
+
+</code></pre>
+
+<h1 id="toc_7">提交安装好环境的容器</h1>
+
+<p>在开一个窗口,输入<code>docker ps</code> 找到正在运行的容器的<code>CONTAINER ID</code><br/>
+刚刚在这个容器里面安装好了环境,那么我们需要保存一下,所以用docker commit提交这个<br/>
+容器,成为镜像<br/>
+<code><br/>
+docker commit a43d121b81a0 testrpc-truffle-env:v1<br/>
+</code><br/>
+提交后,再查看images,比之前的ubuntu大了不少.毕竟装了那么多工具进去了<br/>
+<code><br/>
+ hushiwei@hsw  ~/Docker  docker images<br/>
+REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE<br/>
+testrpc-truffle-env   v1                  a2073b0b64cc        6 minutes ago       503MB<br/>
+ubuntu                latest              f975c5035748        2 weeks ago         112MB<br/>
+</code></p>
+
+<h2 id="toc_8">退出再进去</h2>
+
+<p>现在就算退出运行中的容器,之前安装的工具也都还在了.<br/>
+执行下面的命令即可进入刚刚提交的镜像中.<code>a2073b0b64cc</code>是刚刚提交的镜像的id</p>
+
+<pre><code>docker run -it a2073b0b64cc /bin/bash
+</code></pre>
+
+<h1 id="toc_9">安装idea插件进行开发</h1>
+
+<p>在idea的Plugins中安装插件<code>Intellij-Solidity</code></p>
+
+<h1 id="toc_10">docker挂载本地目录进行开发</h1>
+
+<p>将本地的<code>/Users/hushiwei/BlockChain/ethereum</code>目录,与容器中的<code>/home/deploy</code>进行共享<br/>
+```<br/>
+docker run -it -v /Users/hushiwei/BlockChain/ethereum:/home/deploy a2073b0b64cc /bin/bash</p>
+
+<pre><code>
+# 生成truffle代码
+在容器的`/home/deploy/demo3`目录下执行`truffle init` 生成项目
+![](media/15216998348495/15217712425759.jpg)
+
+本机对应的目录也可以看到
+![](media/15216998348495/15217712751901.jpg)
+
+## 用idea打开ethereum目录作为项目.
+
+![](media/15216998348495/15217713264100.jpg)
+
+
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LeetCode解题思路]]></title>
+    <link href="http://dmlcoding.com/15216328231070.html"/>
+    <updated>2018-03-21T19:47:03+08:00</updated>
+    <id>http://dmlcoding.com/15216328231070.html</id>
+    <content type="html"><![CDATA[
+<h1 id="toc_0">Easy</h1>
+
+<span id="more"></span><!-- more -->
+
+<h2 id="toc_1"><u>01</u>TwoSum</h2>
+
+<h2 id="toc_2"><u>07</u>ReverseInteger</h2>
+
+<h2 id="toc_3"><u>09</u>PalindromeNumber</h2>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Macbook 区块链开发]]></title>
+    <link href="http://dmlcoding.com/15216132281232.html"/>
+    <updated>2018-03-21T14:20:28+08:00</updated>
+    <id>http://dmlcoding.com/15216132281232.html</id>
+    <content type="html"><![CDATA[
+<p>基本概念就不说了,网上一大堆.</p>
+
+<h2 id="toc_0">客户端安装</h2>
+
+<pre><code>brew tap ethereum/ethereum
+
+brew install ethereum
+
+</code></pre>
+
+<span id="more"></span><!-- more -->
+
+<p>很是花了一些时间呢<br/>
+<code><br/>
+  /usr/local/Cellar/ethereum/1.8.2: 9 files, 54.7MB, built in 26 minutes 26 seconds<br/>
+</code></p>
+
+<pre><code>
+geth -h
+geth console
+
+</code></pre>
+
+<pre><code>
+ hushiwei@hsw  ~/BlockChain  geth console
+INFO [03-21|15:05:35] Maximum peer count                       ETH=25 LES=0 total=25
+INFO [03-21|15:05:35] Starting peer-to-peer node               instance=Geth/v1.8.2-stable/darwin-amd64/go1.10
+INFO [03-21|15:05:35] Allocated cache and file handles         database=/Users/hushiwei/Library/Ethereum/geth/chaindata cache=768 handles=1024
+INFO [03-21|15:05:35] Initialised chain configuration          config=&quot;{ChainID: 1 Homestead: 1150000 DAO: 1920000 DAOSupport: true EIP150: 2463000 EIP155: 2675000 EIP158: 2675000 Byzantium: 4370000 Constantinople: &lt;nil&gt; Engine: ethash}&quot;
+INFO [03-21|15:05:35] Disk storage enabled for ethash caches   dir=/Users/hushiwei/Library/Ethereum/geth/ethash count=3
+INFO [03-21|15:05:35] Disk storage enabled for ethash DAGs     dir=/Users/hushiwei/.ethash                      count=2
+INFO [03-21|15:05:35] Initialising Ethereum protocol           versions=&quot;[63 62]&quot; network=1
+INFO [03-21|15:05:35] Loaded most recent local header          number=0 hash=d4e567…cb8fa3 td=17179869184
+INFO [03-21|15:05:35] Loaded most recent local full block      number=0 hash=d4e567…cb8fa3 td=17179869184
+INFO [03-21|15:05:35] Loaded most recent local fast block      number=0 hash=d4e567…cb8fa3 td=17179869184
+INFO [03-21|15:05:35] Loaded local transaction journal         transactions=0 dropped=0
+INFO [03-21|15:05:35] Regenerated local transaction journal    transactions=0 accounts=0
+INFO [03-21|15:05:35] Starting P2P networking
+INFO [03-21|15:05:37] UDP listener up                          self=enode://239405879cbf4f9d8cfb1dafca4bab87b8f7ce27fbdb486347d7215b1de56663805d520d44044bb5ed324a79e41fbdd0be2adbbe5f31684cf528bf2faef4796f@[::]:30303
+INFO [03-21|15:05:37] RLPx listener up                         self=enode://239405879cbf4f9d8cfb1dafca4bab87b8f7ce27fbdb486347d7215b1de56663805d520d44044bb5ed324a79e41fbdd0be2adbbe5f31684cf528bf2faef4796f@[::]:30303
+INFO [03-21|15:05:37] IPC endpoint opened                      url=/Users/hushiwei/Library/Ethereum/geth.ipc
+Welcome to the Geth JavaScript console!
+
+instance: Geth/v1.8.2-stable/darwin-amd64/go1.10
+ modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
+
+</code></pre>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[大数据框架-开源协议]]></title>
@@ -179,25 +514,6 @@ get /master_example
 <pre><code># 在master_example上设置一个监视点
 stat /master_example true
 </code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[分布式应用浅谈]]></title>
-    <link href="http://dmlcoding.com/15205677979326.html"/>
-    <updated>2018-03-09T11:56:37+08:00</updated>
-    <id>http://dmlcoding.com/15205677979326.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0">分布式应用的架构</h2>
-
-<span id="more"></span><!-- more -->
-
-<h2 id="toc_1">分布式应用的需求</h2>
-
-<h2 id="toc_2">分布式应用面临的问题</h2>
-
-<h2 id="toc_3">分布式应用的解决方案</h2>
 
 ]]></content>
   </entry>
@@ -532,1010 +848,6 @@ numRecords must not be negative
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[python-matplotlib note]]></title>
-    <link href="http://dmlcoding.com/15213431815968.html"/>
-    <updated>2018-03-18T11:19:41+08:00</updated>
-    <id>http://dmlcoding.com/15213431815968.html</id>
-    <content type="html"><![CDATA[
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[python-pandas note]]></title>
-    <link href="http://dmlcoding.com/15212549634720.html"/>
-    <updated>2018-03-17T10:49:23+08:00</updated>
-    <id>http://dmlcoding.com/15212549634720.html</id>
-    <content type="html"><![CDATA[
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[python-numpy note]]></title>
-    <link href="http://dmlcoding.com/15212548392809.html"/>
-    <updated>2018-03-17T10:47:19+08:00</updated>
-    <id>http://dmlcoding.com/15212548392809.html</id>
-    <content type="html"><![CDATA[
-<h1 id="toc_0">numpy创建ndarray</h1>
-
-<ul>
-<li>一种由相同元素组成的多维数组,元素数量是事先给定好的</li>
-<li>元素的数据类型由dtype对象来指定,每个ndarry只有一种dtype类型</li>
-<li>ndarray的大小固定,创建好数组大小是不会再发生改变的</li>
-</ul>
-
-<pre><code class="language-python">import numpy as np
-</code></pre>
-
-<pre><code class="language-python"># 可以用help方法来查看这个函数的使用方法
-help(np.array)
-</code></pre>
-
-<h2 id="toc_1">用python内置数组创建ndarray</h2>
-
-<pre><code class="language-python"># 用一维数组创建
-np.array([1,2,3])
-</code></pre>
-
-<pre><code>array([1, 2, 3])
-</code></pre>
-
-<pre><code class="language-python"># 用元组创建
-np.array((1,2,3))
-</code></pre>
-
-<pre><code>array([1, 2, 3])
-</code></pre>
-
-<pre><code class="language-python"># 用多维数组
-np.array([[1,2,3,4],
-          [5,6,7,8]])
-</code></pre>
-
-<pre><code>array([[1, 2, 3, 4],
-       [5, 6, 7, 8]])
-</code></pre>
-
-<pre><code class="language-python"># 创建三维数组
-np.array([[[1,2,3],[2,3,4]],[[4,5,6],[7,8,9]]
-])
-</code></pre>
-
-<pre><code>array([[[1, 2, 3],
-        [2, 3, 4]],
-
-       [[4, 5, 6],
-        [7, 8, 9]]])
-</code></pre>
-
-<h2 id="toc_2">用numpy内置函数创建ndarray</h2>
-
-<pre><code class="language-python"># 通过zeros创建数组,创建元素全为零的数组
-# 参数为一个元组,元组表示你想创建一个几维的数组
-# 创建一个3*3的数组,元素初始化都为0
-np.zeros((3,3))
-
-# 创建一个2*3*3的三维数组,元素初始化都为0
-np.zeros((2,3,3))
-</code></pre>
-
-<pre><code>array([[[0., 0., 0.],
-        [0., 0., 0.],
-        [0., 0., 0.]],
-
-       [[0., 0., 0.],
-        [0., 0., 0.],
-        [0., 0., 0.]]])
-</code></pre>
-
-<pre><code class="language-python"># 通过ones创建数组,创意元素都为1的数组
-np.ones((3,4))
-</code></pre>
-
-<pre><code>array([[1., 1., 1., 1.],
-       [1., 1., 1., 1.],
-       [1., 1., 1., 1.]])
-</code></pre>
-
-<pre><code class="language-python"># 通过empty创建未初始化的数组
-np.empty((2,3))
-</code></pre>
-
-<pre><code>array([[0., 0., 0.],
-       [0., 0., 0.]])
-</code></pre>
-
-<h2 id="toc_3">ndarray的其他创建方式</h2>
-
-<pre><code class="language-python"># arange函数,类似python内置的range
-np.arange(9)
-</code></pre>
-
-<pre><code>array([0, 1, 2, 3, 4, 5, 6, 7, 8])
-</code></pre>
-
-<pre><code class="language-python">np.arange(1,9)
-</code></pre>
-
-<pre><code>array([1, 2, 3, 4, 5, 6, 7, 8])
-</code></pre>
-
-<pre><code class="language-python">np.arange(1,9,2)
-np.arange(9,1,-1)
-</code></pre>
-
-<pre><code>array([9, 8, 7, 6, 5, 4, 3, 2])
-</code></pre>
-
-<pre><code class="language-python"># linspace函数,生成等差数列
-# 生成1到10的数,一共有5个元素
-np.linspace(1,10,5)
-</code></pre>
-
-<pre><code>array([ 1.  ,  3.25,  5.5 ,  7.75, 10.  ])
-</code></pre>
-
-<pre><code class="language-python"># logspace生成等比数列
-# 10的0次方开始,到10的2次方结束,一共生成5个元素
-np.logspace(0,2,5)
-</code></pre>
-
-<pre><code>array([  1.        ,   3.16227766,  10.        ,  31.6227766 ,
-       100.        ])
-</code></pre>
-
-<pre><code class="language-python"># 修改base为2,默认底数是10
-np.logspace(0,2,5,base=2)
-</code></pre>
-
-<pre><code>array([1.        , 1.41421356, 2.        , 2.82842712, 4.        ])
-</code></pre>
-
-<pre><code class="language-python"># random函数,生成随机数
-np.random.random((3,3))
-</code></pre>
-
-<pre><code>array([[0.32521681, 0.46044314, 0.19938466],
-       [0.38477235, 0.20250328, 0.93452861],
-       [0.0615017 , 0.1795197 , 0.32724319]])
-</code></pre>
-
-<pre><code class="language-python"># randint 生成随机整数,从1到9,一共是个3*3的数组
-np.random.randint(1,9,size=(3,3))
-</code></pre>
-
-<pre><code>array([[6, 1, 2],
-       [2, 5, 5],
-       [6, 7, 3]])
-</code></pre>
-
-<pre><code class="language-python"># randn 返回一个样本,具有标准正态分布
-np.random.randn(3,3)
-</code></pre>
-
-<pre><code>array([[-0.57476519,  0.45673427,  0.26634586],
-       [-1.98015823, -1.25879457, -1.18650781],
-       [ 0.90624497, -1.16062802,  0.49804173]])
-</code></pre>
-
-<pre><code class="language-python"># rand 生成0到1直接的随机数
-np.random.rand(9)
-</code></pre>
-
-<pre><code>array([0.23177845, 0.33177202, 0.72181294, 0.24416673, 0.41005128,
-       0.6275457 , 0.40247175, 0.90591392, 0.46705692])
-</code></pre>
-
-<h1 id="toc_4">ndarray对象属性</h1>
-
-<h2 id="toc_5">修改ndarray对象类型dtype</h2>
-
-<pre><code class="language-python"># ndim 数组维度的个数,轴的个数被称作秩
-arr=np.random.randint(1,9,size=(3,3))
-print(arr.ndim)
-</code></pre>
-
-<pre><code>2
-</code></pre>
-
-<pre><code class="language-python"># shape 数组的维度
-arr=np.random.randint(1,9,size=(3,3))
-print(arr.shape)
-</code></pre>
-
-<pre><code>(3, 3)
-</code></pre>
-
-<pre><code class="language-python"># dtype ndarray的元素类型
-arr=np.random.randint(1,9,size=(3,3))
-print(arr.dtype)
-
-# itemsize数组中每个元素的字节大小
-print(arr.itemsize)
-
-# size ndarray里面的元素个数
-print(arr.size)
-</code></pre>
-
-<pre><code>int64
-8
-9
-</code></pre>
-
-<pre><code class="language-python">arr2=np.array([1,2,3,4])
-# 查看元素类型
-print(arr2.dtype)
-
-# 修改元素类型
-arr3=arr2.astype(float)
-print(arr3.dtype)
-arr4=np.array([1,2,3,4],dtype=float)
-print(arr4.dtype)
-</code></pre>
-
-<pre><code>int64
-float64
-float64
-</code></pre>
-
-<h2 id="toc_6">修改ndarray的形状shape</h2>
-
-<pre><code class="language-python"># 修改ndarray形状,要求修改后乘积不变
-arr=np.random.randint(1,9,size=(2,5))
-print(arr)
-print(arr.shape)
-arr.shape=(5,2)
-print(arr)
-</code></pre>
-
-<pre><code>[[5 8 8 1 8]
- [5 5 8 5 6]]
-(2, 5)
-[[5 8]
- [8 1]
- [8 5]
- [5 8]
- [5 6]]
-</code></pre>
-
-<pre><code class="language-python">arr=np.random.randint(1,9,size=(2,5))
-# -1 系统帮你算另外一部分
-arr.shape=(5,-1)
-arr
-</code></pre>
-
-<pre><code>array([[2, 8],
-       [1, 7],
-       [8, 7],
-       [3, 7],
-       [8, 5]])
-</code></pre>
-
-<pre><code class="language-python"># reshape修改后,创建的数组和原先的数组映射.修改后就都修改了
-arr=np.arange(9)
-print(arr)
-arr2=arr.reshape(3,3)
-print(arr2)
-arr2[0][1]=100
-print(arr)
-print(arr2)
-</code></pre>
-
-<pre><code>[0 1 2 3 4 5 6 7 8]
-[[0 1 2]
- [3 4 5]
- [6 7 8]]
-[  0 100   2   3   4   5   6   7   8]
-[[  0 100   2]
- [  3   4   5]
- [  6   7   8]]
-</code></pre>
-
-<pre><code class="language-python">arr=np.arange(9).reshape(3,3)
-arr
-</code></pre>
-
-<pre><code>array([[0, 1, 2],
-       [3, 4, 5],
-       [6, 7, 8]])
-</code></pre>
-
-<h1 id="toc_7">numpy的基本操作</h1>
-
-<h2 id="toc_8">数组与标量,数组之间的运算</h2>
-
-<ul>
-<li>1.数组不用循环即可对每个元素执行批量的算术运算操作,这个过程叫做矢量化,即用数组表达式代替循环的做法</li>
-<li>2.矢量化数组运算性能比纯Python方式快上一两个数据级</li>
-<li>3.大小相等的两个数组之间的任何算术运算都会将其运算应用到元素级别的操作上</li>
-</ul>
-
-<p><strong>在numpy中,大小相等的数组之间的的运算,为元素级运算,即只用于位置相同的元素之间,所得的运算结果组成一个新的数组,运算结果的位置跟操作数位置相同</strong></p>
-
-<h3 id="toc_9">数组与标量之间的运算</h3>
-
-<pre><code class="language-python">arr=np.arange(9).reshape(3,3)
-print(arr)
-print(arr+2)
-print(arr*2)
-</code></pre>
-
-<pre><code>[[0 1 2]
- [3 4 5]
- [6 7 8]]
-[[ 2  3  4]
- [ 5  6  7]
- [ 8  9 10]]
-[[ 0  2  4]
- [ 6  8 10]
- [12 14 16]]
-</code></pre>
-
-<h3 id="toc_10">数组与数组之间的运算</h3>
-
-<pre><code class="language-python">arr=np.array([1,1,2,3])
-arr2=np.array([2,1,6,3])
-arr3=arr+arr2
-arr3
-</code></pre>
-
-<pre><code>array([3, 2, 8, 6])
-</code></pre>
-
-<pre><code class="language-python">arr1=np.array([
-    [10,20,30],
-    [40,50,60]
-])
-arr2=np.array([
-    [1,2,3],
-    [4,5,6]
-])
-print(arr1)
-print(arr2)
-</code></pre>
-
-<pre><code>[[10 20 30]
- [40 50 60]]
-[[1 2 3]
- [4 5 6]]
-</code></pre>
-
-<pre><code class="language-python">print(arr1+arr2)
-</code></pre>
-
-<pre><code>[[11 22 33]
- [44 55 66]]
-</code></pre>
-
-<h2 id="toc_11">数组的矩阵积</h2>
-
-<ul>
-<li>矩阵:多维数组即矩阵</li>
-<li>矩阵积(matrix product):两个二维矩阵(行和列的矩阵)满足第一个矩阵的列数与第二个矩阵的行数相同,那么可以进行矩阵的乘法,即矩阵积,矩阵积不是元素级的运算.也称为点积,数量积.</li>
-<li>[M,N]*[N,Y]=<a href="%E7%B1%BB%E4%BC%BC%E8%BF%99%E6%A0%B7">M,Y</a></li>
-<li>dot函数来实现</li>
-</ul>
-
-<pre><code class="language-python"># 每行为每个部门1,2,3,每列为每个产品A,B,C
-# 那么就是3个部门,3个产品
-arr=np.array([
-    [120,60,220],
-    [115,23,201],
-    [132,48,230]
-])
-
-# 每行为产品A,B,C,列为产品单价和产品体积
-arr2=np.array([
-    [12.34,0.04],
-    [204.56,2.34],
-    [9.89,0.45]
-])
-
-
-</code></pre>
-
-<pre><code class="language-python"># 求每个部门的总收入,以及每个部门的产品共占了多少体积
-# 为了实现这个需求,就可以将两个矩阵进行相乘
-
-# 举例: 120*12+60*204.56+220*9.89=15930.2 
-# 行列对应元素相乘后累加
-# 矩阵相乘使用dot函数
-arr.dot(arr2)
-</code></pre>
-
-<pre><code>array([[15930.2 ,   244.2 ],
-       [ 8111.87,   148.87],
-       [13722.46,   221.1 ]])
-</code></pre>
-
-<h2 id="toc_12">ndarray多维数组的索引和切片</h2>
-
-<p>|  | 0 | 1  |  2 |  3 |<br/>
-|:-|:--|:---|:---|:---|<br/>
-| 0 |0,0|0,1|0,2 |0,3 |<br/>
-| 1 |1,0|1,1|1,2 |1,3 |<br/>
-| 2 |2,0|2,1|2,2 |2,3 |</p>
-
-<pre><code class="language-python">arr=np.random.randint(1,9,size=(2,3,3))
-print(arr)
-</code></pre>
-
-<pre><code>[[[4 5 1]
-  [3 5 3]
-  [3 7 5]]
-
- [[8 3 1]
-  [3 8 3]
-  [3 1 7]]]
-</code></pre>
-
-<h3 id="toc_13">ndarray的索引</h3>
-
-<p>和python的列表索引也是一样的</p>
-
-<pre><code class="language-python"># 一个中括号表示一个维度
-print(arr[0][0][1])
-
-# 通过逗号分隔,每部分是一个维度.比用中括号看起来更简单
-print(arr[0,0,1])
-</code></pre>
-
-<pre><code>5
-5
-</code></pre>
-
-<h3 id="toc_14">ndarray的切片</h3>
-
-<p>和python的列表切片也是一样的</p>
-
-<pre><code class="language-python"># 冒号代表对这一维度的所有进行切片
-print(arr[:,:,:])
-
-# 取每一维度的第一列
-print(arr[:,:,0])
-print(arr[:,:,0:2])
-</code></pre>
-
-<pre><code>[[[4 5 1]
-  [3 5 3]
-  [3 7 5]]
-
- [[8 3 1]
-  [3 8 3]
-  [3 1 7]]]
-[[4 3 3]
- [8 3 3]]
-[[[4 5]
-  [3 5]
-  [3 7]]
-
- [[8 3]
-  [3 8]
-  [3 1]]]
-</code></pre>
-
-<pre><code class="language-python">num=np.array([
-    [0,1,2,3,4],
-    [5,6,7,8,9]
-])
-</code></pre>
-
-<pre><code class="language-python"># 取第一行的所有元素
-num[1,:]
-
-# 取第一列的所有元素
-num[:,0]
-# 取第二列的所有元素
-num[:,1]
-</code></pre>
-
-<pre><code>array([1, 6])
-</code></pre>
-
-<h3 id="toc_15">ndarray的高级索引</h3>
-
-<p>如果一个ndarray是非元组序列,数据类型为<strong>整数</strong>或<strong>布尔值</strong>的ndarray,或者至少一个元素为序列对象的元组,我们就能够用它来索引ndarray</p>
-
-<p>高级索引始终返回数据的副本.与此相反,切片只提供了一个视图.</p>
-
-<h4 id="toc_16">整数索引</h4>
-
-<pre><code class="language-python">x=np.array([
-    [1,2],
-    [3,4],
-    [5,6]
-])
-
-y=x[[0,1,2],[0,1,0]]
-
-# 该结果包括数组中(0,0)，(1,1)和(2,0)位置处的元素。
-print(y)
-</code></pre>
-
-<pre><code>[1 4 5]
-</code></pre>
-
-<pre><code class="language-python"># 下面的示例获取了 4X3 数组中的每个角处的元素。 
-# 行索引是[0,0]和[3,3]，而列索引是[0,2]和[0,2]。
-x=np.array([
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [9,10,11]
-])
-print(&#39;数组原样:&#39;)
-print(x)
-print(&#39;~&#39;*30)
-rows=np.array([[0,0],[3,3]])
-cols=np.array([[0,2],[0,2]])
-y=x[rows,cols]
-print(&#39;这个数组的每个角处的元素是:&#39;)
-print(y)
-</code></pre>
-
-<pre><code>数组原样:
-[[ 0  1  2]
- [ 3  4  5]
- [ 6  7  8]
- [ 9 10 11]]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-这个数组的每个角处的元素是:
-[[ 0  2]
- [ 9 11]]
-</code></pre>
-
-<h4 id="toc_17">布尔索引</h4>
-
-<p>当结果对象是布尔运算(例如比较运算符)的结果时,将使用此类型的高级索引.<br/><br/>
-过滤空值,挺好.</p>
-
-<pre><code class="language-python"># 这个例子中，大于 5 的元素会作为布尔索引的结果返回。
-x=np.array([
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [9,10,11]
-])
-
-print(x&gt;5)
-
-print(&#39;大于5的元素是:&#39;)
-print(x[x&gt;5])
-
-</code></pre>
-
-<pre><code>[[False False False]
- [False False False]
- [ True  True  True]
- [ True  True  True]]
-大于5的元素是:
-[ 6  7  8  9 10 11]
-</code></pre>
-
-<pre><code class="language-python"># 这个例子使用了`~(取补运算符)`来过滤NaN
-a=np.array([np.nan,1,2,np.nan,3,4,5])
-print(a)
-print(a[~np.isnan(a)])
-</code></pre>
-
-<pre><code>[nan  1.  2. nan  3.  4.  5.]
-[1. 2. 3. 4. 5.]
-</code></pre>
-
-<pre><code class="language-python"># 从数组中过滤掉非复数元素
-a = np.array([1,  2+6j,  5,  3.5+5j])  
-print(a[np.iscomplex(a)])
-</code></pre>
-
-<pre><code>[2. +6.j 3.5+5.j]
-</code></pre>
-
-<h1 id="toc_18">Numpy-广播</h1>
-
-<ul>
-<li>广播是指Numpy在算术运算期间处理不同形状的数组的能力.</li>
-<li>对数组的算术运算通常在相应的元素上进行.</li>
-<li>如果两个阵列具有完全相同的形状,则这些操作被无缝执行.</li>
-</ul>
-
-<pre><code class="language-python"># 当两个数组的形状相同,运算没毛病
-a=np.array([1,2,3,4])
-b=np.array([10,20,30,40])
-c=a*b
-print(c)
-</code></pre>
-
-<pre><code>[ 10  40  90 160]
-</code></pre>
-
-<p>如果两个数组的维数不相同,则元素到元素的操作是不可能的.<br/>
-然而,在Numpy中仍然可以对形状不相似的数组进行操作,<strong>因为它拥有广播功能.</strong><br/>
-较小的数组会广播到较大数组的大小,以便使它们的形状可兼容.</p>
-
-<p>如果满足一下规则,则可以进行广播:<br/>
-+ ndim较小的数组会在前面追加一个长度为1的维度.<br/>
-+ 输出数组的每个维度的大小是输入数组该维度大小的最大值.</p>
-
-<p>未完待续...</p>
-
-<h1 id="toc_19">NumPy-数组上的迭代</h1>
-
-<ul>
-<li>Numpy包含一个迭代器对象numpy.nditer.</li>
-<li>她是一个有效的多维迭代器对象,可以用于在数组上进行迭代.</li>
-<li>数组的每个元素可使用python的标准Iterator接口来访问</li>
-</ul>
-
-<h2 id="toc_20">迭代方式</h2>
-
-<pre><code class="language-python">a=np.arange(0,60,5).reshape(3,4)
-print(&#39;--- 原始数组 ---&#39;)
-print(a)
-print(&#39;~&#39;*30)
-print(&#39;--- 进行迭代 ---&#39;)
-for x in np.nditer(a):
-    print(x)
-</code></pre>
-
-<pre><code>--- 原始数组 ---
-[[ 0  5 10 15]
- [20 25 30 35]
- [40 45 50 55]]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
---- 进行迭代 ---
-0
-5
-10
-15
-20
-25
-30
-35
-40
-45
-50
-55
-</code></pre>
-
-<pre><code class="language-python">b=a.T
-print(&#39;--- 原始数组进行转置 ---&#39;)
-print(b)
-for x in np.nditer(b):
-    print(x,end=&#39; &#39;)
-</code></pre>
-
-<pre><code>--- 原始数组进行转置 ---
-[[ 0 20 40]
- [ 5 25 45]
- [10 30 50]
- [15 35 55]]
-0 5 10 15 20 25 30 35 40 45 50 55 
-</code></pre>
-
-<h2 id="toc_21">迭代顺序</h2>
-
-<p>如果相同元素使用 F 风格顺序存储，则迭代器选择以更有效的方式对数组进行迭代。</p>
-
-<pre><code class="language-python">a=np.arange(0,60,5).reshape(3,4)
-print(&#39;原始数组&#39;)
-print(a)
-b=a.T
-print(&#39;原始数组的转置&#39;)
-print(b)
-print(&#39;以 C 风格顺序排序&#39;)
-c=b.copy(order=&#39;C&#39;)
-print(c)
-print(&quot;以 C 来进行迭代&quot;)
-for x in np.nditer(c):
-    print(x,end=&#39; &#39;)
-
-print(&#39;以 F 风格顺序排序&#39;)
-c=b.copy(order=&#39;F&#39;)
-print(c)
-print(&quot;以 F 来进行迭代&quot;)
-for x in np.nditer(c):
-    print(x,end=&#39; &#39;)
-
-</code></pre>
-
-<pre><code>原始数组
-[[ 0  5 10 15]
- [20 25 30 35]
- [40 45 50 55]]
-原始数组的转置
-[[ 0 20 40]
- [ 5 25 45]
- [10 30 50]
- [15 35 55]]
-以 C 风格顺序排序
-[[ 0 20 40]
- [ 5 25 45]
- [10 30 50]
- [15 35 55]]
-以 C 来进行迭代
-0 20 40 5 25 45 10 30 50 15 35 55 以 F 风格顺序排序
-[[ 0 20 40]
- [ 5 25 45]
- [10 30 50]
- [15 35 55]]
-以 F 来进行迭代
-0 5 10 15 20 25 30 35 40 45 50 55 
-</code></pre>
-
-<pre><code class="language-python"># 可以通过显示提醒,来强制nditer对象使用某种顺序
-a=np.arange(0,60,5).reshape(3,4)
-print(&quot;以 C 来进行迭代:&quot;)
-for x in np.nditer(a,order=&#39;C&#39;):
-    print(x,end=&#39; &#39;)
-print(&#39;\n&#39;+&#39;~&#39;*40)
-print(&quot;以 F 来进行迭代:&quot;)
-for x in np.nditer(a,order=&#39;F&#39;):
-    print(x,end=&#39; &#39;)
-</code></pre>
-
-<pre><code>以 C 来进行迭代:
-0 5 10 15 20 25 30 35 40 45 50 55 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-以 F 来进行迭代:
-0 20 40 5 25 45 10 30 50 15 35 55 
-</code></pre>
-
-<h2 id="toc_22">迭代器修改数组的值</h2>
-
-<ul>
-<li>nditer对象有另一个可选参数<code>op_flags</code>.其默认值为只读.</li>
-<li>但可以设置为读写或只写模式.</li>
-<li>这将允许使用此迭代器修改数组的元素</li>
-</ul>
-
-<pre><code class="language-python">a=np.arange(0,60,5).reshape(3,4)
-print(&quot;原始数组:&quot;)
-print(a)
-for x in np.nditer(a,op_flags=[&#39;readwrite&#39;]):
-    x[...]=2*x
-
-print(&#39;修改后的数组是:&#39;)
-print(a)
-</code></pre>
-
-<pre><code>原始数组:
-[[ 0  5 10 15]
- [20 25 30 35]
- [40 45 50 55]]
-修改后的数组是:
-[[  0  10  20  30]
- [ 40  50  60  70]
- [ 80  90 100 110]]
-</code></pre>
-
-<h2 id="toc_23">迭代器外部循环</h2>
-
-<p>nditer类的构造器拥有<code>flags</code>参数</p>
-
-<pre><code class="language-python"># 迭代器遍历每列的一维数组
-print(a)
-print(&quot;~&quot;*50)
-for x in np.nditer(a,flags=[&#39;external_loop&#39;],order=&#39;F&#39;):
-    print(x,end=&#39; &#39;)
-</code></pre>
-
-<pre><code>[[  0  10  20  30]
- [ 40  50  60  70]
- [ 80  90 100 110]]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-[ 0 40 80] [10 50 90] [ 20  60 100] [ 30  70 110] 
-</code></pre>
-
-<h1 id="toc_24">ndarray-数组拉伸与合并</h1>
-
-<ul>
-<li>数组拉伸np.tile（A，rep）函数可以将数组A进行拉伸，沿着A的维度重复rep次</li>
-<li>对于ndarray数组而言，多个数组可以执行合并操作，合并的方式有多种。</li>
-<li>Stack(arrays,axis=0):沿着新的轴加入一系列数组</li>
-<li>vstack（）：堆栈数组垂直顺序（行）</li>
-<li>hstack（）：堆栈数组水平顺序（列）</li>
-</ul>
-
-<pre><code class="language-python">arr=np.array([[3,9],[1,2]])
-arr
-</code></pre>
-
-<pre><code>array([[3, 9],
-       [1, 2]])
-</code></pre>
-
-<pre><code class="language-python"># 横向拉伸2次
-np.tile(arr,2)
-</code></pre>
-
-<pre><code>array([[3, 9, 3, 9],
-       [1, 2, 1, 2]])
-</code></pre>
-
-<pre><code class="language-python">np.tile(arr,6)
-</code></pre>
-
-<pre><code>array([[3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9],
-       [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2]])
-</code></pre>
-
-<pre><code class="language-python">np.tile(arr,(3,1))
-</code></pre>
-
-<pre><code>array([[3, 9],
-       [1, 2],
-       [3, 9],
-       [1, 2],
-       [3, 9],
-       [1, 2]])
-</code></pre>
-
-<pre><code class="language-python">np.tile(arr,(3,4))
-</code></pre>
-
-<pre><code>array([[3, 9, 3, 9, 3, 9, 3, 9],
-       [1, 2, 1, 2, 1, 2, 1, 2],
-       [3, 9, 3, 9, 3, 9, 3, 9],
-       [1, 2, 1, 2, 1, 2, 1, 2],
-       [3, 9, 3, 9, 3, 9, 3, 9],
-       [1, 2, 1, 2, 1, 2, 1, 2]])
-</code></pre>
-
-<h2 id="toc_25">stack</h2>
-
-<blockquote>
-<p>Stack(arrays,axis=0):沿着新的轴加入一系列数组</p>
-</blockquote>
-
-<p>相当于加一层维度</p>
-
-<pre><code class="language-python">a=[1,2,3]
-b=[4,5,6]
-</code></pre>
-
-<pre><code class="language-python"># 默认axis=0
-np.stack((a,))
-</code></pre>
-
-<pre><code>array([[1, 2, 3]])
-</code></pre>
-
-<pre><code class="language-python">np.stack((a,b))
-</code></pre>
-
-<pre><code>array([[1, 2, 3],
-       [4, 5, 6]])
-</code></pre>
-
-<pre><code class="language-python">np.stack((a,),axis=1)
-</code></pre>
-
-<pre><code>array([[1],
-       [2],
-       [3]])
-</code></pre>
-
-<h1 id="toc_26">常用一元函数</h1>
-
-<p><img src="media/15212548392809/15213430309763.jpg" alt=""/></p>
-
-<p><img src="media/15212548392809/15213430461194.jpg" alt=""/></p>
-
-<pre><code class="language-python">arr=np.array([-1,2,-3])
-arr
-</code></pre>
-
-<pre><code>array([-1,  2, -3])
-</code></pre>
-
-<pre><code class="language-python"># 取绝对值
-np.abs(arr)
-</code></pre>
-
-<pre><code>array([1, 2, 3])
-</code></pre>
-
-<pre><code class="language-python"># 计算各个元素的正负号
-np.sign(arr)
-</code></pre>
-
-<pre><code>array([-1,  1, -1])
-</code></pre>
-
-<pre><code class="language-python"># 向上取整
-np.ceil([1.2,1.4,1.7])
-</code></pre>
-
-<pre><code>array([ 2.,  2.,  2.])
-</code></pre>
-
-<pre><code class="language-python"># 向下取整
-np.floor([1.2,1.3,1.6])
-</code></pre>
-
-<pre><code>array([ 1.,  1.,  1.])
-</code></pre>
-
-<pre><code class="language-python"># 四舍五入取整
-np.rint([1.2,1.3,1.6])
-</code></pre>
-
-<pre><code>array([ 1.,  1.,  2.])
-</code></pre>
-
-<pre><code class="language-python"># 分别返回一个数的小数部分和整数部分
-np.modf([1.2,7.8])
-</code></pre>
-
-<pre><code>(array([ 0.2,  0.8]), array([ 1.,  7.]))
-</code></pre>
-
-<h1 id="toc_27">常用二元函数</h1>
-
-<p><img src="media/15212548392809/15213430758071.jpg" alt=""/></p>
-
-<pre><code class="language-python"># 元素级的求模计算(除法取余)
-np.mod(4,3) # 1
-np.mod([4,8],[3,5]) # [1,3]
-</code></pre>
-
-<pre><code>array([1, 3])
-</code></pre>
-
-<h1 id="toc_28">聚合函数</h1>
-
-<ul>
-<li>求和:np.sum()</li>
-<li>平均值:np.mean</li>
-<li>最大值:np.max</li>
-<li>最小值:np.min</li>
-<li>总体标准差:np.std</li>
-<li>......</li>
-</ul>
-
-<pre><code class="language-python">arr.sum()
-</code></pre>
-
-<pre><code>-2
-</code></pre>
-
-<h1 id="toc_29">where</h1>
-
-<pre><code class="language-python">arr1=np.array(
-    [
-    [1,2,np.NaN],
-    [4,5,np.NaN]
-])
-arr1
-</code></pre>
-
-<pre><code>array([[  1.,   2.,  nan],
-       [  4.,   5.,  nan]])
-</code></pre>
-
-<pre><code class="language-python">condition=np.isnan(arr1)
-</code></pre>
-
-<pre><code class="language-python">np.where(condition,0,arr1)
-</code></pre>
-
-<pre><code>array([[ 1.,  2.,  0.],
-       [ 4.,  5.,  0.]])
-</code></pre>
-
-<h1 id="toc_30">unique</h1>
-
-<pre><code class="language-python">np.unique([1,2,3,3,3,3,4,5,6,6,6,6])
-</code></pre>
-
-<pre><code>array([1, 2, 3, 4, 5, 6])
-</code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[Elasticsearch：用Curator辅助Marvel，实现自动删除旧marvel索引]]></title>
     <link href="http://dmlcoding.com/15198768495613.html"/>
     <updated>2018-03-01T12:00:49+08:00</updated>
@@ -1719,193 +1031,6 @@ echo &quot;delete success&quot;
 0 2 * * * source /etc/profile;bash /opt/curator/delete_marvel_daily.sh &gt; /opt/curator/delete.log 2&gt;&amp;1
 
 </code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PythonVirtualenv总结]]></title>
-    <link href="http://dmlcoding.com/15198743666304.html"/>
-    <updated>2018-03-01T11:19:26+08:00</updated>
-    <id>http://dmlcoding.com/15198743666304.html</id>
-    <content type="html"><![CDATA[
-<p>我的电脑是macbookpro.我在电脑里面分别装了python2.7和python3.6.</p>
-
-<p>当我用pip安装了virtual后,我如果想要对应版本的python</p>
-
-<span id="more"></span><!-- more -->
-
-<h1 id="toc_0">virtualenv</h1>
-
-<h2 id="toc_1">安装</h2>
-
-<pre><code>pip install virtualenv
-</code></pre>
-
-<h2 id="toc_2">virtualenv的参数</h2>
-
-<pre><code>hushiwei@hsw  ~/virtual  virtualenv
-You must provide a DEST_DIR
-Usage: virtualenv [OPTIONS] DEST_DIR
-
-Options:
-  --version             show program&#39;s version number and exit
-  -h, --help            show this help message and exit
-  -v, --verbose         Increase verbosity.
-  -q, --quiet           Decrease verbosity.
-  -p PYTHON_EXE, --python=PYTHON_EXE
-                        The Python interpreter to use, e.g.,
-                        --python=python2.5 will use the python2.5 interpreter
-                        to create the new environment.  The default is the
-                        interpreter that virtualenv was installed with
-                        (/usr/local/opt/python3/bin/python3.6)
-  --clear               Clear out the non-root install and start from scratch.
-  --no-site-packages    DEPRECATED. Retained only for backward compatibility.
-                        Not having access to global site-packages is now the
-                        default behavior.
-  --system-site-packages
-                        Give the virtual environment access to the global
-                        site-packages.
-  --always-copy         Always copy files rather than symlinking.
-  --unzip-setuptools    Unzip Setuptools when installing it.
-  --relocatable         Make an EXISTING virtualenv environment relocatable.
-                        This fixes up scripts and makes all .pth files
-                        relative.
-  --no-setuptools       Do not install setuptools in the new virtualenv.
-  --no-pip              Do not install pip in the new virtualenv.
-  --no-wheel            Do not install wheel in the new virtualenv.
-  --extra-search-dir=DIR
-                        Directory to look for setuptools/pip distributions in.
-                        This option can be used multiple times.
-  --download            Download preinstalled packages from PyPI.
-  --no-download, --never-download
-                        Do not download preinstalled packages from PyPI.
-  --prompt=PROMPT       Provides an alternative prompt prefix for this
-                        environment.
-  --distribute          DEPRECATED. Retained only for backward compatibility.
-                        This option has no effect.
-</code></pre>
-
-<p>可以看到里面的--python参数可以指定虚拟环境的python版本.并且说明了默认是python3.6</p>
-
-<h2 id="toc_3">创建虚拟环境</h2>
-
-<h3 id="toc_4">virtual安装Python2.7</h3>
-
-<pre><code>virtualenv --python=python python2env
-</code></pre>
-
-<h3 id="toc_5">virtual安装Python3.6环境</h3>
-
-<pre><code>virtualenv --python=python3 python3env
-</code></pre>
-
-<h2 id="toc_6">激活进入虚拟环境</h2>
-
-<pre><code>source python2env/bin/activate
-source python3env/bin/activate
-</code></pre>
-
-<h2 id="toc_7">退出虚拟环境</h2>
-
-<pre><code>deactivate
-</code></pre>
-
-<h2 id="toc_8">删除虚拟环境</h2>
-
-<pre><code># 直接用rm删除目录就是删除虚拟环境了
-rm -rf 虚拟环境的目录名称
-</code></pre>
-
-<h2 id="toc_9">激活虚拟环境,将全部依赖写入文件</h2>
-
-<pre><code>pip freeze &gt; requirements.txt
-</code></pre>
-
-<p>进入项目内,安装全部依赖</p>
-
-<pre><code>pip install -r requirements.txt
-</code></pre>
-
-<h1 id="toc_10">virtualenvwrapper</h1>
-
-<blockquote>
-<p>virtualenvwrapper是virtualenv的扩展管理包，用于更方便管理虚拟环境.</p>
-</blockquote>
-
-<p>他可以做;</p>
-
-<ol>
-<li>将所有虚拟环境整合在一个目录下</li>
-<li>管理（新增，删除，复制）虚拟环境</li>
-<li>切换虚拟环境</li>
-</ol>
-
-<h2 id="toc_11">安装</h2>
-
-<pre><code>pip install virtualenvwrapper
-</code></pre>
-
-<h2 id="toc_12">使用方法</h2>
-
-<p>1.初始化配置</p>
-
-<p>默认virtualenvwrapper安装在/usr/local/bin下面，实际上需要运行virtualenvwrapper.sh文件才行；</p>
-
-<p>所以需要先进行配置一下：</p>
-
-<p>1.1 创建虚拟环境管理目录:</p>
-
-<pre><code>mkdir $HOME/.local/virtualenvs
-</code></pre>
-
-<p>1.2 在~/.bash_profile中添加行</p>
-
-<pre><code>export VIRTUALENV_USE_DISTRIBUTE=1        #  总是使用 pip/distribute
-export WORKON_HOME=$HOME/.local/virtualenvs       # 所有虚拟环境存储的目录
-if [ -e $HOME/.local/bin/virtualenvwrapper.sh ];then
-    source $HOME/.local/bin/virtualenvwrapper.sh
-else if [ -e /usr/local/bin/virtualenvwrapper.sh ];then
-    source /usr/local/bin/virtualenvwrapper.sh
-fi
-  fi
-export PIP_VIRTUALENV_BASE=$WORKON_HOME
-export PIP_RESPECT_VIRTUALENV=true
-</code></pre>
-
-<p>2.使用方法</p>
-
-<p>所有的命令可使用：<code>virtualenvwrapper --help</code> 进行查看，这里列出几个常用的：</p>
-
-<ul>
-<li><p>创建基本环境：mkvirtualenv [环境名]</p></li>
-<li><p>删除环境：rmvirtualenv [环境名]</p></li>
-<li><p>激活环境：workon [环境名]</p></li>
-<li><p>退出环境：deactivate</p></li>
-<li><p>列出所有环境：workon 或者 lsvirtualenv -b</p></li>
-<li><p>在使用mkvirtualenv命令的时候,-p选项可以指定使用哪一个python环境</p></li>
-</ul>
-
-<p>3.举例</p>
-
-<p>安装python2.7</p>
-
-<pre><code>mkvirtualenv -p python python2env
-</code></pre>
-
-<p>安装python3.6</p>
-
-<pre><code>mkvirtualenv -p python3 python3env
-</code></pre>
-
-<p>查看现在装了几个虚拟环境</p>
-
-<pre><code>hushiwei@hsw  ~  workon
-python2env
-python3env
-</code></pre>
-
-<p>所有命令都可在后面使用<code>--help</code>参数查看具体用法！Enjoy it !</p>
 
 ]]></content>
   </entry>
@@ -2723,1232 +1848,1362 @@ No factory for connector hive
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Elasticsearch基本概念]]></title>
-    <link href="http://dmlcoding.com/15209969513188.html"/>
-    <updated>2018-03-14T11:09:11+08:00</updated>
-    <id>http://dmlcoding.com/15209969513188.html</id>
+    <title type="html"><![CDATA[字符串编码转换]]></title>
+    <link href="http://dmlcoding.com/15219482100406.html"/>
+    <updated>2018-03-25T11:23:30+08:00</updated>
+    <id>http://dmlcoding.com/15219482100406.html</id>
     <content type="html"><![CDATA[
-<h2 id="toc_0">Node 与 Cluster</h2>
-
-<p>Elastic 本质上是一个分布式数据库，允许多台服务器协同工作，每台服务器可以运行多个 Elastic 实例。</p>
-
-<p>单个 Elastic 实例称为一个节点（node）。一组节点构成一个集群（cluster）。</p>
+<ul>
+<li>乱码之类的几乎都是由汉字引起的。</li>
+<li>任何平台的任何编码 都能和 Unicode 互相转换</li>
+<li>UTF-8 与 GBK 互相转换，那就先把UTF-8转换成Unicode，再从Unicode转换成GBK，反之同理。</li>
+</ul>
 
 <span id="more"></span><!-- more -->
 
-<h2 id="toc_1">Index</h2>
+<h2 id="toc_0">decode与encode</h2>
 
-<p>Elastic 会索引所有字段，经过处理后写入一个反向索引（Inverted Index）。查找数据的时候，直接查找该索引。</p>
+<ul>
+<li><code>decode</code>的作用是将其他编码的字符串转换成 Unicode 编码</li>
+<li><code>encode</code>的作用是将 Unicode 编码转换成其他编码的字符串</li>
+<li>一句话：UTF-8是对Unicode字符集进行编码的一种编码方式</li>
+</ul>
 
-<p>所以，Elastic 数据管理的顶层单位就叫做 Index（索引）。它是单个数据库的同义词。每个 Index （即数据库）的名字必须是小写。</p>
+<h2 id="toc_1">utf-8转gbk</h2>
 
-<p>下面的命令可以查看当前节点的所有 Index。</p>
+<pre><code class="language-python"># 这是一个 UTF-8 编码的字符串
+utf8Str = &quot;你好地球&quot;
+
+# 1. 将 UTF-8 编码的字符串 转换成 Unicode 编码
+unicodeStr = utf8Str.decode(&quot;UTF-8&quot;)
+
+# 2. 再将 Unicode 编码格式字符串 转换成 GBK 编码
+gbkData = unicodeStr.encode(&quot;GBK&quot;)
+
+</code></pre>
+
+<h2 id="toc_2">gbk转utf-8</h2>
 
 <pre><code>
-$ curl -X GET &#39;http://localhost:9200/_cat/indices?v&#39;
+# 1. 再将 GBK 编码格式字符串 转化成 Unicode
+unicodeStr = gbkData.decode(&quot;gbk&quot;)
+
+# 2. 再将 Unicode 编码格式字符串转换成 UTF-8
+utf8Str = unicodeStr.encode(&quot;UTF-8&quot;)
 
 </code></pre>
-
-<h2 id="toc_2">Document</h2>
-
-<p>Index 里面单条的记录称为 Document（文档）。许多条 Document 构成了一个 Index。</p>
-
-<p>Document 使用 JSON 格式表示，下面是一个例子。</p>
-
-<pre><code>
- {
-   &quot;user&quot;: &quot;张三&quot;,
-   &quot;title&quot;: &quot;工程师&quot;,
-   &quot;desc&quot;: &quot;数据库管理&quot;
- }
- 
-</code></pre>
-
-<p>同一个 Index 里面的 Document，不要求有相同的结构（scheme），但是最好保持相同，这样有利于提高搜索效率。</p>
-
-<h2 id="toc_3">Type</h2>
-
-<p>Document 可以分组，比如<code>weather</code>这个 Index 里面，可以按城市分组（北京和上海），也可以按气候分组（晴天和雨天）。这种分组就叫做 Type，它是虚拟的逻辑分组，用来过滤 Document。</p>
-
-<p>不同的 Type 应该有相似的结构（schema），举例来说，<code>id</code>字段不能在这个组是字符串，在另一个组是数值。这是与关系型数据库的表的<a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/mapping.html">一个区别</a>。性质完全不同的数据（比如<code>products</code>和<code>logs</code>）应该存成两个 Index，而不是一个 Index 里面的两个 Type（虽然可以做到）。</p>
-
-<p>下面的命令可以列出每个 Index 所包含的 Type。</p>
-
-<pre><code> 
- $ curl &#39;localhost:9200/_mapping?pretty=true&#39;
- 
-</code></pre>
-
-<p>根据<a href="https://www.elastic.co/blog/index-type-parent-child-join-now-future-in-elasticsearch">规划</a>，Elastic 6.x 版只允许每个 Index 包含一个 Type，7.x 版将会彻底移除 Type。</p>
-
-<h2 id="toc_4">Shards &amp; Replicas</h2>
-
-<p>一个index能够存储非常大量的数据，有时可能会超过单个节点硬件的限制。例如。一个index存储一超过1TB的数据，这对于单个节点有可能是负担不起的。为了解决这个问题，es可以讲index分片到不同的shards中。当你创建一个index，你可以定义你想要的shards数量。每一个shard对于自己来说都是一个拥有所有功能并且有独立的index，可以被放到任何node上。<br/>
-分片有两个重要的优势：</p>
-
-<ul>
-<li>它允许你水平 分割/扩展 你的内容。</li>
-<li>它允许你并行处理不同分片上的数据来提高效率。 为了保证高可用性，可以为每个分片节点设置备份节点。</li>
-</ul>
-
-<p>对于如何进行分片以及进行聚合操作时文档是怎样merge的，es都自动管理了，并且对用户是透明的。</p>
-
-<p>在网络环境中，当某个服务失效了，failover机制是非常有效的高可用保障。es也提供了对于index分片的复制。<br/>
-复制机制有两个重要特点：</p>
-
-<ul>
-<li>它提供了高可用性以防一个shard/node失效。值得注意的是，一个shard复制不要和它本身放在同一个节点。</li>
-<li>它通过对所有复制shard的并行搜索来提高你系统的吞吐量。</li>
-</ul>
-
-<h1 id="toc_5">探索集群</h1>
-
-<p>现在我们已经让节点和集群运行起来了，下一步怎么和es进行沟通交流呢？幸运的是，es提供了一个非常好用的restAPI。通过api我们可以做这些事情：</p>
-
-<ul>
-<li>检查集群，节点和index的健康状况，状态和统计数据。</li>
-<li>管理集群、节点和index的数据和元数据。</li>
-<li>执行CRUD和一些针对index的搜索操作。</li>
-<li>执行高级的搜索操作，例如分页，排序，过滤，脚本，聚合以及其他。</li>
-</ul>
-
-<h2 id="toc_6">集群的健康监测</h2>
-
-<p>接下来，我们对集群进行一个基本的简单的健康监测。前文提到了，因为es通过restAPI来进行操作，所以可以使用curl或者postman等。<br/>
-检测cluster的健康状况，我们可以使用_cat API。</p>
-
-<pre><code>[hadoop@U006 ~]$ curl &#39;localhost:9200/_cat/health?v&#39;
-epoch      timestamp cluster            status node.total node.data shards pri relo init unassign pending_tasks max_task_wait_time active_shards_percent
-1521000953 12:15:53  test_elasticsearch yellow          1         1     39  39    0    0       39             0                  -                 50.0%
-</code></pre>
-
-<p>其中status显示了当前的健康状况。<br/>
-status的定义如下：</p>
-
-<ul>
-<li>green ： everything is ok。</li>
-<li>yellow： 所有数据可用，但是一些备份节点的数据尚未被分配。</li>
-<li>red ： 一些数据不可用。</li>
-</ul>
-
-<h2 id="toc_7">查看节点的状况</h2>
-
-<pre><code>[hadoop@U006 ~]$ curl &#39;localhost:9200/_cat/nodes?v&#39;
-host        ip          heap.percent ram.percent load node.role master name
-10.10.25.13 10.10.25.13           11          84 2.54 d         *      node1
-</code></pre>
-
-<h2 id="toc_8">查询所有的index</h2>
-
-<pre><code>[hadoop@U006 ~]$ curl &#39;localhost:9200/_cat/indices?v&#39;
-health status index                   pri rep docs.count docs.deleted store.size pri.store.size
-yellow open   .marvel-es-1-2017.10.25   1   1      20639          640      7.5mb          7.5mb
-yellow open   .marvel-es-1-2017.10.24   1   1     185123          862     66.6mb         66.6mb
-yellow open   .marvel-es-1-2017.10.23   1   1     184771          862     66.2mb         66.2mb
-yellow open   .marvel-es-1-2017.10.22   1   1     182271          862     65.6mb         65.6mb
-yellow open   test_log                  5   1      84539            0     17.2mb         17.2mb
-yellow open   website                   5   1          2            0      7.8kb          7.8kb
-</code></pre>
-
-<h1 id="toc_9">新建和删除 Index</h1>
-
-<h2 id="toc_10">新建 Index</h2>
-
-<p>新建 Index，可以直接向 Elastic 服务器发出 PUT 请求。下面的例子是新建一个名叫<code>weather</code>的 Index。</p>
-
-<pre><code> 
- $ curl -X PUT &#39;localhost:9200/weather&#39;
- 
-</code></pre>
-
-<p>服务器返回一个 JSON 对象，里面的<code>acknowledged</code>字段表示操作成功。</p>
-
-<pre><code> 
- {
-   &quot;acknowledged&quot;:true,
-   &quot;shards_acknowledged&quot;:true
- }
- 
-</code></pre>
-
-<h2 id="toc_11">删除 Index</h2>
-
-<p>然后，我们发出 DELETE 请求，删除这个 Index。</p>
-
-<pre><code> 
- $ curl -X DELETE &#39;localhost:9200/weather&#39;
- 
-</code></pre>
-
-<h1 id="toc_12">数据操作</h1>
-
-<h2 id="toc_13">新增记录</h2>
-
-<p>向指定的 /Index/Type 发送 PUT 请求，就可以在 Index 里面新增一条记录。比如，向<code>/accounts/person</code>发送请求，就可以新增一条人员记录。</p>
-
-<pre><code> 
- $ curl -X PUT &#39;localhost:9200/accounts/person/1&#39; -d &#39;
- {
-   &quot;user&quot;: &quot;张三&quot;,
-   &quot;title&quot;: &quot;工程师&quot;,
-   &quot;desc&quot;: &quot;数据库管理&quot;
- }&#39; 
- 
-</code></pre>
-
-<p>服务器返回的 JSON 对象，会给出 Index、Type、Id、Version 等信息。</p>
-
-<pre><code> 
- {
-   &quot;_index&quot;:&quot;accounts&quot;,
-   &quot;_type&quot;:&quot;person&quot;,
-   &quot;_id&quot;:&quot;1&quot;,
-   &quot;_version&quot;:1,
-   &quot;result&quot;:&quot;created&quot;,
-   &quot;_shards&quot;:{&quot;total&quot;:2,&quot;successful&quot;:1,&quot;failed&quot;:0},
-   &quot;created&quot;:true
- }
- 
-</code></pre>
-
-<p>如果你仔细看，会发现请求路径是<code>/accounts/person/1</code>，最后的<code>1</code>是该条记录的 Id。它不一定是数字，任意字符串（比如<code>abc</code>）都可以。</p>
-
-<p>新增记录的时候，也可以不指定 Id，这时要改成 POST 请求。</p>
-
-<pre><code> 
- $ curl -X POST &#39;localhost:9200/accounts/person&#39; -d &#39;
- {
-   &quot;user&quot;: &quot;李四&quot;,
-   &quot;title&quot;: &quot;工程师&quot;,
-   &quot;desc&quot;: &quot;系统管理&quot;
- }&#39;
- 
-</code></pre>
-
-<p>上面代码中，向<code>/accounts/person</code>发出一个 POST 请求，添加一个记录。这时，服务器返回的 JSON 对象里面，<code>_id</code>字段就是一个随机字符串。</p>
-
-<pre><code> 
- {
-   &quot;_index&quot;:&quot;accounts&quot;,
-   &quot;_type&quot;:&quot;person&quot;,
-   &quot;_id&quot;:&quot;AV3qGfrC6jMbsbXb6k1p&quot;,
-   &quot;_version&quot;:1,
-   &quot;result&quot;:&quot;created&quot;,
-   &quot;_shards&quot;:{&quot;total&quot;:2,&quot;successful&quot;:1,&quot;failed&quot;:0},
-   &quot;created&quot;:true
- }
- 
-</code></pre>
-
-<p>注意，如果没有先创建 Index（这个例子是<code>accounts</code>），直接执行上面的命令，Elastic 也不会报错，而是直接生成指定的 Index。所以，打字的时候要小心，不要写错 Index 的名称。</p>
-
-<h2 id="toc_14">查看记录</h2>
-
-<p>向<code>/Index/Type/Id</code>发出 GET 请求，就可以查看这条记录。</p>
-
-<pre><code> 
- $ curl &#39;localhost:9200/accounts/person/1?pretty=true&#39;
- 
-</code></pre>
-
-<p>上面代码请求查看<code>/accounts/person/1</code>这条记录，URL 的参数<code>pretty=true</code>表示以易读的格式返回。</p>
-
-<p>返回的数据中，<code>found</code>字段表示查询成功，<code>_source</code>字段返回原始记录。</p>
-
-<pre><code> 
- {
-   &quot;_index&quot; : &quot;accounts&quot;,
-   &quot;_type&quot; : &quot;person&quot;,
-   &quot;_id&quot; : &quot;1&quot;,
-   &quot;_version&quot; : 1,
-   &quot;found&quot; : true,
-   &quot;_source&quot; : {
-     &quot;user&quot; : &quot;张三&quot;,
-     &quot;title&quot; : &quot;工程师&quot;,
-     &quot;desc&quot; : &quot;数据库管理&quot;
-   }
- }
- 
-</code></pre>
-
-<p>如果 Id 不正确，就查不到数据，<code>found</code>字段就是<code>false</code>。</p>
-
-<pre><code> 
- $ curl &#39;localhost:9200/weather/beijing/abc?pretty=true&#39;
- 
- {
-   &quot;_index&quot; : &quot;accounts&quot;,
-   &quot;_type&quot; : &quot;person&quot;,
-   &quot;_id&quot; : &quot;abc&quot;,
-   &quot;found&quot; : false
- }
- 
-</code></pre>
-
-<h2 id="toc_15">删除记录</h2>
-
-<p>删除记录就是发出 DELETE 请求。</p>
-
-<pre><code> 
- $ curl -X DELETE &#39;localhost:9200/accounts/person/1&#39;
- 
-</code></pre>
-
-<p>这里先不要删除这条记录，后面还要用到。</p>
-
-<h2 id="toc_16">更新记录</h2>
-
-<p>更新记录就是使用 PUT 请求，重新发送一次数据。</p>
-
-<pre><code> 
- $ curl -X PUT &#39;localhost:9200/accounts/person/1&#39; -d &#39;
- {
-     &quot;user&quot; : &quot;张三&quot;,
-     &quot;title&quot; : &quot;工程师&quot;,
-     &quot;desc&quot; : &quot;数据库管理，软件开发&quot;
- }&#39; 
- 
- {
-   &quot;_index&quot;:&quot;accounts&quot;,
-   &quot;_type&quot;:&quot;person&quot;,
-   &quot;_id&quot;:&quot;1&quot;,
-   &quot;_version&quot;:2,
-   &quot;result&quot;:&quot;updated&quot;,
-   &quot;_shards&quot;:{&quot;total&quot;:2,&quot;successful&quot;:1,&quot;failed&quot;:0},
-   &quot;created&quot;:false
- }
- 
-</code></pre>
-
-<p>上面代码中，我们将原始数据从&quot;数据库管理&quot;改成&quot;数据库管理，软件开发&quot;。 返回结果里面，有几个字段发生了变化。</p>
-
-<pre><code> 
- &quot;_version&quot; : 2,
- &quot;result&quot; : &quot;updated&quot;,
- &quot;created&quot; : false
- 
-</code></pre>
-
-<p>可以看到，记录的 Id 没变，但是版本（version）从<code>1</code>变成<code>2</code>，操作类型（result）从<code>created</code>变成<code>updated</code>，<code>created</code>字段变成<code>false</code>，因为这次不是新建记录。</p>
-
-<h1 id="toc_17">数据查询</h1>
-
-<h2 id="toc_18">返回所有记录</h2>
-
-<p>使用 GET 方法，直接请求<code>/Index/Type/_search</code>，就会返回所有记录。</p>
-
-<pre><code>
- $ curl &#39;localhost:9200/accounts/person/_search&#39;
- 
- {
-   &quot;took&quot;:2,
-   &quot;timed_out&quot;:false,
-   &quot;_shards&quot;:{&quot;total&quot;:5,&quot;successful&quot;:5,&quot;failed&quot;:0},
-   &quot;hits&quot;:{
-     &quot;total&quot;:2,
-     &quot;max_score&quot;:1.0,
-     &quot;hits&quot;:[
-       {
-         &quot;_index&quot;:&quot;accounts&quot;,
-         &quot;_type&quot;:&quot;person&quot;,
-         &quot;_id&quot;:&quot;AV3qGfrC6jMbsbXb6k1p&quot;,
-         &quot;_score&quot;:1.0,
-         &quot;_source&quot;: {
-           &quot;user&quot;: &quot;李四&quot;,
-           &quot;title&quot;: &quot;工程师&quot;,
-           &quot;desc&quot;: &quot;系统管理&quot;
-         }
-       },
-       {
-         &quot;_index&quot;:&quot;accounts&quot;,
-         &quot;_type&quot;:&quot;person&quot;,
-         &quot;_id&quot;:&quot;1&quot;,
-         &quot;_score&quot;:1.0,
-         &quot;_source&quot;: {
-           &quot;user&quot; : &quot;张三&quot;,
-           &quot;title&quot; : &quot;工程师&quot;,
-           &quot;desc&quot; : &quot;数据库管理，软件开发&quot;
-         }
-       }
-     ]
-   }
- }
- 
-</code></pre>
-
-<p>上面代码中，返回结果的 <code>took</code>字段表示该操作的耗时（单位为毫秒），<code>timed_out</code>字段表示是否超时，<code>hits</code>字段表示命中的记录，里面子字段的含义如下。</p>
-
-<blockquote>
-<ul>
-<li><code>total</code>：返回记录数，本例是2条。</li>
-<li><code>max_score</code>：最高的匹配程度，本例是<code>1.0</code>。</li>
-<li><code>hits</code>：返回的记录组成的数组。</li>
-</ul>
-</blockquote>
-
-<p>返回的记录中，每条记录都有一个<code>_score</code>字段，表示匹配的程序，默认是按照这个字段降序排列。</p>
-
-<h2 id="toc_19">全文搜索</h2>
-
-<p>Elastic 的查询非常特别，使用自己的<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.5/query-dsl.html">查询语法</a>，要求 GET 请求带有数据体。</p>
-
-<pre><code> 
- $ curl &#39;localhost:9200/accounts/person/_search&#39;  -d &#39;
- {
-   &quot;query&quot; : { &quot;match&quot; : { &quot;desc&quot; : &quot;软件&quot; }}
- }&#39;
- 
-</code></pre>
-
-<p>上面代码使用 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.5/query-dsl-match-query.html">Match 查询</a>，指定的匹配条件是<code>desc</code>字段里面包含&quot;软件&quot;这个词。返回结果如下。</p>
-
-<pre><code> 
- {
-   &quot;took&quot;:3,
-   &quot;timed_out&quot;:false,
-   &quot;_shards&quot;:{&quot;total&quot;:5,&quot;successful&quot;:5,&quot;failed&quot;:0},
-   &quot;hits&quot;:{
-     &quot;total&quot;:1,
-     &quot;max_score&quot;:0.28582606,
-     &quot;hits&quot;:[
-       {
-         &quot;_index&quot;:&quot;accounts&quot;,
-         &quot;_type&quot;:&quot;person&quot;,
-         &quot;_id&quot;:&quot;1&quot;,
-         &quot;_score&quot;:0.28582606,
-         &quot;_source&quot;: {
-           &quot;user&quot; : &quot;张三&quot;,
-           &quot;title&quot; : &quot;工程师&quot;,
-           &quot;desc&quot; : &quot;数据库管理，软件开发&quot;
-         }
-       }
-     ]
-   }
- }
- 
-</code></pre>
-
-<p>Elastic 默认一次返回10条结果，可以通过<code>size</code>字段改变这个设置。</p>
-
-<pre><code> 
- $ curl &#39;localhost:9200/accounts/person/_search&#39;  -d &#39;
- {
-   &quot;query&quot; : { &quot;match&quot; : { &quot;desc&quot; : &quot;管理&quot; }},
-   &quot;size&quot;: 1
- }&#39;
- 
-</code></pre>
-
-<p>上面代码指定，每次只返回一条结果。</p>
-
-<p>还可以通过<code>from</code>字段，指定位移。</p>
-
-<pre><code> 
- $ curl &#39;localhost:9200/accounts/person/_search&#39;  -d &#39;
- {
-   &quot;query&quot; : { &quot;match&quot; : { &quot;desc&quot; : &quot;管理&quot; }},
-   &quot;from&quot;: 1,
-   &quot;size&quot;: 1
- }&#39;
- 
-</code></pre>
-
-<p>上面代码指定，从位置1开始（默认是从位置0开始），只返回一条结果。</p>
-
-<h2 id="toc_20">逻辑运算</h2>
-
-<p>如果有多个搜索关键字， Elastic 认为它们是<code>or</code>关系。</p>
-
-<pre><code> 
- $ curl &#39;localhost:9200/accounts/person/_search&#39;  -d &#39;
- {
-   &quot;query&quot; : { &quot;match&quot; : { &quot;desc&quot; : &quot;软件 系统&quot; }}
- }&#39;
- 
-</code></pre>
-
-<p>上面代码搜索的是<code>软件 or 系统</code>。</p>
-
-<p>如果要执行多个关键词的<code>and</code>搜索，必须使用<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.5/query-dsl-bool-query.html">布尔查询</a>。</p>
-
-<pre><code> 
- $ curl &#39;localhost:9200/accounts/person/_search&#39;  -d &#39;
- {
-   &quot;query&quot;: {
-     &quot;bool&quot;: {
-       &quot;must&quot;: [
-         { &quot;match&quot;: { &quot;desc&quot;: &quot;软件&quot; } },
-         { &quot;match&quot;: { &quot;desc&quot;: &quot;系统&quot; } }
-       ]
-     }
-   }
- }&#39;
- 
-</code></pre>
-
-<h2 id="toc_21">使用过滤器</h2>
-
-<p>之前提到的score是一个数字，它用来评价当前返回的文档和我们需要的文档的匹配程度。分数越高的匹配程度越好。<br/>
-但是查询并不是总需要产生score，尤其是它们只是用来过滤文档的时候。es能够自动的优化查询并不计算这些无用的score。<br/>
-上文中的bool query也支持filter语句。filter语句可以在不改变score的情况下使用查询语句来限定文档。</p>
-
-<pre><code>curl -XPOST &#39;localhost:9200/customer/_search?pretty&#39; -d &#39;
-{
-  &quot;query&quot;: {
-    &quot;bool&quot;: {
-      &quot;must&quot;: { &quot;match_all&quot;: {} },
-      &quot;filter&quot;: {
-        &quot;range&quot;: {
-          &quot;age&quot;: {
-            &quot;gte&quot;: 20000,
-            &quot;lte&quot;: 30000
-          }
-        }
-      }
-    }
-  }
-}&#39;
-</code></pre>
-
-<h2 id="toc_22">执行聚合</h2>
-
-<p>聚合可以对数据进行分组并对分组进行数据统计。类似于SQL中的group by。在es中，可以一次性返回查询结果和聚合结果。</p>
-
-<pre><code>curl -XPOST &#39;localhost:9200/customer/_search?pretty&#39; -d &#39;
-{
-  &quot;size&quot;: 0,
-  &quot;aggs&quot;: {
-    &quot;group_by_name&quot;: {
-      &quot;terms&quot;: {
-        &quot;field&quot;: &quot;name&quot;
-      }
-    }
-  }
-}&#39;
-</code></pre>
-
-<h1 id="toc_23">参考链接</h1>
-
-<ul>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html">ElasticSearch 官方手册</a></li>
-<li><a href="https://www.elastic.co/blog/a-practical-introduction-to-elasticsearch">A Practical Introduction to Elasticsearch</a></li>
-</ul>
 
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[二八定律与长尾理论]]></title>
-    <link href="http://dmlcoding.com/15198769093559.html"/>
-    <updated>2018-03-01T12:01:49+08:00</updated>
-    <id>http://dmlcoding.com/15198769093559.html</id>
+    <title type="html"><![CDATA[json和jsonPATH[整理自网络]]]></title>
+    <link href="http://dmlcoding.com/15219476833792.html"/>
+    <updated>2018-03-25T11:14:43+08:00</updated>
+    <id>http://dmlcoding.com/15219476833792.html</id>
     <content type="html"><![CDATA[
-<p>刚入广告行业的时候,有时候会听同事们说长尾啥的.一直不太明白长尾是啥意思.最近看一本书,书里面提到了一个二八定律.<br/>
-本着好奇的态度,搜索了一下二八定律<a href="%5B%5D()"></a>,没想到顺带都提到了长尾理论.接着这个机会,好好理解一下二八定律与长尾理论.</p>
+<p>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式，它使得人们很容易的进行阅读和编写。同时也方便了机器进行解析和生成。适用于进行数据交互的场景，比如网站前台与后台之间的数据交互。</p>
+
+<p>JSON和XML的比较可谓不相上下。</p>
 
 <span id="more"></span><!-- more -->
 
-<h1 id="toc_0">什么是二八定律</h1>
+<p>Python 2.7中自带了JSON模块，直接<code>import json</code>就可以使用了。</p>
 
-<p>我把wiki上的解释摘过来看看.</p>
+<p>官方文档：<a href="http://docs.python.org/library/json.html">http://docs.python.org/library/json.html</a></p>
 
-<p>帕雷托法则（英语：Pareto principle），也称为二八定律或80/20法则，此法则指在众多现象中，80%的结果取决于20%的原因，<br/>
-而这一法则在很多方面被广泛的应用。如80%的劳动成果取决于20%的前期努力等等。<br/>
-这个法则最初是意大利经济学家维弗雷多·帕雷托在1906年对意大利20%的人口拥有80%的财产的观察而得出的，<br/>
-后来管理学思想家约瑟夫·朱兰和其他人把它概括为帕雷托法则。</p>
+<p>Json在线解析网站：<a href="http://www.json.cn/#">http://www.json.cn/#</a></p>
 
-<p>所以简单说也就是,最重要的</p>
+<h1 id="toc_0">JSON</h1>
 
-<h1 id="toc_1">什么是长尾理论</h1>
+<p>json简单说就是javascript中的对象和数组，所以这两种结构就是对象和数组两种结构，通过这两种结构可以表示各种复杂的结构</p>
 
-<p>未完待续</p>
+<ol>
+<li><p>对象：对象在js中表示为<code>{ }</code>括起来的内容，数据结构为 <code>{ key：value, key：value, ... }</code>的键值对的结构，在面向对象的语言中，key为对象的属性，value为对应的属性值，所以很容易理解，取值方法为 对象.key 获取属性值，这个属性值的类型可以是数字、字符串、数组、对象这几种。</p></li>
+<li><p>数组：数组在js中是中括号<code>[ ]</code>括起来的内容，数据结构为 <code>[&quot;Python&quot;, &quot;javascript&quot;, &quot;C++&quot;, ...]</code>，取值方式和所有语言中一样，使用索引获取，字段值的类型可以是 数字、字符串、数组、对象几种。</p></li>
+</ol>
+
+<h2 id="toc_1">导入json模块</h2>
+
+<pre><code>import json
+</code></pre>
+
+<p>json模块提供了四个功能：<code>dumps</code>、<code>dump</code>、<code>loads</code>、<code>load</code>，用于字符串 和 python数据类型间进行转换。</p>
+
+<h2 id="toc_2">1. json.loads()</h2>
+
+<p>把Json格式字符串解码转换成Python对象 从json到python的类型转化对照如下：</p>
+
+<p><img src="media/15219476833792/15219477820474.jpg" alt=""/></p>
+
+<pre><code># json_loads.py
+
+import json
+
+strList = &#39;[1, 2, 3, 4]&#39;
+
+strDict = &#39;{&quot;city&quot;: &quot;北京&quot;, &quot;name&quot;: &quot;大猫&quot;}&#39;
+
+json.loads(strList) 
+# [1, 2, 3, 4]
+
+json.loads(strDict) # json数据自动按Unicode存储
+# {u&#39;city&#39;: u&#39;\u5317\u4eac&#39;, u&#39;name&#39;: u&#39;\u5927\u732b&#39;}
+
+</code></pre>
+
+<h2 id="toc_3">2. json.dumps()</h2>
+
+<p>实现python类型转化为json字符串，返回一个str对象 把一个Python对象编码转换成Json字符串</p>
+
+<p>从python原始类型向json类型的转化对照如下：</p>
+
+<p><img src="media/15219476833792/15219478024682.jpg" alt=""/></p>
+
+<pre><code># json_dumps.py
+
+import json
+import chardet
+
+listStr = [1, 2, 3, 4]
+tupleStr = (1, 2, 3, 4)
+dictStr = {&quot;city&quot;: &quot;北京&quot;, &quot;name&quot;: &quot;大猫&quot;}
+
+json.dumps(listStr)
+# &#39;[1, 2, 3, 4]&#39;
+json.dumps(tupleStr)
+# &#39;[1, 2, 3, 4]&#39;
+
+# 注意：json.dumps() 序列化时默认使用的ascii编码
+# 添加参数 ensure_ascii=False 禁用ascii编码，按utf-8编码
+# chardet.detect()返回字典, 其中confidence是检测精确度
+
+json.dumps(dictStr) 
+# &#39;{&quot;city&quot;: &quot;\\u5317\\u4eac&quot;, &quot;name&quot;: &quot;\\u5927\\u5218&quot;}&#39;
+
+chardet.detect(json.dumps(dictStr))
+# {&#39;confidence&#39;: 1.0, &#39;encoding&#39;: &#39;ascii&#39;}
+
+print json.dumps(dictStr, ensure_ascii=False) 
+# {&quot;city&quot;: &quot;北京&quot;, &quot;name&quot;: &quot;大刘&quot;}
+
+chardet.detect(json.dumps(dictStr, ensure_ascii=False))
+# {&#39;confidence&#39;: 0.99, &#39;encoding&#39;: &#39;utf-8&#39;}
+
+</code></pre>
+
+<p><strong><em>chardet是一个非常优秀的编码识别模块，可通过pip安装</em></strong></p>
+
+<h2 id="toc_4">3. json.dump()</h2>
+
+<p>将Python内置类型序列化为json对象后写入文件</p>
+
+<pre><code># json_dump.py
+
+import json
+
+listStr = [{&quot;city&quot;: &quot;北京&quot;}, {&quot;name&quot;: &quot;大刘&quot;}]
+json.dump(listStr, open(&quot;listStr.json&quot;,&quot;w&quot;), ensure_ascii=False)
+
+dictStr = {&quot;city&quot;: &quot;北京&quot;, &quot;name&quot;: &quot;大刘&quot;}
+json.dump(dictStr, open(&quot;dictStr.json&quot;,&quot;w&quot;), ensure_ascii=False)
+
+</code></pre>
+
+<h2 id="toc_5">4. json.load()</h2>
+
+<p>读取文件中json形式的字符串元素 转化成python类型</p>
+
+<pre><code># json_load.py
+
+import json
+
+strList = json.load(open(&quot;listStr.json&quot;))
+print strList
+
+# [{u&#39;city&#39;: u&#39;\u5317\u4eac&#39;}, {u&#39;name&#39;: u&#39;\u5927\u5218&#39;}]
+
+strDict = json.load(open(&quot;dictStr.json&quot;))
+print strDict
+# {u&#39;city&#39;: u&#39;\u5317\u4eac&#39;, u&#39;name&#39;: u&#39;\u5927\u5218&#39;}
+
+</code></pre>
+
+<h1 id="toc_6">JsonPath</h1>
+
+<p>JsonPath 是一种信息抽取类库，是从JSON文档中抽取指定信息的工具，提供多种语言实现版本，包括：Javascript, Python， PHP 和 Java。</p>
+
+<p>JsonPath 对于 JSON 来说，相当于 XPATH 对于 XML。</p>
+
+<blockquote>
+<p>下载地址：<a href="https://pypi.python.org/pypi/jsonpath/">https://pypi.python.org/pypi/jsonpath</a></p>
+
+<p>安装方法：点击<code>Download URL</code>链接下载jsonpath，解压之后执行<code>python setup.py install</code></p>
+
+<p>官方文档：<a href="http://goessner.net/articles/JsonPath/">http://goessner.net/articles/JsonPath</a></p>
+</blockquote>
+
+<h2 id="toc_7">JsonPath与XPath语法对比：</h2>
+
+<p>Json结构清晰，可读性高，复杂度低，非常容易匹配，下表中对应了XPath的用法。</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: center">XPath</th>
+<th>JSONPath</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: center"><code>/</code></td>
+<td><code>$</code></td>
+<td>根节点</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>.</code></td>
+<td><code>@</code></td>
+<td>现行节点</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>/</code></td>
+<td><code>.</code>or<code>[]</code></td>
+<td>取子节点</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>..</code></td>
+<td>n/a</td>
+<td>取父节点，Jsonpath未支持</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>//</code></td>
+<td><code>..</code></td>
+<td>就是不管位置，选择所有符合条件的条件</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>*</code></td>
+<td><code>*</code></td>
+<td>匹配所有元素节点</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>@</code></td>
+<td>n/a</td>
+<td>根据属性访问，Json不支持，因为Json是个Key-value递归结构，不需要。</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>[]</code></td>
+<td><code>[]</code></td>
+<td>迭代器标示（可以在里边做简单的迭代操作，如数组下标，根据内容选值等）</td>
+</tr>
+<tr>
+<td style="text-align: center"></td>
+<td></td>
+<td><code>[,]</code></td>
+</tr>
+<tr>
+<td style="text-align: center"><code>[]</code></td>
+<td><code>?()</code></td>
+<td>支持过滤操作.</td>
+</tr>
+<tr>
+<td style="text-align: center">n/a</td>
+<td><code>()</code></td>
+<td>支持表达式计算</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>()</code></td>
+<td>n/a</td>
+<td>分组，JsonPath不支持</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_8">示例：</h2>
+
+<p>我们以拉勾网城市JSON文件 <a href="http://www.lagou.com/lbs/getAllCitySearchLabels.json">http://www.lagou.com/lbs/getAllCitySearchLabels.json</a> 为例，获取所有城市。</p>
+
+<pre><code># jsonpath_lagou.py
+
+import urllib2
+import jsonpath
+import json
+import chardet
+
+url = &#39;http://www.lagou.com/lbs/getAllCitySearchLabels.json&#39;
+request =urllib2.Request(url)
+response = urllib2.urlopen(request)
+html = response.read()
+
+# 把json格式字符串转换成python对象
+jsonobj = json.loads(html)
+
+# 从根节点开始，匹配name节点
+citylist = jsonpath.jsonpath(jsonobj,&#39;$..name&#39;)
+
+print citylist
+print type(citylist)
+fp = open(&#39;city.json&#39;,&#39;w&#39;)
+
+content = json.dumps(citylist, ensure_ascii=False)
+print content
+
+fp.write(content.encode(&#39;utf-8&#39;))
+fp.close()
+
+</code></pre>
+
+<h2 id="toc_9">注意事项：</h2>
+
+<p>json.loads() 是把 Json格式字符串解码转换成Python对象，如果在json.loads的时候出错，要注意被解码的Json字符的编码。</p>
+
+<p>如果传入的字符串的编码不是UTF-8的话，需要指定字符编码的参数 <code>encoding</code></p>
+
+<pre><code>dataDict = json.loads(jsonStrGBK);
+
+</code></pre>
+
+<ul>
+<li><p>dataJsonStr是JSON字符串，假设其编码本身是非UTF-8的话而是GBK 的，那么上述代码会导致出错，改为对应的：</p>
+
+<pre><code>  dataDict = json.loads(jsonStrGBK, encoding=&quot;GBK&quot;);
+
+</code></pre></li>
+<li><p>如果 dataJsonStr通过encoding指定了合适的编码，但是其中又包含了其他编码的字符，则需要先去将dataJsonStr转换为Unicode，然后再指定编码格式调用json.loads()</p></li>
+</ul>
+
+<pre><code>``` python
+
+</code></pre>
+
+<p>dataJsonStrUni = dataJsonStr.decode(&quot;GB2312&quot;); dataDict = json.loads(dataJsonStrUni, encoding=&quot;GB2312&quot;);</p>
+
+<pre><code>
+
+</code></pre>
 
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[ELK搭建使用]]></title>
-    <link href="http://dmlcoding.com/15198769472354.html"/>
-    <updated>2018-03-01T12:02:27+08:00</updated>
-    <id>http://dmlcoding.com/15198769472354.html</id>
+    <title type="html"><![CDATA[xml和xpath[整理自网络]]]></title>
+    <link href="http://dmlcoding.com/15219455706450.html"/>
+    <updated>2018-03-25T10:39:30+08:00</updated>
+    <id>http://dmlcoding.com/15219455706450.html</id>
     <content type="html"><![CDATA[
-<blockquote>
-<p>elk搭建记录,学习资料.</p>
-</blockquote>
-
-<h1 id="toc_0">ELK学习资料</h1>
+<h2 id="toc_0">什么是XML</h2>
 
 <ul>
-<li><a href="https://www.gitbook.com/book/chenryn/elk-stack-guide-cn/details">ELKstack 中文指南</a></li>
-<li><a href="https://www.gitbook.com/book/looly/elasticsearch-the-definitive-guide-cn/details">Elasticsearch权威指南（中文版）</a></li>
-<li>.....</li>
+<li>XML 指可扩展标记语言（EXtensible Markup Language）</li>
+<li>XML 是一种标记语言，很类似 HTML</li>
+<li>XML 的设计宗旨是传输数据，而非显示数据</li>
+<li>XML 的标签需要我们自行定义。</li>
+<li>XML 被设计为具有自我描述性。</li>
+<li>XML 是 W3C 的推荐标准</li>
 </ul>
 
-<span id="more"></span><!-- more -->
+<p>W3School官方文档：<a href="http://www.w3school.com.cn/xml/index.asp">http://www.w3school.com.cn/xml/index.asp</a></p>
 
-<h1 id="toc_1">ELK下载</h1>
+<h4 id="toc_1">XML 和 HTML 的区别</h4>
 
-<p>历史版本下载地址 : <a href="https://www.elastic.co/downloads/past-releases">https://www.elastic.co/downloads/past-releases</a><br/>
-+ elasticsearch : 2.4.0<br/>
-+ logstash : 2.4.0<br/>
-+ kibana : 4.6.2</p>
+<table>
+<thead>
+<tr>
+<th>数据格式</th>
+<th style="text-align: center">描述</th>
+<th>设计目标</th>
+</tr>
+</thead>
 
-<h1 id="toc_2">安装准备</h1>
+<tbody>
+<tr>
+<td>XML</td>
+<td style="text-align: center">Extensible Markup Language <code>（可扩展标记语言）</code></td>
+<td>被设计为传输和存储数据，其焦点是数据的内容。</td>
+</tr>
+<tr>
+<td>HTML</td>
+<td style="text-align: center">HyperText Markup Language <code>（超文本标记语言）</code></td>
+<td>显示数据以及如何更好显示数据。</td>
+</tr>
+<tr>
+<td>HTML DOM</td>
+<td style="text-align: center">Document Object Model for HTML <code>(文档对象模型)</code></td>
+<td>通过 HTML DOM，可以访问所有的 HTML 元素，连同它们所包含的文本和属性。可以对其中的内容进行修改和删除，同时也可以创建新的元素。</td>
+</tr>
+</tbody>
+</table>
 
-<pre><code>[root@U006 opt]# cd /opt
-[root@U006 opt]# mkdir elk
-[root@U006 opt]# chown -R hadoop:hadoop elk
-[root@U006 opt]# su hadoop
-[hadoop@U006 opt]$ cd /opt/elk/
-[hadoop@U006 elk]$ mkdir jars
-[hadoop@U006 jars]$ pwd
-/opt/elk/jars
+<h5 id="toc_2">XML文档示例</h5>
 
-# 上传jar包
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 
-[hadoop@U006 jars]$ ll
-total 116996
--rw-r--r-- 1 hadoop hadoop 27364449 Sep 18 09:36 elasticsearch-2.4.0.tar.gz
--rw-r--r-- 1 hadoop hadoop 34125464 Sep 18 09:37 kibana-4.6.2-linux-x86_64.tar.gz
--rw-r--r-- 1 hadoop hadoop 58310656 Sep 18 09:41 logstash-2.4.0.tar.gz
+&lt;bookstore&gt; 
+
+  &lt;book category=&quot;cooking&quot;&gt; 
+    &lt;title lang=&quot;en&quot;&gt;Everyday Italian&lt;/title&gt;  
+    &lt;author&gt;Giada De Laurentiis&lt;/author&gt;  
+    &lt;year&gt;2005&lt;/year&gt;  
+    &lt;price&gt;30.00&lt;/price&gt; 
+  &lt;/book&gt;  
+
+  &lt;book category=&quot;children&quot;&gt; 
+    &lt;title lang=&quot;en&quot;&gt;Harry Potter&lt;/title&gt;  
+    &lt;author&gt;J K. Rowling&lt;/author&gt;  
+    &lt;year&gt;2005&lt;/year&gt;  
+    &lt;price&gt;29.99&lt;/price&gt; 
+  &lt;/book&gt;  
+
+  &lt;book category=&quot;web&quot;&gt; 
+    &lt;title lang=&quot;en&quot;&gt;XQuery Kick Start&lt;/title&gt;  
+    &lt;author&gt;James McGovern&lt;/author&gt;  
+    &lt;author&gt;Per Bothner&lt;/author&gt;  
+    &lt;author&gt;Kurt Cagle&lt;/author&gt;  
+    &lt;author&gt;James Linn&lt;/author&gt;  
+    &lt;author&gt;Vaidyanathan Nagarajan&lt;/author&gt;  
+    &lt;year&gt;2003&lt;/year&gt;  
+    &lt;price&gt;49.99&lt;/price&gt; 
+  &lt;/book&gt; 
+
+  &lt;book category=&quot;web&quot; cover=&quot;paperback&quot;&gt; 
+    &lt;title lang=&quot;en&quot;&gt;Learning XML&lt;/title&gt;  
+    &lt;author&gt;Erik T. Ray&lt;/author&gt;  
+    &lt;year&gt;2003&lt;/year&gt;  
+    &lt;price&gt;39.95&lt;/price&gt; 
+  &lt;/book&gt; 
+
+&lt;/bookstore&gt;
 
 </code></pre>
 
-<pre><code>[hadoop@U006 elk]$ ll
-total 16
-drwxrwxr-x  6 hadoop hadoop 4096 Sep 18 09:45 elasticsearch-2.4.0
-drwxrwxr-x  2 hadoop hadoop 4096 Sep 18 09:40 jars
-drwxrwxr-x 11 hadoop hadoop 4096 Oct 21  2016 kibana-4.6.2-linux-x86_64
-drwxrwxr-x  5 hadoop hadoop 4096 Sep 18 09:47 logstash-2.4.0
+<h5 id="toc_3">HTML DOM 模型示例</h5>
+
+<p>HTML DOM 定义了访问和操作 HTML 文档的标准方法，以树结构方式表达 HTML 文档。</p>
+
+<p><img src="media/15219455706450/15219456473425.jpg" alt=""/></p>
+
+<hr/>
+
+<h3 id="toc_4">XML的节点关系</h3>
+
+<h4 id="toc_5">1. 父（Parent）</h4>
+
+<p>每个元素以及属性都有一个父。</p>
+
+<p>下面是一个简单的XML例子中，book 元素是 title、author、year 以及 price 元素的父：</p>
+
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+
+&lt;book&gt;
+  &lt;title&gt;Harry Potter&lt;/title&gt;
+  &lt;author&gt;J K. Rowling&lt;/author&gt;
+  &lt;year&gt;2005&lt;/year&gt;
+  &lt;price&gt;29.99&lt;/price&gt;
+&lt;/book&gt;
+
 </code></pre>
 
-<h1 id="toc_3">安装elasticsearch</h1>
+<h4 id="toc_6">2. 子（Children）</h4>
+
+<p>元素节点可有零个、一个或多个子。</p>
+
+<p>在下面的例子中，title、author、year 以及 price 元素都是 book 元素的子：</p>
+
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+
+&lt;book&gt;
+  &lt;title&gt;Harry Potter&lt;/title&gt;
+  &lt;author&gt;J K. Rowling&lt;/author&gt;
+  &lt;year&gt;2005&lt;/year&gt;
+  &lt;price&gt;29.99&lt;/price&gt;
+&lt;/book&gt;
+
+</code></pre>
+
+<h4 id="toc_7">3. 同胞（Sibling）</h4>
+
+<p>拥有相同的父的节点</p>
+
+<p>在下面的例子中，title、author、year 以及 price 元素都是同胞：</p>
+
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+
+&lt;book&gt;
+  &lt;title&gt;Harry Potter&lt;/title&gt;
+  &lt;author&gt;J K. Rowling&lt;/author&gt;
+  &lt;year&gt;2005&lt;/year&gt;
+  &lt;price&gt;29.99&lt;/price&gt;
+&lt;/book&gt;
+
+</code></pre>
+
+<h4 id="toc_8">4. 先辈（Ancestor）</h4>
+
+<p>某节点的父、父的父，等等。</p>
+
+<p>在下面的例子中，title 元素的先辈是 book 元素和 bookstore 元素：</p>
+
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+
+&lt;bookstore&gt;
+
+&lt;book&gt;
+  &lt;title&gt;Harry Potter&lt;/title&gt;
+  &lt;author&gt;J K. Rowling&lt;/author&gt;
+  &lt;year&gt;2005&lt;/year&gt;
+  &lt;price&gt;29.99&lt;/price&gt;
+&lt;/book&gt;
+
+&lt;/bookstore&gt;
+
+</code></pre>
+
+<h4 id="toc_9">5. 后代（Descendant）</h4>
+
+<p>某个节点的子，子的子，等等。</p>
+
+<p>在下面的例子中，bookstore 的后代是 book、title、author、year 以及 price 元素：</p>
+
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+
+&lt;bookstore&gt;
+
+&lt;book&gt;
+  &lt;title&gt;Harry Potter&lt;/title&gt;
+  &lt;author&gt;J K. Rowling&lt;/author&gt;
+  &lt;year&gt;2005&lt;/year&gt;
+  &lt;price&gt;29.99&lt;/price&gt;
+&lt;/book&gt;
+
+&lt;/bookstore&gt;
+
+</code></pre>
+
+<h2 id="toc_10">什么是XPath？</h2>
 
 <blockquote>
-<p>测试环境搭建,单节点为例</p>
+<p>XPath (XML Path Language) 是一门在 XML 文档中查找信息的语言，可用来在 XML 文档中对元素和属性进行遍历。</p>
+
+<p>W3School官方文档：<a href="http://www.w3school.com.cn/xpath/index.asp">http://www.w3school.com.cn/xpath/index.asp</a></p>
 </blockquote>
 
-<pre><code># 解压elasticsearch
-tar -zxvf elasticsearch-2.4.0.tar.gz -C /opt/elk/
-</code></pre>
+<h3 id="toc_11">XPath 开发工具</h3>
 
-<h2 id="toc_4">修改配置文件config/elasticsearch.yml</h2>
+<ol>
+<li>开源的XPath表达式编辑工具:XMLQuire(XML格式文件可用)</li>
+<li>Chrome插件 XPath Helper</li>
+<li>Firefox插件 XPath Checker</li>
+</ol>
 
-<pre><code>[hadoop@U006 config]$ pwd
-/opt/elk/elasticsearch-2.4.0/config
+<h3 id="toc_12">选取节点</h3>
 
-[hadoop@U006 config]$ ll
-total 8
--rw-rw-r-- 1 hadoop hadoop 3192 Aug 24  2016 elasticsearch.yml
--rw-rw-r-- 1 hadoop hadoop 2571 Aug 24  2016 logging.yml
+<p>XPath 使用路径表达式来选取 XML 文档中的节点或者节点集。这些路径表达式和我们在常规的电脑文件系统中看到的表达式非常相似。</p>
 
-[hadoop@U006 elasticsearch-2.4.0]$ vim config/elasticsearch.yml
+<p>下面列出了最常用的路径表达式：</p>
 
-# 打开这三个配置的注释
- cluster.name: test_elasticsearch # es集群名字
- node.name: node1 # 该节点在es中的名字
- network.host: 0.0.0.0 # 任意节点可以访问
-</code></pre>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>描述</th>
+</tr>
+</thead>
 
-<h2 id="toc_5">启动es</h2>
+<tbody>
+<tr>
+<td>nodename</td>
+<td>选取此节点的所有子节点。</td>
+</tr>
+<tr>
+<td>/</td>
+<td>从根节点选取。</td>
+</tr>
+<tr>
+<td>//</td>
+<td>从匹配选择的当前节点选择文档中的节点，而不考虑它们的位置。</td>
+</tr>
+<tr>
+<td>.</td>
+<td>选取当前节点。</td>
+</tr>
+<tr>
+<td>..</td>
+<td>选取当前节点的父节点。</td>
+</tr>
+<tr>
+<td>@</td>
+<td>选取属性。</td>
+</tr>
+</tbody>
+</table>
 
-<pre><code>./bin/elasticsearch
-./bin/elasticsearch -d #后台启动
-</code></pre>
+<p>在下面的表格中，我们已列出了一些路径表达式以及表达式的结果：</p>
 
-<pre><code>[hadoop@U006 elasticsearch-2.4.0]$ ./bin/elasticsearch
-[2017-09-18 10:08:50,300][WARN ][bootstrap                ] unable to install syscall filter: seccomp unavailable: requires kernel 3.5+ with CONFIG_SECCOMP and CONFIG_SECCOMP_FILTER compiled in
-[2017-09-18 10:08:51,697][INFO ][node                     ] [node1] version[2.4.0], pid[3098], build[ce9f0c7/2016-08-29T09:14:17Z]
-[2017-09-18 10:08:51,697][INFO ][node                     ] [node1] initializing ...
-[2017-09-18 10:08:52,332][INFO ][plugins                  ] [node1] modules [lang-groovy, reindex, lang-expression], plugins [], sites []
-[2017-09-18 10:08:52,363][INFO ][env                      ] [node1] using [1] data paths, mounts [[/home (/dev/mapper/VolGroup-lv_home)]], net usable_space [195.3gb], net total_space [857.4gb], spins? [possibly], types [ext4]
-[2017-09-18 10:08:52,363][INFO ][env                      ] [node1] heap size [989.8mb], compressed ordinary object pointers [true]
-[2017-09-18 10:08:54,472][INFO ][node                     ] [node1] initialized
-[2017-09-18 10:08:54,473][INFO ][node                     ] [node1] starting ...
-[2017-09-18 10:08:54,675][INFO ][transport                ] [node1] publish_address {10.10.25.13:9300}, bound_addresses {[::]:9300}
-[2017-09-18 10:08:54,685][INFO ][discovery                ] [node1] test_elasticsearch/oAbAZR_tTaGAJU-5yd3BqQ
-[2017-09-18 10:08:57,757][INFO ][cluster.service          ] [node1] new_master {node1}{oAbAZR_tTaGAJU-5yd3BqQ}{10.10.25.13}{10.10.25.13:9300}, reason: zen-disco-join(elected_as_master, [0] joins received)
-[2017-09-18 10:08:57,798][INFO ][http                     ] [node1] publish_address {10.10.25.13:9200}, bound_addresses {[::]:9200}
-[2017-09-18 10:08:57,799][INFO ][node                     ] [node1] started
-[2017-09-18 10:08:57,811][INFO ][gateway                  ] [node1] recovered [0] indices into cluster_state
-</code></pre>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>路径表达式</th>
+<th>结果</th>
+</tr>
+</thead>
 
-<p>打开<a href="http://10.10.25.13:9200/">http://10.10.25.13:9200/</a> 将会看到以下内容.返回数据中包含配置的cluster.name和node.name,以及es的版本等信息.<br/>
-<img src="media/15198769472354/es-startresult.png" alt="es-startresult"/></p>
+<tbody>
+<tr>
+<td>bookstore</td>
+<td>选取 bookstore 元素的所有子节点。</td>
+<td></td>
+</tr>
+<tr>
+<td>/bookstore</td>
+<td>选取根元素 bookstore。注释：假如路径起始于正斜杠( / )，则此路径始终代表到某元素的绝对路径！</td>
+<td></td>
+</tr>
+<tr>
+<td>bookstore/book</td>
+<td>选取属于 bookstore 的子元素的所有 book 元素。</td>
+<td></td>
+</tr>
+<tr>
+<td>//book</td>
+<td>选取所有 book 子元素，而不管它们在文档中的位置。</td>
+<td></td>
+</tr>
+<tr>
+<td>bookstore//book</td>
+<td>选择属于 bookstore 元素的后代的所有 book 元素，而不管它们位于 bookstore 之下的什么位置。</td>
+<td></td>
+</tr>
+<tr>
+<td>//@lang</td>
+<td>选取名为 lang 的所有属性。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 
-<h2 id="toc_6">安装插件</h2>
+<h3 id="toc_13">谓语（Predicates）</h3>
 
-<h3 id="toc_7">elasticsearch-head 插件安装</h3>
+<p>谓语用来查找某个特定的节点或者包含某个指定的值的节点，被嵌在方括号中。</p>
 
-<h4 id="toc_8">下载安装</h4>
+<p>在下面的表格中，我们列出了带有谓语的一些路径表达式，以及表达式的结果：</p>
 
-<pre><code># 进入bin目录下
-[hadoop@U006 bin]$ ./plugin install mobz/elasticsearch-head
--&gt; Installing mobz/elasticsearch-head...
-Trying https://github.com/mobz/elasticsearch-head/archive/master.zip ...
-Downloading ...............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................DONE
-Verifying https://github.com/mobz/elasticsearch-head/archive/master.zip checksums if available ...
-NOTE: Unable to verify checksum for downloaded plugin (unable to find .sha1 or .md5 file to verify)
-Installed head into /opt/elk/elasticsearch-2.4.0/plugins/head
+<table>
+<thead>
+<tr>
+<th>路径表达式</th>
+<th>结果</th>
+</tr>
+</thead>
 
-</code></pre>
+<tbody>
+<tr>
+<td>/bookstore/book[1]</td>
+<td>选取属于 bookstore 子元素的第一个 book 元素。</td>
+</tr>
+<tr>
+<td>/bookstore/book[last()]</td>
+<td>选取属于 bookstore 子元素的最后一个 book 元素。</td>
+</tr>
+<tr>
+<td>/bookstore/book[last()-1]</td>
+<td>选取属于 bookstore 子元素的倒数第二个 book 元素。</td>
+</tr>
+<tr>
+<td>/bookstore/book[position()35.00]</td>
+<td>选取 bookstore 元素的所有 book 元素，且其中的 price 元素的值须大于 35.00。</td>
+</tr>
+<tr>
+<td>/bookstore/book[price&gt;35.00]/title</td>
+<td>选取 bookstore 元素中的 book 元素的所有 title 元素，且其中的 price 元素的值须大于 35.00。</td>
+</tr>
+</tbody>
+</table>
 
-<h4 id="toc_9">使用说明</h4>
+<h3 id="toc_14">选取未知节点</h3>
+
+<p>XPath 通配符可用来选取未知的 XML 元素。</p>
+
+<table>
+<thead>
+<tr>
+<th>通配符</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>*</td>
+<td>匹配任何元素节点。</td>
+</tr>
+<tr>
+<td>@*</td>
+<td>匹配任何属性节点。</td>
+</tr>
+<tr>
+<td>node()</td>
+<td>匹配任何类型的节点。</td>
+</tr>
+</tbody>
+</table>
+
+<p>在下面的表格中，我们列出了一些路径表达式，以及这些表达式的结果：</p>
+
+<table>
+<thead>
+<tr>
+<th>路径表达式</th>
+<th>结果</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>/bookstore/*</td>
+<td>选取 bookstore 元素的所有子元素。</td>
+</tr>
+<tr>
+<td>//*</td>
+<td>选取文档中的所有元素。</td>
+</tr>
+<tr>
+<td>//title[@*]</td>
+<td>选取所有带有属性的 title 元素。</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_15">选取若干路径</h3>
+
+<p>通过在路径表达式中使用“|”运算符，您可以选取若干个路径。</p>
+
+<p>实例</p>
+
+<p>在下面的表格中，我们列出了一些路径表达式，以及这些表达式的结果：</p>
+
+<table>
+<thead>
+<tr>
+<th>路径表达式</th>
+<th>结果</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>//book/title</td>
+<td>//book/price</td>
+</tr>
+<tr>
+<td>//title</td>
+<td>//price</td>
+</tr>
+<tr>
+<td>/bookstore/book/title</td>
+<td>//price</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_16">XPath的运算符</h3>
+
+<p>下面列出了可用在 XPath 表达式中的运算符：</p>
+
+<p><img src="media/15219455706450/15219457279252.jpg" alt=""/></p>
+
+<h5 id="toc_17">这些就是XPath的语法内容，在运用到Python抓取时要先转换为xml。</h5>
+
+<h2 id="toc_18">lxml库</h2>
 
 <blockquote>
-<p>head插件是一个用浏览器跟ES集群交互的插件，可以查看集群状态、集群的doc内容、执行搜索和普通的Rest请求等。</p>
+<p>lxml 是 一个HTML/XML的解析器，主要的功能是如何解析和提取 HTML/XML 数据。</p>
+
+<p>lxml和正则一样，也是用 C 实现的，是一款高性能的 Python HTML/XML 解析器，我们可以利用之前学习的XPath语法，来快速的定位特定元素以及节点信息。</p>
+
+<p>lxml python 官方文档：<a href="http://lxml.de/index.html">http://lxml.de/index.html</a></p>
+
+<p>需要安装C语言库，可使用 pip 安装：<code>pip install lxml</code> （或通过wheel方式安装）</p>
 </blockquote>
 
-<p>在浏览器中直接访问接口 <a href="http://10.10.25.13:9200/_plugin/head/">http://10.10.25.13:9200/_plugin/head/</a> ,可以看到es集群状态<br/>
-<img src="media/15198769472354/es-plugin-head.png" alt="es-plugin-head"/></p>
+<h3 id="toc_19">初步使用</h3>
 
-<h3 id="toc_10">安装Marvel插件</h3>
+<p>我们利用它来解析 HTML 代码，简单示例：</p>
 
-<h4 id="toc_11">下载安装</h4>
+<pre><code># lxml_test.py
 
-<pre><code># ./bin/plugin install license
-# ./bin/plugin install marvel-agent
+# 使用 lxml 的 etree 库
+from lxml import etree 
 
-[hadoop@U006 elasticsearch-2.4.0]$ ./bin/plugin install license
--&gt; Installing license...
-Trying https://download.elastic.co/elasticsearch/release/org/elasticsearch/plugin/license/2.4.0/license-2.4.0.zip ...
-Downloading .......DONE
-Verifying https://download.elastic.co/elasticsearch/release/org/elasticsearch/plugin/license/2.4.0/license-2.4.0.zip checksums if available ...
-Downloading .DONE
-Installed license into /opt/elk/elasticsearch-2.4.0/plugins/license
-[hadoop@U006 elasticsearch-2.4.0]$ ./bin/plugin install marvel-agent
--&gt; Installing marvel-agent...
-Trying https://download.elastic.co/elasticsearch/release/org/elasticsearch/plugin/marvel-agent/2.4.0/marvel-agent-2.4.0.zip ...
-Downloading ..........DONE
-Verifying https://download.elastic.co/elasticsearch/release/org/elasticsearch/plugin/marvel-agent/2.4.0/marvel-agent-2.4.0.zip checksums if available ...
-Downloading .DONE
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@     WARNING: plugin requires additional permissions     @
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-* java.lang.RuntimePermission setFactory
-* javax.net.ssl.SSLPermission setHostnameVerifier
-See http://docs.oracle.com/javase/8/docs/technotes/guides/security/permissions.html
-for descriptions of what these permissions allow and the associated risks.
+text = &#39;&#39;&#39;
+&lt;div&gt;
+    &lt;ul&gt;
+         &lt;li class=&quot;item-0&quot;&gt;&lt;a href=&quot;link1.html&quot;&gt;first item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-1&quot;&gt;&lt;a href=&quot;link2.html&quot;&gt;second item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-inactive&quot;&gt;&lt;a href=&quot;link3.html&quot;&gt;third item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-1&quot;&gt;&lt;a href=&quot;link4.html&quot;&gt;fourth item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-0&quot;&gt;&lt;a href=&quot;link5.html&quot;&gt;fifth item&lt;/a&gt; # 注意，此处缺少一个 &lt;/li&gt; 闭合标签
+     &lt;/ul&gt;
+ &lt;/div&gt;
+&#39;&#39;&#39;
 
-Continue with installation? [y/N]y
-Installed marvel-agent into /opt/elk/elasticsearch-2.4.0/plugins/marvel-agent
+#利用etree.HTML，将字符串解析为HTML文档
+html = etree.HTML(text) 
 
+# 按字符串序列化HTML文档
+result = etree.tostring(html) 
 
-# 安装的插件都会出现在es的plugins目录下
-[hadoop@U006 elasticsearch-2.4.0]$ ll
-total 56
-drwxrwxr-x 2 hadoop hadoop  4096 Sep 18 09:45 bin
-drwxrwxr-x 3 hadoop hadoop  4096 Sep 18 10:05 config
-drwxrwxr-x 3 hadoop hadoop  4096 Sep 18 09:59 data
-drwxrwxr-x 2 hadoop hadoop  4096 Sep 18 09:45 lib
--rw-rw-r-- 1 hadoop hadoop 11358 Aug 24  2016 LICENSE.txt
-drwxrwxr-x 2 hadoop hadoop  4096 Sep 18 09:59 logs
-drwxrwxr-x 5 hadoop hadoop  4096 Aug 29  2016 modules
--rw-rw-r-- 1 hadoop hadoop   150 Aug 24  2016 NOTICE.txt
-drwxrwxr-x 3 hadoop hadoop  4096 Sep 18 10:15 plugins
--rw-rw-r-- 1 hadoop hadoop  8700 Aug 24  2016 README.textile
-[hadoop@U006 elasticsearch-2.4.0]$ cd plugins/
-[hadoop@U006 plugins]$ ll
-total 12
-drwxrwxr-x 6 hadoop hadoop 4096 Sep 18 10:15 head
-drwxrwxr-x 2 hadoop hadoop 4096 Sep 18 10:34 license
-drwxrwxr-x 2 hadoop hadoop 4096 Sep 18 10:34 marvel-agent
-</code></pre>
-
-<h4 id="toc_12">使用说明</h4>
-
-<blockquote>
-<p>Marvel是Elasticsearch的管理和监控工具，在开发环境下免费使用。它包含了一个叫做Sense的交互式控制台，<br/>
-使用户方便的通过浏览器直接与Elasticsearch进行交互。<br/>
-marvel插件主要会和kibana进行配置使用,待会看kibana也需要安装marvel插件</p>
-</blockquote>
-
-<h2 id="toc_13">注意</h2>
-
-<ul>
-<li>如何之前在config/elasticsearch.yml的文件中,没有修改network.host项.那么你只能用localhost或者127.0.0.1访问es了.</li>
-<li>注意配置yml结尾的配置文件都需要冒号后面加空格才行</li>
-</ul>
-
-<h1 id="toc_14">安装kibana</h1>
-
-<h2 id="toc_15">解压安装</h2>
-
-<pre><code>tar -zxvf kibana-4.6.2-linux-x86_64.tar.gz -C /opt/elk/
+print(result)
 
 </code></pre>
 
-<h2 id="toc_16">修改config/kibana.yml的elasticsearch.url属性即可。</h2>
+<p>输出结果：</p>
 
-<p><img src="media/15198769472354/kibana-config.png" alt="kibana-config"/></p>
-
-<h2 id="toc_17">安装插件</h2>
-
-<h3 id="toc_18">安装Marvel插件</h3>
-
-<blockquote>
-<p>在安装es的时候,已经给es安装了marvel插件,现在给kibana也安装上marvel插件</p>
-</blockquote>
-
-<h4 id="toc_19">下载</h4>
-
-<pre><code>[hadoop@U006 kibana-4.6.2-linux-x86_64]$ bin/kibana plugin --install elasticsearch/marvel/latest
-Installing marvel
-Attempting to transfer from https://download.elastic.co/elasticsearch/marvel/marvel-latest.tar.gz
-.....
-Transfer complete
-Extracting plugin archive
-Extraction complete
-Optimizing and caching browser bundles...
-Plugin installation complete
+<pre><code>&lt;html&gt;&lt;body&gt;
+&lt;div&gt;
+    &lt;ul&gt;
+         &lt;li class=&quot;item-0&quot;&gt;&lt;a href=&quot;link1.html&quot;&gt;first item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-1&quot;&gt;&lt;a href=&quot;link2.html&quot;&gt;second item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-inactive&quot;&gt;&lt;a href=&quot;link3.html&quot;&gt;third item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-1&quot;&gt;&lt;a href=&quot;link4.html&quot;&gt;fourth item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-0&quot;&gt;&lt;a href=&quot;link5.html&quot;&gt;fifth item&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+ &lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;
 
 </code></pre>
 
-<h4 id="toc_20">启动验证</h4>
+<p>lxml 可以自动修正 html 代码，例子里不仅补全了 li 标签，还添加了 body，html 标签。</p>
 
-<pre><code>bin/elasticsearch
-bin/kibana
+<h3 id="toc_20">文件读取：</h3>
 
-</code></pre>
+<p>除了直接读取字符串，lxml还支持从文件里读取内容。我们新建一个hello.html文件：</p>
 
-<p>查看<a href="http://10.10.25.13:5601/app/marvel">http://10.10.25.13:5601/app/marvel</a> 页面：<br/>
-<img src="media/15198769472354/kibana-marvel1.png" alt="kibana-marve"/><br/>
-<img src="media/15198769472354/kibana-marvel2.png" alt="kibana-marve"/></p>
+<pre><code>&lt;!-- hello.html --&gt;
 
-<h3 id="toc_21">安装sense插件</h3>
-
-<blockquote>
-<p>Sense是flask写的elasticsearch查询工具。<br/>
-支持es查询语言自动提示，es结构自动提示，支持两种主题，支持查询历史记录，支持快捷键。</p>
-</blockquote>
-
-<h4 id="toc_22">下载</h4>
-
-<pre><code>[hadoop@U006 kibana-4.6.2-linux-x86_64]$ ./bin/kibana plugin --install elastic/sense
-Installing sense
-Attempting to transfer from https://download.elastic.co/elastic/sense/sense-latest.tar.gz
-.....
-Transfer complete
-Extracting plugin archive
-Extraction complete
-Optimizing and caching browser bundles...
-Plugin installation complete
+&lt;div&gt;
+    &lt;ul&gt;
+         &lt;li class=&quot;item-0&quot;&gt;&lt;a href=&quot;link1.html&quot;&gt;first item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-1&quot;&gt;&lt;a href=&quot;link2.html&quot;&gt;second item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-inactive&quot;&gt;&lt;a href=&quot;link3.html&quot;&gt;&lt;span class=&quot;bold&quot;&gt;third item&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-1&quot;&gt;&lt;a href=&quot;link4.html&quot;&gt;fourth item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-0&quot;&gt;&lt;a href=&quot;link5.html&quot;&gt;fifth item&lt;/a&gt;&lt;/li&gt;
+     &lt;/ul&gt;
+ &lt;/div&gt;
 
 </code></pre>
 
-<h4 id="toc_23">使用说明</h4>
+<p>再利用 etree.parse() 方法来读取文件。</p>
 
-<p>启动es和kibana<br/>
-查看<a href="http://10.10.25.13:5601/app/sense">http://10.10.25.13:5601/app/sense</a> 页面：<br/>
-<img src="media/15198769472354/kibana-sense.png" alt="kibana-sense"/></p>
+<pre><code># lxml_parse.py
 
-<h1 id="toc_24">安装logstash</h1>
+from lxml import etree
 
-<h2 id="toc_25">解压安装即可</h2>
+# 读取外部文件 hello.html
+html = etree.parse(&#39;./hello.html&#39;)
+result = etree.tostring(html, pretty_print=True)
 
-<pre><code>tar -zxvf logstash-2.4.0.tar.gz -C /opt/elk/
-
-</code></pre>
-
-<h2 id="toc_26">配置logstash的配置文件</h2>
-
-<p>此文件input为从log4j接收日志.output为输出到es集群,进行搜索.</p>
-
-<p>字段具体意思可以看官网 <a href="https://www.elastic.co/guide/en/logstash/current/plugins-inputs-log4j.html">https://www.elastic.co/guide/en/logstash/current/plugins-inputs-log4j.html</a></p>
-
-<pre><code>[hadoop@U006 logstash-2.4.0]$ vim logstash_log4j_to_es.conf
-input {
-        log4j {
-                 mode =&gt; &quot;server&quot;
-                 host =&gt; &quot;10.10.25.13&quot;
-                 port =&gt; 4567
-                 type =&gt; &quot;log4j&quot;
-         }
-}
-output{
-        elasticsearch{
-                action =&gt; &quot;index&quot;
-                hosts =&gt; &quot;10.10.25.13:9200&quot;
-                index =&gt; &quot;test_log&quot;
-        }
-}
+print(result)
 
 </code></pre>
 
-<p><img src="media/15198769472354/logstash-file1.png" alt="logstash-file1"/></p>
+<p>输出结果与之前相同：</p>
 
-<h2 id="toc_27">启动logstash</h2>
+<pre><code>&lt;html&gt;&lt;body&gt;
+&lt;div&gt;
+    &lt;ul&gt;
+         &lt;li class=&quot;item-0&quot;&gt;&lt;a href=&quot;link1.html&quot;&gt;first item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-1&quot;&gt;&lt;a href=&quot;link2.html&quot;&gt;second item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-inactive&quot;&gt;&lt;a href=&quot;link3.html&quot;&gt;third item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-1&quot;&gt;&lt;a href=&quot;link4.html&quot;&gt;fourth item&lt;/a&gt;&lt;/li&gt;
+         &lt;li class=&quot;item-0&quot;&gt;&lt;a href=&quot;link5.html&quot;&gt;fifth item&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+ &lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;
 
-<pre><code>bin/logstash agent -f logstash_log4j_to_es.conf
-# 或者
-bin/logstash -f logstash_log4j_to_es.conf
-
-[hadoop@U006 logstash-2.4.0]$ bin/logstash -f logstash_log4j_to_es.conf
-Settings: Default pipeline workers: 24
-log4j:WARN No appenders could be found for logger (org.apache.http.client.protocol.RequestAuthCache).
-log4j:WARN Please initialize the log4j system properly.
-log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
-Pipeline main started
 </code></pre>
 
-<h1 id="toc_28">ELK框架的综合实际使用</h1>
+<h3 id="toc_21">XPath实例测试</h3>
 
-<blockquote>
-<p>在工作中,我们会使用ELK对业务日志进行收集分析.<br/>
-也就是把项目中的log4j日志用logstash进行收集,然后输出到es中进行索引搜索.最后使用Kibana进行可视化的搜索展示.</p>
-</blockquote>
+<h4 id="toc_22">1. 获取所有的 <code>&lt;li&gt;</code> 标签</h4>
 
-<h2 id="toc_29">启动elk</h2>
+<pre><code># xpath_li.py
 
-<pre><code>bin/elasticsearch
-bin/kibana
-bin/logstash -f logstash_log4j_to_es.conf
+from lxml import etree
+
+html = etree.parse(&#39;hello.html&#39;)
+print type(html)  # 显示etree.parse() 返回类型
+
+result = html.xpath(&#39;//li&#39;)
+
+print result  # 打印&lt;li&gt;标签的元素集合
+print len(result)
+print type(result)
+print type(result[0])
+
 </code></pre>
 
-<p>打开：<a href="http://10.10.25.13:5601">http://10.10.25.13:5601</a><br/>
-<img src="media/15198769472354/kibana-index.png" alt="kibana-index"/></p>
+<p>输出结果：</p>
 
-<p>如图所以,这里有个WARN警告:没有默认的索引模式,需要创建一个才能继续.<br/>
-那么我们就创建一个索引.</p>
+<pre><code>&lt;type &#39;lxml.etree._ElementTree&#39;&gt;
+[&lt;Element li at 0x1014e0e18&gt;, &lt;Element li at 0x1014e0ef0&gt;, &lt;Element li at 0x1014e0f38&gt;, &lt;Element li at 0x1014e0f80&gt;, &lt;Element li at 0x1014e0fc8&gt;]
+5
+&lt;type &#39;list&#39;&gt;
+&lt;type &#39;lxml.etree._Element&#39;&gt;
 
-<h2 id="toc_30">创建索引</h2>
-
-<p>Kibana界面日志检索只有当第一条日志通过Logstash进入ElasticSearch后，才能配置Kibana索引。</p>
-
-<p>1、在“Index name or pattern”项下，填入一个elasticsearch的索引名，也即是Logstash配置文件中output项下的index对应的名称；在你这里应该是将“logstash-* ” 改成“test_log”<br/>
-2、在“Time-field name”，选用默认的配置：“@timestamp”<br/>
-3、点击“create”即可</p>
-
-<p><img src="media/15198769472354/kibana-index2.png" alt="kibana-index2"/></p>
-
-<h2 id="toc_31">log4j日志接入</h2>
-
-<h3 id="toc_32">编写log4j的测试代码</h3>
-
-<pre><code>public class TestFunc {
-
-  Logger logger = LoggerFactory.getLogger(TestFunc.class);
-
-  @Test
-  public void testlog4j() throws Exception {
-    while (true) {
-      long s_time = System.currentTimeMillis();
-      logger.info(&quot;当前时间戳: &quot;+s_time+&quot; i am info info hadoop&quot;);
-      logger.warn(&quot;当前时间戳: &quot;+s_time+&quot; i am info warn spark hushiwei nice&quot;);
-      logger.error(&quot;当前时间戳: &quot;+s_time+&quot; i am info error elk&quot;);
-      Thread.sleep(1000L);
-
-    }
-  }
-  }
 </code></pre>
 
-<h3 id="toc_33">log4j的配置</h3>
+<h4 id="toc_23">2. 继续获取<code>&lt;li&gt;</code> 标签的所有 <code>class</code>属性</h4>
 
-<p>log4j.properties<br/>
-remotehost填写logstash的服务器地址.也就是那个input项里面的地址.<br/>
-<code><br/>
-log4j.rootLogger=INFO,socket<br/>
-log4j.appender.socket=org.apache.log4j.net.SocketAppender<br/>
-log4j.appender.socket.RemoteHost=10.10.25.13<br/>
-log4j.appender.socket.Port=4567<br/>
-log4j.appender.socket.LocationInfo=true<br/>
-</code></p>
+<pre><code># xpath_li.py
 
-<h2 id="toc_34">执行代码,输出log4j日志,观察kibana页面变化</h2>
+from lxml import etree
 
-<p>索引日志里面的信息</p>
+html = etree.parse(&#39;hello.html&#39;)
+result = html.xpath(&#39;//li/@class&#39;)
 
-<p><img src="media/15198769472354/kibana-index3.png" alt="kibana-index3"/></p>
+print result
+
+</code></pre>
+
+<p>运行结果</p>
+
+<pre><code>[&#39;item-0&#39;, &#39;item-1&#39;, &#39;item-inactive&#39;, &#39;item-1&#39;, &#39;item-0&#39;]
+
+</code></pre>
+
+<h4 id="toc_24">3. 继续获取<code>&lt;li&gt;</code>标签下<code>hre</code> 为 <code>link1.html</code> 的 <code>&lt;a&gt;</code> 标签</h4>
+
+<pre><code># xpath_li.py
+
+from lxml import etree
+
+html = etree.parse(&#39;hello.html&#39;)
+result = html.xpath(&#39;//li/a[@href=&quot;link1.html&quot;]&#39;)
+
+print result
+
+</code></pre>
+
+<p>运行结果</p>
+
+<pre><code>[&lt;Element a at 0x10ffaae18&gt;]
+
+</code></pre>
+
+<h4 id="toc_25">4. 获取<code>&lt;li&gt;</code> 标签下的所有 <code>&lt;span&gt;</code> 标签</h4>
+
+<pre><code># xpath_li.py
+
+from lxml import etree
+
+html = etree.parse(&#39;hello.html&#39;)
+
+#result = html.xpath(&#39;//li/span&#39;)
+#注意这么写是不对的：
+#因为 / 是用来获取子元素的，而 &lt;span&gt; 并不是 &lt;li&gt; 的子元素，所以，要用双斜杠
+
+result = html.xpath(&#39;//li//span&#39;)
+
+print result
+
+</code></pre>
+
+<p>运行结果</p>
+
+<pre><code>[&lt;Element span at 0x10d698e18&gt;]
+
+</code></pre>
+
+<h4 id="toc_26">5. 获取 <code>&lt;li&gt;</code> 标签下的<code>&lt;a&gt;</code>标签里的所有 class</h4>
+
+<pre><code># xpath_li.py
+
+from lxml import etree
+
+html = etree.parse(&#39;hello.html&#39;)
+result = html.xpath(&#39;//li/a//@class&#39;)
+
+print result
+
+</code></pre>
+
+<p>运行结果</p>
+
+<pre><code>[&#39;blod&#39;]
+
+</code></pre>
+
+<h4 id="toc_27">6. 获取最后一个 <code>&lt;li&gt;</code> 的 <code>&lt;a&gt;</code> 的 href</h4>
+
+<pre><code># xpath_li.py
+
+from lxml import etree
+
+html = etree.parse(&#39;hello.html&#39;)
+
+result = html.xpath(&#39;//li[last()]/a/@href&#39;)
+# 谓语 [last()] 可以找到最后一个元素
+
+print result
+
+</code></pre>
+
+<p>运行结果</p>
+
+<pre><code>[&#39;link5.html&#39;]
+
+</code></pre>
+
+<h4 id="toc_28">7. 获取倒数第二个元素的内容</h4>
+
+<pre><code># xpath_li.py
+
+from lxml import etree
+
+html = etree.parse(&#39;hello.html&#39;)
+result = html.xpath(&#39;//li[last()-1]/a&#39;)
+
+# text 方法可以获取元素内容
+print result[0].text
+
+</code></pre>
+
+<p>运行结果</p>
+
+<pre><code>fourth item
+
+</code></pre>
+
+<h4 id="toc_29">8. 获取 <code>class</code> 值为 <code>bold</code> 的标签名</h4>
+
+<pre><code># xpath_li.py
+
+from lxml import etree
+
+html = etree.parse(&#39;hello.html&#39;)
+
+result = html.xpath(&#39;//*[@class=&quot;bold&quot;]&#39;)
+
+# tag方法可以获取标签名
+print result[0].tag
+
+</code></pre>
+
+<p>运行结果</p>
+
+<pre><code>span
+
+</code></pre>
 
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Python读取文件编码及内容]]></title>
-    <link href="http://dmlcoding.com/15198744609518.html"/>
-    <updated>2018-03-01T11:21:00+08:00</updated>
-    <id>http://dmlcoding.com/15198744609518.html</id>
+    <title type="html"><![CDATA[python-requests[整理自网络]]]></title>
+    <link href="http://dmlcoding.com/15219449578725.html"/>
+    <updated>2018-03-25T10:29:17+08:00</updated>
+    <id>http://dmlcoding.com/15219449578725.html</id>
     <content type="html"><![CDATA[
-<blockquote>
-<p>当你不知道文件的具体编码方式的时候,如何正确的读取文件内容呢?</p>
-</blockquote>
+<h2 id="toc_0">Requests: 让 HTTP 服务人类</h2>
 
-<h1 id="toc_0">报错日志</h1>
+<p>虽然Python的标准库中 urllib2 模块已经包含了平常我们使用的大多数功能，但是它的 API 使用起来让人感觉不太好，而 Requests 自称 “HTTP for Humans”，说明使用更简洁方便。</p>
 
-<p>当我们不知道文件编码方式的时候,贸然的读取文件,有时候就会出现这些问题</p>
+<p>Requests 继承了urllib2的所有特性。Requests支持HTTP连接保持和连接池，支持使用cookie保持会话，支持文件上传，支持自动确定响应内容的编码，支持国际化的 URL 和 POST 数据自动编码。</p>
 
 <span id="more"></span><!-- more -->
 
-<pre><code>UnicodeDecodeError: &#39;gbk&#39; codec can&#39;t decode byte
+<p>Requests的文档非常完备，中文文档也相当不错。Requests能完全满足当前网络的需求，支持Python 2.6—3.5，而且能在PyPy下完美运行。</p>
+
+<p>开源地址：<a href="https://github.com/kennethreitz/requests">https://github.com/kennethreitz/requests</a></p>
+
+<p>中文文档 API： <a href="http://docs.python-requests.org/zh_CN/latest/index.html">http://docs.python-requests.org/zh_CN/latest/index.html</a></p>
+
+<h2 id="toc_1">安装方式</h2>
+
+<p>利用 pip 安装 或者利用 easy_install 都可以完成安装：</p>
+
+<pre><code>$ pip install requests
+
+$ easy_install requests
+
+</code></pre>
+
+<h2 id="toc_2">基本GET请求（headers参数 和 parmas参数）</h2>
+
+<h5 id="toc_3">1. 最基本的GET请求可以直接用get方法</h5>
+
+<pre><code>response = requests.get(&quot;http://www.baidu.com/&quot;)
+
+# 也可以这么写
+# response = requests.request(&quot;get&quot;, &quot;http://www.baidu.com/&quot;)
+
+</code></pre>
+
+<h5 id="toc_4">2. 添加 headers 和 查询参数</h5>
+
+<p>如果想添加 headers，可以传入<code>headers</code>参数来增加请求头中的headers信息。如果要将参数放在url中传递，可以利用 <code>params</code> 参数。</p>
+
+<pre><code>
+import requests
+
+kw = {&#39;wd&#39;:&#39;长城&#39;}
+
+headers = {&quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36&quot;}
+
+# params 接收一个字典或者字符串的查询参数，字典类型自动转换为url编码，不需要urlencode()
+response = requests.get(&quot;http://www.baidu.com/s?&quot;, params = kw, headers = headers)
+
+# 查看响应内容，response.text 返回的是Unicode格式的数据
+print response.text
+
+# 查看响应内容，response.content返回的字节流数据
+print respones.content
+
+# 查看完整url地址
+print response.url
+
+# 查看响应头部字符编码
+print response.encoding
+
+# 查看响应码
+print response.status_code
+
+</code></pre>
+
+<p>运行结果</p>
+
+<pre><code>......
+
 ......
-</code></pre>
 
-<h1 id="toc_1">解决办法</h1>
+&#39;http://www.baidu.com/s?wd=%E9%95%BF%E5%9F%8E&#39;
 
-<p>所以就是编码方式不对,那么需要先能识别文件的编码文件,然后根据此编码方式进行对文件编码，最后返回文件内容。<br/>
-可以借助一个第三方库<code>chardet</code><br/>
-```</p>
+&#39;utf-8&#39;
 
-<h1 id="toc_2">安装chardet</h1>
-
-<p>pip install chardet<br/>
-```</p>
-
-<h1 id="toc_3">正确实例</h1>
-
-<pre><code>with open(&quot;your_file&quot;, &#39;rb&#39;) as fp:
-    file_data = fp.read()
-    result = chardet.detect(file_data)
-    file_content = file_data.decode(encoding=result[&#39;encoding&#39;])
+200
 
 </code></pre>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[spark开发中遇到的问题]]></title>
-    <link href="http://dmlcoding.com/15198733795152.html"/>
-    <updated>2018-03-01T11:02:59+08:00</updated>
-    <id>http://dmlcoding.com/15198733795152.html</id>
-    <content type="html"><![CDATA[
-<h1 id="toc_0">spark连接mysql</h1>
+<blockquote>
+<ul>
+<li><p>使用response.text 时，Requests 会基于 HTTP 响应的文本编码自动解码响应内容，大多数 Unicode 字符集都能被无缝地解码。</p></li>
+<li><p>使用response.content 时，返回的是服务器响应数据的原始二进制字节流，可以用来保存图片等二进制文件。</p></li>
+</ul>
+</blockquote>
 
-<h2 id="toc_1">问题描述</h2>
+<h2 id="toc_5">基本POST请求（data参数）</h2>
 
-<pre><code>总是报no suitable driver以及   jdbc.mysql.driver类似这样的错误
-</code></pre>
+<h5 id="toc_6">1. 最基本的GET请求可以直接用post方法</h5>
 
-<span id="more"></span><!-- more -->
-
-<h2 id="toc_2">解决办法1</h2>
-
-<pre><code>1.提交任务的时候带上这个，手动指定mysql jar包的位置
-                    SPARK_CLASSPATH=/usr/local/spark-1.4.1-bin-hadoop2.6/lib/mysql-connector-java-5.1.38.jar ./bin/spark-submit --class sparkDemo /root/data/demon-parent-1.0-SNAPSHOT-jar-with-dependencies.jar hdfs://192.168.119.100:9000/examples/custom.txt
-</code></pre>
-
-<h2 id="toc_3">解决办法2</h2>
-
-<pre><code>修改了这个配置SPARK_HOME/conf/spark-env.sh文件，在里面加上了这个参数，就OK了
-
-export SPARK_CLASSPATH=$SPATH_CLASSPATH:/usr/hdp/2.4.0.0-169/spark/lib/mysql-connector-java-5.1.38.jar
+<pre><code>response = requests.post(&quot;http://www.baidu.com/&quot;, data = data)
 
 </code></pre>
 
-<h1 id="toc_4">在spark中使用hive抛出错误</h1>
+<h5 id="toc_7">2. 传入data数据</h5>
 
-<h1 id="toc_5">报错日志</h1>
+<p>对于 POST 请求来说，我们一般需要为它增加一些参数。那么最基本的传参方法可以利用 <code>data</code> 这个参数。</p>
 
-<pre><code>17/08/09 12:11:51 WARN DataNucleus.Persistence: Error creating validator of type org.datanucleus.properties.CorePropertyValidator
-ClassLoaderResolver for class &quot;&quot; gave error on creation : {1}
-org.datanucleus.exceptions.NucleusUserException: ClassLoaderResolver for class &quot;&quot; gave error on creation : {1}
-    at org.datanucleus.NucleusContext.getClassLoaderResolver(NucleusContext.java:1087)
-    at org.datanucleus.PersistenceConfiguration.validatePropertyValue(PersistenceConfiguration.java:797)
-    at org.datanucleus.PersistenceConfiguration.setProperty(PersistenceConfiguration.java:714)
-    at org.datanucleus.PersistenceConfiguration.setPersistenceProperties(PersistenceConfiguration.java:693)
-    at org.datanucleus.NucleusContext.&lt;init&gt;(NucleusContext.java:273)
-    at org.datanucleus.NucleusContext.&lt;init&gt;(NucleusContext.java:247)
-    at org.datanucleus.NucleusContext.&lt;init&gt;(NucleusContext.java:225)
-    at org.datanucleus.api.jdo.JDOPersistenceManagerFactory.&lt;init&gt;(JDOPersistenceManagerFactory.java:416)
-    at org.datanucleus.api.jdo.JDOPersistenceManagerFactory.createPersistenceManagerFactory(JDOPersistenceManagerFactory.java:301)
-    at org.datanucleus.api.jdo.JDOPersistenceManagerFactory.getPersistenceManagerFactory(JDOPersistenceManagerFactory.java:202)
+<pre><code>import requests
+
+formdata = {
+    &quot;type&quot;:&quot;AUTO&quot;,
+    &quot;i&quot;:&quot;i love python&quot;,
+    &quot;doctype&quot;:&quot;json&quot;,
+    &quot;xmlVersion&quot;:&quot;1.8&quot;,
+    &quot;keyfrom&quot;:&quot;fanyi.web&quot;,
+    &quot;ue&quot;:&quot;UTF-8&quot;,
+    &quot;action&quot;:&quot;FY_BY_ENTER&quot;,
+    &quot;typoResult&quot;:&quot;true&quot;
+}
+
+url = &quot;http://fanyi.youdao.com/translate?smartresult=dict&amp;smartresult=rule&amp;smartresult=ugc&amp;sessionFrom=null&quot;
+
+headers={ &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36&quot;}
+
+response = requests.post(url, data = formdata, headers = headers)
+
+print response.text
+
+# 如果是json文件可以直接显示
+print response.json()
+
 </code></pre>
 
-<h1 id="toc_6">问题分析</h1>
+<p>运行结果</p>
 
-<p>看日志应该是缺少了hive的一些包,在网上搜了一下,是下面几个包<br/>
-```<br/>
-[hadoop@U007 lib]\( pwd<br/>
-/opt/spark-1.6.0/lib<br/>
-[hadoop@U007 lib]\) ll<br/>
-total 305220<br/>
--rw-r--r-- 1 hadoop hadoop    339666 Apr 15  2016 datanucleus-api-jdo-3.2.6.jar<br/>
--rw-r--r-- 1 hadoop hadoop   1890075 Apr 15  2016 datanucleus-core-3.2.10.jar<br/>
--rw-r--r-- 1 hadoop hadoop   1809447 Apr 15  2016 datanucleus-rdbms-3.2.9.jar<br/>
-...</p>
+<pre><code>{&quot;type&quot;:&quot;EN2ZH_CN&quot;,&quot;errorCode&quot;:0,&quot;elapsedTime&quot;:2,&quot;translateResult&quot;:[[{&quot;src&quot;:&quot;i love python&quot;,&quot;tgt&quot;:&quot;我喜欢python&quot;}]],&quot;smartResult&quot;:{&quot;type&quot;:1,&quot;entries&quot;:[&quot;&quot;,&quot;肆文&quot;,&quot;高德纳&quot;]}}
+
+{u&#39;errorCode&#39;: 0, u&#39;elapsedTime&#39;: 0, u&#39;translateResult&#39;: [[{u&#39;src&#39;: u&#39;i love python&#39;, u&#39;tgt&#39;: u&#39;\u6211\u559c\u6b22python&#39;}]], u&#39;smartResult&#39;: {u&#39;type&#39;: 1, u&#39;entries&#39;: [u&#39;&#39;, u&#39;\u8086\u6587&#39;, u&#39;\u9ad8\u5fb7\u7eb3&#39;]}, u&#39;type&#39;: u&#39;EN2ZH_CN&#39;}
+
+</code></pre>
+
+<h2 id="toc_8">代理（proxies参数）</h2>
+
+<p>如果需要使用代理，你可以通过为任意请求方法提供 <code>proxies</code> 参数来配置单个请求：</p>
+
+<pre><code>import requests
+
+# 根据协议类型，选择不同的代理
+proxies = {
+  &quot;http&quot;: &quot;http://12.34.56.79:9527&quot;,
+  &quot;https&quot;: &quot;http://12.34.56.79:9527&quot;,
+}
+
+response = requests.get(&quot;http://www.baidu.com&quot;, proxies = proxies)
+print response.text
+
+</code></pre>
+
+<p>也可以通过本地环境变量 <code>HTTP_PROXY</code> 和 <code>HTTPS_PROXY</code> 来配置代理：</p>
+
+<pre><code>export HTTP_PROXY=&quot;http://12.34.56.79:9527&quot;
+export HTTPS_PROXY=&quot;https://12.34.56.79:9527&quot;
+
+</code></pre>
+
+<h2 id="toc_9">私密代理验证（特定格式） 和 Web客户端验证（auth 参数）</h2>
+
+<p>urllib2 这里的做法比较复杂，requests只需要一步：</p>
+
+<h4 id="toc_10">私密代理</h4>
 
 <pre><code>
-所以在提交spark任务的时候,把这几个包加入到classpath中即可
+import requests
 
-# 解决办法
-在提交spark的脚本中加上这几个jar包和hive-site.xml文件
-如下
+# 如果代理需要使用HTTP Basic Auth，可以使用下面这种格式：
+proxy = { &quot;http&quot;: &quot;mr_mao_hacker:sffqry9r@61.158.163.130:16816&quot; }
+
+response = requests.get(&quot;http://www.baidu.com&quot;, proxies = proxy)
+
+print response.text
 
 </code></pre>
 
-<p>nohup spark-submit \<br/>
- --master yarn \<br/>
- --deploy-mode cluster \<br/>
- --class ${className} \<br/>
- --driver-memory 4g \<br/>
- --executor-memory 2g \<br/>
- --executor-cores 4 \<br/>
- --num-executors 4 \<br/>
- --jars ./lib/datanucleus-api-jdo-3.2.6.jar,./lib/datanucleus-core-3.2.10.jar,./lib/datanucleus-rdbms<br/>
--3.2.9.jar  \<br/>
- --files ./lib/hive-site.xml \<br/>
- ./app-jar-with-dependencies.jar \</p>
+<h4 id="toc_11">web客户端验证</h4>
+
+<p>如果是Web客户端验证，需要添加 auth = (账户名, 密码)</p>
+
+<pre><code>import requests
+
+auth=(&#39;test&#39;, &#39;123456&#39;)
+
+response = requests.get(&#39;http://192.168.199.107&#39;, auth = auth)
+
+print response.text
+
+</code></pre>
+
+<blockquote>
+<p>urllib2 泪奔...</p>
+</blockquote>
+
+<h2 id="toc_12">Cookies 和 Session</h2>
+
+<h3 id="toc_13">Cookies</h3>
+
+<p>如果一个响应中包含了cookie，那么我们可以利用 cookies参数拿到：</p>
 
 <pre><code>
-加上--jars 和 --files即可
+import requests
 
-# 在spark中将数据插入hive动态分区
-## 问题描述
-当我用standalone以及yarn-client模式进行提交任务的时候,不会报错.但是当我改成yarn-cluster模式进行提交任务,有时候就会报下面的错
-## 报错日志
+response = requests.get(&quot;http://www.baidu.com/&quot;)
+
+# 7\. 返回CookieJar对象:
+cookiejar = response.cookies
+
+# 8\. 将CookieJar转为字典：
+cookiedict = requests.utils.dict_from_cookiejar(cookiejar)
+
+print cookiejar
+
+print cookiedict
+
 </code></pre>
 
-<p>17/08/09 10:08:01 ERROR scheduler.JobScheduler: Error running job streaming job 1502188440000 ms.0<br/>
-java.lang.NoSuchMethodException: org.apache.hadoop.hive.ql.metadata.Hive.loadDynamicPartitions(org.apache.hadoop.fs.Path, java.lang.String, java.util.Map, boolean, int, boolean, boolean)<br/>
-    at java.lang.Class.getMethod(Class.java:1670)<br/>
-    at org.apache.spark.sql.hive.client.Shim.findMethod(HiveShim.scala:114)<br/>
-    at org.apache.spark.sql.hive.client.Shim_v0_12.loadDynamicPartitionsMethod\(lzycompute(HiveShim.scala:168)<br/>
-    at org.apache.spark.sql.hive.client.Shim_v0_12.loadDynamicPartitionsMethod(HiveShim.scala:167)<br/>
-    at org.apache.spark.sql.hive.client.Shim_v0_12.loadDynamicPartitions(HiveShim.scala:261)<br/>
-    at org.apache.spark.sql.hive.client.ClientWrapper\)\(anonfun\)loadDynamicPartitions\(1.apply\)mcV\(sp(ClientWrapper.scala:560)<br/>
-    at org.apache.spark.sql.hive.client.ClientWrapper\)\(anonfun\)loadDynamicPartitions\(1.apply(ClientWrapper.scala:560)<br/>
-    at org.apache.spark.sql.hive.client.ClientWrapper\)\(anonfun\)loadDynamicPartitions\(1.apply(ClientWrapper.scala:560)<br/>
-    at org.apache.spark.sql.hive.client.ClientWrapper\)\(anonfun\)withHiveState\(1.apply(ClientWrapper.scala:279)<br/>
-    at org.apache.spark.sql.hive.client.ClientWrapper.liftedTree1\)1(ClientWrapper.scala:226)<br/>
-    at org.apache.spark.sql.hive.client.ClientWrapper.retryLocked(ClientWrapper.scala:225)<br/>
-    at org.apache.spark.sql.hive.client.ClientWrapper.withHiveState(ClientWrapper.scala:268)<br/>
-    at org.apache.spark.sql.hive.client.ClientWrapper.loadDynamicPartitions(ClientWrapper.scala:559)<br/>
-    at org.apache.spark.sql.hive.execution.InsertIntoHiveTable.sideEffectResult\(lzycompute(InsertIntoHiveTable.scala:225)<br/>
-    at org.apache.spark.sql.hive.execution.InsertIntoHiveTable.sideEffectResult(InsertIntoHiveTable.scala:127)<br/>
-    at org.apache.spark.sql.hive.execution.InsertIntoHiveTable.doExecute(InsertIntoHiveTable.scala:276)<br/>
-    at org.apache.spark.sql.execution.SparkPlan\)\(anonfun\)execute\(5.apply(SparkPlan.scala:132)<br/>
-    at org.apache.spark.sql.execution.SparkPlan\)\(anonfun\)execute\(5.apply(SparkPlan.scala:130)<br/>
-    at org.apache.spark.rdd.RDDOperationScope\).withScope(RDDOperationScope.scala:150)<br/>
-    at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:130)<br/>
-    at org.apache.spark.sql.execution.QueryExecution.toRdd\(lzycompute(QueryExecution.scala:55)<br/>
-    at org.apache.spark.sql.execution.QueryExecution.toRdd(QueryExecution.scala:55)<br/>
-    at org.apache.spark.sql.DataFrame.&lt;init&gt;(DataFrame.scala:145)<br/>
-    at org.apache.spark.sql.DataFrame.&lt;init&gt;(DataFrame.scala:130)<br/>
-    at org.apache.spark.sql.DataFrame\).apply(DataFrame.scala:52)<br/>
-    at org.apache.spark.sql.SQLContext.sql(SQLContext.scala:817)<br/>
-```</p>
+<p>运行结果：</p>
 
-<h2 id="toc_7">分析</h2>
+<pre><code>&lt;RequestsCookieJar[&lt;Cookie BDORZ=27315 for .baidu.com/&gt;]&gt;
 
-<p>用client模式的时候,是在13上运行的.没有问题<br/>
-用cluster模式的时候,有时候报错,有时候没有报错<br/>
-那不禁让我猜想,为啥cluster模式时而报错时而不报错呢?</p>
+{&#39;BDORZ&#39;: &#39;27315&#39;}
 
-<p>然后我用client模式,在14上提交,不出我所料,基本上每个job都抛出了那个错误.<br/>
-所以定位到问题就是,除了13这个节点外,别的节点缺少了什么包,导致抛出了错误.<br/>
-因为抛出来的错误是java.lang.NoSuchMethodException:,所以肯定是缺少了什么包.<br/>
-之前cluster模式时而报错时而不报错的原因肯定是,当不报错的时候,正好driver端是在13上</p>
-
-<p>现在的问题就是找出别的机器缺少什么包了.</p>
-
-<p>然后我在spark的环境变量里面发现了这个参数<br/>
-<code><br/>
-spark.sql.hive.metastore.jars : /usr/lib/hive/lib/*:/opt/spark-1.6.0/lib/spark-assembly-1.6.0-hadoop2.4.0.jar<br/>
-</code></p>
-
-<p>我去,13上有这个/usr/lib/hive/lib/* 路径<br/>
-14和15上都没有,,,<br/>
-问题找到了</p>
-
-<h2 id="toc_8">解决办法1</h2>
-
-<p>把13上这个路径/usr/lib/hive/lib/* 拷贝到14和15上,各自都有一份.这样无论driver端在哪里,都能找到相应的jar包.<br/>
-就这样愉快的解决了.<br/>
-所以遇到问题,慢慢分析,不要像无头苍蝇一样.<br/>
-在网上搜的解决办法,都无法解决这个问题.所以有时候,具体问题具体分析,要慢慢的分析到出错原因.找到了原因,bug就能迎刃而解.</p>
-
-<h2 id="toc_9">解决办法2</h2>
-
-<p>在spark的配置文件中把 <code>spark.sql.hive.metastore.jars</code> 给删了.因为你总不能在每个节点上去拷贝hive的一些依赖吧,如果以后hive升级了,还得替换hive的jar包,太麻烦.所以改成下面的解决办法更好.</p>
-
-<p>在pom文件中加上hive的依赖</p>
-
-<pre><code>&lt;!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core_2.10 --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
-    &lt;artifactId&gt;spark-core_2.10&lt;/artifactId&gt;
-    &lt;version&gt;1.6.0&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;!-- https://mvnrepository.com/artifact/org.apache.spark/spark-mllib_2.10 --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
-    &lt;artifactId&gt;spark-mllib_2.10&lt;/artifactId&gt;
-    &lt;version&gt;1.6.0&lt;/version&gt;
-    &lt;scope&gt;provided&lt;/scope&gt;
-&lt;/dependency&gt;
-
-&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
-    &lt;artifactId&gt;spark-streaming_2.10&lt;/artifactId&gt;
-    &lt;version&gt;1.6.0&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
-    &lt;artifactId&gt;spark-streaming-kafka_2.10&lt;/artifactId&gt;
-    &lt;version&gt;1.6.0&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
-    &lt;artifactId&gt;spark-sql_2.10&lt;/artifactId&gt;
-    &lt;version&gt;1.6.0&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
-    &lt;artifactId&gt;spark-hive_2.10&lt;/artifactId&gt;
-    &lt;version&gt;1.6.0&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;mysql&lt;/groupId&gt;
-    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
-    &lt;version&gt;5.1.32&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.hive&lt;/groupId&gt;
-    &lt;artifactId&gt;hive-jdbc&lt;/artifactId&gt;
-    &lt;version&gt;0.13.1&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;!-- https://mvnrepository.com/artifact/org.apache.hive/hive-exec --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.hive&lt;/groupId&gt;
-    &lt;artifactId&gt;hive-exec&lt;/artifactId&gt;
-    &lt;version&gt;0.13.1&lt;/version&gt;
-&lt;/dependency&gt;
 </code></pre>
 
-<h1 id="toc_10">sparkstreaming读取kafka数据</h1>
+<h3 id="toc_14">Session</h3>
 
-<h2 id="toc_11">问题描述Couldn&#39;t find leaders for Set</h2>
+<p>在 requests 里，session对象是一个非常常用的对象，这个对象代表一次用户会话：从客户端浏览器连接服务器开始，到客户端浏览器与服务器断开。</p>
 
-<p>SparkStreaming程序从Kafka读数据的程序运行期间报了描述中的异常.<br/>
-通过监控分析发现,是由于有一个Broker挂掉了。可是对应Topic的replica设置的2，就算挂掉一个，应该有replica顶上啊。<br/>
-后来发现，这是由于存在Partition的Replica没有跟Leader保持同步更新，也就是通常所说的“没追上”。 查看某个Topic是否存在没追上的情况：</p>
+<p>会话能让我们在跨请求时候保持某些参数，比如在同一个 Session 实例发出的所有请求之间保持 cookie 。</p>
 
-<p>查看某个Topic是否存在没追上的情况：<br/>
-<code><br/>
-kafka-topics.sh --describe --zookeeper XXX --topic XXX<br/>
-</code></p>
+<h4 id="toc_15">实现人人网登录</h4>
 
-<h2 id="toc_12">报错日志</h2>
+<pre><code>import requests
 
-<pre><code>17/10/13 09:41:13 ERROR DirectKafkaInputDStream: ArrayBuffer(java.nio.channels.ClosedChannelException, org.apache.spark.SparkException: Couldn&#39;t find leader offsets for Set([dsp_request_event,2]))
-17/10/13 09:41:13 ERROR StreamingContext: Error starting the context, marking it as stopped
-org.apache.spark.SparkException: ArrayBuffer(java.nio.channels.ClosedChannelException, org.apache.spark.SparkException: Couldn&#39;t find leader offsets for Set([dsp_request_event,2]))
-    at org.apache.spark.streaming.kafka.DirectKafkaInputDStream.latestLeaderOffsets(DirectKafkaInputDStream.scala:123)
-    at org.apache.spark.streaming.kafka.DirectKafkaInputDStream.compute(DirectKafkaInputDStream.scala:145)
-    at org.apache.spark.streaming.dstream.DStream$$anonfun$getOrCompute$1$$anonfun$1$$anonfun$apply$7.apply(DStream.scala:352)
-    at org.apache.spark.streaming.dstream.DStream$$anonfun$getOrCompute$1$$anonfun$1$$anonfun$apply$7.apply(DStream.scala:352)
+# 1. 创建session对象，可以保存Cookie值
+ssion = requests.session()
+
+# 2. 处理 headers
+headers = {&quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36&quot;}
+
+# 3. 需要登录的用户名和密码
+data = {&quot;email&quot;:&quot;mr_mao_hacker@163.com&quot;, &quot;password&quot;:&quot;alarmchime&quot;}  
+
+# 4. 发送附带用户名和密码的请求，并获取登录后的Cookie值，保存在ssion里
+ssion.post(&quot;http://www.renren.com/PLogin.do&quot;, data = data)
+
+# 5. ssion包含用户登录后的Cookie值，可以直接访问那些登录后才可以访问的页面
+response = ssion.get(&quot;http://www.renren.com/410043129/profile&quot;)
+
+# 6. 打印响应内容
+print response.text
+
 </code></pre>
 
-<h2 id="toc_13">解决办法</h2>
+<h2 id="toc_16">处理HTTPS请求 SSL证书验证</h2>
 
-<p>观察其中的Replicas和Isr是否一致，如果出现Isr少于Replicas，则对应Partition存在没追上的情况<br/>
-解决方法：<br/>
-增大num.replica.fetchers的值，此参数是Replicas从Leader同步数据的线程数，默认为1，增大此参数即增大了同步IO。经过测试，增大此值后，不再有追不上的情况<br/>
-确定问题已解决的方法：<br/>
-启动出现问题的SparkStreaming程序，在程序正常计算的状态下，kill掉任意一个Broker后，再观察运行情况。在增大同步线程数之前，kill后SparkStreaming会报同样的异常，而增大后程序依然正常运行，问题解决。</p>
+<p>Requests也可以为HTTPS请求验证SSL证书：</p>
 
-<p>参考:<a href="http://blog.csdn.net/yanshu2012/article/details/53995159">http://blog.csdn.net/yanshu2012/article/details/53995159</a></p>
+<ul>
+<li>要想检查某个主机的SSL证书，你可以使用 verify 参数（也可以不写）</li>
+</ul>
+
+<pre><code>import requests
+response = requests.get(&quot;https://www.baidu.com/&quot;, verify=True)
+
+# 也可以省略不写
+# response = requests.get(&quot;https://www.baidu.com/&quot;)
+print r.text
+
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;!--STATUS OK--&gt;&lt;html&gt; &lt;head&gt;&lt;meta http-equiv=content-type content=text/html;charset=utf-8&gt;&lt;meta http-equiv=X-UA-Compatible content=IE=Edge&gt;百度一下，你就知道 ....
+
+</code></pre>
+
+<ul>
+<li>如果SSL证书验证不通过，或者不信任服务器的安全证书，则会报出SSLError，据说 12306 证书是自己做的：</li>
+</ul>
+
+<p>来测试一下：</p>
+
+<pre><code>import requests
+response = requests.get(&quot;https://www.12306.cn/mormhweb/&quot;)
+print response.text
+
+</code></pre>
+
+<p>果然：</p>
+
+<p><code>SSLError: (&quot;bad handshake: Error([(&#39;SSL routines&#39;, &#39;ssl3_get_server_certificate&#39;, &#39;certificate verify failed&#39;)],)&quot;,)</code></p>
+
+<p><strong>如果我们想跳过 12306 的证书验证，把 verify 设置为 False 就可以正常请求了。</strong></p>
+
+<pre><code>r = requests.get(&quot;https://www.12306.cn/mormhweb/&quot;, verify = False)
+</code></pre>
 
 ]]></content>
   </entry>

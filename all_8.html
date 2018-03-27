@@ -135,6 +135,8 @@
             <li><a href="Redis.html">Redis</a></li>
         
             <li><a href="Zookeeper.html">Zookeeper</a></li>
+        
+            <li><a href="BlockChain.html">BlockChain</a></li>
          
 
       </ul>
@@ -157,14 +159,14 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15198713708585.html">
+                <a class="clearlink" href="15198772721083.html">
                 
-                  <h1>zabbix 部署文档</h1>
+                  <h1>druid遇到的坑</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>记录下搭建过程,以免以后又重复花时间找搭建文档</p>
+                        	<p>学习druid过程中遇到的一些坑,记录一下.方便自己方便大家</p>
 
 
                         
@@ -173,11 +175,11 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15198713708585.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/4/20</span>
+                   <a href="15198772721083.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/7/9</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
+          					    <span class="posted-in"><a href='Druid.html'>Druid</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -191,14 +193,16 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15198738825693.html">
+                <a class="clearlink" href="15198774045262.html">
                 
-                  <h1>saltstack部署文档</h1>
+                  <h1>Ubuntu16.04使用Docker部署Gitlab</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>安装部署自动化管理工具SaltStack.在管理多台服务器上,这个工具还是非常好使的,另外由于是 Python写的,也可以很方便的对其进行个性化修改.</p>
+                        	<p>我个人非常不喜欢用SVN同步代码,正好想重温一下docker的一些命令,那就用docker方便的搭建一下gitlab.</p>
+
+<h1 id="toc_0">ubuntu安装docker</h1>
 
 
                         
@@ -207,11 +211,11 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15198738825693.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/4/15</span>
+                   <a href="15198774045262.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/7/5</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
+          					    <span class="posted-in"><a href='Docker.html'>Docker</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -225,15 +229,14 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15198738146695.html">
+                <a class="clearlink" href="15198741843316.html">
                 
-                  <h1>saltstack web halite 界面部署文档</h1>
+                  <h1>项目中配置文件的读取</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>安装saltstack webui halite管理界面,方便查看和操作<br/>
-安装部署自动化管理工具SaltStack.在管理多台服务器上,这个工具还是非常好使的,另外由于是 Python写的,也可以很方便的对其进行个性化修改.</p>
+                        	<p>在工作中,我们一般都不会把变化的地方写死.比如开发环境和测试环境的服务器地址,等等之类的信息.这些我们都会写入到配置文件中,方便修改.</p>
 
 
                         
@@ -242,11 +245,11 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15198738146695.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/4/15</span>
+                   <a href="15198741843316.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/6/25</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
+          					    <span class="posted-in"><a href='Scala.html'>Scala</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -260,56 +263,15 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15198747024709.html">
+                <a class="clearlink" href="15198744182911.html">
                 
-                  <h1>mysql赋给用户权限grant all privileges on</h1>
+                  <h1>python 高级特性之切片</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h1 id="toc_0">权限问题</h1>
+                        	<p>python很方便实用,如果你不会切片.那么你真的错过了什么叫方便和实用.</p>
 
-<ul>
-<li><p>问题<br/>
-<code><br/>
-遇到了 SQLException: access denied for  @&#39;localhost&#39; (using password: no)<br/>
-</code></p></li>
-<li><p>解决办法<br/>
-<code><br/>
-grant all privileges on *.* to joe@localhost identified by &#39;1&#39;;<br/>
-flush privileges;<br/>
-</code><br/>
-&lt;!-- more --&gt;</p></li>
-</ul>
-
-<h1 id="toc_1">详细介绍</h1>
-
-<pre><code>MySQL&gt; grant 权限1,权限2,…权限n on 数据库名称.表名称 to 用户名@用户地址 identified by ‘连接口令’;
-
-</code></pre>
-
-<ul>
-<li><code>权限1,权限2,…权限n</code>代表select,insert,update,delete,create,drop,index,alter,grant,references,reload,shutdown,process,file等14个权限。</li>
-<li>当权限1,权限2,…权限n被all privileges或者all代替，表示赋予用户全部权限。</li>
-<li>当数据库名称.表名称被<em>.</em>代替，表示赋予用户操作服务器上所有数据库所有表的权限。</li>
-<li>用户地址可以是localhost，也可以是ip地址、机器名字、域名。也可以用’%&#39;表示从任何地址连接。</li>
-<li>‘连接口令’不能为空，否则创建失败。</li>
-</ul>
-
-<h2 id="toc_2">实例</h2>
-
-<pre><code>mysql&gt;grant select,insert,update,delete,create,drop on vtdc.employee to joe@10.163.225.87 identified by ‘123′;
-给来自10.163.225.87的用户joe分配可对数据库vtdc的employee表进行select,insert,update,delete,create,drop等操作的权限，并设定口令为123。
-
-mysql&gt;grant all privileges on vtdc.* to joe@10.163.225.87 identified by ‘123′;
-给来自10.163.225.87的用户joe分配可对数据库vtdc所有表进行所有操作的权限，并设定口令为123。
-
-mysql&gt;grant all privileges on *.* to joe@10.163.225.87 identified by ‘123′;
-给来自10.163.225.87的用户joe分配可对所有数据库的所有表进行所有操作的权限，并设定口令为123。
-
-mysql&gt;grant all privileges on *.* to joe@localhost identified by ‘123′;
-给本机用户joe分配可对所有数据库的所有表进行所有操作的权限，并设定口令为123。
-</code></pre>
 
                         
                       </div>
@@ -317,11 +279,11 @@ mysql&gt;grant all privileges on *.* to joe@localhost identified by ‘123′;
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
-                    <span class="date">2017/4/9</span>
+                   <a href="15198744182911.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/6/21</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Mysql.html'>Mysql</a></span>
+          					    <span class="posted-in"><a href='Python.html'>Python</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -335,16 +297,15 @@ mysql&gt;grant all privileges on *.* to joe@localhost identified by ‘123′;
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15198739653579.html">
+                <a class="clearlink" href="15198765526677.html">
                 
-                  <h1>Linux 文件同步工具——rsync</h1>
+                  <h1>Git常用命令以及笔记</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">介绍</h2>
-
-<p>rsync是类unix系统下的数据镜像备份工具，从软件的命名上就可以看出来了——remote sync</p>
+                        	<p>平时一直是用Intellij进行开发,git命令也不会用命令行去输入.导致有些命令都不太熟悉了,每次用到的时候都是google.<br/>
+今天把平时用到的命令做个笔记记录一下.</p>
 
 
                         
@@ -353,11 +314,11 @@ mysql&gt;grant all privileges on *.* to joe@localhost identified by ‘123′;
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15198739653579.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/3/22</span>
+                   <a href="15198765526677.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/6/20</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
+          					    <span class="posted-in"><a href='DevTools.html'>DevTools</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -477,6 +438,8 @@ mysql&gt;grant all privileges on *.* to joe@localhost identified by ‘123′;
             <a href="Redis.html"><strong>Redis</strong></a>
         
             <a href="Zookeeper.html"><strong>Zookeeper</strong></a>
+        
+            <a href="BlockChain.html"><strong>BlockChain</strong></a>
          
         </p>
 
@@ -493,31 +456,31 @@ mysql&gt;grant all privileges on *.* to joe@localhost identified by ‘123′;
 	      
 		      
 			      <li class="post">
-			        <a href="15209079363420.html">大数据框架-开源协议</a>
+			        <a href="15221149143615.html">概率分布函数和概率密度函数</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15205689785115.html">Zookeeper笔记</a>
+			        <a href="15220339795263.html">分布式系统的一致性</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15205677979326.html">分布式应用浅谈</a>
+			        <a href="15217143404677.html">docker 错误</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15203071412162.html">kafka-sparkstreaming自己维护offset</a>
+			        <a href="15216998348495.html">mac 搭建 区块链开发环境</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15202200627560.html">查看linux系统负荷</a>
+			        <a href="15216328231070.html">LeetCode解题思路</a>
 			      </li>
 		     
 		  
