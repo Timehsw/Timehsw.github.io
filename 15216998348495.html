@@ -298,24 +298,24 @@ ubuntu                latest              f975c5035748        2 weeks ago       
 
 <h1 id="toc_10">docker挂载本地目录进行开发</h1>
 
-<p>将本地的<code>/Users/hushiwei/BlockChain/ethereum</code>目录,与容器中的<code>/home/deploy</code>进行共享<br/>
-```<br/>
-docker run -it -v /Users/hushiwei/BlockChain/ethereum:/home/deploy a2073b0b64cc /bin/bash</p>
+<p>将本地的<code>/Users/hushiwei/BlockChain/ethereum</code>目录,与容器中的<code>/home/deploy</code>进行共享</p>
 
-<pre><code>
-# 生成truffle代码
-在容器的`/home/deploy/demo3`目录下执行`truffle init` 生成项目
-![](media/15216998348495/15217712425759.jpg)
-
-本机对应的目录也可以看到
-![](media/15216998348495/15217712751901.jpg)
-
-## 用idea打开ethereum目录作为项目.
-
-![](media/15216998348495/15217713264100.jpg)
-
+<pre><code>docker run -it -v /Users/hushiwei/BlockChain/ethereum:/home/deploy a2073b0b64cc /bin/bash
 
 </code></pre>
+
+<h1 id="toc_11">生成truffle代码</h1>
+
+<p>在容器的<code>/home/deploy/demo3</code>目录下执行<code>truffle init</code> 生成项目</p>
+
+<p><img src="media/15216998348495/15217712425759.jpg" alt=""/></p>
+
+<p>本机对应的目录也可以看到<br/>
+<img src="media/15216998348495/15217712751901.jpg" alt=""/></p>
+
+<h2 id="toc_12">用idea打开ethereum目录作为项目.</h2>
+
+<p><img src="media/15216998348495/15217713264100.jpg" alt=""/></p>
 
 
     

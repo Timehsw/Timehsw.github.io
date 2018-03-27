@@ -4,7 +4,7 @@
   <title><![CDATA[Time渐行渐远]]></title>
   <link href="http://dmlcoding.com/atom.xml" rel="self"/>
   <link href="http://dmlcoding.com/"/>
-  <updated>2018-03-27T18:17:25+08:00</updated>
+  <updated>2018-03-27T18:20:44+08:00</updated>
   <id>http://dmlcoding.com/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -87,6 +87,8 @@
     <content type="html"><![CDATA[
 <p><img src="media/15220339795263/15221454798314.jpg" alt=""/></p>
 
+<p>先上个图,未完待续......</p>
+
 ]]></content>
   </entry>
   
@@ -105,14 +107,15 @@
 
 <p>此时，只需要将拉取地址改为国内镜像仓库即可。</p>
 
-<p>标准格式为：<br/>
-<code><br/>
-$ docker pull registry.docker-cn.com/myname/myrepo:mytag<br/>
-</code><br/>
-例：<br/>
-<code><br/>
-$ docker pull registry.docker-cn.com/library/ubuntu:16.04<br/>
-</code></p>
+<p>标准格式为：</p>
+
+<pre><code>$ docker pull registry.docker-cn.com/myname/myrepo:mytag
+</code></pre>
+
+<p>例：</p>
+
+<pre><code>$ docker pull registry.docker-cn.com/library/ubuntu:16.04
+</code></pre>
 
 <p>为了永久性保留更改，您可以修改 /etc/docker/daemon.json 文件并添加上 registry-mirrors 键值。</p>
 
@@ -251,24 +254,24 @@ ubuntu                latest              f975c5035748        2 weeks ago       
 
 <h1 id="toc_10">docker挂载本地目录进行开发</h1>
 
-<p>将本地的<code>/Users/hushiwei/BlockChain/ethereum</code>目录,与容器中的<code>/home/deploy</code>进行共享<br/>
-```<br/>
-docker run -it -v /Users/hushiwei/BlockChain/ethereum:/home/deploy a2073b0b64cc /bin/bash</p>
+<p>将本地的<code>/Users/hushiwei/BlockChain/ethereum</code>目录,与容器中的<code>/home/deploy</code>进行共享</p>
 
-<pre><code>
-# 生成truffle代码
-在容器的`/home/deploy/demo3`目录下执行`truffle init` 生成项目
-![](media/15216998348495/15217712425759.jpg)
-
-本机对应的目录也可以看到
-![](media/15216998348495/15217712751901.jpg)
-
-## 用idea打开ethereum目录作为项目.
-
-![](media/15216998348495/15217713264100.jpg)
-
+<pre><code>docker run -it -v /Users/hushiwei/BlockChain/ethereum:/home/deploy a2073b0b64cc /bin/bash
 
 </code></pre>
+
+<h1 id="toc_11">生成truffle代码</h1>
+
+<p>在容器的<code>/home/deploy/demo3</code>目录下执行<code>truffle init</code> 生成项目</p>
+
+<p><img src="media/15216998348495/15217712425759.jpg" alt=""/></p>
+
+<p>本机对应的目录也可以看到<br/>
+<img src="media/15216998348495/15217712751901.jpg" alt=""/></p>
+
+<h2 id="toc_12">用idea打开ethereum目录作为项目.</h2>
+
+<p><img src="media/15216998348495/15217713264100.jpg" alt=""/></p>
 
 ]]></content>
   </entry>

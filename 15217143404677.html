@@ -188,14 +188,15 @@
 
 <p>此时，只需要将拉取地址改为国内镜像仓库即可。</p>
 
-<p>标准格式为：<br/>
-<code><br/>
-$ docker pull registry.docker-cn.com/myname/myrepo:mytag<br/>
-</code><br/>
-例：<br/>
-<code><br/>
-$ docker pull registry.docker-cn.com/library/ubuntu:16.04<br/>
-</code></p>
+<p>标准格式为：</p>
+
+<pre><code>$ docker pull registry.docker-cn.com/myname/myrepo:mytag
+</code></pre>
+
+<p>例：</p>
+
+<pre><code>$ docker pull registry.docker-cn.com/library/ubuntu:16.04
+</code></pre>
 
 <p>为了永久性保留更改，您可以修改 /etc/docker/daemon.json 文件并添加上 registry-mirrors 键值。</p>
 
