@@ -1,0 +1,673 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  Hadoop RPC运行机制 - Time渐行渐远
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Time渐行渐远" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:dmlcoding.com ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li id=""><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li id=""><a target="_blank" href="about.html">ABOUT</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Time渐行渐远</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="BigData.html">BigData</a></li>
+        
+            <li><a href="Python.html">Python</a></li>
+        
+            <li><a href="Linux.html">Linux</a></li>
+        
+            <li><a href="Life.html">Life</a></li>
+        
+            <li><a href="Spark.html">Spark</a></li>
+        
+            <li><a href="Yarn.html">Yarn</a></li>
+        
+            <li><a href="Scala.html">Scala</a></li>
+        
+            <li><a href="VPS.html">VPS</a></li>
+        
+            <li><a href="MachineLearning.html">MachineLearning</a></li>
+        
+            <li><a href="Writer.html">Writer</a></li>
+        
+            <li><a href="Shell.html">Shell</a></li>
+        
+            <li><a href="Algorithm.html">Algorithm</a></li>
+        
+            <li><a href="Mac.html">Mac</a></li>
+        
+            <li><a href="Presto.html">Presto</a></li>
+        
+            <li><a href="Mysql.html">Mysql</a></li>
+        
+            <li><a href="Maven.html">Maven</a></li>
+        
+            <li><a href="Kafka.html">Kafka</a></li>
+        
+            <li><a href="Java.html">Java</a></li>
+        
+            <li><a href="DevTools.html">DevTools</a></li>
+        
+            <li><a href="Hbase.html">Hbase</a></li>
+        
+            <li><a href="ELK.html">ELK</a></li>
+        
+            <li><a href="Druid.html">Druid</a></li>
+        
+            <li><a href="Docker.html">Docker</a></li>
+        
+            <li><a href="DesignPattern.html">DesignPattern</a></li>
+        
+            <li><a href="Computer.html">Computer</a></li>
+        
+            <li><a href="Redis.html">Redis</a></li>
+        
+            <li><a href="Zookeeper.html">Zookeeper</a></li>
+        
+            <li><a href="BlockChain.html">BlockChain</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>Hadoop RPC运行机制</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2018/3/28</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='BigData.html'>BigData</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p>RPC是一种通过网络从远程计算机上请求服务的机制，封装了具体实现，使用户不需要了解底层网络技术。目前存在许多开源RPC框架，比较有名的有Thrift、Protocol Buffers和Avro。Hadoop RPC与他们一样，均由两部分组成：对象序列化和远程过程调用</p>
+
+<p>什么是远程过程调用?</p>
+
+<span id="more"></span><!-- more -->
+
+<p>首先从字面上解释，“过程”在Java中指的就是对象中的方法，“远程”是指不同机器上的进程（狭义），或者不同的进程（广义）（为了简单，下文不对这种情况进行说明）。因此，RPC就是允许程序调用其他机器上的对象方法。</p>
+
+<p>RPC是属于典型的C/S结构，提供服务的一方称为server，请求服务的一方称为client。server端提供对象方法供client端调用，被调用的对象方法的执行发生在server端。</p>
+
+<p>上面这样解释其实已经很明白了,为了更直观的理解.<br/>
+那么就不废话了,直接上一个例子,用代码说话.</p>
+
+<h1 id="toc_0">RPC 实例</h1>
+
+<blockquote>
+<p>简单来说,就是在client调用远程服务器里面的方法就像在本地调用自己的方法一样.</p>
+</blockquote>
+
+<p>我们的实例用hadoop rpc框架,那么我们需要引入对应的依赖</p>
+
+<pre><code>    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;
+        &lt;artifactId&gt;hadoop-common&lt;/artifactId&gt;
+        &lt;version&gt;2.7.1&lt;/version&gt;
+    &lt;/dependency&gt;
+</code></pre>
+
+<p>Hadoop RPC主要由三个大类组成，即RPC、Client和Server，分别对应对外编程接口、客户端实现和服务器实现</p>
+
+<p>代码分为两部分</p>
+
+<ul>
+<li>服务端的逻辑代码(server-rpc)</li>
+<li>客户端调用服务端的逻辑代码(client-rpc)</li>
+</ul>
+
+<p><img src="media/15222053353935/15222165453483.jpg" alt=""/></p>
+
+<h3 id="toc_1">服务端server-rpc</h3>
+
+<p>RPCLearningServiceInterface <br/>
+定义一个接口,我们想要客户端调用的方法</p>
+
+<pre><code>/**
+ * Created by hushiwei on 2018/3/28.
+ * desc : RPC协议是client端和server端之间的通信接口，它定义了server端对外提供的服务接口。
+ */
+public interface RPCLearningServiceInterface {
+
+    // 协议版本号,不同版本号的client和sever之间不能相互通信
+    static final long versionID = 1L;
+
+    // 登录方法
+    String loging(String name);
+
+    // 乘法
+    String multip(int a, int b);
+}
+
+
+</code></pre>
+
+<p>RPCLearningServiceImpl</p>
+
+<p>接口的具体实现类</p>
+
+<pre><code>/**
+ * Created by hushiwei on 2018/3/28.
+ * desc :Hadoop RPC协议通常是一个Java接口，定义了server端对外提供的服务接口，需要在server端进行实现
+ *
+ * server端的协议实现中不需要关注Socket通信
+ *
+ */
+public class RPCLearningServiceImpl implements RPCLearningServiceInterface {
+    @Override
+    public String loging(String name) {
+        System.out.println(&quot;Exec Login function ...&quot;);
+        return &quot;Hello, &quot; + name + &quot;. Welcome you!&quot;;
+    }
+
+    @Override
+    public String multip(int a, int b) {
+        System.out.println(&quot;Prepare to exec multip function in server ....&quot;);
+        return a + &quot; * &quot; + b + &quot; = &quot; + a * b;
+    }
+}
+
+</code></pre>
+
+<p>RpcLearningServer</p>
+
+<p>server-rpc的启动类</p>
+
+<pre><code>
+/**
+ * Created by hushiwei on 2018/3/28.
+ * desc :
+ *
+ * java -classpath MapReduce-1.0-SNAPSHOT-jar-with-dependencies.jar com.hushiwei.mr.rpc.rpcserver.RpcLearningServer
+ */
+public class RpcLearningServer {
+    public static void main(String[] args) throws IOException {
+
+        // 创建RPC.Builder实例builder,用于构造RPC server
+        RPC.Builder builder = new RPC.Builder(new Configuration());
+
+        // 向builder传递一些必要的参数,如主机,端口号,真实业务逻辑实例,协议接口
+        builder.setBindAddress(&quot;localhost&quot;).setPort(45666)
+                .setInstance(new RPCLearningServiceImpl())
+                .setProtocol(RPCLearningServiceInterface.class);
+
+        // 构造rpc server
+        RPC.Server server = builder.build();
+
+        // 启动server
+        server.start();
+
+    }
+}
+
+</code></pre>
+
+<h3 id="toc_2">客户端client-rpc</h3>
+
+<p>ClientController</p>
+
+<p>客户端的代码里面调用了服务端提供的api</p>
+
+<pre><code>/**
+ * Created by hushiwei on 2018/3/28.
+ * desc : ClientController is a RPC client
+ */
+public class ClientController {
+    public static void main(String[] args) throws IOException {
+
+        // 通过rpc拿到loginServiceinterface的代理对象
+        RPCLearningServiceInterface service = RPC.getProxy(RPCLearningServiceInterface.class, 1L, new InetSocketAddress(&quot;localhost&quot;, 45666), new Configuration());
+
+        // 像本地调用一样,就可以调用服务端的方法
+        String result = service.loging(&quot;Hushiwei&quot;);
+        System.out.println(&quot;rpc client result: &quot; + result);
+
+        String res = service.multip(6, 8);
+        System.out.println(res);
+
+
+        // 关闭连接
+        RPC.stopProxy(service);
+    }
+}
+
+
+</code></pre>
+
+<h3 id="toc_3">本地执行</h3>
+
+<ul>
+<li>为了方便,我在本机进行测试,服务器地址写的localhost</li>
+<li>我在idea中进行开发的,直接run起来</li>
+</ul>
+
+<p>运行<code>RpcLearningServer</code>类,启动rpc服务<br/>
+<img src="media/15222053353935/15222166749600.jpg" alt=""/></p>
+
+<p>运行<code>ClientController</code>类,启动client,进行远程调用<br/>
+<img src="media/15222053353935/15222167326547.jpg" alt=""/></p>
+
+<p>此时,看服务端的输出<br/>
+<img src="media/15222053353935/15222167785896.jpg" alt=""/></p>
+
+<p>这个也说明了,远程调用过程是在服务端执行的.</p>
+
+<h3 id="toc_4">远程执行</h3>
+
+<p>刚刚在本地执行的,为了更说明问题.我把服务器地址从<code>localhost</code>改成服务器的主机名<code>u006</code>,然后代码编译打包,上传到服务器上.<br/>
+在远程服务器上启动rpc-server.然后再本地执行客户端的代码.<br/>
+这样更能清楚的明白rpc的运行过程了</p>
+
+<pre><code>java -classpath MapReduce-1.0-SNAPSHOT-jar-with-dependencies.jar com.hushiwei.mr.rpc.rpcserver.RpcLearningServer
+</code></pre>
+
+<p><img src="media/15222053353935/15222171711365.jpg" alt=""/></p>
+
+<p>在服务器上启动了rpc-server,现在客户端还没启动,服务器上也没有任何输出.</p>
+
+<p>接着在本地执行客户端代码<br/>
+<img src="media/15222053353935/15222172448137.jpg" alt=""/></p>
+
+<p>紧跟着,服务器上也有相应的输出了.<br/>
+<img src="media/15222053353935/15222172751812.jpg" alt=""/></p>
+
+<p>补充:<br/>
+在服务器上启动rpcserver后,可以用<code>jps -m</code>查看这个服务器的启动情况</p>
+
+<pre><code>[hadoop@U006 ~]$ jps -m
+30432 Jps -m
+6979 RpcLearningServer
+</code></pre>
+
+<p>或者查看代码里面用的端口是否被占用中</p>
+
+<pre><code>[hadoop@U006 ~]$ netstat -natp | grep 45666
+(Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.)
+tcp        0      0 ::ffff:10.10.25.13:45666    :::*                        LISTEN      6979/java
+</code></pre>
+
+<p>是不是很熟悉,我们曾经安装hadoop后,用<code>jps -m</code>也可以看到hadoop里面的一些进程.比如<br/>
+<code>NameNode</code>、<code>DataNode</code>、<code>ResourceManager</code>、<code>NodeManager</code>.</p>
+
+<p>所以这些进程都是作为一个RPCserver,并对外提供RPC服务的.</p>
+
+<h1 id="toc_5">总结</h1>
+
+<p>定义RPC协议,实现RPC协议<br/>
+<img src="media/15222053353935/15222165453483.jpg" alt=""/></p>
+
+<p>构造并启动RPC服务<br/>
+<img src="media/15222053353935/15222174334242.jpg" alt=""/></p>
+
+<p>构成RPC客户端并发送RPC请求<br/>
+<img src="media/15222053353935/15222173920962.jpg" alt=""/></p>
+
+<p>使用Hadoop RPC的4个步骤</p>
+
+<ul>
+<li>定义RPC协议</li>
+<li>实现RPC协议</li>
+<li>构造并启动RPC server</li>
+<li>构造RPC client并发送RPC请求</li>
+</ul>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15223141973169.html" 
+          title="Previous Post: Spark Metrics分析">&laquo; Spark Metrics分析</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15221149143615.html" 
+          title="Next Post: 概率分布函数和概率密度函数">概率分布函数和概率密度函数 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://s.gravatar.com/avatar/2d9bdeec5ad2754d8a47063df1346ee8?s=80" /></div>
+            
+                <h1>Time渐行渐远</h1>
+                <div class="site-des">Coding Changing The World</div>
+                <div class="social">
+
+
+
+
+
+
+
+<a target="_blank" class="weibo" href="http://weibo.com/hswnice" title="weibo">Weibo</a>
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:hsw_v5@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="BigData.html"><strong>BigData</strong></a>
+        
+            <a href="Python.html"><strong>Python</strong></a>
+        
+            <a href="Linux.html"><strong>Linux</strong></a>
+        
+            <a href="Life.html"><strong>Life</strong></a>
+        
+            <a href="Spark.html"><strong>Spark</strong></a>
+        
+            <a href="Yarn.html"><strong>Yarn</strong></a>
+        
+            <a href="Scala.html"><strong>Scala</strong></a>
+        
+            <a href="VPS.html"><strong>VPS</strong></a>
+        
+            <a href="MachineLearning.html"><strong>MachineLearning</strong></a>
+        
+            <a href="Writer.html"><strong>Writer</strong></a>
+        
+            <a href="Shell.html"><strong>Shell</strong></a>
+        
+            <a href="Algorithm.html"><strong>Algorithm</strong></a>
+        
+            <a href="Mac.html"><strong>Mac</strong></a>
+        
+            <a href="Presto.html"><strong>Presto</strong></a>
+        
+            <a href="Mysql.html"><strong>Mysql</strong></a>
+        
+            <a href="Maven.html"><strong>Maven</strong></a>
+        
+            <a href="Kafka.html"><strong>Kafka</strong></a>
+        
+            <a href="Java.html"><strong>Java</strong></a>
+        
+            <a href="DevTools.html"><strong>DevTools</strong></a>
+        
+            <a href="Hbase.html"><strong>Hbase</strong></a>
+        
+            <a href="ELK.html"><strong>ELK</strong></a>
+        
+            <a href="Druid.html"><strong>Druid</strong></a>
+        
+            <a href="Docker.html"><strong>Docker</strong></a>
+        
+            <a href="DesignPattern.html"><strong>DesignPattern</strong></a>
+        
+            <a href="Computer.html"><strong>Computer</strong></a>
+        
+            <a href="Redis.html"><strong>Redis</strong></a>
+        
+            <a href="Zookeeper.html"><strong>Zookeeper</strong></a>
+        
+            <a href="BlockChain.html"><strong>BlockChain</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15223141973169.html">Spark Metrics分析</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15222053353935.html">Hadoop RPC运行机制</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15221149143615.html">概率分布函数和概率密度函数</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15220339795263.html">分布式系统的一致性</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15217143404677.html">docker 错误</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?2a025c7742b90ad62b1e767e1b7f2f29";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </body>
+</html>

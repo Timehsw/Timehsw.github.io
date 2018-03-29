@@ -1,0 +1,788 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  Spark Metrics分析 - Time渐行渐远
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Time渐行渐远" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:dmlcoding.com ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li id=""><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li id=""><a target="_blank" href="about.html">ABOUT</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Time渐行渐远</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="BigData.html">BigData</a></li>
+        
+            <li><a href="Python.html">Python</a></li>
+        
+            <li><a href="Linux.html">Linux</a></li>
+        
+            <li><a href="Life.html">Life</a></li>
+        
+            <li><a href="Spark.html">Spark</a></li>
+        
+            <li><a href="Yarn.html">Yarn</a></li>
+        
+            <li><a href="Scala.html">Scala</a></li>
+        
+            <li><a href="VPS.html">VPS</a></li>
+        
+            <li><a href="MachineLearning.html">MachineLearning</a></li>
+        
+            <li><a href="Writer.html">Writer</a></li>
+        
+            <li><a href="Shell.html">Shell</a></li>
+        
+            <li><a href="Algorithm.html">Algorithm</a></li>
+        
+            <li><a href="Mac.html">Mac</a></li>
+        
+            <li><a href="Presto.html">Presto</a></li>
+        
+            <li><a href="Mysql.html">Mysql</a></li>
+        
+            <li><a href="Maven.html">Maven</a></li>
+        
+            <li><a href="Kafka.html">Kafka</a></li>
+        
+            <li><a href="Java.html">Java</a></li>
+        
+            <li><a href="DevTools.html">DevTools</a></li>
+        
+            <li><a href="Hbase.html">Hbase</a></li>
+        
+            <li><a href="ELK.html">ELK</a></li>
+        
+            <li><a href="Druid.html">Druid</a></li>
+        
+            <li><a href="Docker.html">Docker</a></li>
+        
+            <li><a href="DesignPattern.html">DesignPattern</a></li>
+        
+            <li><a href="Computer.html">Computer</a></li>
+        
+            <li><a href="Redis.html">Redis</a></li>
+        
+            <li><a href="Zookeeper.html">Zookeeper</a></li>
+        
+            <li><a href="BlockChain.html">BlockChain</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>Spark Metrics分析</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2018/3/29</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='Spark.html'>Spark</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h2 id="toc_0">MetricsSystem类注释翻译</h2>
+
+<p><img src="media/15223141973169/15223151043399.jpg" alt=""/></p>
+
+<span id="more"></span><!-- more -->
+
+<p>Spark Metrics System 结合源代码由特定的&quot;实例&quot;创建.<br/>
+Sink,定期的拉取source中的度量数据(metrics data)到目标sink中.</p>
+
+<p>&quot;实例&quot;指定&quot;谁&quot;(角色)使用metrics system.在spark中有几个角色,比如master,worker,executor,client driver.这些角色会创建度量系统进行监控.<br/>
+所以实例代表这些角色.目前在spark中,已经实现了几个实例:master,worker,executor,driver,application.</p>
+
+<p>&quot;Source&quot;指定&quot;从哪里&quot;(来源)去收集指标数据.在度量系统中,这存在两种来源:<br/>
+1.Spark内部源,如MasterSource,WorkerSource等.它们将收集Spark组件的内部状态,这些源与实例相关,并将在创建特定度量标准系统后添加.<br/>
+2.通用源,比如JvmSource,这些将收集低级别的状态,由配置进行配置并通过反射加载.</p>
+
+<p>&quot;Sink&quot;指定将Metrics data 输出到哪里(目的地).多个sinks可以共存并且metrics可以都flush到这些sinks中.</p>
+
+<p>Metrics配置格式如下所示</p>
+
+<pre><code>[instance].[sink|source].[name].[options] = xxxx
+</code></pre>
+
+<p>[instance]可以是&quot;master&quot;,&quot;worker&quot;,&quot;executor&quot;,&quot;driver&quot;,&quot;applications&quot;这意味着只有指定的实例才具有这个属性.可以用&quot;*&quot;来替换实例名,这意味着所有的这些实例将拥有此属性.</p>
+
+<p>[sink|source]表示此属性是属于source还是sink.这个字段只能是source或者sink.</p>
+
+<p>[name] 指定source或者sink的名字.如果它是自定义的.</p>
+
+<p>[options] 代表这个source或者sink的具体属性</p>
+
+<h2 id="toc_1">Metrics系统</h2>
+
+<p>Spark拥有一个基于Coda Hale Metrics Library的可配置Metrics系统,这个Metrics系统通过配置文件进行配置。</p>
+
+<p>Spark的Metrics系统允许用户把Spark metrics信息报告到各种各样的sink包含HTTP和 JMX、CSV文件。</p>
+
+<p>Spark的metrics系统解耦到每个Spark组件的实例中。每个实例里，你可以配置一组sink（metrics被报告到的地方）。</p>
+
+<p>注：Coda Hale Metrics使用的Yammer.com开发的Metrics框架，官方网址是<a href="https://github.com/dropwizard/metrics">https://github.com/dropwizard/metrics</a> ，相关文档可在<a href="https://dropwizard.github.io/metrics">https://dropwizard.github.io/metrics</a> 查看。</p>
+
+<h2 id="toc_2">配置文件</h2>
+
+<p>默认的配置文件为“$SPARK_HOME/conf/metrics.properties”，Spark启动时候会自动加载它。</p>
+
+<p>如果想修改配置文件位置，可以使用java的运行时属性<code>-Dspark.metrics.conf=xxx</code>进行修改。。</p>
+
+<h2 id="toc_3">Spark的Metrics系统支持的实例：</h2>
+
+<ul>
+<li><p>master：Spark standalone模式的 master进程。</p></li>
+<li><p>applications：master进程里的一个组件，为各种应用作汇报.</p></li>
+<li><p>worker：Spark standalone模式的一个worker进程。</p></li>
+<li><p>executor：一个Spark executor.</p></li>
+<li><p>driver：Spark driver进程(该进程指创建SparkContext的那个).</p></li>
+</ul>
+
+<h2 id="toc_4">Spark的Metrics系统支持的Sink：</h2>
+
+<p>　　Sink指定metrics信息发送到哪，每个instance可以设置一个或多个Sink。</p>
+
+<p>　　Sink源码位于包org.apache.spark.metrics.sink中。</p>
+
+<h3 id="toc_5">ConsoleSink</h3>
+
+<p>　　记录Metrics信息到Console中。</p>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>class</td>
+<td>org.apache.spark.metrics.sink.ConsoleSink</td>
+<td>Sink类</td>
+</tr>
+<tr>
+<td>period</td>
+<td>10</td>
+<td>轮询间隔</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>seconds</td>
+<td>轮询间隔的单位</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_6">CSVSink</h3>
+
+<p>　　定期的把Metrics信息导出到CSV文件中。</p>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>class</td>
+<td>org.apache.spark.metrics.sink.CsvSink</td>
+<td>Sink类</td>
+</tr>
+<tr>
+<td>period</td>
+<td>10</td>
+<td>轮询间隔</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>seconds</td>
+<td>轮询间隔的单位</td>
+</tr>
+<tr>
+<td>directory</td>
+<td>/tmp</td>
+<td>CSV文件存储的位置</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_7">JmxSink</h3>
+
+<p>可以通过JMX方式访问Mertics信息</p>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>class</td>
+<td>org.apache.spark.metrics.sink.JmxSink</td>
+<td>Sink类</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_8">MetricsServlet</h3>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>class</td>
+<td>org.apache.spark.metrics.sink.MetricsServlet</td>
+<td>Sink类</td>
+</tr>
+<tr>
+<td>path</td>
+<td>VARIES*</td>
+<td>Path prefix from the web server root</td>
+</tr>
+<tr>
+<td>sample</td>
+<td>false</td>
+<td>Whether to show entire set of samples for histograms (&#39;false&#39; or &#39;true&#39;) ｜</td>
+</tr>
+</tbody>
+</table>
+
+<p>　　除master之外所有实例的默认路径为“/metrics/json”。</p>
+
+<p>　　master有两个路径: “/metrics/aplications/json” App的信息、 “/metrics/master/json” Master的信息</p>
+
+<h3 id="toc_9">GraphiteSink</h3>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>class</td>
+<td>org.apache.spark.metrics.sink.GraphiteSink</td>
+<td>Sink类</td>
+</tr>
+<tr>
+<td>host</td>
+<td>NONE</td>
+<td>Graphite服务器主机名</td>
+</tr>
+<tr>
+<td>port</td>
+<td>NONE</td>
+<td>Graphite服务器端口</td>
+</tr>
+<tr>
+<td>period</td>
+<td>10</td>
+<td>轮询间隔</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>seconds</td>
+<td>轮询间隔的单位</td>
+</tr>
+<tr>
+<td>prefix</td>
+<td>EMPTY STRING</td>
+<td>Prefix to prepend to metric name</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_10">GangliaSink</h3>
+
+<p>由于Licene限制，默认没有放到默认的build里面。需要自己打包</p>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>class</td>
+<td>org.apache.spark.metrics.sink.GangliaSink</td>
+<td>Sink类</td>
+</tr>
+<tr>
+<td>host</td>
+<td>NONE</td>
+<td>Ganglia 服务器的主机名或multicast group</td>
+</tr>
+<tr>
+<td>port</td>
+<td>NONE</td>
+<td>Ganglia服务器的端口</td>
+</tr>
+<tr>
+<td>period</td>
+<td>10</td>
+<td>轮询间隔</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>seconds</td>
+<td>轮询间隔的单位</td>
+</tr>
+<tr>
+<td>ttl</td>
+<td>1</td>
+<td>TTL of messages sent by Ganglia</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>multicast</td>
+<td>Ganglia网络模式(&#39;unicast&#39; or &#39;multicast&#39;)</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_11">source：</h2>
+
+<p>第一种为Spark内部source，MasterSource、WorkerSource等，它们会接收Spark组件的内部状态；<br/>
+　　第二种为通用source，如：JvmSource，它收集低级别的状态</p>
+
+<h2 id="toc_12">示例</h2>
+
+<h3 id="toc_13">通过类名为所有实例开启ConsoleSink</h3>
+
+<pre><code>*.sink.console.class=org.apache.spark.metrics.sink.ConsoleSink
+
+ConsoleSink的轮询周期 *.sink.console.period=10
+
+*.sink.console.unit=seconds
+
+**Master实例重置轮询周期**
+
+master.sink.console.period=15
+
+master.sink.console.unit=seconds
+</code></pre>
+
+<h3 id="toc_14">通过类名为所有实例开启JmxSink</h3>
+
+<pre><code>*.sink.jmx.class=org.apache.spark.metrics.sink.JmxSink
+</code></pre>
+
+<h3 id="toc_15">为所有实例开启CsvSink</h3>
+
+<pre><code>*.sink.csv.class=org.apache.spark.metrics.sink.CsvSink
+</code></pre>
+
+<p><strong>CsvSink的轮询周期</strong></p>
+
+<pre><code>*.sink.csv.period=1
+
+*.sink.csv.unit=minutes
+</code></pre>
+
+<p>Polling directory for CsvSink *.sink.csv.directory=/tmp/</p>
+
+<p><strong>Worker实例重置轮询周期</strong></p>
+
+<pre><code>worker.sink.csv.period=10
+
+worker.sink.csv.unit=minutes
+</code></pre>
+
+<h3 id="toc_16">为master和worker、driver、executor开启jvm source</h3>
+
+<pre><code>
+master.source.jvm.class=org.apache.spark.metrics.source.JvmSource
+
+worker.source.jvm.class=org.apache.spark.metrics.source.JvmSource
+
+driver.source.jvm.class=org.apache.spark.metrics.source.JvmSource
+
+executor.source.jvm.class=org.apache.spark.metrics.source.JvmSource
+</code></pre>
+
+<h2 id="toc_17">参考文档：</h2>
+
+<pre><code>${SPARK_HOME}/conf/metrics.properties.template
+http://spark.apache.org/docs/latest/monitoring.html
+</code></pre>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15222053353935.html" 
+          title="Next Post: Hadoop RPC运行机制">Hadoop RPC运行机制 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://s.gravatar.com/avatar/2d9bdeec5ad2754d8a47063df1346ee8?s=80" /></div>
+            
+                <h1>Time渐行渐远</h1>
+                <div class="site-des">Coding Changing The World</div>
+                <div class="social">
+
+
+
+
+
+
+
+<a target="_blank" class="weibo" href="http://weibo.com/hswnice" title="weibo">Weibo</a>
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:hsw_v5@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="BigData.html"><strong>BigData</strong></a>
+        
+            <a href="Python.html"><strong>Python</strong></a>
+        
+            <a href="Linux.html"><strong>Linux</strong></a>
+        
+            <a href="Life.html"><strong>Life</strong></a>
+        
+            <a href="Spark.html"><strong>Spark</strong></a>
+        
+            <a href="Yarn.html"><strong>Yarn</strong></a>
+        
+            <a href="Scala.html"><strong>Scala</strong></a>
+        
+            <a href="VPS.html"><strong>VPS</strong></a>
+        
+            <a href="MachineLearning.html"><strong>MachineLearning</strong></a>
+        
+            <a href="Writer.html"><strong>Writer</strong></a>
+        
+            <a href="Shell.html"><strong>Shell</strong></a>
+        
+            <a href="Algorithm.html"><strong>Algorithm</strong></a>
+        
+            <a href="Mac.html"><strong>Mac</strong></a>
+        
+            <a href="Presto.html"><strong>Presto</strong></a>
+        
+            <a href="Mysql.html"><strong>Mysql</strong></a>
+        
+            <a href="Maven.html"><strong>Maven</strong></a>
+        
+            <a href="Kafka.html"><strong>Kafka</strong></a>
+        
+            <a href="Java.html"><strong>Java</strong></a>
+        
+            <a href="DevTools.html"><strong>DevTools</strong></a>
+        
+            <a href="Hbase.html"><strong>Hbase</strong></a>
+        
+            <a href="ELK.html"><strong>ELK</strong></a>
+        
+            <a href="Druid.html"><strong>Druid</strong></a>
+        
+            <a href="Docker.html"><strong>Docker</strong></a>
+        
+            <a href="DesignPattern.html"><strong>DesignPattern</strong></a>
+        
+            <a href="Computer.html"><strong>Computer</strong></a>
+        
+            <a href="Redis.html"><strong>Redis</strong></a>
+        
+            <a href="Zookeeper.html"><strong>Zookeeper</strong></a>
+        
+            <a href="BlockChain.html"><strong>BlockChain</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15223141973169.html">Spark Metrics分析</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15222053353935.html">Hadoop RPC运行机制</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15221149143615.html">概率分布函数和概率密度函数</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15220339795263.html">分布式系统的一致性</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15217143404677.html">docker 错误</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?2a025c7742b90ad62b1e767e1b7f2f29";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </body>
+</html>

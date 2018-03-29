@@ -159,6 +159,200 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
+                <a class="clearlink" href="15198774988536.html">
+                
+                  <h1>配置Ubuntu/Deepin下要安装的常用软件</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">给系统更新</h2>
+
+<pre><code>sudo apt-get update
+</code></pre>
+
+<h2 id="toc_1">安装sublime3</h2>
+
+<ul>
+<li>1.在商店里下载sublime3后</li>
+<li>2.用第一个这个就可以注册成功
+&lt;!-- more --&gt;
+```
+Ryan Clark
+Single User License
+EA7E-812479
+2158A7DE B690A7A3 8EC04710 006A5EEB
+34E77CA3 9C82C81F 0DB6371B 79704E6F
+93F36655 B031503A 03257CCC 01B20F60
+D304FA8D B1B4F0AF 8A76C7BA 0FA94D55
+56D46BCE 5237A341 CD837F30 4D60772D
+349B1179 A996F826 90CDB73C 24D41245
+FD032C30 AD5E7241 4EAA66ED 167D91FB
+55896B16 EA125C81 F550AF6B A6820916</li>
+</ul>
+
+<p>Michael Barnes<br/>
+Single User License<br/>
+EA7E-821385<br/>
+8A353C41 872A0D5C DF9B2950 AFF6F667<br/>
+C458EA6D 8EA3C286 98D1D650 131A97AB<br/>
+AA919AEC EF20E143 B361B1E7 4C8B7F04<br/>
+B085E65E 2F5F5360 8489D422 FB8FC1AA<br/>
+93F6323C FD7F7544 3F39C318 D95E6480<br/>
+FCCC7561 8A4A1741 68FA4223 ADCEDE07<br/>
+200C25BE DBBC4855 C4CFB774 C5EC138C<br/>
+0FEC1CEF D9DCECEC D3A5DAD1 01316C36<br/>
+```</p>
+
+<ul>
+<li>3.安装插件包管理</li>
+</ul>
+
+<pre><code>import urllib.request,os; pf = &#39;Package Control.sublime-package&#39;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), &#39;wb&#39;).write(urllib.request.urlopen( &#39;http://sublime.wbond.net/&#39; + pf.replace(&#39; &#39;,&#39;%20&#39;)).read())
+</code></pre>
+
+<h2 id="toc_2">安装java,scala,mvn,intellij idea</h2>
+
+<ul>
+<li>1.解压tar包</li>
+<li>2.设置环境变量</li>
+<li>3.加载环境变量以生效</li>
+</ul>
+
+<h2 id="toc_3">安装Mysql</h2>
+
+<p>ubuntu上安装MySQL非常简单只需要几条命令就可以完成。<br/>
+```<br/>
+　　1. sudo apt-get install mysql-server</p>
+
+<p>　　2. apt-get isntall mysql-client</p>
+
+<p>　　3.  sudo apt-get install libmysqlclient-dev<br/>
+```</p>
+
+<p>安装过程中会提示设置密码什么的，注意设置了不要忘了，安装完成之后可以使用如下命令来检查是否安装成功：<br/>
+<code><br/>
+　　sudo netstat -tap | grep mysql<br/>
+</code><br/>
+通过上述命令检查之后，如果看到有mysql 的socket处于 listen 状态则表示安装成功。</p>
+
+<p>登陆mysql数据库可以通过如下命令：<br/>
+```<br/>
+　　mysql -u root -p</p>
+
+<p>　　-u 表示选择登陆的用户名， -p 表示登陆的用户密码，上面命令输入之后会提示输入密码，此时输入密码就可以登录到mysql。<br/>
+```</p>
+
+<h2 id="toc_4">安装 python 环境</h2>
+
+<pre><code>sudo apt-get install python-pip python-dev
+sudo pip install --upgrade pip
+</code></pre>
+
+<p>pip安装常用模块<br/>
+<code><br/>
+sudo pip install django<br/>
+sudo pip install MySQL-python<br/>
+sudo pip install beautifulsoup4<br/>
+</code></p>
+
+<h2 id="toc_5">安装git</h2>
+
+<pre><code>sudo apt-get install git
+</code></pre>
+
+<p>git的执行文件在/usr/bin/git</p>
+
+<h2 id="toc_6">安装nodejs及npm</h2>
+
+<pre><code>sudo add-apt-repository ppa:chris-lea/node.js
+
+sudo apt-get update
+
+sudo apt-get install python-software-properties python g++ make nodejs npm
+</code></pre>
+
+<h2 id="toc_7">安装jekyll步骤</h2>
+
+<blockquote>
+<p>安装一个本地的jekyll环境，方便写博客的时候调试预览效果</p>
+</blockquote>
+
+<pre><code>sudo apt-get install ruby
+sudo apt-get install ruby-dev(用这个命令，不然后面装jekyll会出现缺文件的错误)
+ruby -v （检查一下版本）
+gem -v （检查一下版本）
+sudo apt-get install nodejs （把nodejs也装上）
+sudo gem install jekyll （最后可以安装jekyll了）
+</code></pre>
+
+<p><strong>注意：</strong> 最后安装jekyll的时候，如果报了缺少什么的错误。根据提示的错误，下载缺少的文件即可。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2016/12/11</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15198722438304.html">
+                
+                  <h1>Ubuntu/Deepin下用Shadowsocks实现翻墙上网</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">下载安装小飞机</h2>
+
+<pre><code>sudo add-apt-repository ppa:hzwhuang/ss-qt5
+
+sudo apt-get update
+
+sudo apt-get install shadowsocks-qt5
+</code></pre>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15198722438304.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2016/12/11</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='VPS.html'>VPS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="15198754878999.html">
                 
                   <h1>linux创建软硬链接</h1>
@@ -253,85 +447,6 @@
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='Algorithm.html'>Algorithm</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15198761722300.html">
-                
-                  <h1>Java多线程总结笔记</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">多线程的概述</h2>
-
-<h3 id="toc_1">进程和线程</h3>
-
-<blockquote>
-<ul>
-<li>进程:是一个正在运行的程序,每个进程执行,都有一个执行顺序,该顺序是一个执行路径,或者叫一个控制单元</li>
-<li>线程:进程中的一个独立控制单元,线程在控制着进程的执行,一个进程中至少有一个线程(控制单元)</li>
-</ul>
-</blockquote>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15198761722300.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2016/12/6</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Java.html'>Java</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15198730789776.html">
-                
-                  <h1>使用Spark分析泄露的2000W开房数据和600W条CSDN用户数据</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">2000W开房数据</h2>
-
-<h3 id="toc_1">数据格式</h3>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15198730789776.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2016/12/1</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Spark.html'>Spark</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -469,6 +584,18 @@
 	      
 		      
 			      <li class="post">
+			        <a href="15223141973169.html">Spark Metrics分析</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15222053353935.html">Hadoop RPC运行机制</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15221149143615.html">概率分布函数和概率密度函数</a>
 			      </li>
 		     
@@ -482,18 +609,6 @@
 		      
 			      <li class="post">
 			        <a href="15217143404677.html">docker 错误</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15216998348495.html">mac 搭建 区块链开发环境</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15216328231070.html">LeetCode解题思路</a>
 			      </li>
 		     
 		  
