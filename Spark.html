@@ -172,56 +172,6 @@
 <a href="http://metrics.dropwizard.io/3.1.0/manual/core/">http://metrics.dropwizard.io/3.1.0/manual/core/</a><br/>
 <a href="http://wuchong.me/blog/2015/08/01/getting-started-with-metrics/">http://wuchong.me/blog/2015/08/01/getting-started-with-metrics/</a></p>
 
-<h2 id="toc_0">使用</h2>
-
-<p>The –files flag will cause /path/to/metrics.properties to be sent to every executor,<br/>
-and spark.metrics.conf=metrics.properties will tell all executors to load that file<br/>
-when initializing their respective MetricsSystems.</p>
-
-<p>直接添加到命令行后</p>
-
-<pre><code>--files=/yourPath/metrics.properties 
---conf spark.metrics.conf=metrics.properties
-
-</code></pre>
-
-<h2 id="toc_1">小示例</h2>
-
-<p>新建<code>metrics.properties</code>文件,内容如下</p>
-
-<pre><code>
-driver.source.jvm.class=org.apache.spark.metrics.source.JvmSource
-executor.source.jvm.class=org.apache.spark.metrics.source.JvmSource
-
-*.sink.console.class=org.apache.spark.metrics.sink.ConsoleSink
-*.sink.console.period=10
-*.sink.console.unit=seconds
-</code></pre>
-
-<p>全是driver端的信息</p>
-
-<p><img src="media/15224029526508/15224033134708.jpg" alt=""/></p>
-
-<h3 id="toc_2">jmx-sink</h3>
-
-<pre><code>master.source.jvm.class=org.apache.spark.metrics.source.JvmSource
-worker.source.jvm.class=org.apache.spark.metrics.source.JvmSource
-driver.source.jvm.class=org.apache.spark.metrics.source.JvmSource
-executor.source.jvm.class=org.apache.spark.metrics.source.JvmSource
-*.sink.jmx.class=org.apache.spark.metrics.sink.JmxSink
-</code></pre>
-
-<p>spark on yarn 查看 </p>
-
-<p><a href="http://u007:8089/proxy/application_1509616075703_478985/metrics/json">http://u007:8089/proxy/application_1509616075703_478985/metrics/json</a></p>
-
-<h2 id="toc_3">总结</h2>
-
-<p>source里面定义从哪些实例来监控</p>
-
-<p>sink指定你要输出到哪里</p>
-
-<p>刚才这个例子里面,就是sink输出到console</p>
 
                         
                       </div>
@@ -229,7 +179,7 @@ executor.source.jvm.class=org.apache.spark.metrics.source.JvmSource
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="15224029526508.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2018/3/30</span>
                     <span>posted in&nbsp;</span> 
           				  
