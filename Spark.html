@@ -92,6 +92,8 @@
         
             <li><a href="Spark.html">Spark</a></li>
         
+            <li><a href="Hive.html">Hive</a></li>
+        
             <li><a href="Yarn.html">Yarn</a></li>
         
             <li><a href="Scala.html">Scala</a></li>
@@ -158,6 +160,92 @@
 	<div class="large-8 medium-8 columns">
 		<div class="markdown-body home-categories">
 		
+			<div class="article">
+                <a class="clearlink" href="15224029526508.html">
+                
+                  <h1>Spark-Metrics 实战</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p><a href="http://metrics.dropwizard.io/3.1.0/getting-started/">http://metrics.dropwizard.io/3.1.0/getting-started/</a><br/>
+<a href="http://metrics.dropwizard.io/3.1.0/manual/core/">http://metrics.dropwizard.io/3.1.0/manual/core/</a><br/>
+<a href="http://wuchong.me/blog/2015/08/01/getting-started-with-metrics/">http://wuchong.me/blog/2015/08/01/getting-started-with-metrics/</a></p>
+
+<h2 id="toc_0">使用</h2>
+
+<p>The –files flag will cause /path/to/metrics.properties to be sent to every executor,<br/>
+and spark.metrics.conf=metrics.properties will tell all executors to load that file<br/>
+when initializing their respective MetricsSystems.</p>
+
+<p>直接添加到命令行后</p>
+
+<pre><code>--files=/yourPath/metrics.properties 
+--conf spark.metrics.conf=metrics.properties
+
+</code></pre>
+
+<h2 id="toc_1">小示例</h2>
+
+<p>新建<code>metrics.properties</code>文件,内容如下</p>
+
+<pre><code>
+driver.source.jvm.class=org.apache.spark.metrics.source.JvmSource
+executor.source.jvm.class=org.apache.spark.metrics.source.JvmSource
+
+*.sink.console.class=org.apache.spark.metrics.sink.ConsoleSink
+*.sink.console.period=10
+*.sink.console.unit=seconds
+</code></pre>
+
+<p>全是driver端的信息</p>
+
+<p><img src="media/15224029526508/15224033134708.jpg" alt=""/></p>
+
+<h3 id="toc_2">jmx-sink</h3>
+
+<pre><code>master.source.jvm.class=org.apache.spark.metrics.source.JvmSource
+worker.source.jvm.class=org.apache.spark.metrics.source.JvmSource
+driver.source.jvm.class=org.apache.spark.metrics.source.JvmSource
+executor.source.jvm.class=org.apache.spark.metrics.source.JvmSource
+*.sink.jmx.class=org.apache.spark.metrics.sink.JmxSink
+</code></pre>
+
+<p>spark on yarn 查看 </p>
+
+<p><a href="http://u007:8089/proxy/application_1509616075703_478985/metrics/json">http://u007:8089/proxy/application_1509616075703_478985/metrics/json</a></p>
+
+<h2 id="toc_3">总结</h2>
+
+<p>source里面定义从哪些实例来监控</p>
+
+<p>sink指定你要输出到哪里</p>
+
+<p>刚才这个例子里面,就是sink输出到console</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/3/30</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Spark.html'>Spark</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
 			<div class="article">
                 <a class="clearlink" href="15223141973169.html">
                 
@@ -311,42 +399,6 @@ numRecords must not be negative
                 </div>
               </div><!-- article -->
         
-			<div class="article">
-                <a class="clearlink" href="15198749505894.html">
-                
-                  <h1>监控SparkStreaming程序脚本</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>虽然Spark on yarn非常的稳定,一般情况下是不会出问题的.但是我们的SparkStreaming程序是一直运行着出实时报表的.<br/>
-我们必须得对SparkStreaming程序进行监控,在程序退出后,能够及时的重启.<br/>
-基于此需求,我想到了通过调用yarn的rest接口来获取提交到yarn上的任务</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15198749505894.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/8/15</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Spark.html'>Spark</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
               
 
 
@@ -411,6 +463,8 @@ numRecords must not be negative
         
             <a href="Spark.html"><strong>Spark</strong></a>
         
+            <a href="Hive.html"><strong>Hive</strong></a>
+        
             <a href="Yarn.html"><strong>Yarn</strong></a>
         
             <a href="Scala.html"><strong>Scala</strong></a>
@@ -472,31 +526,31 @@ numRecords must not be negative
 	      
 		      
 			      <li class="post">
-			        <a href="15223141973169.html">Spark Metrics分析</a>
+			        <a href="15248143200628.html">线性回归</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15222053353935.html">Hadoop RPC运行机制</a>
+			        <a href="15242825563762.html">python-matplotlib画图中文显示不出来</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15221149143615.html">概率分布函数和概率密度函数</a>
+			        <a href="15235878044126.html">Markdown中用LaTex语法写数学公式</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15220339795263.html">分布式系统的一致性</a>
+			        <a href="15228352753621.html">如何优雅的设计数据分层</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15217143404677.html">docker 错误</a>
+			        <a href="15224029526508.html">Spark-Metrics 实战</a>
 			      </li>
 		     
 		  

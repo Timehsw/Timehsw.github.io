@@ -4,13 +4,984 @@
   <title><![CDATA[Time渐行渐远]]></title>
   <link href="http://dmlcoding.com/atom.xml" rel="self"/>
   <link href="http://dmlcoding.com/"/>
-  <updated>2018-03-29T18:30:13+08:00</updated>
+  <updated>2018-04-27T15:38:09+08:00</updated>
   <id>http://dmlcoding.com/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[线性回归]]></title>
+    <link href="http://dmlcoding.com/15248143200628.html"/>
+    <updated>2018-04-27T15:32:00+08:00</updated>
+    <id>http://dmlcoding.com/15248143200628.html</id>
+    <content type="html"><![CDATA[
+<p>小试牛刀,未完待续,精彩内容且看下回更新.</p>
+
+<h2 id="toc_0">简述原理</h2>
+
+<h2 id="toc_1">\(\theta\)值推导过程以及求解</h2>
+
+<h3 id="toc_2">构造数据</h3>
+
+<pre><code class="language-python">import numpy as np
+import pandas as pd
+
+# 构造测试数据y=3x1+x2
+df=pd.DataFrame({
+    &quot;x1&quot;:[1,2,3,4,5,6],
+    &quot;x2&quot;:[1,2,1,2,1,2],
+    &quot;y&quot;:[3,6,7,10,11,14]
+})
+
+</code></pre>
+
+<h3 id="toc_3">抽取x和y</h3>
+
+<pre><code class="language-python"># 抽取x和y
+x=df[[&#39;x1&#39;,&#39;x2&#39;]]
+# 将y转换成n行1列的列向量
+y=df[&#39;y&#39;].values.reshape((-1,1))
+
+</code></pre>
+
+<h3 id="toc_4">求解\(\theta\) 值</h3>
+
+<p><em>根据公式计算\(\theta\)</em>值,推导过程如图所示<br/>
+\[\theta=(X^TX)^{-1}X^TY\]</p>
+
+<p><em>numpy</em> api说明:<br/>
++ mat:将ndarray转成matrix<br/>
++ dot:矩阵乘法<br/>
++ T:求矩阵的转置<br/>
++ I:求矩阵的逆</p>
+
+<pre><code class="language-python"># 写出公式,计算theta值
+
+np.dot(np.mat(x.T.dot(x)).I,x.T).dot(y)
+</code></pre>
+
+<pre><code>matrix([[ 2.],
+        [ 1.]])
+</code></pre>
+
+<p>很明显,计算结果正确.两个系数分别是2和1</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[python-matplotlib画图中文显示不出来]]></title>
+    <link href="http://dmlcoding.com/15242825563762.html"/>
+    <updated>2018-04-21T11:49:16+08:00</updated>
+    <id>http://dmlcoding.com/15242825563762.html</id>
+    <content type="html"><![CDATA[
+<pre><code>import matplotlib as mpl
+import matplotlib.pyplot as plt
+
+## 设置字符集，防止中文乱码
+mpl.rcParams[&#39;font.sans-serif&#39;]=[u&#39;simHei&#39;]
+mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
+</code></pre>
+
+<p><img src="media/15242825563762/15242826157154.jpg" alt=""/></p>
+
+<p>已经在代码中设置了字符集,但是却仍然无法正确显示.这是因为系统中没有这个字体</p>
+
+<h1 id="toc_0">解决方案</h1>
+
+<h2 id="toc_1">1. 下载SimHei.ttf字体</h2>
+
+<pre><code>http://www.fontpalace.com/font-details/SimHei/
+</code></pre>
+
+<h2 id="toc_2">2. 查看matplotlib的字体存放目录</h2>
+
+<pre><code>/Users/hushiwei/anaconda3/lib/python3.6/site-packages/matplotlib/mpl-data
+</code></pre>
+
+<pre><code>total 64
+drwxr-xr-x   6 hushiwei  staff    192  1 18 12:03 ./
+drwxr-xr-x  86 hushiwei  staff   2752  1 18 12:03 ../
+drwxr-xr-x   5 hushiwei  staff    160  1 18 12:03 fonts/
+drwxr-xr-x  58 hushiwei  staff   1856  1 18 12:03 images/
+-rw-rw-r--   2 hushiwei  staff  31975 10 10  2017 matplotlibrc
+drwxr-xr-x  27 hushiwei  staff    864  1 18 12:03 stylelib/
+</code></pre>
+
+<h2 id="toc_3">3. 导入字体,删除缓存</h2>
+
+<p>将我们刚刚下载好的字体,<code>SimHei.ttf</code>文件​，放在matplotlib的font目录（./matplotlib/mpl-data/fonts/ttf/）或者系统的font目录下都行(/usr/share/fonts/)</p>
+
+<p>接着:<br/>
+​删除/Users/hushiwei/.matplotlib/*目录，重新运行你的画图脚本；此时程序会自动在~/.matplotlib目录下生成fontList.json文件；</p>
+
+<h2 id="toc_4">4. 重启jupyter ,重新执行代码.</h2>
+
+<p>OK,完成....<br/>
+<img src="media/15242825563762/15242830696194.jpg" alt=""/></p>
+
+<h1 id="toc_5">总结</h1>
+
+<ol>
+<li>需要在代码中引入字符集.</li>
+<li>系统中需要有这个字体.</li>
+<li>导入字体后,若要生效,需要先删除~/.matplotlib目录,让这个目录中的文件重新生成.</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Markdown中用LaTex语法写数学公式]]></title>
+    <link href="http://dmlcoding.com/15235878044126.html"/>
+    <updated>2018-04-13T10:50:04+08:00</updated>
+    <id>http://dmlcoding.com/15235878044126.html</id>
+    <content type="html"><![CDATA[
+<p>最近在学习机器学习和神经网络的一些知识, 在用Markdown做笔记的时候, 发现公式用到LaTeX十分方便, 写篇文章记录在学习过程中的常用的LaTeX公式和用法, 因为本博客支持MathJax, <code>MathJax</code>是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，MathJax可以解析<code>Latex</code>、<code>MathML</code>和<code>ASCIIMathML</code>的标记语言。</p>
+
+<!--more-->
+
+<h2 id="toc_0">关键字索引</h2>
+
+<p><code>\</code> 或者<code>~</code>: 空格</p>
+
+<p><code>\verb +text+</code> : 直接打印不执行任何LATEX命令。这里的+仅是分隔符的一个例子, 除了* 或空格，可以使用任意一个字符。</p>
+
+<p><code>\url{www.baidu.com}</code> : 嵌入超链接, 可在文档中点击访问</p>
+
+<p><code>\emph{text}</code> : 强调的内容</p>
+
+<p><code>\section{...}</code> : 章</p>
+
+<p><code>\subsection{...}</code> : 节</p>
+
+<p><code>\subsubsection{...}</code> : 子节</p>
+
+<p><code>\paragraph{...}</code> : 段落</p>
+
+<p><code>\subparagraph{...}</code> : 子段落</p>
+
+<p>`<code>text&#39;</code> : 单引号</p>
+
+<p><code>text&#39;&#39;</code> : 双引号引起来的text</p>
+
+<p><code>--</code> : 折线</p>
+
+<h2 id="toc_1">基本概念</h2>
+
+<ul>
+<li><p>控制序列: 以<code>\</code>开头,参数：<code>必须参数{}</code>和<code>可选参数[]</code></p></li>
+<li><p>环境: 以<code>bengin 环境名</code>开始，并以<code>end 环境名</code>结束</p></li>
+<li><p>文本模式:如果你想要在公式中排版普通的文本，那么你必须要把这些文本放在<code>\textrm{...}</code> 命令中</p></li>
+<li><p>数学模式</p></li>
+</ul>
+
+<ol>
+<li><p>内嵌模式:公式直接放在文字之间，公式高度一般受文本高度限制: <code>$ latex $</code></p>
+
+<blockquote>
+<p>文字\(\sum_{i=0}^{n}i^2\) 文字</p>
+</blockquote></li>
+<li><p>独立模式:公式另起一行，高度可调整</p>
+
+<blockquote>
+<p>文字\[\sum_{i=0}^{n}i^2\]文字</p>
+</blockquote></li>
+</ol>
+
+<blockquote>
+<p>在LaTeX中，花括号是用于分组，即花括号内部文本为一组, 大括号能消除二义性, 一个组即单个字符或者使用{..}包裹起来的内容。</p>
+</blockquote>
+
+<h3 id="toc_2">上标与下标</h3>
+
+<ul>
+<li><p>上标<code>^{角标}</code>，下标<code>_{角标}</code>, 默认情况下，上下标符号仅仅对下一个组起作用。</p>
+
+<p><code>x_1</code> : \(x_1\) </p>
+
+<p><code>x_1^2</code> : \(x_1^2\) </p>
+
+<p><code>x^{2_1}</code> : \(x^{2_1}\) </p>
+
+<p><code>x_{(22)}^{(n)}</code> : \(x_{(22)}^{(n)}\)</p></li>
+</ul>
+
+<h3 id="toc_3">分式</h3>
+
+<ul>
+<li><p><code>\frac{分子}{分母}</code></p>
+
+<p><code>\frac ab</code> : \(\frac ab\)</p>
+
+<p><code>\frac{x+y}{2}</code> : \(\frac{x+y}{2}\)</p>
+
+<p><code>\frac{1}{1+\frac{1}{2}}</code> : \(\frac{1}{1+\frac{1}{2}}\)</p></li>
+</ul>
+
+<h3 id="toc_4">根式</h3>
+
+<ul>
+<li><p>开平方：<code>\sqrt{表达式}</code>；开n次方：<code>\sqrt[n]{表达式}</code></p>
+
+<p><code>\sqrt{2}&lt;\sqrt[3]{3}</code> : \(\sqrt{2}&lt;\sqrt[3]{3}\)</p>
+
+<p><code>\sqrt[4]{\frac xy}</code> ：\(\sqrt[4]{\frac xy} \)</p>
+
+<p><code>\sqrt{1+\sqrt[^p]{1+a^2}}</code> : \(\sqrt{1+\sqrt[^p]{1+a^2}}\)</p></li>
+</ul>
+
+<h3 id="toc_5">求和与积分</h3>
+
+<ul>
+<li><p>求和<code>\sum</code> ; 求积分<code>\int</code>; 上下限就是<code>上标和下标</code></p>
+
+<p><code>\int_1^\infty</code> ：\(\int_1^\infty\)</p>
+
+<p><code>\int_a^b f(x)dx</code> : \(\int_a^b f(x)dx\)</p>
+
+<p><code>\sum_1^n</code> ：\(\sum_1^n\)</p>
+
+<p><code>\sum_{k=1}^n\frac{1}{k}</code> : \(\sum_{k=1}^n\frac{1}{k}\)</p></li>
+</ul>
+
+<h3 id="toc_6">微分</h3>
+
+<p><code>\frac{\partial E_w}{\partial w}</code> : \(\frac{\partial E_w}{\partial w}\)</p>
+
+<p>\[\frac{\partial E_\hat{w}}{\partial \hat{w}}= 2X^T(X\vec{\hat{w}}-\vec{y}) = 0\]</p>
+
+<h3 id="toc_7">加粗</h3>
+
+<p><code>\mathbf{x}_i :</code>\(\mathbf{x}_i\)</p>
+
+<h3 id="toc_8">多重积分</h3>
+
+<ul>
+<li>对于多重积分，不要使用<code>\int\int</code>此类的表达，应该使用<code>\iint</code>,<code>\iiint</code>等特殊形式。效果如下：</li>
+</ul>
+
+<p>\[<br/>
+\begin{array}{cc}<br/>
+\mathrm{Bad} &amp; \mathrm{Better} \\\\<br/>
+\hline \\\\<br/>
+\int\int_S f(x)\,dy\,dx &amp; \iint_S f(x)\,dy\,dx \\\\<br/>
+\int\int\int_V f(x)\,dz\,dy\,dx &amp; \iiint_V f(x)\,dz\,dy\,dx<br/>
+\end{array}<br/>
+\]</p>
+
+<ul>
+<li>在微分前应该使用<code>\</code>,来增加些许空间，否则\(\TeX\)会将微分紧凑地排列在一起。如下：</li>
+</ul>
+
+<p>\[<br/>
+\begin{array}{cc}<br/>
+\mathrm{Bad} &amp; \mathrm{Better} \\\\<br/>
+\hline \\\\<br/>
+\iiint_V f(x)dz dy dx &amp; \iiint_V f(x)\,dz\,dy\,dx<br/>
+\end{array}<br/>
+\]</p>
+
+<h2 id="toc_9">特殊函数与符号</h2>
+
+<ol>
+<li>常见的三角函数，求极限符号可直接使用<code>\+</code>缩写即可
+<code>\sin x</code> , <code>\arctan x</code>, <code>\lim_{1\to\infty}</code> : \(\sin x\),\(\arctan x\),\(\lim_{1\to\infty}\)</li>
+<li>比较运算符：
+<code>\lt \gt \le \ge \neq</code> ： \(\lt \gt \le \ge \neq\)
+
+<ul>
+<li>在这些运算符前面加上<code>\not</code>
+<code>\not\lt</code> ：\(\not\lt\)</li>
+</ul></li>
+<li><code>\times \div \pm \mp</code> ：\(\times \div \pm \mp\)
+<code>\cdot</code>表示居中的点
+<code>x \cdot y</code> : \(x \cdot y\)。</li>
+<li>集合关系与运算
+<code>\cup \cap \setminus \subset \subseteq \subsetneq \supset \in \notin \emptyset \varnothing</code> ：\(\cup 
+\cap \setminus \subset \subseteq \subsetneq \supset \in \notin \emptyset \varnothing\)</li>
+<li>排列
+<code>{n+1 \choose 2k}</code> : \({n+1 \choose 2k}\) 
+<code>\binom{n+1}{2k}</code> : \({n+1 \choose 2k}\)</li>
+<li>箭头：
+<code>\to \rightarrow \leftarrow \Rightarrow \Leftarrow \mapsto</code> : \(\to \rightarrow \leftarrow \Rightarrow \Leftarrow \mapsto\)</li>
+<li>逻辑运算符
+<code>\land \lor \lnot \forall \exists \top \bot \vdash \vDash</code> ：\(\land \lor \lnot \forall \exists \top \bot \vdash \vDash\)</li>
+<li><code>\star \ast \oplus \circ \bullet</code> ： \(\star \ast \oplus \circ \bullet\)</li>
+<li><code>\approx \sim \cong \equiv \prec</code> ： \(\approx \sim \cong \equiv \prec\)</li>
+<li><code>\infty \aleph_0</code> : \(\infty  \aleph_0\) 
+<code>\nabla \partial</code> : \(\nabla \partial\) \Im \Re \(Im \Re\)</li>
+<li>模运算 <code>\pmode</code> 
+<code>a\equiv b\pmod n</code> ：\(a\equiv b\pmod n\)</li>
+<li><code>\ldots与\cdots</code>区别是dots的位置不同，ldots位置稍低，cdots位置居中
+<code>a_1+a_2+\cdots+a_n</code> : \(a_1+a_2+\cdots+a_n\)
+<code>a_1, a_2, \ldots ,a_n</code> : \(a_1, a_2, \ldots ,a_n\)。</li>
+<li><p>一些希腊字母具有变体形式<br/>
+<code>\epsilon \varepsilon</code> : \( \epsilon \varepsilon\)<br/>
+<code>\phi \varphi</code> : \(\phi \varphi\)</p></li>
+</ol>
+
+<ul>
+<li>使用<a href="http://detexify.kirelabs.org/classify.html">Detexify</a>在网页上画出符号，Detexify会给出相似的符号及其代码但是不能保证它给出的符号可以在MathJax中使用，你可以参考<a href="http://docs.mathjax.org/en/latest/tex.html#supported-latex-commands">supported-latex-commands</a>确定MathJax是否支持此符号。</li>
+</ul>
+
+<h2 id="toc_10">空格 : 美化公式</h2>
+
+<p>紧贴<code>a!b</code> : \(a!b\)<br/>
+  没有空格<code>ab</code> : \(ab\)<br/>
+  小空格<code>a\,b</code> : \(a\,b\)<br/>
+  中等空格<code>a\;b</code> : \(a\;b\)<br/>
+  大空格<code>a\ b</code> : \(a\ b\)<br/>
+  quad空格<code>a\quad b</code> : \(a\quad b\)<br/>
+  两个quad空格<code>a\qquad b</code> : \(a\qquad b\)</p>
+
+<p>原公式:<code>\int_a^b f(x)\mathrm{d}x</code><br/>
+  \(\int_a^b f(x)\mathrm{d}x\)</p>
+
+<p>插入空格:<code>\int_a^b f(x)\qquad \mathrm{d}x</code><br/>
+  \(\int_a^b f(x)\qquad \mathrm{d}x\)</p>
+
+<h2 id="toc_11">括号</h2>
+
+<ol>
+<li>小括号与方括号：使用原始的<code>( )</code>，<code>[ ]</code>即可，如<code>(2+3)[4+4]</code>：\((2+3)[4+4]\)</li>
+<li>大括号：时由于大括号{}被用来分组，使用\lbrace 和\rbrace来表示
+<code>\lbrace a*b \rbrace</code> ：\(\lbrace a*b \rbrace\)</li>
+<li>尖括号：使用<code>\langle</code> 和 <code>\rangle</code>表示左尖括号和右尖括号
+<code>\langle x \rangle</code> ：\(\langle x \rangle\)</li>
+<li>上取整：使用<code>\lceil</code> 和 <code>\rceil</code> 表示 
+<code>\lceil x \rceil</code> ：\(\lceil x \rceil\)</li>
+<li>下取整：使用<code>\lfloor</code> 和 <code>\rfloor</code> 表示
+<code>\lfloor x \rfloor</code> ：\(\lfloor x \rfloor\)</li>
+<li><p>不可见括号：使用<code>.</code>表示</p></li>
+</ol>
+
+<ul>
+<li><p>注意 : 原始符号并不会随着公式大小缩放。如，<code>(\frac12)</code> ：\((\frac12)\)。可以使用\left(…\right)来自适应的调整括号大小。<br/>
+如1.1和1.2公式，公式1.2中的括号是经过缩放的。</p>
+
+<p><code>\lbrace \sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6} \rbrace \tag{1.1}</code><br/>
+\[\lbrace\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}\rbrace\tag{1.1}\]</p>
+
+<p><code>\left \lbrace \sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6} \right\rbrace \tag{1.2}</code><br/>
+\[\left \lbrace \sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6} \right\rbrace\tag{1.2}\]</p></li>
+<li><p>定界符之前冠以 \left（修饰左定界符）或 \right（修饰右定界符），可以得到自适应缩放的定界符，它们会根据定界符所包围的公式大小自适应缩放</p>
+
+<p><code>\left( \sum_{k=\frac{1}{2}}^{N^2}\frac{1}{k} \right)</code><br/>
+\[ \left( \sum_{k=\frac{1}{2}}^{N^2}\frac{1}{k} \right) \]</p></li>
+</ul>
+
+<h2 id="toc_12">字体</h2>
+
+<ol>
+<li>使用<code>\mathbb</code>或<code>\Bbb</code>显示黑板粗体字，此字体经常用来表示代表实数、整数、有理数、复数的大写字母。
+<code>\mathbb{CHNQRZ}</code> : \(\mathbb{CHNQRZ}\)。</li>
+<li>使用<code>\mathbf</code>显示黑体字
+<code>\mathbf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$，$\mathbf{abcdefghijklmnopqrstuvwxyz}</code>
+\(\mathbf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}\)，\(\mathbf{abcdefghijklmnopqrstuvwxyz}\)</li>
+<li>使用<code>\mathtt</code>显示打印机字体
+<code>\mathtt{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$，$\mathtt{abcdefghijklmnopqrstuvwxyz}</code>
+\(\mathtt{ABCDEFGHIJKLMNOPQRSTUVWXYZ}\)，\(\mathtt{abcdefghijklmnopqrstuvwxyz}\)</li>
+<li>使用<code>\mathrm</code>显示罗马字体
+<code>\mathrm{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$，$\mathrm{abcdefghijklmnopqrstuvwxyz}</code>
+\(\mathrm{ABCDEFGHIJKLMNOPQRSTUVWXYZ}\)，\(\mathrm{abcdefghijklmnopqrstuvwxyz}\)</li>
+<li>使用<code>\mathscr</code>显示手写体, 无小写
+<code>\mathscr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}, $\mathscr{abcdefghijklmnopqrstuvwxyz}</code>
+\(\mathscr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}, \)\mathscr{abcdefghijklmnopqrstuvwxyz}$</li>
+<li>使用<code>\mathfrak</code>显示Fraktur字母（一种德国字体）
+<code>\mathfrak{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$, $\mathfrak{abcdefghijklmnopqrstuvwxyz}</code>
+\(\mathfrak{ABCDEFGHIJKLMNOPQRSTUVWXYZ}\),\(\mathfrak{abcdefghijklmnopqrstuvwxyz}\)</li>
+</ol>
+
+<h2 id="toc_13">方程组</h2>
+
+<ul>
+<li><p>使用<code>\begin{array} ... \end{array}</code>与<code>\left\{…\right.</code>配合，表示方程组</p></li>
+<li><p>使用 <code>\being{aligned} .. \end{aligned}</code></p></li>
+</ul>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+\dot{x} &amp; = \sigma(y-x) \\\<br/>
+\dot{y} &amp; = \rho x - y - xz \\\<br/>
+\dot{z} &amp; = -\beta z + xy<br/>
+\end{aligned}<br/>
+\]</p>
+
+<ul>
+<li>使用 <code>\being{case} .. \end{case}</code></li>
+</ul>
+
+<p>\[<br/>
+\begin{cases}<br/>
+a_1x+b_1y+c_1z=d_1 \\\<br/>
+a_2x+b_2y+c_2z=d_2 \\\<br/>
+a_3x+b_3y+c_3z=d_3<br/>
+\end{cases}<br/>
+\]</p>
+
+<ul>
+<li>对齐方程组中的<code>=</code>号, 注意<code>{</code>要转义,&#39;\{&#39;</li>
+</ul>
+
+<p>\[ \left\\{<br/>
+     \begin{aligned} <br/>
+       a_1x+b_1y+c_1z &amp;=d_1+e_1 \\\<br/>
+       a_2x+b_2y&amp;=d_2 \\\ <br/>
+       a_3x+b_3y+c_3z &amp;=d_3 <br/>
+\end{aligned} <br/>
+\right. <br/>
+\]</p>
+
+<ul>
+<li>如果要对齐 <code>=</code>号和<code>项</code>，可以使用<code>\being{array}{列样式} .. \end{array}</code></li>
+</ul>
+
+<p>\[<br/>
+\left\\{<br/>
+\begin{array}{ll}<br/>
+a_1x+b_1y+c_1z &amp;=d_1+e_1 \\\<br/>
+a_2x+b_2y &amp;=d_2 \\\<br/>
+a_3x+b_3y+c_3z &amp;=d_3 <br/>
+\end{array} <br/>
+\right.<br/>
+\]</p>
+
+<h3 id="toc_14">上下文字</h3>
+
+<p>\[ \mathop {\arg min }\limits_{(w,b)}^{top} f(x)\]</p>
+
+<h3 id="toc_15">公式标记与引用</h3>
+
+<ul>
+<li>使用<code>\tag{tag}</code>来标记公式，如果想在之后引用该公式，则还需要加上<code>\label{label}</code>在<code>\tag</code>之后，如：</li>
+<li>需要<code>\*</code>对标签<code>*</code>进行转义</li>
+</ul>
+
+<p>\[<br/>
+ a := x^2-y^3 \tag{\*}\label{\*}<br/>
+\]</p>
+
+<p>\[<br/>
+ a := x^2-y^3 \tag{2.1}\label{2.1}<br/>
+\]</p>
+
+<ul>
+<li>为了引用公式，可以使用<code>\eqref{rlabel}</code>，如：</li>
+</ul>
+
+<p>\[a+y^3 \stackrel{\eqref{\*}}= x^2\]</p>
+
+<p>\[a+y^3 \stackrel{\eqref{2.1}}= x^2\]</p>
+
+<ul>
+<li>通过超链接可以跳转到被引用公式位置。</li>
+</ul>
+
+<h3 id="toc_16"><strong>矩阵</strong></h3>
+
+<ul>
+<li><p>使用<code>$$\begin{matrix}…\end{matrix}$$</code>表示矩阵，矩阵的行之间使用<code>\\\</code>分隔，列之间使用<code>&amp;</code>分隔。</p></li>
+<li><p>效果如下 :</p></li>
+</ul>
+
+<p>\[<br/>
+        \begin{matrix}<br/>
+        1 &amp; x &amp; x^2 \\\<br/>
+        1 &amp; y &amp; y^2 \\\<br/>
+        1 &amp; z &amp; z^2 \\\<br/>
+        \end{matrix}<br/>
+\]</p>
+
+<ul>
+<li><strong>加括号</strong>
+如果要对矩阵加括号，可以像上文中提到的一样，使用<code>\left</code>与<code>\right</code>配合表示括号符号。也可以使用特殊的<code>matrix</code>。即替换<code>\begin{matrix}...\end{matrix}</code>中的matrix为<code>pmatrix</code>，<code>bmatrix</code>，<code>Bmatrix</code>，<code>vmatrix</code>,<code>Vmatrix</code></li>
+</ul>
+
+<p><code>pmatrix</code> : \(\begin{pmatrix}1&amp;2\\\3&amp;4\\\ \end{pmatrix}\) <br/>
+<code>bmatrix</code> : \(\begin{bmatrix}1&amp;2\\\3&amp;4\\\ \end{bmatrix}\) <br/>
+<code>Bmatrix</code> : \(\begin{Bmatrix}1&amp;2\\\3&amp;4\\\ \end{Bmatrix}\) <br/>
+<code>vmatrix</code> : \(\begin{vmatrix}1&amp;2\\\3&amp;4\\\ \end{vmatrix}\) <br/>
+<code>Vmatrix</code> : \(\begin{Vmatrix}1&amp;2\\\3&amp;4\\\ \end{Vmatrix}\) </p>
+
+<ul>
+<li><strong>省略元素</strong>  使用<code>\cdots</code> : \(\cdots\) <code>\ddots</code> : \(\ddots\)  <code>\vdots</code> : \(\vdots\)来省略矩阵中的元素</li>
+</ul>
+
+<p>\[<br/>
+    \begin{pmatrix}<br/>
+         1 &amp; a_1 &amp; a_1^2 &amp; \cdots &amp; a_1^n \\\<br/>
+         1 &amp; a_2 &amp; a_2^2 &amp; \cdots &amp; a_2^n \\\<br/>
+         \vdots  &amp; \vdots&amp; \vdots &amp; \ddots &amp; \vdots \\\<br/>
+         1 &amp; a_m &amp; a_m^2 &amp; \cdots &amp; a_m^n <br/>
+    \end{pmatrix}<br/>
+\]</p>
+
+<h3 id="toc_17"><strong>增广矩阵</strong></h3>
+
+<ul>
+<li>增广矩阵需要使用前面的<code>array</code>来实现</li>
+</ul>
+
+<p>\[ \left[<br/>
+      \begin{array}{cc|c}<br/>
+        1&amp;2&amp;3\\\<br/>
+        4&amp;5&amp;6<br/>
+      \end{array}<br/>
+    \right]<br/>
+\]</p>
+
+<h3 id="toc_18"><strong>对齐公式</strong></h3>
+
+<ul>
+<li>使用形如<code>\begin{align}…\end{align}</code>的格式，使用&amp;来指示需要对齐的位置</li>
+</ul>
+
+<p>\[<br/>
+    \begin{align}<br/>
+    \sqrt{37} &amp; = \sqrt{\frac{73^2-1}{12^2}} \\\<br/>
+     &amp; = \sqrt{\frac{73^2}{12^2}\cdot\frac{73^2-1}{73^2}} \\\<br/>
+     &amp; = \sqrt{\frac{73^2}{12^2}}\sqrt{\frac{73^2-1}{73^2}} \\\<br/>
+     &amp; = \frac{73}{12}\sqrt{1 - \frac{1}{73^2}} \\\<br/>
+     &amp; \approx \frac{73}{12}\left(1 - \frac{1}{2\cdot73^2}\right)<br/>
+    \end{align}<br/>
+\]</p>
+
+<h3 id="toc_19"><strong>分类表达式</strong></h3>
+
+<ul>
+<li>定义函数时分情况给出表达式，使用<code>\begin{cases}…\end{cases}</code></li>
+<li>使用<code>\\\</code>来分类，使用<code>&amp;</code>指示需要对齐的位置</li>
+</ul>
+
+<p>\[<br/>
+ f(n) =<br/>
+    \begin{cases}<br/>
+    n/2,  &amp; \text{if $n$ is even} \\\\[2ex]<br/>
+    3n+1, &amp; \text{if $n$ is odd}<br/>
+    \end{cases}<br/>
+\]</p>
+
+<ul>
+<li><code>[4ex]</code>控制分类之间的垂直间隔, 这里要用<code>\\\\</code>转义</li>
+</ul>
+
+<h3 id="toc_20"><strong>表格</strong></h3>
+
+<ul>
+<li>使用<code>$$\begin{array}{列样式}...\end{array}$$</code>创建表格</li>
+<li>列样式使用<code>clr</code>表示居中，左，右对齐</li>
+<li>使用<code>|</code>表示一条竖线</li>
+<li>使用<code>\\\\</code>分隔行，使用<code>&amp;</code>分隔列</li>
+<li>使用<code>\hline</code>在本行前加入一条直线</li>
+</ul>
+
+<p>\[<br/>
+    \begin{array}{c|lcr}<br/>
+    n &amp; \text{Left} &amp; \text{Center} &amp; \text{Right} \\\\<br/>
+    \hline<br/>
+    1 &amp; 0.24 &amp; 1 &amp; 125 \\\\<br/>
+    2 &amp; -1 &amp; 189 &amp; -8 \\\\<br/>
+    3 &amp; -20 &amp; 2000 &amp; 1+10i \\\\<br/>
+    \end{array}<br/>
+\]</p>
+
+<ul>
+<li>复杂列表</li>
+</ul>
+
+<h3 id="toc_21"><strong>希腊字母</strong></h3>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>大写</th>
+<th>Tex</th>
+<th>小写</th>
+<th>Tex</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>alpha</td>
+<td>\(A\)</td>
+<td>A</td>
+<td>\(\alpha\)</td>
+<td>\alpha</td>
+</tr>
+<tr>
+<td>beta</td>
+<td>\(B\)</td>
+<td>B</td>
+<td>\(\beta\)</td>
+<td>\beta</td>
+</tr>
+<tr>
+<td>gamma</td>
+<td>\(\Gamma\)</td>
+<td>\Gamma</td>
+<td>\(\gamma\)</td>
+<td>\gamma</td>
+</tr>
+<tr>
+<td>delta</td>
+<td>\(\Delta\)</td>
+<td>\Delta</td>
+<td>\(\delta\)</td>
+<td>\delta</td>
+</tr>
+<tr>
+<td>epsilon</td>
+<td>\(E\)</td>
+<td>E</td>
+<td>\(\epsilon\)</td>
+<td>\epsilon</td>
+</tr>
+<tr>
+<td>zeta</td>
+<td>\(Z\)</td>
+<td>Z</td>
+<td>\(\zeta\)</td>
+<td>\zeta</td>
+</tr>
+<tr>
+<td>eta</td>
+<td>\(H\)</td>
+<td>H</td>
+<td>\(\eta\)</td>
+<td>\eta</td>
+</tr>
+<tr>
+<td>theta</td>
+<td>\(\Theta\)</td>
+<td>\Theta</td>
+<td>\(\theta\)</td>
+<td>\theta</td>
+</tr>
+<tr>
+<td>iota</td>
+<td>\(I\)</td>
+<td>I</td>
+<td>\(\iota\)</td>
+<td>\iota</td>
+</tr>
+<tr>
+<td>kappa</td>
+<td>\(K\)</td>
+<td>K</td>
+<td>\(\kappa\)</td>
+<td>\kappa</td>
+</tr>
+<tr>
+<td>lambda</td>
+<td>\(\Lambda\)</td>
+<td>\Lambda</td>
+<td>\(\lambda\)</td>
+<td>\lambda</td>
+</tr>
+<tr>
+<td>mu</td>
+<td>\(M\)</td>
+<td>M</td>
+<td>\(\mu\)</td>
+<td>\mu</td>
+</tr>
+<tr>
+<td>nu</td>
+<td>\(N\)</td>
+<td>N</td>
+<td>\(\nu\)</td>
+<td>\nu</td>
+</tr>
+<tr>
+<td>xi</td>
+<td>\(\Xi\)</td>
+<td>\Xi</td>
+<td>\(\xi\)</td>
+<td>\xi</td>
+</tr>
+<tr>
+<td>omicron</td>
+<td>\(O\)</td>
+<td>O</td>
+<td>\(\omicron\)</td>
+<td>\omicron</td>
+</tr>
+<tr>
+<td>pi</td>
+<td>\(\Pi\)</td>
+<td>\Pi</td>
+<td>\(\pi\)</td>
+<td>\pi</td>
+</tr>
+<tr>
+<td>rho</td>
+<td>\(P\)</td>
+<td>P</td>
+<td>\(\rho\)</td>
+<td>\rho</td>
+</tr>
+<tr>
+<td>sigma</td>
+<td>\(\Sigma\)</td>
+<td>\Sigma</td>
+<td>\(\sigma\)</td>
+<td>\sigma</td>
+</tr>
+<tr>
+<td>tau</td>
+<td>\(T\)</td>
+<td>T</td>
+<td>\(\tau\)</td>
+<td>\tau</td>
+</tr>
+<tr>
+<td>upsilon</td>
+<td>\(\Upsilon\)</td>
+<td>\Upsilon</td>
+<td>\(\upsilon\)</td>
+<td>\upsilon</td>
+</tr>
+<tr>
+<td>phi</td>
+<td>\(\Phi\)</td>
+<td>\Phi</td>
+<td>\(\phi\)</td>
+<td>\phi</td>
+</tr>
+<tr>
+<td>chi</td>
+<td>\(X\)</td>
+<td>X</td>
+<td>\(\chi\)</td>
+<td>\chi</td>
+</tr>
+<tr>
+<td>psi</td>
+<td>\(\Psi\)</td>
+<td>\Psi</td>
+<td>\(\psi\)</td>
+<td>\psi</td>
+</tr>
+<tr>
+<td>omega</td>
+<td>\(\Omega \)</td>
+<td>\Omega</td>
+<td>\(\omega\)</td>
+<td>\omega</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_22"><strong>重音符号</strong></h3>
+
+<ul>
+<li><p><code>\hat{A}</code> : \( \hat{A} \)</p></li>
+<li><p>单字符<br/>
+<code>\hat</code> ：\(\hat x\)</p></li>
+<li><p>多字符<br/>
+<code>\widehat</code> : \(\widehat {xy}\)</p></li>
+</ul>
+
+<p><img src="media/15235878044126/15235930010630.jpg" alt=""/></p>
+
+<h3 id="toc_23"><strong>二元关系</strong></h3>
+
+<ul>
+<li><code>a\ll{b}</code> : \( a\ll{b} \)</li>
+</ul>
+
+<p><img src="media/15235878044126/15235930296134.jpg" alt=""/></p>
+
+<h3 id="toc_24"><strong>二元运算符</strong></h3>
+
+<ul>
+<li><code>\pm</code> : \( \pm \)</li>
+</ul>
+
+<p><img src="media/15235878044126/15235930579186.jpg" alt=""/></p>
+
+<h3 id="toc_25"><strong>&quot;大&quot;运算符</strong></h3>
+
+<ul>
+<li><code>\sum</code> : \( \sum \)</li>
+</ul>
+
+<p><img src="media/15235878044126/15235931068818.jpg" alt=""/></p>
+
+<h3 id="toc_26"><strong>箭头</strong></h3>
+
+<ul>
+<li><code>\to</code> : \( \to \)</li>
+</ul>
+
+<p><img src="media/15235878044126/15235931161176.jpg" alt=""/></p>
+
+<h3 id="toc_27"><strong>定界符</strong></h3>
+
+<ul>
+<li><code>\lbrack</code> : \( \lbrack \)</li>
+</ul>
+
+<p><img src="media/15235878044126/15235931287395.jpg" alt=""/></p>
+
+<h3 id="toc_28"><strong>大定界符</strong></h3>
+
+<ul>
+<li><code>\lgroup</code> : \( \lgroup \)</li>
+</ul>
+
+<p><img src="media/15235878044126/15235931644817.jpg" alt=""/></p>
+
+<h3 id="toc_29"><strong>其他符号</strong></h3>
+
+<ul>
+<li><code>\dots</code> : \( \dots \)</li>
+</ul>
+
+<p><img src="media/15235878044126/15235931801879.jpg" alt=""/></p>
+
+<h3 id="toc_30"><strong>注意事项</strong></h3>
+
+<ul>
+<li><p>不要在再指数或者积分中使用 <code>\frac</code></p></li>
+<li><p>在指数或者积分表达式中使用<code>\frac</code>会使表达式看起来不清晰，应该使用一个水平的<code>/</code>来代替</p></li>
+<li><p>使用 \mid 代替 | 作为分隔符<br/>
+符号|作为分隔符时有排版空间大小的问题，应该使用\mid代替。效果如下：</p></li>
+</ul>
+
+<p>\[<br/>
+\begin{array}<br/>
+\mathrm{Bad} &amp; \mathrm{Better} \\\<br/>
+\hline \\\<br/>
+{x|x^2\in\Bbb Z} &amp; {x\mid x^2\in\Bbb Z} \\\<br/>
+\end{array}<br/>
+\]</p>
+
+<ul>
+<li>连分数
+书写连分数表达式时，请使用<code>\cfrac</code>代替<code>\frac</code>或者<code>\over</code>,两者效果对比如下：</li>
+</ul>
+
+<p>\[<br/>
+x = a_0 + \cfrac{1^2}{a_1<br/>
+          \+ \cfrac{2^2}{a_2<br/>
+          \+ \cfrac{3^2}{a_3 + \cfrac{4^4}{a_4 + \cdots}}}} \tag{\cfrac}<br/>
+\]<br/>
+\[<br/>
+x = a_0 + \frac{1^2}{a_1<br/>
+         \+ \frac{2^2}{a_2<br/>
+          \+ \frac{3^2}{a_3 + \frac{4^4}{a_4 + \cdots}}}} \tag{\frac}<br/>
+\]</p>
+
+<blockquote>
+<p><strong>转义</strong><br/>
+  一些MathJax使用的特殊字符，可以使用<code>\</code>或者<code>\\</code>转义为原来的含义。如<code>\$</code>表示<code>$</code>，<code>\\_</code>表示下划线。<br/>
+- 注意: 换行和方程组的开始<code>{</code>等, 常常需要转义, 用<code>\</code>或者<code>\\</code>或者<code>\\\</code>或者<code>\\\\</code><br/>
+<a href="https://github.com/Simshang/blog/blob/master/source/_posts/Demo-LaTeX.md">Markdown文件</a></p>
+</blockquote>
+
+<h3 id="toc_31">转载参考:<a href="http://simtalk.cn/2015/12/21/Demo-LaTeX/">http://simtalk.cn/2015/12/21/Demo-LaTeX/</a></h3>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[如何优雅的设计数据分层]]></title>
+    <link href="http://dmlcoding.com/15228352753621.html"/>
+    <updated>2018-04-04T17:47:55+08:00</updated>
+    <id>http://dmlcoding.com/15228352753621.html</id>
+    <content type="html"><![CDATA[
+<h1 id="toc_0">理论</h1>
+
+<p><img src="media/15228352753621/15231557165878.jpg" alt=""/></p>
+
+<h2 id="toc_1">1.ODS 全称是 Operational Data Store，操作数据存储</h2>
+
+<p>“面向主题的”，数据运营层，也叫ODS层，是最接近数据源中数据的一层，数据源中的数据，经过抽取、洗净、传输，也就说传说中的 ETL 之后，装入本层。本层的数据，总体上大多是按照源头业务系统的分类方式而分类的。</p>
+
+<p>但是，这一层面的数据却不等同于原始数据。在源数据装入这一层时，要进行诸如去噪（例如有一条数据中人的年龄是 300 岁，这种属于异常数据，就需要提前做一些处理）、去重（例如在个人资料表中，同一 ID 却有两条重复数据，在接入的时候需要做一步去重）、字段命名规范等一系列操作。</p>
+
+<h2 id="toc_2">2.数据仓库层(DW)，是数据仓库的主体</h2>
+
+<p>在这里，从 ODS 层中获得的数据按照主题建立各种数据模型。这一层和维度建模会有比较深的联系.</p>
+
+<h2 id="toc_3">3.数据产品层（APP），这一层是提供为数据产品使用的结果数据</h2>
+
+<p>在这里，主要是提供给数据产品和数据分析使用的数据，一般会存放在 ES、Mysql 等系统中供线上系统使用，也可能会存在 Hive 或者 Druid 中供数据分析和数据挖掘使用。<br/>
+比如我们经常说的报表数据，或者说那种大宽表，一般就放在这里</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Spark-Metrics 实战]]></title>
+    <link href="http://dmlcoding.com/15224029526508.html"/>
+    <updated>2018-03-30T17:42:32+08:00</updated>
+    <id>http://dmlcoding.com/15224029526508.html</id>
+    <content type="html"><![CDATA[
+<p><a href="http://metrics.dropwizard.io/3.1.0/getting-started/">http://metrics.dropwizard.io/3.1.0/getting-started/</a><br/>
+<a href="http://metrics.dropwizard.io/3.1.0/manual/core/">http://metrics.dropwizard.io/3.1.0/manual/core/</a><br/>
+<a href="http://wuchong.me/blog/2015/08/01/getting-started-with-metrics/">http://wuchong.me/blog/2015/08/01/getting-started-with-metrics/</a></p>
+
+<h2 id="toc_0">使用</h2>
+
+<p>The –files flag will cause /path/to/metrics.properties to be sent to every executor,<br/>
+and spark.metrics.conf=metrics.properties will tell all executors to load that file<br/>
+when initializing their respective MetricsSystems.</p>
+
+<p>直接添加到命令行后</p>
+
+<pre><code>--files=/yourPath/metrics.properties 
+--conf spark.metrics.conf=metrics.properties
+
+</code></pre>
+
+<h2 id="toc_1">小示例</h2>
+
+<p>新建<code>metrics.properties</code>文件,内容如下</p>
+
+<pre><code>
+driver.source.jvm.class=org.apache.spark.metrics.source.JvmSource
+executor.source.jvm.class=org.apache.spark.metrics.source.JvmSource
+
+*.sink.console.class=org.apache.spark.metrics.sink.ConsoleSink
+*.sink.console.period=10
+*.sink.console.unit=seconds
+</code></pre>
+
+<p>全是driver端的信息</p>
+
+<p><img src="media/15224029526508/15224033134708.jpg" alt=""/></p>
+
+<h3 id="toc_2">jmx-sink</h3>
+
+<pre><code>master.source.jvm.class=org.apache.spark.metrics.source.JvmSource
+worker.source.jvm.class=org.apache.spark.metrics.source.JvmSource
+driver.source.jvm.class=org.apache.spark.metrics.source.JvmSource
+executor.source.jvm.class=org.apache.spark.metrics.source.JvmSource
+*.sink.jmx.class=org.apache.spark.metrics.sink.JmxSink
+</code></pre>
+
+<p>spark on yarn 查看 </p>
+
+<p><a href="http://u007:8089/proxy/application_1509616075703_478985/metrics/json">http://u007:8089/proxy/application_1509616075703_478985/metrics/json</a></p>
+
+<h2 id="toc_3">总结</h2>
+
+<p>source里面定义从哪些实例来监控</p>
+
+<p>sink指定你要输出到哪里</p>
+
+<p>刚才这个例子里面,就是sink输出到console</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Spark Metrics分析]]></title>
@@ -1450,1345 +2421,6 @@ numRecords must not be negative
 1. spark.yarn.maxAppAttempts参数不能超过hadoop集群yarn.resourcemanager.am.max-attempts的最大值，如果超过将会取两者较小值<br/>
 2. 由于kafka切换leader导致的数据丢失,然后造成sparkstreaming程序报错,异常退出的情况下.我这通通常都是重启kafka,删除checkpoint,再重启sparkstreaming了.<br/>
 3. 后面我们不用原生的方式来存储offset.而是自己维护offset,那么以后更新迭代后就不用再删除checkpoint了,对业务的影响也最小了.</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Elasticsearch：用Curator辅助Marvel，实现自动删除旧marvel索引]]></title>
-    <link href="http://dmlcoding.com/15198768495613.html"/>
-    <updated>2018-03-01T12:00:49+08:00</updated>
-    <id>http://dmlcoding.com/15198768495613.html</id>
-    <content type="html"><![CDATA[
-<p>Marvel几乎是所有Elasticsearch用户的标配。Marvel保留观测数据的代价是，<br/>
-它默认每天会新建一个index，命名规律像是这样：.marvel-2017-12-10。<br/>
-marvel自建的索引一天可以产生大概500M的数据，而且将会越来越多，占的容量也将越来越大。<br/>
-有没有什么办法能让它自动过期？比如说只保留最近两天的观测数据，其他的都抛弃掉。</p>
-
-<p>当然有办法,curator就可以帮你实现.</p>
-
-<span id="more"></span><!-- more -->
-
-<h1 id="toc_0">curator是什么？</h1>
-
-<p>它是一个命令，可以帮助你管理你在Elasticsearch中的索引，帮你删除，关闭（close），<br/>
-打开（open）它们。当然这是比较片面的说法，更完整的说明见：<br/>
-<a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/index.html">https://www.elastic.co/guide/en/elasticsearch/client/curator/current/index.html</a></p>
-
-<h1 id="toc_1">实践</h1>
-
-<p>我们集群里面安装的Elasticsearch的版本是2.1.1.<br/>
-按照官网,我装了最新的5.x版本,显示版本不对.<br/>
-按照 <a href="http://blog.csdn.net/hereiskxm/article/details/47423715">http://blog.csdn.net/hereiskxm/article/details/47423715</a>  这个博客,我装了3.3.0版本.<br/>
-显示也不对.</p>
-
-<p>然后我搜了一下,感觉应该装一个中间的版本,因此我安装了4.0.0版本<br/>
-<code><br/>
-pip install elasticsearch-curator (4.0.0)<br/>
-</code></p>
-
-<p>然后我看了一下这个版本提供的参数</p>
-
-<pre><code> curator --help
-Usage: curator [OPTIONS] ACTION_FILE
-
-  Curator for Elasticsearch indices.
-
-  See http://elastic.co/guide/en/elasticsearch/client/curator/current
-
-Options:
-  --config PATH  Path to configuration file. Default: ~/.curator/curator.yml
-  --dry-run      Do not perform any changes.
-  --version      Show the version and exit.
-  --help         Show this message and exit.
-</code></pre>
-
-<p>和我安装最新的5.X的版本看起来是一致的.正好在这个站点看到配置的办法<br/>
-<a href="https://stackoverflow.com/questions/33430055/removing-old-indices-in-elasticsearch/42268400#42268400">https://stackoverflow.com/questions/33430055/removing-old-indices-in-elasticsearch/42268400#42268400</a></p>
-
-<p>之前在博客里面看到的那个3.3.0版本,还不兼容呢.</p>
-
-<h2 id="toc_2">用法</h2>
-
-<blockquote>
-<p>目的是删除2天前以.marvel开头的索引</p>
-</blockquote>
-
-<p>新建目录 /opt/curator</p>
-
-<pre><code>~ pwd
-/opt/curator
-~ ll
-total 12
--rw-r--r-- 1 root root  184 Dec 12 10:48 config_file.yml
--rw-r--r-- 1 root root 1311 Dec 12 10:37 delete_marvel_indices.yml
-drwxr-xr-x 2 root root 4096 Dec 12 10:49 logs
-</code></pre>
-
-<h2 id="toc_3">config_file.yml</h2>
-
-<pre><code># 记住,这个logfile得提前新建好.不然会启动报错.
-vim config_file.yml
-
----
-client:
-  hosts:
-   - 10.10.25.217
-  port: 9200
-logging:
-  loglevel: INFO
-  logfile: &quot;/opt/curator/logs/actions.log&quot;
-  logformat: default
-  blacklist: [&#39;elasticsearch&#39;, &#39;urllib3&#39;]
-
-</code></pre>
-
-<h2 id="toc_4">delete_marvel_indices.yml</h2>
-
-<p>删除以.marvel前缀且是2天之前的索引</p>
-
-<h2 id="toc_5">```</h2>
-
-<h1 id="toc_6">Remember, leave a key empty if there is no value.  None will be a string,</h1>
-
-<h1 id="toc_7">not a Python &quot;NoneType&quot;</h1>
-
-<h1 id="toc_8">Also remember that all examples have &#39;disable_action&#39; set to True.  If you</h1>
-
-<h1 id="toc_9">want to use this action as a template, be sure to set this to False after</h1>
-
-<h1 id="toc_10">copying it.</h1>
-
-<p>actions:<br/>
-  1:<br/>
-    action: delete_indices<br/>
-    description: &gt;-<br/>
-      Delete indices older than 30 days (based on index name), for rc- prefixed indices.<br/>
-    options:<br/>
-      ignore_empty_list: True<br/>
-      timeout_override:<br/>
-      continue_if_exception: False<br/>
-      disable_action: False<br/>
-    filters:<br/>
-    - filtertype: pattern<br/>
-      kind: prefix<br/>
-      value: rc-<br/>
-      exclude:<br/>
-    - filtertype: age<br/>
-      source: name<br/>
-      direction: older<br/>
-      timestring: &#39;%Y.%m.%d&#39;<br/>
-      unit: days<br/>
-      unit_count: 30<br/>
-      exclude:<br/>
-  2:<br/>
-    action: delete_indices<br/>
-    description: &gt;-</p>
-
-<pre><code>  Delete indices older than 2 days (based on index name), for .marvel prefixed indices.
-options:
-  ignore_empty_list: True
-  timeout_override:
-  continue_if_exception: False
-  disable_action: False
-filters:
-- filtertype: pattern
-  kind: prefix
-  value: .marvel
-  exclude:
-- filtertype: age
-  source: name
-  direction: older
-  timestring: &#39;%Y.%m.%d&#39;
-  unit: days
-  unit_count: 2
-  exclude:
-</code></pre>
-
-<pre><code>
-配置完成.
-
-## 执行命令
-
-</code></pre>
-
-<p>curator --config config_file.yml [--dry-run] delete_marvel_indices.yml<br/>
-```</p>
-
-<p>注意:<br/>
-1. --dry-run 是可选参数,加上后不会真的删除,只会执行逻辑.你可以通过看日志来判断是否正确.<br/>
-确认正确后,去掉--dry-run参数,再执行命令,既是真正的执行删除了.<br/>
-2. 如果没有在config_file.yml里面配置logfile参数,那么日志会在console打印出来.</p>
-
-<h1 id="toc_11">配置日常任务</h1>
-
-<p>很明显,我们需要自动化这个过程,让它每天自动执行,因此写一个脚本,让crontab每天自动调用即可</p>
-
-<pre><code>#!/bin/bash
-
-curator --config /opt/curator/config_file.yml  /opt/curator/delete_marvel_indices.yml
-
-echo &quot;delete success&quot;
-
-</code></pre>
-
-<p>配置crontab</p>
-
-<pre><code># 每天2点执行删除脚本
-0 2 * * * source /etc/profile;bash /opt/curator/delete_marvel_daily.sh &gt; /opt/curator/delete.log 2&gt;&amp;1
-
-</code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[机器学习实战之朴素贝叶斯]]></title>
-    <link href="http://dmlcoding.com/15198746079468.html"/>
-    <updated>2018-03-01T11:23:27+08:00</updated>
-    <id>http://dmlcoding.com/15198746079468.html</id>
-    <content type="html"><![CDATA[
-<p>朴素贝叶斯就是利用先验知识来解决后验概率，因为训练集中我们已经知道了每个单词在类别0和1中的概率，即p(w|c),<br/>
-我们就是要利用这个知识去解决在出现这些单词的组合情况下，类别更可能是0还是1,即p(c|w)。<br/>
-如果说之前的训练样本少，那么这个p(w|c)就更可能不准确，所以样本越多我们会觉得这个p(w|c)越可信。</p>
-
-<span id="more"></span><!-- more -->
-
-<pre><code class="language-python">import os
-import sys
-from numpy import *
-sys.path.append(os.getcwd())
-</code></pre>
-
-<pre><code class="language-python">import bayes
-</code></pre>
-
-<pre><code class="language-python"># 返回实验样本和类别标签(侮辱类和非侮辱类)
-listOPosts,listClasses=bayes.loadDataSet()
-</code></pre>
-
-<pre><code class="language-python"># 创建词汇表
-# 将实验样本里面的词汇进行去重
-def createVocabList(dataSet):
-    vocabSet=set([])
-    for document in dataSet:
-        vocabSet=vocabSet|set(document)
-    return list(vocabSet)
-</code></pre>
-
-<pre><code class="language-python">myVocabList=createVocabList(listOPosts)
-</code></pre>
-
-<pre><code class="language-python"># 将词汇转成特征向量
-# 也就是将每一行样本转成特征向量
-# 向量的每一元素为1或者0,分别表示词汇表中的单词在输入文档中是否出现
-def setOfWordsVec(vocabList,inputSet):
-    returnVec=[0]*len(vocabList)
-    for word in inputSet:
-        if word in vocabList:
-            returnVec[vocabList.index(word)]=1
-        else:print &quot;the word:%s is not in my Vocabulary!&quot; % word
-    return returnVec
-</code></pre>
-
-<h1 id="toc_0">训练算法:从词向量计算概率</h1>
-
-<p>朴素贝叶斯分类器训练函数</p>
-
-<pre><code class="language-python"># 输入为文档矩阵以及由每篇文档类别标签所构成的向量
-def trainNB0(trainMatrix,trainCategory):
-    # 文档总数,有几篇文档,在这里也就是有几个一维数组
-    numTrainDocs=len(trainMatrix)
-    # 每篇文档里面的单词数,也就是一维数组的长度
-    numWords=len(trainMatrix[0])
-    # 因为就只有0和1两个分类,将类别列表求和后,就是其中一个类别的个数
-    # 然后numTrainDocs也就是文档总数,这样相除后就是这个类别的概率了
-    pAbusive=sum(trainCategory)/float(numTrainDocs)
-    # 以下两行,初始化概率
-    p0Num=ones(numWords);p1Num=ones(numWords)
-    p0Denom=2.0;p1Denom=2.0
-
-    # 依次遍历所有的文档
-    for i in range(numTrainDocs):
-        # 判断这个文档所属类别
-        if trainCategory[i]==1:
-            # 数组与数组相加,这里就是统计每个词在这个分类里面出现的次数
-            p1Num+=trainMatrix[i]
-            # 统计该类别下,这些词语一共出现了多少次
-            p1Denom+=sum(trainMatrix[i])
-        else:
-            p0Num+=trainMatrix[i]
-            p0Denom+=sum(trainMatrix[i])
-    # 通过求对数避免数据下溢出
-    p1Vect=log(p1Num/p1Denom)
-    p0Vect=log(p0Num/p0Denom)
-    return p0Vect,p1Vect,pAbusive
-</code></pre>
-
-<pre><code class="language-python"># 所有文档的特征向量
-trainMat=[]
-</code></pre>
-
-<pre><code class="language-python"># 将文档的每一行,转成词向量,然后追加到trainMat中
-for postinDoc in listOPosts:
-    trainMat.append(bayes.setOfWords2Vec(myVocabList,postinDoc))
-</code></pre>
-
-<pre><code class="language-python">p0V,p1V,pAb=trainNB0(trainMat,listClasses)
-</code></pre>
-
-<pre><code class="language-python">pAb
-</code></pre>
-
-<pre><code>0.5
-</code></pre>
-
-<pre><code class="language-python">p0V
-</code></pre>
-
-<pre><code>array([-2.56494936, -2.56494936, -2.56494936, -3.25809654, -3.25809654,
-       -2.56494936, -2.56494936, -2.56494936, -3.25809654, -2.56494936,
-       -2.56494936, -2.56494936, -2.56494936, -3.25809654, -3.25809654,
-       -2.15948425, -3.25809654, -3.25809654, -2.56494936, -3.25809654,
-       -2.56494936, -2.56494936, -3.25809654, -2.56494936, -2.56494936,
-       -2.56494936, -3.25809654, -2.56494936, -3.25809654, -2.56494936,
-       -2.56494936, -1.87180218])
-</code></pre>
-
-<pre><code class="language-python">p1V
-</code></pre>
-
-<pre><code>array([-3.04452244, -3.04452244, -3.04452244, -2.35137526, -2.35137526,
-       -3.04452244, -3.04452244, -3.04452244, -2.35137526, -2.35137526,
-       -3.04452244, -3.04452244, -3.04452244, -2.35137526, -2.35137526,
-       -2.35137526, -2.35137526, -2.35137526, -3.04452244, -1.94591015,
-       -3.04452244, -2.35137526, -2.35137526, -3.04452244, -1.94591015,
-       -3.04452244, -1.65822808, -3.04452244, -2.35137526, -3.04452244,
-       -3.04452244, -3.04452244])
-</code></pre>
-
-<pre><code class="language-python"># 朴素贝叶斯分类函数
-def classifyNB(vec2classify,p0Vec,p1Vec,pClass1):
-    #元素相乘
-    p1=sum(vec2classify*p1Vec)+log(pClass1)
-    p0=sum(vec2classify*p0Vec)+log(pClass1)
-    if p1&gt;p0:
-        return 1
-    else:
-        return 0
-</code></pre>
-
-<pre><code class="language-python">def testingNB():
-    listOPosts,listClasses=bayes.loadDataSet()
-    myVocabList=createVocabList(listOPosts)
-    trainMat=[]
-    for postinDoc in listOPosts:
-        trainMat.append(setOfWordsVec(myVocabList,postinDoc))
-
-    p0V,p1V,pAb=trainNB0(array(trainMat),array(listClasses))
-
-    testEntry=[&#39;love&#39;,&#39;my&#39;,&#39;dalmation&#39;]
-    thisDoc=array(setOfWordsVec(myVocabList,testEntry))
-    print testEntry,&#39;classified as : &#39;,classifyNB(thisDoc,p0V,p1V,pAb)
-
-    testEntry=[&#39;stupid&#39;,&#39;garbage&#39;]
-    thisDoc=array(setOfWordsVec(myVocabList,testEntry))
-    print testEntry,&#39;classified as : &#39;,classifyNB(thisDoc,p0V,p1V,pAb)
-</code></pre>
-
-<pre><code class="language-python">testingNB()
-</code></pre>
-
-<pre><code>[&#39;love&#39;, &#39;my&#39;, &#39;dalmation&#39;] classified as :  0
-[&#39;stupid&#39;, &#39;garbage&#39;] classified as :  1
-</code></pre>
-
-<h1 id="toc_1">使用朴素贝叶斯过滤垃圾邮件</h1>
-
-<ul>
-<li>收集数据：提供文本文件</li>
-<li>准备数据：将文本文件解析成词条向量</li>
-<li>分析数据：检查词条确保解析的正确性</li>
-<li>训练算法：使用我们之前建立的trainNB0()函数</li>
-<li>测试算法：使用classifyNB()</li>
-</ul>
-
-<pre><code class="language-python">mySent=&#39;This book is the best book on Python or M.L. I have ever laid eyes upon.&#39;
-</code></pre>
-
-<pre><code class="language-python"># 文件解析及完整的垃圾邮件测试函数
-def textParse(bigString):
-    import re
-    listOfTokens=re.split(r&#39;\W*&#39;,bigString)
-    return [tok.lower() for tok in listOfTokens if len(tok)&gt;2]
-</code></pre>
-
-<pre><code class="language-python">def spamTest():
-    docList=[];classList=[];fullText=[]
-    for i in range(1,26):
-        # 导入邮件文本，并解析成词条
-        wordList=textParse(open(&#39;email/spam/%d.txt&#39; %i).read())
-        docList.append(wordList)
-        fullText.extend(wordList)
-        classList.append(1)
-
-        wordList=textParse(open(&#39;email/ham/%d.txt&#39; %i).read())
-        docList.append(wordList)
-        fullText.extend(wordList)
-        classList.append(0)
-    # 生成词汇表
-    vocabList=createVocabList(docList)
-
-    # 随机构建训练集、测试集
-    trainingSet=range(50);testSet=[]
-    for i in range(10):
-        randIndex=int(random.uniform(0,len(trainingSet)))
-        testSet.append(trainingSet[randIndex])
-        del(trainingSet[randIndex])
-
-    # 生成测试集的特征向量
-    trainMat=[];trainClasses=[]
-    for docIndex in trainingSet:
-        trainMat.append(setOfWordsVec(vocabList,docList[docIndex]))
-        trainClasses.append(classList[docIndex])
-
-    p0V,p1V,pSpam=trainNB0(trainMat,trainClasses)
-
-    # 测试集，测试错误率
-    errorCount=0
-    for docIndex in testSet:
-        wordVector=setOfWordsVec(vocabList,docList[docIndex])
-        if classifyNB(wordVector,p0V,p1V,pSpam)!=classList[docIndex]:
-            errorCount+=1
-    print &#39;the error rate is : &#39;,float(errorCount)/len(testSet)
-</code></pre>
-
-<pre><code class="language-python">spamTest()
-</code></pre>
-
-<pre><code>the error rate is :  0.2
-</code></pre>
-
-<h1 id="toc_2">使用朴素贝叶斯分类器从个人广告中获取区域倾向</h1>
-
-<ul>
-<li>收集数据:从RSS源收集内容,这里需要对RSS源构建一个接口</li>
-<li>准备数据:将文本文件解析成词条向量</li>
-<li>分析数据:检查词条确保解析的正确性</li>
-<li>训练算法:使用我们之前建立的trainNB0()函数</li>
-<li>测试算法:观察错误率,确保分类器可用.可以修改切分程序,以降低错误率,提高分类结果.</li>
-<li>使用算法:构建一个完整的程序,封装所有内容.给定两个RSS源,该程序会显示最常用的公共词.</li>
-</ul>
-
-<p>下面将使用来自不同城市的广告训练一个分类器，然后观察分类器的效果。我们的目的并不是使用该分类器进行分类，而是通过观察单词和条件概率值来发现与特定城市相关的内容。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Presto的学习笔记]]></title>
-    <link href="http://dmlcoding.com/15198745641385.html"/>
-    <updated>2018-03-01T11:22:44+08:00</updated>
-    <id>http://dmlcoding.com/15198745641385.html</id>
-    <content type="html"><![CDATA[
-<h1 id="toc_0">是什么?可以做什么?</h1>
-
-<ol>
-<li>Presto是一个开源的分布式SQL查询引擎，适用于交互式分析查询，数据量支持GB到PB字节。</li>
-<li>Presto支持在线数据查询，包括Hive, Cassandra, 关系数据库以及专有数据存储。 一条Presto查询可以将多个数据源的数据进行合并，可以跨越整个组织进行分析。</li>
-<li>作为Hive和Pig（Hive和Pig都是通过MapReduce的管道流来完成HDFS数据的查询）的替代者，Presto不仅可以访问HDFS，也可以操作不同的数据源，包括：RDBMS和其他的数据源（例如：Cassandra）。</li>
-<li>查询后的数据自动分页,这个很不错.</li>
-</ol>
-
-<span id="more"></span><!-- more -->
-
-<h1 id="toc_1">源码编译</h1>
-
-<p>下载<strong>presto</strong>源码包地址:<a href="https://github.com/prestodb/presto/releases">https://github.com/prestodb/presto/releases</a></p>
-
-<p>安装文档地址(注意这个中文文档的版本是0.100):</p>
-
-<p>注意:</p>
-
-<ul>
-<li>jdk得是1.8以上</li>
-<li>我是用的presto0.161</li>
-</ul>
-
-<pre><code>tar -xzvf presto-0.161.tar.gz
-
-# 编译
-./mvnw clean install -DskipTests
-</code></pre>
-
-<p>在pom.xml文件中加入阿里云的仓库,加速下载依赖</p>
-
-<pre><code>&lt;repositories&gt;
-    &lt;repository&gt;
-        &lt;id&gt;nexus-aliyun&lt;/id&gt;
-        &lt;name&gt;Nexus aliyun&lt;/name&gt;
-        &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;
-    &lt;/repository&gt;
-&lt;/repositories&gt;
-</code></pre>
-
-<p>编译报错</p>
-
-<pre><code>[ERROR] Failed to execute goal pl.project13.maven:git-commit-id-plugin:2.1.13:revision (default) on project presto-spi: .git directory could not be found! Please specify a valid [dotGitDirectory] in your pom.xml -&gt; [Help 1]
-org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal pl.project13.maven:git-commit-id-plugin:2.1.13:revision (default) on project presto-spi: .git directory could not be found! Please specify a valid [dotGitDirectory] in your pom.xml
-    at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:212)
-    at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
-    at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)
-    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:116)
-    at org.apache.maven.lifecycle.internal.builder.multithreaded.MultiThreadedBuilder$1.call(MultiThreadedBuilder.java:185)
-    at org.apache.maven.lifecycle.internal.builder.multithreaded.MultiThreadedBuilder$1.call(MultiThreadedBuilder.java:181)
-    at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-    at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
-    at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-    at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-    at java.lang.Thread.run(Thread.java:745)
-Caused by: org.apache.maven.plugin.MojoExecutionException: .git directory could not be found! Please specify a valid [dotGitDirectory] in your pom.xml
-    at pl.project13.maven.git.GitCommitIdMojo.throwWhenRequiredDirectoryNotFound(GitCommitIdMojo.java:432)
-    at pl.project13.maven.git.GitCommitIdMojo.execute(GitCommitIdMojo.java:337)
-    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
-    at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:207)
-</code></pre>
-
-<p>解决办法</p>
-
-<pre><code>pom文件中加入这个插件
-&lt;pluginManagement&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;pl.project13.maven&lt;/groupId&gt;
-                &lt;artifactId&gt;git-commit-id-plugin&lt;/artifactId&gt;
-                &lt;configuration&gt;
-                    &lt;skip&gt;true&lt;/skip&gt;
-                &lt;/configuration&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/pluginManagement&gt;
-</code></pre>
-
-<h1 id="toc_2">部署包安装</h1>
-
-<h2 id="toc_3">下载地址</h2>
-
-<p>下载presto-cli(记住要下载的presto-cli-xxxx-executable.jar):<a href="https://repo1.maven.org/maven2/com/facebook/presto/presto-cli">https://repo1.maven.org/maven2/com/facebook/presto/presto-cli</a></p>
-
-<p>下载部署包的地址:<a href="https://repo1.maven.org/maven2/com/facebook/presto/presto-server/">https://repo1.maven.org/maven2/com/facebook/presto/presto-server/</a></p>
-
-<h2 id="toc_4">服务器说明</h2>
-
-<p>机器共有三台U006,U007,U008</p>
-
-<ul>
-<li>coordinator
-
-<ul>
-<li>U007</li>
-</ul></li>
-<li>discovery
-
-<ul>
-<li>U007</li>
-</ul></li>
-<li>worker
-
-<ul>
-<li>U006</li>
-<li>U008</li>
-</ul></li>
-</ul>
-
-<p>coordinator和worker的其他配置都是一样的,除了config.properties不一样.具体哪里不一样,看下面的配置说明.</p>
-
-<h1 id="toc_5">配置说明</h1>
-
-<p>以下配置均是presto0.161版本的.如果你的版本不一样,启动后如果报错了,那么可能是配置文件里面的参数和版本对应不上,请找相应版本的配置.</p>
-
-<p>在presto-server-0.161目录下新建etc目录,下面的配置文件均在此etc目录下</p>
-
-<pre><code>[druid@U007 presto-server-0.161]$ tree etc/
-etc/
-├── catalog
-│   ├── hive.properties
-│   └── jmx.properties
-├── config.properties
-├── jvm.config
-├── log.properties
-└── node.properties
-</code></pre>
-
-<h2 id="toc_6">jvm.config</h2>
-
-<blockquote>
-<p>包含一系列在启动JVM的时候需要使用的命令行选项。这份配置文件的格式是：一系列的选项，每行配置一个单独的选项。由于这些选项不在shell命令中使用。 因此即使将每个选项通过空格或者其他的分隔符分开，java程序也不会将这些选项分开，而是作为一个命令行选项处理,信息如下：</p>
-</blockquote>
-
-<p>VM 系统属性 <code>HADOOP_USER_NAME</code> 来指定用户名</p>
-
-<pre><code>-server
--Xmx16G
--XX:+UseG1GC
--XX:G1HeapRegionSize=32M
--XX:+UseGCOverheadLimit
--XX:+ExplicitGCInvokesConcurrent
--XX:+HeapDumpOnOutOfMemoryError
--XX:OnOutOfMemoryError=kill -9 %p
--DHADOOP_USER_NAME=hdfs
-</code></pre>
-
-<h2 id="toc_7">log.properties</h2>
-
-<blockquote>
-<p>这个配置文件中允许你根据不同的日志结构设置不同的日志级别。每个logger都有一个名字（通常是使用logger的类的全标示类名）. Loggers通过名字中的“.“来表示层级和集成关系，信息如下：</p>
-</blockquote>
-
-<pre><code>com.facebook.presto=INFO
-</code></pre>
-
-<ul>
-<li>配置日志等级，类似于log4j。四个等级：DEBUG,INFO,WARN,ERROR</li>
-</ul>
-
-<h2 id="toc_8">node.properties</h2>
-
-<blockquote>
-<p>包含针对于每个节点的特定的配置信息。 一个节点就是在一台机器上安装的Presto实例，<strong>etc/node.properties</strong>配置文件至少包含如下配置信息</p>
-</blockquote>
-
-<pre><code>node.environment=production
-node.id=ffffffff-ffff-ffff-ffff-ffffffffffff # 每个节点的node.id一定要不一样
-node.data-dir=/home/druid/data/presto # 计算临时存储目录,presto得有读写权限
-</code></pre>
-
-<p>说明:</p>
-
-<ol>
-<li>node.environment： 集群名称, 所有在同一个集群中的Presto节点必须拥有相同的集群名称.</li>
-<li>node.id： 每个Presto节点的唯一标示。每个节点的node.id都必须是唯一的。在Presto进行重启或者升级过程中每个节点的node.id必须保持不变。如果在一个节点上安装多个Presto实例（例如：在同一台机器上安装多个Presto节点），那么每个Presto节点必须拥有唯一的node.id.</li>
-<li>node.data-dir： 数据存储目录的位置（操作系统上的路径）, Presto将会把日期和数据存储在这个目录下</li>
-</ol>
-
-<h2 id="toc_9">config.properties</h2>
-
-<h3 id="toc_10">coordinator 主节点配置</h3>
-
-<pre><code>coordinator=true
-node-scheduler.include-coordinator=false
-http-server.http.port=8585
-query.max-memory=10GB
-discovery-server.enabled=true
-discovery.uri=http://U007:8585
-</code></pre>
-
-<p>说明:</p>
-
-<ol>
-<li><p>coordinator表示此节点是否作为一个coordinator。每个节点可以是一个worker，也可以同时是一个coordinator，但作为性能考虑，一般大型机群最好将两者分开。</p></li>
-<li><p>若coordinator设置成true，则此节点成为一个coordinator。</p></li>
-<li><p>若node-scheduler.include-coordinator设置成true，则成为一个worker，两者可以同时设置成true，此节点拥有两种身份。在一个节点上的Presto server即作为coordinator又作为worke将会降低查询性能。因为如果一个服务器作为worker使用，那么大部分的资源都会被worker占用，那么就不会有足够的资源进行关键任务调度、管理和监控查询执行.</p></li>
-<li><p>http-server.http.port：指定HTTP server的端口。Presto 使用 HTTP进行内部和外部的所有通讯.</p></li>
-<li><p>query.max-memory=10GB：一个单独的任务使用的最大内存 (一个查询计划的某个执行部分会在一个特定的节点上执行)。 这个配置参数限制的GROUP BY语句中的Group的数目、JOIN关联中的右关联表的大小、ORDER BY语句中的行数和一个窗口函数中处理的行数。 该参数应该根据并发查询的数量和查询的复杂度进行调整。如果该参数设置的太低，很多查询将不能执行；但是如果设置的太高将会导致JVM把内存耗光.</p></li>
-<li><p>discovery-server.enabled：Presto 通过Discovery 服务来找到集群中所有的节点。为了能够找到集群中所有的节点，每一个Presto实例都会在启动的时候将自己注册到discovery服务。Presto为了简化部署，并且也不想再增加一个新的服务进程，Presto coordinator 可以运行一个内嵌在coordinator 里面的Discovery 服务。这个内嵌的Discovery 服务和Presto共享HTTP server并且使用同样的端口.</p></li>
-<li><p>discovery.uri：Discovery server的URI。由于启用了Presto coordinator内嵌的Discovery 服务，因此这个uri就是Presto coordinator的uri。注意：这个URI一定不能以“/“结尾</p></li>
-</ol>
-
-<h3 id="toc_11">worker节点配置</h3>
-
-<pre><code>coordinator=false
-node-scheduler.include-coordinator=true
-http-server.http.port=8585
-query.max-memory=5GB
-query.max-memory-per-node=1GB
-discovery.uri=http://U007:8585
-</code></pre>
-
-<h2 id="toc_12">catalog</h2>
-
-<p>hive.properties(hive连接器的配置)</p>
-
-<p>连接hive</p>
-
-<pre><code># 在etc/catalog目录下,新建hive.properties文件,配置上hive的一些信息
-[druid@U006 catalog]$ pwd
-/home/druid/presto-server-0.161/etc/catalog
-[druid@U006 catalog]$ more hive.properties
-connector.name=hive-cdh5
-hive.metastore.uri=thrift://U006:9083
-hive.config.resources=/etc/hadoop/conf.cloudera.yarn/core-site.xml,/etc/hadoop/conf.clouder
-a.yarn/hdfs-site.xml
-</code></pre>
-
-<p>保证每个节点presto对core-site.xml,hdfs-site.xml两个文件有读权限</p>
-
-<h1 id="toc_13">启动停止presto</h1>
-
-<h2 id="toc_14">单节点启动</h2>
-
-<p>在每个节点依次执行启动脚本</p>
-
-<pre><code># 后台运行
-bin/launcher start
-# 前台运行
-bin/launcher run
-
-# 重启presto
-bin/launcher restart
-
-# 停止presto
-bin/launcher stop
-</code></pre>
-
-<h2 id="toc_15">批量启动停止脚本</h2>
-
-<pre><code>ssh -t ${i} -C &#39;. /usr/local/bin/env.sh &amp;&amp; /usr/local/presto-server-0.161/bin/launcher restart&#39;
-</code></pre>
-
-<h1 id="toc_16">监控presto</h1>
-
-<p>启动完成后,在浏览器输入:</p>
-
-<pre><code>http://U007:8585
-</code></pre>
-
-<p>这个地址也就是coordinator的discovery.uri</p>
-
-<h1 id="toc_17">cli连接</h1>
-
-<h2 id="toc_18">连接器注意说明</h2>
-
-<ul>
-<li><p>cli下载地址(找到自己的版本下载):<a href="https://repo1.maven.org/maven2/com/facebook/presto/presto-cli">https://repo1.maven.org/maven2/com/facebook/presto/presto-cli</a></p></li>
-<li><p>连接器的配置文件必须是以<code>.properties</code>后缀结尾的,前面的名字就是连接器的catalog名字</p></li>
-<li><p>每次新加连接器配置文件后,都需要在presto的所有机器上加上相同的配置文件,然后重启</p></li>
-<li><p>要下载对应版本的cli连接器,不然可能不好使.名字类似<code>presto-cli-0.161-executable.jar</code></p></li>
-</ul>
-
-<h2 id="toc_19">hive连接器</h2>
-
-<p>配置说明(hive连接器的配置在说catalog的时候已经配置好了,你可以回头看看):</p>
-
-<ul>
-<li>connector.name=hive-cdh5(根据你的hive版本来选择)</li>
-<li>hive.metastore.uri=thrift://U006:9083(hive的metastore地址)</li>
-<li>hive.config.resources=/etc/hadoop/conf.cloudera.yarn/core-(配置文件的地址)</li>
-</ul>
-
-<pre><code>chmod +x presto-cli-0.161-executable.jar
-./presto-cli-0.161-executable.jar --server U007:8585 --catalog hive --schema default
-或者 mv presto-cli-0.161-executable.jar presto都可以
-./presto --server U007:8585 --catalog hive --schema default
-执行该语句后在 presto shell 中执行: show tables 查看 hive 中的 default 库下的表。如果出现对应的表，表安装验证成功
-</code></pre>
-
-<h2 id="toc_20">jmx连接器</h2>
-
-<ul>
-<li>JMX提供了有关JVM中运行的Java虚拟机和软件的信息</li>
-<li>jmx连接器用于在presto服务器中查询JMX信息</li>
-</ul>
-
-<p>在etc/catalog目录下新建<strong>jmx.properties</strong></p>
-
-<pre><code>connector.name=jmx
-</code></pre>
-
-<p>现在连接presto cli以启用JMX插件</p>
-
-<pre><code>[druid@U007 presto-server-0.161]$ ./presto --server U007:8585 --catalog jmx --schema jmx
-presto:jmx&gt; show schemas from jmx;
-       Schema
---------------------
- current
- history
- information_schema
-(3 rows)
-
-Query 20171012_063601_00020_yuhat, FINISHED, 2 nodes
-Splits: 2 total, 2 done (100.00%)
-0:00 [3 rows, 47B] [39 rows/s, 614B/s]
-</code></pre>
-
-<h2 id="toc_21">MySQL连接器</h2>
-
-<p>vim etc/catalog/mysql.properties</p>
-
-<pre><code>connector.name=mysql
-connection-url=jdbc:mysql://10.10.25.13:3306
-connection-user=root
-connection-password=wankatest***
-</code></pre>
-
-<p>schema 后面跟的mysql的数据库,</p>
-
-<pre><code>[druid@U007 presto-server-0.161]$ ./presto --server U007:8585 --catalog mysql --schema test
-presto:test&gt; show tables;
-Query 20171012_071844_00002_iz4q8 failed: No worker nodes available
-
-presto:test&gt; show tables;
-          Table
---------------------------
- dmp_summary_daily_report
- tb_dmp_stat_appboot
- tb_dmp_stat_asdk_detail
- tb_dmp_stat_device
- tb_leidian1
- tb_leidian2
-(6 rows)
-
-Query 20171012_072024_00003_iz4q8, FINISHED, 2 nodes
-Splits: 2 total, 2 done (100.00%)
-0:01 [6 rows, 190B] [6 rows/s, 196B/s]
-</code></pre>
-
-<h2 id="toc_22">kafka连接器</h2>
-
-<p>暂时没这个需求,未测试.</p>
-
-<h2 id="toc_23">系统连接器</h2>
-
-<ul>
-<li>系统连接器提供了正在运行的Presto集群的一些信息和指标</li>
-<li>那么这个就可以通过标准sql很方便的查询这些信息</li>
-<li>系统连接器不需要配置,已经内置了.我们可以很方便的访问名为<code>system</code>的catalog</li>
-</ul>
-
-<pre><code>[druid@U007 presto-server-0.161]$ ./presto --server U007:8585 --catalog system
-presto&gt; show schemas from system;
-       Schema
---------------------
- information_schema
- jdbc
- metadata
- runtime
-(4 rows)
-
-Query 20171012_082437_00019_iz4q8, FINISHED, 2 nodes
-Splits: 2 total, 2 done (100.00%)
-0:00 [4 rows, 57B] [70 rows/s, 997B/s]
-</code></pre>
-
-<p>查询有多少个节点</p>
-
-<pre><code>presto&gt; SELECT * FROM system.runtime.nodes;
-                  node_id                  |        http_uri         | node_version | coord
--------------------------------------------+-------------------------+--------------+------
- ffffffff-ffff-ffff-ffff-ffffffffffff-u006 | http://10.10.25.13:8585 | 0.161        | false
- ffffffff-ffff-ffff-ffff-ffffffffffff-u007 | http://10.10.25.14:8585 | 0.161        | true
- ffffffff-ffff-ffff-ffff-ffffffffffff-u008 | http://10.10.25.15:8585 | 0.161        | false
-(3 rows)
-
-Query 20171012_082952_00023_iz4q8, FINISHED, 2 nodes
-Splits: 2 total, 2 done (100.00%)
-4:08 [3 rows, 228B] [0 rows/s, 0B/s]
-</code></pre>
-
-<h2 id="toc_24">JDBC接口</h2>
-
-<h3 id="toc_25">依赖下载安装</h3>
-
-<ul>
-<li>下载地址(找到自己的版本下载):<a href="https://repo1.maven.org/maven2/com/facebook/presto/presto-jdbc">https://repo1.maven.org/maven2/com/facebook/presto/presto-jdbc</a></li>
-<li><code>presto-jdbc-0.161.jar</code>在jar文件下载之后，将其添加到Java应用程序的classpath中。</li>
-<li>我不太喜欢用jar包的方式,那么可以在pom文件加入presto-jdbc的依赖</li>
-<li><a href="http://mvnrepository.com/artifact/com.facebook.presto/presto-jdbc">http://mvnrepository.com/artifact/com.facebook.presto/presto-jdbc</a> 找到自己相应的版本</li>
-</ul>
-
-<pre><code>&lt;!-- https://mvnrepository.com/artifact/com.facebook.presto/presto-jdbc --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.facebook.presto&lt;/groupId&gt;
-    &lt;artifactId&gt;presto-jdbc&lt;/artifactId&gt;
-    &lt;version&gt;0.161&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
-
-<p>Presto支持的URL格式如下：</p>
-
-<pre><code>jdbc:presto://host:port
-jdbc:presto://host:port/catalog
-jdbc:presto://host:port/catalog/schema
-</code></pre>
-
-<p>例如，可以使用下面的URL来连接运行在U007服务器8585端口上的Presto的mysql catalog中的test schema：</p>
-
-<pre><code>jdbc:presto://10.10.25.14:8585/mysql/test
-</code></pre>
-
-<p>这个url就是来连接hive catalog中的default schema</p>
-
-<pre><code>jdbc:presto://10.10.25.14:8585/hive/default
-</code></pre>
-
-<h3 id="toc_26">Java代码</h3>
-
-<p><strong>读取mysql下的test库下的所有表</strong></p>
-
-<pre><code>public class PrestoJdbcDemo {
-
-  public static void main(String[] args) throws SQLException, ClassNotFoundException {
-    Class.forName(&quot;com.facebook.presto.jdbc.PrestoDriver&quot;);
-    Connection connection = DriverManager
-        .getConnection(&quot;jdbc:presto://10.10.25.14:8585/mysql/test&quot;, &quot;root&quot;, &quot;wankatest***&quot;);
-    Statement stmt = connection.createStatement();
-    ResultSet rs = stmt.executeQuery(&quot;show tables&quot;);
-    while (rs.next()) {
-      System.out.println(rs.getString(1));
-    }
-    rs.close();
-    connection.close();
-
-  }
-}
-</code></pre>
-
-<p><strong>读取hive下的default库下的所有表</strong></p>
-
-<pre><code>public class PrestoJdbcDemo {
-
-  public static void main(String[] args) throws SQLException, ClassNotFoundException {
-    Class.forName(&quot;com.facebook.presto.jdbc.PrestoDriver&quot;);
-    Connection connection = DriverManager
-        .getConnection(&quot;jdbc:presto://10.10.25.14:8585/hive/default&quot;,&quot;root&quot;,null);
-    Statement stmt = connection.createStatement();
-    ResultSet rs = stmt.executeQuery(&quot;show tables&quot;);
-    while (rs.next()) {
-      System.out.println(rs.getString(1));
-    }
-    rs.close();
-    connection.close();
-
-  }
-}
-</code></pre>
-
-<h1 id="toc_27">不同数据源之间的join</h1>
-
-<p>presto的一个特性就是其支持在不同的数据源之间进行join</p>
-
-<p>当连接presto的客户端的时候,也可以不指定连接器</p>
-
-<p>不同的数据源就用catalog名称指定,然后加上库名表明即可.</p>
-
-<pre><code>./presto --server U007:8585
- show tables from mysql.dsp_test;
-</code></pre>
-
-<h1 id="toc_28">presto提供的函数和运算符</h1>
-
-<p>参考文档:<a href="http://prestodb-china.com/docs/current/functions.html">http://prestodb-china.com/docs/current/functions.html</a></p>
-
-<h1 id="toc_29">看日志</h1>
-
-<h2 id="toc_30">日志路径</h2>
-
-<p><strong>node.properties</strong>中配置了node.data-dir=/home/druid/data/presto</p>
-
-<pre><code>[druid@U007 presto]$ tree
-.
-├── etc -&gt; /home/druid/presto-server-0.161/etc
-├── plugin -&gt; /home/druid/presto-server-0.161/plugin
-└── var
-    ├── log
-    │   ├── http-request.log
-    │   ├── launcher.log
-    │   └── server.log
-    └── run
-        └── launcher.pid
-
-5 directories, 4 files
-</code></pre>
-
-<p>出现错误后,我们主要关注var/log目录下的日志.</p>
-
-<p>当服务有问题的时候,看server.log找到报错原因,从而解决问题.</p>
-
-<h1 id="toc_31">常见错误</h1>
-
-<h2 id="toc_32">连接不上连接器</h2>
-
-<p>类似这样的错误</p>
-
-<pre><code>No factory for connector mysql
-No factory for connector hive
-</code></pre>
-
-<p>如果服务报相关这样的错误,那么就需要关注各个连接器的配置文件是否写对了.各个连接器的配置文件是否在每个presto服务器上都部署了.</p>
-
-<h1 id="toc_33">Presto的实现原理</h1>
-
-<p><img src="http://oz6wyfxp0.bkt.clouddn.com/1512097348.png?imageMogr2/thumbnail/!70p" alt="Presto架构"/></p>
-
-<ul>
-<li>Presto的架构</li>
-<li>Presto执行原理</li>
-</ul>
-
-<p>简单来说:</p>
-
-<ol>
-<li>cli客户端把查询需求发送给Coordinator节点.Coordinator节点负责解析sql语句,生成执行计划,分发执行任务给worer节点执行.所以worker节点负责实际执行查询任务.</li>
-<li>worker节点启动后向discovery server服务注册,因此coordinator就可以从discovery server获得可以正常工作的worker节点.</li>
-</ol>
-
-<p>深入来说:</p>
-
-<ol>
-<li>参考网上相关blog.</li>
-<li>买书.</li>
-<li>看源码!</li>
-</ol>
-
-<h1 id="toc_34">参考文档</h1>
-
-<ul>
-<li><p><a href="https://prestodb.io">presto官网</a></p></li>
-<li><p><a href="https://github.com/prestodb/presto">presto-Github</a></p></li>
-<li><p><a href="http://prestodb-china.com">presto-京东维护-中文文档</a></p></li>
-<li><p><a href="https://tech.meituan.com/presto.html">Presto实现原理和美团的使用实践</a></p></li>
-<li><p><a href="http://getindata.com/tutorial-using-presto-to-combine-data-from-hive-and-mysql-in-one-sql-like-query/">Presto-Hive-Mysql-InteractiveQuery</a></p></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[字符串编码转换]]></title>
-    <link href="http://dmlcoding.com/15219482100406.html"/>
-    <updated>2018-03-25T11:23:30+08:00</updated>
-    <id>http://dmlcoding.com/15219482100406.html</id>
-    <content type="html"><![CDATA[
-<ul>
-<li>乱码之类的几乎都是由汉字引起的。</li>
-<li>任何平台的任何编码 都能和 Unicode 互相转换</li>
-<li>UTF-8 与 GBK 互相转换，那就先把UTF-8转换成Unicode，再从Unicode转换成GBK，反之同理。</li>
-</ul>
-
-<span id="more"></span><!-- more -->
-
-<h2 id="toc_0">decode与encode</h2>
-
-<ul>
-<li><code>decode</code>的作用是将其他编码的字符串转换成 Unicode 编码</li>
-<li><code>encode</code>的作用是将 Unicode 编码转换成其他编码的字符串</li>
-<li>一句话：UTF-8是对Unicode字符集进行编码的一种编码方式</li>
-</ul>
-
-<h2 id="toc_1">utf-8转gbk</h2>
-
-<pre><code class="language-python"># 这是一个 UTF-8 编码的字符串
-utf8Str = &quot;你好地球&quot;
-
-# 1. 将 UTF-8 编码的字符串 转换成 Unicode 编码
-unicodeStr = utf8Str.decode(&quot;UTF-8&quot;)
-
-# 2. 再将 Unicode 编码格式字符串 转换成 GBK 编码
-gbkData = unicodeStr.encode(&quot;GBK&quot;)
-
-</code></pre>
-
-<h2 id="toc_2">gbk转utf-8</h2>
-
-<pre><code>
-# 1. 再将 GBK 编码格式字符串 转化成 Unicode
-unicodeStr = gbkData.decode(&quot;gbk&quot;)
-
-# 2. 再将 Unicode 编码格式字符串转换成 UTF-8
-utf8Str = unicodeStr.encode(&quot;UTF-8&quot;)
-
-</code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[json和jsonPATH[整理自网络]]]></title>
-    <link href="http://dmlcoding.com/15219476833792.html"/>
-    <updated>2018-03-25T11:14:43+08:00</updated>
-    <id>http://dmlcoding.com/15219476833792.html</id>
-    <content type="html"><![CDATA[
-<p>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式，它使得人们很容易的进行阅读和编写。同时也方便了机器进行解析和生成。适用于进行数据交互的场景，比如网站前台与后台之间的数据交互。</p>
-
-<p>JSON和XML的比较可谓不相上下。</p>
-
-<span id="more"></span><!-- more -->
-
-<p>Python 2.7中自带了JSON模块，直接<code>import json</code>就可以使用了。</p>
-
-<p>官方文档：<a href="http://docs.python.org/library/json.html">http://docs.python.org/library/json.html</a></p>
-
-<p>Json在线解析网站：<a href="http://www.json.cn/#">http://www.json.cn/#</a></p>
-
-<h1 id="toc_0">JSON</h1>
-
-<p>json简单说就是javascript中的对象和数组，所以这两种结构就是对象和数组两种结构，通过这两种结构可以表示各种复杂的结构</p>
-
-<ol>
-<li><p>对象：对象在js中表示为<code>{ }</code>括起来的内容，数据结构为 <code>{ key：value, key：value, ... }</code>的键值对的结构，在面向对象的语言中，key为对象的属性，value为对应的属性值，所以很容易理解，取值方法为 对象.key 获取属性值，这个属性值的类型可以是数字、字符串、数组、对象这几种。</p></li>
-<li><p>数组：数组在js中是中括号<code>[ ]</code>括起来的内容，数据结构为 <code>[&quot;Python&quot;, &quot;javascript&quot;, &quot;C++&quot;, ...]</code>，取值方式和所有语言中一样，使用索引获取，字段值的类型可以是 数字、字符串、数组、对象几种。</p></li>
-</ol>
-
-<h2 id="toc_1">导入json模块</h2>
-
-<pre><code>import json
-</code></pre>
-
-<p>json模块提供了四个功能：<code>dumps</code>、<code>dump</code>、<code>loads</code>、<code>load</code>，用于字符串 和 python数据类型间进行转换。</p>
-
-<h2 id="toc_2">1. json.loads()</h2>
-
-<p>把Json格式字符串解码转换成Python对象 从json到python的类型转化对照如下：</p>
-
-<p><img src="media/15219476833792/15219477820474.jpg" alt=""/></p>
-
-<pre><code># json_loads.py
-
-import json
-
-strList = &#39;[1, 2, 3, 4]&#39;
-
-strDict = &#39;{&quot;city&quot;: &quot;北京&quot;, &quot;name&quot;: &quot;大猫&quot;}&#39;
-
-json.loads(strList) 
-# [1, 2, 3, 4]
-
-json.loads(strDict) # json数据自动按Unicode存储
-# {u&#39;city&#39;: u&#39;\u5317\u4eac&#39;, u&#39;name&#39;: u&#39;\u5927\u732b&#39;}
-
-</code></pre>
-
-<h2 id="toc_3">2. json.dumps()</h2>
-
-<p>实现python类型转化为json字符串，返回一个str对象 把一个Python对象编码转换成Json字符串</p>
-
-<p>从python原始类型向json类型的转化对照如下：</p>
-
-<p><img src="media/15219476833792/15219478024682.jpg" alt=""/></p>
-
-<pre><code># json_dumps.py
-
-import json
-import chardet
-
-listStr = [1, 2, 3, 4]
-tupleStr = (1, 2, 3, 4)
-dictStr = {&quot;city&quot;: &quot;北京&quot;, &quot;name&quot;: &quot;大猫&quot;}
-
-json.dumps(listStr)
-# &#39;[1, 2, 3, 4]&#39;
-json.dumps(tupleStr)
-# &#39;[1, 2, 3, 4]&#39;
-
-# 注意：json.dumps() 序列化时默认使用的ascii编码
-# 添加参数 ensure_ascii=False 禁用ascii编码，按utf-8编码
-# chardet.detect()返回字典, 其中confidence是检测精确度
-
-json.dumps(dictStr) 
-# &#39;{&quot;city&quot;: &quot;\\u5317\\u4eac&quot;, &quot;name&quot;: &quot;\\u5927\\u5218&quot;}&#39;
-
-chardet.detect(json.dumps(dictStr))
-# {&#39;confidence&#39;: 1.0, &#39;encoding&#39;: &#39;ascii&#39;}
-
-print json.dumps(dictStr, ensure_ascii=False) 
-# {&quot;city&quot;: &quot;北京&quot;, &quot;name&quot;: &quot;大刘&quot;}
-
-chardet.detect(json.dumps(dictStr, ensure_ascii=False))
-# {&#39;confidence&#39;: 0.99, &#39;encoding&#39;: &#39;utf-8&#39;}
-
-</code></pre>
-
-<p><strong><em>chardet是一个非常优秀的编码识别模块，可通过pip安装</em></strong></p>
-
-<h2 id="toc_4">3. json.dump()</h2>
-
-<p>将Python内置类型序列化为json对象后写入文件</p>
-
-<pre><code># json_dump.py
-
-import json
-
-listStr = [{&quot;city&quot;: &quot;北京&quot;}, {&quot;name&quot;: &quot;大刘&quot;}]
-json.dump(listStr, open(&quot;listStr.json&quot;,&quot;w&quot;), ensure_ascii=False)
-
-dictStr = {&quot;city&quot;: &quot;北京&quot;, &quot;name&quot;: &quot;大刘&quot;}
-json.dump(dictStr, open(&quot;dictStr.json&quot;,&quot;w&quot;), ensure_ascii=False)
-
-</code></pre>
-
-<h2 id="toc_5">4. json.load()</h2>
-
-<p>读取文件中json形式的字符串元素 转化成python类型</p>
-
-<pre><code># json_load.py
-
-import json
-
-strList = json.load(open(&quot;listStr.json&quot;))
-print strList
-
-# [{u&#39;city&#39;: u&#39;\u5317\u4eac&#39;}, {u&#39;name&#39;: u&#39;\u5927\u5218&#39;}]
-
-strDict = json.load(open(&quot;dictStr.json&quot;))
-print strDict
-# {u&#39;city&#39;: u&#39;\u5317\u4eac&#39;, u&#39;name&#39;: u&#39;\u5927\u5218&#39;}
-
-</code></pre>
-
-<h1 id="toc_6">JsonPath</h1>
-
-<p>JsonPath 是一种信息抽取类库，是从JSON文档中抽取指定信息的工具，提供多种语言实现版本，包括：Javascript, Python， PHP 和 Java。</p>
-
-<p>JsonPath 对于 JSON 来说，相当于 XPATH 对于 XML。</p>
-
-<blockquote>
-<p>下载地址：<a href="https://pypi.python.org/pypi/jsonpath/">https://pypi.python.org/pypi/jsonpath</a></p>
-
-<p>安装方法：点击<code>Download URL</code>链接下载jsonpath，解压之后执行<code>python setup.py install</code></p>
-
-<p>官方文档：<a href="http://goessner.net/articles/JsonPath/">http://goessner.net/articles/JsonPath</a></p>
-</blockquote>
-
-<h2 id="toc_7">JsonPath与XPath语法对比：</h2>
-
-<p>Json结构清晰，可读性高，复杂度低，非常容易匹配，下表中对应了XPath的用法。</p>
-
-<table>
-<thead>
-<tr>
-<th style="text-align: center">XPath</th>
-<th>JSONPath</th>
-<th>描述</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td style="text-align: center"><code>/</code></td>
-<td><code>$</code></td>
-<td>根节点</td>
-</tr>
-<tr>
-<td style="text-align: center"><code>.</code></td>
-<td><code>@</code></td>
-<td>现行节点</td>
-</tr>
-<tr>
-<td style="text-align: center"><code>/</code></td>
-<td><code>.</code>or<code>[]</code></td>
-<td>取子节点</td>
-</tr>
-<tr>
-<td style="text-align: center"><code>..</code></td>
-<td>n/a</td>
-<td>取父节点，Jsonpath未支持</td>
-</tr>
-<tr>
-<td style="text-align: center"><code>//</code></td>
-<td><code>..</code></td>
-<td>就是不管位置，选择所有符合条件的条件</td>
-</tr>
-<tr>
-<td style="text-align: center"><code>*</code></td>
-<td><code>*</code></td>
-<td>匹配所有元素节点</td>
-</tr>
-<tr>
-<td style="text-align: center"><code>@</code></td>
-<td>n/a</td>
-<td>根据属性访问，Json不支持，因为Json是个Key-value递归结构，不需要。</td>
-</tr>
-<tr>
-<td style="text-align: center"><code>[]</code></td>
-<td><code>[]</code></td>
-<td>迭代器标示（可以在里边做简单的迭代操作，如数组下标，根据内容选值等）</td>
-</tr>
-<tr>
-<td style="text-align: center"></td>
-<td></td>
-<td><code>[,]</code></td>
-</tr>
-<tr>
-<td style="text-align: center"><code>[]</code></td>
-<td><code>?()</code></td>
-<td>支持过滤操作.</td>
-</tr>
-<tr>
-<td style="text-align: center">n/a</td>
-<td><code>()</code></td>
-<td>支持表达式计算</td>
-</tr>
-<tr>
-<td style="text-align: center"><code>()</code></td>
-<td>n/a</td>
-<td>分组，JsonPath不支持</td>
-</tr>
-</tbody>
-</table>
-
-<h2 id="toc_8">示例：</h2>
-
-<p>我们以拉勾网城市JSON文件 <a href="http://www.lagou.com/lbs/getAllCitySearchLabels.json">http://www.lagou.com/lbs/getAllCitySearchLabels.json</a> 为例，获取所有城市。</p>
-
-<pre><code># jsonpath_lagou.py
-
-import urllib2
-import jsonpath
-import json
-import chardet
-
-url = &#39;http://www.lagou.com/lbs/getAllCitySearchLabels.json&#39;
-request =urllib2.Request(url)
-response = urllib2.urlopen(request)
-html = response.read()
-
-# 把json格式字符串转换成python对象
-jsonobj = json.loads(html)
-
-# 从根节点开始，匹配name节点
-citylist = jsonpath.jsonpath(jsonobj,&#39;$..name&#39;)
-
-print citylist
-print type(citylist)
-fp = open(&#39;city.json&#39;,&#39;w&#39;)
-
-content = json.dumps(citylist, ensure_ascii=False)
-print content
-
-fp.write(content.encode(&#39;utf-8&#39;))
-fp.close()
-
-</code></pre>
-
-<h2 id="toc_9">注意事项：</h2>
-
-<p>json.loads() 是把 Json格式字符串解码转换成Python对象，如果在json.loads的时候出错，要注意被解码的Json字符的编码。</p>
-
-<p>如果传入的字符串的编码不是UTF-8的话，需要指定字符编码的参数 <code>encoding</code></p>
-
-<pre><code>dataDict = json.loads(jsonStrGBK);
-
-</code></pre>
-
-<ul>
-<li><p>dataJsonStr是JSON字符串，假设其编码本身是非UTF-8的话而是GBK 的，那么上述代码会导致出错，改为对应的：</p>
-
-<pre><code>  dataDict = json.loads(jsonStrGBK, encoding=&quot;GBK&quot;);
-
-</code></pre></li>
-<li><p>如果 dataJsonStr通过encoding指定了合适的编码，但是其中又包含了其他编码的字符，则需要先去将dataJsonStr转换为Unicode，然后再指定编码格式调用json.loads()</p></li>
-</ul>
-
-<pre><code>``` python
-
-</code></pre>
-
-<p>dataJsonStrUni = dataJsonStr.decode(&quot;GB2312&quot;); dataDict = json.loads(dataJsonStrUni, encoding=&quot;GB2312&quot;);</p>
-
-<pre><code>
-
-</code></pre>
 
 ]]></content>
   </entry>

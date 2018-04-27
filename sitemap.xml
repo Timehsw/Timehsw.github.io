@@ -2,7 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
   <loc>http://dmlcoding.com/</loc>
-  <lastmod>2018-03-29T18:30:21+08:00</lastmod>
+  <lastmod>2018-04-27T15:38:17+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://dmlcoding.com/15248143200628.html</loc>
+  <lastmod>2018-04-27T15:32:00+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://dmlcoding.com/15242825563762.html</loc>
+  <lastmod>2018-04-21T11:49:16+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://dmlcoding.com/15235878044126.html</loc>
+  <lastmod>2018-04-13T10:50:04+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://dmlcoding.com/15228352753621.html</loc>
+  <lastmod>2018-04-04T17:47:55+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://dmlcoding.com/15224029526508.html</loc>
+  <lastmod>2018-03-30T17:42:32+08:00</lastmod>
 </url>
 
 <url>
@@ -486,6 +511,16 @@
 </url>
 
 <url>
+  <loc>http://dmlcoding.com/15241221126545.html</loc>
+  <lastmod>2016-09-25T15:15:12+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://dmlcoding.com/15241250928886.html</loc>
+  <lastmod>2016-09-24T16:04:52+08:00</lastmod>
+</url>
+
+<url>
   <loc>http://dmlcoding.com/15198750304999.html</loc>
   <lastmod>2016-09-23T10:30:30+08:00</lastmod>
 </url>
@@ -503,7 +538,7 @@
 
 <url>
   <loc>http://dmlcoding.com/collections.html</loc>
-  <lastmod>2018-03-22T13:56:57+08:00</lastmod>
+  <lastmod>2018-04-11T12:24:43+08:00</lastmod>
 </url>
 
 <url>
@@ -530,6 +565,10 @@
 
 <url>
   <loc>http://dmlcoding.com/Spark.html</loc>
+</url>
+
+<url>
+  <loc>http://dmlcoding.com/Hive.html</loc>
 </url>
 
 <url>

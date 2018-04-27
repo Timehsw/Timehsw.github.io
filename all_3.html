@@ -92,6 +92,8 @@
         
             <li><a href="Spark.html">Spark</a></li>
         
+            <li><a href="Hive.html">Hive</a></li>
+        
             <li><a href="Yarn.html">Yarn</a></li>
         
             <li><a href="Scala.html">Scala</a></li>
@@ -159,19 +161,16 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15198768495613.html">
+                <a class="clearlink" href="15203071412162.html">
                 
-                  <h1>Elasticsearch：用Curator辅助Marvel，实现自动删除旧marvel索引</h1>
+                  <h1>kafka-sparkstreaming自己维护offset</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>Marvel几乎是所有Elasticsearch用户的标配。Marvel保留观测数据的代价是，<br/>
-它默认每天会新建一个index，命名规律像是这样：.marvel-2017-12-10。<br/>
-marvel自建的索引一天可以产生大概500M的数据，而且将会越来越多，占的容量也将越来越大。<br/>
-有没有什么办法能让它自动过期？比如说只保留最近两天的观测数据，其他的都抛弃掉。</p>
+                        	<h2 id="toc_0">auto.offset.reset</h2>
 
-<p>当然有办法,curator就可以帮你实现.</p>
+<p>By default, it will start consuming from the latest offset of each Kafka partition. If you set configuration auto.offset.reset in Kafka parameters to smallest, then it will start consuming from the smallest offset.</p>
 
 
                         
@@ -180,11 +179,11 @@ marvel自建的索引一天可以产生大概500M的数据，而且将会越来�
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15198768495613.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/12/11</span>
+                   <a href="15203071412162.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/3/6</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='ELK.html'>ELK</a></span>
+          					    <span class="posted-in"><a href='Spark.html'>Spark</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -198,16 +197,18 @@ marvel自建的索引一天可以产生大概500M的数据，而且将会越来�
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15198746079468.html">
+                <a class="clearlink" href="15202200627560.html">
                 
-                  <h1>机器学习实战之朴素贝叶斯</h1>
+                  <h1>查看linux系统负荷</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>朴素贝叶斯就是利用先验知识来解决后验概率，因为训练集中我们已经知道了每个单词在类别0和1中的概率，即p(w|c),<br/>
-我们就是要利用这个知识去解决在出现这些单词的组合情况下，类别更可能是0还是1,即p(c|w)。<br/>
-如果说之前的训练样本少，那么这个p(w|c)就更可能不准确，所以样本越多我们会觉得这个p(w|c)越可信。</p>
+                        	<h1 id="toc_0">uptime</h1>
+
+<pre><code>~ uptime
+17:54:40 up 846 days, 55 min, 10 users,  load average: 0.36, 0.33, 0.48
+</code></pre>
 
 
                         
@@ -216,11 +217,11 @@ marvel自建的索引一天可以产生大概500M的数据，而且将会越来�
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15198746079468.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/11/26</span>
+                   <a href="15202200627560.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/3/5</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
+          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -234,21 +235,18 @@ marvel自建的索引一天可以产生大概500M的数据，而且将会越来�
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15198745641385.html">
+                <a class="clearlink" href="15202199373374.html">
                 
-                  <h1>Presto的学习笔记</h1>
+                  <h1>MacbookPro 修改应用的默认语言</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h1 id="toc_0">是什么?可以做什么?</h1>
+                        	<p>当我把macbook pro的默认系统语言从中文改成英文后,其他的应用的语言也都变成了英文了.</p>
 
-<ol>
-<li>Presto是一个开源的分布式SQL查询引擎，适用于交互式分析查询，数据量支持GB到PB字节。</li>
-<li>Presto支持在线数据查询，包括Hive, Cassandra, 关系数据库以及专有数据存储。 一条Presto查询可以将多个数据源的数据进行合并，可以跨越整个组织进行分析。</li>
-<li>作为Hive和Pig（Hive和Pig都是通过MapReduce的管道流来完成HDFS数据的查询）的替代者，Presto不仅可以访问HDFS，也可以操作不同的数据源，包括：RDBMS和其他的数据源（例如：Cassandra）。</li>
-<li>查询后的数据自动分页,这个很不错.</li>
-</ol>
+<p>但是比如地图应用,我还是希望用中文呢?</p>
+
+<h1 id="toc_0">将地图Maps应用的语言改成中文</h1>
 
 
                         
@@ -257,11 +255,11 @@ marvel自建的索引一天可以产生大概500M的数据，而且将会越来�
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15198745641385.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/10/11</span>
+                   <a href="15202199373374.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/3/5</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Presto.html'>Presto</a></span>
+          					    <span class="posted-in"><a href='Mac.html'>Mac</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -275,31 +273,31 @@ marvel自建的索引一天可以产生大概500M的数据，而且将会越来�
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15219482100406.html">
+                <a class="clearlink" href="15199545224004.html">
                 
-                  <h1>字符串编码转换</h1>
+                  <h1>思考</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<ul>
-<li>乱码之类的几乎都是由汉字引起的。</li>
-<li>任何平台的任何编码 都能和 Unicode 互相转换</li>
-<li>UTF-8 与 GBK 互相转换，那就先把UTF-8转换成Unicode，再从Unicode转换成GBK，反之同理。</li>
+                        	<h2 id="toc_0">为什么有些人能够突飞猛进?</h2>
+
+<ul>
+<li>智商高</li>
+<li>有想法,有思路</li>
 </ul>
 
-
                         
                       </div>
                   </div>
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15219482100406.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/10/4</span>
+                  
+                    <span class="date">2018/3/2</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Python.html'>Python</a></span>
+          					    <span class="posted-in"><a href='Life.html'>Life</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -313,16 +311,20 @@ marvel自建的索引一天可以产生大概500M的数据，而且将会越来�
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15219476833792.html">
+                <a class="clearlink" href="15199040835190.html">
                 
-                  <h1>json和jsonPATH[整理自网络]</h1>
+                  <h1>kafka-sparkstreaming长时间运行后异常退出原因分析</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式，它使得人们很容易的进行阅读和编写。同时也方便了机器进行解析和生成。适用于进行数据交互的场景，比如网站前台与后台之间的数据交互。</p>
+                        	<h2 id="toc_0">报错信息</h2>
 
-<p>JSON和XML的比较可谓不相上下。</p>
+<pre><code>Couldn`t find leader offsets for set([xxxxxxxxxxx,xx])
+
+# 或者
+numRecords must not be negative
+</code></pre>
 
 
                         
@@ -331,11 +333,13 @@ marvel自建的索引一天可以产生大概500M的数据，而且将会越来�
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15219476833792.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/10/3</span>
+                   <a href="15199040835190.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/3/1</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Python.html'>Python</a></span>
+          					    <span class="posted-in"><a href='Spark.html'>Spark</a></span>
+          				  
+          					    <span class="posted-in"><a href='Kafka.html'>Kafka</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -412,6 +416,8 @@ marvel自建的索引一天可以产生大概500M的数据，而且将会越来�
         
             <a href="Spark.html"><strong>Spark</strong></a>
         
+            <a href="Hive.html"><strong>Hive</strong></a>
+        
             <a href="Yarn.html"><strong>Yarn</strong></a>
         
             <a href="Scala.html"><strong>Scala</strong></a>
@@ -473,31 +479,31 @@ marvel自建的索引一天可以产生大概500M的数据，而且将会越来�
 	      
 		      
 			      <li class="post">
-			        <a href="15223141973169.html">Spark Metrics分析</a>
+			        <a href="15248143200628.html">线性回归</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15222053353935.html">Hadoop RPC运行机制</a>
+			        <a href="15242825563762.html">python-matplotlib画图中文显示不出来</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15221149143615.html">概率分布函数和概率密度函数</a>
+			        <a href="15235878044126.html">Markdown中用LaTex语法写数学公式</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15220339795263.html">分布式系统的一致性</a>
+			        <a href="15228352753621.html">如何优雅的设计数据分层</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15217143404677.html">docker 错误</a>
+			        <a href="15224029526508.html">Spark-Metrics 实战</a>
 			      </li>
 		     
 		  

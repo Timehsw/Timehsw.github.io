@@ -92,6 +92,8 @@
         
             <li><a href="Spark.html">Spark</a></li>
         
+            <li><a href="Hive.html">Hive</a></li>
+        
             <li><a href="Yarn.html">Yarn</a></li>
         
             <li><a href="Scala.html">Scala</a></li>
@@ -158,6 +160,88 @@
 	<div class="large-8 medium-8 columns">
 		<div class="markdown-body home-categories">
 		
+			<div class="article">
+                <a class="clearlink" href="15248143200628.html">
+                
+                  <h1>线性回归</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>小试牛刀,未完待续,精彩内容且看下回更新.</p>
+
+<h2 id="toc_0">简述原理</h2>
+
+<h2 id="toc_1">\(\theta\)值推导过程以及求解</h2>
+
+<h3 id="toc_2">构造数据</h3>
+
+<pre><code class="language-python">import numpy as np
+import pandas as pd
+
+# 构造测试数据y=3x1+x2
+df=pd.DataFrame({
+    &quot;x1&quot;:[1,2,3,4,5,6],
+    &quot;x2&quot;:[1,2,1,2,1,2],
+    &quot;y&quot;:[3,6,7,10,11,14]
+})
+
+</code></pre>
+
+<h3 id="toc_3">抽取x和y</h3>
+
+<pre><code class="language-python"># 抽取x和y
+x=df[[&#39;x1&#39;,&#39;x2&#39;]]
+# 将y转换成n行1列的列向量
+y=df[&#39;y&#39;].values.reshape((-1,1))
+
+</code></pre>
+
+<h3 id="toc_4">求解\(\theta\) 值</h3>
+
+<p><em>根据公式计算\(\theta\)</em>值,推导过程如图所示<br/>
+\[\theta=(X^TX)^{-1}X^TY\]</p>
+
+<p><em>numpy</em> api说明:<br/>
++ mat:将ndarray转成matrix<br/>
++ dot:矩阵乘法<br/>
++ T:求矩阵的转置<br/>
++ I:求矩阵的逆</p>
+
+<pre><code class="language-python"># 写出公式,计算theta值
+
+np.dot(np.mat(x.T.dot(x)).I,x.T).dot(y)
+</code></pre>
+
+<pre><code>matrix([[ 2.],
+        [ 1.]])
+</code></pre>
+
+<p>很明显,计算结果正确.两个系数分别是2和1</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/4/27</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
 			<div class="article">
                 <a class="clearlink" href="15221149143615.html">
                 
@@ -307,42 +391,6 @@
                 </div>
               </div><!-- article -->
         
-			<div class="article">
-                <a class="clearlink" href="15198664916272.html">
-                
-                  <h1>机器学习实战之决策树</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h1 id="toc_0">什么是决策树</h1>
-
-<h2 id="toc_1">决策树的概念</h2>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15198664916272.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2016/11/9</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
               
 
 
@@ -354,7 +402,7 @@
 			  </div>
 			  <div class="large-6 columns">
 			<p class="text-right" style="padding-top:25px;">
-			
+			 <a href="MachineLearning_1.html">&raquo; Next Page</a> 
 			</p>
 			  </div>
 			</div>
@@ -406,6 +454,8 @@
             <a href="Life.html"><strong>Life</strong></a>
         
             <a href="Spark.html"><strong>Spark</strong></a>
+        
+            <a href="Hive.html"><strong>Hive</strong></a>
         
             <a href="Yarn.html"><strong>Yarn</strong></a>
         
@@ -468,31 +518,31 @@
 	      
 		      
 			      <li class="post">
-			        <a href="15223141973169.html">Spark Metrics分析</a>
+			        <a href="15248143200628.html">线性回归</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15222053353935.html">Hadoop RPC运行机制</a>
+			        <a href="15242825563762.html">python-matplotlib画图中文显示不出来</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15221149143615.html">概率分布函数和概率密度函数</a>
+			        <a href="15235878044126.html">Markdown中用LaTex语法写数学公式</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15220339795263.html">分布式系统的一致性</a>
+			        <a href="15228352753621.html">如何优雅的设计数据分层</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15217143404677.html">docker 错误</a>
+			        <a href="15224029526508.html">Spark-Metrics 实战</a>
 			      </li>
 		     
 		  

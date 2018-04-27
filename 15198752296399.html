@@ -92,6 +92,8 @@
         
             <li><a href="Spark.html">Spark</a></li>
         
+            <li><a href="Hive.html">Hive</a></li>
+        
             <li><a href="Yarn.html">Yarn</a></li>
         
             <li><a href="Scala.html">Scala</a></li>
@@ -269,55 +271,63 @@ passwd123<br/>
 
 <p>注：首次连接时，会弹出密钥文件密码输入框，可以输入并保存！</p>
 
+<p>为了免密登录,可以使用ssh-add添加pem文件</p>
+
+<pre><code>ssh-add -k /Users/hushiwei/sshpass/Jumpserver/hushiwei.pem
+</code></pre>
+
+<p>输入pem文件的密码,后续即可免密登录了.可以直接使用这个命令登录了</p>
+
+<pre><code>ssh hushiwei@xxx.xxx.xxx.xxx(堡垒机ip)
+# 也仍然可以不用密码使用这个命令登录了
+ssh -i /Users/hushiwei/sshpass/Jumpserver/hushiwei.pem hushiwei@xxx.xxx.xxx.xxx
+</code></pre>
+
 <p>除了直接命令连接外，也可参考上面Profiles功能，配置好，直接在Profile里调用！简单脚本如下：</p>
 
 <h2 id="toc_7">配置Profile脚本自动登录堡垒机</h2>
 
-<p>脚本文件 vim jumpserver<br/>
-```<br/>
-hushiwei@localhost  ~/sshpass/Jumpserver  more jumpserver</p>
+<p>脚本文件 vim jumpserver</p>
 
-<h1 id="toc_8">!/usr/bin/expect -f</h1>
+<pre><code>hushiwei@localhost  ~/sshpass/Jumpserver  more jumpserver
+#!/usr/bin/expect -f
+ set user hushiwei
+ set host xxx.xxx.xxx.xxx
+ set empath /Users/hushiwei/sshpass/Jumpserver/hushiwei.pem
+ set timeout -1
 
-<p>set user hushiwei<br/>
- set host xxx.xxx.xxx.xxx<br/>
- set empath /Users/hushiwei/sshpass/Jumpserver/hushiwei.pem<br/>
- set timeout -1</p>
-
-<p>spawn ssh -i \(empath \)user@$host<br/>
- interact<br/>
- expect eof<br/>
-```</p>
-
-<p>命令行执行<br/>
-```<br/>
-hushiwei@localhost  ~/sshpass/Jumpserver  expect /Users/hushiwei/sshpass/Jumpserver/jumpserver<br/>
-spawn ssh -i /Users/hushiwei/sshpass/Jumpserver/hushiwei.pem <a href="mailto:hushiwei@xxx.xxx.xxx.xxx">hushiwei@xxx.xxx.xxx.xxx</a><br/>
-Last login: Fri Aug 18 11:06:16 2017 from xxx.xxx.xxx.xxx</p>
-
-<h3 id="toc_9">欢迎使用Jumpserver开源跳板机系统</h3>
-
-<pre><code>   1) 输入 ID 直接登录 或 输入部分 IP,主机名,备注 进行搜索登录(如果唯一).
-   2) 输入 / + IP, 主机名 or 备注 搜索. 如: /ip
-   3) 输入 P/p 显示您有权限的主机.
-   4) 输入 G/g 显示您有权限的主机组.
-   5) 输入 G/g + 组ID 显示该组下主机. 如: g1
-   6) 输入 E/e 批量执行命令.
-   7) 输入 U/u 批量上传文件.
-   8) 输入 D/d 批量下载文件.
-   9) 输入 H/h 帮助.
-   0) 输入 Q/q 退出.
+ spawn ssh -i $empath $user@$host
+ interact
+ expect eof
 </code></pre>
 
-<p>Opt or ID&gt;:<br/>
-<code><br/>
-参考上面的Profile功能,配置好,直接在Profile里调用即可<br/>
-</code></p>
+<p>命令行执行</p>
 
-<h1 id="toc_10">在Command里面写入以下即可</h1>
+<pre><code>hushiwei@localhost  ~/sshpass/Jumpserver  expect /Users/hushiwei/sshpass/Jumpserver/jumpserver
+spawn ssh -i /Users/hushiwei/sshpass/Jumpserver/hushiwei.pem hushiwei@xxx.xxx.xxx.xxx
+Last login: Fri Aug 18 11:06:16 2017 from xxx.xxx.xxx.xxx
 
-<p>expect /Users/hushiwei/sshpass/Jumpserver/jumpserver<br/>
-```</p>
+###    欢迎使用Jumpserver开源跳板机系统   ###
+
+       1) 输入 ID 直接登录 或 输入部分 IP,主机名,备注 进行搜索登录(如果唯一).
+       2) 输入 / + IP, 主机名 or 备注 搜索. 如: /ip
+       3) 输入 P/p 显示您有权限的主机.
+       4) 输入 G/g 显示您有权限的主机组.
+       5) 输入 G/g + 组ID 显示该组下主机. 如: g1
+       6) 输入 E/e 批量执行命令.
+       7) 输入 U/u 批量上传文件.
+       8) 输入 D/d 批量下载文件.
+       9) 输入 H/h 帮助.
+       0) 输入 Q/q 退出.
+
+Opt or ID&gt;:
+</code></pre>
+
+<p>参考上面的Profile功能,配置好,直接在Profile里调用即可</p>
+
+<pre><code># 在Command里面写入以下即可
+expect /Users/hushiwei/sshpass/Jumpserver/jumpserver
+</code></pre>
 
 
     
@@ -403,6 +413,8 @@ Last login: Fri Aug 18 11:06:16 2017 from xxx.xxx.xxx.xxx</p>
         
             <a href="Spark.html"><strong>Spark</strong></a>
         
+            <a href="Hive.html"><strong>Hive</strong></a>
+        
             <a href="Yarn.html"><strong>Yarn</strong></a>
         
             <a href="Scala.html"><strong>Scala</strong></a>
@@ -464,31 +476,31 @@ Last login: Fri Aug 18 11:06:16 2017 from xxx.xxx.xxx.xxx</p>
 	      
 		      
 			      <li class="post">
-			        <a href="15223141973169.html">Spark Metrics分析</a>
+			        <a href="15248143200628.html">线性回归</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15222053353935.html">Hadoop RPC运行机制</a>
+			        <a href="15242825563762.html">python-matplotlib画图中文显示不出来</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15221149143615.html">概率分布函数和概率密度函数</a>
+			        <a href="15235878044126.html">Markdown中用LaTex语法写数学公式</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15220339795263.html">分布式系统的一致性</a>
+			        <a href="15228352753621.html">如何优雅的设计数据分层</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15217143404677.html">docker 错误</a>
+			        <a href="15224029526508.html">Spark-Metrics 实战</a>
 			      </li>
 		     
 		  
