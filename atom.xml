@@ -4,7 +4,7 @@
   <title><![CDATA[Time渐行渐远]]></title>
   <link href="http://dmlcoding.com/atom.xml" rel="self"/>
   <link href="http://dmlcoding.com/"/>
-  <updated>2018-04-27T15:38:09+08:00</updated>
+  <updated>2018-04-27T15:38:18+08:00</updated>
   <id>http://dmlcoding.com/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -25,6 +25,8 @@
 <h2 id="toc_1">\(\theta\)值推导过程以及求解</h2>
 
 <h3 id="toc_2">构造数据</h3>
+
+<span id="more"></span><!-- more -->
 
 <pre><code class="language-python">import numpy as np
 import pandas as pd
@@ -85,6 +87,8 @@ import matplotlib.pyplot as plt
 mpl.rcParams[&#39;font.sans-serif&#39;]=[u&#39;simHei&#39;]
 mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
 </code></pre>
+
+<span id="more"></span><!-- more -->
 
 <p><img src="media/15242825563762/15242826157154.jpg" alt=""/></p>
 
@@ -900,6 +904,8 @@ x = a_0 + \frac{1^2}{a_1<br/>
 <h1 id="toc_0">理论</h1>
 
 <p><img src="media/15228352753621/15231557165878.jpg" alt=""/></p>
+
+<span id="more"></span><!-- more -->
 
 <h2 id="toc_1">1.ODS 全称是 Operational Data Store，操作数据存储</h2>
 

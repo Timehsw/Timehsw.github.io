@@ -176,48 +176,6 @@
 
 <h3 id="toc_2">构造数据</h3>
 
-<pre><code class="language-python">import numpy as np
-import pandas as pd
-
-# 构造测试数据y=3x1+x2
-df=pd.DataFrame({
-    &quot;x1&quot;:[1,2,3,4,5,6],
-    &quot;x2&quot;:[1,2,1,2,1,2],
-    &quot;y&quot;:[3,6,7,10,11,14]
-})
-
-</code></pre>
-
-<h3 id="toc_3">抽取x和y</h3>
-
-<pre><code class="language-python"># 抽取x和y
-x=df[[&#39;x1&#39;,&#39;x2&#39;]]
-# 将y转换成n行1列的列向量
-y=df[&#39;y&#39;].values.reshape((-1,1))
-
-</code></pre>
-
-<h3 id="toc_4">求解\(\theta\) 值</h3>
-
-<p><em>根据公式计算\(\theta\)</em>值,推导过程如图所示<br/>
-\[\theta=(X^TX)^{-1}X^TY\]</p>
-
-<p><em>numpy</em> api说明:<br/>
-+ mat:将ndarray转成matrix<br/>
-+ dot:矩阵乘法<br/>
-+ T:求矩阵的转置<br/>
-+ I:求矩阵的逆</p>
-
-<pre><code class="language-python"># 写出公式,计算theta值
-
-np.dot(np.mat(x.T.dot(x)).I,x.T).dot(y)
-</code></pre>
-
-<pre><code>matrix([[ 2.],
-        [ 1.]])
-</code></pre>
-
-<p>很明显,计算结果正确.两个系数分别是2和1</p>
 
                         
                       </div>
@@ -225,7 +183,7 @@ np.dot(np.mat(x.T.dot(x)).I,x.T).dot(y)
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="15248143200628.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2018/4/27</span>
                     <span>posted in&nbsp;</span> 
           				  
@@ -258,50 +216,6 @@ mpl.rcParams[&#39;font.sans-serif&#39;]=[u&#39;simHei&#39;]
 mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
 </code></pre>
 
-<p><img src="media/15242825563762/15242826157154.jpg" alt=""/></p>
-
-<p>已经在代码中设置了字符集,但是却仍然无法正确显示.这是因为系统中没有这个字体</p>
-
-<h1 id="toc_0">解决方案</h1>
-
-<h2 id="toc_1">1. 下载SimHei.ttf字体</h2>
-
-<pre><code>http://www.fontpalace.com/font-details/SimHei/
-</code></pre>
-
-<h2 id="toc_2">2. 查看matplotlib的字体存放目录</h2>
-
-<pre><code>/Users/hushiwei/anaconda3/lib/python3.6/site-packages/matplotlib/mpl-data
-</code></pre>
-
-<pre><code>total 64
-drwxr-xr-x   6 hushiwei  staff    192  1 18 12:03 ./
-drwxr-xr-x  86 hushiwei  staff   2752  1 18 12:03 ../
-drwxr-xr-x   5 hushiwei  staff    160  1 18 12:03 fonts/
-drwxr-xr-x  58 hushiwei  staff   1856  1 18 12:03 images/
--rw-rw-r--   2 hushiwei  staff  31975 10 10  2017 matplotlibrc
-drwxr-xr-x  27 hushiwei  staff    864  1 18 12:03 stylelib/
-</code></pre>
-
-<h2 id="toc_3">3. 导入字体,删除缓存</h2>
-
-<p>将我们刚刚下载好的字体,<code>SimHei.ttf</code>文件​，放在matplotlib的font目录（./matplotlib/mpl-data/fonts/ttf/）或者系统的font目录下都行(/usr/share/fonts/)</p>
-
-<p>接着:<br/>
-​删除/Users/hushiwei/.matplotlib/*目录，重新运行你的画图脚本；此时程序会自动在~/.matplotlib目录下生成fontList.json文件；</p>
-
-<h2 id="toc_4">4. 重启jupyter ,重新执行代码.</h2>
-
-<p>OK,完成....<br/>
-<img src="media/15242825563762/15242830696194.jpg" alt=""/></p>
-
-<h1 id="toc_5">总结</h1>
-
-<ol>
-<li>需要在代码中引入字符集.</li>
-<li>系统中需要有这个字体.</li>
-<li>导入字体后,若要生效,需要先删除~/.matplotlib目录,让这个目录中的文件重新生成.</li>
-</ol>
 
                         
                       </div>
@@ -309,7 +223,7 @@ drwxr-xr-x  27 hushiwei  staff    864  1 18 12:03 stylelib/
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="15242825563762.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2018/4/21</span>
                     <span>posted in&nbsp;</span> 
           				  
@@ -1117,20 +1031,6 @@ x = a_0 + \frac{1^2}{a_1<br/>
 
 <p><img src="media/15228352753621/15231557165878.jpg" alt=""/></p>
 
-<h2 id="toc_1">1.ODS 全称是 Operational Data Store，操作数据存储</h2>
-
-<p>“面向主题的”，数据运营层，也叫ODS层，是最接近数据源中数据的一层，数据源中的数据，经过抽取、洗净、传输，也就说传说中的 ETL 之后，装入本层。本层的数据，总体上大多是按照源头业务系统的分类方式而分类的。</p>
-
-<p>但是，这一层面的数据却不等同于原始数据。在源数据装入这一层时，要进行诸如去噪（例如有一条数据中人的年龄是 300 岁，这种属于异常数据，就需要提前做一些处理）、去重（例如在个人资料表中，同一 ID 却有两条重复数据，在接入的时候需要做一步去重）、字段命名规范等一系列操作。</p>
-
-<h2 id="toc_2">2.数据仓库层(DW)，是数据仓库的主体</h2>
-
-<p>在这里，从 ODS 层中获得的数据按照主题建立各种数据模型。这一层和维度建模会有比较深的联系.</p>
-
-<h2 id="toc_3">3.数据产品层（APP），这一层是提供为数据产品使用的结果数据</h2>
-
-<p>在这里，主要是提供给数据产品和数据分析使用的数据，一般会存放在 ES、Mysql 等系统中供线上系统使用，也可能会存在 Hive 或者 Druid 中供数据分析和数据挖掘使用。<br/>
-比如我们经常说的报表数据，或者说那种大宽表，一般就放在这里</p>
 
                         
                       </div>
@@ -1138,7 +1038,7 @@ x = a_0 + \frac{1^2}{a_1<br/>
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="15228352753621.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2018/4/4</span>
                     <span>posted in&nbsp;</span> 
           				  

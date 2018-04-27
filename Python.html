@@ -176,50 +176,6 @@ mpl.rcParams[&#39;font.sans-serif&#39;]=[u&#39;simHei&#39;]
 mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
 </code></pre>
 
-<p><img src="media/15242825563762/15242826157154.jpg" alt=""/></p>
-
-<p>已经在代码中设置了字符集,但是却仍然无法正确显示.这是因为系统中没有这个字体</p>
-
-<h1 id="toc_0">解决方案</h1>
-
-<h2 id="toc_1">1. 下载SimHei.ttf字体</h2>
-
-<pre><code>http://www.fontpalace.com/font-details/SimHei/
-</code></pre>
-
-<h2 id="toc_2">2. 查看matplotlib的字体存放目录</h2>
-
-<pre><code>/Users/hushiwei/anaconda3/lib/python3.6/site-packages/matplotlib/mpl-data
-</code></pre>
-
-<pre><code>total 64
-drwxr-xr-x   6 hushiwei  staff    192  1 18 12:03 ./
-drwxr-xr-x  86 hushiwei  staff   2752  1 18 12:03 ../
-drwxr-xr-x   5 hushiwei  staff    160  1 18 12:03 fonts/
-drwxr-xr-x  58 hushiwei  staff   1856  1 18 12:03 images/
--rw-rw-r--   2 hushiwei  staff  31975 10 10  2017 matplotlibrc
-drwxr-xr-x  27 hushiwei  staff    864  1 18 12:03 stylelib/
-</code></pre>
-
-<h2 id="toc_3">3. 导入字体,删除缓存</h2>
-
-<p>将我们刚刚下载好的字体,<code>SimHei.ttf</code>文件​，放在matplotlib的font目录（./matplotlib/mpl-data/fonts/ttf/）或者系统的font目录下都行(/usr/share/fonts/)</p>
-
-<p>接着:<br/>
-​删除/Users/hushiwei/.matplotlib/*目录，重新运行你的画图脚本；此时程序会自动在~/.matplotlib目录下生成fontList.json文件；</p>
-
-<h2 id="toc_4">4. 重启jupyter ,重新执行代码.</h2>
-
-<p>OK,完成....<br/>
-<img src="media/15242825563762/15242830696194.jpg" alt=""/></p>
-
-<h1 id="toc_5">总结</h1>
-
-<ol>
-<li>需要在代码中引入字符集.</li>
-<li>系统中需要有这个字体.</li>
-<li>导入字体后,若要生效,需要先删除~/.matplotlib目录,让这个目录中的文件重新生成.</li>
-</ol>
 
                         
                       </div>
@@ -227,7 +183,7 @@ drwxr-xr-x  27 hushiwei  staff    864  1 18 12:03 stylelib/
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="15242825563762.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2018/4/21</span>
                     <span>posted in&nbsp;</span> 
           				  

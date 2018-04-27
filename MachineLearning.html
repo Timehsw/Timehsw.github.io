@@ -176,48 +176,6 @@
 
 <h3 id="toc_2">构造数据</h3>
 
-<pre><code class="language-python">import numpy as np
-import pandas as pd
-
-# 构造测试数据y=3x1+x2
-df=pd.DataFrame({
-    &quot;x1&quot;:[1,2,3,4,5,6],
-    &quot;x2&quot;:[1,2,1,2,1,2],
-    &quot;y&quot;:[3,6,7,10,11,14]
-})
-
-</code></pre>
-
-<h3 id="toc_3">抽取x和y</h3>
-
-<pre><code class="language-python"># 抽取x和y
-x=df[[&#39;x1&#39;,&#39;x2&#39;]]
-# 将y转换成n行1列的列向量
-y=df[&#39;y&#39;].values.reshape((-1,1))
-
-</code></pre>
-
-<h3 id="toc_4">求解\(\theta\) 值</h3>
-
-<p><em>根据公式计算\(\theta\)</em>值,推导过程如图所示<br/>
-\[\theta=(X^TX)^{-1}X^TY\]</p>
-
-<p><em>numpy</em> api说明:<br/>
-+ mat:将ndarray转成matrix<br/>
-+ dot:矩阵乘法<br/>
-+ T:求矩阵的转置<br/>
-+ I:求矩阵的逆</p>
-
-<pre><code class="language-python"># 写出公式,计算theta值
-
-np.dot(np.mat(x.T.dot(x)).I,x.T).dot(y)
-</code></pre>
-
-<pre><code>matrix([[ 2.],
-        [ 1.]])
-</code></pre>
-
-<p>很明显,计算结果正确.两个系数分别是2和1</p>
 
                         
                       </div>
@@ -225,7 +183,7 @@ np.dot(np.mat(x.T.dot(x)).I,x.T).dot(y)
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="15248143200628.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2018/4/27</span>
                     <span>posted in&nbsp;</span> 
           				  
