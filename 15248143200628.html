@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  线性回归 - Time渐行渐远
+  回归算法 - Time渐行渐远
   
   </title>
   
@@ -161,7 +161,7 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>线性回归</h1>
+          <h1>回归算法</h1>
      
         <div class="read-more clearfix">
           <span class="date">2018/4/27</span>
@@ -181,15 +181,86 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>小试牛刀,未完待续,精彩内容且看下回更新.</p>
+      <h2 id="toc_0">什么是回归算法</h2>
 
-<h2 id="toc_0">简述原理</h2>
-
-<h2 id="toc_1">\(\theta\)值推导过程以及求解</h2>
-
-<h3 id="toc_2">构造数据</h3>
+<ol>
+<li>回归算法是一种有监督算法;</li>
+<li>回归算法是一种比较常用的机器学习算法,用于建立解释变量(自变量X)和观测值(因变量Y)之间的关系;</li>
+<li>从机器学习的角度来讲,用于构建一个算法模型(函数)来做属性(X)与标签(Y)之间的映射关系,在算法的学习过程中,视图寻找一个函数h:使得\(R^d\to R\)使得参数之间的关系拟合性最好;</li>
+<li>回归算法中,算法(函数)的最终结果是一个<strong>连续</strong>的数据值,输入值(属性值)是一个d维度的属性/数值向量;</li>
+<li>因此,回归算法是用于预测连续型数值输出的算法.
+## 线性回归</li>
+</ol>
 
 <span id="more"></span><!-- more -->
+
+<h3 id="toc_1">单变量线性回归</h3>
+
+<p>\[h_{\theta}=\theta_0+ \theta_1x\]</p>
+
+<p>因为只含有一个特征/输入变量,因此这样的问题叫做单变量线性回归问题.</p>
+
+<h3 id="toc_2">代价函数(Cost Function)</h3>
+
+<p>我们选择的参数决定了我们得到的直线相对于我们的训练集的准确程度,模型所预测的值与训练集中实际值之间的差距就是建模误差(modeling error).</p>
+
+<p>我们的目标便是选择出可以使得<strong>建模误差的平方和</strong>能够<strong>最小</strong>的模型参数.即使得代价函数最小.<br/>
+\[J(\theta_0,\theta_1)=\dfrac{1}{2m}\sum_{i=1}^m(h_{\theta}(x^{(i)})-y^{(i)})^2\]</p>
+
+<h3 id="toc_3">多变量线性回归</h3>
+
+<h2 id="toc_4">公式推导</h2>
+
+<p>\[\begin{align}<br/>
+y^{(i)}&amp; =\theta ^Tx^{(i)}+\epsilon^{(i)}\\\<br/>
+p(\epsilon^{(i)})&amp; =\frac{1}{\sqrt{2\pi}\sigma}e^{\left(-\dfrac{(\epsilon^{(i)})^2}{2\sigma^2}\right)} \\\<br/>
+p(y^{(i)}|x^{(i)};\theta)&amp; =\frac{1}{\sqrt{2\pi}\sigma}e^{\left(-\dfrac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2}\right)} \\\<br/>
+L(\theta)&amp; =\prod_{i=1}^mp(y^{(i)}|x^{(i)};\theta)\\\<br/>
+&amp; = \prod_{i=1}^m\frac{1}{\sqrt{2\pi}\sigma}e^{\left(-\dfrac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2}\right)}<br/>
+\end{align}\]</p>
+
+<p>最大似然,要使这个方程的结果最大</p>
+
+<p>对数似然,目标函数及最小二乘法</p>
+
+<p>\[<br/>
+\begin{align}<br/>
+\ell(\theta)&amp; =\log L(\theta) \\\<br/>
+&amp; = \log\prod_{i=1}^m\frac{1}{\sqrt{2\pi}\sigma}e^{\Big(-\dfrac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2}\Big)} \\\<br/>
+&amp; = \sum_{i=1}^m\log\frac{1}{\sqrt{2\pi}\sigma}+\sum_{i=1}^m \log e^{\Big(-\dfrac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2}\Big)} \\\<br/>
+&amp; = m\log\frac{1}{\sqrt{2\pi}\sigma}-\frac{1}{\sigma^2}\cdot\frac{1}{2}\sum_{i=1}^m\Big(y^{(i)}-\theta^Tx{(i)}\Big)^2<br/>
+\end{align}<br/>
+\]</p>
+
+<p>那么就得让这个式子的结果最小</p>
+
+<p>\[loss(y_j,\hat{y_j})=J(\theta)=\frac{1}{2}\sum_{i=1}^{m}\left(h_\theta(x^{(i)-y^{(i)}})\right)^2\]</p>
+
+<p>我们的目标是最小化损失函数.</p>
+
+<p>\[J(\theta)=\cfrac{1}{2}\sum_{i=1}^{m}(h_{\theta}(x^{(i)})-y^{(i)})^2=\cfrac{1}{2}(X\theta-Y)^T(X\theta-Y) \to \min \limits_{\theta}J(\theta)\]</p>
+
+<p>既然是求最小值,那么肯定是通过求导来计算.对这个损失函数进行求导运算.</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+\nabla J(\theta)&amp; =\nabla_{\theta}\Big(\cfrac{1}{2}(X\theta-Y)^T(X\theta-Y)\Big) \\\<br/>
+&amp; = \nabla_{\theta}\Big(\cfrac{1}{2}(\theta^TX^T-Y^T)(X\theta-Y)\Big) \\\<br/>
+&amp; = \nabla_{\theta}\Big(\cfrac{1}{2}(\theta^TX^TX\theta-\theta^TX^TY-Y^TX\theta+Y^TY)\Big) \\\<br/>
+&amp; = \cfrac{1}{2}\Big(2X^TX\theta-X^T-(Y^TX)^T\Big) \\\<br/>
+&amp; = X^TX\theta-X^TY<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>\[\theta=(X^TX)^{-1}X^TY\]</p>
+
+<h2 id="toc_5">简述原理</h2>
+
+<h2 id="toc_6">\(\theta\)值推导过程以及求解</h2>
+
+<h3 id="toc_7">构造数据</h3>
+
+<!-- more -->
 
 <pre><code class="language-python">import numpy as np
 import pandas as pd
@@ -203,7 +274,7 @@ df=pd.DataFrame({
 
 </code></pre>
 
-<h3 id="toc_3">抽取x和y</h3>
+<h3 id="toc_8">抽取x和y</h3>
 
 <pre><code class="language-python"># 抽取x和y
 x=df[[&#39;x1&#39;,&#39;x2&#39;]]
@@ -212,7 +283,7 @@ y=df[&#39;y&#39;].values.reshape((-1,1))
 
 </code></pre>
 
-<h3 id="toc_4">求解\(\theta\) 值</h3>
+<h3 id="toc_9">求解\(\theta\) 值</h3>
 
 <p><em>根据公式计算\(\theta\)</em>值,推导过程如图所示<br/>
 \[\theta=(X^TX)^{-1}X^TY\]</p>
@@ -242,6 +313,9 @@ np.dot(np.mat(x.T.dot(x)).I,x.T).dot(y)
       <div class="row">
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15198753668603.html" 
+          title="Previous Post: 逻辑回归">&laquo; 逻辑回归</a>
       
         </p>
         </div>
@@ -378,31 +452,31 @@ np.dot(np.mat(x.T.dot(x)).I,x.T).dot(y)
 	      
 		      
 			      <li class="post">
-			        <a href="15248143200628.html">线性回归</a>
+			        <a href="15255701784620.html">集成学习</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15255685118456.html">决策树</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198753668603.html">逻辑回归</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15248143200628.html">回归算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
 			        <a href="15242825563762.html">python-matplotlib画图中文显示不出来</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15235878044126.html">Markdown中用LaTex语法写数学公式</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15228352753621.html">如何优雅的设计数据分层</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15224029526508.html">Spark-Metrics 实战</a>
 			      </li>
 		     
 		  

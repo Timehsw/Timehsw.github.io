@@ -161,20 +161,148 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15248143200628.html">
+                <a class="clearlink" href="15255701784620.html">
                 
-                  <h1>线性回归</h1>
+                  <h1>集成学习</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>小试牛刀,未完待续,精彩内容且看下回更新.</p>
+                        	<p>集成学习的思想是将若干个学习器(分类器&amp;回归器)组合之后产生一个新学习器.弱分类器(weak learner)指那些分类准确率只稍微好于随机猜测的分类器(error rate&lt; 0.5).</p>
 
-<h2 id="toc_0">简述原理</h2>
+<p>集成算法的成功在于保证弱分类器的多样性(Diversity).而且集成不稳定的算法也能够得到一个比较明显的性能提升.</p>
 
-<h2 id="toc_1">\(\theta\)值推导过程以及求解</h2>
+<p>常见的集成学习思想有:<br/>
+    + Bagging<br/>
+    + Boosting<br/>
+    + Stacking</p>
 
-<h3 id="toc_2">构造数据</h3>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15255701784620.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/5/6</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15255685118456.html">
+                
+                  <h1>决策树</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>在决策树算法的学习过程中,信息增益是特征选择的一个重要指标.它定义为一个特征能够为分类系统带来多少信息,带来的信息越多,说明该特征越重要,相应的信息增益也就越大<br/>
+<img src="media/15255685118456/15256176444642.jpg" alt=""/></p>
+
+<h1 id="toc_0">信息熵(Entropy)</h1>
+
+<p>\[H(X)=-\sum_{i=1}^mp_i\log_2(p_i)\]</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15255685118456.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/5/3</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15198753668603.html">
+                
+                  <h1>逻辑回归</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>不知道什么是逻辑回归,但是也许看完接下来的文章,你会有个大概的印象吧</p>
+
+<h1 id="toc_0">简单介绍Logistic回归</h1>
+
+<h2 id="toc_1">Logistic回归用到的知识点</h2>
+
+<ul>
+<li>Sigmoid函数和Logistic回归分类器</li>
+<li>最优化理论初步</li>
+<li>梯度下降最优化算法</li>
+<li>数据中的缺失项处理</li>
+</ul>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15198753668603.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/4/29</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15248143200628.html">
+                
+                  <h1>回归算法</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">什么是回归算法</h2>
+
+<ol>
+<li>回归算法是一种有监督算法;</li>
+<li>回归算法是一种比较常用的机器学习算法,用于建立解释变量(自变量X)和观测值(因变量Y)之间的关系;</li>
+<li>从机器学习的角度来讲,用于构建一个算法模型(函数)来做属性(X)与标签(Y)之间的映射关系,在算法的学习过程中,视图寻找一个函数h:使得\(R^d\to R\)使得参数之间的关系拟合性最好;</li>
+<li>回归算法中,算法(函数)的最终结果是一个<strong>连续</strong>的数据值,输入值(属性值)是一个d维度的属性/数值向量;</li>
+<li>因此,回归算法是用于预测连续型数值输出的算法.
+## 线性回归</li>
+</ol>
 
 
                         
@@ -228,114 +356,6 @@ mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='Python.html'>Python</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15235878044126.html">
-                
-                  <h1>Markdown中用LaTex语法写数学公式</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>最近在学习机器学习和神经网络的一些知识, 在用Markdown做笔记的时候, 发现公式用到LaTeX十分方便, 写篇文章记录在学习过程中的常用的LaTeX公式和用法, 因为本博客支持MathJax, <code>MathJax</code>是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，MathJax可以解析<code>Latex</code>、<code>MathML</code>和<code>ASCIIMathML</code>的标记语言。</p>
-
-<h2 id="toc_0">关键字索引</h2>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15235878044126.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/4/13</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='DevTools.html'>DevTools</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15228352753621.html">
-                
-                  <h1>如何优雅的设计数据分层</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h1 id="toc_0">理论</h1>
-
-<p><img src="media/15228352753621/15231557165878.jpg" alt=""/></p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15228352753621.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/4/4</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Hive.html'>Hive</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15224029526508.html">
-                
-                  <h1>Spark-Metrics 实战</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p><a href="http://metrics.dropwizard.io/3.1.0/getting-started/">http://metrics.dropwizard.io/3.1.0/getting-started/</a><br/>
-<a href="http://metrics.dropwizard.io/3.1.0/manual/core/">http://metrics.dropwizard.io/3.1.0/manual/core/</a><br/>
-<a href="http://wuchong.me/blog/2015/08/01/getting-started-with-metrics/">http://wuchong.me/blog/2015/08/01/getting-started-with-metrics/</a></p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15224029526508.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/3/30</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Spark.html'>Spark</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -475,31 +495,31 @@ mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
 	      
 		      
 			      <li class="post">
-			        <a href="15248143200628.html">线性回归</a>
+			        <a href="15255701784620.html">集成学习</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15255685118456.html">决策树</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198753668603.html">逻辑回归</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15248143200628.html">回归算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
 			        <a href="15242825563762.html">python-matplotlib画图中文显示不出来</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15235878044126.html">Markdown中用LaTex语法写数学公式</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15228352753621.html">如何优雅的设计数据分层</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15224029526508.html">Spark-Metrics 实战</a>
 			      </li>
 		     
 		  

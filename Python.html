@@ -201,6 +201,46 @@ mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
               </div><!-- article -->
         
 			<div class="article">
+                <a class="clearlink" href="15209051281712.html">
+                
+                  <h1>fabric自动化部署</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">简介</h2>
+
+<p>Fabric是一个用Python开发的部署工具，最大特点是不用登录远程服务器，在本地运行远程命令，几行Python脚本就可以轻松部署。</p>
+
+<p>Fabric提供几个简单的API来完成所有的部署，最常用的是local()和run()，分别在本地和远程执行命令，put()可以把本地文件上传到远程，当需要在远程指定当前目录时，只需用with cd(&#39;/path/to/dir/&#39;):即可。</p>
+
+<p>默认情况下，当命令执行失败时，Fabric会停止执行后续命令。有时，我们允许忽略失败的命令继续执行，比如run(&#39;rm /tmp/abc&#39;)在文件不存在的时候有可能失败，这时可以用with settings(warn_only=True):执行命令，这样Fabric只会打出警告信息而不会中断执行。</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15209051281712.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/3/13</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Python.html'>Python</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="15219482100406.html">
                 
                   <h1>字符串编码转换</h1>
@@ -302,44 +342,6 @@ mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
                   <div class="more-left left">
                    <a href="15219455706450.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2017/10/2</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Python.html'>Python</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15219449578725.html">
-                
-                  <h1>python-requests[整理自网络]</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">Requests: 让 HTTP 服务人类</h2>
-
-<p>虽然Python的标准库中 urllib2 模块已经包含了平常我们使用的大多数功能，但是它的 API 使用起来让人感觉不太好，而 Requests 自称 “HTTP for Humans”，说明使用更简洁方便。</p>
-
-<p>Requests 继承了urllib2的所有特性。Requests支持HTTP连接保持和连接池，支持使用cookie保持会话，支持文件上传，支持自动确定响应内容的编码，支持国际化的 URL 和 POST 数据自动编码。</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15219449578725.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/10/1</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='Python.html'>Python</a></span>
@@ -482,31 +484,31 @@ mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
 	      
 		      
 			      <li class="post">
-			        <a href="15248143200628.html">线性回归</a>
+			        <a href="15255701784620.html">集成学习</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15255685118456.html">决策树</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198753668603.html">逻辑回归</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15248143200628.html">回归算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
 			        <a href="15242825563762.html">python-matplotlib画图中文显示不出来</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15235878044126.html">Markdown中用LaTex语法写数学公式</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15228352753621.html">如何优雅的设计数据分层</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15224029526508.html">Spark-Metrics 实战</a>
 			      </li>
 		     
 		  

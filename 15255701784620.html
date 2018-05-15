@@ -1,0 +1,650 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  集成学习 - Time渐行渐远
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Time渐行渐远" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:dmlcoding.com ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li id=""><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li id=""><a target="_blank" href="about.html">ABOUT</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Time渐行渐远</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="BigData.html">BigData</a></li>
+        
+            <li><a href="Python.html">Python</a></li>
+        
+            <li><a href="Linux.html">Linux</a></li>
+        
+            <li><a href="Life.html">Life</a></li>
+        
+            <li><a href="Spark.html">Spark</a></li>
+        
+            <li><a href="Hive.html">Hive</a></li>
+        
+            <li><a href="Yarn.html">Yarn</a></li>
+        
+            <li><a href="Scala.html">Scala</a></li>
+        
+            <li><a href="VPS.html">VPS</a></li>
+        
+            <li><a href="MachineLearning.html">MachineLearning</a></li>
+        
+            <li><a href="Writer.html">Writer</a></li>
+        
+            <li><a href="Shell.html">Shell</a></li>
+        
+            <li><a href="Algorithm.html">Algorithm</a></li>
+        
+            <li><a href="Mac.html">Mac</a></li>
+        
+            <li><a href="Presto.html">Presto</a></li>
+        
+            <li><a href="Mysql.html">Mysql</a></li>
+        
+            <li><a href="Maven.html">Maven</a></li>
+        
+            <li><a href="Kafka.html">Kafka</a></li>
+        
+            <li><a href="Java.html">Java</a></li>
+        
+            <li><a href="DevTools.html">DevTools</a></li>
+        
+            <li><a href="Hbase.html">Hbase</a></li>
+        
+            <li><a href="ELK.html">ELK</a></li>
+        
+            <li><a href="Druid.html">Druid</a></li>
+        
+            <li><a href="Docker.html">Docker</a></li>
+        
+            <li><a href="DesignPattern.html">DesignPattern</a></li>
+        
+            <li><a href="Computer.html">Computer</a></li>
+        
+            <li><a href="Redis.html">Redis</a></li>
+        
+            <li><a href="Zookeeper.html">Zookeeper</a></li>
+        
+            <li><a href="BlockChain.html">BlockChain</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>集成学习</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2018/5/6</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p>集成学习的思想是将若干个学习器(分类器&amp;回归器)组合之后产生一个新学习器.弱分类器(weak learner)指那些分类准确率只稍微好于随机猜测的分类器(error rate&lt; 0.5).</p>
+
+<p>集成算法的成功在于保证弱分类器的多样性(Diversity).而且集成不稳定的算法也能够得到一个比较明显的性能提升.</p>
+
+<p>常见的集成学习思想有:<br/>
+    + Bagging<br/>
+    + Boosting<br/>
+    + Stacking</p>
+
+<span id="more"></span><!-- more -->
+
+<h2 id="toc_0">为什么需要集成学习</h2>
+
+<ol>
+<li>弱分类器间存在一定的差异性,这会导致分类的边界不同,也就是说可能存在错误.那么将多个弱分类器合并后,就可以得到更加合理的边界,减少整体的错误率,实现更好的效果.</li>
+<li>对于数据集过大或者过小,可以分别进行划分和有放回的操作产生不同的数据子集,然后使用数据子集训练不同的分类器,最终再合并成为一个大的分类器.</li>
+<li>如果数据的划分边界过于复杂,使用线性模型很难描述情况,那么可以训练多个模型,然后再进行模型的融合.</li>
+<li>对于多个异构的特征集的时候,很难进行融合,那么可以考虑每个数据集构建一个分类模型,然后将多个模型融合.</li>
+</ol>
+
+<h1 id="toc_1">Bagging方法</h1>
+
+<p>Bagging方法又叫自举汇聚法(Bootstrap Aggregating),思想是:在原始数据集上通过有放回的抽样的方式,重新选择出S个新数据集来分别训练S个分类器的集成技术.也就是说这些模型的训练数据中允许存在重复数据.</p>
+
+<p>Bagging方法训练出来的模型在预测新样本分类的时候,会使用<strong>多数投票</strong>或者求<strong>均值</strong>的方式来统计最终的分类结果.</p>
+
+<p>Bagging方法的弱学习器可以是基本的算法模型,eg:Linear,Ridge,Lasso,Logistic,Softmax,ID3,C4.5,CART,SVM,KNN等</p>
+
+<p>备注:Bagging方式是有放回的抽样,并且每个子集的样本数量必须和原始样本数量一致,但是子集中允许存在重复数据.</p>
+
+<p><img src="media/15255701784620/15259417755837.jpg" alt="Bagging方法-训练过程"/></p>
+
+<h2 id="toc_2">随机森林(Random Forest)</h2>
+
+<p>在Bagging策略的基础上进行修改后的一种算法</p>
+
+<ol>
+<li>从原始样本集(n个样本)中用Bootstrap采样(有放回重采样)选出n个样本;</li>
+<li>从所有属性中随机选择k个属性,选择出最佳分割属性作为节点创建决策树;</li>
+<li>重复以上两步m次,即建立m棵决策树;</li>
+<li>这m个决策树形成随机森林,通过投票表决结果决定数据属于哪一类.</li>
+</ol>
+
+<h2 id="toc_3">随机森林的推广算法</h2>
+
+<p>RF(随机森林)算法在实际应用中具有比较好的特性,应用也比较广泛,主要应用在:分类,回归,特征转换,异常点检测.常见的RF变种算法如下:</p>
+
+<ul>
+<li>Extra Tree</li>
+<li>Totally Random Trees Embedding(TRTE)</li>
+<li>lsolation Forest</li>
+</ul>
+
+<h2 id="toc_4">Extra Tree</h2>
+
+<p>Extra Tree是RF的一个变种,原理基本和RF一样,区别如下:</p>
+
+<ol>
+<li>RF会随机采样作为子决策树的训练集,而Extra Tree每个子决策树采样原始数据集训练;</li>
+<li>RF在选择划分特征点的时候会和传统决策树一样,会基于信息增益,信息增益率,基尼系数,均方差等原则来选择最优特征值;而Extra Tree会随机的选择一个特征值来划分决策树,</li>
+</ol>
+
+<p>Extra Tree因为是随机选择特征值的划分点,这样会导致决策树的规模一般大于RF所生成的决策树.也就是说Extra Tree模型的方差相对于RF进一步减少.在某些情况下,Extra Tree的泛华能力比RF的强.</p>
+
+<h2 id="toc_5">Totally Random Trees Embedding(TRTE)</h2>
+
+<p>TRTE是一种非监督的数据转化方式.将低维的数据集映射到高维,从而让映射到高维的数据更好的应用于分类回归模型.</p>
+
+<p>TRTE算法的转换过程类似RF算法的方法,建立T个决策树来拟合数据.当决策树构建完成后,数据集里的每个数据在T个决策树叶子节点的位置就定下来了,将位置信息转换为向量就完成了特征转换操作.</p>
+
+<h2 id="toc_6">Isolation Forest(IForest)</h2>
+
+<p>IForest是一种异常点检测算法,使用类似RF的方式来检测异常点;IForest算法和RF算法的区别在于:</p>
+
+<ol>
+<li>在随机采样的过程中,一般只需要少量数据即可;</li>
+<li>在进行决策树构建过程中,IForest算法会随机选择一个划分特征,并对划分特征随机选择一个划分阈值.</li>
+<li>IForest算法构建的决策树一般深度max_depth是比较小的</li>
+</ol>
+
+<p>区别原因:目的是异常点检测,所以只要能够区分异常的即可,不需要大量数据;另外在异常点检测的过程中,一般不需要太大规模的决策树.</p>
+
+<p>对于异常点的判断,则是将测试样本x拟合到T棵决策树上.计算在每棵树上该样本的叶子节点的深度\(h_t(x)\).从而计算出平均深度\(h(x)\);然后就可以使用下列公式计算样本点x的异常概率值,p(s,m)的取值范围为[0,1],越接近于1,则是异常点的概率越大.</p>
+
+<p>\[p(x,m)=2^{-\dfrac{h(x)}{c(m)}}\]<br/>
+\[c(m)=2\ln(m-1)+\xi-2\dfrac{m-1}{m} : m为样本个数,\xi为欧拉常数\]</p>
+
+<h2 id="toc_7">RF随机森林总结</h2>
+
+<ul>
+<li><p>RF的主要优点</p>
+
+<ul>
+<li>1. 训练可以并行化,对于大规模样本的训练具有速度的优势;</li>
+<li>2. 由于进行随机选择决策树划分特征列表,这样在样本维度比较高的时候,仍然具有比较高的训练性能;</li>
+<li>3. 可以给出各个特征的重要性列表;</li>
+<li>4. 由于存在随机抽样,训练出来的模型方差小,泛化能力强;</li>
+<li>5. RF实现简单;</li>
+<li>6. 对于部分特征的缺失不敏感.</li>
+</ul></li>
+<li><p>RF的主要缺点</p>
+
+<ul>
+<li>1. 在某些噪音比较大的特征上,RF模型容易陷入过拟合;</li>
+<li>2. 取值比较多的划分特征对RF的决策会产生更大的影响,从而有可能影响模型的效果.</li>
+</ul></li>
+</ul>
+
+<h2 id="toc_8">随机森林算法案例</h2>
+
+<pre><code>```
+```
+</code></pre>
+
+<h2 id="toc_9">RF scikit-learn相关参数</h2>
+
+<pre><code>![](media/15255701784620/15260264540993.jpg)
+</code></pre>
+
+<h2 id="toc_10">随机森林的思考</h2>
+
+<p>在随机森林的构建过程中,由于各棵树之间是没有关系的,相对独立的;在构建的过程中,构建第m棵子树的时候,不会考虑前面的m-1棵树.</p>
+
+<p>思考:<br/>
+1. 如果在构建第m棵子树的时候,考虑到前m-1棵子树的结果,会不会对最终结果产生有益的影响?<br/>
+2. 各个决策树组成随机森林后,在形成最终结果的时候能不能给定一种既定的决策顺序呢?</p>
+
+<h1 id="toc_11">Boosting</h1>
+
+<p>提升学习(Boosting)是一种机器学习技术,可以用于回归和分类的问题,它每一步产生弱预测模型(如决策树),并加权累加到总模型中;如果每一步的弱项模型的生成都是依据损失函数的梯度方式的,那么就称为梯度提升(Gradient boosting).</p>
+
+<p>提升技术的意义:如果一个问题存在弱预测模型,那么可以通过提升技术的方法得到一个强预测模型.</p>
+
+<p>常见的模型有:</p>
+
+<ul>
+<li>Adaboost</li>
+<li>Gradient Boosting(GBT/GBDT/GBRT)</li>
+</ul>
+
+<p><img src="media/15255701784620/15260302457703.jpg" alt=""/></p>
+
+<h2 id="toc_12">Adaboost算法公式</h2>
+
+<p>Adaboost算法将基分类器的线性组合作为强分类器,同时给分类误差率较小的基本分类器以大的权重,给分类误差率较大的基分类器以小的权重值;构建的线性组合为:<br/>
+\[f(x)=\sum_{m=1}^M\alpha_mG_m(x)\]</p>
+
+<p>最终分类器是在线性组合的基础上进行Sign函数转换:<br/>
+\[G(x)=sign(f(x))=sign \left[\sum_{m=1}^M\alpha_mG_m(x) \right]\]</p>
+
+<p>Sign函数<br/>
+<img src="media/15255701784620/15260310974094.jpg" alt="Sign函数"/></p>
+
+<h2 id="toc_13">AdaBoost算法原理</h2>
+
+<p>Adaptive Boosting是一种迭代算法.每轮迭代中会在训练集上产生一个新的学习器,然后使用该学习器对所有样本进行预测,以评估每个样本的重要性(Informative).换句话来讲就是,算法会为每个样本赋予一个权重,每次用训练好的学习器标注/预测各个样本,如果某个样本点被预测的越正确,则将其权重降低;否则提高样本的权重.权重越高的样本在下一个迭代训练中所占的比重就越大,也就是说越难区分的样本在训练过程中会变得越重要.</p>
+
+<p>整个迭代过程直到错误率足够小或者达到一定的迭代次数为止.</p>
+
+<p>样本加权</p>
+
+<p><img src="media/15255701784620/15260307178045.jpg" alt="样本加权"/></p>
+
+<p>最终的强学习器<br/>
+\[G(x)=sign(f(x))=sign \left[\sum_{m=1}^M\alpha_mG_m(x) \right]\]</p>
+
+<p>损失函数<br/>
+\[loss=\dfrac{1}{n}\sum_{i=1}^nI(G(x_i)\neq y_i)\]</p>
+
+<p>损失函数<br/>
+\[loss=\dfrac{1}{n}\sum_{i=1}^nI(G(x_i)\neq y_i) \leq \dfrac{1}{n}\sum_{i=1}^ne^{(-y_if(x))}\]</p>
+
+<p>第k-1轮的强学习器<br/>
+\[f_{k-1}(x)=\sum_{j=1}^{k-1}\alpha_jG_j(x)\]</p>
+
+<p>第k轮的强学习器<br/>
+\[f_{k}(x)=\sum_{j=1}^{k}\alpha_jG_j(x) \qquad<br/>
+f_k(x)=f_{k-1}(x)+\alpha_kG_k(x)<br/>
+\]</p>
+
+<p>损失函数<br/>
+\[loss(\alpha_m,G_m(x))=\dfrac{1}{n}\sum_{i=1}^ne^{(-y_i(f_{n-1}(x)+\alpha_mG_m(x)))}\]</p>
+
+<p>未完待续</p>
+
+<h2 id="toc_14">...</h2>
+
+<h2 id="toc_15">AdaBoost总结</h2>
+
+<ul>
+<li><p>daBoost的优点如下:</p>
+
+<ul>
+<li>可以处理连续值和离散值;</li>
+<li>模型的鲁棒性比较强;</li>
+<li>解释强,结构简单.</li>
+</ul></li>
+<li><p>AdaBoost的缺点如下:</p>
+
+<ul>
+<li>对异常样本敏感,异常样本可能会在迭代过程中获得较高的权重值,最终影响模型效果.</li>
+</ul></li>
+</ul>
+
+<h1 id="toc_16">Stacking</h1>
+
+<p>Stacking是指训练一个模型用于组合(combine)其他模型(基模型/基学习器)的技术.即首先训练出多个不同的模型,然后再以之前训练的各个模型的输出作为输入来新训练一个新的模型,从而得到一个最终的模型.一般情况下使用单层的Logistic回归作为组合模型<br/>
+<img src="media/15255701784620/15260322012383.jpg" alt=""/></p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15255685118456.html" 
+          title="Next Post: 决策树">决策树 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://s.gravatar.com/avatar/2d9bdeec5ad2754d8a47063df1346ee8?s=80" /></div>
+            
+                <h1>Time渐行渐远</h1>
+                <div class="site-des">Coding Changing The World</div>
+                <div class="social">
+
+
+
+
+
+
+
+<a target="_blank" class="weibo" href="http://weibo.com/hswnice" title="weibo">Weibo</a>
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:hsw_v5@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="BigData.html"><strong>BigData</strong></a>
+        
+            <a href="Python.html"><strong>Python</strong></a>
+        
+            <a href="Linux.html"><strong>Linux</strong></a>
+        
+            <a href="Life.html"><strong>Life</strong></a>
+        
+            <a href="Spark.html"><strong>Spark</strong></a>
+        
+            <a href="Hive.html"><strong>Hive</strong></a>
+        
+            <a href="Yarn.html"><strong>Yarn</strong></a>
+        
+            <a href="Scala.html"><strong>Scala</strong></a>
+        
+            <a href="VPS.html"><strong>VPS</strong></a>
+        
+            <a href="MachineLearning.html"><strong>MachineLearning</strong></a>
+        
+            <a href="Writer.html"><strong>Writer</strong></a>
+        
+            <a href="Shell.html"><strong>Shell</strong></a>
+        
+            <a href="Algorithm.html"><strong>Algorithm</strong></a>
+        
+            <a href="Mac.html"><strong>Mac</strong></a>
+        
+            <a href="Presto.html"><strong>Presto</strong></a>
+        
+            <a href="Mysql.html"><strong>Mysql</strong></a>
+        
+            <a href="Maven.html"><strong>Maven</strong></a>
+        
+            <a href="Kafka.html"><strong>Kafka</strong></a>
+        
+            <a href="Java.html"><strong>Java</strong></a>
+        
+            <a href="DevTools.html"><strong>DevTools</strong></a>
+        
+            <a href="Hbase.html"><strong>Hbase</strong></a>
+        
+            <a href="ELK.html"><strong>ELK</strong></a>
+        
+            <a href="Druid.html"><strong>Druid</strong></a>
+        
+            <a href="Docker.html"><strong>Docker</strong></a>
+        
+            <a href="DesignPattern.html"><strong>DesignPattern</strong></a>
+        
+            <a href="Computer.html"><strong>Computer</strong></a>
+        
+            <a href="Redis.html"><strong>Redis</strong></a>
+        
+            <a href="Zookeeper.html"><strong>Zookeeper</strong></a>
+        
+            <a href="BlockChain.html"><strong>BlockChain</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15255701784620.html">集成学习</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15255685118456.html">决策树</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198753668603.html">逻辑回归</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15248143200628.html">回归算法</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15242825563762.html">python-matplotlib画图中文显示不出来</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?2a025c7742b90ad62b1e767e1b7f2f29";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </body>
+</html>

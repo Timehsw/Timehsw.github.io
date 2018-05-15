@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  机器学习实战之逻辑回归 - Time渐行渐远
+  逻辑回归 - Time渐行渐远
   
   </title>
   
@@ -161,10 +161,10 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>机器学习实战之逻辑回归</h1>
+          <h1>逻辑回归</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2017/7/12</span>
+          <span class="date">2018/4/29</span>
 
           <span>posted in&nbsp;</span> 
           
@@ -183,8 +183,6 @@
       <div class="article-content">
       <p>不知道什么是逻辑回归,但是也许看完接下来的文章,你会有个大概的印象吧</p>
 
-<span id="more"></span><!-- more -->
-
 <h1 id="toc_0">简单介绍Logistic回归</h1>
 
 <h2 id="toc_1">Logistic回归用到的知识点</h2>
@@ -195,6 +193,8 @@
 <li>梯度下降最优化算法</li>
 <li>数据中的缺失项处理</li>
 </ul>
+
+<span id="more"></span><!-- more -->
 
 <h2 id="toc_2">Logistic回归的一般过程</h2>
 
@@ -234,7 +234,50 @@
 <p>基本公式:<br/>
 Sigmoid函数具体的计算公式</p>
 
-<math xmlns="http://www.w3.org/1998/Math/MathML">  <mstyle displaystyle="true">    <mi> &#x03C3;<!--greek small letter sigma--> </mi>    <mfenced>      <mrow>        <mi> z </mi>      </mrow>    </mfenced>    <mo> = </mo>    <mfrac>      <mrow>        <mn> 1 </mn>      </mrow>      <mrow>        <mn> 1 </mn>        <mo> + </mo>        <msup>          <mrow>            <mi> e </mi>          </mrow>          <mrow>            <mo> - </mo>            <mi> z </mi>          </mrow>        </msup>      </mrow>    </mfrac>  </mstyle></math>
+<p>\[p=h_{\theta}(x)=g(\theta^Tx)=\dfrac{1}{1+e^{-\theta^Tx}}\]<br/>
+\[g(z)=\dfrac{1}{1+e^{-z}}\]</p>
+
+<p><img src="media/15198753668603/15253390268591.jpg" alt=""/></p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+g^{&#39;}(X)&amp; =\left(\dfrac{1}{1+e^{-z}}\right)^{&#39;} \\\<br/>
+&amp; = \dfrac{e^{-z}}{(1+e^{-z})^2} \\\<br/>
+&amp; = \dfrac{1}{1+e^{-z}}\cdot \dfrac{e^{-z}}{1+e{-z}} \\\<br/>
+&amp; = \dfrac{1}{1+e^{-z}}\cdot \left(1-\dfrac{1}{1+e^{-z}}\right) \\\<br/>
+&amp; = g(z)\cdot (1-g(z))<br/>
+\end{aligned}<br/>
+\]</p>
+
+<h2 id="toc_5">logistic 回归及似然函数</h2>
+
+<p>假设<br/>
+\[<br/>
+\begin{aligned}<br/>
+P(y=1|x;\theta)&amp; =h_{\theta}(x) \\\<br/>
+P(y=0|x;\theta)&amp; =1-h_{\theta}(x) \\\<br/>
+P(y|x;\theta)&amp; =(h_{\theta}(x))^y(1-h_{\theta}(x))^{(1-y)}<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>似然函数:<br/>
+\[<br/>
+\begin{aligned}<br/>
+L(\theta) &amp; =p(\vec{y}|X;\theta) \\\<br/>
+&amp; =\prod_{i=1}^m p(y^{(i)}|x^{(i)};\theta) \\\<br/>
+&amp; = \prod_{i=1}^m (h_{\theta}(x^{(i)}))^{y^{(i)}}(1-h_{\theta}(x^{(i)}))^{(1-y^{(i)})}<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>对数似然函数:<br/>
+\[<br/>
+\begin{aligned}<br/>
+\ell(\theta) &amp; =\log L(\theta) \\\<br/>
+&amp; = \sum_{i=1}^m\left(y^{(i)}\log h_{\theta}(x^{(i)})+(1-y^{(i)})\log (1-h_{\theta}(x^{(i)}))\right)<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>最大似然/极大似然函数的随机梯度</p>
 
 
     
@@ -245,16 +288,16 @@ Sigmoid函数具体的计算公式</p>
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15198716087210.html" 
-          title="Previous Post: 年中总结">&laquo; 年中总结</a>
+          <a href="15255685118456.html" 
+          title="Previous Post: 决策树">&laquo; 决策树</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15198772721083.html" 
-          title="Next Post: druid遇到的坑">druid遇到的坑 &raquo;</a>
+          <a  href="15248143200628.html" 
+          title="Next Post: 回归算法">回归算法 &raquo;</a>
       
       </p>
         </div>
@@ -383,31 +426,31 @@ Sigmoid函数具体的计算公式</p>
 	      
 		      
 			      <li class="post">
-			        <a href="15248143200628.html">线性回归</a>
+			        <a href="15255701784620.html">集成学习</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15255685118456.html">决策树</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15198753668603.html">逻辑回归</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15248143200628.html">回归算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
 			        <a href="15242825563762.html">python-matplotlib画图中文显示不出来</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15235878044126.html">Markdown中用LaTex语法写数学公式</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15228352753621.html">如何优雅的设计数据分层</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15224029526508.html">Spark-Metrics 实战</a>
 			      </li>
 		     
 		  
