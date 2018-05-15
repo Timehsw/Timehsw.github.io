@@ -186,30 +186,31 @@
 <ol>
 <li>回归算法是一种有监督算法;</li>
 <li>回归算法是一种比较常用的机器学习算法,用于建立解释变量(自变量X)和观测值(因变量Y)之间的关系;</li>
-<li>从机器学习的角度来讲,用于构建一个算法模型(函数)来做属性(X)与标签(Y)之间的映射关系,在算法的学习过程中,视图寻找一个函数h:使得\(R^d\to R\)使得参数之间的关系拟合性最好;</li>
+<li>从机器学习的角度来讲,用于构建一个算法模型(函数)来做属性(X)与标签(Y)之间的映射关系,在算法的学习过程中,试图寻找一个函数h:使得\(R^d\to R\)使得参数之间的关系拟合性最好;</li>
 <li>回归算法中,算法(函数)的最终结果是一个<strong>连续</strong>的数据值,输入值(属性值)是一个d维度的属性/数值向量;</li>
-<li>因此,回归算法是用于预测连续型数值输出的算法.
-## 线性回归</li>
+<li>因此,回归算法是用于预测连续型数值输出的算法.</li>
 </ol>
+
+<h2 id="toc_1">线性回归</h2>
 
 <span id="more"></span><!-- more -->
 
-<h3 id="toc_1">单变量线性回归</h3>
+<h3 id="toc_2">单变量线性回归</h3>
 
 <p>\[h_{\theta}=\theta_0+ \theta_1x\]</p>
 
 <p>因为只含有一个特征/输入变量,因此这样的问题叫做单变量线性回归问题.</p>
 
-<h3 id="toc_2">代价函数(Cost Function)</h3>
+<h3 id="toc_3">代价函数(Cost Function)</h3>
 
 <p>我们选择的参数决定了我们得到的直线相对于我们的训练集的准确程度,模型所预测的值与训练集中实际值之间的差距就是建模误差(modeling error).</p>
 
 <p>我们的目标便是选择出可以使得<strong>建模误差的平方和</strong>能够<strong>最小</strong>的模型参数.即使得代价函数最小.<br/>
 \[J(\theta_0,\theta_1)=\dfrac{1}{2m}\sum_{i=1}^m(h_{\theta}(x^{(i)})-y^{(i)})^2\]</p>
 
-<h3 id="toc_3">多变量线性回归</h3>
+<h3 id="toc_4">多变量线性回归</h3>
 
-<h2 id="toc_4">公式推导</h2>
+<h2 id="toc_5">公式推导</h2>
 
 <p>\[\begin{align}<br/>
 y^{(i)}&amp; =\theta ^Tx^{(i)}+\epsilon^{(i)}\\\<br/>
@@ -254,11 +255,11 @@ L(\theta)&amp; =\prod_{i=1}^mp(y^{(i)}|x^{(i)};\theta)\\\<br/>
 
 <p>\[\theta=(X^TX)^{-1}X^TY\]</p>
 
-<h2 id="toc_5">简述原理</h2>
+<h2 id="toc_6">简述原理</h2>
 
-<h2 id="toc_6">\(\theta\)值推导过程以及求解</h2>
+<h2 id="toc_7">\(\theta\)值推导过程以及求解</h2>
 
-<h3 id="toc_7">构造数据</h3>
+<h3 id="toc_8">构造数据</h3>
 
 <!-- more -->
 
@@ -274,7 +275,7 @@ df=pd.DataFrame({
 
 </code></pre>
 
-<h3 id="toc_8">抽取x和y</h3>
+<h3 id="toc_9">抽取x和y</h3>
 
 <pre><code class="language-python"># 抽取x和y
 x=df[[&#39;x1&#39;,&#39;x2&#39;]]
@@ -283,7 +284,7 @@ y=df[&#39;y&#39;].values.reshape((-1,1))
 
 </code></pre>
 
-<h3 id="toc_9">求解\(\theta\) 值</h3>
+<h3 id="toc_10">求解\(\theta\) 值</h3>
 
 <p><em>根据公式计算\(\theta\)</em>值,推导过程如图所示<br/>
 \[\theta=(X^TX)^{-1}X^TY\]</p>
@@ -322,8 +323,8 @@ np.dot(np.mat(x.T.dot(x)).I,x.T).dot(y)
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15242825563762.html" 
-          title="Next Post: python-matplotlib画图中文显示不出来">python-matplotlib画图中文显示不出来 &raquo;</a>
+          <a  href="15263722402424.html" 
+          title="Next Post: 学习机器学习">学习机器学习 &raquo;</a>
       
       </p>
         </div>
@@ -476,7 +477,7 @@ np.dot(np.mat(x.T.dot(x)).I,x.T).dot(y)
 		  
 		      
 			      <li class="post">
-			        <a href="15242825563762.html">python-matplotlib画图中文显示不出来</a>
+			        <a href="15263722402424.html">学习机器学习</a>
 			      </li>
 		     
 		  

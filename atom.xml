@@ -4,7 +4,7 @@
   <title><![CDATA[Time渐行渐远]]></title>
   <link href="http://dmlcoding.com/atom.xml" rel="self"/>
   <link href="http://dmlcoding.com/"/>
-  <updated>2018-05-15T15:40:46+08:00</updated>
+  <updated>2018-05-15T16:30:54+08:00</updated>
   <id>http://dmlcoding.com/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -134,8 +134,7 @@
 
 <h2 id="toc_9">RF scikit-learn相关参数</h2>
 
-<pre><code>![](media/15255701784620/15260264540993.jpg)
-</code></pre>
+<p><img src="media/15255701784620/15260264540993.jpg" alt=""/></p>
 
 <h2 id="toc_10">随机森林的思考</h2>
 
@@ -845,30 +844,31 @@ L(\theta) &amp; =p(\vec{y}|X;\theta) \\\<br/>
 <ol>
 <li>回归算法是一种有监督算法;</li>
 <li>回归算法是一种比较常用的机器学习算法,用于建立解释变量(自变量X)和观测值(因变量Y)之间的关系;</li>
-<li>从机器学习的角度来讲,用于构建一个算法模型(函数)来做属性(X)与标签(Y)之间的映射关系,在算法的学习过程中,视图寻找一个函数h:使得\(R^d\to R\)使得参数之间的关系拟合性最好;</li>
+<li>从机器学习的角度来讲,用于构建一个算法模型(函数)来做属性(X)与标签(Y)之间的映射关系,在算法的学习过程中,试图寻找一个函数h:使得\(R^d\to R\)使得参数之间的关系拟合性最好;</li>
 <li>回归算法中,算法(函数)的最终结果是一个<strong>连续</strong>的数据值,输入值(属性值)是一个d维度的属性/数值向量;</li>
-<li>因此,回归算法是用于预测连续型数值输出的算法.
-## 线性回归</li>
+<li>因此,回归算法是用于预测连续型数值输出的算法.</li>
 </ol>
+
+<h2 id="toc_1">线性回归</h2>
 
 <span id="more"></span><!-- more -->
 
-<h3 id="toc_1">单变量线性回归</h3>
+<h3 id="toc_2">单变量线性回归</h3>
 
 <p>\[h_{\theta}=\theta_0+ \theta_1x\]</p>
 
 <p>因为只含有一个特征/输入变量,因此这样的问题叫做单变量线性回归问题.</p>
 
-<h3 id="toc_2">代价函数(Cost Function)</h3>
+<h3 id="toc_3">代价函数(Cost Function)</h3>
 
 <p>我们选择的参数决定了我们得到的直线相对于我们的训练集的准确程度,模型所预测的值与训练集中实际值之间的差距就是建模误差(modeling error).</p>
 
 <p>我们的目标便是选择出可以使得<strong>建模误差的平方和</strong>能够<strong>最小</strong>的模型参数.即使得代价函数最小.<br/>
 \[J(\theta_0,\theta_1)=\dfrac{1}{2m}\sum_{i=1}^m(h_{\theta}(x^{(i)})-y^{(i)})^2\]</p>
 
-<h3 id="toc_3">多变量线性回归</h3>
+<h3 id="toc_4">多变量线性回归</h3>
 
-<h2 id="toc_4">公式推导</h2>
+<h2 id="toc_5">公式推导</h2>
 
 <p>\[\begin{align}<br/>
 y^{(i)}&amp; =\theta ^Tx^{(i)}+\epsilon^{(i)}\\\<br/>
@@ -913,11 +913,11 @@ L(\theta)&amp; =\prod_{i=1}^mp(y^{(i)}|x^{(i)};\theta)\\\<br/>
 
 <p>\[\theta=(X^TX)^{-1}X^TY\]</p>
 
-<h2 id="toc_5">简述原理</h2>
+<h2 id="toc_6">简述原理</h2>
 
-<h2 id="toc_6">\(\theta\)值推导过程以及求解</h2>
+<h2 id="toc_7">\(\theta\)值推导过程以及求解</h2>
 
-<h3 id="toc_7">构造数据</h3>
+<h3 id="toc_8">构造数据</h3>
 
 <!-- more -->
 
@@ -933,7 +933,7 @@ df=pd.DataFrame({
 
 </code></pre>
 
-<h3 id="toc_8">抽取x和y</h3>
+<h3 id="toc_9">抽取x和y</h3>
 
 <pre><code class="language-python"># 抽取x和y
 x=df[[&#39;x1&#39;,&#39;x2&#39;]]
@@ -942,7 +942,7 @@ y=df[&#39;y&#39;].values.reshape((-1,1))
 
 </code></pre>
 
-<h3 id="toc_9">求解\(\theta\) 值</h3>
+<h3 id="toc_10">求解\(\theta\) 值</h3>
 
 <p><em>根据公式计算\(\theta\)</em>值,推导过程如图所示<br/>
 \[\theta=(X^TX)^{-1}X^TY\]</p>
@@ -963,6 +963,36 @@ np.dot(np.mat(x.T.dot(x)).I,x.T).dot(y)
 </code></pre>
 
 <p>很明显,计算结果正确.两个系数分别是2和1</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[学习机器学习]]></title>
+    <link href="http://dmlcoding.com/15263722402424.html"/>
+    <updated>2018-05-15T16:17:20+08:00</updated>
+    <id>http://dmlcoding.com/15263722402424.html</id>
+    <content type="html"><![CDATA[
+<p>机器不能代替你学习,代替你成长,终归还得自己踏实学习!</p>
+
+<p>对于下面的基础知识,不管是大学的时候没学好,还是由于时间太长了,导致自己忘记了.都无所谓了.既然打算学习机器学习,那么就不得不花时间去重拾这些知识.</p>
+
+<p>至于如何学,很多说法,我在网上看了很多,比如:<br/>
+1. 看视频学习;<br/>
+2. 看教程学习;<br/>
+3. 边学习边看.</p>
+
+<span id="more"></span><!-- more -->
+
+<p>我个人是先回顾一遍,常用的知识点做到心里有数,用到的时候,知道用的什么知识点,去哪里查.然后在学习的过程中巩固,毕竟不是应试考试,没时间也没精力去抠知识点了.</p>
+
+<p>之前总是想要先把数学之类的都复习好,再开始看机器学习算法的.但是每次翻开高数课本,每次第一章的极限没看完,就看不下去了.</p>
+
+<p>所以,这是我自己的问题,我只能想办法,慢慢尝试,看看如何跳过这个坎.</p>
+
+<p>这也是我目前学习中遇到的问题,我会都记录下来,一来是复习,二是帮助大家.</p>
+
+<p>最后,学习缓慢.磕磕碰碰,在所难免,与诸君共勉!</p>
 
 ]]></content>
   </entry>
@@ -3691,122 +3721,6 @@ get /master_example
 <pre><code># 在master_example上设置一个监视点
 stat /master_example true
 </code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[kafka-sparkstreaming自己维护offset]]></title>
-    <link href="http://dmlcoding.com/15203071412162.html"/>
-    <updated>2018-03-06T11:32:21+08:00</updated>
-    <id>http://dmlcoding.com/15203071412162.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0">auto.offset.reset</h2>
-
-<p>By default, it will start consuming from the latest offset of each Kafka partition. If you set configuration auto.offset.reset in Kafka parameters to smallest, then it will start consuming from the smallest offset.</p>
-
-<span id="more"></span><!-- more -->
-
-<h2 id="toc_1">OffsetRange</h2>
-
-<p>topic主题,分区ID,起始offset,结束offset</p>
-
-<h2 id="toc_2">重写思路</h2>
-
-<p>因为spark源码中<code>KafkaCluster</code>类被限制在<strong>[spark]</strong>包下,所以我们如果想要在项目中调用这个类,那么只能在项目中也新建包<code>org.apache.spark.streaming.kafka</code>.然后再该包下面写调用的逻辑.这里面就可以引用<code>KafkaCluster</code>类了.这个类里面封装了很多实用的方法,比如:获取主题和分区,获取offset等等...</p>
-
-<p>这些api,spark里面都有现成的,我们现在就是需要组织起来!</p>
-
-<pre><code>offsetRanges = rdd.asInstanceOf[HasOffsetRanges].offsetRanges
-</code></pre>
-
-<p>简单说一下<br/>
-1. 在zookeeper上读取offset前先根据实际情况更新<code>fromOffsets</code><br/>
-    1.1 如果是一个新的groupid,那么会从最新的开始读<br/>
-    1.2 如果是存在的groupid,根据配置<code>auto.offset.reset</code><br/>
-        1.2.1 <code>smallest</code> : 那么会从开始读,获取最开始的offset.<br/>
-        1.2.2 <code>largest</code> : 那么会从最新的位置开始读取,获取最新的offset.</p>
-
-<ol>
-<li>根据topic获取topic和该topics下所有的partitions</li>
-</ol>
-
-<pre><code>val partitionsE = kc.getPartitions(topics)
-</code></pre>
-
-<ol>
-<li>传入上面获取到的topics和该分区所有的partitions</li>
-</ol>
-
-<pre><code>val consumerOffsetsE = kc.getConsumerOffsets(groupId, partitions)
-</code></pre>
-
-<ol>
-<li>获取到该topic下所有分区的offset了.最后还是调用spark中封装好了的api</li>
-</ol>
-
-<pre><code>KafkaUtils.createDirectStream[K, V, KD, VD, (K, V, String)](
-                ssc, kafkaParams, consumerOffsets, (mmd: MessageAndMetadata[K, V]) =&gt; ( mmd.key, mmd.message, mmd.topic))
-</code></pre>
-
-<ol>
-<li>更新zookeeper中的kafka消息的偏移量</li>
-</ol>
-
-<pre><code>kc.setConsumerOffsets(groupId, Map((topicAndPartition, offsets.untilOffset)))
-</code></pre>
-
-<h2 id="toc_3">问题</h2>
-
-<p>sparkstreaming-kafka的源码中是自己把offset维护在kafka集群中了?</p>
-
-<pre><code>./kafka-consumer-groups.sh --bootstrap-server 10.10.25.13:9092 --describe  --group heheda
-</code></pre>
-
-<p>因为用命令行工具可以查到,这个工具可以查到基于javaapi方式的offset,查不到在zookeeper中的</p>
-
-<p>网上的自己维护offset,是把offset维护在zookeeper中了?<br/>
-用这个方式产生的groupid,在命令行工具中查不到,但是也是调用的源码中的方法呢?<br/>
-难道spark提供了这个方法,但是自己却没有用是吗?</p>
-
-<h2 id="toc_4">自己维护和用原生的区别</h2>
-
-<p>区别只在于,自己维护offset,会先去zk中获取offset,逻辑处理完成后再更新zk中的offset.<br/>
-然而,在代码层面,区别在于调用了不同的<code>KafkaUtils.createDirectStream</code></p>
-
-<h3 id="toc_5">自己维护</h3>
-
-<p>自己维护的offset,这个方法会传入offset.因为在此之前我们已经从zk中获取到了起始offset</p>
-
-<pre><code>KafkaUtils.createDirectStream[K, V, KD, VD, (K, V, String)](
-                ssc, kafkaParams, consumerOffsets, (mmd: MessageAndMetadata[K, V]) =&gt; ( mmd.key, mmd.message, mmd.topic))
-</code></pre>
-
-<h3 id="toc_6">原生的</h3>
-
-<p>接受的是一个topic,底层会根据topic去获取存储在kafka中的起始offset</p>
-
-<pre><code>KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, myTopic)
-</code></pre>
-
-<p>接下来这个方法里面会调用<code>getFromOffsets</code>来获取起始的offset</p>
-
-<pre><code>val kc = new KafkaCluster(kafkaParams)
-val fromOffsets = getFromOffsets(kc, kafkaParams, topics)
-</code></pre>
-
-<h2 id="toc_7">代码</h2>
-
-<p>这个代码,网上很多,GitHub上也有现成的了.这里我就不贴出来了!<br/>
-这里主要还是学习代码的实现思路!</p>
-
-<h2 id="toc_8">如何引用spark源码中限制了包的代码</h2>
-
-<ol>
-<li>新建和源码中同等的包名,如上所述.</li>
-<li>把你需要的源码拷贝一份出来,但是可能源码里面又引用了别的,这个不一定好使.</li>
-<li>在你需要引用的那个类里,把这个类的包名改成与你需要引用的包名一样.最简单的办法了</li>
-</ol>
 
 ]]></content>
   </entry>

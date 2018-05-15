@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  配置 ssh 免密码登录 - Time渐行渐远
+  学习机器学习 - Time渐行渐远
   
   </title>
   
@@ -161,14 +161,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>配置 ssh 免密码登录</h1>
+          <h1>学习机器学习</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2016/12/9</span>
+          <span class="date">2018/4/26</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='Linux.html'>Linux</a></span>
+              <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
            
          
           <span class="comments">
@@ -181,106 +181,26 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>配置 ssh 免密码登录很简单,记住几个命令就行了</p>
+      <p>机器不能代替你学习,代替你成长,终归还得自己踏实学习!</p>
+
+<p>对于下面的基础知识,不管是大学的时候没学好,还是由于时间太长了,导致自己忘记了.都无所谓了.既然打算学习机器学习,那么就不得不花时间去重拾这些知识.</p>
+
+<p>至于如何学,很多说法,我在网上看了很多,比如:<br/>
+1. 看视频学习;<br/>
+2. 看教程学习;<br/>
+3. 边学习边看.</p>
 
 <span id="more"></span><!-- more -->
 
-<h1 id="toc_0">生成公钥</h1>
+<p>我个人是先回顾一遍,常用的知识点做到心里有数,用到的时候,知道用的什么知识点,去哪里查.然后在学习的过程中巩固,毕竟不是应试考试,没时间也没精力去抠知识点了.</p>
 
-<pre><code>ssh-keygen -t rsa
+<p>之前总是想要先把数学之类的都复习好,再开始看机器学习算法的.但是每次翻开高数课本,每次第一章的极限没看完,就看不下去了.</p>
 
-</code></pre>
+<p>所以,这是我自己的问题,我只能想办法,慢慢尝试,看看如何跳过这个坎.</p>
 
-<h1 id="toc_1">把公钥拷贝到目标机器上即可</h1>
+<p>这也是我目前学习中遇到的问题,我会都记录下来,一来是复习,二是帮助大家.</p>
 
-<pre><code>ssh-copy-id -i /root/.ssh/id_rsa.pub master(主机名或IP或用户名@IP)
-</code></pre>
-
-<ul>
-<li>1.会提示输入 yes</li>
-<li>2.然后输入目标机器的密码即可</li>
-<li>3.成功了,会有类似的提示</li>
-</ul>
-
-<pre><code>Now try logging into the machine, with &quot;ssh &#39;10.30.23.216&#39;&quot;, and check in:
-
-  .ssh/authorized_keys
-
-to make sure we haven&#39;t added extra keys that you weren&#39;t expecting.
-</code></pre>
-
-<h1 id="toc_2">验证</h1>
-
-<pre><code>ssh &#39;10.30.23.216&#39;
-</code></pre>
-
-<h1 id="toc_3">说明</h1>
-
-<p>在.ssh 目录下有这么几个文件</p>
-
-<pre><code>[root@bigdata .ssh]# ll
-total 16
--rw------- 1 root root  399 Apr  6 18:24 authorized_keys
--rw------- 1 root root 1675 Apr  6 18:23 id_rsa
--rw-r--r-- 1 root root  399 Apr  6 18:23 id_rsa.pub
--rw-r--r-- 1 root root 2399 Apr 10 12:15 known_hosts
-</code></pre>
-
-<table>
-<thead>
-<tr>
-<th style="text-align: left">文件名</th>
-<th style="text-align: left">备注</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td style="text-align: left">authorized_keys</td>
-<td style="text-align: left">这个文件里存储了可以免密码登录到此台服务器的机器</td>
-</tr>
-<tr>
-<td style="text-align: left">id_rsa</td>
-<td style="text-align: left">私钥</td>
-</tr>
-<tr>
-<td style="text-align: left">id_rsa.pub</td>
-<td style="text-align: left">公钥</td>
-</tr>
-<tr>
-<td style="text-align: left">known_hosts</td>
-<td style="text-align: left">这个文件里存储了已经远程登录到此台服务器的机器,不代表可以免密码登录</td>
-</tr>
-</tbody>
-</table>
-
-<ul>
-<li>注意</li>
-</ul>
-
-<p>因此,想要配置免密码登录,也就是把公钥拷贝到服务器的authorized_keys这个文件里就行了.</p>
-
-<ul>
-<li><p>举例</p>
-
-<ul>
-<li>1.A 机器想要免密码登录到 B 机器</li>
-<li>2.A机器生成公钥(没有公钥就执行:ssh-keygen -t rsa.有就不必要不执行了)</li>
-<li>3.把 A 机器的公钥拷贝到 B机器的authorized_keys文件里即可.</li>
-<li>4.ssh-copy-id -i /root/.ssh/id_rsa.pub master(主机名或IP)</li>
-<li>5.上面的命令就是第3步的实现</li>
-<li>6.输入 yes,输入远程机器的密码</li>
-<li>7.完成</li>
-</ul></li>
-</ul>
-
-<h1 id="toc_4">注意</h1>
-
-<ol>
-<li>重新生成公钥后,<code>id_rsa.pub</code>和<code>id_rsa</code>会变,但是<code>authorized_keys</code>文件不会变,这也意味着曾经授权免密登录的主机,仍然可以免密登录过来.</li>
-<li>当主机名修改后,公钥可能就不好使了.</li>
-<li>当用more命令去查看<code>id_rsa.pub</code>文件里面的公钥,然后复制的时候,可能会在换行的地方加上了换行符,然后配置免密的时候,可能就配置不成功了.所以查看文件再复制的时候,还是用cat命令比较好.</li>
-</ol>
+<p>最后,学习缓慢.磕磕碰碰,在所难免,与诸君共勉!</p>
 
 
     
@@ -291,16 +211,16 @@ total 16
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15198754878999.html" 
-          title="Previous Post: linux创建软硬链接">&laquo; linux创建软硬链接</a>
+          <a href="15248143200628.html" 
+          title="Previous Post: 回归算法">&laquo; 回归算法</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15198742884636.html" 
-          title="Next Post: Java数据结构之队列">Java数据结构之队列 &raquo;</a>
+          <a  href="15242825563762.html" 
+          title="Next Post: python-matplotlib画图中文显示不出来">python-matplotlib画图中文显示不出来 &raquo;</a>
       
       </p>
         </div>
