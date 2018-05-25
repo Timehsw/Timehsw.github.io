@@ -4,7 +4,7 @@
   <title><![CDATA[Time渐行渐远]]></title>
   <link href="http://dmlcoding.com/atom.xml" rel="self"/>
   <link href="http://dmlcoding.com/"/>
-  <updated>2018-05-15T16:30:54+08:00</updated>
+  <updated>2018-05-25T22:19:16+08:00</updated>
   <id>http://dmlcoding.com/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -839,7 +839,23 @@ L(\theta) &amp; =p(\vec{y}|X;\theta) \\\<br/>
     <updated>2018-04-27T15:32:00+08:00</updated>
     <id>http://dmlcoding.com/15248143200628.html</id>
     <content type="html"><![CDATA[
-<h2 id="toc_0">什么是回归算法</h2>
+<p>总结一下,这一节主要记录了下面的内容</p>
+
+<ol>
+<li>什么是回归算法.</li>
+<li>线性回归,单变量线性回归,多变量线性回归</li>
+<li>代价函数</li>
+<li>过拟合与欠拟合</li>
+<li>正则项</li>
+</ol>
+
+<p>在这篇文章中,主要介绍了什么是回归算法,以及简单的线性回归.包括单变量线性回归和多变量线性回归.</p>
+
+<p>同时介绍了用最小二乘法求解\(\theta\)值.接下介绍了防止过拟合问题,加入正则项.</p>
+
+<p>最后介绍了如何评价模型的效果.</p>
+
+<h1 id="toc_0">什么是回归算法</h1>
 
 <ol>
 <li>回归算法是一种有监督算法;</li>
@@ -849,38 +865,144 @@ L(\theta) &amp; =p(\vec{y}|X;\theta) \\\<br/>
 <li>因此,回归算法是用于预测连续型数值输出的算法.</li>
 </ol>
 
-<h2 id="toc_1">线性回归</h2>
+<p>常用的回归算法有几种:比如,线性回归,Logistic回归,Softmax回归等等.先说最简单的线性回归算法.</p>
 
 <span id="more"></span><!-- more -->
 
-<h3 id="toc_2">单变量线性回归</h3>
+<h2 id="toc_1">线性回归</h2>
 
-<p>\[h_{\theta}=\theta_0+ \theta_1x\]</p>
+<p>一个很常见的例子,根据房屋面积来预测房价(不考虑其他的环境因素).</p>
+
+<p>假如我们有一些关于房屋面积和租赁价格的数据,比如</p>
+
+<table>
+<thead>
+<tr>
+<th>房屋面积(m<sup>2)</sup></th>
+<th>租赁价格(1000/元)</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>10</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>15</td>
+<td>1</td>
+</tr>
+<tr>
+<td>20</td>
+<td>1.8</td>
+</tr>
+<tr>
+<td>30</td>
+<td>2</td>
+</tr>
+<tr>
+<td>50</td>
+<td>3.2</td>
+</tr>
+<tr>
+<td>60</td>
+<td>3</td>
+</tr>
+<tr>
+<td>60</td>
+<td>3.1</td>
+</tr>
+<tr>
+<td>70</td>
+<td>3.5</td>
+</tr>
+</tbody>
+</table>
+
+<p>那么一个问题来了,请问,如果现在有一个房屋面积为55平,请问最终的租赁价格是多少比较合适呢?</p>
+
+<p>这个数据里面只有1个条件.很显然,在生活中,房价是和很多因素相关,比如房屋的面积,房间的数量,地理位置等等.</p>
+
+<p>那么第一个例子,其实就是单变量线性回归.第二个当然就是多变量线性回归了.</p>
+
+<p>公式描述如下:</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+h_{\theta}(x)&amp; =\theta_0+\theta_1x_1+\cdots+\theta_nx_n \\\<br/>
+&amp; = \theta_01+\theta_1x_1+\cdots+\theta_nx_n \\\<br/>
+&amp; = \theta_0x_0+\theta_1x_1+\cdots+\theta_nx_n \\\<br/>
+&amp; = \sum_{i=0}^n\theta_ix_i \\\<br/>
+&amp; = \theta^Tx<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>所以在线性回归中,最终的要求也就是计算出\(\theta\)值,并选择最优的\(\theta\)值构成算法公式.</p>
+
+<p>这里就涉及到两个问题:</p>
+
+<ol>
+<li>计算出\(\theta\)值;</li>
+<li>选择最优的\(\theta\)值.</li>
+</ol>
+
+<p>对于第一个问题,在机器学习中,一般都是用列向量表示数据,因此公式的最后两行,也就是将第一个列向量转置成为行向量.这样就可以转换成一个行向量与列向量相乘,也就是矩阵相乘了.公式描述就能直观了.</p>
+
+<p>对于第二个问题,就是找代价函数的最小值.后面会说到.</p>
+
+<h3 id="toc_2">单变量线性回归</h3>
 
 <p>因为只含有一个特征/输入变量,因此这样的问题叫做单变量线性回归问题.</p>
 
-<h3 id="toc_3">代价函数(Cost Function)</h3>
+<p>公式描述如下:</p>
 
-<p>我们选择的参数决定了我们得到的直线相对于我们的训练集的准确程度,模型所预测的值与训练集中实际值之间的差距就是建模误差(modeling error).</p>
+<p>\[h_{\theta}=\theta_0+ \theta_1x\]</p>
 
-<p>我们的目标便是选择出可以使得<strong>建模误差的平方和</strong>能够<strong>最小</strong>的模型参数.即使得代价函数最小.<br/>
-\[J(\theta_0,\theta_1)=\dfrac{1}{2m}\sum_{i=1}^m(h_{\theta}(x^{(i)})-y^{(i)})^2\]</p>
+<h3 id="toc_3">多变量线性回归</h3>
 
-<h3 id="toc_4">多变量线性回归</h3>
+<p>公式如下:<br/>
+\[h_{\theta}(x) =\theta_0+\theta_1x_1+\cdots+\theta_nx_n\]</p>
 
-<h2 id="toc_5">公式推导</h2>
+<h1 id="toc_4">代价函数(Cost Function)</h1>
 
-<p>\[\begin{align}<br/>
-y^{(i)}&amp; =\theta ^Tx^{(i)}+\epsilon^{(i)}\\\<br/>
-p(\epsilon^{(i)})&amp; =\frac{1}{\sqrt{2\pi}\sigma}e^{\left(-\dfrac{(\epsilon^{(i)})^2}{2\sigma^2}\right)} \\\<br/>
-p(y^{(i)}|x^{(i)};\theta)&amp; =\frac{1}{\sqrt{2\pi}\sigma}e^{\left(-\dfrac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2}\right)} \\\<br/>
+<p>我们选择的参数\(\theta\)决定了我们得到的直线相对于我们的训练集的准确程度,模型所预测的值与训练集中实际值之间的差距就是建模误差(modeling error).</p>
+
+<p>我们的目标便是选择出可以使得<strong>建模误差的平方和</strong>能够<strong>最小</strong>的<strong>模型参数</strong>.<strong>即使得代价函数最小</strong>.</p>
+
+<p>\[J(\theta_0,\theta_1)=\dfrac{1}{2m}\sum_{i=1}^m(h_{\theta}(x^{(i)})-y^{(i)})^2\]</p>
+
+<p>\(h_{\theta}(x^{(i)})\)也就是我们的回归函数,即预测值.\(y^{(i)}\)是数据给定的真实值.</p>
+
+<p>接下来说一下公式的推导过程</p>
+
+<h1 id="toc_5">公式推导</h1>
+
+<h2 id="toc_6">原理说明</h2>
+
+<p>很显然,不可能找到一个算法可以百分百的预测正确,而且在实际问题中,总会有一些因素会造成误差.因此我们给线性回归的公式加上一个误差函数\(\epsilon^{(i)}\),这样就更合理了.</p>
+
+<p>\[y^{(i)}=\theta^Tx^{(i)}+\epsilon^{(i)}\]</p>
+
+<p><strong>补充说明</strong>:\(\epsilon^{(i)}(1\leq i \leq n)\)是独立同分布的,服从均值为0,方差为某定值\(\sigma^2\)的高斯分布.实际问题中,很多随机现象可以看到看到众多因素的独立影响的综合反应,往往服从正态分布.原理是因为中心极限定理.</p>
+
+<p>因为,误差函数服从高斯分布,因此\(p(\epsilon^{(i)})=\frac{1}{\sqrt{2\pi}\sigma}e^{\left(-\dfrac{(\epsilon^{(i)})^2}{2\sigma^2}\right)}\)</p>
+
+<p>因此,咱们也可以说是在某个因素发生的条件下,y发生的概率.所以可以改写成\(p(y^{(i)}|x^{(i)};\theta)=\frac{1}{\sqrt{2\pi}\sigma}e^{\left(-\dfrac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2}\right)}\)</p>
+
+<p>最后,根据极大似然函数方法,咱们来求解这个\(\theta\)值.</p>
+
+<h2 id="toc_7">\(\theta\)值推导过程以及求解</h2>
+
+<p>根据极大似然函数,来求解\(\theta\)值,那么将公式改写成</p>
+
+<p>\[\begin{aligned}<br/>
 L(\theta)&amp; =\prod_{i=1}^mp(y^{(i)}|x^{(i)};\theta)\\\<br/>
 &amp; = \prod_{i=1}^m\frac{1}{\sqrt{2\pi}\sigma}e^{\left(-\dfrac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2}\right)}<br/>
-\end{align}\]</p>
+\end{aligned}\]</p>
 
-<p>最大似然,要使这个方程的结果最大</p>
+<p>最大似然,也就是要使这个方程的结果最大.连乘不好求,一般都是对连乘取对数.</p>
 
-<p>对数似然,目标函数及最小二乘法</p>
+<p>现在转成求对数似然</p>
 
 <p>\[<br/>
 \begin{align}<br/>
@@ -891,11 +1013,14 @@ L(\theta)&amp; =\prod_{i=1}^mp(y^{(i)}|x^{(i)};\theta)\\\<br/>
 \end{align}<br/>
 \]</p>
 
-<p>那么就得让这个式子的结果最小</p>
+<p>因为\(m\log\frac{1}{\sqrt{2\pi}\sigma}\)是一个常数,要使\(\ell(\theta)\)最大,那么也就是使这个式子的结果最小.保留\(\dfrac 12\)是因为求导求最小值的时候会约去参数.</p>
 
-<p>\[loss(y_j,\hat{y_j})=J(\theta)=\frac{1}{2}\sum_{i=1}^{m}\left(h_\theta(x^{(i)-y^{(i)}})\right)^2\]</p>
+<p>这样就得到了我们的损失函数:<br/>
+\[loss(y_j,\hat{y_j})=J(\theta)=\frac{1}{2}\sum_{i=1}^{m}\left(h_\theta(x^{(i)}-y^{(i)})\right)^2\]</p>
 
 <p>我们的目标是最小化损失函数.</p>
+
+<p>注意:矩阵的平方也等于矩阵的转置乘以矩阵.</p>
 
 <p>\[J(\theta)=\cfrac{1}{2}\sum_{i=1}^{m}(h_{\theta}(x^{(i)})-y^{(i)})^2=\cfrac{1}{2}(X\theta-Y)^T(X\theta-Y) \to \min \limits_{\theta}J(\theta)\]</p>
 
@@ -911,15 +1036,17 @@ L(\theta)&amp; =\prod_{i=1}^mp(y^{(i)}|x^{(i)};\theta)\\\<br/>
 \end{aligned}<br/>
 \]</p>
 
+<p>因此求解\(\theta\)的公式就推导出来了(最小二乘法).</p>
+
 <p>\[\theta=(X^TX)^{-1}X^TY\]</p>
 
-<h2 id="toc_6">简述原理</h2>
+<h2 id="toc_8">公式验证</h2>
 
-<h2 id="toc_7">\(\theta\)值推导过程以及求解</h2>
+<p>求解\(\theta\)值的公式已经推导出来了,那让我们来校验一下,是否正确呢?</p>
 
-<h3 id="toc_8">构造数据</h3>
+<p>用python的科学计算包可以很方便的来做科学计算,废话不多说看代码吧.</p>
 
-<!-- more -->
+<p>1.构造测试数据</p>
 
 <pre><code class="language-python">import numpy as np
 import pandas as pd
@@ -933,7 +1060,7 @@ df=pd.DataFrame({
 
 </code></pre>
 
-<h3 id="toc_9">抽取x和y</h3>
+<p>2.抽取x和y</p>
 
 <pre><code class="language-python"># 抽取x和y
 x=df[[&#39;x1&#39;,&#39;x2&#39;]]
@@ -942,27 +1069,364 @@ y=df[&#39;y&#39;].values.reshape((-1,1))
 
 </code></pre>
 
-<h3 id="toc_10">求解\(\theta\) 值</h3>
+<p>3.求解\(\theta\) 值</p>
 
-<p><em>根据公式计算\(\theta\)</em>值,推导过程如图所示<br/>
+<p><em>根据公式计算\(\theta\)</em>值,推导过程上面已经详述了.<br/>
 \[\theta=(X^TX)^{-1}X^TY\]</p>
 
-<p><em>numpy</em> api说明:<br/>
-+ mat:将ndarray转成matrix<br/>
-+ dot:矩阵乘法<br/>
-+ T:求矩阵的转置<br/>
-+ I:求矩阵的逆</p>
+<p><em>numpy</em> api说明:</p>
 
-<pre><code class="language-python"># 写出公式,计算theta值
+<ul>
+<li>mat:将ndarray转成matrix</li>
+<li>dot:矩阵乘法</li>
+<li>T:求矩阵的转置</li>
+<li>I:求矩阵的逆</li>
+</ul>
+
+<pre><code class="language-python"># 将公式转成python代码,计算theta值
 
 np.dot(np.mat(x.T.dot(x)).I,x.T).dot(y)
 </code></pre>
 
-<pre><code>matrix([[ 2.],
-        [ 1.]])
+<p>4.结果输出</p>
+
+<pre><code>    matrix([[ 2.],
+            [ 1.]])
 </code></pre>
 
 <p>很明显,计算结果正确.两个系数分别是2和1</p>
+
+<h1 id="toc_9">最小二乘法的参数最优解</h1>
+
+<p>求解\(\theta\)的公式为\(\theta=(X^TX)^{-1}X^TY\).但是最小二乘法的使用要求矩阵\(X^TX\)是可逆的.</p>
+
+<p>为了防止不可逆或者过拟合的问题存在,可以<strong>增加额外数据影响</strong>,导致最终的矩阵是可逆的.</p>
+
+<p>\[\theta=(X^TX+\lambda I)^{-1}X^TY\]</p>
+
+<p>注意:最小二乘法直接求解的难点:矩阵逆的求解是一个难处.<br/>
+因此,后面会说到另一种求解办法,即,梯度下降法来求解.</p>
+
+<h1 id="toc_10">线性回归案例</h1>
+
+<p><strong>数据来源</strong>:<a href="https://archive.ics.uci.edu/ml/datasets/individual+household+electric+power+consumption">https://archive.ics.uci.edu/ml/datasets/individual+household+electric+power+consumption</a></p>
+
+<p>数据描述:现有一批描述家庭用电情况的数据,对数据进行算法模型预测,并最终得到预测模型(每天各个时间段和功率之间的关系,功率与电流之间的关系等)</p>
+
+<p><img src="media/15248143200628/15264383529325.jpg" alt=""/></p>
+
+<p>我们使用 <code>sklearn</code> 库中的 <code>linear_model</code> 中的 <code>LinerRegression</code>来获取算法,让我们来做一个成功的<code>调包侠</code>,哈哈哈哈.</p>
+
+<h2 id="toc_11">线性回归预测时间和功率之间的关系</h2>
+
+<p>虽然调api不用我们来实现算法的实现了,但是学习的过程还是应该掌握公式的推导比较好.</p>
+
+<p>代码示例如下(机器学习的简单开发流程):</p>
+
+<pre><code># -*- coding: utf-8 -*-
+&#39;&#39;&#39;
+    Created by hushiwei on 2018/4/27.
+
+    1:时间与功率之间的关系
+&#39;&#39;&#39;
+
+import numpy as np
+import pandas as pd
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+# 设置字符集,防止中文乱码
+mpl.rcParams[&#39;font.sans-serif&#39;]=[u&#39;simHei&#39;]
+mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
+
+
+# 加载数据
+df = pd.read_csv(
+    &quot;/Users/hushiwei/PycharmProjects/Python-AI/MachineLearning/LinearRegression/datas/household_power_consumption_1000.txt&quot;,
+    sep=&quot;;&quot;)
+print(df.head())
+
+# 异常数据处理
+new_df = df.replace(&#39;?&#39;, np.nan)
+datas = new_df.dropna(axis=0, how=&#39;any&#39;)
+
+# 观察数据
+
+print(datas.describe())
+
+
+# 处理时间
+
+def date_format(dt):
+    import time
+    t = time.strptime(&#39; &#39;.join(dt), &#39;%d/%m/%Y %H:%M:%S&#39;)
+    return (t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec)
+
+
+# 获取X和Y,并将时间转换为数值型变量
+# X:时间
+# Y:用电量
+
+X=datas.iloc[:,0:2]
+X=X.apply(lambda x:pd.Series(date_format(x)),axis=1)
+Y=datas[&#39;Global_active_power&#39;]
+
+
+print(X.head())
+print(Y.head())
+
+
+# 划分数据集
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.2,random_state=0)
+
+# 对数据进行标准化
+ss=StandardScaler()
+
+# 训练并转换
+X_train=ss.fit_transform(X_train)
+# 直接使用在模型构建数据上进行一个数据标准化操作
+X_test=ss.transform(X_test)
+
+# 这里,fit_transform和transform的区别?
+# fit_tranform是计算并转换,在这个过程中会计算出均值和方差,然后将变量进行标准化去量纲
+# transform是转换,它将用上面计算出的均值和方差来进行标准化去量纲.
+# 因为训练集的数据相较于测试集更多 ,所以测试集也延用训练集算出来的均值和方差
+# 因此fit_transform在transform上面调用
+
+# 模型训练
+
+liner=LinearRegression()
+liner.fit(X_train,Y_train)
+
+
+# 模型校验
+
+y_predict=liner.predict(X_test)
+time_name=[&#39;年&#39;,&#39;月&#39;,&#39;日&#39;,&#39;时&#39;,&#39;分&#39;,&#39;秒&#39;]
+print(&quot;准确率:&quot;,liner.score(X_train,Y_train))
+mse=np.average((y_predict-Y_test)**2)
+rmse=np.sqrt(mse)
+print(&#39;rmse:&#39;,rmse)
+print(&quot;特征的系数为:&quot;,list(zip(time_name,liner.coef_)))
+
+# 模型保存
+
+# from sklearn.externals import joblib
+#
+# joblib.dump(ss,&quot;data_ss.model&quot;) ## 将标准化模型保存
+# joblib.dump(liner,&quot;data_lr.model&quot;) ## 将模型保存
+#
+# joblib.load(&quot;data_ss.model&quot;) ## 加载模型
+# joblib.load(&quot;data_lr.model&quot;) ## 加载模型
+
+# 预测值和实际值可视化画图比较
+
+t=np.arange(len(X_test))
+plt.figure(facecolor=&#39;w&#39;)
+plt.plot(t,Y_test,&#39;r-&#39;,linewidth=2,label=&#39;真实值&#39;)
+plt.plot(t,y_predict,&#39;g-&#39;,linewidth=2,label=&#39;预测值&#39;)
+plt.legend(loc=&#39;upper left&#39;)
+plt.title(&quot;线性回归预测时间与功率之间的关系&quot;,fontsize=20)
+plt.grid(b=True)
+plt.show()
+
+</code></pre>
+
+<p>结果输出:</p>
+
+<pre><code>准确率: 0.24409311805909026
+rmse: 1.164092345973625
+特征的系数为: [(&#39;年&#39;, 0.0), (&#39;月&#39;, 1.1102230246251565e-16), (&#39;日&#39;, -1.415881661733238), (&#39;时&#39;, -0.9349532432495644), (&#39;分&#39;, -0.10214075598497), (&#39;秒&#39;, 0.0)]
+</code></pre>
+
+<p>可视化显示:</p>
+
+<p><img src="media/15248143200628/15264444548035.jpg" alt=""/></p>
+
+<p>从这个结果可以看出,预测效果不太好,可能是时间与功率没啥关系,我们现在换一下因变量与自变量</p>
+
+<h2 id="toc_12">线性回归预测功率与电流之间的关系</h2>
+
+<p>代码示例:</p>
+
+<pre><code># -*- coding: utf-8 -*-
+&#39;&#39;&#39;
+    Created by hushiwei on 2018/4/27.
+
+    desc: 功率与电流之间的关系
+&#39;&#39;&#39;
+
+import numpy as np
+import pandas as pd
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+# 设置字符集,防止中文乱码
+mpl.rcParams[&#39;font.sans-serif&#39;]=[u&#39;simHei&#39;]
+mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
+
+
+# 加载数据
+df = pd.read_csv(
+    &quot;/Users/hushiwei/PycharmProjects/Python-AI/MachineLearning/LinearRegression/datas/household_power_consumption_1000.txt&quot;,
+    sep=&quot;;&quot;)
+print(df.head())
+
+# 异常数据处理
+new_df = df.replace(&#39;?&#39;, np.nan)
+datas = new_df.dropna(axis=0, how=&#39;any&#39;)
+
+# 观察数据
+
+print(datas.describe())
+
+
+
+X=datas.iloc[:,2:4]
+Y=datas.iloc[:,5]
+
+
+print(X.head())
+print(Y.head())
+
+
+# 划分数据集
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.2,random_state=0)
+
+# 对数据进行标准化
+ss=StandardScaler()
+
+# 训练并转换
+X_train=ss.fit_transform(X_train)
+# 直接使用在模型构建数据上进行一个数据标准化操作
+X_test=ss.transform(X_test)
+
+# 这里,fit_transform和transform的区别?
+# fit_tranform是计算并转换,在这个过程中会计算出均值和方差,然后将变量进行标准化去量纲
+# transform是转换,它将用上面计算出的均值和方差来进行标准化去量纲.
+# 因为训练集的数据相较于测试集更多 ,所以测试集也延用训练集算出来的均值和方差
+# 因此fit_transform在transform上面调用
+
+# 模型训练
+
+liner=LinearRegression()
+liner.fit(X_train,Y_train)
+
+
+# 模型校验
+
+y_predict=liner.predict(X_test)
+print(&quot;电流训练准确率: &quot;,liner.score(X_train,Y_train))
+print(&quot;电流预测准确率: &quot;,liner.score(X_test,Y_test))
+print(&quot;电流参数: &quot;,liner.coef_)
+
+
+
+# 预测值和实际值可视化画图比较
+
+t=np.arange(len(X_test))
+plt.figure(facecolor=&#39;w&#39;)
+plt.plot(t,Y_test,&#39;r-&#39;,linewidth=2,label=&#39;真实值&#39;)
+plt.plot(t,y_predict,&#39;g-&#39;,linewidth=2,label=&#39;预测值&#39;)
+plt.legend(loc=&#39;upper left&#39;)
+plt.title(&quot;线性回归预测时间与功率之间的关系&quot;,fontsize=20)
+plt.grid(b=True)
+plt.show()
+
+</code></pre>
+
+<p>模型预测结果</p>
+
+<pre><code>电流训练准确率:  0.9909657573073489
+电流预测准确率:  0.9920420609708968
+电流参数:  [5.07744316 0.07191391]
+</code></pre>
+
+<p><img src="media/15248143200628/15264449452427.jpg" alt=""/></p>
+
+<p>从图中也可以看出,效果很明显,预测得非常好.</p>
+
+<h1 id="toc_13">线性回归的过拟合和正则项</h1>
+
+<p>我们用线性回归的时候,可能拟合的不是那么好,那么可以加大阶数,去拟合.</p>
+
+<p>但是也不是阶数越高效果越好.为什么这么说呢?看例子分析.</p>
+
+<p>我们的目标函数是(之前已经写过推导过程):<br/>
+\[J(\theta)=\dfrac{1}{2}\sum_{i=1}^m(h_{\theta}(x^{(i)})-y^{(i)})^2\]</p>
+
+<p>为了防止数据过拟合,也就是\(\theta\)值在样本空间中不能过大/过小,可以在目标函数之上增加一个平方和损失:<br/>
+\[J(\theta)=\dfrac{1}{2}\sum_{i=1}^m(h_{\theta}(x^{(i)})-y^{(i)})^2+\lambda\sum_{i=1}^n\theta_j^2\]</p>
+
+<p>我们如果对这个函数进行求导计算会得出之前写的一个函数,即<br/>
+\[\theta=(X^TX+\lambda I)^{-1}X^TY\]</p>
+
+<p>注意:这里新加的\(\lambda\sum_{i=1}^n\theta_j^2\),也叫正则项(norm).这里的这个正则项叫做L2-norm.所以还有其他的正则项,且看后续说明.</p>
+
+<h2 id="toc_14">正则项</h2>
+
+<p><strong>L2正则(L2-norm)</strong>:\(\lambda\sum_{i=1}^n\theta_j^2 \quad \lambda &gt; 0\)</p>
+
+<p><strong>L1正则(L1-norm)</strong>:\(\lambda\sum_{i=1}^n|\theta_j| \quad \lambda &gt; 0\)</p>
+
+<h2 id="toc_15">Ridge回归</h2>
+
+<p>使用L2正则的线性回归模型就称为Ridge回归(也叫岭回归)<br/>
+\[J(\theta)=\dfrac{1}{2}\sum_{i=1}^m(h_{\theta}(x^{(i)})-y^{(i)})^2+\lambda\sum_{i=1}^n\theta_j^2 \qquad \lambda &gt; 0\]</p>
+
+<h2 id="toc_16">Lasso回归</h2>
+
+<p>使用L1正则的线性回归模型就称为LASSO回归(Least Absolute Shrinkage and Selection Operator)<br/>
+\[J(\theta)=\dfrac{1}{2}\sum_{i=1}^m(h_{\theta}(x^{(i)})-y^{(i)})^2+\lambda\sum_{i=1}^n|\theta_j| \qquad \lambda &gt; 0\]</p>
+
+<h2 id="toc_17">Ridge(L2-norm)和LASSO(L1-norm)比较</h2>
+
+<p>L2-norm中,由于对于各个维度的参数缩放是在一个圆内缩放的,不可能导致有维度参数变为0的情况,那么也就不会产生稀疏解;实际应用中,数据的维度中是存在噪音和冗余的,稀疏的解可以找到有用的维度并且减少冗余,提高回归预测的准确性和鲁棒性(减少了overfitting)(L1-norm可以达到最终解的稀疏性的要求)</p>
+
+<p>Ridge模型具有较高的准确性,鲁棒性以及稳定性;LASSO模型具有较高的求解速度.</p>
+
+<p>如果既要考虑稳定性也考虑求解的速度,就使用Elastic Net<br/>
+<img src="media/15248143200628/15265465368148.jpg" alt=""/></p>
+
+<h2 id="toc_18">Elastic Net</h2>
+
+<p>同时使用L1正则和L2正则的线性回归模型就称为Elastic Net算法(弹性网络算法)</p>
+
+<p>\[J(\theta)=\dfrac{1}{2}\sum_{i=1}^m(h_{\theta}(x^{(i)})-y^{(i)})^2+\lambda \left(p\sum_{j=1}^n|\theta_j| +(1-p)\sum_{j=1}^n\theta_j^2 \right) \qquad \lambda &gt; 0 , p \in [0,1]\]</p>
+
+<h1 id="toc_19">模型效果判断</h1>
+
+<p>MSE:误差平方和,越趋近于0表示模型越拟合训练数据<br/>
+\[MSE=\dfrac{1}{m}\sum_{i=1}^m(y_i-\hat y_i)^2\]</p>
+
+<p>RMSE:MSE的平方根,作用同MSE<br/>
+\[RMSE=\sqrt{MSE}=\sqrt{\dfrac{1}{m}\sum_{i=1}^m(y_i-\hat y_i)^2}\]</p>
+
+<p>\(R^2\):取值范围(负无穷,1],值越大表示模型越拟合训练数据;最优解是1;当模型预测为随机值的时候,有可能为负;若预测值恒为样本期望,\(R^2\)为0</p>
+
+<p>TSS:总平方和TSS(Total Sum Of Squares),表示样本之间的差异情况,是伪方差的m倍.</p>
+
+<p>RSS:残差平方和RSS(Residual Sum Of Squares),表示预测值和样本值之间的差异情况,是MSE的m倍</p>
+
+<p>\[R^2=1-\dfrac{RSS}{TSS}=1-\dfrac{\sum_{i=1}^m(y_i-\hat y_i)^2}{\sum_{i=1}^m(y_i-\overline y)^2} \qquad \overline y=\dfrac{1}{m}\sum_{i=1}^my_i\]</p>
+
+<h1 id="toc_20">机器学习调参</h1>
+
+<h2 id="toc_21">调参</h2>
+
+<p>在实际工作中,对于各种算法模型(线性回归)来讲,我们需要获取\(\theta,\lambda,p\)的值;\(\theta\)的求解其实就是算法模型的求解,一般不需要开发人员参与(算法已经实现),主要需要求解的是\(\lambda\)和p的值,这个过程就叫做<strong>调参(超参)</strong></p>
+
+<h2 id="toc_22">交叉验证</h2>
+
+<p>将训练数据分为多份,其中一份进行数据验证并获取最优的超参:\(\lambda\)和p;比如:十折交叉验证,五折交叉验证(scikit-learn中默认)等</p>
+
+<p><img src="media/15248143200628/15267171709516.jpg" alt=""/></p>
 
 ]]></content>
   </entry>
@@ -1856,6 +2320,170 @@ x = a_0 + \frac{1^2}{a_1<br/>
 
 <p>在这里，主要是提供给数据产品和数据分析使用的数据，一般会存放在 ES、Mysql 等系统中供线上系统使用，也可能会存在 Hive 或者 Druid 中供数据分析和数据挖掘使用。<br/>
 比如我们经常说的报表数据，或者说那种大宽表，一般就放在这里</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[大数定理&中心极限定理]]></title>
+    <link href="http://dmlcoding.com/15264345359411.html"/>
+    <updated>2018-05-16T09:35:35+08:00</updated>
+    <id>http://dmlcoding.com/15264345359411.html</id>
+    <content type="html"><![CDATA[
+<h1 id="toc_0">大数定理</h1>
+
+<h2 id="toc_1">概念阐述</h2>
+
+<p>大数定律的意义:随着样本容量n的增加,样本平均数将接近于总体平均数(期望\(\mu\)),所以在统计推断中,一般都会使用样本平均数估计总体平均数的值.</p>
+
+<p>也就是我们会使用一部分样本的平均值来代替整体样本的期望/均值,出现偏差的可能性是存在的,但是当n足够大的时候,偏差的可能性是非常小的,当n无限大的时候,这种可能性的概率基本为0.</p>
+
+<p>大数定律的主要作用就是为使用频率来估计概率提供了理论支持;为使用部分数据来近似的模拟构建全部数据的特征提供了理论支持.</p>
+
+<h2 id="toc_2">代码实验</h2>
+
+<pre><code># -*- coding: utf-8 -*-
+&#39;&#39;&#39;
+    Created by hushiwei on 2018/4/1.
+
+    desc: 大数定理展示理解
+&#39;&#39;&#39;
+
+import random
+import numpy as np
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+
+# 解决中文显示问题
+mpl.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
+mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
+
+random.seed(28)
+
+
+def generate_random_int(n):
+    &#39;&#39;&#39;
+    产生n个1-9的随机数
+    :param n:
+    :return:
+    &#39;&#39;&#39;
+    return [random.randint(1,9) for i in range(n)]
+
+if __name__ == &#39;__main__&#39;:
+    number=8000
+    x=[i for i in range(number+1) if i!=0]
+
+    # 产生number个[1,9]的随机数
+    total_random_int=generate_random_int(number)
+
+    # 求n个[1,9]的随机数的均值,n=1,2,3,4,5...
+    # 求这number个数的均值,比如1个元素的均值,2个元素的均值,3个元素的均值,4个元素的均值,一直到最后
+    y=[np.mean(total_random_int[0:i+1]) for i in range(number)]
+
+
+    plt.plot(x,y,&#39;b-&#39;)
+    plt.xlim(0,number)
+    plt.grid(True)
+    plt.show()
+</code></pre>
+
+<h2 id="toc_3">可视化展示原理</h2>
+
+<p><img src="media/15264345359411/15265238560825.jpg" alt=""/></p>
+
+<h1 id="toc_4">中心极限定理</h1>
+
+<h2 id="toc_5">概念阐述</h2>
+
+<p>中心极限定理(Central Limit Theorem).假设\({X_n}\)为独立同分布的随机变量序列,并具有相同的期望\(\mu\)和方差为\(\sigma^2\),则\({X_n}\)服从中心极限定理,且\(Z_n\)为随机序列\({X_n}\)的规范和.</p>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+Y_n &amp; =X_1+X_2+ \cdots +X_n \\\<br/>
+&amp; = \sum_{i=1}^nX_i \to N(n\mu,n\sigma^2)<br/>
+\end{aligned}<br/>
+\]</p>
+
+<p>\[Z_n=\dfrac{Y_n-E(Y_n)}{\sqrt{D(Y_n)}}=\dfrac{Y_n-n\mu }{\sqrt{n}{\sigma}} \to N(0,1)\]</p>
+
+<p>中心极限定理就是一般在同分布的情况下,抽样样本值的规范和在总体数量趋于无穷时的极限分布近似于正态分布.</p>
+
+<h2 id="toc_6">代码实验</h2>
+
+<pre><code># -*- coding: utf-8 -*-
+&#39;&#39;&#39;
+    Created by hushiwei on 2018/4/1.
+    desc :中心极限定理
+
+    随机的抛六面的骰子,计算三次的点数的和,三次点数的和其实就是一个事件A
+
+    问题: 事件A的发生属于什么分布呢?
+
+    分析: A=x1+x2+x3,其中x1,x2,x3是分别三次抛骰子的点数
+    根据中心极限定理,由于x1,x2,x3属于独立同分布的,因此最终的事件A属于高斯分布
+&#39;&#39;&#39;
+
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+def generate_random_int():
+    &#39;&#39;&#39;
+    随机产生一个[1,6]的数字,模拟随机抛六面骰子的结果
+    :return:
+    &#39;&#39;&#39;
+    return random.randint(1,6)
+
+
+def generate_sum(n):
+    &#39;&#39;&#39;
+    计算返回n次抛六面骰子的和结果
+
+    也既是模拟A事件
+    :param n:
+    :return:
+    &#39;&#39;&#39;
+    return np.sum([generate_random_int() for i in range(n)])
+
+
+if __name__ == &#39;__main__&#39;:
+    # 进行A事件多少次
+    number1=10000000
+
+    # 表示每次A事件抛几次骰子
+    number2=3
+
+    # 进行number1次事件A的操作,每次事件A都进行number2次抛骰子
+    keys=[generate_sum(number2) for i in range(number1)]
+
+    # 统计每个和数字出现的次数,eg:和为3的出现多少次,和为10出现多少次...
+    result={}
+    for key in keys:
+        count=1
+        if key in result:
+            count+=result[key]
+        result[key]=count
+
+    # 获取x和y
+    x=sorted(np.unique(list(result.keys())))
+    y=[]
+    for key in x:
+        # 将出现的次数进行一个百分比的计算
+        y.append(result[key]/number1)
+
+    # 画图,可视化展示
+
+    plt.plot(x,y,&#39;b-&#39;)
+    plt.xlim(x[0]-1,x[-1]+1)
+    plt.grid(True)
+    plt.show()
+</code></pre>
+
+<h2 id="toc_7">可视化展示原理</h2>
+
+<p><img src="media/15264345359411/15265238226274.jpg" alt=""/></p>
 
 ]]></content>
   </entry>
@@ -3040,7 +3668,7 @@ instance: Geth/v1.8.2-stable/darwin-amd64/go1.10
 <li>在python2.7环境下安装fabric模块</li>
 </ol>
 
-<pre><code>pip install fabric
+<pre><code>pip install fabric==1.14.0
 </code></pre>
 
 <p>到此已经把fabric模块安装完成了.接下来就是使用了.</p>
@@ -3658,68 +4286,6 @@ Options:
                         comma-separated list of hosts to exclude
   -z INT, --pool-size=INT
                         number of concurrent processes to use in parallel mode
-</code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Zookeeper笔记]]></title>
-    <link href="http://dmlcoding.com/15205689785115.html"/>
-    <updated>2018-03-09T12:16:18+08:00</updated>
-    <id>http://dmlcoding.com/15205689785115.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0">基础知识</h2>
-
-<h3 id="toc_1">znode</h3>
-
-<span id="more"></span><!-- more -->
-
-<h3 id="toc_2">基础api</h3>
-
-<pre><code># 创建一个test_node节点,并包含数据testdata
-[zk: localhost:2181(CONNECTED) 12] create /test_note testdata
-Created /test_note
-[zk: localhost:2181(CONNECTED) 13] ls /test_note
-[]
-[zk: localhost:2181(CONNECTED) 14] get /test_note
-testdata
-cZxid = 0x1cc0015709f
-ctime = Fri Mar 09 12:15:41 CST 2018
-mZxid = 0x1cc0015709f
-mtime = Fri Mar 09 12:15:41 CST 2018
-pZxid = 0x1cc0015709f
-cversion = 0
-dataVersion = 0
-aclVersion = 0
-ephemeralOwner = 0x0
-dataLength = 8
-numChildren = 0
-
-[zk: localhost:2181(CONNECTED) 15] delete /test_note
-[zk: localhost:2181(CONNECTED) 16] get /test_note
-Node does not exist: /test_note
-
-</code></pre>
-
-<h2 id="toc_3">主-从模式的例子</h2>
-
-<pre><code># -e 表示临时性
-# 创建一个临时性的znode,节点名称为master_example ,数据为master1.example.com:2223
-# 一个临时节点会在会话过期或关闭时自动被删除
-create -e /master_example &quot;master1.example.com:2223&quot;
-
-# 列出目录树
-ls /
-
-# 获取master_example znode的元数据和数据
-get /master_example
-</code></pre>
-
-<p>如果再次执行创建master_example的命令会报<code>Node already exists: /master_example</code></p>
-
-<pre><code># 在master_example上设置一个监视点
-stat /master_example true
 </code></pre>
 
 ]]></content>
