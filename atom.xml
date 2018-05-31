@@ -4,7 +4,7 @@
   <title><![CDATA[Time渐行渐远]]></title>
   <link href="http://dmlcoding.com/atom.xml" rel="self"/>
   <link href="http://dmlcoding.com/"/>
-  <updated>2018-05-25T22:19:16+08:00</updated>
+  <updated>2018-05-31T18:03:43+08:00</updated>
   <id>http://dmlcoding.com/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -727,6 +727,117 @@ Image(graph.create_png)
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[KNN]]></title>
+    <link href="http://dmlcoding.com/15277324362749.html"/>
+    <updated>2018-05-31T10:07:16+08:00</updated>
+    <id>http://dmlcoding.com/15277324362749.html</id>
+    <content type="html"><![CDATA[
+<p>K近邻(K-nearst neighbors,KNN)是一种基本的机器学习算法,所谓K近邻,就是K个最近的邻居的意思,说的是每个样本都可以用它最接近的K个邻居来代表.</p>
+
+<p>比如:判断一个人的人品,只需要观察与他来往最密切的几个人的人品好坏就可以得出,即,&quot;近朱者赤,近墨者黑&quot;.</p>
+
+<p>KNN算法既可以应用于分类应用中,也可以应用在回归应用中.KNN在做回归和分类的主要区别在于最后做预测的时候决策方式不同,<strong>KNN在分类预测时,一般采用多数表决法;而在做回归预测时,一般采用平均值法.</strong></p>
+
+<span id="more"></span><!-- more -->
+
+<h1 id="toc_0">KNN算法原理</h1>
+
+<ol>
+<li>从训练集合中获取K个离待预测样本距离最近的样本数据;</li>
+<li>根据获取得到的K个样本数据来预测当前待预测样本的目标属性值</li>
+</ol>
+
+<p><img src="media/15277324362749/15277329582308.jpg" alt=""/></p>
+
+<p>如上图所示,绿色圆要被决定赋予那一个类呢,是红色三角形还是蓝色矩形?</p>
+
+<ol>
+<li>如果K=3,由于红色三角形所占比例为2/3,绿色圆将被赋予红色三角形这个类.(多数投票)</li>
+<li>如果K=5,由于蓝色四方形比例为3/5,因此绿色圆被赋予蓝色矩形.</li>
+</ol>
+
+<h1 id="toc_1">KNN三要素</h1>
+
+<p>在KNN算法中,非常重要的主要是三个因素:</p>
+
+<ul>
+<li><strong>K值的选择</strong>:对于K值的选择,一般根据样本分布选择一个较小的值,然后通过<strong>交叉验证</strong>来选择一个比较合适的最终值;当选择比较小的K值的时候,表示使用较小领域中的样本进行预测,训练误差会减小,但是会导致模型变得复杂,容易过拟合;当选择较大的K值的时候,表示使用较大领域中的样本进行预测,训练误差会增大,同时会使模型变得简单,容易导致欠拟合.</li>
+<li><strong>距离的度量</strong>:一般使用欧式距离(即,欧几里得距离);</li>
+<li><strong>决策规则</strong>:在分类模型中,主要使用多数表决法或者加权多数表决法;在回归模型中,主要使用平均值法或者加权平均值法.加权的时候,可以认为距离越近的权重也应该越大.</li>
+</ul>
+
+<p>\[D(x,y) = \sqrt{(x_1-y_1)^2 + (x_2-y_2)^2 + ... + (x_n-y_n)^2} = \sqrt{\sum\limits_{i=1}^{n}(x_i-y_i)^2}\]</p>
+
+<h1 id="toc_2">KNN预测规则</h1>
+
+<p>既然KNN算法既可以用在分类场景中,也可以用在回归场景中,那么针对不同的场景,KNN也有不同的预测规则</p>
+
+<h2 id="toc_3">KNN分类预测规则</h2>
+
+<p>在KNN分类应用中,一般采用对数投票或者加权多数表决法.</p>
+
+<p><img src="media/15277324362749/15277370065477.jpg" alt=""/></p>
+
+<ul>
+<li><p><strong>多数表决法</strong>: 每个邻近样本的权重是一样的,也就是说最终预测的结果为出现类别最多的那个类,比如上图中蓝色矩形的最终类别为红色圆;</p></li>
+<li><p><strong>加权多数表决法</strong>:每个邻近样本的权重是不一样的,一般情况下采用权重和距离成反比的方式来计算,也就是说最终预测结果是出现权重最大的那个类别:比如上图中,假设三个红色圆点到预测样本点的距离均为2,两个黄色星到预测样本点距离为1,那么蓝色圆圈的最终类别为黄色.(\(\frac12*3 &lt; 1*2\))</p></li>
+</ul>
+
+<h2 id="toc_4">KNN回归预测规则</h2>
+
+<p>在KNN回归应用中,一般采用平均值法或者加权平均值法.<br/>
+<img src="media/15277324362749/15277369863901.jpg" alt=""/></p>
+
+<ul>
+<li><p><strong>平均值法</strong>: 每个邻近样本的权重是一样的,也就是说最终预测的结果为所有邻近样本的目标属性值的均值;比如上图中,蓝色方块的最终预测值为\((3+3+3+2+2)/5=2.6\).</p></li>
+<li><p><strong>加权平均值法</strong>:每个邻近样本的权重是不一样的,一般情况下采用权重和距离成反比的方式来计算,也就是说在计算均值的时候进行加权操作;比如上图中,假设上面三个点到待预测样本点的距离均为2,下面两个点到待预测样本点距离为1.那么蓝色方块的最终预测值为2.43.</p></li>
+</ul>
+
+<h1 id="toc_5">KNN算法实现方式</h1>
+
+<p>KNN算法的重点在于找出K个最近邻的点,主要方式有一下几种:</p>
+
+<ul>
+<li><strong>蛮力实现(brute)</strong>:计算预测样本到所有训练集样本的距离,然后选择最小的K个距离即可得到K个最近邻点.缺点在于当特征数比较多,样本数比较多的时候,算法的执行效率比较低;</li>
+<li><strong>KD树(kd_tree)</strong>:KD树算法中,首先是对训练数据进行建模,构建KD树,然后再根据建好的模型来获取邻近样本数据.</li>
+<li>除此之外,还有一些从kd_tree修改后的求解最邻近点的算法,比如:Ball Tree,BBF Tree,MVP tree等</li>
+</ul>
+
+<p>接下来重点说一下KD树的构建过程</p>
+
+<h1 id="toc_6">KD Tree</h1>
+
+<p>KD Tree是KNN算法中用于计算最近邻的快速,便捷构建方式.</p>
+
+<p>当样本数据量少的时候,我们可以使用brute这种暴力的方式进行求解最近邻,即计算到所有样本的距离.但是当样本量比较大的时候,直接计算所有样本的距离,工作量有点大,所以在这种情况下,我们可以使用kd_tree来快速的计算.</p>
+
+<h2 id="toc_7">KD Tree构建方式</h2>
+
+<p>KD树采用从m个样本的n维特征中,分别计算n个特征取值的方差,用方差最大的第k维特征\(n_k\)作为根节点.对于这个特征,选择取值的中位数\(n_{kv}\)作为样本的划分点,对于小于该值的样本划分到左子树,对于大于等于该值的样本划分到右子树,对于左右子树采用同样的方式找方差最大的特征最为根节点,递归即可产生KD树.(可以认为方差越大,越具有区分能力)</p>
+
+<p><img src="media/15277324362749/15277383424878.jpg" alt="KD树构建过程"/></p>
+
+<p>比如我们有二维样本6个，{(2,3)，(5,4)，(9,6)，(4,7)，(8,1)，(7,2)}，构建kd树的具体步骤如草稿所示<br/>
+<img src="media/15277324362749/15277404253921.jpg" alt=""/></p>
+
+<h2 id="toc_8">KD Tree查找最近邻</h2>
+
+<p>当我们生成KD树以后,就可以去预测测试集里面的样本目标点了.对于一个目标点,我们首先在KD树里面找到包含目标点的叶子节点.以目标点为圆心,以目标点到叶子节点样本实例的距离为半径,得到一个超球体,最近邻的点一定在这个超球体内部.然后返回叶子节点的父节点,检查另一个子节点包含的超矩形体是否和超球体相交,如果相交就到这个子节点寻找是否有更加近的近邻,有的话就更新最近邻.如果不相交那就简单了,我们直接返回父节点的父节点,在另一个子树继续搜索最近邻.当回溯到根节点时,算法结束,此时保存的最近邻节点就是最终的最近邻.</p>
+
+<p>具体过程如图所示<br/>
+<img src="media/15277324362749/15277426727922.jpg" alt=""/></p>
+
+<h1 id="toc_9">参考引用</h1>
+
+<ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%9C%80%E8%BF%91%E9%84%B0%E5%B1%85%E6%B3%95">KNN wiki</a></li>
+<li><a href="https://www.cnblogs.com/pinard/p/6061661.html">K近邻法(KNN)原理小结</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[逻辑回归]]></title>
     <link href="http://dmlcoding.com/15198753668603.html"/>
     <updated>2018-03-01T11:36:06+08:00</updated>
@@ -829,6 +940,16 @@ L(\theta) &amp; =p(\vec{y}|X;\theta) \\\<br/>
 \]</p>
 
 <p>最大似然/极大似然函数的随机梯度</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[梯度下降笔记]]></title>
+    <link href="http://dmlcoding.com/15277385790025.html"/>
+    <updated>2018-05-31T11:49:39+08:00</updated>
+    <id>http://dmlcoding.com/15277385790025.html</id>
+    <content type="html"><![CDATA[
 
 ]]></content>
   </entry>
@@ -3491,801 +3612,6 @@ Welcome to the Geth JavaScript console!
 instance: Geth/v1.8.2-stable/darwin-amd64/go1.10
  modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
 
-</code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[大数据框架-开源协议]]></title>
-    <link href="http://dmlcoding.com/15209079363420.html"/>
-    <updated>2018-03-13T10:25:36+08:00</updated>
-    <id>http://dmlcoding.com/15209079363420.html</id>
-    <content type="html"><![CDATA[
-<p>知道我们经常用的开源框架的开源协议么?</p>
-
-<span id="more"></span><!-- more -->
-
-<table>
-<thead>
-<tr>
-<th>开源项目</th>
-<th>开源协议</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>Superset</td>
-<td>Apache License 2.0</td>
-</tr>
-<tr>
-<td>Yanagishima</td>
-<td>Apache License 2.0</td>
-</tr>
-<tr>
-<td>Kibana</td>
-<td>Apache License 2.0</td>
-</tr>
-<tr>
-<td>Spark</td>
-<td>Apache License 2.0</td>
-</tr>
-<tr>
-<td>Tensorflow</td>
-<td>Apache License 2.0</td>
-</tr>
-<tr>
-<td>PlanOut</td>
-<td>BSD License</td>
-</tr>
-<tr>
-<td>Hadoop</td>
-<td>Apache License 2.0</td>
-</tr>
-<tr>
-<td>Hive</td>
-<td>Apache License 2.0</td>
-</tr>
-<tr>
-<td>Sqoop</td>
-<td>Apache License 2.0</td>
-</tr>
-<tr>
-<td>Impala</td>
-<td>Apache License 2.0</td>
-</tr>
-<tr>
-<td>Presto</td>
-<td>Apache License 2.0</td>
-</tr>
-<tr>
-<td>Hbase</td>
-<td>Apache License 2.0</td>
-</tr>
-<tr>
-<td>Mysql</td>
-<td>GPL license</td>
-</tr>
-<tr>
-<td>Elasticsearch</td>
-<td>Apache License 2.0</td>
-</tr>
-<tr>
-<td>CDH</td>
-<td>Apache License 2.0</td>
-</tr>
-<tr>
-<td>Zookeeper</td>
-<td>Apache License 2.0</td>
-</tr>
-<tr>
-<td>Hue</td>
-<td>Apache License 2.0</td>
-</tr>
-<tr>
-<td>Oozie</td>
-<td>Apache License 2.0</td>
-</tr>
-<tr>
-<td>Flume</td>
-<td>Apache License 2.0</td>
-</tr>
-<tr>
-<td>Kafka</td>
-<td>Apache License 2.0</td>
-</tr>
-<tr>
-<td>Logstash</td>
-<td>Apache License 2.0</td>
-</tr>
-</tbody>
-</table>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[fabric自动化部署]]></title>
-    <link href="http://dmlcoding.com/15209051281712.html"/>
-    <updated>2018-03-13T09:38:48+08:00</updated>
-    <id>http://dmlcoding.com/15209051281712.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0">简介</h2>
-
-<p>Fabric是一个用Python开发的部署工具，最大特点是不用登录远程服务器，在本地运行远程命令，几行Python脚本就可以轻松部署。</p>
-
-<p>Fabric提供几个简单的API来完成所有的部署，最常用的是local()和run()，分别在本地和远程执行命令，put()可以把本地文件上传到远程，当需要在远程指定当前目录时，只需用with cd(&#39;/path/to/dir/&#39;):即可。</p>
-
-<p>默认情况下，当命令执行失败时，Fabric会停止执行后续命令。有时，我们允许忽略失败的命令继续执行，比如run(&#39;rm /tmp/abc&#39;)在文件不存在的时候有可能失败，这时可以用with settings(warn_only=True):执行命令，这样Fabric只会打出警告信息而不会中断执行。</p>
-
-<span id="more"></span><!-- more -->
-
-<h2 id="toc_1">Fabric是如何在远程执行命令的呢</h2>
-
-<p>其实Fabric所有操作都是基于SSH执行的，必要时它会提示输入口令，所以非常安全。更好的办法是在指定的部署服务器上用证书配置无密码的ssh连接。</p>
-
-<p>如果是基于团队开发，可以让Fabric利用版本库自动检出代码，自动执行测试、打包、部署的任务。由于Fabric运行的命令都是基本的Linux命令，所以根本不需要用Fabric本身来扩展，会敲Linux命令就能用Fabric部署。</p>
-
-<h1 id="toc_2">安装</h1>
-
-<p>在windows上安装可能会有各种依赖的问题,安装就可能没有那么顺利.</p>
-
-<p>为了减少麻烦.我们直接把你电脑上的原装python都给卸载了吧,无论你是python2还是python3.都卸载了.</p>
-
-<p>我们直接在windows上安装Anaconda包.Anaconda是给机器学习学习者集成的python环境,可以给不想折腾的同学,节省很多安装的时间.</p>
-
-<h2 id="toc_3">下载安装Anaconda</h2>
-
-<p><a href="https://www.anaconda.com/download/#windows">官网下载安装包</a><br/>
-<img src="media/15209051281712/15260197981453.jpg" alt=""/></p>
-
-<p>下载python3.6吧,毕竟python2在以后python社区会逐渐的不再维护支持了.另外Anaconda中的python3,可以用虚拟环境创建python2.7的虚拟环境.</p>
-
-<p>下载如图所示后,会有安装包,点击下一步之类的就安装好了,记得在安装的过程中要点上配置环境变量.如果你错过了,那么就只能在安装完成后,自己手动的配置Anaconda的环境变量了.</p>
-
-<p>手动配置Anaconda环境变量参考网上文章,和一般的环境变量没啥区别.</p>
-
-<h2 id="toc_4">创建python2.7的虚拟环境</h2>
-
-<p>因为<code>fabric.py</code>脚本是在python2.7下写的.因此咱们需要创建一个python2.7的环境,然后在这个环境里面下载安装<code>fabric模块</code></p>
-
-<ol>
-<li>创建python2.7虚拟环境</li>
-</ol>
-
-<pre><code>conda create -n python27 python=2.7
-</code></pre>
-
-<ol>
-<li>激活python2.7的虚拟环境</li>
-</ol>
-
-<pre><code>activate python27
-</code></pre>
-
-<ol>
-<li>在python2.7环境下安装fabric模块</li>
-</ol>
-
-<pre><code>pip install fabric==1.14.0
-</code></pre>
-
-<p>到此已经把fabric模块安装完成了.接下来就是使用了.</p>
-
-<ol>
-<li>退出python2.7的虚拟环境</li>
-</ol>
-
-<pre><code>deactivate
-</code></pre>
-
-<h1 id="toc_5">使用</h1>
-
-<ul>
-<li><a href="http://www.fabfile.org/installing.html">官网说明</a></li>
-</ul>
-
-<h2 id="toc_6">fabric常用api</h2>
-
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th>解释</th>
-<th>例子</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>local</td>
-<td>执行本地命令</td>
-<td>local(&#39;ls -l&#39;)</td>
-</tr>
-<tr>
-<td>lcd</td>
-<td>切换本地目录(需要with包裹)</td>
-<td>lcd(&#39;本地目录&#39;)</td>
-</tr>
-<tr>
-<td>run</td>
-<td>执行远程命令</td>
-<td>run(&#39;ls -l&#39;)</td>
-</tr>
-<tr>
-<td>cd</td>
-<td>切换远程目录(需要with包裹)</td>
-<td>cd(&#39;远程目录&#39;)</td>
-</tr>
-<tr>
-<td>put</td>
-<td>将本地文件上传至远程目录</td>
-<td>put(&#39;本地文件&#39;,&#39;远程目录&#39;)</td>
-</tr>
-<tr>
-<td>env</td>
-<td>fabric环境，配置远程ip、端口、密码</td>
-<td>见下文</td>
-</tr>
-</tbody>
-</table>
-
-<h2 id="toc_7">fabric远程执行例子</h2>
-
-<p>想好你的上线步骤,比如我平时的上线步骤就是这么几步.</p>
-
-<ol>
-<li>拉取SVN代码</li>
-<li>本地编译打包</li>
-<li>上传到服务器</li>
-<li>备份服务器上的上一个版本</li>
-<li>部署到服务器指定目录</li>
-<li>清理多余文件</li>
-<li>相关Jar包和文件上传到HDFS</li>
-</ol>
-
-<p>如果不符合你的业务需求,可以参考脚本做相应的修改.</p>
-
-<h3 id="toc_8">Mac下的脚本</h3>
-
-<pre><code># -*- coding: utf-8 -*-
-&quot;&quot;&quot;
-Created by hushiwei on 2017/10/16
-desc : 自动化部署上线
-1. 更新代码到指定分支
-2. 执行 fab deploy
-3. OK...
-&quot;&quot;&quot;
-import os
-import datetime
-from fabric.api import *
-from fabric.contrib.console import confirm
-from fabric.colors import blue, red, green
-from fabric.contrib.files import *
-import sys
-
-local_dir = &quot;/Users/hushiwei/demo/auto_deploy/&quot;
-remote_project = &quot;/home/hadoop/statistics/ad/&quot;
-remote_dir = &quot;/home/hadoop/statistics/auto_deploy/&quot;
-remote_dir_bak = &quot;/home/hadoop/statistics/auto_deploy_bak/&quot;
-svn_path = &quot;svn://svn.gm825.com/code/server/bigdata/xxxxxxxxxxx&quot;
-hdfs_path = &quot;/user/oozie/ad/&quot;
-
-env.user = &quot;xxxxxxx&quot;
-
-env.hosts = [&#39;***.***.***.***&#39;]
-env.password = &#39;**********&#39;
-
-
-def today():
-  return datetime.date.today().strftime(&quot;%Y%m%d&quot;)
-
-
-def svn_to_local(project_name):
-  &#39;&#39;&#39;
-  fab svn_to_local:project_name=quickapp
-  把项目SVN的trunk代码checkout到本地
-  :param project_name:
-  :return:
-  &#39;&#39;&#39;
-  print green(&#39;Checking out the project, SVN Path Is : %s&#39; % svn_path)
-  if not os.path.exists(local_dir):
-    local(&#39;mkdir &#39; + local_dir)
-
-  with lcd(local_dir):
-    local(&#39;rm -rf &#39; + local_dir + project_name)
-    local(&#39;svn co &#39; + svn_path, capture=True)
-    local(&#39;mv {svn_name} {project_name} &#39;.format(svn_name=svn_path.split(&quot;/&quot;)[-1],project_name=project_name))
-  print green(&#39;Checkout The Project --- Finished!&#39;)
-
-
-def pack_project(project_name):
-  &#39;&#39;&#39;
-  fab pack_project:project_name=quickapp
-  把本地项目打成tar包,准备上传到服务器
-  :param project_name:
-  :return:
-  &#39;&#39;&#39;
-  with lcd(local_dir + project_name):
-    local(&quot;find &quot; + local_dir + project_name + &quot; -name &#39;.svn&#39; | xargs rm -rf&quot;)
-    print(green(&quot;Removed the .svn file --- Finished, Pack the project&quot;))
-    local(&#39;mvn clean scala:compile compile package -DskipTests&#39;, capture=True)
-    local(&#39;mv oozie %s&#39; % project_name)
-    local(&#39;mv target/*-jar-with-dependencies.jar {project_name}/&#39;.format(project_name=project_name))
-    local(&#39;mv target/*-SNAPSHOT.jar {project_name}/{project_name}_streaming&#39;.format(project_name=project_name))
-    local(&#39;tar cfz {local_dir}{project_name}.tar.gz {project_name}/*&#39;.format(
-        project_name=project_name, local_dir=local_dir))
-
-  print green(&#39;Pack the Project --- Finished!&#39;)
-
-
-def backup_serverfile(project_name):
-  &#39;&#39;&#39;
-  备份服务器上的项目
-  :param project_name:
-  :return:
-  &#39;&#39;&#39;
-  print green(&quot;Back the project on server&quot;)
-  with cd(remote_project):
-    with settings(warn_only=True):
-      # 创建备份文件目录
-      if not exists(remote_dir_bak):
-        run(&quot;mkdir &quot;+remote_dir_bak)
-      run(
-          &quot;tar cfz &quot; + remote_dir_bak + project_name + &quot;_&quot; + today() + &quot;.tar.gz --exclude source_log &quot; + project_name + &quot;/&quot;)
-      run(&quot;cp -r &quot; + project_name + &quot; &quot; + project_name + &quot;_&quot; + today())
-  print green(&quot;Back up the project on server --- Finished!&quot;)
-
-
-def put_package(project_name):
-  &#39;&#39;&#39;
-  上传发布包到远程服务器
-  :param project_name:
-  :return:
-  &#39;&#39;&#39;
-  if not exists(remote_dir):
-    run(&quot;mkdir &quot;+remote_dir)
-  print green(&quot;Start upload the Project to the Server ...&quot;)
-  with cd(remote_dir):
-    with settings(warn_only=True):
-      result = put(local_dir + project_name + &quot;.tar.gz&quot;,
-                   remote_dir + project_name + &quot;.tar.gz&quot;)
-      if result.failed and not confirm(&quot;put file failed,Continue?&quot;):
-        abort(&quot;Aborting file put task!&quot;)
-  print green(&quot;Put the package to remote server --- Finished!&quot;)
-
-
-def deploy_project(project_name):
-  &#39;&#39;&#39;
-  解压线上tar包,进行部署项目
-  :param project_name:
-  :return:
-  &#39;&#39;&#39;
-  with cd(remote_dir):
-    with settings(warn_only=True):
-      result = run(&quot;tar zxf &quot; + project_name + &quot;.tar.gz -C &quot; + remote_project)
-    if result.failed:
-      print red(&quot;Deploy the Project Failed,Roll backing&quot;)
-      roll_back(project_name)
-  run(&quot;cd {remote_project} &amp;&amp; chown -R hadoop:hadoop {project_name}&quot;.format(
-      remote_project=remote_project, project_name=project_name))
-  print(green(&quot;Deploy the package at the server --- Finished&quot;))
-
-
-def clear_deploy(project_name):
-  &#39;&#39;&#39;
-  删除部署后留下的多余文件
-  :param project_name:
-  :return:
-  &#39;&#39;&#39;
-  with cd(remote_project):
-    run(&#39;rm -rf &#39; + project_name + &quot;_&quot; + today())
-  with cd(remote_dir):
-    run(&quot;rm -rf &quot; + project_name + &quot;.tar.gz&quot;)
-  print green(&quot;Clear the files at the server --- Finished&quot;)
-
-
-def roll_back(project_name):
-  &#39;&#39;&#39;
-  当部署失败后,回滚到前一个备份版本
-  :param project_name:
-  :return:
-  &#39;&#39;&#39;
-  run(&quot;rm -rf &quot; + project_name)
-  run(&quot;mv &quot; + project_name + &quot;_&quot; + today() + &quot; &quot; + project_name)
-  print red(&quot;Roll back deploy --- Finished&quot;)
-
-
-@runs_once
-@task
-def prepare_deploy(project_name=&quot;quickapp&quot;):
-  &quot;&quot;&quot;
-  部署前准备，下载最新版代码，打包代码
-  &quot;&quot;&quot;
-  svn_to_local(project_name)
-  pack_project(project_name)
-
-
-def upload_files(project_name):
-  hdfs_work=hdfs_path+project_name+&quot;/&quot;
-  with cd(remote_project + project_name):
-    run(&quot;hadoop fs -put -f ./{wf,hourwf,offlinewf,targetingwf} %s&quot; % hdfs_work)
-  print green(&quot;upload files to hdfs --- Finished&quot;)
-
-
-def upload_jars(project_name):
-  hdfs_work=hdfs_path+project_name+&quot;/&quot;
-  wfPaths = [&#39;wf&#39;, &#39;hourwf&#39;,&#39;offlinewf&#39;,&#39;targetingwf&#39;]
-  with cd(remote_project + project_name):
-    for i in range(len(wfPaths)):
-      run(&quot;hadoop fs -put -f ./*.jar &quot; + hdfs_work + wfPaths[i] + &quot;/lib&quot;)
-  print green(&quot;upload jars to hdfs --- Finished&quot;)
-
-
-@task
-def upload_hdfs(project_name=&quot;quickapp&quot;):
-  &#39;&#39;&#39;
-  将项目上传到hdfs
-  :return:
-  &#39;&#39;&#39;
-  upload_files(project_name)
-  upload_jars(project_name)
-
-@task
-def upload_hdfs_by_exec_shell(project_name=&quot;quickapp&quot;):
-  &#39;&#39;&#39;
-  通过调用项目里面的upgrade.sh脚本来上传项目到hdfs
-  :param project_name:
-  :return:
-  &#39;&#39;&#39;
-  with cd(remote_project):
-    run(&quot;cd %s/wf/shell &amp;&amp; sh upgrade.sh &quot; % project_name)
-
-
-@task
-def deploy(project_name=&quot;quickapp&quot;, prepated=True):
-  &#39;&#39;&#39;
-  本地打包,部署到线上服务器,上传到HDFS全流程
-  :param project_name:
-  :param prepated:
-  :return:
-  &#39;&#39;&#39;
-  if prepated == True:
-    prepare_deploy(project_name)
-  # 上传
-  put_package(project_name)
-  # 备份
-  backup_serverfile(project_name)
-  # 部署
-  deploy_project(project_name)
-  # 清理
-  clear_deploy(project_name)
-  # 上传hdfs
-  upload_hdfs(project_name)
-
-</code></pre>
-
-<h3 id="toc_9">Windows下的脚本</h3>
-
-<pre><code># -*- coding: utf-8 -*-
-&quot;&quot;&quot;
-Created by hushiwei on 2017/10/16
-desc : 自动化部署上线
-1. 更新代码到trunk.
-2. 执行 fab deploy
-3. OK...
-&quot;&quot;&quot;
-import os
-import datetime
-from fabric.api import *
-from fabric.contrib.console import confirm
-from fabric.colors import blue, red, green
-from fabric.contrib.files import *
-import os,tarfile
-
-
-local_dir = &quot;D:\wanka\svn_project\dsp_interact\\&quot;
-remote_project = &quot;/home/hadoop/statistics/ad/&quot;
-remote_dir = &quot;/home/hadoop/statistics/auto_deploy/&quot;
-remote_dir_bak = &quot;/home/hadoop/statistics/auto_deploy_bak/&quot;
-svn_path = &quot;svn://svn.gm825.com/code/server/bigdata/xxxxxxxxxx&quot;
-hdfs_path = &quot;/user/oozie/ad/&quot;
-
-env.user = &quot;xxxxxxx&quot;
-
-env.hosts = [&#39;***.***.***.***&#39;]
-env.password = &#39;**********&#39;
-
-# python在windows环境打tar包.output_filename为tar包文件,source_dir为要打包的目录
-def make_targz(output_filename, source_dir):
-  with tarfile.open(output_filename, &quot;w:gz&quot;) as tar:
-    tar.add(source_dir, arcname=os.path.basename(source_dir))
-
-def today():
-  return datetime.date.today().strftime(&quot;%Y%m%d&quot;)
-
-
-def svn_to_local(project_name):
-  &#39;&#39;&#39;
-  fab svn_to_local:project_name=dsp_interaction_ad
-  把项目SVN的trunk代码checkout到本地
-  :param project_name:
-  :return:
-  &#39;&#39;&#39;
-  print green(&#39;Checking out the project, SVN Path Is : %s&#39; % svn_path)
-  if not os.path.exists(local_dir):
-    local(&#39;mkdir &#39; + local_dir)
-
-  with lcd(local_dir):
-
-    # local(&#39;rm -rf &#39; + local_dir + project_name)
-
-    local(&#39;if exist &#39; + local_dir + project_name + &#39; (rd /s /q &#39; + local_dir + project_name + &#39;)&#39;)
-    local(&#39;if exist &#39; + local_dir + project_name + &#39;.tar.gz (del &#39; + local_dir + project_name + &#39;.tar.gz)&#39;)
-
-    local(&#39;svn co &#39; + svn_path, capture=True)
-    local(&#39;rename {svn_name} {project_name} &#39;.format(svn_name=svn_path.split(&quot;/&quot;)[-1],project_name=project_name))
-  print green(&#39;Checkout The Project --- Finished!&#39;)
-
-
-def pack_project(project_name):
-  &#39;&#39;&#39;
-  fab pack_project:project_name=dsp_interaction_ad
-  把本地项目打成tar包,准备上传到服务器
-  :param project_name:
-  :return:
-  &#39;&#39;&#39;
-  # with lcd(local_dir + project_name):
-  with lcd(local_dir):
-    
-    local(&quot;rd /s /q &quot; + local_dir + project_name + &#39;\\.svn&#39;, capture=True)
-    print(green(&quot;Removed the .svn file --- Finished, Pack the project&quot;))
-
-  with lcd(local_dir + project_name):
-    local(&#39;mvn clean scala:compile compile package -DskipTests&#39;, capture=True)
-    local(&#39;rename oozie %s&#39; % project_name)
-    local(&#39;move target\\*-jar-with-dependencies.jar {project_name}\\&#39;.format(project_name=project_name))
-    local(&#39;move target\\*-SNAPSHOT.jar {project_name}\\{project_name}_streaming&#39;.format(project_name=project_name))
-
-    make_targz(local_dir + project_name + &#39;.tar.gz&#39;, local_dir + project_name + &#39;\\&#39; + project_name)
-
-  print green(&#39;Pack the Project --- Finished!&#39;)
-
-
-def backup_serverfile(project_name):
-  &#39;&#39;&#39;
-  备份服务器上的项目
-  :param project_name:
-  :return:
-  &#39;&#39;&#39;
-  print green(&quot;Back the project on server&quot;)
-  with cd(remote_project):
-    with settings(warn_only=True):
-      # 创建备份文件目录
-      if not exists(remote_dir_bak):
-        run(&quot;mkdir &quot;+remote_dir_bak)
-      run(
-          &quot;tar cfz &quot; + remote_dir_bak + project_name + &quot;_&quot; + today() + &quot;.tar.gz --exclude source_log &quot; + project_name + &quot;/&quot;)
-      run(&quot;cp -r &quot; + project_name + &quot; &quot; + project_name + &quot;_&quot; + today())
-  print green(&quot;Back up the project on server --- Finished!&quot;)
-
-
-def put_package(project_name):
-  &#39;&#39;&#39;
-  上传发布包到远程服务器
-  :param project_name:
-  :return:
-  &#39;&#39;&#39;
-  if not exists(remote_dir):
-    run(&quot;mkdir &quot;+remote_dir)
-  print green(&quot;Start upload the Project to the Server ...&quot;)
-  with cd(remote_dir):
-    with settings(warn_only=True):
-      result = put(local_dir + project_name + &quot;.tar.gz&quot;,
-                   remote_dir + project_name + &quot;.tar.gz&quot;)
-      if result.failed and not confirm(&quot;put file failed,Continue?&quot;):
-        abort(&quot;Aborting file put task!&quot;)
-  print green(&quot;Put the package to remote server --- Finished!&quot;)
-
-
-def deploy_project(project_name):
-  &#39;&#39;&#39;
-  解压线上tar包,进行部署项目
-  :param project_name:
-  :return:
-  &#39;&#39;&#39;
-  with cd(remote_dir):
-    with settings(warn_only=True):
-      result = run(&quot;tar zxf &quot; + project_name + &quot;.tar.gz -C &quot; + remote_project)
-    if result.failed:
-      print red(&quot;Deploy the Project Failed,Roll backing&quot;)
-      roll_back(project_name)
-  run(&quot;cd {remote_project} &amp;&amp; chown -R hadoop:hadoop {project_name}&quot;.format(
-      remote_project=remote_project, project_name=project_name))
-  print(green(&quot;Deploy the package at the server --- Finished&quot;))
-
-
-def clear_deploy(project_name):
-  &#39;&#39;&#39;
-  删除部署后留下的多余文件
-  :param project_name:
-  :return:
-  &#39;&#39;&#39;
-  with cd(remote_project):
-    run(&#39;rm -rf &#39; + project_name + &quot;_&quot; + today())
-  with cd(remote_dir):
-    run(&quot;rm -rf &quot; + project_name + &quot;.tar.gz&quot;)
-  print green(&quot;Clear the files at the server --- Finished&quot;)
-
-
-def roll_back(project_name):
-  &#39;&#39;&#39;
-  当部署失败后,回滚到前一个备份版本
-  :param project_name:
-  :return:
-  &#39;&#39;&#39;
-  run(&quot;rm -rf &quot; + project_name)
-  run(&quot;mv &quot; + project_name + &quot;_&quot; + today() + &quot; &quot; + project_name)
-  print red(&quot;Roll back deploy --- Finished&quot;)
-
-
-@runs_once
-@task
-def prepare_deploy(project_name=&quot;dsp_interaction_ad&quot;):
-  &quot;&quot;&quot;
-  部署前准备，下载最新版代码，打包代码
-  &quot;&quot;&quot;
-  svn_to_local(project_name)
-  pack_project(project_name)
-
-
-def upload_files(project_name):
-  hdfs_work=hdfs_path+project_name+&quot;/&quot;
-  with cd(remote_project + project_name):
-    run(&quot;hadoop fs -put -f ./{wf,hourwf,offlinewf,targetingwf} %s&quot; % hdfs_work)
-  print green(&quot;upload files to hdfs --- Finished&quot;)
-
-
-def upload_jars(project_name):
-  hdfs_work=hdfs_path+project_name+&quot;/&quot;
-  wfPaths = [&#39;wf&#39;, &#39;hourwf&#39;,&#39;offlinewf&#39;,&#39;targetingwf&#39;]
-  with cd(remote_project + project_name):
-    for i in range(len(wfPaths)):
-      run(&quot;hadoop fs -put -f ./*.jar &quot; + hdfs_work + wfPaths[i] + &quot;/lib&quot;)
-  print green(&quot;upload jars to hdfs --- Finished&quot;)
-
-
-@task
-def upload_hdfs(project_name=&quot;dsp_interaction_ad&quot;):
-  &#39;&#39;&#39;
-  将项目上传到hdfs
-  :return:
-  &#39;&#39;&#39;
-  upload_files(project_name)
-  upload_jars(project_name)
-
-@task
-def upload_hdfs_by_exec_shell(project_name=&quot;dsp_interaction_ad&quot;):
-  &#39;&#39;&#39;
-  通过调用项目里面的upgrade.sh脚本来上传项目到hdfs
-  :param project_name:
-  :return:
-  &#39;&#39;&#39;
-  with cd(remote_project):
-    run(&quot;cd %s/wf/shell &amp;&amp; sh upgrade.sh &quot; % project_name)
-
-
-@task
-def deploy(project_name=&quot;dsp_interaction_ad&quot;, prepated=True):
-  &#39;&#39;&#39;
-  本地打包,部署到线上服务器,上传到HDFS全流程
-  :param project_name:
-  :param prepated:
-  :return:
-  &#39;&#39;&#39;
-  if prepated == True:
-    prepare_deploy(project_name)
-  # 上传
-  put_package(project_name)
-  # 备份
-  backup_serverfile(project_name)
-  # 部署
-  deploy_project(project_name)
-  # 清理
-  clear_deploy(project_name)
-  # 上传hdfs
-  upload_hdfs(project_name)
-
-</code></pre>
-
-<h2 id="toc_10">执行命令</h2>
-
-<p>在执行fab命令之前,需要先激活之前安装的python2.7虚拟环境.在这个环境下才可以执行fab命令</p>
-
-<pre><code>activate python27
-</code></pre>
-
-<p>激活python2.7环境后,我们就在fabric.py文件的同级目录下执行<strong>fab deploy</strong>即可一键上线</p>
-
-<pre><code>fab deploy
-</code></pre>
-
-<p>至于其他更加详细的命令,可以执行<strong>fab -h</strong>参考官方说明.</p>
-
-<pre><code> hushiwei@hsw  ~  fab -h
-Usage: fab [options] &lt;command&gt;[:arg1,arg2=val2,host=foo,hosts=&#39;h1;h2&#39;,...] ...
-
-Options:
-  -h, --help            show this help message and exit
-  -d NAME, --display=NAME
-                        print detailed info about command NAME
-  -F FORMAT, --list-format=FORMAT
-                        formats --list, choices: short, normal, nested
-  -I, --initial-password-prompt
-                        Force password prompt up-front
-  --initial-sudo-password-prompt
-                        Force sudo password prompt up-front
-  -l, --list            print list of possible commands and exit
-  --set=KEY=VALUE,...   comma separated KEY=VALUE pairs to set Fab env vars
-  --shortlist           alias for -F short --list
-  -V, --version         show program&#39;s version number and exit
-  -a, --no_agent        don&#39;t use the running SSH agent
-  -A, --forward-agent   forward local agent to remote end
-  --abort-on-prompts    abort instead of prompting (for password, host, etc)
-  -c PATH, --config=PATH
-                        specify location of config file to use
-  --colorize-errors     Color error output
-  -D, --disable-known-hosts
-                        do not load user known_hosts file
-  -e, --eagerly-disconnect
-                        disconnect from hosts as soon as possible
-  -f PATH, --fabfile=PATH
-                        python module file to import, e.g. &#39;../other.py&#39;
-  -g HOST, --gateway=HOST
-                        gateway host to connect through
-  --gss-auth            Use GSS-API authentication
-  --gss-deleg           Delegate GSS-API client credentials or not
-  --gss-kex             Perform GSS-API Key Exchange and user authentication
-  --hide=LEVELS         comma-separated list of output levels to hide
-  -H HOSTS, --hosts=HOSTS
-                        comma-separated list of hosts to operate on
-  -i PATH               path to SSH private key file. May be repeated.
-  -k, --no-keys         don&#39;t load private key files from ~/.ssh/
-  --keepalive=N         enables a keepalive every N seconds
-  --linewise            print line-by-line instead of byte-by-byte
-  -n M, --connection-attempts=M
-                        make M attempts to connect before giving up
-  --no-pty              do not use pseudo-terminal in run/sudo
-  -p PASSWORD, --password=PASSWORD
-                        password for use with authentication and/or sudo
-  -P, --parallel        default to parallel execution method
-  --port=PORT           SSH connection port
-  -r, --reject-unknown-hosts
-                        reject unknown hosts
-  --sudo-password=SUDO_PASSWORD
-                        password for use with sudo only
-  --system-known-hosts=SYSTEM_KNOWN_HOSTS
-                        load system known_hosts file before reading user
-                        known_hosts
-  -R ROLES, --roles=ROLES
-                        comma-separated list of roles to operate on
-  -s SHELL, --shell=SHELL
-                        specify a new shell, defaults to &#39;/bin/bash -l -c&#39;
-  --show=LEVELS         comma-separated list of output levels to show
-  --skip-bad-hosts      skip over hosts that can&#39;t be reached
-  --skip-unknown-tasks  skip over unknown tasks
-  --ssh-config-path=PATH
-                        Path to SSH config file
-  -t N, --timeout=N     set connection timeout to N seconds
-  -T N, --command-timeout=N
-                        set remote command timeout to N seconds
-  -u USER, --user=USER  username to use when connecting to remote hosts
-  -w, --warn-only       warn, instead of abort, when commands fail
-  -x HOSTS, --exclude-hosts=HOSTS
-                        comma-separated list of hosts to exclude
-  -z INT, --pool-size=INT
-                        number of concurrent processes to use in parallel mode
 </code></pre>
 
 ]]></content>
