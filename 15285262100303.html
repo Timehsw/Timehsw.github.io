@@ -1,0 +1,523 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  SVM(支持向量机)---未完成 - Time渐行渐远
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Time渐行渐远" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:dmlcoding.com ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li id=""><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li id=""><a target="_blank" href="about.html">ABOUT</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Time渐行渐远</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="BigData.html">BigData</a></li>
+        
+            <li><a href="Python.html">Python</a></li>
+        
+            <li><a href="Linux.html">Linux</a></li>
+        
+            <li><a href="Life.html">Life</a></li>
+        
+            <li><a href="Spark.html">Spark</a></li>
+        
+            <li><a href="Hive.html">Hive</a></li>
+        
+            <li><a href="Yarn.html">Yarn</a></li>
+        
+            <li><a href="Scala.html">Scala</a></li>
+        
+            <li><a href="VPS.html">VPS</a></li>
+        
+            <li><a href="MachineLearning.html">MachineLearning</a></li>
+        
+            <li><a href="Writer.html">Writer</a></li>
+        
+            <li><a href="Shell.html">Shell</a></li>
+        
+            <li><a href="Algorithm.html">Algorithm</a></li>
+        
+            <li><a href="Mac.html">Mac</a></li>
+        
+            <li><a href="Presto.html">Presto</a></li>
+        
+            <li><a href="Mysql.html">Mysql</a></li>
+        
+            <li><a href="Maven.html">Maven</a></li>
+        
+            <li><a href="Kafka.html">Kafka</a></li>
+        
+            <li><a href="Java.html">Java</a></li>
+        
+            <li><a href="DevTools.html">DevTools</a></li>
+        
+            <li><a href="Hbase.html">Hbase</a></li>
+        
+            <li><a href="ELK.html">ELK</a></li>
+        
+            <li><a href="Druid.html">Druid</a></li>
+        
+            <li><a href="Docker.html">Docker</a></li>
+        
+            <li><a href="DesignPattern.html">DesignPattern</a></li>
+        
+            <li><a href="Computer.html">Computer</a></li>
+        
+            <li><a href="Redis.html">Redis</a></li>
+        
+            <li><a href="Zookeeper.html">Zookeeper</a></li>
+        
+            <li><a href="BlockChain.html">BlockChain</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>SVM(支持向量机)---未完成</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2018/6/9</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p>支持向量机(Support Vecor Machine,SVM)本身是一个<strong>二元分类算法</strong>,是对感知器算法模型的一种扩展,现在的SVM算法支持线性分类和非线性分类的分类应用,并且也能够直接将SVM应用于回归应用中.同时通过OvR或者OvO的方式我们也可以将SVM应用在多元分类领域中.在不考虑集成算法,不考虑特定的数据集的时候,在分类算法中SVM可以说是特别优秀的.</p>
+
+<p><strong>线性可分(Linearly Separable)</strong>:在数据集中,如果可以找出一个超平面,将两组数据分开,那么这个数据集叫做线性可分数据.</p>
+
+<p><strong>线性不可分(Linear Inseparable)</strong>:在数据集中,没法找出一个超平面,能够将两组数据分开,那么这个数据集就叫做线性不可分数据.</p>
+
+<p><strong>分割超平面(Separating Hyperplane)</strong>:将数据集分割开来的直线/平面叫做分割超平面.</p>
+
+<p><strong>间隔(Margin)</strong>:数据点到分割超平面的距离称为间隔.</p>
+
+<p><strong>支持向量(Support Vector)</strong>:离分割超平面最近的那些点叫做支持向量.</p>
+
+<span id="more"></span><!-- more -->
+
+<h1 id="toc_0">线性可分SVM</h1>
+
+<p>在感知器模型中,算法是在数据中找出一个划分超平面,让尽可能多的数据分布在这个平面的两侧,从而达到分类的效果,但是在实际数据中这个符合我们要求的超平面是可能存在多个的.<br/>
+<img src="media/15285262100303/15285276077823.jpg" alt=""/></p>
+
+<p>在感知器模型中,我们可以找到多个可以分类的超平面将数据分开,并且优化时希望所有的点都离超平面尽可能的远,但是实际上离超平面足够远的点基本上都是被正确分类的,所以这个是没有意义的;反而比较关心那些离超平面很近的点,这些点比较容易分错.所以说我们只要让离超平面比较近的点尽可能的远离这个超平面,那么我们的模型分类效果应该就会比较不错了.(这个就是SVM的思想)<br/>
+<img src="media/15285262100303/15285279858682.jpg" alt=""/></p>
+
+<h2 id="toc_1">超平面和法向量</h2>
+
+<p>先回顾一下同济高数上的一个例题,求解点到平面的距离.<br/>
+<img src="media/15285262100303/15285475518085.jpg" alt=""/></p>
+
+<p>常见的平面概念是在三维空间中定义的:\(Ax+By+Cz+D=0\).<br/>
+而d维空间中的超平面由下面的方程确定:\(w^Tx+b=0\),其中w和x都是d维列向量,\(x=(x_1,x_2,...,x_d)^T\)为平面上的点,\(w=(w_1,w_2,...,w_d)^T\)为平面的法向量.b是一个实数,代表平面与原点之间的距离.</p>
+
+<p><strong>点到超平面的距离</strong></p>
+
+<p>假设点\(x^{&#39;}为超平面A:w^Tx+b=0上的任意一点,则点x到A的距离为x-x^{&#39;}在超平面法向量w上的投影长度:\)</p>
+
+<p>\[d=\dfrac{|w^T(x-x^{&#39;})|}{||w||}=\dfrac{|w^Tx+b|}{||w||} \qquad 注意:w^Tx^{&#39;}=-b,x^{&#39;}为超平面上一点\]</p>
+
+<p>这里,\(||w||是w的L_2范数\)</p>
+
+<p><strong>超平面的正面和反面</strong><br/>
+一个超平面可以将它所在的空间分为两半,它的法向量指向的那一半对应的一面是它的正面,另一面则是它的反面.</p>
+
+<p><strong>法向量的意义</strong><br/>
+法向量的大小是坐标原点到分离超平面的距离,垂直于分离超平面,方向由分离超平面决定.</p>
+
+<h2 id="toc_2">线性可分SVM</h2>
+
+<p>支持向量到超平面的距离为:<br/>
+\[\because w^Tx+b=\pm1 \\\<br/>
+\because y \in \{+1,-1\} \\\<br/>
+\therefore \dfrac{|y(w^Tx+b)|}{||w||}=\dfrac{1}{||w||}\]</p>
+
+<p>备注:在SVM中支持向量到超平面的函数距离一般设置为1<br/>
+<img src="media/15285262100303/15285491659569.jpg" alt=""/></p>
+
+<p>SVM模型是让所有的分类点在各自类别的支持向量的两边,同时要求支持向量尽可能的远离这个超平面,用数学公式表示如下:</p>
+
+<p>注意:<br/>
+\[<br/>
+\begin{cases}<br/>
+w^T=(w_1,w_2,\cdots,w_n)\\\ <br/>
+||w||=\sqrt{w_1^2+w_2^2+\cdots+w_n^2}<br/>
+\end{cases}<br/>
+\]</p>
+
+<p>\[<br/>
+\begin{cases}<br/>
+\max \limits_{w,b}\dfrac{1}{||w||} &amp;\text {目标}\\\ <br/>
+s.t:y^{(i)}\left(w^Tx^{(i)}+b\right) \geq 1,i=1,2,...,m &amp;\text {限制条件}<br/>
+\end{cases}<br/>
+\]</p>
+
+<p>一般求最优化问题,都是求最小值,因此稍微将这个优化问题转换一下<br/>
+\[<br/>
+\begin{cases}<br/>
+\min \limits_{w,b}\dfrac12||w||^2 &amp;\text {目标}\\\ <br/>
+s.t:y^{(i)}\left(w^Tx^{(i)}+b\right) \geq 1,i=1,2,...,m &amp;\text {限制条件}<br/>
+\end{cases}<br/>
+\]</p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15289333499679.html" 
+          title="Previous Post: 拉格朗日乘子法&KKT条件---未完成">&laquo; 拉格朗日乘子法&KKT条件---未完成</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15284222434956.html" 
+          title="Next Post: 聚类算法---未完成">聚类算法---未完成 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://s.gravatar.com/avatar/2d9bdeec5ad2754d8a47063df1346ee8?s=80" /></div>
+            
+                <h1>Time渐行渐远</h1>
+                <div class="site-des">Coding Changing The World</div>
+                <div class="social">
+
+
+
+
+
+
+
+<a target="_blank" class="weibo" href="http://weibo.com/hswnice" title="weibo">Weibo</a>
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:hsw_v5@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="BigData.html"><strong>BigData</strong></a>
+        
+            <a href="Python.html"><strong>Python</strong></a>
+        
+            <a href="Linux.html"><strong>Linux</strong></a>
+        
+            <a href="Life.html"><strong>Life</strong></a>
+        
+            <a href="Spark.html"><strong>Spark</strong></a>
+        
+            <a href="Hive.html"><strong>Hive</strong></a>
+        
+            <a href="Yarn.html"><strong>Yarn</strong></a>
+        
+            <a href="Scala.html"><strong>Scala</strong></a>
+        
+            <a href="VPS.html"><strong>VPS</strong></a>
+        
+            <a href="MachineLearning.html"><strong>MachineLearning</strong></a>
+        
+            <a href="Writer.html"><strong>Writer</strong></a>
+        
+            <a href="Shell.html"><strong>Shell</strong></a>
+        
+            <a href="Algorithm.html"><strong>Algorithm</strong></a>
+        
+            <a href="Mac.html"><strong>Mac</strong></a>
+        
+            <a href="Presto.html"><strong>Presto</strong></a>
+        
+            <a href="Mysql.html"><strong>Mysql</strong></a>
+        
+            <a href="Maven.html"><strong>Maven</strong></a>
+        
+            <a href="Kafka.html"><strong>Kafka</strong></a>
+        
+            <a href="Java.html"><strong>Java</strong></a>
+        
+            <a href="DevTools.html"><strong>DevTools</strong></a>
+        
+            <a href="Hbase.html"><strong>Hbase</strong></a>
+        
+            <a href="ELK.html"><strong>ELK</strong></a>
+        
+            <a href="Druid.html"><strong>Druid</strong></a>
+        
+            <a href="Docker.html"><strong>Docker</strong></a>
+        
+            <a href="DesignPattern.html"><strong>DesignPattern</strong></a>
+        
+            <a href="Computer.html"><strong>Computer</strong></a>
+        
+            <a href="Redis.html"><strong>Redis</strong></a>
+        
+            <a href="Zookeeper.html"><strong>Zookeeper</strong></a>
+        
+            <a href="BlockChain.html"><strong>BlockChain</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15299156181001.html">EM算法---未完成</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15284222434956.html">聚类算法---未完成</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?2a025c7742b90ad62b1e767e1b7f2f29";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </body>
+</html>

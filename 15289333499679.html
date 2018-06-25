@@ -1,0 +1,577 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  拉格朗日乘子法&KKT条件---未完成 - Time渐行渐远
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Time渐行渐远" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:dmlcoding.com ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li id=""><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li id=""><a target="_blank" href="about.html">ABOUT</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Time渐行渐远</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="BigData.html">BigData</a></li>
+        
+            <li><a href="Python.html">Python</a></li>
+        
+            <li><a href="Linux.html">Linux</a></li>
+        
+            <li><a href="Life.html">Life</a></li>
+        
+            <li><a href="Spark.html">Spark</a></li>
+        
+            <li><a href="Hive.html">Hive</a></li>
+        
+            <li><a href="Yarn.html">Yarn</a></li>
+        
+            <li><a href="Scala.html">Scala</a></li>
+        
+            <li><a href="VPS.html">VPS</a></li>
+        
+            <li><a href="MachineLearning.html">MachineLearning</a></li>
+        
+            <li><a href="Writer.html">Writer</a></li>
+        
+            <li><a href="Shell.html">Shell</a></li>
+        
+            <li><a href="Algorithm.html">Algorithm</a></li>
+        
+            <li><a href="Mac.html">Mac</a></li>
+        
+            <li><a href="Presto.html">Presto</a></li>
+        
+            <li><a href="Mysql.html">Mysql</a></li>
+        
+            <li><a href="Maven.html">Maven</a></li>
+        
+            <li><a href="Kafka.html">Kafka</a></li>
+        
+            <li><a href="Java.html">Java</a></li>
+        
+            <li><a href="DevTools.html">DevTools</a></li>
+        
+            <li><a href="Hbase.html">Hbase</a></li>
+        
+            <li><a href="ELK.html">ELK</a></li>
+        
+            <li><a href="Druid.html">Druid</a></li>
+        
+            <li><a href="Docker.html">Docker</a></li>
+        
+            <li><a href="DesignPattern.html">DesignPattern</a></li>
+        
+            <li><a href="Computer.html">Computer</a></li>
+        
+            <li><a href="Redis.html">Redis</a></li>
+        
+            <li><a href="Zookeeper.html">Zookeeper</a></li>
+        
+            <li><a href="BlockChain.html">BlockChain</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>拉格朗日乘子法&KKT条件---未完成</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2018/6/14</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p>如果不理解拉格朗日乘子法和KKT条件的相关原理,则不可能真正理解SVM的计算方法.</p>
+
+<p>这是我们学习SVM的大前提</p>
+
+<h1 id="toc_0">优化问题</h1>
+
+<p>通常,我们要求解的函数优化问题,大致可分为以下3类</p>
+
+<ul>
+<li>无约束条件的优化问题:
+\[min f(X)\]</li>
+<li>只有等式约束的优化问题:
+\[min f(X) \\\
+s.t: h_i(X)=0,i \in {1,2,...,n}\]</li>
+<li><p>含有不等式约束的优化问题:<br/>
+\[min f(X) \\\<br/>
+s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
+     g_j(X) \leq 0, j \in {1,2,...,n} \]</p>
+
+<span id="more"></span><!-- more -->        </li>
+</ul>
+
+<p>其中大写的X表示所有自变量的集合(也可以说是所有样本点的集合),\(h_i(X)\)表示等式约束条件,\(g_i(X)\)表示不等式约束条件.这里用\(min f(X)\)表示求取最优值的目标函数,其实不一定是求取最小值,求最大值也是可以的(取相反数即可).但是一般最优化都是取小值.</p>
+
+<p>注意:默认所有解决的最优问题都是凸优化问题(即求取凸函数的最优解).拉格朗日乘子法一定是适用于凸优化问题,而不一定适用于其他非凸问题.</p>
+
+<p>回到最上面的三类优化问题,解决方法是明确的,参考如下(注意:默认都是针对凸优化问题):</p>
+
+<ul>
+<li>对于无约束条件的优化问题,直接对其各个自变量求导,令导数为0,得全局最优解.</li>
+<li>对于只有等式约束的优化问题,利用拉格朗日乘子法,得到全局最优解.</li>
+<li>对于含不等式约束的优化问题,利用KKT条件,得全局最优解.</li>
+</ul>
+
+<h1 id="toc_1">拉格朗日乘子法</h1>
+
+<p>举个例子来描述拉格朗日乘子法的基本思路:<br/>
+\[min f(X)=2x_1^2+3x_2^2+7x_3^2 \\\<br/>
+s.t : 2x_1+x_2=1,\quad 2x_2+3x_3=2\]</p>
+
+<p>这个例子正式只有等式约束条件的优化问题,求解思路如下:<br/>
+首先想到直接对3个自变量分别求偏导,令其偏导数都为0,则此时\(x_1,x_2,x_3\)都是0,看函数也是这样,当3个自变量都是0时,函数取得最小值0.但是这显然不符合约束条件的.</p>
+
+<p>怎么把约束条件考虑进去呢?用拉格朗日乘子法,把改写后的约束条件乘以一个系数,然后以加的形式带入目标函数,该函数称之为拉格朗日函数.先看看改写后的约束条件:<br/>
+\[s.t : 2x_1+x_2-1=0,\quad 2x_2+3x_3-2=0\]<br/>
+左右移项,实际上没发生任何变化.其后,将改写后的约束条件带入目标函数,构造拉格朗日函数:<br/>
+\[L(X,\alpha)=2x_1^2+3x_2^2+7x_3^2+\alpha_1(2x_1+x_2-1)+\alpha_2(2x_2+3x_3-2)\]</p>
+
+<p>可见,当求得的最优解满足约束条件时,\(L(x,\alpha)\)与原始的目标函数并没有差别(后面都是0).这样,我们再对这个拉格朗日函数求关于各个自变量的偏导,并令这些偏导数为0.<br/>
+\[<br/>
+\begin{aligned}<br/>
+\dfrac{\partial f(X)}{\partial x_1} &amp; =4x_1+2\alpha_1=0 \implies  x_1=-\frac12\alpha_1 \\<br/>
+ \dfrac{\partial f(X)}{\partial x_2} &amp; =6x_2+\alpha_1+2\alpha_2=0 \implies  x_2=-\frac16\alpha_1 - \frac13\alpha_2 \\ <br/>
+\dfrac{\partial f(X)}{\partial x_3} &amp; =14x_3+3\alpha_2=0 \implies  x_3=-\frac{3}{14}\alpha_2<br/>
+\end{aligned}\]</p>
+
+<p>现在,将用系数\(\alpha_1,\alpha_2\)表示的3个自变量带入约束条件,可得如下方程:<br/>
+\[<br/>
+\begin{aligned}<br/>
+-\dfrac{7}{6}\alpha1 - \dfrac{1}{3}\alpha_2 -1 &amp; =0 \\<br/>
+-\dfrac{1}{3}\alpha1 - \dfrac{55}{44}\alpha_2 -2 &amp; =0 <br/>
+\end{aligned}\]</p>
+
+<p>两个未知数,两个方程,可以求解得到\(\alpha_1=-0.45,\alpha_2=-1.41\),再带入自变量的表达式,即求得最优解.</p>
+
+<h1 id="toc_2">拉格朗日乘子法的形式化描述</h1>
+
+<p>用拉格朗日乘子法解决只有等式约束条件的优化问题,可以被如下形式化的描述:<br/>
+现有优化问题:<br/>
+    \[min f(X) \\<br/>
+    s.t: h_i(X)=0,i \in {1,2,...,n}\]<br/>
+则需要先得到拉格朗日函数\(L(X,\alpha)=f(X)+\sum_{i=1}^n \alpha_i \cdot h_i(X)\),对该函数的各个自变量求偏导,令偏导数为0,则可以求出各个自变量的含系数\(\alpha\)的代数式,再带入约束条件,解得\(\alpha\)后,可最终得到最优解.</p>
+
+<h1 id="toc_3">KKT条件</h1>
+
+<p>上面说的拉格朗日乘子法,解决的是只有等式约束条件的优化问题,而现实中更普遍的情况是求解含有不等式约束条件的问题.</p>
+
+<p>还是通过一个例子讲解,优化问题如下:<br/>
+\[min f(X)=x_1^2-2x_1+1+x_2^2+4x_2+4 \\\<br/>
+s.t : x_1+10x_2 &gt; 10 \\\<br/>
+10x_1-x_2 &lt; 10\]</p>
+
+<p>第一步:把约束条件改写如下:<br/>
+\[s.t : 10-x_1-10x_2&lt;0 \\\<br/>
+10x_1-x_2-10&lt;0\]</p>
+
+<p>改写的目的是方便后面的计算,且这种改写没有改变约束条件本身,所以不影响.</p>
+
+<p>第二步:与拉格朗日乘子法相同,给约束条件乘以系数后加入目标函数,构成拉格朗日函数\(L(X,\beta)\)<br/>
+\[L(X,\beta)=x_1^2-2x_1+1+x_2^2+4x_2+4+\beta_1(10-x_1-10x_2)+\beta_2(10x_1-x_2-10)\]</p>
+
+<p>第三步:对拉格朗日函数的各个自变量求偏导:<br/>
+\[<br/>
+\begin{aligned}<br/>
+\dfrac{\partial f(X)}{\partial x_1} &amp; =2x_1-\beta_1+10\beta_2 -2 \\<br/>
+ \dfrac{\partial f(X)}{\partial x_2} &amp; =2x_2-10\beta_1-10\beta_2+4<br/>
+\end{aligned}\]</p>
+
+<p>做完以上3步,先不往下进行了.先给出KKT条件的形式化描述如下.</p>
+
+<h1 id="toc_4">KKT条件的形式化描述</h1>
+
+<p>KKT条件用于解决带有不等式约束条件的优化问题,可以被如下形式化描述:<br/>
+现有优化问题:<br/>
+\[min f(X) \\\<br/>
+    s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
+         g_j(X) \leq 0, j \in {1,2,...,n} \]<br/>
+根据这个优化问题可以得到拉格朗日函数:<br/>
+\[L(X,\alpha,\beta)=f(X)+\sum_{i=1}^m\alpha_i \cdot h_i(X)+\sum_{j=1}^m\beta_j \cdot g_j(X)\]</p>
+
+<p>那么KKT条件就是函数的最优值必定满足下面3个条件(这3个条件是重点中的重点)</p>
+
+<ul>
+<li>\(L(X,\alpha,\beta)\)对各个自变量求导为0</li>
+<li>h(X)=0</li>
+<li>\(\sum_{i=1}^m\beta_j \cdot g_j(X)=0,\beta_j \geq 0\)</li>
+</ul>
+
+<p>3个条件中,前两个很好理解,不说了.关键在于第3个条件,这也是这篇文章中最难理解的部分.我尝试解释一下这个条件的原理.</p>
+
+<p>首先,我们已知\(\beta_j \geq0,而g_j(X)\leq 0\)(这样设计的目的是要求目标函数的梯度和约束条件的梯度必须反向).也就是说,想要条件3成立,则每一项\(\beta_j \cdot g_j(X)都等于0\),再换个说法,对于每一项来说,要么\(\beta_j=0\),要么\(g_j(X)=0\).这就是条件3所要表达的真实含义.</p>
+
+<p>下面解释为什么这样的条件可以用来寻找最优解.</p>
+
+<p>假设X由2个自变量\(x_1,x_2\)组成,那么我们很容易想象出目标函数f(X)的图像,它就是一个三维空间中的曲面;再假设此时优化问题有3个不等式约束条件\(g_1(X),g_2(X),g_3(X)\).那现在可以把优化问题的图像画出来,如下图所示.画的是该问题再\(x_1 x_2\)平面上的投影,虚线为f(X)的等高线,那现在就有左图和右图两种不同情况了.<br/>
+<img src="media/15289333499679/15289408757643.jpg" alt=""/></p>
+
+<p>左图表示的是min f(X)在不等式的约束范围内,且不在不等式的约束面上.这时,f(X)的最优解与不等式的约束实际上没关系了,我们就令\(\beta_1=\beta_2=\beta3=0\)成立,而且此时,\(L(X,\alpha,\beta)\)对各个自变量求导为0的解就是最优解.换句话说,这种情况需要条件1,3同时成立.</p>
+
+<h1 id="toc_5">参考</h1>
+
+<p><a href="https://blog.csdn.net/on2way/article/details/47729419">https://blog.csdn.net/on2way/article/details/47729419</a></p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15299156181001.html" 
+          title="Previous Post: EM算法---未完成">&laquo; EM算法---未完成</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15285262100303.html" 
+          title="Next Post: SVM(支持向量机)---未完成">SVM(支持向量机)---未完成 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://s.gravatar.com/avatar/2d9bdeec5ad2754d8a47063df1346ee8?s=80" /></div>
+            
+                <h1>Time渐行渐远</h1>
+                <div class="site-des">Coding Changing The World</div>
+                <div class="social">
+
+
+
+
+
+
+
+<a target="_blank" class="weibo" href="http://weibo.com/hswnice" title="weibo">Weibo</a>
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:hsw_v5@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="BigData.html"><strong>BigData</strong></a>
+        
+            <a href="Python.html"><strong>Python</strong></a>
+        
+            <a href="Linux.html"><strong>Linux</strong></a>
+        
+            <a href="Life.html"><strong>Life</strong></a>
+        
+            <a href="Spark.html"><strong>Spark</strong></a>
+        
+            <a href="Hive.html"><strong>Hive</strong></a>
+        
+            <a href="Yarn.html"><strong>Yarn</strong></a>
+        
+            <a href="Scala.html"><strong>Scala</strong></a>
+        
+            <a href="VPS.html"><strong>VPS</strong></a>
+        
+            <a href="MachineLearning.html"><strong>MachineLearning</strong></a>
+        
+            <a href="Writer.html"><strong>Writer</strong></a>
+        
+            <a href="Shell.html"><strong>Shell</strong></a>
+        
+            <a href="Algorithm.html"><strong>Algorithm</strong></a>
+        
+            <a href="Mac.html"><strong>Mac</strong></a>
+        
+            <a href="Presto.html"><strong>Presto</strong></a>
+        
+            <a href="Mysql.html"><strong>Mysql</strong></a>
+        
+            <a href="Maven.html"><strong>Maven</strong></a>
+        
+            <a href="Kafka.html"><strong>Kafka</strong></a>
+        
+            <a href="Java.html"><strong>Java</strong></a>
+        
+            <a href="DevTools.html"><strong>DevTools</strong></a>
+        
+            <a href="Hbase.html"><strong>Hbase</strong></a>
+        
+            <a href="ELK.html"><strong>ELK</strong></a>
+        
+            <a href="Druid.html"><strong>Druid</strong></a>
+        
+            <a href="Docker.html"><strong>Docker</strong></a>
+        
+            <a href="DesignPattern.html"><strong>DesignPattern</strong></a>
+        
+            <a href="Computer.html"><strong>Computer</strong></a>
+        
+            <a href="Redis.html"><strong>Redis</strong></a>
+        
+            <a href="Zookeeper.html"><strong>Zookeeper</strong></a>
+        
+            <a href="BlockChain.html"><strong>BlockChain</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15299156181001.html">EM算法---未完成</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15284222434956.html">聚类算法---未完成</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?2a025c7742b90ad62b1e767e1b7f2f29";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </body>
+</html>

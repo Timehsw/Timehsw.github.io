@@ -161,40 +161,24 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15248143200628.html">
+                <a class="clearlink" href="15255701784620.html">
                 
-                  <h1>回归算法</h1>
+                  <h1>集成学习---未完成</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>总结一下,这一节主要记录了下面的内容</p>
+                        	<p>集成学习的思想是将若干个学习器(分类器&amp;回归器)组合之后产生一个新学习器.弱分类器(weak learner)指那些分类准确率只稍微好于随机猜测的分类器(error rate&lt; 0.5).</p>
 
-<ol>
-<li>什么是回归算法.</li>
-<li>线性回归,单变量线性回归,多变量线性回归</li>
-<li>代价函数</li>
-<li>过拟合与欠拟合</li>
-<li>正则项</li>
-</ol>
+<p>集成算法的成功在于保证弱分类器的多样性(Diversity).而且集成不稳定的算法也能够得到一个比较明显的性能提升.</p>
 
-<p>在这篇文章中,主要介绍了什么是回归算法,以及简单的线性回归.包括单变量线性回归和多变量线性回归.</p>
+<p>常见的集成学习思想有:</p>
 
-<p>同时介绍了用最小二乘法求解\(\theta\)值.接下介绍了防止过拟合问题,加入正则项.</p>
-
-<p>最后介绍了如何评价模型的效果.</p>
-
-<h1 id="toc_0">什么是回归算法</h1>
-
-<ol>
-<li>回归算法是一种有监督算法;</li>
-<li>回归算法是一种比较常用的机器学习算法,用于建立解释变量(自变量X)和观测值(因变量Y)之间的关系;</li>
-<li>从机器学习的角度来讲,用于构建一个算法模型(函数)来做属性(X)与标签(Y)之间的映射关系,在算法的学习过程中,试图寻找一个函数h:使得\(R^d\to R\)使得参数之间的关系拟合性最好;</li>
-<li>回归算法中,算法(函数)的最终结果是一个<strong>连续</strong>的数据值,输入值(属性值)是一个d维度的属性/数值向量;</li>
-<li>因此,回归算法是用于预测连续型数值输出的算法.</li>
-</ol>
-
-<p>常用的回归算法有几种:比如,线性回归,Logistic回归,Softmax回归等等.先说最简单的线性回归算法.</p>
+<ul>
+<li>Bagging</li>
+<li>Boosting</li>
+<li>Stacking</li>
+</ul>
 
 
                         
@@ -203,8 +187,8 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15248143200628.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/4/27</span>
+                   <a href="15255701784620.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/5/6</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -221,21 +205,19 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15263722402424.html">
+                <a class="clearlink" href="15255685118456.html">
                 
-                  <h1>学习机器学习</h1>
+                  <h1>决策树</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>机器不能代替你学习,代替你成长,终归还得自己踏实学习!</p>
+                        	<p>在决策树算法的学习过程中,信息增益是特征选择的一个重要指标.它定义为一个特征能够为分类系统带来多少信息,带来的信息越多,说明该特征越重要,相应的信息增益也就越大<br/>
+<img src="media/15255685118456/15256176444642.jpg" alt=""/></p>
 
-<p>对于下面的基础知识,不管是大学的时候没学好,还是由于时间太长了,导致自己忘记了.都无所谓了.既然打算学习机器学习,那么就不得不花时间去重拾这些知识.</p>
+<h1 id="toc_0">信息熵(Entropy)</h1>
 
-<p>至于如何学,很多说法,我在网上看了很多,比如:<br/>
-1. 看视频学习;<br/>
-2. 看教程学习;<br/>
-3. 边学习边看.</p>
+<p>\[H(X)=-\sum_{i=1}^mp_i\log_2(p_i)\]</p>
 
 
                         
@@ -244,8 +226,8 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15263722402424.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/4/26</span>
+                   <a href="15255685118456.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/5/3</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -262,20 +244,18 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15242825563762.html">
+                <a class="clearlink" href="15277324362749.html">
                 
-                  <h1>python-matplotlib画图中文显示不出来</h1>
+                  <h1>KNN</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<pre><code>import matplotlib as mpl
-import matplotlib.pyplot as plt
+                        	<p>K近邻(K-nearst neighbors,KNN)是一种基本的机器学习算法,所谓K近邻,就是K个最近的邻居的意思,说的是每个样本都可以用它最接近的K个邻居来代表.</p>
 
-## 设置字符集，防止中文乱码
-mpl.rcParams[&#39;font.sans-serif&#39;]=[u&#39;simHei&#39;]
-mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
-</code></pre>
+<p>比如:判断一个人的人品,只需要观察与他来往最密切的几个人的人品好坏就可以得出,即,&quot;近朱者赤,近墨者黑&quot;.</p>
+
+<p>KNN算法既可以应用于分类应用中,也可以应用在回归应用中.KNN在做回归和分类的主要区别在于最后做预测的时候决策方式不同,<strong>KNN在分类预测时,一般采用多数表决法;而在做回归预测时,一般采用平均值法.</strong></p>
 
 
                         
@@ -284,11 +264,11 @@ mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15242825563762.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/4/21</span>
+                   <a href="15277324362749.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/5/2</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Python.html'>Python</a></span>
+          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -302,18 +282,25 @@ mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15235878044126.html">
+                <a class="clearlink" href="15198753668603.html">
                 
-                  <h1>Markdown中用LaTex语法写数学公式</h1>
+                  <h1>逻辑回归</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p><img src="media/15235878044126/15249021210382.jpg" alt=""/></p>
+                        	<p>不知道什么是逻辑回归,但是也许看完接下来的文章,你会有个大概的印象吧</p>
 
-<p>最近在学习机器学习和神经网络的一些知识, 在用Markdown做笔记的时候, 发现公式用到LaTeX十分方便, 写篇文章记录在学习过程中的常用的LaTeX公式和用法, 因为本博客支持MathJax, <code>MathJax</code>是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，MathJax可以解析<code>Latex</code>、<code>MathML</code>和<code>ASCIIMathML</code>的标记语言。</p>
+<h1 id="toc_0">简单介绍Logistic回归</h1>
 
-<h2 id="toc_0">关键字索引</h2>
+<h2 id="toc_1">Logistic回归用到的知识点</h2>
+
+<ul>
+<li>Sigmoid函数和Logistic回归分类器</li>
+<li>最优化理论初步</li>
+<li>梯度下降最优化算法</li>
+<li>数据中的缺失项处理</li>
+</ul>
 
 
                         
@@ -322,11 +309,11 @@ mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15235878044126.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/4/13</span>
+                   <a href="15198753668603.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/4/29</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='DevTools.html'>DevTools</a></span>
+          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -340,17 +327,14 @@ mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15228352753621.html">
+                <a class="clearlink" href="15277385790025.html">
                 
-                  <h1>如何优雅的设计数据分层</h1>
+                  <h1>梯度下降笔记&拉格朗日乘子法</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h1 id="toc_0">理论</h1>
-
-<p><img src="media/15228352753621/15231557165878.jpg" alt=""/></p>
-
+                        	<p>SVM的前置知识</p>
 
                         
                       </div>
@@ -358,11 +342,11 @@ mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15228352753621.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/4/4</span>
+                  
+                    <span class="date">2018/4/28</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Hive.html'>Hive</a></span>
+          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -502,31 +486,31 @@ mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
 	      
 		      
 			      <li class="post">
-			        <a href="15255701784620.html">集成学习</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15255685118456.html">决策树</a>
+			        <a href="15299156181001.html">EM算法---未完成</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15277324362749.html">KNN</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15198753668603.html">逻辑回归</a>
+			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15277385790025.html">梯度下降笔记</a>
+			        <a href="15284222434956.html">聚类算法---未完成</a>
 			      </li>
 		     
 		  

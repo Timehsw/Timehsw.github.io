@@ -161,40 +161,19 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15248143200628.html">
+                <a class="clearlink" href="15255685118456.html">
                 
-                  <h1>回归算法</h1>
+                  <h1>决策树</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>总结一下,这一节主要记录了下面的内容</p>
+                        	<p>在决策树算法的学习过程中,信息增益是特征选择的一个重要指标.它定义为一个特征能够为分类系统带来多少信息,带来的信息越多,说明该特征越重要,相应的信息增益也就越大<br/>
+<img src="media/15255685118456/15256176444642.jpg" alt=""/></p>
 
-<ol>
-<li>什么是回归算法.</li>
-<li>线性回归,单变量线性回归,多变量线性回归</li>
-<li>代价函数</li>
-<li>过拟合与欠拟合</li>
-<li>正则项</li>
-</ol>
+<h1 id="toc_0">信息熵(Entropy)</h1>
 
-<p>在这篇文章中,主要介绍了什么是回归算法,以及简单的线性回归.包括单变量线性回归和多变量线性回归.</p>
-
-<p>同时介绍了用最小二乘法求解\(\theta\)值.接下介绍了防止过拟合问题,加入正则项.</p>
-
-<p>最后介绍了如何评价模型的效果.</p>
-
-<h1 id="toc_0">什么是回归算法</h1>
-
-<ol>
-<li>回归算法是一种有监督算法;</li>
-<li>回归算法是一种比较常用的机器学习算法,用于建立解释变量(自变量X)和观测值(因变量Y)之间的关系;</li>
-<li>从机器学习的角度来讲,用于构建一个算法模型(函数)来做属性(X)与标签(Y)之间的映射关系,在算法的学习过程中,试图寻找一个函数h:使得\(R^d\to R\)使得参数之间的关系拟合性最好;</li>
-<li>回归算法中,算法(函数)的最终结果是一个<strong>连续</strong>的数据值,输入值(属性值)是一个d维度的属性/数值向量;</li>
-<li>因此,回归算法是用于预测连续型数值输出的算法.</li>
-</ol>
-
-<p>常用的回归算法有几种:比如,线性回归,Logistic回归,Softmax回归等等.先说最简单的线性回归算法.</p>
+<p>\[H(X)=-\sum_{i=1}^mp_i\log_2(p_i)\]</p>
 
 
                         
@@ -203,8 +182,8 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15248143200628.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/4/27</span>
+                   <a href="15255685118456.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/5/3</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -221,21 +200,18 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15263722402424.html">
+                <a class="clearlink" href="15277324362749.html">
                 
-                  <h1>学习机器学习</h1>
+                  <h1>KNN</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>机器不能代替你学习,代替你成长,终归还得自己踏实学习!</p>
+                        	<p>K近邻(K-nearst neighbors,KNN)是一种基本的机器学习算法,所谓K近邻,就是K个最近的邻居的意思,说的是每个样本都可以用它最接近的K个邻居来代表.</p>
 
-<p>对于下面的基础知识,不管是大学的时候没学好,还是由于时间太长了,导致自己忘记了.都无所谓了.既然打算学习机器学习,那么就不得不花时间去重拾这些知识.</p>
+<p>比如:判断一个人的人品,只需要观察与他来往最密切的几个人的人品好坏就可以得出,即,&quot;近朱者赤,近墨者黑&quot;.</p>
 
-<p>至于如何学,很多说法,我在网上看了很多,比如:<br/>
-1. 看视频学习;<br/>
-2. 看教程学习;<br/>
-3. 边学习边看.</p>
+<p>KNN算法既可以应用于分类应用中,也可以应用在回归应用中.KNN在做回归和分类的主要区别在于最后做预测的时候决策方式不同,<strong>KNN在分类预测时,一般采用多数表决法;而在做回归预测时,一般采用平均值法.</strong></p>
 
 
                         
@@ -244,8 +220,8 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15263722402424.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/4/26</span>
+                   <a href="15277324362749.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/5/2</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -262,167 +238,59 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15264345359411.html">
+                <a class="clearlink" href="15198753668603.html">
                 
-                  <h1>大数定理&中心极限定理</h1>
+                  <h1>逻辑回归</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h1 id="toc_0">大数定理</h1>
+                        	<p>不知道什么是逻辑回归,但是也许看完接下来的文章,你会有个大概的印象吧</p>
 
-<h2 id="toc_1">概念阐述</h2>
+<h1 id="toc_0">简单介绍Logistic回归</h1>
 
-<p>大数定律的意义:随着样本容量n的增加,样本平均数将接近于总体平均数(期望\(\mu\)),所以在统计推断中,一般都会使用样本平均数估计总体平均数的值.</p>
+<h2 id="toc_1">Logistic回归用到的知识点</h2>
 
-<p>也就是我们会使用一部分样本的平均值来代替整体样本的期望/均值,出现偏差的可能性是存在的,但是当n足够大的时候,偏差的可能性是非常小的,当n无限大的时候,这种可能性的概率基本为0.</p>
-
-<p>大数定律的主要作用就是为使用频率来估计概率提供了理论支持;为使用部分数据来近似的模拟构建全部数据的特征提供了理论支持.</p>
-
-<h2 id="toc_2">代码实验</h2>
-
-<pre><code># -*- coding: utf-8 -*-
-&#39;&#39;&#39;
-    Created by hushiwei on 2018/4/1.
-
-    desc: 大数定理展示理解
-&#39;&#39;&#39;
-
-import random
-import numpy as np
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-
-# 解决中文显示问题
-mpl.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
-mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
-
-random.seed(28)
+<ul>
+<li>Sigmoid函数和Logistic回归分类器</li>
+<li>最优化理论初步</li>
+<li>梯度下降最优化算法</li>
+<li>数据中的缺失项处理</li>
+</ul>
 
 
-def generate_random_int(n):
-    &#39;&#39;&#39;
-    产生n个1-9的随机数
-    :param n:
-    :return:
-    &#39;&#39;&#39;
-    return [random.randint(1,9) for i in range(n)]
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15198753668603.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/4/29</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
 
-if __name__ == &#39;__main__&#39;:
-    number=8000
-    x=[i for i in range(number+1) if i!=0]
-
-    # 产生number个[1,9]的随机数
-    total_random_int=generate_random_int(number)
-
-    # 求n个[1,9]的随机数的均值,n=1,2,3,4,5...
-    # 求这number个数的均值,比如1个元素的均值,2个元素的均值,3个元素的均值,4个元素的均值,一直到最后
-    y=[np.mean(total_random_int[0:i+1]) for i in range(number)]
-
-
-    plt.plot(x,y,&#39;b-&#39;)
-    plt.xlim(0,number)
-    plt.grid(True)
-    plt.show()
-</code></pre>
-
-<h2 id="toc_3">可视化展示原理</h2>
-
-<p><img src="media/15264345359411/15265238560825.jpg" alt=""/></p>
-
-<h1 id="toc_4">中心极限定理</h1>
-
-<h2 id="toc_5">概念阐述</h2>
-
-<p>中心极限定理(Central Limit Theorem).假设\({X_n}\)为独立同分布的随机变量序列,并具有相同的期望\(\mu\)和方差为\(\sigma^2\),则\({X_n}\)服从中心极限定理,且\(Z_n\)为随机序列\({X_n}\)的规范和.</p>
-
-<p>\[<br/>
-\begin{aligned}<br/>
-Y_n &amp; =X_1+X_2+ \cdots +X_n \\\<br/>
-&amp; = \sum_{i=1}^nX_i \to N(n\mu,n\sigma^2)<br/>
-\end{aligned}<br/>
-\]</p>
-
-<p>\[Z_n=\dfrac{Y_n-E(Y_n)}{\sqrt{D(Y_n)}}=\dfrac{Y_n-n\mu }{\sqrt{n}{\sigma}} \to N(0,1)\]</p>
-
-<p>中心极限定理就是一般在同分布的情况下,抽样样本值的规范和在总体数量趋于无穷时的极限分布近似于正态分布.</p>
-
-<h2 id="toc_6">代码实验</h2>
-
-<pre><code># -*- coding: utf-8 -*-
-&#39;&#39;&#39;
-    Created by hushiwei on 2018/4/1.
-    desc :中心极限定理
-
-    随机的抛六面的骰子,计算三次的点数的和,三次点数的和其实就是一个事件A
-
-    问题: 事件A的发生属于什么分布呢?
-
-    分析: A=x1+x2+x3,其中x1,x2,x3是分别三次抛骰子的点数
-    根据中心极限定理,由于x1,x2,x3属于独立同分布的,因此最终的事件A属于高斯分布
-&#39;&#39;&#39;
-
-import random
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-
-def generate_random_int():
-    &#39;&#39;&#39;
-    随机产生一个[1,6]的数字,模拟随机抛六面骰子的结果
-    :return:
-    &#39;&#39;&#39;
-    return random.randint(1,6)
-
-
-def generate_sum(n):
-    &#39;&#39;&#39;
-    计算返回n次抛六面骰子的和结果
-
-    也既是模拟A事件
-    :param n:
-    :return:
-    &#39;&#39;&#39;
-    return np.sum([generate_random_int() for i in range(n)])
-
-
-if __name__ == &#39;__main__&#39;:
-    # 进行A事件多少次
-    number1=10000000
-
-    # 表示每次A事件抛几次骰子
-    number2=3
-
-    # 进行number1次事件A的操作,每次事件A都进行number2次抛骰子
-    keys=[generate_sum(number2) for i in range(number1)]
-
-    # 统计每个和数字出现的次数,eg:和为3的出现多少次,和为10出现多少次...
-    result={}
-    for key in keys:
-        count=1
-        if key in result:
-            count+=result[key]
-        result[key]=count
-
-    # 获取x和y
-    x=sorted(np.unique(list(result.keys())))
-    y=[]
-    for key in x:
-        # 将出现的次数进行一个百分比的计算
-        y.append(result[key]/number1)
-
-    # 画图,可视化展示
-
-    plt.plot(x,y,&#39;b-&#39;)
-    plt.xlim(x[0]-1,x[-1]+1)
-    plt.grid(True)
-    plt.show()
-</code></pre>
-
-<h2 id="toc_7">可视化展示原理</h2>
-
-<p><img src="media/15264345359411/15265238226274.jpg" alt=""/></p>
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15277385790025.html">
+                
+                  <h1>梯度下降笔记&拉格朗日乘子法</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>SVM的前置知识</p>
 
                         
                       </div>
@@ -431,7 +299,7 @@ if __name__ == &#39;__main__&#39;:
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2018/4/1</span>
+                    <span class="date">2018/4/28</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -448,26 +316,18 @@ if __name__ == &#39;__main__&#39;:
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15221149143615.html">
+                <a class="clearlink" href="15299158833805.html">
                 
-                  <h1>概率分布函数和概率密度函数</h1>
+                  <h1>什么是最小二乘法</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<blockquote>
-<p>研究一个随机变量,不只要看它能取哪些值,更重要的是它取各种值的概率如何!</p>
-</blockquote>
+                        	<p>最小二乘法(又称最小平方法)是一种数学优化技术.他通过最小化误差的平方和寻找数据的最佳函数匹配.</p>
 
-<ul>
-<li>概率分布函数</li>
-<li>概率密度函数</li>
-</ul>
+<p>利用最小二乘法可以简便地求得未知的数据,并使得这些求得的数据与实际数据之间误差的平方和为最小.</p>
 
-<h2 id="toc_0">离散型随机变量</h2>
-
-<p>在理解这两个词之前</p>
-
+<p><img src="media/15294841337807/15296334116393.jpg" alt=""/></p>
 
                         
                       </div>
@@ -475,44 +335,8 @@ if __name__ == &#39;__main__&#39;:
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15221149143615.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/3/27</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15198746079468.html">
-                
-                  <h1>机器学习实战之朴素贝叶斯</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>朴素贝叶斯就是利用先验知识来解决后验概率，因为训练集中我们已经知道了每个单词在类别0和1中的概率，即p(w|c),<br/>
-我们就是要利用这个知识去解决在出现这些单词的组合情况下，类别更可能是0还是1,即p(c|w)。<br/>
-如果说之前的训练样本少，那么这个p(w|c)就更可能不准确，所以样本越多我们会觉得这个p(w|c)越可信。</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15198746079468.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/11/26</span>
+                  
+                    <span class="date">2018/4/27</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -655,31 +479,31 @@ if __name__ == &#39;__main__&#39;:
 	      
 		      
 			      <li class="post">
-			        <a href="15255701784620.html">集成学习</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15255685118456.html">决策树</a>
+			        <a href="15299156181001.html">EM算法---未完成</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15277324362749.html">KNN</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15198753668603.html">逻辑回归</a>
+			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15277385790025.html">梯度下降笔记</a>
+			        <a href="15284222434956.html">聚类算法---未完成</a>
 			      </li>
 		     
 		  

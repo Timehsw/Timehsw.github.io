@@ -4,7 +4,7 @@
   <title><![CDATA[Time渐行渐远]]></title>
   <link href="http://dmlcoding.com/atom.xml" rel="self"/>
   <link href="http://dmlcoding.com/"/>
-  <updated>2018-05-31T18:03:43+08:00</updated>
+  <updated>2018-06-25T16:44:33+08:00</updated>
   <id>http://dmlcoding.com/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -13,7 +13,410 @@
   <generator uri="http://www.mweb.im/">MWeb</generator>
   
   <entry>
-    <title type="html"><![CDATA[集成学习]]></title>
+    <title type="html"><![CDATA[HMM(摘自:统计学习方法---未完成)]]></title>
+    <link href="http://dmlcoding.com/15299155104492.html"/>
+    <updated>2018-06-25T16:31:50+08:00</updated>
+    <id>http://dmlcoding.com/15299155104492.html</id>
+    <content type="html"><![CDATA[
+<p>HMM(隐马尔可夫模型的定义):隐马尔可夫模型是关于时序的概率模型,描述由一个隐藏的马尔可夫链随机生成不可观察的状态随机序列,再由各个状态生成一个观测而产生观测随机序列的过程.隐藏的马尔可夫链随机生成的状态的序列,称为状态序列(state sequence);每个状态生成一个观测,而由此产生的观测的随机序列,称为观测序列(observation sequence).序列的每一个位置又可以看作是一个时刻.</p>
+
+<p><img src="media/15299155104492/15299160364725.jpg" alt=""/></p>
+
+<span id="more"></span><!-- more -->
+
+<h1 id="toc_0">隐马尔可夫模型的相关定义</h1>
+
+<p>隐马尔可夫模型由初始概率分布,状态转移概率分布以及观测概率分布确定.隐马尔可夫模型的形式定义如下:<br/>
+   设Q是所有可能的状态集合,V是所有可能的观测的集合,其中,N是可能的状态数,M是可能的观测数.</p>
+
+<p>\[\begin{aligned}<br/>
+   Q &amp; = {q_1,q_2,\cdots,q_N}  &amp;\text{Q是所有可能的状态集合} \\<br/>
+   V &amp; = {v_1,v_2,\cdots,v_M} &amp; \text{V是所有可能的观测的集合} <br/>
+\end{aligned}\]</p>
+
+<p>I是长度为T的状态序列,O是对应的观测序列<br/>
+  \[\begin{aligned}<br/>
+   I &amp; = {i_1,i_2,\cdots,i_T}  &amp;\text{I是长度为T的状态序列} \\<br/>
+   O &amp; = {o_1,o_2,\cdots,o_T} &amp; \text{O是对应的长度为T的观测序列} <br/>
+\end{aligned}\]</p>
+
+<p>A是状态转移概率矩阵:<br/>
+\[A=[a_{ij}]_{N*N} \\\<br/>
+其中,a_{ij}=P(i_{t+1}=q_j|i_t=q_i),\qquad i=1,2,\cdots,N;j=1,2,\cdots,N \\\<br/>
+表示在时刻t处于状态q_i的条件下在时刻t+1转移到状态q_j的概率\]</p>
+
+<p>B是观测概率矩阵:<br/>
+\[B=[b_j(k)]_{N*M} \\\<br/>
+其中,b_j(k)=P(o_t=v_k|i_t=q_j),\qquad k=1,2,\cdots,M;j=1,2,\cdots,N \\\<br/>
+表示在时刻t处于状态q_j的条件下生成观测v_k的概率\]</p>
+
+<p>\(\pi\)是初始状态概率向量<br/>
+\[\pi=(\pi_i) \\\<br/>
+其中,\pi_i=P(i_1=q_i),\qquad i=1,2,\cdots,N \\\<br/>
+表示在时刻t=1处于状态q_i的概率\]</p>
+
+<p>隐马尔可夫模型由初始状态概率向量\(\pi\),状态转移概率矩阵A和观测概率矩阵B决定,\(\pi\)和A决定状态序列,B决定观测序列.因此,隐马尔可夫模型\(\lambda\)可以用三元符合表示,即<br/>
+\[\lambda=(\pi,A,B) \\\<br/>
+A,B,\pi 称为隐马尔可夫模型的三要素\]</p>
+
+<p>状态转移概率矩阵A与初始状态概率向量\(\pi\)确定了隐藏的马尔可夫链,生成不可观测的状态序列.观测概率矩阵B确定了如何从状态生成观测,与状态序列综合确定了如何产生观测序列.</p>
+
+<p>从定义可知,隐马尔可夫模型作了两个基本假设:<br/>
+(1)齐次马尔可夫假设,即假设隐藏的马尔可夫链在任意时刻t的状态只依赖于前一时刻的状态,与其他时刻的状态及观测无关,也与时刻t无关.<br/>
+   \[P(i_t|i_{t-1},o_{t-1},\cdots,i_1,o_1)=P(i_t|i_{t-1}),t=1,2,\cdots,T\]<br/>
+(2)观测独立性假设,即假设任意时刻的观测只依赖于该时刻的马尔可夫链的状态,与其他观测及状态无关.<br/>
+\[P(o_t|i_T,o_T,i_{T-1},o_{T-1},\cdots,i_{t+1},o_{t+1},i_t,o_t,i_{t-1},o_{t-1},\cdots,i_1,o_1)=P(o_t|i_t)\]</p>
+
+<p>观测序列的生成过程</p>
+
+<p>根据隐马尔可夫模型定义,可以将一个长度为T的观测序列\(O=(o_1,o_2,\cdots,o_T)\)的生成过程描述如下:<br/>
+输入:隐马尔可夫模型\(\lambda=(A,B,\pi)\),观测序列长度T;<br/>
+输出:观测序列\(O=(o_1,o_2,\cdots,o_T)\)<br/>
+(1) 按照初始状态分布\(\pi\)产生状态\(i_1\)<br/>
+(2) 令t=1<br/>
+(3) 按照状态\(i_t\)的观测概率分布\(b_{i_t}(k)生成o_t\)<br/>
+(4) 按照状态\(i_t\)的状态转移概率分布\({a_{i_t j_{t+1}}}产生状态i_{t+1},i_{t+1}=1,2,\cdots,N\)<br/>
+(5) 令t=t+1;如果t&lt;T,转步(3);否则,终止</p>
+
+<h1 id="toc_1">前向算法</h1>
+
+<p>首先定义前向概率:给定隐马尔可夫模型\(\lambda\),定义到时刻t部分观测序列\(o_1,o_2,\cdots,o_t\)且状态为\(q_i\)的概率为前向概率,记作<br/>
+\[\alpha_t(i)=P(o_1,o_2,\cdots,o_t,i_t=q_i|\lambda)\]<br/>
+可以递推地求得前向概率\( \alpha_t(i)\) 及观测序列概率 \(P(O|\lambda)\)</p>
+
+<p><strong>观测序列概率的前向算法:</strong><br/>
+输入:隐马尔可夫模型\(\lambda\),观测序列O;<br/>
+输出:观测序列概率\(P(O|\lambda)\)<br/>
+(1) 初值<br/>
+\[\alpha_1(i)=\pi_ib_i(o_1),\qquad  i=1,2,\cdots,N\]<br/>
+(2) 递推 <br/>
+\[对t=1,2,\cdots,T-1, \\\<br/>
+\alpha_{t+1}(i)= \bigg[\sum_{j=1}^N\alpha_t(j)\alpha_{ji} \bigg] b_i(\alpha_{t+1}),\qquad i=1,2,\cdots,N\]<br/>
+(3) 终止<br/>
+\[P(O|\lambda)=\sum_{i=1}^N\alpha_T(i)\]</p>
+
+<p>前向算法,步骤(1)初始化前向概率,是初始时刻的状态\(i_1=q_i\)和观测\(o_1\)的联合概率.步骤(2)是前向概率的递推公式,计算到时刻t+1部分观测序列为\(o_1,o_2,\cdots,o_t,o_{t+1}\)且在时刻t+1处于状态\(q_i\)的前向概率,</p>
+
+<p><img src="media/15299155104492/15299161632092.jpg" alt=""/></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[EM算法---未完成]]></title>
+    <link href="http://dmlcoding.com/15299156181001.html"/>
+    <updated>2018-06-25T16:33:38+08:00</updated>
+    <id>http://dmlcoding.com/15299156181001.html</id>
+    <content type="html"><![CDATA[
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[拉格朗日乘子法&KKT条件---未完成]]></title>
+    <link href="http://dmlcoding.com/15289333499679.html"/>
+    <updated>2018-06-14T07:42:29+08:00</updated>
+    <id>http://dmlcoding.com/15289333499679.html</id>
+    <content type="html"><![CDATA[
+<p>如果不理解拉格朗日乘子法和KKT条件的相关原理,则不可能真正理解SVM的计算方法.</p>
+
+<p>这是我们学习SVM的大前提</p>
+
+<h1 id="toc_0">优化问题</h1>
+
+<p>通常,我们要求解的函数优化问题,大致可分为以下3类</p>
+
+<ul>
+<li>无约束条件的优化问题:
+\[min f(X)\]</li>
+<li>只有等式约束的优化问题:
+\[min f(X) \\\
+s.t: h_i(X)=0,i \in {1,2,...,n}\]</li>
+<li><p>含有不等式约束的优化问题:<br/>
+\[min f(X) \\\<br/>
+s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
+     g_j(X) \leq 0, j \in {1,2,...,n} \]</p>
+
+<span id="more"></span><!-- more -->        </li>
+</ul>
+
+<p>其中大写的X表示所有自变量的集合(也可以说是所有样本点的集合),\(h_i(X)\)表示等式约束条件,\(g_i(X)\)表示不等式约束条件.这里用\(min f(X)\)表示求取最优值的目标函数,其实不一定是求取最小值,求最大值也是可以的(取相反数即可).但是一般最优化都是取小值.</p>
+
+<p>注意:默认所有解决的最优问题都是凸优化问题(即求取凸函数的最优解).拉格朗日乘子法一定是适用于凸优化问题,而不一定适用于其他非凸问题.</p>
+
+<p>回到最上面的三类优化问题,解决方法是明确的,参考如下(注意:默认都是针对凸优化问题):</p>
+
+<ul>
+<li>对于无约束条件的优化问题,直接对其各个自变量求导,令导数为0,得全局最优解.</li>
+<li>对于只有等式约束的优化问题,利用拉格朗日乘子法,得到全局最优解.</li>
+<li>对于含不等式约束的优化问题,利用KKT条件,得全局最优解.</li>
+</ul>
+
+<h1 id="toc_1">拉格朗日乘子法</h1>
+
+<p>举个例子来描述拉格朗日乘子法的基本思路:<br/>
+\[min f(X)=2x_1^2+3x_2^2+7x_3^2 \\\<br/>
+s.t : 2x_1+x_2=1,\quad 2x_2+3x_3=2\]</p>
+
+<p>这个例子正式只有等式约束条件的优化问题,求解思路如下:<br/>
+首先想到直接对3个自变量分别求偏导,令其偏导数都为0,则此时\(x_1,x_2,x_3\)都是0,看函数也是这样,当3个自变量都是0时,函数取得最小值0.但是这显然不符合约束条件的.</p>
+
+<p>怎么把约束条件考虑进去呢?用拉格朗日乘子法,把改写后的约束条件乘以一个系数,然后以加的形式带入目标函数,该函数称之为拉格朗日函数.先看看改写后的约束条件:<br/>
+\[s.t : 2x_1+x_2-1=0,\quad 2x_2+3x_3-2=0\]<br/>
+左右移项,实际上没发生任何变化.其后,将改写后的约束条件带入目标函数,构造拉格朗日函数:<br/>
+\[L(X,\alpha)=2x_1^2+3x_2^2+7x_3^2+\alpha_1(2x_1+x_2-1)+\alpha_2(2x_2+3x_3-2)\]</p>
+
+<p>可见,当求得的最优解满足约束条件时,\(L(x,\alpha)\)与原始的目标函数并没有差别(后面都是0).这样,我们再对这个拉格朗日函数求关于各个自变量的偏导,并令这些偏导数为0.<br/>
+\[<br/>
+\begin{aligned}<br/>
+\dfrac{\partial f(X)}{\partial x_1} &amp; =4x_1+2\alpha_1=0 \implies  x_1=-\frac12\alpha_1 \\<br/>
+ \dfrac{\partial f(X)}{\partial x_2} &amp; =6x_2+\alpha_1+2\alpha_2=0 \implies  x_2=-\frac16\alpha_1 - \frac13\alpha_2 \\ <br/>
+\dfrac{\partial f(X)}{\partial x_3} &amp; =14x_3+3\alpha_2=0 \implies  x_3=-\frac{3}{14}\alpha_2<br/>
+\end{aligned}\]</p>
+
+<p>现在,将用系数\(\alpha_1,\alpha_2\)表示的3个自变量带入约束条件,可得如下方程:<br/>
+\[<br/>
+\begin{aligned}<br/>
+-\dfrac{7}{6}\alpha1 - \dfrac{1}{3}\alpha_2 -1 &amp; =0 \\<br/>
+-\dfrac{1}{3}\alpha1 - \dfrac{55}{44}\alpha_2 -2 &amp; =0 <br/>
+\end{aligned}\]</p>
+
+<p>两个未知数,两个方程,可以求解得到\(\alpha_1=-0.45,\alpha_2=-1.41\),再带入自变量的表达式,即求得最优解.</p>
+
+<h1 id="toc_2">拉格朗日乘子法的形式化描述</h1>
+
+<p>用拉格朗日乘子法解决只有等式约束条件的优化问题,可以被如下形式化的描述:<br/>
+现有优化问题:<br/>
+    \[min f(X) \\<br/>
+    s.t: h_i(X)=0,i \in {1,2,...,n}\]<br/>
+则需要先得到拉格朗日函数\(L(X,\alpha)=f(X)+\sum_{i=1}^n \alpha_i \cdot h_i(X)\),对该函数的各个自变量求偏导,令偏导数为0,则可以求出各个自变量的含系数\(\alpha\)的代数式,再带入约束条件,解得\(\alpha\)后,可最终得到最优解.</p>
+
+<h1 id="toc_3">KKT条件</h1>
+
+<p>上面说的拉格朗日乘子法,解决的是只有等式约束条件的优化问题,而现实中更普遍的情况是求解含有不等式约束条件的问题.</p>
+
+<p>还是通过一个例子讲解,优化问题如下:<br/>
+\[min f(X)=x_1^2-2x_1+1+x_2^2+4x_2+4 \\\<br/>
+s.t : x_1+10x_2 &gt; 10 \\\<br/>
+10x_1-x_2 &lt; 10\]</p>
+
+<p>第一步:把约束条件改写如下:<br/>
+\[s.t : 10-x_1-10x_2&lt;0 \\\<br/>
+10x_1-x_2-10&lt;0\]</p>
+
+<p>改写的目的是方便后面的计算,且这种改写没有改变约束条件本身,所以不影响.</p>
+
+<p>第二步:与拉格朗日乘子法相同,给约束条件乘以系数后加入目标函数,构成拉格朗日函数\(L(X,\beta)\)<br/>
+\[L(X,\beta)=x_1^2-2x_1+1+x_2^2+4x_2+4+\beta_1(10-x_1-10x_2)+\beta_2(10x_1-x_2-10)\]</p>
+
+<p>第三步:对拉格朗日函数的各个自变量求偏导:<br/>
+\[<br/>
+\begin{aligned}<br/>
+\dfrac{\partial f(X)}{\partial x_1} &amp; =2x_1-\beta_1+10\beta_2 -2 \\<br/>
+ \dfrac{\partial f(X)}{\partial x_2} &amp; =2x_2-10\beta_1-10\beta_2+4<br/>
+\end{aligned}\]</p>
+
+<p>做完以上3步,先不往下进行了.先给出KKT条件的形式化描述如下.</p>
+
+<h1 id="toc_4">KKT条件的形式化描述</h1>
+
+<p>KKT条件用于解决带有不等式约束条件的优化问题,可以被如下形式化描述:<br/>
+现有优化问题:<br/>
+\[min f(X) \\\<br/>
+    s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
+         g_j(X) \leq 0, j \in {1,2,...,n} \]<br/>
+根据这个优化问题可以得到拉格朗日函数:<br/>
+\[L(X,\alpha,\beta)=f(X)+\sum_{i=1}^m\alpha_i \cdot h_i(X)+\sum_{j=1}^m\beta_j \cdot g_j(X)\]</p>
+
+<p>那么KKT条件就是函数的最优值必定满足下面3个条件(这3个条件是重点中的重点)</p>
+
+<ul>
+<li>\(L(X,\alpha,\beta)\)对各个自变量求导为0</li>
+<li>h(X)=0</li>
+<li>\(\sum_{i=1}^m\beta_j \cdot g_j(X)=0,\beta_j \geq 0\)</li>
+</ul>
+
+<p>3个条件中,前两个很好理解,不说了.关键在于第3个条件,这也是这篇文章中最难理解的部分.我尝试解释一下这个条件的原理.</p>
+
+<p>首先,我们已知\(\beta_j \geq0,而g_j(X)\leq 0\)(这样设计的目的是要求目标函数的梯度和约束条件的梯度必须反向).也就是说,想要条件3成立,则每一项\(\beta_j \cdot g_j(X)都等于0\),再换个说法,对于每一项来说,要么\(\beta_j=0\),要么\(g_j(X)=0\).这就是条件3所要表达的真实含义.</p>
+
+<p>下面解释为什么这样的条件可以用来寻找最优解.</p>
+
+<p>假设X由2个自变量\(x_1,x_2\)组成,那么我们很容易想象出目标函数f(X)的图像,它就是一个三维空间中的曲面;再假设此时优化问题有3个不等式约束条件\(g_1(X),g_2(X),g_3(X)\).那现在可以把优化问题的图像画出来,如下图所示.画的是该问题再\(x_1 x_2\)平面上的投影,虚线为f(X)的等高线,那现在就有左图和右图两种不同情况了.<br/>
+<img src="media/15289333499679/15289408757643.jpg" alt=""/></p>
+
+<p>左图表示的是min f(X)在不等式的约束范围内,且不在不等式的约束面上.这时,f(X)的最优解与不等式的约束实际上没关系了,我们就令\(\beta_1=\beta_2=\beta3=0\)成立,而且此时,\(L(X,\alpha,\beta)\)对各个自变量求导为0的解就是最优解.换句话说,这种情况需要条件1,3同时成立.</p>
+
+<h1 id="toc_5">参考</h1>
+
+<p><a href="https://blog.csdn.net/on2way/article/details/47729419">https://blog.csdn.net/on2way/article/details/47729419</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SVM(支持向量机)---未完成]]></title>
+    <link href="http://dmlcoding.com/15285262100303.html"/>
+    <updated>2018-06-09T14:36:50+08:00</updated>
+    <id>http://dmlcoding.com/15285262100303.html</id>
+    <content type="html"><![CDATA[
+<p>支持向量机(Support Vecor Machine,SVM)本身是一个<strong>二元分类算法</strong>,是对感知器算法模型的一种扩展,现在的SVM算法支持线性分类和非线性分类的分类应用,并且也能够直接将SVM应用于回归应用中.同时通过OvR或者OvO的方式我们也可以将SVM应用在多元分类领域中.在不考虑集成算法,不考虑特定的数据集的时候,在分类算法中SVM可以说是特别优秀的.</p>
+
+<p><strong>线性可分(Linearly Separable)</strong>:在数据集中,如果可以找出一个超平面,将两组数据分开,那么这个数据集叫做线性可分数据.</p>
+
+<p><strong>线性不可分(Linear Inseparable)</strong>:在数据集中,没法找出一个超平面,能够将两组数据分开,那么这个数据集就叫做线性不可分数据.</p>
+
+<p><strong>分割超平面(Separating Hyperplane)</strong>:将数据集分割开来的直线/平面叫做分割超平面.</p>
+
+<p><strong>间隔(Margin)</strong>:数据点到分割超平面的距离称为间隔.</p>
+
+<p><strong>支持向量(Support Vector)</strong>:离分割超平面最近的那些点叫做支持向量.</p>
+
+<span id="more"></span><!-- more -->
+
+<h1 id="toc_0">线性可分SVM</h1>
+
+<p>在感知器模型中,算法是在数据中找出一个划分超平面,让尽可能多的数据分布在这个平面的两侧,从而达到分类的效果,但是在实际数据中这个符合我们要求的超平面是可能存在多个的.<br/>
+<img src="media/15285262100303/15285276077823.jpg" alt=""/></p>
+
+<p>在感知器模型中,我们可以找到多个可以分类的超平面将数据分开,并且优化时希望所有的点都离超平面尽可能的远,但是实际上离超平面足够远的点基本上都是被正确分类的,所以这个是没有意义的;反而比较关心那些离超平面很近的点,这些点比较容易分错.所以说我们只要让离超平面比较近的点尽可能的远离这个超平面,那么我们的模型分类效果应该就会比较不错了.(这个就是SVM的思想)<br/>
+<img src="media/15285262100303/15285279858682.jpg" alt=""/></p>
+
+<h2 id="toc_1">超平面和法向量</h2>
+
+<p>先回顾一下同济高数上的一个例题,求解点到平面的距离.<br/>
+<img src="media/15285262100303/15285475518085.jpg" alt=""/></p>
+
+<p>常见的平面概念是在三维空间中定义的:\(Ax+By+Cz+D=0\).<br/>
+而d维空间中的超平面由下面的方程确定:\(w^Tx+b=0\),其中w和x都是d维列向量,\(x=(x_1,x_2,...,x_d)^T\)为平面上的点,\(w=(w_1,w_2,...,w_d)^T\)为平面的法向量.b是一个实数,代表平面与原点之间的距离.</p>
+
+<p><strong>点到超平面的距离</strong></p>
+
+<p>假设点\(x^{&#39;}为超平面A:w^Tx+b=0上的任意一点,则点x到A的距离为x-x^{&#39;}在超平面法向量w上的投影长度:\)</p>
+
+<p>\[d=\dfrac{|w^T(x-x^{&#39;})|}{||w||}=\dfrac{|w^Tx+b|}{||w||} \qquad 注意:w^Tx^{&#39;}=-b,x^{&#39;}为超平面上一点\]</p>
+
+<p>这里,\(||w||是w的L_2范数\)</p>
+
+<p><strong>超平面的正面和反面</strong><br/>
+一个超平面可以将它所在的空间分为两半,它的法向量指向的那一半对应的一面是它的正面,另一面则是它的反面.</p>
+
+<p><strong>法向量的意义</strong><br/>
+法向量的大小是坐标原点到分离超平面的距离,垂直于分离超平面,方向由分离超平面决定.</p>
+
+<h2 id="toc_2">线性可分SVM</h2>
+
+<p>支持向量到超平面的距离为:<br/>
+\[\because w^Tx+b=\pm1 \\\<br/>
+\because y \in \{+1,-1\} \\\<br/>
+\therefore \dfrac{|y(w^Tx+b)|}{||w||}=\dfrac{1}{||w||}\]</p>
+
+<p>备注:在SVM中支持向量到超平面的函数距离一般设置为1<br/>
+<img src="media/15285262100303/15285491659569.jpg" alt=""/></p>
+
+<p>SVM模型是让所有的分类点在各自类别的支持向量的两边,同时要求支持向量尽可能的远离这个超平面,用数学公式表示如下:</p>
+
+<p>注意:<br/>
+\[<br/>
+\begin{cases}<br/>
+w^T=(w_1,w_2,\cdots,w_n)\\\ <br/>
+||w||=\sqrt{w_1^2+w_2^2+\cdots+w_n^2}<br/>
+\end{cases}<br/>
+\]</p>
+
+<p>\[<br/>
+\begin{cases}<br/>
+\max \limits_{w,b}\dfrac{1}{||w||} &amp;\text {目标}\\\ <br/>
+s.t:y^{(i)}\left(w^Tx^{(i)}+b\right) \geq 1,i=1,2,...,m &amp;\text {限制条件}<br/>
+\end{cases}<br/>
+\]</p>
+
+<p>一般求最优化问题,都是求最小值,因此稍微将这个优化问题转换一下<br/>
+\[<br/>
+\begin{cases}<br/>
+\min \limits_{w,b}\dfrac12||w||^2 &amp;\text {目标}\\\ <br/>
+s.t:y^{(i)}\left(w^Tx^{(i)}+b\right) \geq 1,i=1,2,...,m &amp;\text {限制条件}<br/>
+\end{cases}<br/>
+\]</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[聚类算法---未完成]]></title>
+    <link href="http://dmlcoding.com/15284222434956.html"/>
+    <updated>2018-06-08T09:44:03+08:00</updated>
+    <id>http://dmlcoding.com/15284222434956.html</id>
+    <content type="html"><![CDATA[
+<span id="more"></span><!-- more -->
+
+<h1 id="toc_0">什么是聚类算法</h1>
+
+<h1 id="toc_1">聚类算法的度量</h1>
+
+<h1 id="toc_2">聚类的思想</h1>
+
+<h1 id="toc_3">K-Means算法</h1>
+
+<h1 id="toc_4">K-Means++算法</h1>
+
+<h1 id="toc_5">K-Means||算法</h1>
+
+<h1 id="toc_6">Canopy算法</h1>
+
+<h1 id="toc_7">Mini Batch K-Means算法</h1>
+
+<h1 id="toc_8">聚类算法的衡量指标</h1>
+
+<h1 id="toc_9">层次聚类方法</h1>
+
+<p>层次聚类方法对给定的数据集进行层次的分解,直到满足某种条件为止,传统的层次聚类算法主要分为两大类算法:<br/>
+凝聚的层次聚类(AGNES算法:AGglomerative NESting):采用自底向上的策略.最初将每个对象作为一个簇,然后这些簇根据某些准则被一步一步合并,两个簇间的距离可以由这两个不同簇中距离最近的数据点的相似度来确定;聚类的合并过程反复进行直到所有的对象满足簇数目.</p>
+
+<p>分裂的层次聚类(DIANA算法:DIvisive ANALysis):采用自顶向下的策略.首先将所有对象置于一个簇中,然后按照某种既定的规则逐渐细分为越来越小的簇(比如最大的欧式距离),直到达到某个终结条件(簇数目或者簇距离达到阈值).</p>
+
+<p>AGNES和DIANA算法优缺点:</p>
+
+<ul>
+<li>简单,理解容易</li>
+<li>合并点/分裂点选择不太容易</li>
+<li>合并/分类的操作不能进行撤销</li>
+<li>大数据集不太适合</li>
+<li>执行效率较低</li>
+</ul>
+
+<p>AGNES算法中簇间距离</p>
+
+<ul>
+<li>最小距离(SL聚类)
+
+<ul>
+<li>两个聚簇中最近的两个样本之间的距离(single/word-linkage聚类法)</li>
+<li>最终得到模型容易形成链式结构</li>
+</ul></li>
+<li>最大距离(CL聚类)
+
+<ul>
+<li>两个聚簇中最远的两个样本的距离(complete-linkage聚类法)</li>
+<li>如果存在异常值,那么构建可能不太稳定</li>
+</ul></li>
+<li>平均距离(AL聚类)
+
+<ul>
+<li>两个聚类中样本间两两距离的平均值(average-linkage聚类法)</li>
+<li>两个聚簇中样本间两两距离的中值(median-linkage聚类法)</li>
+</ul></li>
+</ul>
+
+<h1 id="toc_10">密度聚类方法</h1>
+
+<h1 id="toc_11">谱聚类</h1>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[集成学习---未完成]]></title>
     <link href="http://dmlcoding.com/15255701784620.html"/>
     <updated>2018-05-06T09:29:38+08:00</updated>
     <id>http://dmlcoding.com/15255701784620.html</id>
@@ -22,10 +425,13 @@
 
 <p>集成算法的成功在于保证弱分类器的多样性(Diversity).而且集成不稳定的算法也能够得到一个比较明显的性能提升.</p>
 
-<p>常见的集成学习思想有:<br/>
-    + Bagging<br/>
-    + Boosting<br/>
-    + Stacking</p>
+<p>常见的集成学习思想有:</p>
+
+<ul>
+<li>Bagging</li>
+<li>Boosting</li>
+<li>Stacking</li>
+</ul>
 
 <span id="more"></span><!-- more -->
 
@@ -820,12 +1226,17 @@ Image(graph.create_png)
 <p>比如我们有二维样本6个，{(2,3)，(5,4)，(9,6)，(4,7)，(8,1)，(7,2)}，构建kd树的具体步骤如草稿所示<br/>
 <img src="media/15277324362749/15277404253921.jpg" alt=""/></p>
 
+<p>构建的完整子树就如图所示<br/>
+<img src="media/15277324362749/15278193600353.jpg" alt=""/></p>
+
 <h2 id="toc_8">KD Tree查找最近邻</h2>
 
 <p>当我们生成KD树以后,就可以去预测测试集里面的样本目标点了.对于一个目标点,我们首先在KD树里面找到包含目标点的叶子节点.以目标点为圆心,以目标点到叶子节点样本实例的距离为半径,得到一个超球体,最近邻的点一定在这个超球体内部.然后返回叶子节点的父节点,检查另一个子节点包含的超矩形体是否和超球体相交,如果相交就到这个子节点寻找是否有更加近的近邻,有的话就更新最近邻.如果不相交那就简单了,我们直接返回父节点的父节点,在另一个子树继续搜索最近邻.当回溯到根节点时,算法结束,此时保存的最近邻节点就是最终的最近邻.</p>
 
 <p>具体过程如图所示<br/>
 <img src="media/15277324362749/15277426727922.jpg" alt=""/></p>
+
+<p><img src="media/15277324362749/15278221391077.jpg" alt=""/></p>
 
 <h1 id="toc_9">参考引用</h1>
 
@@ -945,11 +1356,27 @@ L(\theta) &amp; =p(\vec{y}|X;\theta) \\\<br/>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[梯度下降笔记]]></title>
+    <title type="html"><![CDATA[梯度下降笔记&拉格朗日乘子法]]></title>
     <link href="http://dmlcoding.com/15277385790025.html"/>
     <updated>2018-05-31T11:49:39+08:00</updated>
     <id>http://dmlcoding.com/15277385790025.html</id>
     <content type="html"><![CDATA[
+<p>SVM的前置知识</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[什么是最小二乘法]]></title>
+    <link href="http://dmlcoding.com/15299158833805.html"/>
+    <updated>2018-06-25T16:38:03+08:00</updated>
+    <id>http://dmlcoding.com/15299158833805.html</id>
+    <content type="html"><![CDATA[
+<p>最小二乘法(又称最小平方法)是一种数学优化技术.他通过最小化误差的平方和寻找数据的最佳函数匹配.</p>
+
+<p>利用最小二乘法可以简便地求得未知的数据,并使得这些求得的数据与实际数据之间误差的平方和为最小.</p>
+
+<p><img src="media/15294841337807/15296334116393.jpg" alt=""/></p>
 
 ]]></content>
   </entry>
@@ -2457,6 +2884,8 @@ x = a_0 + \frac{1^2}{a_1<br/>
 
 <p>大数定律的意义:随着样本容量n的增加,样本平均数将接近于总体平均数(期望\(\mu\)),所以在统计推断中,一般都会使用样本平均数估计总体平均数的值.</p>
 
+<span id="more"></span><!-- more -->
+
 <p>也就是我们会使用一部分样本的平均值来代替整体样本的期望/均值,出现偏差的可能性是存在的,但是当n足够大的时候,偏差的可能性是非常小的,当n无限大的时候,这种可能性的概率基本为0.</p>
 
 <p>大数定律的主要作用就是为使用频率来估计概率提供了理论支持;为使用部分数据来近似的模拟构建全部数据的特征提供了理论支持.</p>
@@ -3273,346 +3702,6 @@ tcp        0      0 ::ffff:10.10.25.13:45666    :::*                        LIST
 <li>构造并启动RPC server</li>
 <li>构造RPC client并发送RPC请求</li>
 </ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[概率分布函数和概率密度函数]]></title>
-    <link href="http://dmlcoding.com/15221149143615.html"/>
-    <updated>2018-03-27T09:41:54+08:00</updated>
-    <id>http://dmlcoding.com/15221149143615.html</id>
-    <content type="html"><![CDATA[
-<blockquote>
-<p>研究一个随机变量,不只要看它能取哪些值,更重要的是它取各种值的概率如何!</p>
-</blockquote>
-
-<ul>
-<li>概率分布函数</li>
-<li>概率密度函数</li>
-</ul>
-
-<h2 id="toc_0">离散型随机变量</h2>
-
-<p>在理解这两个词之前</p>
-
-<span id="more"></span><!-- more --> 
-
-<ul>
-<li>概率分布函数</li>
-<li>概率密度函数</li>
-</ul>
-
-<p>先理解这两个词</p>
-
-<ul>
-<li>概率函数: 就是用函数的形式来表达概率.也叫分布律.</li>
-<li>概率分布: 表达随机变量所有可能取值的分布情况.注意:是所有的取值</li>
-<li>分布函数: 即,概率分布函数,</li>
-</ul>
-
-<p><img src="media/15221149143615/15221166166372.png" alt=""/></p>
-
-<p>概率分布函数: 它是概率函数各个取值的累加结果.也叫累积概率函数</p>
-
-<ul>
-<li>分布函数</li>
-</ul>
-
-<h2 id="toc_1">连续型随机变量</h2>
-
-<ul>
-<li>概率密度函数: 等同于概率函数,why?</li>
-</ul>
-
-<p>在连续型随机变量中为啥要将概率函数叫成概率密度函数呢?<br/>
-参考陈希孺老师所著的《概率论与数理统计》<br/>
-<img src="media/15221149143615/15221159306143.png" alt=""/><br/>
-<img src="media/15221149143615/15221159405543.png" alt=""/></p>
-
-<p>概率密度函数用数学公式表示就是一个定积分的函数，定积分在数学中是用来求面积的，而在这里，你就把概率表示为面积即可！<br/>
-<img src="media/15221149143615/15221159485806.png" alt=""/></p>
-
-<p>左边是F(x)<code>连续型随机变量分布函数</code>画出的图形，右边是f(x)<code>连续型随机变量的概率密度函数</code>画出的图像，它们之间的关系就是，概率密度函数是分布函数的导函数。</p>
-
-<p>两张图一对比，你就会发现，如果用右图中的面积来表示概率，利用图形就能很清楚的看出，哪些取值的概率更大！这样看起来是不是特别直观，特别爽！！所以，我们在表示连续型随机变量的概率时，用f(x)概率密度函数来表示，是非常好的！</p>
-
-<h1 id="toc_2">参考</h1>
-
-<p><a href="https://www.jianshu.com/p/b570b1ba92bb">应该如何理解概率分布函数和概率密度函数?</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[分布式系统的一致性]]></title>
-    <link href="http://dmlcoding.com/15220339795263.html"/>
-    <updated>2018-03-26T11:12:59+08:00</updated>
-    <id>http://dmlcoding.com/15220339795263.html</id>
-    <content type="html"><![CDATA[
-<p><img src="media/15220339795263/15221454798314.jpg" alt=""/></p>
-
-<p>先上个图,未完待续......</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[docker 错误]]></title>
-    <link href="http://dmlcoding.com/15217143404677.html"/>
-    <updated>2018-03-22T18:25:40+08:00</updated>
-    <id>http://dmlcoding.com/15217143404677.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0">net/http: TLS handshake timeout</h2>
-
-<p>下载镜像的时候出现<code>net/http: TLS handshake timeout</code>,<br/>
-原因是docker默认镜像拉取地址为国外仓库下载速度较慢，则会报错“net/http: TLS handshake timeout”。</p>
-
-<span id="more"></span><!-- more -->
-
-<p>此时，只需要将拉取地址改为国内镜像仓库即可。</p>
-
-<p>标准格式为：</p>
-
-<pre><code>$ docker pull registry.docker-cn.com/myname/myrepo:mytag
-</code></pre>
-
-<p>例：</p>
-
-<pre><code>$ docker pull registry.docker-cn.com/library/ubuntu:16.04
-</code></pre>
-
-<p>为了永久性保留更改，您可以修改 /etc/docker/daemon.json 文件并添加上 registry-mirrors 键值。</p>
-
-<pre><code>{
-  &quot;registry-mirrors&quot;: [&quot;https://registry.docker-cn.com&quot;]
-}
-</code></pre>
-
-<p>修改保存后重启 Docker 以使配置生效。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[mac 搭建 区块链开发环境]]></title>
-    <link href="http://dmlcoding.com/15216998348495.html"/>
-    <updated>2018-03-22T14:23:54+08:00</updated>
-    <id>http://dmlcoding.com/15216998348495.html</id>
-    <content type="html"><![CDATA[
-<ul>
-<li><a href="https://docs.docker.com/docker-for-mac/install/">官方安装文档</a></li>
-<li><a href="https://docs.docker.com/docker-for-mac/">官方使用文档</a></li>
-</ul>
-
-<span id="more"></span><!-- more -->
-
-<h1 id="toc_0">用docker下载ubuntu镜像</h1>
-
-<pre><code># 下载ubuntu镜像
-docker pull ubuntu
-# 进入镜像中
-docker run -it ubuntu /bin/bash
-# 查看ubuntu的发行版本
-cat /etc/issue
-
-</code></pre>
-
-<p>新开一个终端查看</p>
-
-<pre><code> hushiwei@hsw  ~/Docker  docker images
-REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
-ubuntu                latest              f975c5035748        2 weeks ago         112MB
-</code></pre>
-
-<h2 id="toc_1">进入镜像后,即生成了一个容器.更新容易里面的系统</h2>
-
-<p>跟新apt-get,安装常用开发工具</p>
-
-<pre><code>apt-get update
-apt-get install vim
-apt-get install sudo
-</code></pre>
-
-<h2 id="toc_2">提高安全意识,添加普通用户</h2>
-
-<pre><code>adduser deploy
-su deploy
-</code></pre>
-
-<h2 id="toc_3">给普通用户sudo权限</h2>
-
-<pre><code># root下执行
-chmod 777 /etc/sudoers
-vim /etc/sudoers
-</code></pre>
-
-<p>在/etc/sudoers文件里面添加一行,表示给deploy用户sudo权限,并且不需要密码<br/>
-<img src="media/15216998348495/15217671764613.jpg" alt=""/></p>
-
-<p>把这个文件的权限改回去</p>
-
-<pre><code>chmod 440 /etc/sudoers
-</code></pre>
-
-<h1 id="toc_4">在容器中进行区块链环境的搭建</h1>
-
-<p>注意:目前为止,我们还没退出容器过.</p>
-
-<h2 id="toc_5">安装curl,nodejs</h2>
-
-<pre><code>sudo apt-get install curl
-
-# 安装nodejs的版本
-root@a43d121b81a0:~# curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-# 完成后输出
-## Run `apt-get install nodejs` (as root) to install Node.js v8.x LTS Carbon and npm
-
-# 然后安装nodejs
-apt-get install nodejs
-
-# 查看版本
-node -v
-
-npm -v
-</code></pre>
-
-<h2 id="toc_6">安装testrpc,truffle</h2>
-
-<pre><code># 安装淘宝镜像,速度快
-npm install -g cnpm --registry=https://registry.npm.taobao.org
-
-sudo cnpm install -g ethereumjs-testrpc
-# 完成后输入testrpc,进行校验
-
-sudo cnpm install -g truffle
-
-</code></pre>
-
-<h1 id="toc_7">提交安装好环境的容器</h1>
-
-<p>在开一个窗口,输入<code>docker ps</code> 找到正在运行的容器的<code>CONTAINER ID</code><br/>
-刚刚在这个容器里面安装好了环境,那么我们需要保存一下,所以用docker commit提交这个<br/>
-容器,成为镜像<br/>
-<code><br/>
-docker commit a43d121b81a0 testrpc-truffle-env:v1<br/>
-</code><br/>
-提交后,再查看images,比之前的ubuntu大了不少.毕竟装了那么多工具进去了<br/>
-<code><br/>
- hushiwei@hsw  ~/Docker  docker images<br/>
-REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE<br/>
-testrpc-truffle-env   v1                  a2073b0b64cc        6 minutes ago       503MB<br/>
-ubuntu                latest              f975c5035748        2 weeks ago         112MB<br/>
-</code></p>
-
-<h2 id="toc_8">退出再进去</h2>
-
-<p>现在就算退出运行中的容器,之前安装的工具也都还在了.<br/>
-执行下面的命令即可进入刚刚提交的镜像中.<code>a2073b0b64cc</code>是刚刚提交的镜像的id</p>
-
-<pre><code>docker run -it a2073b0b64cc /bin/bash
-</code></pre>
-
-<h1 id="toc_9">安装idea插件进行开发</h1>
-
-<p>在idea的Plugins中安装插件<code>Intellij-Solidity</code></p>
-
-<h1 id="toc_10">docker挂载本地目录进行开发</h1>
-
-<p>将本地的<code>/Users/hushiwei/BlockChain/ethereum</code>目录,与容器中的<code>/home/deploy</code>进行共享</p>
-
-<pre><code>docker run -it -v /Users/hushiwei/BlockChain/ethereum:/home/deploy a2073b0b64cc /bin/bash
-
-</code></pre>
-
-<h1 id="toc_11">生成truffle代码</h1>
-
-<p>在容器的<code>/home/deploy/demo3</code>目录下执行<code>truffle init</code> 生成项目</p>
-
-<p><img src="media/15216998348495/15217712425759.jpg" alt=""/></p>
-
-<p>本机对应的目录也可以看到<br/>
-<img src="media/15216998348495/15217712751901.jpg" alt=""/></p>
-
-<h2 id="toc_12">用idea打开ethereum目录作为项目.</h2>
-
-<p><img src="media/15216998348495/15217713264100.jpg" alt=""/></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[LeetCode解题思路]]></title>
-    <link href="http://dmlcoding.com/15216328231070.html"/>
-    <updated>2018-03-21T19:47:03+08:00</updated>
-    <id>http://dmlcoding.com/15216328231070.html</id>
-    <content type="html"><![CDATA[
-<h1 id="toc_0">Easy</h1>
-
-<span id="more"></span><!-- more -->
-
-<h2 id="toc_1"><u>01</u>TwoSum</h2>
-
-<h2 id="toc_2"><u>07</u>ReverseInteger</h2>
-
-<h2 id="toc_3"><u>09</u>PalindromeNumber</h2>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Macbook 区块链开发]]></title>
-    <link href="http://dmlcoding.com/15216132281232.html"/>
-    <updated>2018-03-21T14:20:28+08:00</updated>
-    <id>http://dmlcoding.com/15216132281232.html</id>
-    <content type="html"><![CDATA[
-<p>基本概念就不说了,网上一大堆.</p>
-
-<h2 id="toc_0">客户端安装</h2>
-
-<pre><code>brew tap ethereum/ethereum
-
-brew install ethereum
-
-</code></pre>
-
-<span id="more"></span><!-- more -->
-
-<p>很是花了一些时间呢<br/>
-<code><br/>
-  /usr/local/Cellar/ethereum/1.8.2: 9 files, 54.7MB, built in 26 minutes 26 seconds<br/>
-</code></p>
-
-<pre><code>
-geth -h
-geth console
-
-</code></pre>
-
-<pre><code>
- hushiwei@hsw  ~/BlockChain  geth console
-INFO [03-21|15:05:35] Maximum peer count                       ETH=25 LES=0 total=25
-INFO [03-21|15:05:35] Starting peer-to-peer node               instance=Geth/v1.8.2-stable/darwin-amd64/go1.10
-INFO [03-21|15:05:35] Allocated cache and file handles         database=/Users/hushiwei/Library/Ethereum/geth/chaindata cache=768 handles=1024
-INFO [03-21|15:05:35] Initialised chain configuration          config=&quot;{ChainID: 1 Homestead: 1150000 DAO: 1920000 DAOSupport: true EIP150: 2463000 EIP155: 2675000 EIP158: 2675000 Byzantium: 4370000 Constantinople: &lt;nil&gt; Engine: ethash}&quot;
-INFO [03-21|15:05:35] Disk storage enabled for ethash caches   dir=/Users/hushiwei/Library/Ethereum/geth/ethash count=3
-INFO [03-21|15:05:35] Disk storage enabled for ethash DAGs     dir=/Users/hushiwei/.ethash                      count=2
-INFO [03-21|15:05:35] Initialising Ethereum protocol           versions=&quot;[63 62]&quot; network=1
-INFO [03-21|15:05:35] Loaded most recent local header          number=0 hash=d4e567…cb8fa3 td=17179869184
-INFO [03-21|15:05:35] Loaded most recent local full block      number=0 hash=d4e567…cb8fa3 td=17179869184
-INFO [03-21|15:05:35] Loaded most recent local fast block      number=0 hash=d4e567…cb8fa3 td=17179869184
-INFO [03-21|15:05:35] Loaded local transaction journal         transactions=0 dropped=0
-INFO [03-21|15:05:35] Regenerated local transaction journal    transactions=0 accounts=0
-INFO [03-21|15:05:35] Starting P2P networking
-INFO [03-21|15:05:37] UDP listener up                          self=enode://239405879cbf4f9d8cfb1dafca4bab87b8f7ce27fbdb486347d7215b1de56663805d520d44044bb5ed324a79e41fbdd0be2adbbe5f31684cf528bf2faef4796f@[::]:30303
-INFO [03-21|15:05:37] RLPx listener up                         self=enode://239405879cbf4f9d8cfb1dafca4bab87b8f7ce27fbdb486347d7215b1de56663805d520d44044bb5ed324a79e41fbdd0be2adbbe5f31684cf528bf2faef4796f@[::]:30303
-INFO [03-21|15:05:37] IPC endpoint opened                      url=/Users/hushiwei/Library/Ethereum/geth.ipc
-Welcome to the Geth JavaScript console!
-
-instance: Geth/v1.8.2-stable/darwin-amd64/go1.10
- modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
-
-</code></pre>
 
 ]]></content>
   </entry>
