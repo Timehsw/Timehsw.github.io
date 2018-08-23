@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -228,7 +235,7 @@
 
 <h5 id="toc_2">XML文档示例</h5>
 
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre class="line-numbers"><code class="language-text">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 
 &lt;bookstore&gt; 
 
@@ -284,7 +291,7 @@
 
 <p>下面是一个简单的XML例子中，book 元素是 title、author、year 以及 price 元素的父：</p>
 
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre class="line-numbers"><code class="language-text">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 
 &lt;book&gt;
   &lt;title&gt;Harry Potter&lt;/title&gt;
@@ -301,7 +308,7 @@
 
 <p>在下面的例子中，title、author、year 以及 price 元素都是 book 元素的子：</p>
 
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre class="line-numbers"><code class="language-text">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 
 &lt;book&gt;
   &lt;title&gt;Harry Potter&lt;/title&gt;
@@ -318,7 +325,7 @@
 
 <p>在下面的例子中，title、author、year 以及 price 元素都是同胞：</p>
 
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre class="line-numbers"><code class="language-text">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 
 &lt;book&gt;
   &lt;title&gt;Harry Potter&lt;/title&gt;
@@ -335,7 +342,7 @@
 
 <p>在下面的例子中，title 元素的先辈是 book 元素和 bookstore 元素：</p>
 
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre class="line-numbers"><code class="language-text">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 
 &lt;bookstore&gt;
 
@@ -356,7 +363,7 @@
 
 <p>在下面的例子中，bookstore 的后代是 book、title、author、year 以及 price 元素：</p>
 
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre class="line-numbers"><code class="language-text">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 
 &lt;bookstore&gt;
 
@@ -622,7 +629,7 @@
 
 <p>我们利用它来解析 HTML 代码，简单示例：</p>
 
-<pre><code># lxml_test.py
+<pre class="line-numbers"><code class="language-text"># lxml_test.py
 
 # 使用 lxml 的 etree 库
 from lxml import etree 
@@ -651,7 +658,7 @@ print(result)
 
 <p>输出结果：</p>
 
-<pre><code>&lt;html&gt;&lt;body&gt;
+<pre class="line-numbers"><code class="language-text">&lt;html&gt;&lt;body&gt;
 &lt;div&gt;
     &lt;ul&gt;
          &lt;li class=&quot;item-0&quot;&gt;&lt;a href=&quot;link1.html&quot;&gt;first item&lt;/a&gt;&lt;/li&gt;
@@ -671,7 +678,7 @@ print(result)
 
 <p>除了直接读取字符串，lxml还支持从文件里读取内容。我们新建一个hello.html文件：</p>
 
-<pre><code>&lt;!-- hello.html --&gt;
+<pre class="line-numbers"><code class="language-text">&lt;!-- hello.html --&gt;
 
 &lt;div&gt;
     &lt;ul&gt;
@@ -687,7 +694,7 @@ print(result)
 
 <p>再利用 etree.parse() 方法来读取文件。</p>
 
-<pre><code># lxml_parse.py
+<pre class="line-numbers"><code class="language-text"># lxml_parse.py
 
 from lxml import etree
 
@@ -701,7 +708,7 @@ print(result)
 
 <p>输出结果与之前相同：</p>
 
-<pre><code>&lt;html&gt;&lt;body&gt;
+<pre class="line-numbers"><code class="language-text">&lt;html&gt;&lt;body&gt;
 &lt;div&gt;
     &lt;ul&gt;
          &lt;li class=&quot;item-0&quot;&gt;&lt;a href=&quot;link1.html&quot;&gt;first item&lt;/a&gt;&lt;/li&gt;
@@ -719,7 +726,7 @@ print(result)
 
 <h4 id="toc_22">1. 获取所有的 <code>&lt;li&gt;</code> 标签</h4>
 
-<pre><code># xpath_li.py
+<pre class="line-numbers"><code class="language-text"># xpath_li.py
 
 from lxml import etree
 
@@ -737,7 +744,7 @@ print type(result[0])
 
 <p>输出结果：</p>
 
-<pre><code>&lt;type &#39;lxml.etree._ElementTree&#39;&gt;
+<pre class="line-numbers"><code class="language-text">&lt;type &#39;lxml.etree._ElementTree&#39;&gt;
 [&lt;Element li at 0x1014e0e18&gt;, &lt;Element li at 0x1014e0ef0&gt;, &lt;Element li at 0x1014e0f38&gt;, &lt;Element li at 0x1014e0f80&gt;, &lt;Element li at 0x1014e0fc8&gt;]
 5
 &lt;type &#39;list&#39;&gt;
@@ -747,7 +754,7 @@ print type(result[0])
 
 <h4 id="toc_23">2. 继续获取<code>&lt;li&gt;</code> 标签的所有 <code>class</code>属性</h4>
 
-<pre><code># xpath_li.py
+<pre class="line-numbers"><code class="language-text"># xpath_li.py
 
 from lxml import etree
 
@@ -760,13 +767,13 @@ print result
 
 <p>运行结果</p>
 
-<pre><code>[&#39;item-0&#39;, &#39;item-1&#39;, &#39;item-inactive&#39;, &#39;item-1&#39;, &#39;item-0&#39;]
+<pre class="line-numbers"><code class="language-text">[&#39;item-0&#39;, &#39;item-1&#39;, &#39;item-inactive&#39;, &#39;item-1&#39;, &#39;item-0&#39;]
 
 </code></pre>
 
 <h4 id="toc_24">3. 继续获取<code>&lt;li&gt;</code>标签下<code>hre</code> 为 <code>link1.html</code> 的 <code>&lt;a&gt;</code> 标签</h4>
 
-<pre><code># xpath_li.py
+<pre class="line-numbers"><code class="language-text"># xpath_li.py
 
 from lxml import etree
 
@@ -779,13 +786,13 @@ print result
 
 <p>运行结果</p>
 
-<pre><code>[&lt;Element a at 0x10ffaae18&gt;]
+<pre class="line-numbers"><code class="language-text">[&lt;Element a at 0x10ffaae18&gt;]
 
 </code></pre>
 
 <h4 id="toc_25">4. 获取<code>&lt;li&gt;</code> 标签下的所有 <code>&lt;span&gt;</code> 标签</h4>
 
-<pre><code># xpath_li.py
+<pre class="line-numbers"><code class="language-text"># xpath_li.py
 
 from lxml import etree
 
@@ -803,13 +810,13 @@ print result
 
 <p>运行结果</p>
 
-<pre><code>[&lt;Element span at 0x10d698e18&gt;]
+<pre class="line-numbers"><code class="language-text">[&lt;Element span at 0x10d698e18&gt;]
 
 </code></pre>
 
 <h4 id="toc_26">5. 获取 <code>&lt;li&gt;</code> 标签下的<code>&lt;a&gt;</code>标签里的所有 class</h4>
 
-<pre><code># xpath_li.py
+<pre class="line-numbers"><code class="language-text"># xpath_li.py
 
 from lxml import etree
 
@@ -822,13 +829,13 @@ print result
 
 <p>运行结果</p>
 
-<pre><code>[&#39;blod&#39;]
+<pre class="line-numbers"><code class="language-text">[&#39;blod&#39;]
 
 </code></pre>
 
 <h4 id="toc_27">6. 获取最后一个 <code>&lt;li&gt;</code> 的 <code>&lt;a&gt;</code> 的 href</h4>
 
-<pre><code># xpath_li.py
+<pre class="line-numbers"><code class="language-text"># xpath_li.py
 
 from lxml import etree
 
@@ -843,13 +850,13 @@ print result
 
 <p>运行结果</p>
 
-<pre><code>[&#39;link5.html&#39;]
+<pre class="line-numbers"><code class="language-text">[&#39;link5.html&#39;]
 
 </code></pre>
 
 <h4 id="toc_28">7. 获取倒数第二个元素的内容</h4>
 
-<pre><code># xpath_li.py
+<pre class="line-numbers"><code class="language-text"># xpath_li.py
 
 from lxml import etree
 
@@ -863,13 +870,13 @@ print result[0].text
 
 <p>运行结果</p>
 
-<pre><code>fourth item
+<pre class="line-numbers"><code class="language-text">fourth item
 
 </code></pre>
 
 <h4 id="toc_29">8. 获取 <code>class</code> 值为 <code>bold</code> 的标签名</h4>
 
-<pre><code># xpath_li.py
+<pre class="line-numbers"><code class="language-text"># xpath_li.py
 
 from lxml import etree
 
@@ -884,7 +891,7 @@ print result[0].tag
 
 <p>运行结果</p>
 
-<pre><code>span
+<pre class="line-numbers"><code class="language-text">span
 
 </code></pre>
 
@@ -1035,31 +1042,31 @@ print result[0].tag
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -1134,7 +1141,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -193,107 +200,109 @@
 
 <h2 id="toc_2">Windows 系统</h2>
 
-<pre><code>下载可执行安装文件https://code.google.com/p/tesseract-ocr/downloads/list安装。
+<pre class="line-numbers"><code class="language-text">下载可执行安装文件https://code.google.com/p/tesseract-ocr/downloads/list安装。
 </code></pre>
 
 <h2 id="toc_3">Linux 系统</h2>
 
-<pre><code>可以通过 apt-get 安装: $sudo apt-get tesseract-ocr
+<pre class="line-numbers"><code class="language-text">可以通过 apt-get 安装: $sudo apt-get tesseract-ocr
 </code></pre>
 
 <h2 id="toc_4">Mac OS X系统</h2>
 
-<p>用 Homebrew(<a href="http://brew.sh/)%E7%AD%89%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%8F%AF%E4%BB%A5%E5%BE%88%E6%96%B9%E4%BE%BF%E5%9C%B0%E5%AE%89%E8%A3%85">http://brew.sh/)等第三方库可以很方便地安装</a><br/>
-<code><br/>
-brew install tesseract<br/>
-</code><br/>
-要使用 Tesseract 的功能，比如后面的示例中训练程序识别字母，要先在系统中设置一个新的环境变量 $TESSDATA_PREFIX，让 Tesseract 知道训练的数据文件存储在哪里，然后搞一份tessdata数据文件，放到Tesseract目录下。</p>
+<p>用 Homebrew(<a href="http://brew.sh/)%E7%AD%89%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%8F%AF%E4%BB%A5%E5%BE%88%E6%96%B9%E4%BE%BF%E5%9C%B0%E5%AE%89%E8%A3%85">http://brew.sh/)等第三方库可以很方便地安装</a></p>
 
-<p>在大多数 Linux 系统和 Mac OS X 系统上,你可以这么设置:<br/>
-<code><br/>
- $export TESSDATA_PREFIX=/usr/local/share/Tesseract<br/>
-</code><br/>
-或者<br/>
-<code><br/>
-hushiwei@localhost  ~  more ~/.bash_profile<br/>
-alias l=&#39;ls -lF&#39;<br/>
-alias ll=&#39;ls -alF&#39;<br/>
-JAVA_HOME=`/usr/libexec/java_home`<br/>
-SCALA_HOME=/Users/hushiwei/devApps/scala-2.10.5<br/>
-MAVEN_HOME=/Users/hushiwei/devApps/maven-3.3.9<br/>
-TESSDATA_PREFIX=/Users/hushiwei/devApps/Tesseract<br/>
-</code><br/>
-在 Windows 系统上也类似,你可以通过下面这行命令设置环境变量:<br/>
-```</p>
-
-<h1 id="toc_5">setx TESSDATA_PREFIX C:\Program Files\Tesseract OCR\Tesseract</h1>
-
-<pre><code># 安装pytesseract
-Tesseract 是一个 Python 的命令行工具，不是通过 import 语句导入的库。安装之后,要用 tesseract 命令在 Python 的外面运行，但我们可以通过 pip 安装支持Python 版本的 Tesseract库：
+<pre class="line-numbers"><code class="language-text">brew install tesseract
 </code></pre>
 
-<p>pip install pytesseract<br/>
-```</p>
+<p>要使用 Tesseract 的功能，比如后面的示例中训练程序识别字母，要先在系统中设置一个新的环境变量 $TESSDATA_PREFIX，让 Tesseract 知道训练的数据文件存储在哪里，然后搞一份tessdata数据文件，放到Tesseract目录下。</p>
+
+<p>在大多数 Linux 系统和 Mac OS X 系统上,你可以这么设置:</p>
+
+<pre class="line-numbers"><code class="language-text"> $export TESSDATA_PREFIX=/usr/local/share/Tesseract
+</code></pre>
+
+<p>或者</p>
+
+<pre class="line-numbers"><code class="language-text">hushiwei@localhost  ~  more ~/.bash_profile
+alias l=&#39;ls -lF&#39;
+alias ll=&#39;ls -alF&#39;
+JAVA_HOME=`/usr/libexec/java_home`
+SCALA_HOME=/Users/hushiwei/devApps/scala-2.10.5
+MAVEN_HOME=/Users/hushiwei/devApps/maven-3.3.9
+TESSDATA_PREFIX=/Users/hushiwei/devApps/Tesseract
+</code></pre>
+
+<p>在 Windows 系统上也类似,你可以通过下面这行命令设置环境变量:</p>
+
+<pre class="line-numbers"><code class="language-text">#setx TESSDATA_PREFIX C:\Program Files\Tesseract OCR\Tesseract
+</code></pre>
+
+<h1 id="toc_5">安装pytesseract</h1>
+
+<p>Tesseract 是一个 Python 的命令行工具，不是通过 import 语句导入的库。安装之后,要用 tesseract 命令在 Python 的外面运行，但我们可以通过 pip 安装支持Python 版本的 Tesseract库：</p>
+
+<pre class="line-numbers"><code class="language-text">pip install pytesseract
+</code></pre>
 
 <h1 id="toc_6">简单示例</h1>
 
 <p>目前只能处理规范的文字,那么什么算<code>格式规范</code>呢?<br/>
-格式规范的文字具有以下特点:<br/>
-+ 使用一个标准字体(不包含手写体、草书,或者十分“花哨的”字体) • 虽然被复印或拍照,字体还是很清晰,没有多余的痕迹或污点<br/>
-+ 排列整齐,没有歪歪斜斜的字<br/>
-+ 没有超出图片范围,也没有残缺不全,或紧紧贴在图片的边缘</p>
+格式规范的文字具有以下特点:</p>
+
+<ul>
+<li>使用一个标准字体(不包含手写体、草书,或者十分“花哨的”字体) • 虽然被复印或拍照,字体还是很清晰,没有多余的痕迹或污点</li>
+<li>排列整齐,没有歪歪斜斜的字</li>
+<li>没有超出图片范围,也没有残缺不全,或紧紧贴在图片的边缘</li>
+</ul>
 
 <p>格式规范的图片示例<br/>
 <img src="media/15198725905052/test.png" alt="test"/></p>
 
 <h2 id="toc_7">命令行方式</h2>
 
-<p>那么试一试Tesseract,,看看效果如何.用起来也是非常简单.读取图片,然后把结果写入到一个文本文件中<br/>
-<code><br/>
-hushiwei@localhost  ~/Desktop  tesseract test.png text<br/>
-Tesseract Open Source OCR Engine v3.05.01 with Leptonica<br/>
-Warning. Invalid resolution 0 dpi. Using 70 instead.<br/>
-</code><br/>
-接着打开这个文本看看效果<br/>
-```<br/>
-hushiwei@localhost  ~/Desktop  more text.txt<br/>
-This is some text, written in Arial, that will be read by<br/>
-Tesseract. Here are some symbols: !@#$%&quot;&amp;&#39;()</p>
+<p>那么试一试Tesseract,,看看效果如何.用起来也是非常简单.读取图片,然后把结果写入到一个文本文件中</p>
 
-<pre><code>
-除了一个小符号没有识别出来,其他的字符基本上都识别对了.
+<pre class="line-numbers"><code class="language-text">hushiwei@localhost  ~/Desktop  tesseract test.png text
+Tesseract Open Source OCR Engine v3.05.01 with Leptonica
+Warning. Invalid resolution 0 dpi. Using 70 instead.
+</code></pre>
 
-## python代码方式进行识别
+<p>接着打开这个文本看看效果</p>
 
-用之前安装的`pytesseract`模块,就可以很方便的完成我们想要的效果
+<pre class="line-numbers"><code class="language-text">hushiwei@localhost  ~/Desktop  more text.txt
+This is some text, written in Arial, that will be read by
+Tesseract. Here are some symbols: !@#$%&quot;&amp;&#39;()
 
 </code></pre>
 
-<p>import pytesseract</p>
+<p>除了一个小符号没有识别出来,其他的字符基本上都识别对了.</p>
 
-<p>from PIL import Image</p>
+<h2 id="toc_8">python代码方式进行识别</h2>
 
-<h1 id="toc_8">打开一个图片</h1>
+<p>用之前安装的<code>pytesseract</code>模块,就可以很方便的完成我们想要的效果</p>
 
-<p>image=Image.open(&#39;test.png&#39;)</p>
+<pre class="line-numbers"><code class="language-text">
+import pytesseract
 
-<h1 id="toc_9">调用pytesseract的image_to_string方法识别出图片中的文字,返回识别出来的文字</h1>
+from PIL import Image
 
-<p>text=pytesseract.image_to_string(image)</p>
+# 打开一个图片
+image=Image.open(&#39;test.png&#39;)
 
-<h1 id="toc_10">打印文字看看效果</h1>
+# 调用pytesseract的image_to_string方法识别出图片中的文字,返回识别出来的文字
+text=pytesseract.image_to_string(image)
 
-<p>print text<br/>
-```</p>
+# 打印文字看看效果
+print text
+</code></pre>
 
-<p>输出结果<br/>
-```<br/>
-This is some text, written in Arial, that will be read by<br/>
-Tesseract. Here are some symbols: !@#$%&quot;&amp;&#39;()</p>
+<p>输出结果</p>
 
-<p>Process finished with exit code 0</p>
+<pre class="line-numbers"><code class="language-text">This is some text, written in Arial, that will be read by
+Tesseract. Here are some symbols: !@#$%&quot;&amp;&#39;()
 
-<pre><code>
+Process finished with exit code 0
 
 </code></pre>
 
@@ -444,31 +453,31 @@ Tesseract. Here are some symbols: !@#$%&quot;&amp;&#39;()</p>
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -543,7 +552,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

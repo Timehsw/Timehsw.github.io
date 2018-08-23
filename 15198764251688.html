@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -199,17 +206,17 @@
 <li>3、hexo new page categories 新建页面</li>
 <li>4、部署（所有打开bash都是在blog目录下）
 <code>
-hexo clean #清除缓存 网页正常情况下可以忽略此条命令
-hexo generate #生成
-hexo server #启动服务预览，非必要，可本地浏览网页
+hexo clean #清除缓存 网页正常情况下可以忽略此条命令<br/>
+hexo generate #生成<br/>
+hexo server #启动服务预览，非必要，可本地浏览网页<br/>
 hexo deploy #部署发布
 </code>
 简写Tips：
 <code>
-hexo n &quot;我的博客&quot; == hexo new &quot;我的博客&quot; #新建文章
-hexo p == hexo publish
-hexo g == hexo generate#生成
-hexo s == hexo server #启动服务预览
+hexo n &quot;我的博客&quot; == hexo new &quot;我的博客&quot; #新建文章<br/>
+hexo p == hexo publish<br/>
+hexo g == hexo generate#生成<br/>
+hexo s == hexo server #启动服务预览<br/>
 hexo d == hexo deploy#部署
 </code></li>
 </ul>
@@ -218,61 +225,50 @@ hexo d == hexo deploy#部署
 
 <h1 id="toc_2">安装 hexo</h1>
 
-<p>mac电脑直接用下面的命令就可以很简单的安装成功<br/>
-```</p>
+<p>mac电脑直接用下面的命令就可以很简单的安装成功</p>
 
-<h1 id="toc_3">安装mac下的神器,brew包管理器</h1>
+<pre class="line-numbers"><code class="language-text"># 安装mac下的神器,brew包管理器
+ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
 
-<p>ruby -e &quot;$(curl -fsSL <a href="https://raw.githubusercontent.com/Homebrew/install/master/install)">https://raw.githubusercontent.com/Homebrew/install/master/install)</a>&quot;</p>
+# 更新 brew
+brew update
 
-<h1 id="toc_4">更新 brew</h1>
+# 先用brew安装node
+brew install node
 
-<p>brew update</p>
+# 然后用node安装hexo就行了
+npm install -g hexo-cli
 
-<h1 id="toc_5">先用brew安装node</h1>
-
-<p>brew install node</p>
-
-<h1 id="toc_6">然后用node安装hexo就行了</h1>
-
-<p>npm install -g hexo-cli</p>
-
-<h1 id="toc_7">验证成功与否</h1>
-
-<h1 id="toc_8">输入 hexo 有提示就成了</h1>
-
-<pre><code>
-为了后面用npm下载依赖更快速,这里建议把npm的镜像改成淘宝源,可以使用下面的几种方法来修改npm镜像源
-
-1.临时使用
+# 验证成功与否
+# 输入 hexo 有提示就成了
 </code></pre>
 
-<p>npm --registry <a href="https://registry.npm.taobao.org">https://registry.npm.taobao.org</a> install express<br/>
-<code><br/>
-2.持久使用<br/>
-</code><br/>
-npm config set registry <a href="https://registry.npm.taobao.org">https://registry.npm.taobao.org</a></p>
+<p>为了后面用npm下载依赖更快速,这里建议把npm的镜像改成淘宝源,可以使用下面的几种方法来修改npm镜像源</p>
 
-<h1 id="toc_9">配置后可通过下面方式来验证是否成功</h1>
+<p>1.临时使用</p>
 
-<p>npm config get registry</p>
+<pre class="line-numbers"><code class="language-text">npm --registry https://registry.npm.taobao.org install express
+</code></pre>
 
-<h1 id="toc_10">或</h1>
+<p>2.持久使用</p>
 
-<p>npm info express<br/>
-<code><br/>
-3.通过cnpm使用<br/>
-</code><br/>
-npm install -g cnpm --registry=<a href="https://registry.npm.taobao.org">https://registry.npm.taobao.org</a></p>
+<pre class="line-numbers"><code class="language-text">npm config set registry https://registry.npm.taobao.org
+# 配置后可通过下面方式来验证是否成功
+npm config get registry
+# 或
+npm info express
+</code></pre>
 
-<h1 id="toc_11">使用</h1>
+<p>3.通过cnpm使用</p>
 
-<p>cnpm install express<br/>
-```</p>
+<pre class="line-numbers"><code class="language-text">npm install -g cnpm --registry=https://registry.npm.taobao.org
+# 使用
+cnpm install express
+</code></pre>
 
-<h1 id="toc_12">初始化博客</h1>
+<h1 id="toc_3">初始化博客</h1>
 
-<pre><code>// 建立一个博客文件夹，并初始化博客，&lt;folder&gt;为文件夹的名称，可以随便起名字
+<pre class="line-numbers"><code class="language-text">// 建立一个博客文件夹，并初始化博客，&lt;folder&gt;为文件夹的名称，可以随便起名字
 $ hexo init &lt;folder&gt;
 成功提示:
 INFO  Start blogging with Hexo!
@@ -285,33 +281,33 @@ $ npm install
 <ul>
 <li>执行完 hexo init test/ 命令后, test 文件下出现了这些
 <code>
-hushiweideMacBook-Pro:test hushiwei$ ll
-total 24
-drwxr-xr-x 9 hushiwei staff 306 3 2 10:05 ./
-drwxr-xr-x 3 hushiwei staff 102 3 2 09:53 ../
--rw-r--r-- 1 hushiwei staff 65 3 2 10:00 .gitignore
--rw-r--r-- 1 hushiwei staff 1483 3 2 10:00 _config.yml
-drwxr-xr-x 287 hushiwei staff 9758 3 2 10:06 node_modules/
--rw-r--r-- 1 hushiwei staff 443 3 2 10:00 package.json
-drwxr-xr-x 5 hushiwei staff 170 3 2 10:00 scaffolds/
-drwxr-xr-x 3 hushiwei staff 102 3 2 10:00 source/
+hushiweideMacBook-Pro:test hushiwei$ ll<br/>
+total 24<br/>
+drwxr-xr-x 9 hushiwei staff 306 3 2 10:05 ./<br/>
+drwxr-xr-x 3 hushiwei staff 102 3 2 09:53 ../<br/>
+-rw-r--r-- 1 hushiwei staff 65 3 2 10:00 .gitignore<br/>
+-rw-r--r-- 1 hushiwei staff 1483 3 2 10:00 _config.yml<br/>
+drwxr-xr-x 287 hushiwei staff 9758 3 2 10:06 node_modules/<br/>
+-rw-r--r-- 1 hushiwei staff 443 3 2 10:00 package.json<br/>
+drwxr-xr-x 5 hushiwei staff 170 3 2 10:00 scaffolds/<br/>
+drwxr-xr-x 3 hushiwei staff 102 3 2 10:00 source/<br/>
 drwxr-xr-x 3 hushiwei staff 102 3 2 10:00 themes/
 </code></li>
 </ul>
 
-<h1 id="toc_13">因为你初始化hexo 之后source目录下自带一篇hello world文章, 所以直接执行下方命令</h1>
+<h1 id="toc_4">因为你初始化hexo 之后source目录下自带一篇hello world文章, 所以直接执行下方命令</h1>
 
-<pre><code>$ hexo generate
+<pre class="line-numbers"><code class="language-text">$ hexo generate
 </code></pre>
 
-<h1 id="toc_14">启动本地服务器</h1>
+<h1 id="toc_5">启动本地服务器</h1>
 
-<pre><code>$ hexo server
+<pre class="line-numbers"><code class="language-text">$ hexo server
 </code></pre>
 
-<h1 id="toc_15">在浏览器输入 <a href="http://localhost:4000/%E5%B0%B1%E5%8F%AF%E4%BB%A5%E7%9C%8B%E8%A7%81%E7%BD%91%E9%A1%B5%E5%92%8C%E6%A8%A1%E6%9D%BF%E4%BA%86">http://localhost:4000/就可以看见网页和模板了</a></h1>
+<h1 id="toc_6">在浏览器输入 <a href="http://localhost:4000/%E5%B0%B1%E5%8F%AF%E4%BB%A5%E7%9C%8B%E8%A7%81%E7%BD%91%E9%A1%B5%E5%92%8C%E6%A8%A1%E6%9D%BF%E4%BA%86">http://localhost:4000/就可以看见网页和模板了</a></h1>
 
-<pre><code>INFO Start processing
+<pre class="line-numbers"><code class="language-text">INFO Start processing
 INFO Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.
 </code></pre>
 
@@ -321,15 +317,15 @@ INFO Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.
 <p>我们只需要在 配置文件中把 deploy 改成这样就行了.<br/>
 repo 这个 GitHub 的仓库我们需要提前在 GitHub 上建好.<br/>
 仓库名为:Timehsw.github.io(Timehsw为我的 GitHub 用户名)<br/>
-然后设置 ssh 免密码登录即可.不需要再 GitHub 上配置其他的什么东西了.真的非常简单.<br/>
-<code><br/>
-deploy:<br/>
-  type: git<br/>
-  repo: https://github.com/Timehsw/Timehsw.github.io.git<br/>
-  branch: master<br/>
-</code></p>
+然后设置 ssh 免密码登录即可.不需要再 GitHub 上配置其他的什么东西了.真的非常简单.</p>
 
-<h1 id="toc_16">部署到github上后,如何找到自己的博客地址?</h1>
+<pre class="line-numbers"><code class="language-text">deploy:
+  type: git
+  repo: https://github.com/Timehsw/Timehsw.github.io.git
+  branch: master
+</code></pre>
+
+<h1 id="toc_7">部署到github上后,如何找到自己的博客地址?</h1>
 
 <p>部署到github上后,打开自己这个项目,然后找到 <strong>setting</strong> 选项卡.拉到Github Pages,这里会显示出你的博客地址.<br/>
 我因为是做了域名映射,所以这里显示的是我的域名.<br/>
@@ -339,180 +335,151 @@ deploy:<br/>
 <p>就像我这样取就行了<br/>
 <img src="/images/pics/githubblogname.png" alt="blogname"/></p>
 
-<h1 id="toc_17">搭建一个可以显示数学公式的hexo博客</h1>
+<h1 id="toc_8">搭建一个可以显示数学公式的hexo博客</h1>
 
 <blockquote>
 <p>利用MathJax来渲染LaTeX数学公式</p>
 </blockquote>
 
-<h2 id="toc_18">安装方式也很简单，在博客文件夹下执行</h2>
+<h2 id="toc_9">安装方式也很简单，在博客文件夹下执行</h2>
 
-<pre><code>npm install hexo-math --save
+<pre class="line-numbers"><code class="language-text">npm install hexo-math --save
 hexo math install
 </code></pre>
 
-<h2 id="toc_19">然后写博客的时候就可以用上了</h2>
+<h2 id="toc_10">然后写博客的时候就可以用上了</h2>
 
 <p>如果不会用MathJax写公式,可以借助于这个网站,非常方便<br/>
 <a href="https://webdemo.myscript.com/views/math.html">在线数学公式编辑器</a></p>
 
-<h2 id="toc_20">示例</h2>
+<h2 id="toc_11">示例</h2>
 
 <p>看图片所示<br/>
 <img src="/images/pics/mathweb.png" alt="在线数学公式编辑器"/></p>
 
-<h1 id="toc_21">配置博客</h1>
+<h1 id="toc_12">配置博客</h1>
 
-<p>基于上一步，我们对博客修改相应的配置，我们用到_config.yml文件，下面是该文件的默认参数信息：<br/>
-```</p>
+<p>基于上一步，我们对博客修改相应的配置，我们用到_config.yml文件，下面是该文件的默认参数信息：</p>
 
-<h1 id="toc_22">Hexo Configuration</h1>
-
-<h2 id="toc_23">Docs: <a href="http://hexo.io/docs/configuration.html">http://hexo.io/docs/configuration.html</a></h2>
-
-<h2 id="toc_24">Source: <a href="https://github.com/hexojs/hexo/">https://github.com/hexojs/hexo/</a></h2>
-
-<h1 id="toc_25">Site #站点信息</h1>
-
-<p>title: #标题<br/>
-subtitle: #副标题<br/>
-description: #站点描述，给搜索引擎看的<br/>
-author: #作者<br/>
-email: #电子邮箱<br/>
-language: zh-CN #语言</p>
-
-<h1 id="toc_26">URL #链接格式</h1>
-
-<p>url: #网址<br/>
-root: / #根目录<br/>
-permalink: :year/:month/:day/:title/ #文章的链接格式<br/>
-tag_dir: tags #标签目录<br/>
-archive_dir: archives #存档目录<br/>
-category_dir: categories #分类目录<br/>
-code_dir: downloads/code<br/>
-permalink_defaults:</p>
-
-<h1 id="toc_27">Directory #目录</h1>
-
-<p>source_dir: source #源文件目录<br/>
-public_dir: public #生成的网页文件目录</p>
-
-<h1 id="toc_28">Writing #写作</h1>
-
-<p>new_post_name: :title.md #新文章标题<br/>
-default_layout: post #默认的模板，包括 post、page、photo、draft（文章、页面、照片、草稿）<br/>
-titlecase: false #标题转换成大写<br/>
-external_link: true #在新选项卡中打开连接<br/>
-filename_case: 0<br/>
-render_drafts: false<br/>
-post_asset_folder: false<br/>
-relative_link: false<br/>
-highlight: #语法高亮<br/>
-  enable: true #是否启用<br/>
-  line_number: true #显示行号<br/>
-  tab_replace:</p>
-
-<h1 id="toc_29">Category &amp; Tag #分类和标签</h1>
-
-<p>default_category: uncategorized #默认分类<br/>
-category_map:<br/>
-tag_map:</p>
-
-<h1 id="toc_30">Archives</h1>
-
-<p>2: 开启分页<br/>
-1: 禁用分页<br/>
-0: 全部禁用<br/>
-archive: 2<br/>
-category: 2<br/>
-tag: 2</p>
-
-<h1 id="toc_31">Server #本地服务器</h1>
-
-<p>port: 4000 #端口号<br/>
-server_ip: localhost #IP 地址<br/>
-logger: false<br/>
-logger_format: dev</p>
-
-<h1 id="toc_32">Date / Time format #日期时间格式</h1>
-
-<p>date_format: YYYY-MM-DD #参考<a href="http://momentjs.com/docs/#/displaying/format/">http://momentjs.com/docs/#/displaying/format/</a><br/>
-time_format: H:mm:ss</p>
-
-<h1 id="toc_33">Pagination #分页</h1>
-
-<p>per_page: 10 #每页文章数，设置成 0 禁用分页<br/>
-pagination_dir: page</p>
-
-<h1 id="toc_34">Disqus #Disqus评论，替换为多说</h1>
-
-<p>disqus_shortname:</p>
-
-<h1 id="toc_35">Extensions #拓展插件</h1>
-
-<p>theme: landscape-plus #主题<br/>
-exclude_generator:<br/>
-plugins: #插件，例如生成 RSS 和站点地图的<br/>
-- hexo-generator-feed<br/>
-- hexo-generator-sitemap</p>
-
-<h1 id="toc_36">Deployment #部署，将 lmintlcx 改成用户名</h1>
-
-<p>deploy:<br/>
-  type: git<br/>
-  repo: 刚刚github创库地址.git<br/>
-  branch: master<br/>
-```<br/>
-+ 注意<br/>
-特别提醒，在每个参数的：后都要加一个空格</p>
-
-<ul>
-<li>修改网站相关信息
-<code>
-title: Time渐行渐远
-subtitle:Coding Changing The World
-description: 时间渐行渐远
-author: Hushiwei
-language: zh-CN
-timezone: Asia/Shanghai
-</code>
-# 配置部署（修改成自己的）
-<code>
+<pre class="line-numbers"><code class="language-text"># Hexo Configuration
+## Docs: http://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+# Site #站点信息
+title: #标题
+subtitle: #副标题
+description: #站点描述，给搜索引擎看的
+author: #作者
+email: #电子邮箱
+language: zh-CN #语言
+# URL #链接格式
+url: #网址
+root: / #根目录
+permalink: :year/:month/:day/:title/ #文章的链接格式
+tag_dir: tags #标签目录
+archive_dir: archives #存档目录
+category_dir: categories #分类目录
+code_dir: downloads/code
+permalink_defaults:
+# Directory #目录
+source_dir: source #源文件目录
+public_dir: public #生成的网页文件目录
+# Writing #写作
+new_post_name: :title.md #新文章标题
+default_layout: post #默认的模板，包括 post、page、photo、draft（文章、页面、照片、草稿）
+titlecase: false #标题转换成大写
+external_link: true #在新选项卡中打开连接
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+highlight: #语法高亮
+  enable: true #是否启用
+  line_number: true #显示行号
+  tab_replace:
+# Category &amp; Tag #分类和标签
+default_category: uncategorized #默认分类
+category_map:
+tag_map:
+# Archives
+2: 开启分页
+1: 禁用分页
+0: 全部禁用
+archive: 2
+category: 2
+tag: 2
+# Server #本地服务器
+port: 4000 #端口号
+server_ip: localhost #IP 地址
+logger: false
+logger_format: dev
+# Date / Time format #日期时间格式
+date_format: YYYY-MM-DD #参考http://momentjs.com/docs/#/displaying/format/
+time_format: H:mm:ss
+# Pagination #分页
+per_page: 10 #每页文章数，设置成 0 禁用分页
+pagination_dir: page
+# Disqus #Disqus评论，替换为多说
+disqus_shortname:
+# Extensions #拓展插件
+theme: landscape-plus #主题
+exclude_generator:
+plugins: #插件，例如生成 RSS 和站点地图的
+- hexo-generator-feed
+- hexo-generator-sitemap
+# Deployment #部署，将 lmintlcx 改成用户名
 deploy:
-type: git
-repo: https://github.com/Timehsw/Timehsw.github.io.git
-branch: master
-</code></li>
-</ul>
-
-<h1 id="toc_37">增加站内搜索Local Search</h1>
-
-<h2 id="toc_38">安装 hexo-generator-searchdb，在站点的根目录下执行以下命令：</h2>
-
-<pre><code class="language-$xslt">$ npm install hexo-generator-searchdb --save
+  type: git
+  repo: 刚刚github创库地址.git
+  branch: master
 </code></pre>
 
-<h2 id="toc_39">编辑 站点配置文件，新增以下内容到任意位置：</h2>
+<ul>
+<li><p>注意<br/>
+特别提醒，在每个参数的：后都要加一个空格</p></li>
+<li><p>修改网站相关信息</p>
+<pre class="line-numbers"><code class="language-text">title: Time渐行渐远
+subtitle:Coding Changing The World<br/>
+description: 时间渐行渐远<br/>
+author: Hushiwei<br/>
+language: zh-CN<br/>
+timezone: Asia/Shanghai
+</code></pre>
+<h1 id="toc_13">配置部署（修改成自己的）</h1>
+<pre class="line-numbers"><code class="language-text">deploy:
+type: git<br/>
+repo: https://github.com/Timehsw/Timehsw.github.io.git<br/>
+branch: master
+</code></pre></li>
+</ul>
 
-<pre><code>search:
+<h1 id="toc_14">增加站内搜索Local Search</h1>
+
+<h2 id="toc_15">安装 hexo-generator-searchdb，在站点的根目录下执行以下命令：</h2>
+
+<pre class="line-numbers"><code class="language-$xslt">$ npm install hexo-generator-searchdb --save
+</code></pre>
+
+<h2 id="toc_16">编辑 站点配置文件，新增以下内容到任意位置：</h2>
+
+<pre class="line-numbers"><code class="language-text">search:
   path: search.xml
   field: post
   format: html
   limit: 10000
 </code></pre>
 
-<h2 id="toc_40">编辑 主题配置文件，启用本地搜索功能：</h2>
+<h2 id="toc_17">编辑 主题配置文件，启用本地搜索功能：</h2>
 
-<pre><code class="language-$xslt"># Local search
+<pre class="line-numbers"><code class="language-$xslt"># Local search
 local_search:
   enable: true
 </code></pre>
 
-<h1 id="toc_41">绑定自己的域名(可选)</h1>
+<h1 id="toc_18">绑定自己的域名(可选)</h1>
 
-<h2 id="toc_42">首先获取 gitpage 的 ip 地址</h2>
+<h2 id="toc_19">首先获取 gitpage 的 ip 地址</h2>
 
-<pre><code class="language-$xslt">hushiweideMacBook-Pro:myblog hushiwei$ ping timehsw.github.io
+<pre class="line-numbers"><code class="language-$xslt">hushiweideMacBook-Pro:myblog hushiwei$ ping timehsw.github.io
 PING github.map.fastly.net (151.101.100.133): 56 data bytes
 64 bytes from 151.101.100.133: icmp_seq=0 ttl=52 time=63.278 ms
 64 bytes from 151.101.100.133: icmp_seq=1 ttl=52 time=63.262 ms
@@ -525,26 +492,26 @@ PING github.map.fastly.net (151.101.100.133): 56 data bytes
 
 <p><strong>注意:</strong> 这里ip可能会变,多ping几次,发现ip不变后,再进行下面的域名和ip的映射.</p>
 
-<h2 id="toc_43">设置域名与 ip 的解析</h2>
+<h2 id="toc_20">设置域名与 ip 的解析</h2>
 
 <p>如图所示,增加两条即可,除了 ip 地址写成自己的,其他的都一样.<br/>
 <img src="/images/pics/gitpage.png" alt="gitpage"/></p>
 
-<h2 id="toc_44">增加 CNAME</h2>
+<h2 id="toc_21">增加 CNAME</h2>
 
 <p>在 hexo 博客的 <strong>source</strong> 文件夹下新建一个名为<strong>CNAME</strong>的文件,无后缀名.内容为你的域名.即可</p>
 
-<h1 id="toc_45">问题</h1>
+<h1 id="toc_22">问题</h1>
 
 <ul>
 <li>部署的时候出现
 <code>
-hushiweideMacBook-Pro:test hushiwei$ hexo deploy
+hushiweideMacBook-Pro:test hushiwei$ hexo deploy<br/>
 ERROR Deployer not found: git
 </code></li>
 <li>解决办法
 <code>
-npm install hexo-deployer-git --save
+npm install hexo-deployer-git --save<br/>
 重新 deploy 即可
 </code></li>
 <li>阅读全文
@@ -701,31 +668,31 @@ npm install hexo-deployer-git --save
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -800,7 +767,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

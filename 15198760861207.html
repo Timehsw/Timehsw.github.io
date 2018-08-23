@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -188,9 +195,12 @@
 <h1 id="toc_0">概述</h1>
 
 <p>对于java程序员来说,在虚拟机的自动内存管理机制的帮助下,不再需要为每一个new操作去写配对的delete/free代码(C/C++语言是需要的),而且不容易出现内存泄漏和内存溢出问题,看起来由虚拟机管理内存一切都很美好.不过,也正是因为java程序员把内存控制的权利交给了Java虚拟机,一旦出现内存泄露和溢出方面的问题,如果不了解虚拟机是怎样使用内存的,那排查错误将会成为一项异常艰难的工作.<br/>
-在这篇文章里,我们会写到这几个部分,了解了这几个部分,也就可以翻越虚拟机内存管理的第一步.<br/>
-+ java虚拟机内存的各个区域<br/>
-+ 各个区域的作用,服务对象,以及其中可能产生的问题</p>
+在这篇文章里,我们会写到这几个部分,了解了这几个部分,也就可以翻越虚拟机内存管理的第一步.</p>
+
+<ul>
+<li>java虚拟机内存的各个区域</li>
+<li>各个区域的作用,服务对象,以及其中可能产生的问题</li>
+</ul>
 
 <h1 id="toc_1">运行时数据区域</h1>
 
@@ -219,23 +229,30 @@
 </blockquote>
 
 <p>我们平时所说的栈内存,也就是这里的虚拟机栈.那么这个虚拟机栈究竟是什么呢?<br/>
-虚拟机栈描述的是java方法执行的内存模型:<br/>
-+ 每个方法被执行的时候都会同时创建一个 <strong>栈帧(Stack Frame)</strong> 用于存储<code>局部变量表</code>,<code>操作栈</code>,<code>动态链接</code>,<code>方法出口</code>等信息.<br/>
-+ 每一个方法被调用直至执行完成的过程,就对应着一个 <strong>栈帧</strong> 在虚拟机栈中从入栈到出栈的过程.</p>
+虚拟机栈描述的是java方法执行的内存模型:</p>
 
-<p>提一下局部变量表:<br/>
-+ 局部变量表存放了编译期可知的各种基本数据类型(boolean,byte,char,short,int,float,long,double),对象引用(reference类型,它不等同于对象本身).<br/>
-+ 局部变量表所需的内存空间在编译期间完成分配,当进入一个方法时,这个方法需要在帧中分配多大的局部变量空间是完全确定的,在方法运行期间不会改变局部变量表的大小.<br/>
-+ 局部变量表区域可能会抛出两种异常状况<br/>
-  + 如果线程请求的栈深度大于虚拟机所允许的深度,将抛出StackOverflowError异常.<br/>
-  + 如果虚拟机可以动态扩展,当扩展时无法申请到足够的内存时会抛出OutOfMemoryError.</p>
+<ul>
+<li>每个方法被执行的时候都会同时创建一个 <strong>栈帧(Stack Frame)</strong> 用于存储<code>局部变量表</code>,<code>操作栈</code>,<code>动态链接</code>,<code>方法出口</code>等信息.</li>
+<li>每一个方法被调用直至执行完成的过程,就对应着一个 <strong>栈帧</strong> 在虚拟机栈中从入栈到出栈的过程.</li>
+</ul>
+
+<p>提一下局部变量表:</p>
+
+<ul>
+<li>局部变量表存放了编译期可知的各种基本数据类型(boolean,byte,char,short,int,float,long,double),对象引用(reference类型,它不等同于对象本身).</li>
+<li>局部变量表所需的内存空间在编译期间完成分配,当进入一个方法时,这个方法需要在帧中分配多大的局部变量空间是完全确定的,在方法运行期间不会改变局部变量表的大小.</li>
+<li>局部变量表区域可能会抛出两种异常状况
+<ul>
+<li>如果线程请求的栈深度大于虚拟机所允许的深度,将抛出StackOverflowError异常.</li>
+<li>如果虚拟机可以动态扩展,当扩展时无法申请到足够的内存时会抛出OutOfMemoryError.</li>
+</ul></li>
+</ul>
 
 <h2 id="toc_4">本地方法栈</h2>
 
 <ul>
 <li>本地方法栈(Native Method Stacks)与虚拟机所发挥的作用是非常相似的</li>
 <li>本地方法栈与虚拟机栈的区别
-
 <ul>
 <li>虚拟机栈为虚拟机执行Java方法(也就是字节码)服务</li>
 <li>本地方法栈则是为虚拟机使用到的Native方法服务</li>
@@ -248,36 +265,51 @@
 
 <h2 id="toc_5">Java堆</h2>
 
-<p><strong>堆内存的特点</strong><br/>
-+ 对于大多数应用来说,Java堆(Java heap)是Java虚拟机所管理的内存中最大的一块.<br/>
-+ Java堆是被所有线程共享的一块内存区域,<strong>在虚拟机启动时创建</strong> .<br/>
-+ Java堆内存区域的唯一目的就是存放对象实例,几乎所有的对象实例都是在这里分配内存.<br/>
-+ Java堆是垃圾收集器管理的主要区域.因为那么多实例在堆上分配内存,实例用完后,我们肯定要及时回收内存,这样才能给新的实例分配足够的内存呢.<br/>
-+ Java堆可以处于物理上不连续的内存空间中,只要逻辑上是连续的即可,就像我们的磁盘空间一样.<br/>
-+ 如果在堆中没有内存完成实例分配,并且堆也无法再扩展时,将会抛出OutOfMemoryErrory异常.</p>
+<p><strong>堆内存的特点</strong></p>
 
-<p><strong>再细分一下堆内存</strong><br/>
-+ 从垃圾回收的角度看<br/>
-  + 因为现在的垃圾收集器都是采用分代收集算法,所以Java堆中还可以细分为:<code>新生代</code>,<code>老年代</code>,等等区域.<br/>
-  + 后面写到垃圾回收的时候,再细说这部分.<br/>
-+ 从内存分配的角度看<br/>
-  + 线程共享的Java堆中可能划分出多个线程私有的分配缓存区<br/>
-+ 在实现上<br/>
-  + 既可以实现成固定大小的,也可以是扩展的.<br/>
-  + 不过目前主流的虚拟机都是按照可扩展来实现的<br/>
-  + <code>-Xmx</code>来设置程序的堆内存大小<br/>
-  + <code>-Xms</code>来设置程序的栈内存大小</p>
+<ul>
+<li>对于大多数应用来说,Java堆(Java heap)是Java虚拟机所管理的内存中最大的一块.</li>
+<li>Java堆是被所有线程共享的一块内存区域,<strong>在虚拟机启动时创建</strong> .</li>
+<li>Java堆内存区域的唯一目的就是存放对象实例,几乎所有的对象实例都是在这里分配内存.</li>
+<li>Java堆是垃圾收集器管理的主要区域.因为那么多实例在堆上分配内存,实例用完后,我们肯定要及时回收内存,这样才能给新的实例分配足够的内存呢.</li>
+<li>Java堆可以处于物理上不连续的内存空间中,只要逻辑上是连续的即可,就像我们的磁盘空间一样.</li>
+<li>如果在堆中没有内存完成实例分配,并且堆也无法再扩展时,将会抛出OutOfMemoryErrory异常.</li>
+</ul>
+
+<p><strong>再细分一下堆内存</strong></p>
+
+<ul>
+<li>从垃圾回收的角度看
+<ul>
+<li>因为现在的垃圾收集器都是采用分代收集算法,所以Java堆中还可以细分为:<code>新生代</code>,<code>老年代</code>,等等区域.</li>
+<li>后面写到垃圾回收的时候,再细说这部分.</li>
+</ul></li>
+<li>从内存分配的角度看
+<ul>
+<li>线程共享的Java堆中可能划分出多个线程私有的分配缓存区</li>
+</ul></li>
+<li>在实现上
+<ul>
+<li>既可以实现成固定大小的,也可以是扩展的.</li>
+<li>不过目前主流的虚拟机都是按照可扩展来实现的</li>
+<li><code>-Xmx</code>来设置程序的堆内存大小</li>
+<li><code>-Xms</code>来设置程序的栈内存大小</li>
+</ul></li>
+</ul>
 
 <h2 id="toc_6">方法区</h2>
 
 <blockquote>
 <p>方法区(Method Area)<br/>
-<strong>方法区的特点</strong><br/>
-+ 方法区与Java堆一样,是各个线程共享的内存区域.<br/>
-+ 它用于存储已被虚拟机加载的类信息,常量,静态变量,即时编译器编译后的代码等数据.<br/>
-+ 然后Java虚拟机规范把方法区描述为堆的一个逻辑部分,但是它却有一个别名叫做Non-Heap(非堆),目的应该是与Java堆区分开来.<br/>
-+ 方法区被有些人称为&quot;永久代(Permanent Generation)&quot;是因为GC分代收集时候,方法区的变量会在永久代区域.<br/>
-+ 当方法区无法满足内存分区需求时,将抛出OutOfMemoryErrory异常.</p>
+<strong>方法区的特点</strong></p>
+
+<ul>
+<li>方法区与Java堆一样,是各个线程共享的内存区域.</li>
+<li>它用于存储已被虚拟机加载的类信息,常量,静态变量,即时编译器编译后的代码等数据.</li>
+<li>然后Java虚拟机规范把方法区描述为堆的一个逻辑部分,但是它却有一个别名叫做Non-Heap(非堆),目的应该是与Java堆区分开来.</li>
+<li>方法区被有些人称为&quot;永久代(Permanent Generation)&quot;是因为GC分代收集时候,方法区的变量会在永久代区域.</li>
+<li>当方法区无法满足内存分区需求时,将抛出OutOfMemoryErrory异常.</li>
+</ul>
 </blockquote>
 
 <h2 id="toc_7">运行时常量池</h2>
@@ -303,15 +335,21 @@
 <strong>在Java语言中,对象访问是如何进行的?</strong></p>
 </blockquote>
 
-<p>看这行最简单的代码,我们来解释这行代码.<br/>
-<code><br/>
-Object obj=new Object();<br/>
-</code><br/>
-假设这句代码出现在方法体中,那么<br/>
-+ <strong>Object obj</strong> 这部分的语义将会反映到 <strong>Java栈的本地变量表</strong> 中,作为一个reference类型数据出现.<br/>
-+ <strong>new Object()</strong> 这部分的语义将会反映到 <strong>Java堆</strong> 中,形成一块存储了Object类型所有实例数据值的结构化内存.<br/>
-  + 这块内存的长度是不固定<br/>
-  + 另外,在这个堆中还必须包含能查找到此对象类型数据(如对象类型,父类,实现的接口,方法等)的地址信息,这些类型数据则存储在方法区.</p>
+<p>看这行最简单的代码,我们来解释这行代码.</p>
+
+<pre class="line-numbers"><code class="language-text">Object obj=new Object();
+</code></pre>
+
+<p>假设这句代码出现在方法体中,那么</p>
+
+<ul>
+<li><strong>Object obj</strong> 这部分的语义将会反映到 <strong>Java栈的本地变量表</strong> 中,作为一个reference类型数据出现.</li>
+<li><strong>new Object()</strong> 这部分的语义将会反映到 <strong>Java堆</strong> 中,形成一块存储了Object类型所有实例数据值的结构化内存.
+<ul>
+<li>这块内存的长度是不固定</li>
+<li>另外,在这个堆中还必须包含能查找到此对象类型数据(如对象类型,父类,实现的接口,方法等)的地址信息,这些类型数据则存储在方法区.</li>
+</ul></li>
+</ul>
 
 
     
@@ -460,31 +498,31 @@ Object obj=new Object();<br/>
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -559,7 +597,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

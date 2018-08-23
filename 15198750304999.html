@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -183,7 +190,7 @@
       <div class="article-content">
       <h1 id="toc_0">maven 阿里云镜像</h1>
 
-<pre><code class="language-$xslt">&lt;mirror&gt;
+<pre class="line-numbers"><code class="language-$xslt">&lt;mirror&gt;
       &lt;id&gt;alimaven&lt;/id&gt;
       &lt;name&gt;aliyun maven&lt;/name&gt;
       &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;
@@ -195,7 +202,7 @@
 
 <h1 id="toc_1">或者在pom.xml中写入</h1>
 
-<pre><code>&lt;repositories&gt;
+<pre class="line-numbers"><code class="language-text">&lt;repositories&gt;
         &lt;repository&gt;
             &lt;id&gt;nexus-aliyun&lt;/id&gt;
             &lt;name&gt;Nexus aliyun&lt;/name&gt;
@@ -206,24 +213,27 @@
 
 <h1 id="toc_2">手动添加依赖到仓库</h1>
 
-<p>当mvn工程中，有依赖下载不下来的时候，手动添加依赖到仓库中的办法<br/>
-```$xslt<br/>
-各个内容是以：分隔<br/>
-DgroupId：<br/>
-DartifactId：<br/>
-Dversion：<br/>
-Dfile：手动下载的jar包的位置<br/>
-mvn install:install-file -DgroupId=org.eclipse.paho -DartifactId=org.eclipse.paho.client.mqttv3 -Dversion=1.0.1 -Dpackaging=jar -Dfile=E:/org.eclipse.paho.client.mqttv3-1.0.1.jar</p>
+<p>当mvn工程中，有依赖下载不下来的时候，手动添加依赖到仓库中的办法</p>
 
-<p>然后再Dos窗口执行上面的命令即可</p>
+<pre class="line-numbers"><code class="language-$xslt">各个内容是以：分隔
+DgroupId：
+DartifactId：
+Dversion：
+Dfile：手动下载的jar包的位置
+mvn install:install-file -DgroupId=org.eclipse.paho -DartifactId=org.eclipse.paho.client.mqttv3 -Dversion=1.0.1 -Dpackaging=jar -Dfile=E:/org.eclipse.paho.client.mqttv3-1.0.1.jar
 
-<pre><code>
-# maven 中打包的依赖
-+ 注意：
-放在pom的最后面, 改下你的jdk版本和代码路径
+然后再Dos窗口执行上面的命令即可
 
-```$xslt
-&lt;build&gt;
+</code></pre>
+
+<h1 id="toc_3">maven 中打包的依赖</h1>
+
+<ul>
+<li>注意：<br/>
+放在pom的最后面, 改下你的jdk版本和代码路径</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-$xslt">&lt;build&gt;
     &lt;sourceDirectory&gt;src/main/java&lt;/sourceDirectory&gt;
     &lt;testSourceDirectory&gt;src/test/java&lt;/testSourceDirectory&gt;
     &lt;resources&gt;
@@ -268,9 +278,9 @@ mvn install:install-file -DgroupId=org.eclipse.paho -DartifactId=org.eclipse.pah
   &lt;/build&gt;
 </code></pre>
 
-<h1 id="toc_3">编译打包scala</h1>
+<h1 id="toc_4">编译打包scala</h1>
 
-<pre><code class="language-$xslt">&lt;plugin&gt;
+<pre class="line-numbers"><code class="language-$xslt">&lt;plugin&gt;
   &lt;groupId&gt;org.scala-tools&lt;/groupId&gt;
   &lt;artifactId&gt;maven-scala-plugin&lt;/artifactId&gt;
   &lt;!--  &lt;version&gt;2.15.2&lt;/version&gt;   --&gt;
@@ -432,31 +442,31 @@ mvn install:install-file -DgroupId=org.eclipse.paho -DartifactId=org.eclipse.pah
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -531,7 +541,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

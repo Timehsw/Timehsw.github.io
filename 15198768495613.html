@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -203,14 +210,14 @@ marvel自建的索引一天可以产生大概500M的数据，而且将会越来�
 按照 <a href="http://blog.csdn.net/hereiskxm/article/details/47423715">http://blog.csdn.net/hereiskxm/article/details/47423715</a>  这个博客,我装了3.3.0版本.<br/>
 显示也不对.</p>
 
-<p>然后我搜了一下,感觉应该装一个中间的版本,因此我安装了4.0.0版本<br/>
-<code><br/>
-pip install elasticsearch-curator (4.0.0)<br/>
-</code></p>
+<p>然后我搜了一下,感觉应该装一个中间的版本,因此我安装了4.0.0版本</p>
+
+<pre class="line-numbers"><code class="language-text">pip install elasticsearch-curator (4.0.0)
+</code></pre>
 
 <p>然后我看了一下这个版本提供的参数</p>
 
-<pre><code> curator --help
+<pre class="line-numbers"><code class="language-text"> curator --help
 Usage: curator [OPTIONS] ACTION_FILE
 
   Curator for Elasticsearch indices.
@@ -237,7 +244,7 @@ Options:
 
 <p>新建目录 /opt/curator</p>
 
-<pre><code>~ pwd
+<pre class="line-numbers"><code class="language-text">~ pwd
 /opt/curator
 ~ ll
 total 12
@@ -248,7 +255,7 @@ drwxr-xr-x 2 root root 4096 Dec 12 10:49 logs
 
 <h2 id="toc_3">config_file.yml</h2>
 
-<pre><code># 记住,这个logfile得提前新建好.不然会启动报错.
+<pre class="line-numbers"><code class="language-text"># 记住,这个logfile得提前新建好.不然会启动报错.
 vim config_file.yml
 
 ---
@@ -268,84 +275,79 @@ logging:
 
 <p>删除以.marvel前缀且是2天之前的索引</p>
 
-<h2 id="toc_5">```</h2>
+<pre class="line-numbers"><code class="language-text">---
+# Remember, leave a key empty if there is no value.  None will be a string,
+# not a Python &quot;NoneType&quot;
+#
+# Also remember that all examples have &#39;disable_action&#39; set to True.  If you
+# want to use this action as a template, be sure to set this to False after
+# copying it.
+actions:
+  1:
+    action: delete_indices
+    description: &gt;-
+      Delete indices older than 30 days (based on index name), for rc- prefixed indices.
+    options:
+      ignore_empty_list: True
+      timeout_override:
+      continue_if_exception: False
+      disable_action: False
+    filters:
+    - filtertype: pattern
+      kind: prefix
+      value: rc-
+      exclude:
+    - filtertype: age
+      source: name
+      direction: older
+      timestring: &#39;%Y.%m.%d&#39;
+      unit: days
+      unit_count: 30
+      exclude:
+  2:
+    action: delete_indices
+    description: &gt;-
 
-<h1 id="toc_6">Remember, leave a key empty if there is no value.  None will be a string,</h1>
-
-<h1 id="toc_7">not a Python &quot;NoneType&quot;</h1>
-
-<h1 id="toc_8">Also remember that all examples have &#39;disable_action&#39; set to True.  If you</h1>
-
-<h1 id="toc_9">want to use this action as a template, be sure to set this to False after</h1>
-
-<h1 id="toc_10">copying it.</h1>
-
-<p>actions:<br/>
-  1:<br/>
-    action: delete_indices<br/>
-    description: &gt;-<br/>
-      Delete indices older than 30 days (based on index name), for rc- prefixed indices.<br/>
-    options:<br/>
-      ignore_empty_list: True<br/>
-      timeout_override:<br/>
-      continue_if_exception: False<br/>
-      disable_action: False<br/>
-    filters:<br/>
-    - filtertype: pattern<br/>
-      kind: prefix<br/>
-      value: rc-<br/>
-      exclude:<br/>
-    - filtertype: age<br/>
-      source: name<br/>
-      direction: older<br/>
-      timestring: &#39;%Y.%m.%d&#39;<br/>
-      unit: days<br/>
-      unit_count: 30<br/>
-      exclude:<br/>
-  2:<br/>
-    action: delete_indices<br/>
-    description: &gt;-</p>
-
-<pre><code>  Delete indices older than 2 days (based on index name), for .marvel prefixed indices.
-options:
-  ignore_empty_list: True
-  timeout_override:
-  continue_if_exception: False
-  disable_action: False
-filters:
-- filtertype: pattern
-  kind: prefix
-  value: .marvel
-  exclude:
-- filtertype: age
-  source: name
-  direction: older
-  timestring: &#39;%Y.%m.%d&#39;
-  unit: days
-  unit_count: 2
-  exclude:
+      Delete indices older than 2 days (based on index name), for .marvel prefixed indices.
+    options:
+      ignore_empty_list: True
+      timeout_override:
+      continue_if_exception: False
+      disable_action: False
+    filters:
+    - filtertype: pattern
+      kind: prefix
+      value: .marvel
+      exclude:
+    - filtertype: age
+      source: name
+      direction: older
+      timestring: &#39;%Y.%m.%d&#39;
+      unit: days
+      unit_count: 2
+      exclude:
 </code></pre>
 
-<pre><code>
-配置完成.
+<p>配置完成.</p>
 
-## 执行命令
+<h2 id="toc_5">执行命令</h2>
 
+<pre class="line-numbers"><code class="language-text">curator --config config_file.yml [--dry-run] delete_marvel_indices.yml
 </code></pre>
 
-<p>curator --config config_file.yml [--dry-run] delete_marvel_indices.yml<br/>
-```</p>
+<p>注意:</p>
 
-<p>注意:<br/>
-1. --dry-run 是可选参数,加上后不会真的删除,只会执行逻辑.你可以通过看日志来判断是否正确.<br/>
-确认正确后,去掉--dry-run参数,再执行命令,既是真正的执行删除了.<br/>
-2. 如果没有在config_file.yml里面配置logfile参数,那么日志会在console打印出来.</p>
+<ol>
+<li>--dry-run 是可选参数,加上后不会真的删除,只会执行逻辑.你可以通过看日志来判断是否正确.<br/>
+确认正确后,去掉--dry-run参数,再执行命令,既是真正的执行删除了.</li>
+<li>如果没有在config_file.yml里面配置logfile参数,那么日志会在console打印出来.</li>
+</ol>
 
-<h1 id="toc_11">配置日常任务</h1>
+<h1 id="toc_6">配置日常任务</h1>
 
 <p>很明显,我们需要自动化这个过程,让它每天自动执行,因此写一个脚本,让crontab每天自动调用即可</p>
 
-<pre><code>#!/bin/bash
+<pre class="line-numbers"><code class="language-text">#!/bin/bash
 
 curator --config /opt/curator/config_file.yml  /opt/curator/delete_marvel_indices.yml
 
@@ -355,7 +357,7 @@ echo &quot;delete success&quot;
 
 <p>配置crontab</p>
 
-<pre><code># 每天2点执行删除脚本
+<pre class="line-numbers"><code class="language-text"># 每天2点执行删除脚本
 0 2 * * * source /etc/profile;bash /opt/curator/delete_marvel_daily.sh &gt; /opt/curator/delete.log 2&gt;&amp;1
 
 </code></pre>
@@ -507,31 +509,31 @@ echo &quot;delete success&quot;
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -606,7 +608,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

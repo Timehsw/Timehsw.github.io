@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -186,7 +193,7 @@
 
 <h1 id="toc_0">安装Homebrew</h1>
 
-<pre><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+<pre class="line-numbers"><code class="language-text">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
 </code></pre>
 
 <span id="more"></span><!-- more -->
@@ -199,7 +206,7 @@
 
 <h2 id="toc_2">安装</h2>
 
-<pre><code>brew tap homebrew/services
+<pre class="line-numbers"><code class="language-text">brew tap homebrew/services
 </code></pre>
 
 <h2 id="toc_3">使用</h2>
@@ -208,7 +215,7 @@
 <li>查看服务</li>
 </ul>
 
-<pre><code>~ brew services list
+<pre class="line-numbers"><code class="language-text">~ brew services list
 Name  Status  User Plist
 mysql stopped
 redis stopped
@@ -218,7 +225,7 @@ redis stopped
 <li>启动服务</li>
 </ul>
 
-<pre><code>启动mysql服务
+<pre class="line-numbers"><code class="language-text">启动mysql服务
 ~ brew services start mysql
   ==&gt; Successfully started mysql (label: homebrew.mxcl.mysql)
 查看服务状态,redis仍然还是停止的
@@ -232,18 +239,18 @@ redis stopped
 <li>停止服务</li>
 </ul>
 
-<pre><code>brew services stop mysql
+<pre class="line-numbers"><code class="language-text">brew services stop mysql
 </code></pre>
 
 <h1 id="toc_4">安装MySQL</h1>
 
-<pre><code>brew info mysql
+<pre class="line-numbers"><code class="language-text">brew info mysql
 brew install mysql
 </code></pre>
 
 <h2 id="toc_5">额外配置</h2>
 
-<pre><code># 安装brew服务
+<pre class="line-numbers"><code class="language-text"># 安装brew服务
 brew tap homebrew/services
 # 启动mysql服务
 brew services start mysql 或者 mysql.server start mysql.server stop
@@ -258,7 +265,7 @@ mysql -uroot -p
 
 <h1 id="toc_6">安装redis</h1>
 
-<pre><code>brew install redis
+<pre class="line-numbers"><code class="language-text">brew install redis
 </code></pre>
 
 <ul>
@@ -272,17 +279,17 @@ mysql -uroot -p
 </code></li>
 <li>卸载redis和它的文件 
 <code>
-brew uninstall redis 
+brew uninstall redis <br/>
 rm ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
 </code></li>
 <li>测试redis server是否启动 
 <code>
 /usr/local/bin/redis-cli ping 或者 redis-cli ping
 </code>
-## brew service管理redis
-``<code>
-# 启动redis服务
-hushiwei@hsw  ~  brew services start redis
+## brew service管理redis<br/>
+``<code><br/>
+# 启动redis服务<br/>
+hushiwei@hsw  ~  brew services start redis<br/>
 ==&gt; Successfully started</code>redis` (label: homebrew.mxcl.redis)</li>
 </ul>
 
@@ -294,8 +301,10 @@ Stopping <code>redis</code>... (might take a while)<br/>
 
 <h1 id="toc_8">启动redis客户端</h1>
 
-<p>/usr/local/bin/redis-cli 或者 redis-cli<br/>
-```</p>
+<p>/usr/local/bin/redis-cli 或者 redis-cli</p>
+
+<pre class="line-numbers"><code class="language-text">
+</code></pre>
 
 
     
@@ -444,31 +453,31 @@ Stopping <code>redis</code>... (might take a while)<br/>
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -543,7 +552,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

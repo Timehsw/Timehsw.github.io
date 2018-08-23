@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -190,7 +197,7 @@
 
 <h1 id="toc_0">用docker下载ubuntu镜像</h1>
 
-<pre><code># 下载ubuntu镜像
+<pre class="line-numbers"><code class="language-text"># 下载ubuntu镜像
 docker pull ubuntu
 # 进入镜像中
 docker run -it ubuntu /bin/bash
@@ -201,7 +208,7 @@ cat /etc/issue
 
 <p>新开一个终端查看</p>
 
-<pre><code> hushiwei@hsw  ~/Docker  docker images
+<pre class="line-numbers"><code class="language-text"> hushiwei@hsw  ~/Docker  docker images
 REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
 ubuntu                latest              f975c5035748        2 weeks ago         112MB
 </code></pre>
@@ -210,20 +217,20 @@ ubuntu                latest              f975c5035748        2 weeks ago       
 
 <p>跟新apt-get,安装常用开发工具</p>
 
-<pre><code>apt-get update
+<pre class="line-numbers"><code class="language-text">apt-get update
 apt-get install vim
 apt-get install sudo
 </code></pre>
 
 <h2 id="toc_2">提高安全意识,添加普通用户</h2>
 
-<pre><code>adduser deploy
+<pre class="line-numbers"><code class="language-text">adduser deploy
 su deploy
 </code></pre>
 
 <h2 id="toc_3">给普通用户sudo权限</h2>
 
-<pre><code># root下执行
+<pre class="line-numbers"><code class="language-text"># root下执行
 chmod 777 /etc/sudoers
 vim /etc/sudoers
 </code></pre>
@@ -233,7 +240,7 @@ vim /etc/sudoers
 
 <p>把这个文件的权限改回去</p>
 
-<pre><code>chmod 440 /etc/sudoers
+<pre class="line-numbers"><code class="language-text">chmod 440 /etc/sudoers
 </code></pre>
 
 <h1 id="toc_4">在容器中进行区块链环境的搭建</h1>
@@ -242,7 +249,7 @@ vim /etc/sudoers
 
 <h2 id="toc_5">安装curl,nodejs</h2>
 
-<pre><code>sudo apt-get install curl
+<pre class="line-numbers"><code class="language-text">sudo apt-get install curl
 
 # 安装nodejs的版本
 root@a43d121b81a0:~# curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
@@ -260,7 +267,7 @@ npm -v
 
 <h2 id="toc_6">安装testrpc,truffle</h2>
 
-<pre><code># 安装淘宝镜像,速度快
+<pre class="line-numbers"><code class="language-text"># 安装淘宝镜像,速度快
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 
 sudo cnpm install -g ethereumjs-testrpc
@@ -274,24 +281,25 @@ sudo cnpm install -g truffle
 
 <p>在开一个窗口,输入<code>docker ps</code> 找到正在运行的容器的<code>CONTAINER ID</code><br/>
 刚刚在这个容器里面安装好了环境,那么我们需要保存一下,所以用docker commit提交这个<br/>
-容器,成为镜像<br/>
-<code><br/>
-docker commit a43d121b81a0 testrpc-truffle-env:v1<br/>
-</code><br/>
-提交后,再查看images,比之前的ubuntu大了不少.毕竟装了那么多工具进去了<br/>
-<code><br/>
- hushiwei@hsw  ~/Docker  docker images<br/>
-REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE<br/>
-testrpc-truffle-env   v1                  a2073b0b64cc        6 minutes ago       503MB<br/>
-ubuntu                latest              f975c5035748        2 weeks ago         112MB<br/>
-</code></p>
+容器,成为镜像</p>
+
+<pre class="line-numbers"><code class="language-text">docker commit a43d121b81a0 testrpc-truffle-env:v1
+</code></pre>
+
+<p>提交后,再查看images,比之前的ubuntu大了不少.毕竟装了那么多工具进去了</p>
+
+<pre class="line-numbers"><code class="language-text"> hushiwei@hsw  ~/Docker  docker images
+REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
+testrpc-truffle-env   v1                  a2073b0b64cc        6 minutes ago       503MB
+ubuntu                latest              f975c5035748        2 weeks ago         112MB
+</code></pre>
 
 <h2 id="toc_8">退出再进去</h2>
 
 <p>现在就算退出运行中的容器,之前安装的工具也都还在了.<br/>
 执行下面的命令即可进入刚刚提交的镜像中.<code>a2073b0b64cc</code>是刚刚提交的镜像的id</p>
 
-<pre><code>docker run -it a2073b0b64cc /bin/bash
+<pre class="line-numbers"><code class="language-text">docker run -it a2073b0b64cc /bin/bash
 </code></pre>
 
 <h1 id="toc_9">安装idea插件进行开发</h1>
@@ -302,7 +310,7 @@ ubuntu                latest              f975c5035748        2 weeks ago       
 
 <p>将本地的<code>/Users/hushiwei/BlockChain/ethereum</code>目录,与容器中的<code>/home/deploy</code>进行共享</p>
 
-<pre><code>docker run -it -v /Users/hushiwei/BlockChain/ethereum:/home/deploy a2073b0b64cc /bin/bash
+<pre class="line-numbers"><code class="language-text">docker run -it -v /Users/hushiwei/BlockChain/ethereum:/home/deploy a2073b0b64cc /bin/bash
 
 </code></pre>
 
@@ -466,31 +474,31 @@ ubuntu                latest              f975c5035748        2 weeks ago       
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -565,7 +573,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

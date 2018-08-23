@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -183,7 +190,7 @@
       <div class="article-content">
       <h2 id="toc_0">给系统更新</h2>
 
-<pre><code>sudo apt-get update
+<pre class="line-numbers"><code class="language-text">sudo apt-get update
 </code></pre>
 
 <h2 id="toc_1">安装sublime3</h2>
@@ -191,18 +198,18 @@
 <ul>
 <li>1.在商店里下载sublime3后</li>
 <li>2.用第一个这个就可以注册成功
-&lt;!-- more --&gt;
-```
-Ryan Clark
-Single User License
-EA7E-812479
-2158A7DE B690A7A3 8EC04710 006A5EEB
-34E77CA3 9C82C81F 0DB6371B 79704E6F
-93F36655 B031503A 03257CCC 01B20F60
-D304FA8D B1B4F0AF 8A76C7BA 0FA94D55
-56D46BCE 5237A341 CD837F30 4D60772D
-349B1179 A996F826 90CDB73C 24D41245
-FD032C30 AD5E7241 4EAA66ED 167D91FB
+<span id="more"></span><!-- more -->
+```<br/>
+Ryan Clark<br/>
+Single User License<br/>
+EA7E-812479<br/>
+2158A7DE B690A7A3 8EC04710 006A5EEB<br/>
+34E77CA3 9C82C81F 0DB6371B 79704E6F<br/>
+93F36655 B031503A 03257CCC 01B20F60<br/>
+D304FA8D B1B4F0AF 8A76C7BA 0FA94D55<br/>
+56D46BCE 5237A341 CD837F30 4D60772D<br/>
+349B1179 A996F826 90CDB73C 24D41245<br/>
+FD032C30 AD5E7241 4EAA66ED 167D91FB<br/>
 55896B16 EA125C81 F550AF6B A6820916</li>
 </ul>
 
@@ -216,92 +223,97 @@ B085E65E 2F5F5360 8489D422 FB8FC1AA<br/>
 93F6323C FD7F7544 3F39C318 D95E6480<br/>
 FCCC7561 8A4A1741 68FA4223 ADCEDE07<br/>
 200C25BE DBBC4855 C4CFB774 C5EC138C<br/>
-0FEC1CEF D9DCECEC D3A5DAD1 01316C36<br/>
-```</p>
+0FEC1CEF D9DCECEC D3A5DAD1 01316C36</p>
 
-<ul>
-<li>3.安装插件包管理</li>
-</ul>
+<pre class="line-numbers"><code class="language-text">
++ 3.安装插件包管理
 
-<pre><code>import urllib.request,os; pf = &#39;Package Control.sublime-package&#39;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), &#39;wb&#39;).write(urllib.request.urlopen( &#39;http://sublime.wbond.net/&#39; + pf.replace(&#39; &#39;,&#39;%20&#39;)).read())
 </code></pre>
 
-<h2 id="toc_2">安装java,scala,mvn,intellij idea</h2>
+<p>import urllib.request,os; pf = &#39;Package Control.sublime-package&#39;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), &#39;wb&#39;).write(urllib.request.urlopen( &#39;<a href="http://sublime.wbond.net/">http://sublime.wbond.net/</a>&#39; + pf.replace(&#39; &#39;,&#39;%20&#39;)).read())</p>
 
-<ul>
-<li>1.解压tar包</li>
-<li>2.设置环境变量</li>
-<li>3.加载环境变量以生效</li>
-</ul>
+<pre class="line-numbers"><code class="language-text">
+## 安装java,scala,mvn,intellij idea
++ 1.解压tar包
++ 2.设置环境变量
++ 3.加载环境变量以生效
 
-<h2 id="toc_3">安装Mysql</h2>
+## 安装Mysql
 
-<p>ubuntu上安装MySQL非常简单只需要几条命令就可以完成。<br/>
-```<br/>
-　　1. sudo apt-get install mysql-server</p>
+ubuntu上安装MySQL非常简单只需要几条命令就可以完成。
+</code></pre>
+
+<p>　　1. sudo apt-get install mysql-server</p>
 
 <p>　　2. apt-get isntall mysql-client</p>
 
-<p>　　3.  sudo apt-get install libmysqlclient-dev<br/>
-```</p>
+<p>　　3.  sudo apt-get install libmysqlclient-dev</p>
 
-<p>安装过程中会提示设置密码什么的，注意设置了不要忘了，安装完成之后可以使用如下命令来检查是否安装成功：<br/>
-<code><br/>
-　　sudo netstat -tap | grep mysql<br/>
-</code><br/>
-通过上述命令检查之后，如果看到有mysql 的socket处于 listen 状态则表示安装成功。</p>
-
-<p>登陆mysql数据库可以通过如下命令：<br/>
-```<br/>
-　　mysql -u root -p</p>
-
-<p>　　-u 表示选择登陆的用户名， -p 表示登陆的用户密码，上面命令输入之后会提示输入密码，此时输入密码就可以登录到mysql。<br/>
-```</p>
-
-<h2 id="toc_4">安装 python 环境</h2>
-
-<pre><code>sudo apt-get install python-pip python-dev
-sudo pip install --upgrade pip
+<pre class="line-numbers"><code class="language-text">
+安装过程中会提示设置密码什么的，注意设置了不要忘了，安装完成之后可以使用如下命令来检查是否安装成功：
 </code></pre>
 
-<p>pip安装常用模块<br/>
-<code><br/>
-sudo pip install django<br/>
+<p>　　sudo netstat -tap | grep mysql</p>
+
+<pre class="line-numbers"><code class="language-text">通过上述命令检查之后，如果看到有mysql 的socket处于 listen 状态则表示安装成功。
+
+登陆mysql数据库可以通过如下命令：
+</code></pre>
+
+<p>　　mysql -u root -p</p>
+
+<p>　　-u 表示选择登陆的用户名， -p 表示登陆的用户密码，上面命令输入之后会提示输入密码，此时输入密码就可以登录到mysql。</p>
+
+<pre class="line-numbers"><code class="language-text">
+## 安装 python 环境
+</code></pre>
+
+<p>sudo apt-get install python-pip python-dev<br/>
+sudo pip install --upgrade pip</p>
+
+<pre class="line-numbers"><code class="language-text">pip安装常用模块
+</code></pre>
+
+<p>sudo pip install django<br/>
 sudo pip install MySQL-python<br/>
-sudo pip install beautifulsoup4<br/>
-</code></p>
+sudo pip install beautifulsoup4</p>
 
-<h2 id="toc_5">安装git</h2>
-
-<pre><code>sudo apt-get install git
+<pre class="line-numbers"><code class="language-text">
+## 安装git
 </code></pre>
 
-<p>git的执行文件在/usr/bin/git</p>
+<p>sudo apt-get install git</p>
 
-<h2 id="toc_6">安装nodejs及npm</h2>
+<pre class="line-numbers"><code class="language-text">git的执行文件在/usr/bin/git
 
-<pre><code>sudo add-apt-repository ppa:chris-lea/node.js
+## 安装nodejs及npm
 
-sudo apt-get update
-
-sudo apt-get install python-software-properties python g++ make nodejs npm
 </code></pre>
 
-<h2 id="toc_7">安装jekyll步骤</h2>
+<p>sudo add-apt-repository ppa:chris-lea/node.js</p>
 
-<blockquote>
-<p>安装一个本地的jekyll环境，方便写博客的时候调试预览效果</p>
-</blockquote>
+<p>sudo apt-get update</p>
 
-<pre><code>sudo apt-get install ruby
-sudo apt-get install ruby-dev(用这个命令，不然后面装jekyll会出现缺文件的错误)
-ruby -v （检查一下版本）
-gem -v （检查一下版本）
-sudo apt-get install nodejs （把nodejs也装上）
-sudo gem install jekyll （最后可以安装jekyll了）
+<p>sudo apt-get install python-software-properties python g++ make nodejs npm</p>
+
+<pre class="line-numbers"><code class="language-text">
+## 安装jekyll步骤
+
+&gt; 安装一个本地的jekyll环境，方便写博客的时候调试预览效果
+
 </code></pre>
 
-<p><strong>注意：</strong> 最后安装jekyll的时候，如果报了缺少什么的错误。根据提示的错误，下载缺少的文件即可。</p>
+<p>sudo apt-get install ruby<br/>
+sudo apt-get install ruby-dev(用这个命令，不然后面装jekyll会出现缺文件的错误)<br/>
+ruby -v （检查一下版本）<br/>
+gem -v （检查一下版本）<br/>
+sudo apt-get install nodejs （把nodejs也装上）<br/>
+sudo gem install jekyll （最后可以安装jekyll了）</p>
+
+<pre class="line-numbers"><code class="language-text">**注意：** 最后安装jekyll的时候，如果报了缺少什么的错误。根据提示的错误，下载缺少的文件即可。
+
+
+</code></pre>
 
 
     
@@ -450,31 +462,31 @@ sudo gem install jekyll （最后可以安装jekyll了）
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -549,7 +561,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

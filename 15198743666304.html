@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -191,12 +198,12 @@
 
 <h2 id="toc_1">安装</h2>
 
-<pre><code>pip install virtualenv
+<pre class="line-numbers"><code class="language-text">pip install virtualenv
 </code></pre>
 
 <h2 id="toc_2">virtualenv的参数</h2>
 
-<pre><code>hushiwei@hsw  ~/virtual  virtualenv
+<pre class="line-numbers"><code class="language-text">hushiwei@hsw  ~/virtual  virtualenv
 You must provide a DEST_DIR
 Usage: virtualenv [OPTIONS] DEST_DIR
 
@@ -244,39 +251,39 @@ Options:
 
 <h3 id="toc_4">virtual安装Python2.7</h3>
 
-<pre><code>virtualenv --python=python python2env
+<pre class="line-numbers"><code class="language-text">virtualenv --python=python python2env
 </code></pre>
 
 <h3 id="toc_5">virtual安装Python3.6环境</h3>
 
-<pre><code>virtualenv --python=python3 python3env
+<pre class="line-numbers"><code class="language-text">virtualenv --python=python3 python3env
 </code></pre>
 
 <h2 id="toc_6">激活进入虚拟环境</h2>
 
-<pre><code>source python2env/bin/activate
+<pre class="line-numbers"><code class="language-text">source python2env/bin/activate
 source python3env/bin/activate
 </code></pre>
 
 <h2 id="toc_7">退出虚拟环境</h2>
 
-<pre><code>deactivate
+<pre class="line-numbers"><code class="language-text">deactivate
 </code></pre>
 
 <h2 id="toc_8">删除虚拟环境</h2>
 
-<pre><code># 直接用rm删除目录就是删除虚拟环境了
+<pre class="line-numbers"><code class="language-text"># 直接用rm删除目录就是删除虚拟环境了
 rm -rf 虚拟环境的目录名称
 </code></pre>
 
 <h2 id="toc_9">激活虚拟环境,将全部依赖写入文件</h2>
 
-<pre><code>pip freeze &gt; requirements.txt
+<pre class="line-numbers"><code class="language-text">pip freeze &gt; requirements.txt
 </code></pre>
 
 <p>进入项目内,安装全部依赖</p>
 
-<pre><code>pip install -r requirements.txt
+<pre class="line-numbers"><code class="language-text">pip install -r requirements.txt
 </code></pre>
 
 <h1 id="toc_10">virtualenvwrapper</h1>
@@ -295,7 +302,7 @@ rm -rf 虚拟环境的目录名称
 
 <h2 id="toc_11">安装</h2>
 
-<pre><code>pip install virtualenvwrapper
+<pre class="line-numbers"><code class="language-text">pip install virtualenvwrapper
 </code></pre>
 
 <h2 id="toc_12">使用方法</h2>
@@ -308,12 +315,12 @@ rm -rf 虚拟环境的目录名称
 
 <p>1.1 创建虚拟环境管理目录:</p>
 
-<pre><code>mkdir $HOME/.local/virtualenvs
+<pre class="line-numbers"><code class="language-text">mkdir $HOME/.local/virtualenvs
 </code></pre>
 
 <p>1.2 在~/.bash_profile中添加行</p>
 
-<pre><code>export VIRTUALENV_USE_DISTRIBUTE=1        #  总是使用 pip/distribute
+<pre class="line-numbers"><code class="language-text">export VIRTUALENV_USE_DISTRIBUTE=1        #  总是使用 pip/distribute
 export WORKON_HOME=$HOME/.local/virtualenvs       # 所有虚拟环境存储的目录
 if [ -e $HOME/.local/bin/virtualenvwrapper.sh ];then
     source $HOME/.local/bin/virtualenvwrapper.sh
@@ -342,17 +349,17 @@ export PIP_RESPECT_VIRTUALENV=true
 
 <p>安装python2.7</p>
 
-<pre><code>mkvirtualenv -p python python2env
+<pre class="line-numbers"><code class="language-text">mkvirtualenv -p python python2env
 </code></pre>
 
 <p>安装python3.6</p>
 
-<pre><code>mkvirtualenv -p python3 python3env
+<pre class="line-numbers"><code class="language-text">mkvirtualenv -p python3 python3env
 </code></pre>
 
 <p>查看现在装了几个虚拟环境</p>
 
-<pre><code>hushiwei@hsw  ~  workon
+<pre class="line-numbers"><code class="language-text">hushiwei@hsw  ~  workon
 python2env
 python3env
 </code></pre>
@@ -506,31 +513,31 @@ python3env
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -605,7 +612,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

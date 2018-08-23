@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -181,7 +188,7 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <pre><code> useradd –d /usr/sam -m sam
+      <pre class="line-numbers"><code class="language-text"> useradd –d /usr/sam -m sam
 </code></pre>
 
 <p>此命令创建了一个用户sam，其中-d和-m选项用来为登录名sam产生一个主目录/usr/sam（/usr为默认的用户主目录所在的父目录）。</p>
@@ -192,7 +199,7 @@
 
 <h2 id="toc_1">假设当前用户是sam，则下面的命令修改该用户自己的口令：</h2>
 
-<pre><code> passwd
+<pre class="line-numbers"><code class="language-text"> passwd
 
 Old password:******
 
@@ -204,7 +211,7 @@ Re-enter new password:*******
 
 <h2 id="toc_2">如果是超级用户，可以用下列形式指定任何用户的口令：</h2>
 
-<pre><code> passwd sam
+<pre class="line-numbers"><code class="language-text"> passwd sam
 
 New password:*******
 
@@ -218,7 +225,7 @@ Re-enter new password:*******
 
 <h2 id="toc_4">首先用adduser命令添加一个普通用户，命令如下：</h2>
 
-<pre><code>adduser tommy  //添加一个名为tommy的用户
+<pre class="line-numbers"><code class="language-text">adduser tommy  //添加一个名为tommy的用户
 passwd tommy   //修改密码
 Changing password for user tommy.
 New UNIX password:     //在这里输入新密码
@@ -235,7 +242,7 @@ passwd: all authentication tokens updated successfully.
 
 <p>修改 /etc/sudoers 文件，找到下面一行，把前面的注释（）去掉</p>
 
-<pre><code> Allows people in group wheel to run all commands
+<pre class="line-numbers"><code class="language-text"> Allows people in group wheel to run all commands
 %wheel    ALL=(ALL)    ALL
 然后修改用户，使其属于root组（wheel），命令如下：
 usermod -g root tommy
@@ -249,7 +256,7 @@ usermod -g root tommy
 
 <p>修改 /etc/sudoers 文件，找到下面一行，在root下面添加一行，如下所示：</p>
 
-<pre><code> Allow root to run any commands anywhere
+<pre class="line-numbers"><code class="language-text"> Allow root to run any commands anywhere
 root    ALL=(ALL)     ALL
 tommy   ALL=(ALL)     ALL
 </code></pre>
@@ -260,7 +267,7 @@ tommy   ALL=(ALL)     ALL
 
 <h2 id="toc_7">增加用户</h2>
 
-<pre><code>[root@bigdata mytest] useradd –help
+<pre class="line-numbers"><code class="language-text">[root@bigdata mytest] useradd –help
 
 Usage: useradd [options] LOGIN
 
@@ -309,14 +316,14 @@ Options:
 
 <h2 id="toc_8">修改密码</h2>
 
-<pre><code>passwd test
+<pre class="line-numbers"><code class="language-text">passwd test
 </code></pre>
 
 <p>增加用户test，有一点要注意的，useradd增加一个用户后，不要忘了给他设置密码，不然不能登录的。</p>
 
 <h2 id="toc_9">修改用户</h2>
 
-<pre><code>usermod -d /home/test -G test2 test
+<pre class="line-numbers"><code class="language-text">usermod -d /home/test -G test2 test
 
 将test用户的登录目录改成/home/test，并加入test2组，注意这里是大G。
 
@@ -327,7 +334,7 @@ gpasswd -d test test2 将用户test从test2组中移出
 
 <h2 id="toc_10">删除用户</h2>
 
-<pre><code>userdel test
+<pre class="line-numbers"><code class="language-text">userdel test
 </code></pre>
 
 <p>将test用户删除</p>
@@ -336,33 +343,33 @@ gpasswd -d test test2 将用户test从test2组中移出
 
 <h3 id="toc_12">查看当前登录用户</h3>
 
-<pre><code>[root@bigdata ~] w
+<pre class="line-numbers"><code class="language-text">[root@bigdata ~] w
 
 [root@bigdata ~] who
 </code></pre>
 
 <h3 id="toc_13">查看自己的用户名</h3>
 
-<pre><code>[root@bigdata ~] whoami
+<pre class="line-numbers"><code class="language-text">[root@bigdata ~] whoami
 </code></pre>
 
 <h3 id="toc_14">查看单个用户信息</h3>
 
-<pre><code>[root@bigdata ~] finger apacheuser
+<pre class="line-numbers"><code class="language-text">[root@bigdata ~] finger apacheuser
 
 [root@bigdata ~] id apacheuser
 </code></pre>
 
 <h3 id="toc_15">查看用户登录记录</h3>
 
-<pre><code>[root@bigdata ~] last 查看登录成功的用户记录
+<pre class="line-numbers"><code class="language-text">[root@bigdata ~] last 查看登录成功的用户记录
 
 [root@bigdata ~] lastb 查看登录不成功的用户记录
 </code></pre>
 
 <h3 id="toc_16">查看所有用户</h3>
 
-<pre><code>[root@bigdata ~] cut -d : -f 1 /etc/passwd
+<pre class="line-numbers"><code class="language-text">[root@bigdata ~] cut -d : -f 1 /etc/passwd
 
 [root@bigdata ~] cat /etc/passwd |awk -F \: &#39;{print $1}&#39;
 </code></pre>
@@ -371,21 +378,21 @@ gpasswd -d test test2 将用户test从test2组中移出
 
 <h2 id="toc_18">创建组</h2>
 
-<pre><code>groupadd test
+<pre class="line-numbers"><code class="language-text">groupadd test
 </code></pre>
 
 <p>增加一个test组</p>
 
 <h2 id="toc_19">修改组</h2>
 
-<pre><code>groupmod -n test2 test
+<pre class="line-numbers"><code class="language-text">groupmod -n test2 test
 </code></pre>
 
 <p>将test组的名子改成test2</p>
 
 <h2 id="toc_20">删除组</h2>
 
-<pre><code>groupdel test2
+<pre class="line-numbers"><code class="language-text">groupdel test2
 </code></pre>
 
 <p>删除 组test2</p>
@@ -398,7 +405,7 @@ gpasswd -d test test2 将用户test从test2组中移出
 <li>c）有的linux系统没有/etc/group文件的，这个时候看下面的这个方法</li>
 </ul>
 
-<pre><code>
+<pre class="line-numbers"><code class="language-text">
 cat /etc/passwd |awk -F [:] ‘{print $4}’ |sort|uniq | getent group |awk -F [:] ‘{print $1}’
 </code></pre>
 
@@ -410,7 +417,7 @@ cat /etc/passwd |awk -F [:] ‘{print $4}’ |sort|uniq | getent group |awk -F [
 
 <p>如下：</p>
 
-<pre><code>vi /etc/ssh/sshd_config 
+<pre class="line-numbers"><code class="language-text">vi /etc/ssh/sshd_config 
 # 添加
 
 AllowUsers root@192.168.1.32 admin
@@ -423,7 +430,6 @@ AllowUsers root@192.168.1.32 admin
 
 <ul>
 <li>Sudo的工作流程：
-
 <ul>
 <li>(1) root用户编辑/etc/sudoers文件,添加要分配的普通用户记录,其中有这么一行记录：root ALL=(ALL) ALL,在这行后面添加：Sam ALL=(ALL) ALL</li>
 <li>(2) 那么sam用户在执行操作时,如果所执行的操作自己没有权限,则会去/etc/sudoers文件中查找是否有对应的记录,如果有的话则临时获得root权限,执行只有root才能执行的操作.</li>
@@ -431,7 +437,7 @@ AllowUsers root@192.168.1.32 admin
 </ul></li>
 </ul>
 
-<pre><code>Shell&gt; sudo mkdir –p a/b/c/d
+<pre class="line-numbers"><code class="language-text">Shell&gt; sudo mkdir –p a/b/c/d
 We trust you have received the usual lecture from the local System
 Administrator. It usually boils down to these three things:
 1) Respect the privacy of others.
@@ -443,7 +449,7 @@ Administrator. It usually boils down to these three things:
 
 <p>几个操作：</p>
 
-<pre><code>1) 编辑/etc/sudoers文件,使用visudo命令,
+<pre class="line-numbers"><code class="language-text">1) 编辑/etc/sudoers文件,使用visudo命令,
 Shell&gt; visudo
 其实visudo命令也是调用vi去编辑sudoer文件的,但是在保存时会去检查你修改后文件的语法,如果错误是不能保存的,但是如果直接用vi来编辑该文件,强制保存虽然成功,但是如果有语
 法错误这里并不能给出提示,也就导致了后面sudo命令的不可用.
@@ -458,22 +464,22 @@ Sam ALL=(ALL) ALL
 
 <h2 id="toc_26">举例1</h2>
 
-<p>要更改文件 program.c 的所有者： <br/>
-<code><br/>
-chown jim program.c<br/>
-</code><br/>
-program.c 的用户访问权限现在应用到 jim。作为所有者，jim 可以使用 chmod 命令允许或拒绝其他用户访问 program.c。</p>
+<p>要更改文件 program.c 的所有者： </p>
+
+<pre class="line-numbers"><code class="language-text">chown jim program.c
+</code></pre>
+
+<p>program.c 的用户访问权限现在应用到 jim。作为所有者，jim 可以使用 chmod 命令允许或拒绝其他用户访问 program.c。</p>
 
 <h2 id="toc_27">举例2</h2>
 
-<p>要将目录 /tmp/src 中所有文件的所有者和组更改为用户 john 和组 build：<br/>
-```<br/>
-chown -R john:build /tmp/src</p>
+<p>要将目录 /tmp/src 中所有文件的所有者和组更改为用户 john 和组 build：</p>
 
-<h1 id="toc_28">如: tomcat的安装目录的所有者修改</h1>
+<pre class="line-numbers"><code class="language-text">chown -R john:build /tmp/src
 
-<p>chown -R user:group /usr/java/tomcat5.5<br/>
-```</p>
+# 如: tomcat的安装目录的所有者修改
+chown -R user:group /usr/java/tomcat5.5
+</code></pre>
 
 
     
@@ -622,31 +628,31 @@ chown -R john:build /tmp/src</p>
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -721,7 +727,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

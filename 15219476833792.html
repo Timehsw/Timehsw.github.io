@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -204,7 +211,7 @@
 
 <h2 id="toc_1">导入json模块</h2>
 
-<pre><code>import json
+<pre class="line-numbers"><code class="language-text">import json
 </code></pre>
 
 <p>json模块提供了四个功能：<code>dumps</code>、<code>dump</code>、<code>loads</code>、<code>load</code>，用于字符串 和 python数据类型间进行转换。</p>
@@ -215,7 +222,7 @@
 
 <p><img src="media/15219476833792/15219477820474.jpg" alt=""/></p>
 
-<pre><code># json_loads.py
+<pre class="line-numbers"><code class="language-text"># json_loads.py
 
 import json
 
@@ -239,7 +246,7 @@ json.loads(strDict) # json数据自动按Unicode存储
 
 <p><img src="media/15219476833792/15219478024682.jpg" alt=""/></p>
 
-<pre><code># json_dumps.py
+<pre class="line-numbers"><code class="language-text"># json_dumps.py
 
 import json
 import chardet
@@ -277,7 +284,7 @@ chardet.detect(json.dumps(dictStr, ensure_ascii=False))
 
 <p>将Python内置类型序列化为json对象后写入文件</p>
 
-<pre><code># json_dump.py
+<pre class="line-numbers"><code class="language-text"># json_dump.py
 
 import json
 
@@ -293,7 +300,7 @@ json.dump(dictStr, open(&quot;dictStr.json&quot;,&quot;w&quot;), ensure_ascii=Fa
 
 <p>读取文件中json形式的字符串元素 转化成python类型</p>
 
-<pre><code># json_load.py
+<pre class="line-numbers"><code class="language-text"># json_load.py
 
 import json
 
@@ -403,7 +410,7 @@ print strDict
 
 <p>我们以拉勾网城市JSON文件 <a href="http://www.lagou.com/lbs/getAllCitySearchLabels.json">http://www.lagou.com/lbs/getAllCitySearchLabels.json</a> 为例，获取所有城市。</p>
 
-<pre><code># jsonpath_lagou.py
+<pre class="line-numbers"><code class="language-text"># jsonpath_lagou.py
 
 import urllib2
 import jsonpath
@@ -439,26 +446,24 @@ fp.close()
 
 <p>如果传入的字符串的编码不是UTF-8的话，需要指定字符编码的参数 <code>encoding</code></p>
 
-<pre><code>dataDict = json.loads(jsonStrGBK);
+<pre class="line-numbers"><code class="language-text">dataDict = json.loads(jsonStrGBK);
 
 </code></pre>
 
 <ul>
 <li><p>dataJsonStr是JSON字符串，假设其编码本身是非UTF-8的话而是GBK 的，那么上述代码会导致出错，改为对应的：</p>
-
-<pre><code>  dataDict = json.loads(jsonStrGBK, encoding=&quot;GBK&quot;);
-
+<pre class="line-numbers"><code class="language-text">  dataDict = json.loads(jsonStrGBK, encoding=&quot;GBK&quot;);
 </code></pre></li>
 <li><p>如果 dataJsonStr通过encoding指定了合适的编码，但是其中又包含了其他编码的字符，则需要先去将dataJsonStr转换为Unicode，然后再指定编码格式调用json.loads()</p></li>
 </ul>
 
-<pre><code>``` python
+<pre class="line-numbers"><code class="language-text">``` python
 
 </code></pre>
 
 <p>dataJsonStrUni = dataJsonStr.decode(&quot;GB2312&quot;); dataDict = json.loads(dataJsonStrUni, encoding=&quot;GB2312&quot;);</p>
 
-<pre><code>
+<pre class="line-numbers"><code class="language-text">
 
 </code></pre>
 
@@ -609,31 +614,31 @@ fp.close()
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -708,7 +713,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

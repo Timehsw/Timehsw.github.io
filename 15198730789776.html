@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -209,7 +216,7 @@ sortbykey是对每个分区中的数据进行排序,如果想要全局排序,把
 <li>分析开房次数TOP10用户(第0,3,4三个字段确定唯一的用户)</li>
 </ul>
 
-<pre><code>    val conf = new SparkConf().setAppName(&quot;KaiFan&quot;).setMaster(&quot;local[*]&quot;)
+<pre class="line-numbers"><code class="language-text">    val conf = new SparkConf().setAppName(&quot;KaiFan&quot;).setMaster(&quot;local[*]&quot;)
     val sc = new SparkContext(conf)
     //    酒店开房数据的字段
     //    Name,CardNo,Descriot,CtfTp,CtfId,Gender,Birthday,Address,Zip,Dirty,District1,District2,District3,District4,District5,District6,FirstNm,LastNm,Duty,Mobile,Tel,Fax,EMail,Nation,Taste,Education,Company,CTel,CAddress,CZip,Family,Version,id
@@ -239,7 +246,7 @@ sortbykey是对每个分区中的数据进行排序,如果想要全局排序,把
 
 <p>先去除脏数据,然后从时间字段里过滤出小时部分.然后统计小时的词频</p>
 
-<pre><code>    val hourRDD = hotelRDD.map(line =&gt; line.toString().split(&quot;,&quot;)).filter(_.length == 33).filter(arr =&gt; arr(31).trim.length != 0)
+<pre class="line-numbers"><code class="language-text">    val hourRDD = hotelRDD.map(line =&gt; line.toString().split(&quot;,&quot;)).filter(_.length == 33).filter(arr =&gt; arr(31).trim.length != 0)
       .map(arr =&gt; arr(31)).map(str =&gt; str.split(&quot;[- :]&quot;)).filter(arr =&gt; arr.length == 6)
       .map(arr =&gt; arr(3).toInt).map(hour =&gt; (hour, 1)).reduceByKey(_ + _).map { case (x, y) =&gt; (y, x)}
 
@@ -256,7 +263,7 @@ sortbykey是对每个分区中的数据进行排序,如果想要全局排序,把
 <li>性别分布统计</li>
 </ul>
 
-<pre><code>//    性别分布统计
+<pre class="line-numbers"><code class="language-text">//    性别分布统计
     val sexRDD=hotelRDD.map(line=&gt; line.toString().split(&quot;,&quot;)).filter(_.length==33).filter(arr=&gt;arr(31).trim.length!=0)
       .map(arr=&gt;arr(5))
 //      过滤掉脏数据
@@ -273,7 +280,7 @@ sortbykey是对每个分区中的数据进行排序,如果想要全局排序,把
 <li>开房的年龄分布</li>
 </ul>
 
-<pre><code>    //    年龄分布统计(从身份证中截取出身年份,然后用今年减去即可)
+<pre class="line-numbers"><code class="language-text">    //    年龄分布统计(从身份证中截取出身年份,然后用今年减去即可)
     val ageRDD = hotelRDD.map(line =&gt; line.toString().split(&quot;,&quot;)).filter(_.length == 33)
       .filter(arr =&gt; arr(3) == &quot;ID&quot;) //只取ID类型的用户
       .filter(arr =&gt; arr(4).length == 18) //确保身份证号的位数是对的
@@ -299,7 +306,7 @@ sortbykey是对每个分区中的数据进行排序,如果想要全局排序,把
 <p>以免泄露别人的信息,以下的信息我做了额外的增加</p>
 </blockquote>
 
-<pre><code>zdgs # 12344fd321 # zdfdag@csdn.net
+<pre class="line-numbers"><code class="language-text">zdgs # 12344fd321 # zdfdag@csdn.net
 LaafoZheng # 6702fsd03313747 # chenfdagming_zheng@163.com
 fstfaao # 730df413 # fstafao@tom.com
 hufdwolf # 25352gf63 # hujiadfye@263.net
@@ -312,7 +319,7 @@ cafaddcjl # KIC43aafdk6! # ccegfdsdcjl@21cn.com
 <li>分析最多人使用的TOPn个密码</li>
 </ul>
 
-<pre><code>    val csdnRDD = sc.textFile(&quot;G:\\600W-CSDN\\csdnuser.txt&quot;)
+<pre class="line-numbers"><code class="language-text">    val csdnRDD = sc.textFile(&quot;G:\\600W-CSDN\\csdnuser.txt&quot;)
     println(s&quot;csdn一共泄露了: ${csdnRDD.count()} 个用户数据&quot;)
     //     cafaddcjl # KIC43aafdk6! # ccegfdsdcjl@21cn.com
     //    分析最多人使用的TOPn个密码
@@ -329,7 +336,7 @@ cafaddcjl # KIC43aafdk6! # ccegfdsdcjl@21cn.com
 <li>统计使用纯数字作为密码的人数</li>
 </ul>
 
-<pre><code>    val numPwRDD = csdnRDD.map(line =&gt; line.toString.split(&quot; # &quot;))
+<pre class="line-numbers"><code class="language-text">    val numPwRDD = csdnRDD.map(line =&gt; line.toString.split(&quot; # &quot;))
       .map(_ (1))
       .filter(&quot;\\d+&quot;.r.pattern.matcher(_).matches())
       .map((_, 1)).reduceByKey(_ + _).sortBy(_._2, false)
@@ -343,7 +350,7 @@ cafaddcjl # KIC43aafdk6! # ccegfdsdcjl@21cn.com
 <li>统计使用纯字母作为密码的人数</li>
 </ul>
 
-<pre><code>    val letterRDD = csdnRDD.map(line =&gt; line.toString.split(&quot; # &quot;))
+<pre class="line-numbers"><code class="language-text">    val letterRDD = csdnRDD.map(line =&gt; line.toString.split(&quot; # &quot;))
       .map(_ (1))
       .filter(&quot;[a-zA-Z]+&quot;.r.pattern.matcher(_).matches())
       .map((_, 1)).reduceByKey(_ + _).sortBy(_._2, false)
@@ -357,7 +364,6 @@ cafaddcjl # KIC43aafdk6! # ccegfdsdcjl@21cn.com
 
 <ul>
 <li>声明:
-
 <ul>
 <li>统计指标来源与网络上的博客</li>
 <li>数据也来自于网络,想要数据的可以联系我</li>
@@ -511,31 +517,31 @@ cafaddcjl # KIC43aafdk6! # ccegfdsdcjl@21cn.com
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -610,7 +616,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

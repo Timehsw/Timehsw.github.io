@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -224,12 +231,10 @@
 
 <ol>
 <li><p>内嵌模式:公式直接放在文字之间，公式高度一般受文本高度限制: <code>$ latex $</code></p>
-
 <blockquote>
 <p>文字\(\sum_{i=0}^{n}i^2\) 文字</p>
 </blockquote></li>
 <li><p>独立模式:公式另起一行，高度可调整</p>
-
 <blockquote>
 <p>文字\[\sum_{i=0}^{n}i^2\]文字</p>
 </blockquote></li>
@@ -243,13 +248,9 @@
 
 <ul>
 <li><p>上标<code>^{角标}</code>，下标<code>_{角标}</code>, 默认情况下，上下标符号仅仅对下一个组起作用。</p>
-
 <p><code>x_1</code> : \(x_1\) </p>
-
 <p><code>x_1^2</code> : \(x_1^2\) </p>
-
 <p><code>x^{2_1}</code> : \(x^{2_1}\) </p>
-
 <p><code>x_{(22)}^{(n)}</code> : \(x_{(22)}^{(n)}\)</p></li>
 </ul>
 
@@ -257,11 +258,8 @@
 
 <ul>
 <li><p><code>\frac{分子}{分母}</code></p>
-
 <p><code>\frac ab</code> : \(\frac ab\)</p>
-
 <p><code>\frac{x+y}{2}</code> : \(\frac{x+y}{2}\)</p>
-
 <p><code>\frac{1}{1+\frac{1}{2}}</code> : \(\frac{1}{1+\frac{1}{2}}\)</p></li>
 </ul>
 
@@ -269,11 +267,8 @@
 
 <ul>
 <li><p>开平方：<code>\sqrt{表达式}</code>；开n次方：<code>\sqrt[n]{表达式}</code></p>
-
 <p><code>\sqrt{2}&lt;\sqrt[3]{3}</code> : \(\sqrt{2}&lt;\sqrt[3]{3}\)</p>
-
 <p><code>\sqrt[4]{\frac xy}</code> ：\(\sqrt[4]{\frac xy} \)</p>
-
 <p><code>\sqrt{1+\sqrt[^p]{1+a^2}}</code> : \(\sqrt{1+\sqrt[^p]{1+a^2}}\)</p></li>
 </ul>
 
@@ -281,13 +276,9 @@
 
 <ul>
 <li><p>求和<code>\sum</code> ; 求积分<code>\int</code>; 上下限就是<code>上标和下标</code></p>
-
 <p><code>\int_1^\infty</code> ：\(\int_1^\infty\)</p>
-
 <p><code>\int_a^b f(x)dx</code> : \(\int_a^b f(x)dx\)</p>
-
 <p><code>\sum_1^n</code> ：\(\sum_1^n\)</p>
-
 <p><code>\sum_{k=1}^n\frac{1}{k}</code> : \(\sum_{k=1}^n\frac{1}{k}\)</p></li>
 </ul>
 
@@ -335,7 +326,6 @@
 <code>\sin x</code> , <code>\arctan x</code>, <code>\lim_{1\to\infty}</code> : \(\sin x\),\(\arctan x\),\(\lim_{1\to\infty}\)</li>
 <li>比较运算符：
 <code>\lt \gt \le \ge \neq</code> ： \(\lt \gt \le \ge \neq\)
-
 <ul>
 <li>在这些运算符前面加上<code>\not</code>
 <code>\not\lt</code> ：\(\not\lt\)</li>
@@ -405,20 +395,15 @@
 <ul>
 <li><p>注意 : 原始符号并不会随着公式大小缩放。如，<code>(\frac12)</code> ：\((\frac12)\)。可以使用\left(…\right)来自适应的调整括号大小。<br/>
 如1.1和1.2公式，公式1.2中的括号是经过缩放的。</p>
-
 <p><code>\lbrace \sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6} \rbrace \tag{1.1}</code><br/>
 \[\lbrace\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}\rbrace\tag{1.1}\]</p>
-
 <p><code>\left \lbrace \sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6} \right\rbrace \tag{1.2}</code><br/>
 \[\left \lbrace \sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6} \right\rbrace\tag{1.2}\]</p></li>
 <li><p>定界符之前冠以 \left（修饰左定界符）或 \right（修饰右定界符），可以得到自适应缩放的定界符，它们会根据定界符所包围的公式大小自适应缩放</p>
-
 <p><code>\left( \sum_{k=\frac{1}{2}}^{N^2}\frac{1}{k} \right)</code><br/>
 \[ \left( \sum_{k=\frac{1}{2}}^{N^2}\frac{1}{k} \right) \]</p></li>
 <li><p>诸如()、[]、{}、|等分割公式的称为定界符，前面加上\big，\Big，\bigg，\Bigg可以放大这些符号，我比较喜欢用自适应的放大命令，<code>\left...\right</code>，例如</p>
-
 <p><code>$$\left. \frac{\partial f(x, y)}{\partial x}\right|_{x=0}$$</code></p>
-
 <p>\[\left. \frac{\partial f(x, y)}{\partial x}\right|_{x=0}\]</p></li>
 </ul>
 
@@ -912,7 +897,7 @@ a_3x+b_3y+c_3z &amp;=d_3 <br/>
 \]</p>
 
 <ul>
-<li>连分数
+<li>连分数<br/>
 书写连分数表达式时，请使用<code>\cfrac</code>代替<code>\frac</code>或者<code>\over</code>,两者效果对比如下：</li>
 </ul>
 
@@ -929,9 +914,12 @@ x = a_0 + \frac{1^2}{a_1<br/>
 
 <blockquote>
 <p><strong>转义</strong><br/>
-  一些MathJax使用的特殊字符，可以使用<code>\</code>或者<code>\\</code>转义为原来的含义。如<code>\$</code>表示<code>$</code>，<code>\\_</code>表示下划线。<br/>
-- 注意: 换行和方程组的开始<code>{</code>等, 常常需要转义, 用<code>\</code>或者<code>\\</code>或者<code>\\\</code>或者<code>\\\\</code><br/>
-<a href="https://github.com/Simshang/blog/blob/master/source/_posts/Demo-LaTeX.md">Markdown文件</a></p>
+  一些MathJax使用的特殊字符，可以使用<code>\</code>或者<code>\\</code>转义为原来的含义。如<code>\$</code>表示<code>$</code>，<code>\\_</code>表示下划线。</p>
+
+<ul>
+<li>注意: 换行和方程组的开始<code>{</code>等, 常常需要转义, 用<code>\</code>或者<code>\\</code>或者<code>\\\</code>或者<code>\\\\</code>
+<a href="https://github.com/Simshang/blog/blob/master/source/_posts/Demo-LaTeX.md">Markdown文件</a></li>
+</ul>
 </blockquote>
 
 <h3 id="toc_31">转载参考:</h3>
@@ -1088,31 +1076,31 @@ x = a_0 + \frac{1^2}{a_1<br/>
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -1187,7 +1175,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

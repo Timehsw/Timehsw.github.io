@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -187,32 +194,32 @@
 
 <h2 id="toc_0">0. 在每台都启动kafka</h2>
 
-<pre><code>./bin/kafka-server-start.sh config/server.properties &gt;/opt/logs/kafka-serve &amp;
+<pre class="line-numbers"><code class="language-text">./bin/kafka-server-start.sh config/server.properties &gt;/opt/logs/kafka-serve &amp;
 </code></pre>
 
 <h2 id="toc_1">1. 创建一个topic 分区数和复本数都是1</h2>
 
-<pre><code> ./bin/kafka-topics.sh --create --zookeeper ncp163:2181,ncp161:2181,ncp162:2181 --replication-factor 1 --partitions 1 --topic flume-kafka
+<pre class="line-numbers"><code class="language-text"> ./bin/kafka-topics.sh --create --zookeeper ncp163:2181,ncp161:2181,ncp162:2181 --replication-factor 1 --partitions 1 --topic flume-kafka
 </code></pre>
 
 <h2 id="toc_2">2. 查看这个topic的信息</h2>
 
-<pre><code> ./bin/kafka-topics.sh --describe --zookeeper ncp163:2181,ncp161:2181,ncp162:2181 --topic flume-kafka
+<pre class="line-numbers"><code class="language-text"> ./bin/kafka-topics.sh --describe --zookeeper ncp163:2181,ncp161:2181,ncp162:2181 --topic flume-kafka
 </code></pre>
 
 <h2 id="toc_3">3. 查询所有可用的topic</h2>
 
-<pre><code>./bin/kafka-topics.sh --list --zookeeper ncp163:2181,ncp161:2181,ncp162:2181
+<pre class="line-numbers"><code class="language-text">./bin/kafka-topics.sh --list --zookeeper ncp163:2181,ncp161:2181,ncp162:2181
 </code></pre>
 
 <h2 id="toc_4">4. 修改topic 把分区数修改为3</h2>
 
-<pre><code>./bin/kafka-topics.sh --alter --zookeeper ncp163:2181,ncp161:2181,ncp162:2181 --partition 3 --topic flume-kafka
+<pre class="line-numbers"><code class="language-text">./bin/kafka-topics.sh --alter --zookeeper ncp163:2181,ncp161:2181,ncp162:2181 --partition 3 --topic flume-kafka
 </code></pre>
 
 <h2 id="toc_5">5. 删除topic</h2>
 
-<pre><code>bin/kafka-topics.sh --delete --zookeeper ncp163:2181,ncp161:2181,ncp162:2181 --topic flume-kafka
+<pre class="line-numbers"><code class="language-text">bin/kafka-topics.sh --delete --zookeeper ncp163:2181,ncp161:2181,ncp162:2181 --topic flume-kafka
 </code></pre>
 
 <p>注意:flume-kafka只是被标记为删除了。kafka为了数据的安全，不允许随便删除数据。如果要完全删除，需要修改配置<br/>
@@ -221,18 +228,18 @@
 
 <h2 id="toc_6">6. 创建生产者 localhost:9092这个根据情况要修改</h2>
 
-<pre><code>./bin/kafka-console-producer.sh --broker-list localhost:9092 --topic flume-kafka
+<pre class="line-numbers"><code class="language-text">./bin/kafka-console-producer.sh --broker-list localhost:9092 --topic flume-kafka
 
 </code></pre>
 
 <h2 id="toc_7">7. 创建消费者</h2>
 
-<pre><code>./bin/kafka-console-consumer.sh --zookeeper ncp163:2181,ncp161:2181,ncp162:2181 --topic flume-kafka --from-beginning
+<pre class="line-numbers"><code class="language-text">./bin/kafka-console-consumer.sh --zookeeper ncp163:2181,ncp161:2181,ncp162:2181 --topic flume-kafka --from-beginning
 </code></pre>
 
 <h2 id="toc_8">8. 查看topic的offset值</h2>
 
-<pre><code>kafka-run-class kafka.tools.GetOffsetShell --broker-list 10.10.25.13:9092 --topic my_test
+<pre class="line-numbers"><code class="language-text">kafka-run-class kafka.tools.GetOffsetShell --broker-list 10.10.25.13:9092 --topic my_test
 
 # --time -1 获取offset最大值
 kafka-run-class kafka.tools.GetOffsetShell --broker-list 10.10.25.13:9092 --topic my_test --time -1
@@ -241,7 +248,7 @@ kafka-run-class kafka.tools.GetOffsetShell --broker-list 10.10.25.13:9092 --topi
 kafka-run-class kafka.tools.GetOffsetShell --broker-list 10.10.25.13:9092 --topic my_test --time -2
 </code></pre>
 
-<pre><code>kafka-run-class kafka.tools.GetOffsetShell --broker-list 10.10.25.13:9092 --topic my_test
+<pre class="line-numbers"><code class="language-text">kafka-run-class kafka.tools.GetOffsetShell --broker-list 10.10.25.13:9092 --topic my_test
 
 my_test:2:82
 my_test:1:83
@@ -254,7 +261,7 @@ my_test:0:120
 
 <p>查看某个主题的某个groupid的offset位置</p>
 
-<pre><code>kafka-consumer-offset-checker --zookeeper 10.10.25.14:2181 --group m_offset --topic my_test
+<pre class="line-numbers"><code class="language-text">kafka-consumer-offset-checker --zookeeper 10.10.25.14:2181 --group m_offset --topic my_test
 
 </code></pre>
 
@@ -407,31 +414,31 @@ my_test:0:120
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -506,7 +513,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -194,7 +201,7 @@
 
 <h1 id="toc_1">设置 commit 的用户和邮箱</h1>
 
-<pre><code>git config user.name &quot;xx&quot;               #设置 commit 的用户
+<pre class="line-numbers"><code class="language-text">git config user.name &quot;xx&quot;               #设置 commit 的用户
 git config user.email &quot;xx@xx.com&quot;       #设置 commit 的邮箱
 git commit --amend --author &quot;xxx &lt;xxx@gmail.com&gt;&quot;    #修改上次提交的用户信息
 git config format.pretty oneline        #显示历史记录时，每个提交的信息只显示一行
@@ -208,7 +215,7 @@ git config format.pretty oneline        #显示历史记录时，每个提交的
 
 <h2 id="toc_4">添加远程仓库</h2>
 
-<pre><code>git remote add origin git@server-name:path/repo-name.git  #添加一个远程库
+<pre class="line-numbers"><code class="language-text">git remote add origin git@server-name:path/repo-name.git  #添加一个远程库
 </code></pre>
 
 <h2 id="toc_5">查看远程仓库</h2>
@@ -217,18 +224,18 @@ git config format.pretty oneline        #显示历史记录时，每个提交的
 <p>origin是远程仓库的别名,约定俗成的叫做original.</p>
 </blockquote>
 
-<pre><code>git remote      #要查看远程库的信息
+<pre class="line-numbers"><code class="language-text">git remote      #要查看远程库的信息
 git remote -v   #显示更详细的信息
 </code></pre>
 
 <h2 id="toc_6">推送分支</h2>
 
-<pre><code>git push origin master    #推送到远程master分支
+<pre class="line-numbers"><code class="language-text">git push origin master    #推送到远程master分支
 </code></pre>
 
 <h2 id="toc_7">抓取分支</h2>
 
-<pre><code>git clone git@server-name:path/repo-name.git   #克隆远程仓库到本地(能看到master分支)
+<pre class="line-numbers"><code class="language-text">git clone git@server-name:path/repo-name.git   #克隆远程仓库到本地(能看到master分支)
 git checkout -b dev origin/dev  #创建远程origin的dev分支到本地，并命名为dev
 git checkout origin/dev --track #与上面效果一样
 git pull origin master          #从远程分支进行更新
@@ -237,7 +244,7 @@ git fetch origin master         #获取远程分支上的数据
 
 <h2 id="toc_8">抓取GitHub上某个pull request到本地</h2>
 
-<pre><code>git fetch origin pull/ID/head:BRANCHNAME
+<pre class="line-numbers"><code class="language-text">git fetch origin pull/ID/head:BRANCHNAME
 git checkout BRANCHNAME
 $ git branch --set-upstream branch-name origin/branch-name，可以建立起本地分支和远程分支的关联，之后可以直接git pull从远程抓取分支。
 
@@ -247,7 +254,7 @@ $ git branch --set-upstream branch-name origin/branch-name，可以建立起本�
 
 <h2 id="toc_9">删除远程分支</h2>
 
-<pre><code>$ git push origin --delete bugfix
+<pre class="line-numbers"><code class="language-text">$ git push origin --delete bugfix
 To https://github.com/wuchong/jacman
  - [deleted]         bugfix
 # 或者直接push一个空分支
@@ -258,24 +265,25 @@ To https://github.com/wuchong/jacman
 
 <h2 id="toc_10">更新远程分支信息</h2>
 
-<p>项目往前推进的过程中，远程仓库上经常会增加一些分支、删除一些分支。 所以有时需要与远程同步下分支信息。<br/>
-<code><br/>
-git fetch -p<br/>
-</code><br/>
--p就是修剪的意思。它在fetch之后删除掉没有与远程分支对应的本地分支，并且同步一些远程新创建的分支和tag。</p>
+<p>项目往前推进的过程中，远程仓库上经常会增加一些分支、删除一些分支。 所以有时需要与远程同步下分支信息。</p>
+
+<pre class="line-numbers"><code class="language-text">git fetch -p
+</code></pre>
+
+<p>-p就是修剪的意思。它在fetch之后删除掉没有与远程分支对应的本地分支，并且同步一些远程新创建的分支和tag。</p>
 
 <h1 id="toc_11">历史管理</h1>
 
 <h2 id="toc_12">查看历史</h2>
 
-<pre><code>git log --pretty=oneline filename #一行显示
+<pre class="line-numbers"><code class="language-text">git log --pretty=oneline filename #一行显示
 git log -p -2      #显示最近2次提交内容的差异
 git show cb926e7   #查看某次修改
 </code></pre>
 
 <h2 id="toc_13">版本回退</h2>
 
-<pre><code>git reset --hard HEAD^    #回退到上一个版本
+<pre class="line-numbers"><code class="language-text">git reset --hard HEAD^    #回退到上一个版本
 git reset --hard cb926e7  #回退到具体某个版
 git reflog                #查看命令历史,常用于帮助找回丢失掉的commit
 </code></pre>
@@ -284,14 +292,14 @@ git reflog                #查看命令历史,常用于帮助找回丢失掉的c
 
 <h1 id="toc_14">管理修改</h1>
 
-<pre><code>git status              #查看工作区、暂存区的状态
+<pre class="line-numbers"><code class="language-text">git status              #查看工作区、暂存区的状态
 git checkout -- &lt;file&gt;  #丢弃工作区上某个文件的修改
 git reset HEAD &lt;file&gt;   #丢弃暂存区上某个文件的修改，重新放回工作区
 </code></pre>
 
 <h2 id="toc_15">查看差异</h2>
 
-<pre><code>git diff              #查看未暂存的文件更新
+<pre class="line-numbers"><code class="language-text">git diff              #查看未暂存的文件更新
 git diff --cached     #查看已暂存文件的更新
 git diff HEAD -- readme.txt  #查看工作区和版本库里面最新版本的区别
 git diff &lt;source_branch&gt; &lt;target_branch&gt;  #在合并改动之前，预览两个分支的差异
@@ -300,13 +308,13 @@ git diff &lt;source_branch&gt; &lt;target_branch&gt;  #在合并改动之前，�
 
 <h2 id="toc_16">删除文件</h2>
 
-<pre><code>git rm &lt;file&gt;           #直接删除文件
+<pre class="line-numbers"><code class="language-text">git rm &lt;file&gt;           #直接删除文件
 git rm --cached &lt;file&gt;  #删除文件暂存状态
 </code></pre>
 
 <h2 id="toc_17">储藏和恢复</h2>
 
-<pre><code>git stash           #储藏当前工作
+<pre class="line-numbers"><code class="language-text">git stash           #储藏当前工作
 git stash list      #查看储藏的工作现场
 git stash apply     #恢复工作现场，stash内容并不删除
 git stash pop       #恢复工作现场，并删除stash内容
@@ -316,13 +324,13 @@ git stash pop       #恢复工作现场，并删除stash内容
 
 <h2 id="toc_19">创建分支</h2>
 
-<pre><code>git branch develop              #只创建分支
+<pre class="line-numbers"><code class="language-text">git branch develop              #只创建分支
 git checkout -b master develop  #创建并切换到 develop 分支
 </code></pre>
 
 <h2 id="toc_20">合并分支</h2>
 
-<pre><code>git checkout master         #切换到主分支
+<pre class="line-numbers"><code class="language-text">git checkout master         #切换到主分支
 git merge --no-ff develop   #把 develop 合并到 master 分支，no-ff 选项的作用是保留原分支记录
 git branch -d develop       #删除 develop 分支
 </code></pre>
@@ -331,20 +339,20 @@ git branch -d develop       #删除 develop 分支
 
 <h2 id="toc_22">显示标签</h2>
 
-<pre><code>git tag         #列出现有标签
+<pre class="line-numbers"><code class="language-text">git tag         #列出现有标签
 git show &lt;tagname&gt;  #显示标签信息
 </code></pre>
 
 <h2 id="toc_23">创建标签</h2>
 
-<pre><code>git tag v0.1    #新建标签，默认位 HEAD
+<pre class="line-numbers"><code class="language-text">git tag v0.1    #新建标签，默认位 HEAD
 git tag v0.1 cb926e7  #对指定的 commit id 打标签
 git tag -a v0.1 -m &#39;version 0.1 released&#39;   #新建带注释标签
 </code></pre>
 
 <h2 id="toc_24">操作标签</h2>
 
-<pre><code>git checkout &lt;tagname&gt;        #切换到标签
+<pre class="line-numbers"><code class="language-text">git checkout &lt;tagname&gt;        #切换到标签
 git push origin &lt;tagname&gt;     #推送分支到源上
 git push origin --tags        #一次性推送全部尚未推送到远程的本地标签
 git tag -d &lt;tagname&gt;          #删除标签
@@ -501,31 +509,31 @@ Git 设置
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -600,7 +608,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

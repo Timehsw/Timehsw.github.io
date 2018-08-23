@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -202,7 +209,7 @@
 
 <p>我们的实例用hadoop rpc框架,那么我们需要引入对应的依赖</p>
 
-<pre><code>    &lt;dependency&gt;
+<pre class="line-numbers"><code class="language-text">    &lt;dependency&gt;
         &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;
         &lt;artifactId&gt;hadoop-common&lt;/artifactId&gt;
         &lt;version&gt;2.7.1&lt;/version&gt;
@@ -225,7 +232,7 @@
 <p>RPCLearningServiceInterface <br/>
 定义一个接口,我们想要客户端调用的方法</p>
 
-<pre><code>/**
+<pre class="line-numbers"><code class="language-text">/**
  * Created by hushiwei on 2018/3/28.
  * desc : RPC协议是client端和server端之间的通信接口，它定义了server端对外提供的服务接口。
  */
@@ -248,7 +255,7 @@ public interface RPCLearningServiceInterface {
 
 <p>接口的具体实现类</p>
 
-<pre><code>/**
+<pre class="line-numbers"><code class="language-text">/**
  * Created by hushiwei on 2018/3/28.
  * desc :Hadoop RPC协议通常是一个Java接口，定义了server端对外提供的服务接口，需要在server端进行实现
  *
@@ -275,7 +282,7 @@ public class RPCLearningServiceImpl implements RPCLearningServiceInterface {
 
 <p>server-rpc的启动类</p>
 
-<pre><code>
+<pre class="line-numbers"><code class="language-text">
 /**
  * Created by hushiwei on 2018/3/28.
  * desc :
@@ -310,7 +317,7 @@ public class RpcLearningServer {
 
 <p>客户端的代码里面调用了服务端提供的api</p>
 
-<pre><code>/**
+<pre class="line-numbers"><code class="language-text">/**
  * Created by hushiwei on 2018/3/28.
  * desc : ClientController is a RPC client
  */
@@ -360,7 +367,7 @@ public class ClientController {
 在远程服务器上启动rpc-server.然后再本地执行客户端的代码.<br/>
 这样更能清楚的明白rpc的运行过程了</p>
 
-<pre><code>java -classpath MapReduce-1.0-SNAPSHOT-jar-with-dependencies.jar com.hushiwei.mr.rpc.rpcserver.RpcLearningServer
+<pre class="line-numbers"><code class="language-text">java -classpath MapReduce-1.0-SNAPSHOT-jar-with-dependencies.jar com.hushiwei.mr.rpc.rpcserver.RpcLearningServer
 </code></pre>
 
 <p><img src="media/15222053353935/15222171711365.jpg" alt=""/></p>
@@ -376,14 +383,14 @@ public class ClientController {
 <p>补充:<br/>
 在服务器上启动rpcserver后,可以用<code>jps -m</code>查看这个服务器的启动情况</p>
 
-<pre><code>[hadoop@U006 ~]$ jps -m
+<pre class="line-numbers"><code class="language-text">[hadoop@U006 ~]$ jps -m
 30432 Jps -m
 6979 RpcLearningServer
 </code></pre>
 
 <p>或者查看代码里面用的端口是否被占用中</p>
 
-<pre><code>[hadoop@U006 ~]$ netstat -natp | grep 45666
+<pre class="line-numbers"><code class="language-text">[hadoop@U006 ~]$ netstat -natp | grep 45666
 (Not all processes could be identified, non-owned process info
  will not be shown, you would have to be root to see it all.)
 tcp        0      0 ::ffff:10.10.25.13:45666    :::*                        LISTEN      6979/java
@@ -561,31 +568,31 @@ tcp        0      0 ::ffff:10.10.25.13:45666    :::*                        LIST
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -660,7 +667,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

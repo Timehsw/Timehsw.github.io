@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -195,7 +202,7 @@
 
 <h2 id="toc_1">jps命令格式</h2>
 
-<pre><code>jps [options] [hostid]
+<pre class="line-numbers"><code class="language-text">jps [options] [hostid]
 </code></pre>
 
 <h2 id="toc_2">jps工具主要选项</h2>
@@ -230,7 +237,7 @@
 
 <h2 id="toc_3">jps命令样例1</h2>
 
-<pre><code>[hadoop@U006 ~]$ jps -l
+<pre class="line-numbers"><code class="language-text">[hadoop@U006 ~]$ jps -l
 3183 sun.tools.jps.Jps
 17831 org.apache.spark.executor.CoarseGrainedExecutorBackend
 10004 org.apache.spark.deploy.worker.Worker
@@ -250,34 +257,37 @@ jstat是用于监视虚拟机各种运行状态信息的命令行工具<br/>
 
 <h2 id="toc_5">jstat命令格式</h2>
 
-<pre><code>jstat [option vmid [interval[s|ms] [count]]]
+<pre class="line-numbers"><code class="language-text">jstat [option vmid [interval[s|ms] [count]]]
 </code></pre>
 
-<p><strong>注意</strong>:<br/>
-+ 对于命令中的VMID与LVMID需要特别说明一下:如果是本地虚拟机进程,VMID与LVMID是一致的.<br/>
-+ 如何是远程虚拟机进程,那VMID的格式应当是:<code>[protocal:][//]lvmid[@hostname[:port]/servername]</code><br/>
-+ 参数interval和count代表查询间隔和次数.如果省略这两个参数,说明只查询一次.</p>
+<p><strong>注意</strong>:</p>
 
-<p>假设需要每250毫秒查询一次进程2764垃圾收集的状况,一共查询20次,那么命令应该是:<br/>
-<code><br/>
-jstat -gc 2764 250 20<br/>
-</code></p>
+<ul>
+<li>对于命令中的VMID与LVMID需要特别说明一下:如果是本地虚拟机进程,VMID与LVMID是一致的.</li>
+<li>如何是远程虚拟机进程,那VMID的格式应当是:<code>[protocal:][//]lvmid[@hostname[:port]/servername]</code></li>
+<li>参数interval和count代表查询间隔和次数.如果省略这两个参数,说明只查询一次.</li>
+</ul>
 
-<p>每2毫秒查询10次spark进程的垃圾收集状况:<br/>
-<code><br/>
-[hadoop@U006 ~]$ jstat -gc 17659 2 10<br/>
- S0C    S1C    S0U    S1U      EC       EU        OC         OU       PC     PU    YGC     YGCT    FGC    FGCT     GCT<br/>
-349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056<br/>
-349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056<br/>
-349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056<br/>
-349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056<br/>
-349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056<br/>
-349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056<br/>
-349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056<br/>
-349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056<br/>
-349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056<br/>
-349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056<br/>
-</code></p>
+<p>假设需要每250毫秒查询一次进程2764垃圾收集的状况,一共查询20次,那么命令应该是:</p>
+
+<pre class="line-numbers"><code class="language-text">jstat -gc 2764 250 20
+</code></pre>
+
+<p>每2毫秒查询10次spark进程的垃圾收集状况:</p>
+
+<pre class="line-numbers"><code class="language-text">[hadoop@U006 ~]$ jstat -gc 17659 2 10
+ S0C    S1C    S0U    S1U      EC       EU        OC         OU       PC     PU    YGC     YGCT    FGC    FGCT     GCT
+349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056
+349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056
+349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056
+349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056
+349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056
+349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056
+349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056
+349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056
+349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056
+349184.0 349184.0  0.0    0.0   2098176.0 954275.3 5592576.0   246723.4  116224.0 115802.6     52    5.099  48     18.956   24.056
+</code></pre>
 
 <h2 id="toc_6">jstat工具主要选项</h2>
 
@@ -315,19 +325,22 @@ jstat -gc 2764 250 20<br/>
 
 <h2 id="toc_7">jstat执行样例</h2>
 
-<pre><code>hadoop@U006 ~]$ jstat -gcutil 17659
+<pre class="line-numbers"><code class="language-text">hadoop@U006 ~]$ jstat -gcutil 17659
   S0     S1     E      O      P     YGC     YGCT    FGC    FGCT     GCT
   0.00   0.00  37.59   4.41  99.68     77    7.439    73   27.473   34.912
 </code></pre>
 
 <p>查询结果表明:<br/>
-这个进程的<br/>
-+ 新生代Eden区(E,表示Eden)使用了37.59%的空间.<br/>
-+ 两个Survivor区(S0,S1,表示Survivor0,Survivor1)里面都是空的.<br/>
-+ 老年代(O,表示Old)和永久代(P,表示Permanent)则分别使用了4.41%和99.68%的空间.<br/>
-+ 程序运行以来共发生Minor GC(YGC,表示Young GC)77次,总耗时7.439秒.<br/>
-+ 发生Full GC(FGC,表示Full GC)73次,Full GC总耗时(FGCT,表示Full GC Time)为27.473秒.<br/>
-+ 所有GC总耗时(GCT,表示GC Time)为34.912秒.</p>
+这个进程的</p>
+
+<ul>
+<li>新生代Eden区(E,表示Eden)使用了37.59%的空间.</li>
+<li>两个Survivor区(S0,S1,表示Survivor0,Survivor1)里面都是空的.</li>
+<li>老年代(O,表示Old)和永久代(P,表示Permanent)则分别使用了4.41%和99.68%的空间.</li>
+<li>程序运行以来共发生Minor GC(YGC,表示Young GC)77次,总耗时7.439秒.</li>
+<li>发生Full GC(FGC,表示Full GC)73次,Full GC总耗时(FGCT,表示Full GC Time)为27.473秒.</li>
+<li>所有GC总耗时(GCT,表示GC Time)为34.912秒.</li>
+</ul>
 
 <p><strong>总结</strong>:使用jstat工具在纯文本状态下监视虚拟机状态的变化,虽然没有一些可视化监控工具来得直观.但与我而言,更显极客本色.</p>
 
@@ -340,28 +353,29 @@ jinfo的作用是实时地查看和调整虚拟机的各项参数</p>
 
 <h2 id="toc_9">jinfo命令格式</h2>
 
-<pre><code>jinfo [option] pid
+<pre class="line-numbers"><code class="language-text">jinfo [option] pid
 </code></pre>
 
 <h2 id="toc_10">使用方式</h2>
 
-<p>前面解释过jps的-v选项.这个可以查看虚拟机启动时显示指定的参数列表,比如<br/>
-<code><br/>
-[hadoop@U006 ~]$ jps -v<br/>
-17831 CoarseGrainedExecutorBackend -Xms4096M -Xmx4096M -Dspark.driver.port=42195 -XX:MaxPermSize=256m<br/>
-5146 Jps -Dapplication.home=/usr/java/jdk1.7.0_71 -Xms8m<br/>
-10004 Worker -Xms1g -Xmx1g -XX:MaxPermSize=256m<br/>
-17659 SparkSubmit -Xms8g -Xmx8g -XX:MaxPermSize=256m<br/>
-10254 Worker -Xms1g -Xmx1g -XX:MaxPermSize=256m<br/>
-9830 Master -Xms1g -Xmx1g -XX:MaxPermSize=256m<br/>
-</code><br/>
-但如果想知道未被显示指定的参数的系统默认值,除了查找资料,还可以使用这里的<code>jinfo的-flag</code>选项进行查询了.</p>
+<p>前面解释过jps的-v选项.这个可以查看虚拟机启动时显示指定的参数列表,比如</p>
 
-<p>比如查询CMSInitiatingOccupancyFraction参数值:<br/>
-<code><br/>
-[hadoop@U006 ~]$ jinfo -flag CMSInitiatingOccupancyFraction 17659<br/>
--XX:CMSInitiatingOccupancyFraction=-1<br/>
-</code></p>
+<pre class="line-numbers"><code class="language-text">[hadoop@U006 ~]$ jps -v
+17831 CoarseGrainedExecutorBackend -Xms4096M -Xmx4096M -Dspark.driver.port=42195 -XX:MaxPermSize=256m
+5146 Jps -Dapplication.home=/usr/java/jdk1.7.0_71 -Xms8m
+10004 Worker -Xms1g -Xmx1g -XX:MaxPermSize=256m
+17659 SparkSubmit -Xms8g -Xmx8g -XX:MaxPermSize=256m
+10254 Worker -Xms1g -Xmx1g -XX:MaxPermSize=256m
+9830 Master -Xms1g -Xmx1g -XX:MaxPermSize=256m
+</code></pre>
+
+<p>但如果想知道未被显示指定的参数的系统默认值,除了查找资料,还可以使用这里的<code>jinfo的-flag</code>选项进行查询了.</p>
+
+<p>比如查询CMSInitiatingOccupancyFraction参数值:</p>
+
+<pre class="line-numbers"><code class="language-text">[hadoop@U006 ~]$ jinfo -flag CMSInitiatingOccupancyFraction 17659
+-XX:CMSInitiatingOccupancyFraction=-1
+</code></pre>
 
 <h1 id="toc_11">jmap:Java内存映像工具</h1>
 
@@ -388,7 +402,7 @@ jstack命令用于生成虚拟机当前时刻的线程快照(一般称为threadd
 
 <h2 id="toc_13">jstack命令格式</h2>
 
-<pre><code>jstack [option] vmid
+<pre class="line-numbers"><code class="language-text">jstack [option] vmid
 </code></pre>
 
 <h2 id="toc_14">jstack工具的主要选项</h2>
@@ -564,31 +578,31 @@ jstack命令用于生成虚拟机当前时刻的线程快照(一般称为threadd
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -663,7 +677,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

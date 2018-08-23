@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -191,7 +198,7 @@
 
 <h3 id="toc_2">软件包安装</h3>
 
-<pre><code>　　# sudo apt-get  install  rsync  注：在debian、ubuntu 等在线安装方法；
+<pre class="line-numbers"><code class="language-text">　　# sudo apt-get  install  rsync  注：在debian、ubuntu 等在线安装方法；
 　　# yum install rsync    注：Fedora、Redhat 等在线安装方法；
 　　# rpm -ivh rsync       注：Fedora、Redhat 等rpm包安装方法；
 </code></pre>
@@ -200,7 +207,7 @@
 
 <h3 id="toc_3">源码包安装</h3>
 
-<pre><code>　　tar xvf  rsync-xxx.tar.gz
+<pre class="line-numbers"><code class="language-text">　　tar xvf  rsync-xxx.tar.gz
 　　cd rsync-xxx
 　　./configure --prefix=/usr  ;make ;make install   注：在用源码包编译安装之前，您得安装gcc等编译工具才行；
 </code></pre>
@@ -215,7 +222,7 @@
 
 <p>用root用户创建：</p>
 
-<pre><code>    touch /etc/rsyncd.conf  #创建rsyncd.conf，这是rsync服务器的配置文件。
+<pre class="line-numbers"><code class="language-text">    touch /etc/rsyncd.conf  #创建rsyncd.conf，这是rsync服务器的配置文件。
     touch /etc/rsyncd.secrets  #创建rsyncd.secrets ，这是用户密码文件。这个密码文件很好的哦，你可以设置一个用户名：密码的数值对，然后在客户端设置一个密码文件，只写密码就可以了，一会细讲。
 
     chmod 600 /etc/rsyncd.secrets  #将rsyncd.secrets这个密码文件的文件属性设为root拥有, 且权限要设为600, 否则无法备份成功!
@@ -230,7 +237,7 @@
 
 <p>比如我想要把远程机器上的文件,拉到这个服务器上的/home/root/tmp_hsw位置</p>
 
-<pre><code class="language-$xslt">
+<pre class="line-numbers"><code class="language-$xslt">
 vi /etc/rsyncd.conf
 
 pid file = /var/run/rsyncd.pid
@@ -281,7 +288,6 @@ comment = This is test for get coolpad data
 
 <ul>
 <li>全局配置
-
 <ul>
 <li>pid file = /var/run/rsyncd.pid              注：告诉进程写到 /var/run/rsyncd.pid 文件中；</li>
 <li>port = 873                                  注：指定运行端口，默认是873，您可以自己指定；</li>
@@ -305,7 +311,6 @@ comment = This is test for get coolpad data
 
 <ul>
 <li>模块定义
-
 <ul>
 <li>[getcoolpaddata]  #模块它为我们提供了一个链接的名字，在本模块中链接到了/home/root/tmp_hsw/testRsync目录；要用[name] 形式</li>
 <li>path = /home    #指定文件目录所在位置，这是必须指定的 </li>
@@ -324,21 +329,26 @@ comment = This is test for get coolpad data
 
 <p>　　用户名:密码</p>
 
-<p>比如:<br/>
-```$xslt<br/>
-vi /etc/rsyncd.secrets</p>
+<p>比如:</p>
 
-<p>root:rsy123456<br/>
-```</p>
+<pre class="line-numbers"><code class="language-$xslt">vi /etc/rsyncd.secrets
 
-<p>修改权限<br/>
-<code>$xslt<br/>
-chown root.root rsyncd.secrets 　#修改属主<br/>
-chmod 600 rsyncd.secrets     #修改权限<br/>
-</code><br/>
-+ 注意<br/>
-    + 1、将rsyncd.secrets这个密码文件的文件属性设为root拥有, 且权限要设为600, 否则无法备份成功! 出于安全目的，文件的属性必需是只有属主可读。<br/>
-    + 2、这里的密码值得注意，为了安全你不能把系统用户的密码写在这里。比如你的系统用户root密码是 helloworld，为了安全你可以让rsync中的rsyncd.secrets文件中的密码为为123456。这样，在客户端连接的时候，也是用这个123456会使用这个rsyncd.secrets作为认证文件，不和os有任何牵连。</p>
+root:rsy123456
+</code></pre>
+
+<p>修改权限</p>
+
+<pre class="line-numbers"><code class="language-$xslt">chown root.root rsyncd.secrets 　#修改属主
+chmod 600 rsyncd.secrets     #修改权限
+</code></pre>
+
+<ul>
+<li>注意
+<ul>
+<li>1、将rsyncd.secrets这个密码文件的文件属性设为root拥有, 且权限要设为600, 否则无法备份成功! 出于安全目的，文件的属性必需是只有属主可读。</li>
+<li>2、这里的密码值得注意，为了安全你不能把系统用户的密码写在这里。比如你的系统用户root密码是 helloworld，为了安全你可以让rsync中的rsyncd.secrets文件中的密码为为123456。这样，在客户端连接的时候，也是用这个123456会使用这个rsyncd.secrets作为认证文件，不和os有任何牵连。</li>
+</ul></li>
+</ul>
 
 <h2 id="toc_8">配置客户端</h2>
 
@@ -346,7 +356,7 @@ chmod 600 rsyncd.secrets     #修改权限<br/>
 <p>上面两个配置文件都是在启动 rsycn的服务器端,然而在我们的客户端,我们安装了 rsync后,只需要创建一个密码文件,里面放上服务器上定义的密码即可了</p>
 </blockquote>
 
-<pre><code class="language-$xslt">root: vi /etc/rsyncd.passwd
+<pre class="line-numbers"><code class="language-$xslt">root: vi /etc/rsyncd.passwd
 rsy123456
 </code></pre>
 
@@ -356,7 +366,7 @@ rsy123456
 <p>启动rsync服务器相当简单</p>
 </blockquote>
 
-<pre><code class="language-$xslt">--daemon参数方式，是让rsync以服务器模式运行
+<pre class="line-numbers"><code class="language-$xslt">--daemon参数方式，是让rsync以服务器模式运行
 
 # /usr/bin/rsync --daemon  --config=/etc/rsyncd/rsyncd.conf 　#--config用于指定rsyncd.conf的位置,如果在/etc下可以不写
 
@@ -366,7 +376,7 @@ rsy123456
 
 <p>把客户端/home/root/tmp_hsw 路径下的文件同步到服务器下.路径为 path 里面定义的</p>
 
-<pre><code class="language-$xslt">rsync -avz --progress  --password-file=/etc/rsyncd.passwd --delete /home/root/tmp_hsw root@10.10.25.13::getcoolpaddata/
+<pre class="line-numbers"><code class="language-$xslt">rsync -avz --progress  --password-file=/etc/rsyncd.passwd --delete /home/root/tmp_hsw root@10.10.25.13::getcoolpaddata/
 </code></pre>
 
 <h2 id="toc_11">总结</h2>
@@ -526,31 +536,31 @@ rsy123456
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -625,7 +635,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

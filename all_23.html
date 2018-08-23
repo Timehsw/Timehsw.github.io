@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -161,6 +168,136 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
+                <a class="clearlink" href="15198766411736.html">
+                
+                  <h1>Git 命令</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h1 id="toc_0">git 常用命令</h1>
+
+<h2 id="toc_1">git 配置命令</h2>
+
+<p>git init                                                  # 初始化本地git仓库（创建新仓库）<br/>
+git config --global user.name &quot;xxx&quot;                       # 配置用户名<br/>
+git config --global user.email &quot;<a href="mailto:xxx@xxx.com">xxx@xxx.com</a>&quot;              # 配置邮件<br/>
+ssh-keygen -t rsa -C <a href="mailto:xxx@xxx.com">xxx@xxx.com</a>                 # 生成SSH秘钥<br/>
+git config --global color.ui true                         # git status等命令自动着色<br/>
+git config --global color.status auto<br/>
+git config --global color.diff auto</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15198766411736.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2016/10/23</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='DevTools.html'>DevTools</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15198777730178.html">
+                
+                  <h1>CentOS 常用开发环境</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h1 id="toc_0">安装gcc</h1>
+
+<p>yum -y install gcc gcc-c++ kernel-devel</p>
+
+<h1 id="toc_1">安装python2.7</h1>
+
+<p>wget <a href="https://www.python.org/ftp/python/2.7.8/Python-2.7.8.tgz">https://www.python.org/ftp/python/2.7.8/Python-2.7.8.tgz</a></p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15198777730178.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2016/10/20</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15241221126545.html">
+                
+                  <h1>Maven笔记2</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>1.运行mvn命令实际上是执行Java命令,既然是运行Java,那么运行Java命令可用的参数当然也应该在运行mvn命令时可用.这个时候<code>MAVEN_OPTS</code>环境变量就能派上用场.</p>
+
+<p>通常都需要加大<code>MAVEN_OPTS</code>的值,因为当项目比较大的时候,使用MAVEN构建项目,需要占用大量的内存.如果没有该配置,则很容易得到<code>java.lang.OutOfMemeoryError</code>.</p>
+
+<h2 id="toc_0">属性</h2>
+
+<ul>
+<li>内置属性</li>
+<li>pom属性</li>
+<li>自定义属性</li>
+<li>Settings属性</li>
+<li>Java系统属性</li>
+<li>环境变量属性</li>
+</ul>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2016/9/25</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Maven.html'>Maven</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="15241250928886.html">
                 
                   <h1>maven3配置区分</h1>
@@ -172,7 +309,7 @@
 
 <p><img src="media/15241250928886/111524123576_.pic_hd.jpg" alt="111524123576_.pic_hd"/></p>
 
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<pre class="line-numbers"><code class="language-text">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
          xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
          xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
@@ -469,7 +606,7 @@
                         
                         	<h1 id="toc_0">maven 阿里云镜像</h1>
 
-<pre><code class="language-$xslt">&lt;mirror&gt;
+<pre class="line-numbers"><code class="language-$xslt">&lt;mirror&gt;
       &lt;id&gt;alimaven&lt;/id&gt;
       &lt;name&gt;aliyun maven&lt;/name&gt;
       &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;
@@ -501,40 +638,6 @@
                 </div>
               </div><!-- article -->
         
-			<div class="article">
-                <a class="clearlink" href="15198721453009.html">
-                
-                  <h1>Vim实用命令</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>提高效率的几个vim常用命令</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15198721453009.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2016/3/26</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
               
 
 
@@ -546,7 +649,7 @@
 			  </div>
 			  <div class="large-6 columns">
 			<p class="text-right" style="padding-top:25px;">
-			
+			 <a href="all_24.html">&raquo; Next Page</a> 
 			</p>
 			  </div>
 			</div>
@@ -662,31 +765,31 @@
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -761,7 +864,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

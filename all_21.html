@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -161,6 +168,136 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
+                <a class="clearlink" href="15198727396154.html">
+                
+                  <h1>Spark的RDD基础操作</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h1 id="toc_0">简单算子</h1>
+
+<ul>
+<li>1.构造一些数据</li>
+<li>2.用map算子进行一些操作</li>
+<li>3.用mapPartitions算子进行操作</li>
+<li>4.调用zipwithpartition算子标记分区</li>
+<li>5.调用foreachPartiton进行输出</li>
+<li>6.调用glom算子收集每个分区的数据</li>
+<li>7.调用flodleft函数处理Array</li>
+</ul>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15198727396154.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2016/11/17</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Spark.html'>Spark</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15198751889703.html">
+                
+                  <h1>大数据学习时候,造数据的常用方式</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h1 id="toc_0">一些提供数据的网站</h1>
+
+<p><a href="https://github.com/fivethirtyeight/data">FiveThirtyEight</a></p>
+
+<ul>
+<li><a href="https://github.com/GoogleTrends/data">An index of all open-source data</a></li>
+<li><a href="http://grouplens.org/datasets/">Grouplens</a></li>
+<li><a href="https://datahub.io/">datahub</a></li>
+<li><a href="http://www-etud.iro.umontreal.ca/%7Ebergstrj/audioscrobbler_data.html">profiledata_06-May-2005.tar.gz </a></li>
+<li><a href="http://archive.ics.uci.edu/ml/">UCI Machine Learning Repository</a></li>
+<li><a href="http://www.sogou.com/labs/resource/list_pingce.php">搜狗实验室</a></li>
+<li><a href="https://www.quora.com/What-kinds-of-large-datasets-open-to-the-public-do-you-analyze-the-mostl">large datasets list from quora</a></li>
+<li><a href="http://www.kdnuggets.com/datasets/index.html">kdnuggets</a></li>
+<li><a href="https://aws.amazon.com/cn/public-data-sets/">AmazonPublicData</a></li>
+</ul>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15198751889703.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2016/11/16</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='BigData.html'>BigData</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15198729251649.html">
+                
+                  <h1>Spark算子详解</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h3 id="toc_0">aggregate</h3>
+
+<blockquote>
+<p>def aggregate<a href="zeroValue:%20U">U: ClassTag</a>(seqOp: (U, T) =&gt; U, combOp: (U, U) =&gt; U): U</p>
+</blockquote>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15198729251649.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2016/11/16</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Spark.html'>Spark</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="15198737601432.html">
                 
                   <h1>Scala数组</h1>
@@ -233,127 +370,6 @@
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='Scala.html'>Scala</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15198733143325.html">
-                
-                  <h1>PySpark做日志分析</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">第一步:给你的样本日志目录修改这个参数</h2>
-
-<p>在这个例子里面，我们会用到这个样本文件&quot;/databricks-datasets/sample_logs&quot;,样本数据已经存储到DBFS(Databricks的文件系统)</p>
-
-<blockquote>
-<p>DBFS_SAMPLES_LOGS_FOLDER=&quot;/databricks-datasets/samples_logs&quot; #path to the log file to be analyzed</p>
-</blockquote>
-
-<h2 id="toc_1">第二步:为Apache访问日志的每一行创建一个解析器以此来创建一个Row对象</h2>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15198733143325.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2016/11/12</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Spark.html'>Spark</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15198736518032.html">
-                
-                  <h1>ScalaNote</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">1.sealed trait</h2>
-
-<blockquote>
-<p>被sealed 声明的 trait仅能被同一文件的的类继承。<br/>
-  除了这个，我们通常将sealed用于枚举中，因为编译器在编译的时候知道这个trait被哪些类继承过，因此我们在match时对sealed trait进行case 的时候，如果你没有判断全部编译器在编译时就会报错。</p>
-</blockquote>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15198736518032.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2016/11/12</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Scala.html'>Scala</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15198714756091.html">
-                
-                  <h1>浅谈逻辑</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h1 id="toc_0">问题</h1>
-
-<ul>
-<li>写着写着,突然写不下去了</li>
-<li>被外界打断了,不知道怎么写下去</li>
-<li>写完之后,逻辑不通发现自己都看不懂</li>
-</ul>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15198714756091.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2016/11/12</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Writer.html'>Writer</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -493,31 +509,31 @@
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -592,7 +608,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

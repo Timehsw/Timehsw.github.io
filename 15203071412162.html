@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -197,35 +204,35 @@
 
 <p>这些api,spark里面都有现成的,我们现在就是需要组织起来!</p>
 
-<pre><code>offsetRanges = rdd.asInstanceOf[HasOffsetRanges].offsetRanges
+<pre class="line-numbers"><code class="language-text">offsetRanges = rdd.asInstanceOf[HasOffsetRanges].offsetRanges
 </code></pre>
 
-<p>简单说一下<br/>
-1. 在zookeeper上读取offset前先根据实际情况更新<code>fromOffsets</code><br/>
-    1.1 如果是一个新的groupid,那么会从最新的开始读<br/>
-    1.2 如果是存在的groupid,根据配置<code>auto.offset.reset</code><br/>
-        1.2.1 <code>smallest</code> : 那么会从开始读,获取最开始的offset.<br/>
-        1.2.2 <code>largest</code> : 那么会从最新的位置开始读取,获取最新的offset.</p>
+<p>简单说一下</p>
 
 <ol>
-<li>根据topic获取topic和该topics下所有的partitions</li>
+<li><p>在zookeeper上读取offset前先根据实际情况更新<code>fromOffsets</code><br/>
+1.1 如果是一个新的groupid,那么会从最新的开始读<br/>
+1.2 如果是存在的groupid,根据配置<code>auto.offset.reset</code><br/>
+    1.2.1 <code>smallest</code> : 那么会从开始读,获取最开始的offset.<br/>
+    1.2.2 <code>largest</code> : 那么会从最新的位置开始读取,获取最新的offset.</p></li>
+<li><p>根据topic获取topic和该topics下所有的partitions</p></li>
 </ol>
 
-<pre><code>val partitionsE = kc.getPartitions(topics)
+<pre class="line-numbers"><code class="language-text">val partitionsE = kc.getPartitions(topics)
 </code></pre>
 
 <ol>
 <li>传入上面获取到的topics和该分区所有的partitions</li>
 </ol>
 
-<pre><code>val consumerOffsetsE = kc.getConsumerOffsets(groupId, partitions)
+<pre class="line-numbers"><code class="language-text">val consumerOffsetsE = kc.getConsumerOffsets(groupId, partitions)
 </code></pre>
 
 <ol>
 <li>获取到该topic下所有分区的offset了.最后还是调用spark中封装好了的api</li>
 </ol>
 
-<pre><code>KafkaUtils.createDirectStream[K, V, KD, VD, (K, V, String)](
+<pre class="line-numbers"><code class="language-text">KafkaUtils.createDirectStream[K, V, KD, VD, (K, V, String)](
                 ssc, kafkaParams, consumerOffsets, (mmd: MessageAndMetadata[K, V]) =&gt; ( mmd.key, mmd.message, mmd.topic))
 </code></pre>
 
@@ -233,14 +240,14 @@
 <li>更新zookeeper中的kafka消息的偏移量</li>
 </ol>
 
-<pre><code>kc.setConsumerOffsets(groupId, Map((topicAndPartition, offsets.untilOffset)))
+<pre class="line-numbers"><code class="language-text">kc.setConsumerOffsets(groupId, Map((topicAndPartition, offsets.untilOffset)))
 </code></pre>
 
 <h2 id="toc_3">问题</h2>
 
 <p>sparkstreaming-kafka的源码中是自己把offset维护在kafka集群中了?</p>
 
-<pre><code>./kafka-consumer-groups.sh --bootstrap-server 10.10.25.13:9092 --describe  --group heheda
+<pre class="line-numbers"><code class="language-text">./kafka-consumer-groups.sh --bootstrap-server 10.10.25.13:9092 --describe  --group heheda
 </code></pre>
 
 <p>因为用命令行工具可以查到,这个工具可以查到基于javaapi方式的offset,查不到在zookeeper中的</p>
@@ -258,7 +265,7 @@
 
 <p>自己维护的offset,这个方法会传入offset.因为在此之前我们已经从zk中获取到了起始offset</p>
 
-<pre><code>KafkaUtils.createDirectStream[K, V, KD, VD, (K, V, String)](
+<pre class="line-numbers"><code class="language-text">KafkaUtils.createDirectStream[K, V, KD, VD, (K, V, String)](
                 ssc, kafkaParams, consumerOffsets, (mmd: MessageAndMetadata[K, V]) =&gt; ( mmd.key, mmd.message, mmd.topic))
 </code></pre>
 
@@ -266,12 +273,12 @@
 
 <p>接受的是一个topic,底层会根据topic去获取存储在kafka中的起始offset</p>
 
-<pre><code>KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, myTopic)
+<pre class="line-numbers"><code class="language-text">KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, myTopic)
 </code></pre>
 
 <p>接下来这个方法里面会调用<code>getFromOffsets</code>来获取起始的offset</p>
 
-<pre><code>val kc = new KafkaCluster(kafkaParams)
+<pre class="line-numbers"><code class="language-text">val kc = new KafkaCluster(kafkaParams)
 val fromOffsets = getFromOffsets(kc, kafkaParams, topics)
 </code></pre>
 
@@ -435,31 +442,31 @@ val fromOffsets = getFromOffsets(kc, kafkaParams, topics)
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -534,7 +541,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

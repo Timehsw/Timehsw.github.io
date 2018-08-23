@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -195,7 +202,7 @@
 
 <span id="more"></span><!-- more -->
 
-<pre><code>hushiwei@hsw:~$ free --help
+<pre class="line-numbers"><code class="language-text">hushiwei@hsw:~$ free --help
 
 Usage:
  free [options]
@@ -229,7 +236,7 @@ Options:
 <li>以人类可看的方式输出</li>
 </ul>
 
-<pre><code>hushiwei@hsw:~$ free -h
+<pre class="line-numbers"><code class="language-text">hushiwei@hsw:~$ free -h
               total        used        free      shared  buff/cache   available
 Mem:           7.7G        4.4G        240M        970M        3.0G        2.1G
 Swap:            0B          0B          0B
@@ -237,18 +244,17 @@ Swap:            0B          0B          0B
 
 <p>我用的是Deepin系统，free命令出来的比一般的ubuntu或者linux命令出来的要少一行。</p>
 
-<p>为了详细的说明，我换一台服务器<br/>
-<code><br/>
-[devel@xxx ~]$ free -h<br/>
-             total       used       free     shared    buffers     cached<br/>
-Mem:           24G        20G       3.6G        18M       358M        13G<br/>
--/+ buffers/cache:       6.9G        17G<br/>
-Swap:         4.0G         0B       4.0G<br/>
-</code></p>
+<p>为了详细的说明，我换一台服务器</p>
+
+<pre class="line-numbers"><code class="language-text">[devel@xxx ~]$ free -h
+             total       used       free     shared    buffers     cached
+Mem:           24G        20G       3.6G        18M       358M        13G
+-/+ buffers/cache:       6.9G        17G
+Swap:         4.0G         0B       4.0G
+</code></pre>
 
 <ul>
 <li>简单说明：
-
 <ul>
 <li>total:24G 即为总的物理内存大小</li>
 <li>used:20G 为当前被系统调度的内存大小</li>
@@ -292,22 +298,22 @@ Swap:         4.0G         0B       4.0G<br/>
 <li>vmstat</li>
 </ul>
 
-<p>free,buffer,cached的值，也可以通过vmstat命令来动态获取它的变化值，比如每隔一秒采集一次，总共采集10次memory的变化；<br/>
-<code><br/>
-hushiwei@hsw:~$ vmstat 1 10<br/>
-procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----<br/>
- r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st<br/>
- 0  0      0 420908  95636 3952264    0    0   309    89  420 3104 10  3 83  5  0<br/>
- 0  0      0 438580  95636 3932768    0    0     0   360 1548 12740  8  3 88  0  0<br/>
- 0  0      0 438944  95636 3932684    0    0     0     0  788 7131  2  2 96  0  0<br/>
- 1  0      0 439020  95636 3932684    0    0     0     0  817 11039  3  2 95  0  0<br/>
- 2  0      0 423376  95636 3950340    0    0     0     0 1092 8635  7  5 88  0  0<br/>
- 0  0      0 421692  95644 3951528    0    0     0   236 1231 12386 10  3 84  3  0<br/>
- 1  0      0 439968  95644 3932768    0    0     0   360  881 7472  3  2 95  0  0<br/>
- 1  0      0 439800  95644 3932680    0    0     0     0 3319 22657 15  3 81  0  0<br/>
- 0  0      0 439692  95644 3932680    0    0     0     0  737 7149  3  1 96  0  0<br/>
- 2  0      0 422388  95644 3950288    0    0     0     0  916 12164  7  2 91  0  0<br/>
-</code></p>
+<p>free,buffer,cached的值，也可以通过vmstat命令来动态获取它的变化值，比如每隔一秒采集一次，总共采集10次memory的变化；</p>
+
+<pre class="line-numbers"><code class="language-text">hushiwei@hsw:~$ vmstat 1 10
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 0  0      0 420908  95636 3952264    0    0   309    89  420 3104 10  3 83  5  0
+ 0  0      0 438580  95636 3932768    0    0     0   360 1548 12740  8  3 88  0  0
+ 0  0      0 438944  95636 3932684    0    0     0     0  788 7131  2  2 96  0  0
+ 1  0      0 439020  95636 3932684    0    0     0     0  817 11039  3  2 95  0  0
+ 2  0      0 423376  95636 3950340    0    0     0     0 1092 8635  7  5 88  0  0
+ 0  0      0 421692  95644 3951528    0    0     0   236 1231 12386 10  3 84  3  0
+ 1  0      0 439968  95644 3932768    0    0     0   360  881 7472  3  2 95  0  0
+ 1  0      0 439800  95644 3932680    0    0     0     0 3319 22657 15  3 81  0  0
+ 0  0      0 439692  95644 3932680    0    0     0     0  737 7149  3  1 96  0  0
+ 2  0      0 422388  95644 3950288    0    0     0     0  916 12164  7  2 91  0  0
+</code></pre>
 
 <ul>
 <li>watch</li>
@@ -318,7 +324,6 @@ procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
 <ul>
 <li>watch命令可以实时全屏监控当前命令执行的动态变化结果</li>
 <li>watch命令的常用参数有:
-
 <ul>
 <li>-n:时隔多少秒刷新(默认每隔2秒刷一次结果)</li>
 <li>-d:高亮显示动态变化</li>
@@ -326,30 +331,26 @@ procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
 </ul></li>
 </ul>
 
-<p>example:<br/>
-```</p>
+<p>example:</p>
 
-<h1 id="toc_4">每隔3秒查看当前系统时间</h1>
+<pre class="line-numbers"><code class="language-text"># 每隔3秒查看当前系统时间
+watch -n 3 date
+# -d 参数可以高亮显示执行结果的变化
+watch -n 3 -d date
+</code></pre>
 
-<p>watch -n 3 date</p>
+<p>因此，<strong>watch与free命令配合</strong>，也可以获取到动态的内存变化值。</p>
 
-<h1 id="toc_5">-d 参数可以高亮显示执行结果的变化</h1>
+<pre class="line-numbers"><code class="language-text">watch -n 1 -d free
+</code></pre>
 
-<p>watch -n 3 -d date<br/>
-```</p>
-
-<p>因此，<strong>watch与free命令配合</strong>，也可以获取到动态的内存变化值。<br/>
-<code><br/>
-watch -n 1 -d free<br/>
-</code></p>
-
-<h2 id="toc_6">top命令解析</h2>
+<h2 id="toc_4">top命令解析</h2>
 
 <blockquote>
 <p>top不仅仅用于内存分析，还用于进程分析。先说关于内存部分</p>
 </blockquote>
 
-<pre><code>top - 10:28:54 up 19 days, 20:48,  1 user,  load average: 0.00, 0.00, 0.00
+<pre class="line-numbers"><code class="language-text">top - 10:28:54 up 19 days, 20:48,  1 user,  load average: 0.00, 0.00, 0.00
 Tasks: 362 total,   1 running, 361 sleeping,   0 stopped,   0 zombie
 Cpu(s):  0.0%us,  0.0%sy,  0.0%ni, 99.9%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
 Mem:  25402148k total, 22153960k used,  3248188k free,   367512k buffers
@@ -532,31 +533,31 @@ Swap:  4194300k total,        0k used,  4194300k free, 14689300k cached
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -631,7 +632,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

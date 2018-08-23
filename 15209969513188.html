@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -197,7 +204,7 @@
 
 <p>下面的命令可以查看当前节点的所有 Index。</p>
 
-<pre><code>
+<pre class="line-numbers"><code class="language-text">
 $ curl -X GET &#39;http://localhost:9200/_cat/indices?v&#39;
 
 </code></pre>
@@ -208,7 +215,7 @@ $ curl -X GET &#39;http://localhost:9200/_cat/indices?v&#39;
 
 <p>Document 使用 JSON 格式表示，下面是一个例子。</p>
 
-<pre><code>
+<pre class="line-numbers"><code class="language-text">
  {
    &quot;user&quot;: &quot;张三&quot;,
    &quot;title&quot;: &quot;工程师&quot;,
@@ -227,7 +234,7 @@ $ curl -X GET &#39;http://localhost:9200/_cat/indices?v&#39;
 
 <p>下面的命令可以列出每个 Index 所包含的 Type。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  $ curl &#39;localhost:9200/_mapping?pretty=true&#39;
  
 </code></pre>
@@ -270,7 +277,7 @@ $ curl -X GET &#39;http://localhost:9200/_cat/indices?v&#39;
 <p>接下来，我们对集群进行一个基本的简单的健康监测。前文提到了，因为es通过restAPI来进行操作，所以可以使用curl或者postman等。<br/>
 检测cluster的健康状况，我们可以使用_cat API。</p>
 
-<pre><code>[hadoop@U006 ~]$ curl &#39;localhost:9200/_cat/health?v&#39;
+<pre class="line-numbers"><code class="language-text">[hadoop@U006 ~]$ curl &#39;localhost:9200/_cat/health?v&#39;
 epoch      timestamp cluster            status node.total node.data shards pri relo init unassign pending_tasks max_task_wait_time active_shards_percent
 1521000953 12:15:53  test_elasticsearch yellow          1         1     39  39    0    0       39             0                  -                 50.0%
 </code></pre>
@@ -286,14 +293,14 @@ status的定义如下：</p>
 
 <h2 id="toc_7">查看节点的状况</h2>
 
-<pre><code>[hadoop@U006 ~]$ curl &#39;localhost:9200/_cat/nodes?v&#39;
+<pre class="line-numbers"><code class="language-text">[hadoop@U006 ~]$ curl &#39;localhost:9200/_cat/nodes?v&#39;
 host        ip          heap.percent ram.percent load node.role master name
 10.10.25.13 10.10.25.13           11          84 2.54 d         *      node1
 </code></pre>
 
 <h2 id="toc_8">查询所有的index</h2>
 
-<pre><code>[hadoop@U006 ~]$ curl &#39;localhost:9200/_cat/indices?v&#39;
+<pre class="line-numbers"><code class="language-text">[hadoop@U006 ~]$ curl &#39;localhost:9200/_cat/indices?v&#39;
 health status index                   pri rep docs.count docs.deleted store.size pri.store.size
 yellow open   .marvel-es-1-2017.10.25   1   1      20639          640      7.5mb          7.5mb
 yellow open   .marvel-es-1-2017.10.24   1   1     185123          862     66.6mb         66.6mb
@@ -309,14 +316,14 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>新建 Index，可以直接向 Elastic 服务器发出 PUT 请求。下面的例子是新建一个名叫<code>weather</code>的 Index。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  $ curl -X PUT &#39;localhost:9200/weather&#39;
  
 </code></pre>
 
 <p>服务器返回一个 JSON 对象，里面的<code>acknowledged</code>字段表示操作成功。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  {
    &quot;acknowledged&quot;:true,
    &quot;shards_acknowledged&quot;:true
@@ -328,7 +335,7 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>然后，我们发出 DELETE 请求，删除这个 Index。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  $ curl -X DELETE &#39;localhost:9200/weather&#39;
  
 </code></pre>
@@ -339,7 +346,7 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>向指定的 /Index/Type 发送 PUT 请求，就可以在 Index 里面新增一条记录。比如，向<code>/accounts/person</code>发送请求，就可以新增一条人员记录。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  $ curl -X PUT &#39;localhost:9200/accounts/person/1&#39; -d &#39;
  {
    &quot;user&quot;: &quot;张三&quot;,
@@ -351,7 +358,7 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>服务器返回的 JSON 对象，会给出 Index、Type、Id、Version 等信息。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  {
    &quot;_index&quot;:&quot;accounts&quot;,
    &quot;_type&quot;:&quot;person&quot;,
@@ -368,7 +375,7 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>新增记录的时候，也可以不指定 Id，这时要改成 POST 请求。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  $ curl -X POST &#39;localhost:9200/accounts/person&#39; -d &#39;
  {
    &quot;user&quot;: &quot;李四&quot;,
@@ -380,7 +387,7 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>上面代码中，向<code>/accounts/person</code>发出一个 POST 请求，添加一个记录。这时，服务器返回的 JSON 对象里面，<code>_id</code>字段就是一个随机字符串。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  {
    &quot;_index&quot;:&quot;accounts&quot;,
    &quot;_type&quot;:&quot;person&quot;,
@@ -399,7 +406,7 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>向<code>/Index/Type/Id</code>发出 GET 请求，就可以查看这条记录。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  $ curl &#39;localhost:9200/accounts/person/1?pretty=true&#39;
  
 </code></pre>
@@ -408,7 +415,7 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>返回的数据中，<code>found</code>字段表示查询成功，<code>_source</code>字段返回原始记录。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  {
    &quot;_index&quot; : &quot;accounts&quot;,
    &quot;_type&quot; : &quot;person&quot;,
@@ -426,7 +433,7 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>如果 Id 不正确，就查不到数据，<code>found</code>字段就是<code>false</code>。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  $ curl &#39;localhost:9200/weather/beijing/abc?pretty=true&#39;
  
  {
@@ -442,7 +449,7 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>删除记录就是发出 DELETE 请求。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  $ curl -X DELETE &#39;localhost:9200/accounts/person/1&#39;
  
 </code></pre>
@@ -453,7 +460,7 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>更新记录就是使用 PUT 请求，重新发送一次数据。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  $ curl -X PUT &#39;localhost:9200/accounts/person/1&#39; -d &#39;
  {
      &quot;user&quot; : &quot;张三&quot;,
@@ -475,7 +482,7 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>上面代码中，我们将原始数据从&quot;数据库管理&quot;改成&quot;数据库管理，软件开发&quot;。 返回结果里面，有几个字段发生了变化。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  &quot;_version&quot; : 2,
  &quot;result&quot; : &quot;updated&quot;,
  &quot;created&quot; : false
@@ -490,7 +497,7 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>使用 GET 方法，直接请求<code>/Index/Type/_search</code>，就会返回所有记录。</p>
 
-<pre><code>
+<pre class="line-numbers"><code class="language-text">
  $ curl &#39;localhost:9200/accounts/person/_search&#39;
  
  {
@@ -545,7 +552,7 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>Elastic 的查询非常特别，使用自己的<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.5/query-dsl.html">查询语法</a>，要求 GET 请求带有数据体。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  $ curl &#39;localhost:9200/accounts/person/_search&#39;  -d &#39;
  {
    &quot;query&quot; : { &quot;match&quot; : { &quot;desc&quot; : &quot;软件&quot; }}
@@ -555,7 +562,7 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>上面代码使用 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.5/query-dsl-match-query.html">Match 查询</a>，指定的匹配条件是<code>desc</code>字段里面包含&quot;软件&quot;这个词。返回结果如下。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  {
    &quot;took&quot;:3,
    &quot;timed_out&quot;:false,
@@ -583,7 +590,7 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>Elastic 默认一次返回10条结果，可以通过<code>size</code>字段改变这个设置。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  $ curl &#39;localhost:9200/accounts/person/_search&#39;  -d &#39;
  {
    &quot;query&quot; : { &quot;match&quot; : { &quot;desc&quot; : &quot;管理&quot; }},
@@ -596,7 +603,7 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>还可以通过<code>from</code>字段，指定位移。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  $ curl &#39;localhost:9200/accounts/person/_search&#39;  -d &#39;
  {
    &quot;query&quot; : { &quot;match&quot; : { &quot;desc&quot; : &quot;管理&quot; }},
@@ -612,7 +619,7 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>如果有多个搜索关键字， Elastic 认为它们是<code>or</code>关系。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  $ curl &#39;localhost:9200/accounts/person/_search&#39;  -d &#39;
  {
    &quot;query&quot; : { &quot;match&quot; : { &quot;desc&quot; : &quot;软件 系统&quot; }}
@@ -624,7 +631,7 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>如果要执行多个关键词的<code>and</code>搜索，必须使用<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.5/query-dsl-bool-query.html">布尔查询</a>。</p>
 
-<pre><code> 
+<pre class="line-numbers"><code class="language-text"> 
  $ curl &#39;localhost:9200/accounts/person/_search&#39;  -d &#39;
  {
    &quot;query&quot;: {
@@ -645,7 +652,7 @@ yellow open   website                   5   1          2            0      7.8kb
 但是查询并不是总需要产生score，尤其是它们只是用来过滤文档的时候。es能够自动的优化查询并不计算这些无用的score。<br/>
 上文中的bool query也支持filter语句。filter语句可以在不改变score的情况下使用查询语句来限定文档。</p>
 
-<pre><code>curl -XPOST &#39;localhost:9200/customer/_search?pretty&#39; -d &#39;
+<pre class="line-numbers"><code class="language-text">curl -XPOST &#39;localhost:9200/customer/_search?pretty&#39; -d &#39;
 {
   &quot;query&quot;: {
     &quot;bool&quot;: {
@@ -667,7 +674,7 @@ yellow open   website                   5   1          2            0      7.8kb
 
 <p>聚合可以对数据进行分组并对分组进行数据统计。类似于SQL中的group by。在es中，可以一次性返回查询结果和聚合结果。</p>
 
-<pre><code>curl -XPOST &#39;localhost:9200/customer/_search?pretty&#39; -d &#39;
+<pre class="line-numbers"><code class="language-text">curl -XPOST &#39;localhost:9200/customer/_search?pretty&#39; -d &#39;
 {
   &quot;size&quot;: 0,
   &quot;aggs&quot;: {
@@ -834,31 +841,31 @@ yellow open   website                   5   1          2            0      7.8kb
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -933,7 +940,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

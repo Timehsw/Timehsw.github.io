@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -212,7 +219,7 @@
 
 <h2 id="toc_1">master 端配置防火墙(没有配置,直接把防火墙关了)</h2>
 
-<pre><code>[root@master ~]# vim /etc/sysconfig/iptables
+<pre class="line-numbers"><code class="language-text">[root@master ~]# vim /etc/sysconfig/iptables
 #加入
 -A INPUT -m state --state new -m tcp -p tcp --dport 4505 -j ACCEPT
 -A INPUT -m state --state new -m tcp -p tcp --dport 4506 -j ACCEPT
@@ -220,13 +227,13 @@
 
 <h1 id="toc_2">安装 epel 源</h1>
 
-<pre><code>[root@master ~]# wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-6.repo
+<pre class="line-numbers"><code class="language-text">[root@master ~]# wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-6.repo
 [root@minion ~]# wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-6.repo
 </code></pre>
 
 <h1 id="toc_3">关闭防火墙</h1>
 
-<pre><code>[root@master ~]# service iptables stop
+<pre class="line-numbers"><code class="language-text">[root@master ~]# service iptables stop
 iptables: Setting chains to policy ACCEPT: nat mangle filte[  OK  ]
 iptables: Flushing firewall rules:                         [  OK  ]
 iptables: Unloading modules:                               [  OK  ]
@@ -241,17 +248,17 @@ iptables: Unloading modules:                               [  OK  ]
 
 <h2 id="toc_5">master 端安装</h2>
 
-<pre><code>[root@master ~]# yum -y install salt-master
+<pre class="line-numbers"><code class="language-text">[root@master ~]# yum -y install salt-master
 </code></pre>
 
 <h2 id="toc_6">minion 端安装</h2>
 
-<pre><code>[root@minion ~]# yum -y install salt-minion
+<pre class="line-numbers"><code class="language-text">[root@minion ~]# yum -y install salt-minion
 </code></pre>
 
 <h2 id="toc_7">master 端配置</h2>
 
-<pre><code># 备份
+<pre class="line-numbers"><code class="language-text"># 备份
 [root@master ~]# cp /etc/salt/master /etc/salt/master.bak
 [root@master ~]# vim /etc/salt/master
 # 去掉这几行的注释
@@ -277,15 +284,15 @@ iptables: Unloading modules:                               [  OK  ]
 
 </code></pre>
 
-<p>接着启动 saltmaster 服务<br/>
-<code><br/>
-[root@master ~]# /etc/init.d/salt-master start<br/>
-Starting salt-master daemon:                               [  OK  ]<br/>
-</code></p>
+<p>接着启动 saltmaster 服务</p>
+
+<pre class="line-numbers"><code class="language-text">[root@master ~]# /etc/init.d/salt-master start
+Starting salt-master daemon:                               [  OK  ]
+</code></pre>
 
 <h2 id="toc_8">minion 端配置</h2>
 
-<pre><code># 备份
+<pre class="line-numbers"><code class="language-text"># 备份
 [root@minion ~]# cp /etc/salt/minion /etc/salt/minion.bak 
 [root@minion ~]# vim /etc/salt/minion
 # Set the location of the salt master server. If the master server cannot be
@@ -301,17 +308,17 @@ master: master #改成 master 的主机或者 IP
 
 </code></pre>
 
-<p>接着启动 saltminion 服务<br/>
-<code><br/>
-[root@minion ~]# /etc/init.d/salt-minion start<br/>
-Starting salt-minion daemon:                               [  OK  ]<br/>
-</code></p>
+<p>接着启动 saltminion 服务</p>
+
+<pre class="line-numbers"><code class="language-text">[root@minion ~]# /etc/init.d/salt-minion start
+Starting salt-minion daemon:                               [  OK  ]
+</code></pre>
 
 <h1 id="toc_9">验证</h1>
 
 <h2 id="toc_10">master 端</h2>
 
-<pre><code>[root@master ~]# salt-key -L#显示所有minion认证信息
+<pre class="line-numbers"><code class="language-text">[root@master ~]# salt-key -L#显示所有minion认证信息
 Accepted Keys:
 Denied Keys:
 Unaccepted Keys:
@@ -319,7 +326,7 @@ salt-minion
 Rejected Keys:
 </code></pre>
 
-<pre><code>[root@master ~]# salt-key -a salt-minion #接受salt-minion的认证信息；可跟参数 -y
+<pre class="line-numbers"><code class="language-text">[root@master ~]# salt-key -a salt-minion #接受salt-minion的认证信息；可跟参数 -y
 The following keys are going to be accepted:
 Unaccepted Keys:
 salt-minion
@@ -334,12 +341,12 @@ Unaccepted Keys:
 Rejected Keys:
 </code></pre>
 
-<pre><code>[root@master ~]# salt-key -A #接受所有Unaccepted状态的minion认证信息
+<pre class="line-numbers"><code class="language-text">[root@master ~]# salt-key -A #接受所有Unaccepted状态的minion认证信息
 </code></pre>
 
 <h1 id="toc_11">一些简单命令介绍</h1>
 
-<pre><code>[root@master ~]# salt &#39;*&#39; test.ping
+<pre class="line-numbers"><code class="language-text">[root@master ~]# salt &#39;*&#39; test.ping
 salt-minion:
     True
 [root@master ~]# salt &#39;salt-minion&#39; test.ping
@@ -509,31 +516,31 @@ salt-minion:
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -608,7 +615,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

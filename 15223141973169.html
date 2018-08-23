@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -201,7 +208,7 @@ Sink,定期的拉取source中的度量数据(metrics data)到目标sink中.</p>
 
 <p>Metrics配置格式如下所示</p>
 
-<pre><code>[instance].[sink|source].[name].[options] = xxxx
+<pre class="line-numbers"><code class="language-text">[instance].[sink|source].[name].[options] = xxxx
 </code></pre>
 
 <p>[instance]可以是&quot;master&quot;,&quot;worker&quot;,&quot;executor&quot;,&quot;driver&quot;,&quot;applications&quot;这意味着只有指定的实例才具有这个属性.可以用&quot;*&quot;来替换实例名,这意味着所有的这些实例将拥有此属性.</p>
@@ -475,7 +482,7 @@ Sink,定期的拉取source中的度量数据(metrics data)到目标sink中.</p>
 
 <h3 id="toc_13">通过类名为所有实例开启ConsoleSink</h3>
 
-<pre><code>*.sink.console.class=org.apache.spark.metrics.sink.ConsoleSink
+<pre class="line-numbers"><code class="language-text">*.sink.console.class=org.apache.spark.metrics.sink.ConsoleSink
 
 ConsoleSink的轮询周期 *.sink.console.period=10
 
@@ -490,17 +497,17 @@ master.sink.console.unit=seconds
 
 <h3 id="toc_14">通过类名为所有实例开启JmxSink</h3>
 
-<pre><code>*.sink.jmx.class=org.apache.spark.metrics.sink.JmxSink
+<pre class="line-numbers"><code class="language-text">*.sink.jmx.class=org.apache.spark.metrics.sink.JmxSink
 </code></pre>
 
 <h3 id="toc_15">为所有实例开启CsvSink</h3>
 
-<pre><code>*.sink.csv.class=org.apache.spark.metrics.sink.CsvSink
+<pre class="line-numbers"><code class="language-text">*.sink.csv.class=org.apache.spark.metrics.sink.CsvSink
 </code></pre>
 
 <p><strong>CsvSink的轮询周期</strong></p>
 
-<pre><code>*.sink.csv.period=1
+<pre class="line-numbers"><code class="language-text">*.sink.csv.period=1
 
 *.sink.csv.unit=minutes
 </code></pre>
@@ -509,14 +516,14 @@ master.sink.console.unit=seconds
 
 <p><strong>Worker实例重置轮询周期</strong></p>
 
-<pre><code>worker.sink.csv.period=10
+<pre class="line-numbers"><code class="language-text">worker.sink.csv.period=10
 
 worker.sink.csv.unit=minutes
 </code></pre>
 
 <h3 id="toc_16">为master和worker、driver、executor开启jvm source</h3>
 
-<pre><code>
+<pre class="line-numbers"><code class="language-text">
 master.source.jvm.class=org.apache.spark.metrics.source.JvmSource
 
 worker.source.jvm.class=org.apache.spark.metrics.source.JvmSource
@@ -528,7 +535,7 @@ executor.source.jvm.class=org.apache.spark.metrics.source.JvmSource
 
 <h2 id="toc_17">参考文档：</h2>
 
-<pre><code>${SPARK_HOME}/conf/metrics.properties.template
+<pre class="line-numbers"><code class="language-text">${SPARK_HOME}/conf/metrics.properties.template
 http://spark.apache.org/docs/latest/monitoring.html
 </code></pre>
 
@@ -679,31 +686,31 @@ http://spark.apache.org/docs/latest/monitoring.html
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -778,7 +785,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

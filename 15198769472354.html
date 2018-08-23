@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -197,14 +204,17 @@
 
 <h1 id="toc_1">ELK下载</h1>
 
-<p>历史版本下载地址 : <a href="https://www.elastic.co/downloads/past-releases">https://www.elastic.co/downloads/past-releases</a><br/>
-+ elasticsearch : 2.4.0<br/>
-+ logstash : 2.4.0<br/>
-+ kibana : 4.6.2</p>
+<p>历史版本下载地址 : <a href="https://www.elastic.co/downloads/past-releases">https://www.elastic.co/downloads/past-releases</a></p>
+
+<ul>
+<li>elasticsearch : 2.4.0</li>
+<li>logstash : 2.4.0</li>
+<li>kibana : 4.6.2</li>
+</ul>
 
 <h1 id="toc_2">安装准备</h1>
 
-<pre><code>[root@U006 opt]# cd /opt
+<pre class="line-numbers"><code class="language-text">[root@U006 opt]# cd /opt
 [root@U006 opt]# mkdir elk
 [root@U006 opt]# chown -R hadoop:hadoop elk
 [root@U006 opt]# su hadoop
@@ -223,7 +233,7 @@ total 116996
 
 </code></pre>
 
-<pre><code>[hadoop@U006 elk]$ ll
+<pre class="line-numbers"><code class="language-text">[hadoop@U006 elk]$ ll
 total 16
 drwxrwxr-x  6 hadoop hadoop 4096 Sep 18 09:45 elasticsearch-2.4.0
 drwxrwxr-x  2 hadoop hadoop 4096 Sep 18 09:40 jars
@@ -237,13 +247,13 @@ drwxrwxr-x  5 hadoop hadoop 4096 Sep 18 09:47 logstash-2.4.0
 <p>测试环境搭建,单节点为例</p>
 </blockquote>
 
-<pre><code># 解压elasticsearch
+<pre class="line-numbers"><code class="language-text"># 解压elasticsearch
 tar -zxvf elasticsearch-2.4.0.tar.gz -C /opt/elk/
 </code></pre>
 
 <h2 id="toc_4">修改配置文件config/elasticsearch.yml</h2>
 
-<pre><code>[hadoop@U006 config]$ pwd
+<pre class="line-numbers"><code class="language-text">[hadoop@U006 config]$ pwd
 /opt/elk/elasticsearch-2.4.0/config
 
 [hadoop@U006 config]$ ll
@@ -261,11 +271,11 @@ total 8
 
 <h2 id="toc_5">启动es</h2>
 
-<pre><code>./bin/elasticsearch
+<pre class="line-numbers"><code class="language-text">./bin/elasticsearch
 ./bin/elasticsearch -d #后台启动
 </code></pre>
 
-<pre><code>[hadoop@U006 elasticsearch-2.4.0]$ ./bin/elasticsearch
+<pre class="line-numbers"><code class="language-text">[hadoop@U006 elasticsearch-2.4.0]$ ./bin/elasticsearch
 [2017-09-18 10:08:50,300][WARN ][bootstrap                ] unable to install syscall filter: seccomp unavailable: requires kernel 3.5+ with CONFIG_SECCOMP and CONFIG_SECCOMP_FILTER compiled in
 [2017-09-18 10:08:51,697][INFO ][node                     ] [node1] version[2.4.0], pid[3098], build[ce9f0c7/2016-08-29T09:14:17Z]
 [2017-09-18 10:08:51,697][INFO ][node                     ] [node1] initializing ...
@@ -291,7 +301,7 @@ total 8
 
 <h4 id="toc_8">下载安装</h4>
 
-<pre><code># 进入bin目录下
+<pre class="line-numbers"><code class="language-text"># 进入bin目录下
 [hadoop@U006 bin]$ ./plugin install mobz/elasticsearch-head
 -&gt; Installing mobz/elasticsearch-head...
 Trying https://github.com/mobz/elasticsearch-head/archive/master.zip ...
@@ -315,7 +325,7 @@ Installed head into /opt/elk/elasticsearch-2.4.0/plugins/head
 
 <h4 id="toc_11">下载安装</h4>
 
-<pre><code># ./bin/plugin install license
+<pre class="line-numbers"><code class="language-text"># ./bin/plugin install license
 # ./bin/plugin install marvel-agent
 
 [hadoop@U006 elasticsearch-2.4.0]$ ./bin/plugin install license
@@ -383,7 +393,7 @@ marvel插件主要会和kibana进行配置使用,待会看kibana也需要安装m
 
 <h2 id="toc_15">解压安装</h2>
 
-<pre><code>tar -zxvf kibana-4.6.2-linux-x86_64.tar.gz -C /opt/elk/
+<pre class="line-numbers"><code class="language-text">tar -zxvf kibana-4.6.2-linux-x86_64.tar.gz -C /opt/elk/
 
 </code></pre>
 
@@ -401,7 +411,7 @@ marvel插件主要会和kibana进行配置使用,待会看kibana也需要安装m
 
 <h4 id="toc_19">下载</h4>
 
-<pre><code>[hadoop@U006 kibana-4.6.2-linux-x86_64]$ bin/kibana plugin --install elasticsearch/marvel/latest
+<pre class="line-numbers"><code class="language-text">[hadoop@U006 kibana-4.6.2-linux-x86_64]$ bin/kibana plugin --install elasticsearch/marvel/latest
 Installing marvel
 Attempting to transfer from https://download.elastic.co/elasticsearch/marvel/marvel-latest.tar.gz
 .....
@@ -415,7 +425,7 @@ Plugin installation complete
 
 <h4 id="toc_20">启动验证</h4>
 
-<pre><code>bin/elasticsearch
+<pre class="line-numbers"><code class="language-text">bin/elasticsearch
 bin/kibana
 
 </code></pre>
@@ -433,7 +443,7 @@ bin/kibana
 
 <h4 id="toc_22">下载</h4>
 
-<pre><code>[hadoop@U006 kibana-4.6.2-linux-x86_64]$ ./bin/kibana plugin --install elastic/sense
+<pre class="line-numbers"><code class="language-text">[hadoop@U006 kibana-4.6.2-linux-x86_64]$ ./bin/kibana plugin --install elastic/sense
 Installing sense
 Attempting to transfer from https://download.elastic.co/elastic/sense/sense-latest.tar.gz
 .....
@@ -455,7 +465,7 @@ Plugin installation complete
 
 <h2 id="toc_25">解压安装即可</h2>
 
-<pre><code>tar -zxvf logstash-2.4.0.tar.gz -C /opt/elk/
+<pre class="line-numbers"><code class="language-text">tar -zxvf logstash-2.4.0.tar.gz -C /opt/elk/
 
 </code></pre>
 
@@ -465,7 +475,7 @@ Plugin installation complete
 
 <p>字段具体意思可以看官网 <a href="https://www.elastic.co/guide/en/logstash/current/plugins-inputs-log4j.html">https://www.elastic.co/guide/en/logstash/current/plugins-inputs-log4j.html</a></p>
 
-<pre><code>[hadoop@U006 logstash-2.4.0]$ vim logstash_log4j_to_es.conf
+<pre class="line-numbers"><code class="language-text">[hadoop@U006 logstash-2.4.0]$ vim logstash_log4j_to_es.conf
 input {
         log4j {
                  mode =&gt; &quot;server&quot;
@@ -488,7 +498,7 @@ output{
 
 <h2 id="toc_27">启动logstash</h2>
 
-<pre><code>bin/logstash agent -f logstash_log4j_to_es.conf
+<pre class="line-numbers"><code class="language-text">bin/logstash agent -f logstash_log4j_to_es.conf
 # 或者
 bin/logstash -f logstash_log4j_to_es.conf
 
@@ -509,7 +519,7 @@ Pipeline main started
 
 <h2 id="toc_29">启动elk</h2>
 
-<pre><code>bin/elasticsearch
+<pre class="line-numbers"><code class="language-text">bin/elasticsearch
 bin/kibana
 bin/logstash -f logstash_log4j_to_es.conf
 </code></pre>
@@ -534,7 +544,7 @@ bin/logstash -f logstash_log4j_to_es.conf
 
 <h3 id="toc_32">编写log4j的测试代码</h3>
 
-<pre><code>public class TestFunc {
+<pre class="line-numbers"><code class="language-text">public class TestFunc {
 
   Logger logger = LoggerFactory.getLogger(TestFunc.class);
 
@@ -555,14 +565,14 @@ bin/logstash -f logstash_log4j_to_es.conf
 <h3 id="toc_33">log4j的配置</h3>
 
 <p>log4j.properties<br/>
-remotehost填写logstash的服务器地址.也就是那个input项里面的地址.<br/>
-<code><br/>
-log4j.rootLogger=INFO,socket<br/>
-log4j.appender.socket=org.apache.log4j.net.SocketAppender<br/>
-log4j.appender.socket.RemoteHost=10.10.25.13<br/>
-log4j.appender.socket.Port=4567<br/>
-log4j.appender.socket.LocationInfo=true<br/>
-</code></p>
+remotehost填写logstash的服务器地址.也就是那个input项里面的地址.</p>
+
+<pre class="line-numbers"><code class="language-text">log4j.rootLogger=INFO,socket
+log4j.appender.socket=org.apache.log4j.net.SocketAppender
+log4j.appender.socket.RemoteHost=10.10.25.13
+log4j.appender.socket.Port=4567
+log4j.appender.socket.LocationInfo=true
+</code></pre>
 
 <h2 id="toc_34">执行代码,输出log4j日志,观察kibana页面变化</h2>
 
@@ -717,31 +727,31 @@ log4j.appender.socket.LocationInfo=true<br/>
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -816,7 +826,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

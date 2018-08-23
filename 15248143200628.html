@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -390,7 +397,7 @@ L(\theta)&amp; =\prod_{i=1}^mp(y^{(i)}|x^{(i)};\theta)\\\<br/>
 
 <p>1.构造测试数据</p>
 
-<pre><code class="language-python">import numpy as np
+<pre class="line-numbers"><code class="language-python">import numpy as np
 import pandas as pd
 
 # 构造测试数据y=3x1+x2
@@ -404,7 +411,7 @@ df=pd.DataFrame({
 
 <p>2.抽取x和y</p>
 
-<pre><code class="language-python"># 抽取x和y
+<pre class="line-numbers"><code class="language-python"># 抽取x和y
 x=df[[&#39;x1&#39;,&#39;x2&#39;]]
 # 将y转换成n行1列的列向量
 y=df[&#39;y&#39;].values.reshape((-1,1))
@@ -425,14 +432,14 @@ y=df[&#39;y&#39;].values.reshape((-1,1))
 <li>I:求矩阵的逆</li>
 </ul>
 
-<pre><code class="language-python"># 将公式转成python代码,计算theta值
+<pre class="line-numbers"><code class="language-python"># 将公式转成python代码,计算theta值
 
 np.dot(np.mat(x.T.dot(x)).I,x.T).dot(y)
 </code></pre>
 
 <p>4.结果输出</p>
 
-<pre><code>    matrix([[ 2.],
+<pre class="line-numbers"><code class="language-text">    matrix([[ 2.],
             [ 1.]])
 </code></pre>
 
@@ -465,7 +472,7 @@ np.dot(np.mat(x.T.dot(x)).I,x.T).dot(y)
 
 <p>代码示例如下(机器学习的简单开发流程):</p>
 
-<pre><code># -*- coding: utf-8 -*-
+<pre class="line-numbers"><code class="language-text"># -*- coding: utf-8 -*-
 &#39;&#39;&#39;
     Created by hushiwei on 2018/4/27.
 
@@ -579,7 +586,7 @@ plt.show()
 
 <p>结果输出:</p>
 
-<pre><code>准确率: 0.24409311805909026
+<pre class="line-numbers"><code class="language-text">准确率: 0.24409311805909026
 rmse: 1.164092345973625
 特征的系数为: [(&#39;年&#39;, 0.0), (&#39;月&#39;, 1.1102230246251565e-16), (&#39;日&#39;, -1.415881661733238), (&#39;时&#39;, -0.9349532432495644), (&#39;分&#39;, -0.10214075598497), (&#39;秒&#39;, 0.0)]
 </code></pre>
@@ -594,7 +601,7 @@ rmse: 1.164092345973625
 
 <p>代码示例:</p>
 
-<pre><code># -*- coding: utf-8 -*-
+<pre class="line-numbers"><code class="language-text"># -*- coding: utf-8 -*-
 &#39;&#39;&#39;
     Created by hushiwei on 2018/4/27.
 
@@ -685,7 +692,7 @@ plt.show()
 
 <p>模型预测结果</p>
 
-<pre><code>电流训练准确率:  0.9909657573073489
+<pre class="line-numbers"><code class="language-text">电流训练准确率:  0.9909657573073489
 电流预测准确率:  0.9920420609708968
 电流参数:  [5.07744316 0.07191391]
 </code></pre>
@@ -917,31 +924,31 @@ plt.show()
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -1016,7 +1023,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

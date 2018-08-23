@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -204,7 +211,6 @@
 
 <ul>
 <li>步骤：
-
 <ul>
 <li>1、首先，定义类继承Thread；</li>
 <li>2、复写Thread类中的run方法；目的：将自定义代码存储在run方法中，让线程执行</li>
@@ -214,7 +220,7 @@
 
 <p><strong>代码示例:</strong></p>
 
-<pre><code>public class BasicThread extends Thread {
+<pre class="line-numbers"><code class="language-text">public class BasicThread extends Thread {
     @Override
     public void run() {
         for (int i = 0; i &lt; 10; i++) {
@@ -240,7 +246,6 @@ public class MainFunction {
 
 <ul>
 <li>步骤：
-
 <ul>
 <li>1、定义类实现Runnable接口</li>
 <li>2、复写接口中的run方法</li>
@@ -252,7 +257,7 @@ public class MainFunction {
 
 <p><strong>代码示例:</strong></p>
 
-<pre><code>public class BasicRunnable implements Runnable {
+<pre class="line-numbers"><code class="language-text">public class BasicRunnable implements Runnable {
     @Override
     public void run() {
         for (int i = 0; i &lt; 10; i++) {
@@ -300,16 +305,21 @@ public class MainRunnable {
 
 <p><strong>问题:</strong> 当多个线程共享同一个数据时,导致共享数据出现错误<br/>
 <strong>解决方案:</strong> 当一个线程执行时,其他的线程不能参与执行.<br/>
-<strong>锁:</strong> 对象如图锁,持有锁的线程才能在同步中执行,没有锁的线程,即使获取了CPU的执行权,也进不去.<br/>
-+ 同步的前提:<br/>
-    + 必须要有两个或两个以上的线程访问共享数据<br/>
-    + 必须是多个线程使用同一个锁<br/>
-+ 好处:解决了多线程安全问题<br/>
-+ 弊端:多个线程都需要判断锁,较为消耗资源</p>
+<strong>锁:</strong> 对象如图锁,持有锁的线程才能在同步中执行,没有锁的线程,即使获取了CPU的执行权,也进不去.</p>
+
+<ul>
+<li>同步的前提:
+<ul>
+<li>必须要有两个或两个以上的线程访问共享数据</li>
+<li>必须是多个线程使用同一个锁</li>
+</ul></li>
+<li>好处:解决了多线程安全问题</li>
+<li>弊端:多个线程都需要判断锁,较为消耗资源</li>
+</ul>
 
 <p>伪代码:</p>
 
-<pre><code>synchronized(监视器对象){
+<pre class="line-numbers"><code class="language-text">synchronized(监视器对象){
 //需要被同步的代码
 }
 </code></pre>
@@ -323,7 +333,7 @@ public class MainRunnable {
 
 <p>账户对象:</p>
 
-<pre><code>public class Account {
+<pre class="line-numbers"><code class="language-text">public class Account {
     private double balance;//账户余额
 
     public Account(double balance) {
@@ -352,7 +362,7 @@ public class MainRunnable {
 
 <p>取钱线程:</p>
 
-<pre><code>public class DrawThread extends Thread {
+<pre class="line-numbers"><code class="language-text">public class DrawThread extends Thread {
     private Account account;
     private double drawBalance;
 
@@ -385,7 +395,7 @@ public class MainRunnable {
 
 <p>测试取钱:</p>
 
-<pre><code>public class DrawTest {
+<pre class="line-numbers"><code class="language-text">public class DrawTest {
     public static void main(String[] args) {
         Account account = new Account(1000);
         new DrawThread(&quot;A账户: &quot;,account,500).start();
@@ -414,12 +424,11 @@ Thread[A账户: ,5,main] : 余额不足,当前余额: 0.0
 <li>伪代码:</li>
 </ul>
 
-<pre><code>public synchronized void disPlay(){}
+<pre class="line-numbers"><code class="language-text">public synchronized void disPlay(){}
 </code></pre>
 
 <ul>
 <li>特点:
-
 <ul>
 <li>1.对于同步方法而言,无需指定同步监视器对象.同步方法的同步监视器对象是this.</li>
 <li>2.一个对象的一个同步方法被调用,这个对象的其他同步方法都用不了.</li>
@@ -430,7 +439,7 @@ Thread[A账户: ,5,main] : 余额不足,当前余额: 0.0
 
 <p>业务类:</p>
 
-<pre><code>public class Working {
+<pre class="line-numbers"><code class="language-text">public class Working {
     public synchronized void tom() {
         System.out.println(&quot;tom in...&quot;+&quot;\n&quot;+&quot;tom say: Hello Jerry &quot;);
         try {
@@ -451,7 +460,7 @@ Thread[A账户: ,5,main] : 余额不足,当前余额: 0.0
 
 <p>线程类:</p>
 
-<pre><code>public class JerryThread extends Thread {
+<pre class="line-numbers"><code class="language-text">public class JerryThread extends Thread {
     private Working working;
 
     public JerryThread(Working working) {
@@ -479,7 +488,7 @@ public class TomThread extends Thread {
 
 <p>测试类:</p>
 
-<pre><code>public class SynFunction {
+<pre class="line-numbers"><code class="language-text">public class SynFunction {
     public static void main(String[] args) {
         Working working = new Working();
         TomThread tomThread = new TomThread(working);
@@ -512,7 +521,7 @@ tom out...
 
 <p>线程1:</p>
 
-<pre><code>public class Thread1 extends Thread {
+<pre class="line-numbers"><code class="language-text">public class Thread1 extends Thread {
     @Override
     public void run() {
         synchronized (Object.class) {
@@ -533,7 +542,7 @@ tom out...
 
 <p>线程2:</p>
 
-<pre><code>public class Thread2 extends Thread {
+<pre class="line-numbers"><code class="language-text">public class Thread2 extends Thread {
     @Override
     public void run() {
         synchronized (String.class) {
@@ -554,7 +563,7 @@ tom out...
 
 <p>测试类:</p>
 
-<pre><code>public class LockFunction {
+<pre class="line-numbers"><code class="language-text">public class LockFunction {
     public static void main(String[] args) {
         Thread1 thread1 = new Thread1();
         Thread2 thread2 = new Thread2();
@@ -577,7 +586,7 @@ Thread-1...外层锁
 
 <p>例如:</p>
 
-<pre><code>    老师：我们开始上课；
+<pre class="line-numbers"><code class="language-text">    老师：我们开始上课；
     学生A：老师等一下，我要去厕所；
     老师：OK，你快点，那我wait()了，等你回来notify我一下。
 </code></pre>
@@ -589,7 +598,7 @@ Thread-1...外层锁
 
 <p>银行类:</p>
 
-<pre><code>public class Bank {
+<pre class="line-numbers"><code class="language-text">public class Bank {
     private double money;
     boolean flag = false;
 
@@ -630,7 +639,7 @@ Thread-1...外层锁
 
 <p>存钱类:</p>
 
-<pre><code>public class SaveThread extends Thread {
+<pre class="line-numbers"><code class="language-text">public class SaveThread extends Thread {
     private Bank bank;
     private double saveMoney;
 
@@ -663,7 +672,7 @@ Thread-1...外层锁
 
 <p>取钱类:</p>
 
-<pre><code>public class DrawThread extends Thread {
+<pre class="line-numbers"><code class="language-text">public class DrawThread extends Thread {
     private Bank bank;
     private double drawMoney;
 
@@ -699,7 +708,7 @@ Thread-1...外层锁
 
 <p>测试类:</p>
 
-<pre><code>public class BankTest {
+<pre class="line-numbers"><code class="language-text">public class BankTest {
     public static void main(String[] args) {
         Bank bank = new Bank(5000);
         new DrawThread(&quot;取钱线程&quot;,bank,500).start();
@@ -774,7 +783,7 @@ Thread-1...外层锁
 
 <p>资源类：</p>
 
-<pre><code>public class Resource {
+<pre class="line-numbers"><code class="language-text">public class Resource {
     private int num = 0;
     boolean flag = false;
 
@@ -824,7 +833,7 @@ Thread-1...外层锁
 
 <p>生产者线程:</p>
 
-<pre><code>public class Producer implements Runnable {
+<pre class="line-numbers"><code class="language-text">public class Producer implements Runnable {
     private Resource resource;
 
     public Producer(Resource resource) {
@@ -846,7 +855,7 @@ Thread-1...外层锁
 
 <p>消费者线程:</p>
 
-<pre><code>public class Consumer implements Runnable {
+<pre class="line-numbers"><code class="language-text">public class Consumer implements Runnable {
     private Resource resource;
 
     public Consumer(Resource resource) {
@@ -868,7 +877,7 @@ Thread-1...外层锁
 
 <p>测试类:</p>
 
-<pre><code>public class Test {
+<pre class="line-numbers"><code class="language-text">public class Test {
     public static void main(String[] args) {
         Resource resource = new Resource(50);
         new Thread(new Producer(resource)).start();
@@ -901,7 +910,7 @@ Thread-1 消费者线程: ---&gt; 56
 
 <p>测试代码:</p>
 
-<pre><code>public class Test {
+<pre class="line-numbers"><code class="language-text">public class Test {
     public static void main(String[] args) {
         Resource resource = new Resource(0);
         new Thread(new Producer(resource)).start();
@@ -923,23 +932,27 @@ Thread-2 消费者线程: -----------&gt; 105
 
 <ul>
 <li>原因分析
-
 <ul>
 <li>当两个线程同时操作生产者生产或者消费者消费时，如果有生产者或者消费者的两个线程都wait()时，再次notify(),由于其中一个线程已经改变了标记而另外一个线程再次往下直接执行的时候没有判断标记而导致的。</li>
 <li>if判断标记，只有一次，会导致不该运行的线程运行了。出现了数据错误的情况。</li>
 </ul></li>
-<li>解决方案
+<li>解决方案<br/>
 +while判断标记，解决了线程获取执行权后，是否要运行！也就是每次wait()后再notify()时先再次判断标记</li>
 </ul>
 
-<p><strong>注意:</strong><br/>
-+ 把单消费者单生产者改为多消费者和多生产者时候.<br/>
-    + 1.把if改为while<br/>
-    + 2.把notify改为notifyAll(不然会出现锁死)</p>
+<p><strong>注意:</strong></p>
+
+<ul>
+<li>把单消费者单生产者改为多消费者和多生产者时候.
+<ul>
+<li>1.把if改为while</li>
+<li>2.把notify改为notifyAll(不然会出现锁死)</li>
+</ul></li>
+</ul>
 
 <p>代码:</p>
 
-<pre><code>public class Resource {
+<pre class="line-numbers"><code class="language-text">public class Resource {
     private int num = 0;
     boolean flag = false;
 
@@ -1135,31 +1148,31 @@ Thread-2 消费者线程: -----------&gt; 105
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -1234,7 +1247,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -187,7 +194,7 @@
 
 <h1 id="toc_0">安装方式</h1>
 
-<pre><code># ubuntu上安装
+<pre class="line-numbers"><code class="language-text"># ubuntu上安装
 sudo apt install python-matplotlib
 # mac上安装
 pip install matplotlib
@@ -197,184 +204,167 @@ pip install matplotlib
 
 <h2 id="toc_2">快速入门小例子1之画单个图</h2>
 
-<p>我们只要有x轴的数和y轴的数,那么就可以在坐标轴上画出图来了.<br/>
-```<br/>
-import numpy as np<br/>
-import matplotlib as mpl<br/>
-import matplotlib.pyplot as plt</p>
+<p>我们只要有x轴的数和y轴的数,那么就可以在坐标轴上画出图来了.</p>
 
-<h1 id="toc_3">通过rcParams设置全局横纵轴字体大小</h1>
+<pre class="line-numbers"><code class="language-text">import numpy as np
+import matplotlib as mpl
+import matplotlib.pyplot as plt
 
-<p>mpl.rcParams[&#39;xtick.labelsize&#39;]=24<br/>
-mpl.rcParams[&#39;ytick.labelsize&#39;]=24</p>
+# 通过rcParams设置全局横纵轴字体大小
+mpl.rcParams[&#39;xtick.labelsize&#39;]=24
+mpl.rcParams[&#39;ytick.labelsize&#39;]=24
 
-<h1 id="toc_4">x轴的点</h1>
+# x轴的点
+x1 = np.arange(11)
+# y轴的点
+y1 = [
+    1.0847275042134147E-4,
+    2.0106877828356476E-4,
+    1.1836360644802181E-4,
+    0.043453404423487926,
+    0.03113001646083574,
+    0.06,
+    0.012709253496067191,
+    0.06,
+    3.284899860591644E-4,
+    0.015235253124714847,
+    0.0034946847451197242,
+]
 
-<p>x1 = np.arange(11)</p>
+# 创建一个图,名字为ctr
+plt.figure(&quot;ctr&quot;)
+# 在图上绘制
+plt.plot(x1,y1)
 
-<h1 id="toc_5">y轴的点</h1>
+# 将当前figure的图像保存到文件result.png
+plt.savefig(&#39;result.pn
+g&#39;)
+# 一定要加上这句才能让画好的图显示在屏幕上
+plt.show()
 
-<p>y1 = [<br/>
-    1.0847275042134147E-4,<br/>
-    2.0106877828356476E-4,<br/>
-    1.1836360644802181E-4,<br/>
-    0.043453404423487926,<br/>
-    0.03113001646083574,<br/>
-    0.06,<br/>
-    0.012709253496067191,<br/>
-    0.06,<br/>
-    3.284899860591644E-4,<br/>
-    0.015235253124714847,<br/>
-    0.0034946847451197242,<br/>
-]</p>
-
-<h1 id="toc_6">创建一个图,名字为ctr</h1>
-
-<p>plt.figure(&quot;ctr&quot;)</p>
-
-<h1 id="toc_7">在图上绘制</h1>
-
-<p>plt.plot(x1,y1)</p>
-
-<h1 id="toc_8">将当前figure的图像保存到文件result.png</h1>
-
-<p>plt.savefig(&#39;result.pn<br/>
-g&#39;)</p>
-
-<h1 id="toc_9">一定要加上这句才能让画好的图显示在屏幕上</h1>
-
-<p>plt.show()</p>
-
-<pre><code>
-如图所示:
-![ct](media/15198750755456/ctr1.png)
-
-看上面就没有几行代码,但是就画出了一个图.所以用Matplotlib可以非常方便的绘制我们想要的图形.这里这是用最简单的例子说明一下.
-
-## 快速入门小例子2之把两组坐标画在一个图上进行比较
-
-这里我们有两组数据,希望能够方便的比较这两组数据的差异,那么我们就可以把趋势都画在一个图上
 </code></pre>
 
-<p>import numpy as np<br/>
-import matplotlib as mpl<br/>
-import matplotlib.pyplot as plt</p>
+<p>如图所示:<br/>
+<img src="media/15198750755456/ctr1.png" alt="ct"/></p>
 
-<h1 id="toc_10">通过rcParams设置全局横纵轴字体大小</h1>
+<p>看上面就没有几行代码,但是就画出了一个图.所以用Matplotlib可以非常方便的绘制我们想要的图形.这里这是用最简单的例子说明一下.</p>
 
-<p>mpl.rcParams[&#39;xtick.labelsize&#39;]=24<br/>
-mpl.rcParams[&#39;ytick.labelsize&#39;]=24</p>
+<h2 id="toc_3">快速入门小例子2之把两组坐标画在一个图上进行比较</h2>
 
-<h1 id="toc_11">x轴的点</h1>
+<p>这里我们有两组数据,希望能够方便的比较这两组数据的差异,那么我们就可以把趋势都画在一个图上</p>
 
-<p>x1 = np.arange(11)</p>
+<pre class="line-numbers"><code class="language-text">import numpy as np
+import matplotlib as mpl
+import matplotlib.pyplot as plt
 
-<h1 id="toc_12">y轴的点</h1>
+# 通过rcParams设置全局横纵轴字体大小
+mpl.rcParams[&#39;xtick.labelsize&#39;]=24
+mpl.rcParams[&#39;ytick.labelsize&#39;]=24
 
-<p>y1 = [<br/>
-    1.0847275042134147E-4,<br/>
-    2.0106877828356476E-4,<br/>
-    1.1836360644802181E-4,<br/>
-    0.043453404423487926,<br/>
-    0.03113001646083574,<br/>
-    0.06,<br/>
-    0.012709253496067191,<br/>
-    0.06,<br/>
-    3.284899860591644E-4,<br/>
-    0.015235253124714847,<br/>
-    0.0034946847451197242,<br/>
-]</p>
+# x轴的点
+x1 = np.arange(11)
+# y轴的点
+y1 = [
+    1.0847275042134147E-4,
+    2.0106877828356476E-4,
+    1.1836360644802181E-4,
+    0.043453404423487926,
+    0.03113001646083574,
+    0.06,
+    0.012709253496067191,
+    0.06,
+    3.284899860591644E-4,
+    0.015235253124714847,
+    0.0034946847451197242,
+]
 
-<h1 id="toc_13">创建一个图,名字为ctr</h1>
+# 创建一个图,名字为ctr
+#plt.figure(&quot;ctr&quot;)
+# 在图上绘制
+#plt.plot(x1,y1)
 
-<h1 id="toc_14">plt.figure(&quot;ctr&quot;)</h1>
 
-<h1 id="toc_15">在图上绘制</h1>
+x2 = np.arange(11)
 
-<h1 id="toc_16">plt.plot(x1,y1)</h1>
+y2 = [
+    3.529088519807792E-5,
+    1.1895968858318187E-4,
+    0.0013049292594645469,
+    0.046417845349992326,
+    0.03282177644291713,
+    0.06,
+    0.013313023920004725,
+    0.06,
+    3.554547063283854E-4,
+    0.014309633417956262,
+    0.0034946847451197242,
+]
 
-<p>x2 = np.arange(11)</p>
 
-<p>y2 = [<br/>
-    3.529088519807792E-5,<br/>
-    1.1895968858318187E-4,<br/>
-    0.0013049292594645469,<br/>
-    0.046417845349992326,<br/>
-    0.03282177644291713,<br/>
-    0.06,<br/>
-    0.013313023920004725,<br/>
-    0.06,<br/>
-    3.554547063283854E-4,<br/>
-    0.014309633417956262,<br/>
-    0.0034946847451197242,<br/>
-]</p>
+#plt.figure(&quot;ctrEstimate&quot;)
+#plt.plot(x2,y2,&#39;k&#39;)
 
-<h1 id="toc_17">plt.figure(&quot;ctrEstimate&quot;)</h1>
 
-<h1 id="toc_18">plt.plot(x2,y2,&#39;k&#39;)</h1>
+# 两个图画一起
+plt.figure(&#39;ctr &amp; ctrEstimate&#39;)
+plt.plot(x1, y1)
 
-<h1 id="toc_19">两个图画一起</h1>
+# scatter可以方便出散点图
+# plt.scatter(x1,y11,c=&#39;red&#39;,marker=&#39;v&#39;)
 
-<p>plt.figure(&#39;ctr &amp; ctrEstimate&#39;)<br/>
-plt.plot(x1, y1)</p>
+# plt.scatter(x2,y22,marker=&#39;^&#39;)
 
-<h1 id="toc_20">scatter可以方便出散点图</h1>
+# &#39;r&#39;表示用红色线
+plt.plot(x2, y2, &#39;r&#39;)
 
-<h1 id="toc_21">plt.scatter(x1,y11,c=&#39;red&#39;,marker=&#39;v&#39;)</h1>
+plt.show()
+</code></pre>
 
-<h1 id="toc_22">plt.scatter(x2,y22,marker=&#39;<sup>&#39;)</sup></h1>
-
-<h1 id="toc_23">&#39;r&#39;表示用红色线</h1>
-
-<p>plt.plot(x2, y2, &#39;r&#39;)</p>
-
-<p>plt.show()<br/>
-```<br/>
-如图所示:<br/>
+<p>如图所示:<br/>
 <img src="media/15198750755456/ctr2.png" alt="ct"/></p>
 
-<h2 id="toc_24">入门小例子3之多布局</h2>
+<h2 id="toc_4">入门小例子3之多布局</h2>
 
-<p>在一张图上构建多个布局画多张图<br/>
-```<br/>
-import matplotlib as mpl<br/>
-import matplotlib.pyplot as plt</p>
+<p>在一张图上构建多个布局画多张图</p>
 
-<h1 id="toc_25">通过rcParams设置全局横纵轴字体大小</h1>
+<pre class="line-numbers"><code class="language-text">import matplotlib as mpl
+import matplotlib.pyplot as plt
 
-<p>mpl.rcParams[&#39;xtick.labelsize&#39;]=24<br/>
-mpl.rcParams[&#39;ytick.labelsize&#39;]=24</p>
+# 通过rcParams设置全局横纵轴字体大小
+mpl.rcParams[&#39;xtick.labelsize&#39;]=24
+mpl.rcParams[&#39;ytick.labelsize&#39;]=24
 
-<p>x=range(10)</p>
+x=range(10)
 
-<p>y=[5,4,3,2,1,6,7,8,9,0]</p>
+y=[5,4,3,2,1,6,7,8,9,0]
 
-<p>fig=plt.figure(&quot;one figure many subplot&quot;)<br/>
-ax=fig.add_subplot(131)<br/>
-ax.set_title(&#39;Histogram&#39;)<br/>
-ax.bar(x,y)</p>
+fig=plt.figure(&quot;one figure many subplot&quot;)
+ax=fig.add_subplot(131)
+ax.set_title(&#39;Histogram&#39;)
+ax.bar(x,y)
 
-<p>ax=fig.add_subplot(132)<br/>
-ax.set_title(&#39;line chart&#39;)<br/>
-ax.plot(x,y)</p>
+ax=fig.add_subplot(132)
+ax.set_title(&#39;line chart&#39;)
+ax.plot(x,y)
 
-<p>ax=fig.add_subplot(133)<br/>
-ax.set_title(u&#39;Scatter plot&#39;)<br/>
-ax.scatter(x,y)</p>
+ax=fig.add_subplot(133)
+ax.set_title(u&#39;Scatter plot&#39;)
+ax.scatter(x,y)
 
-<p>plt.show()<br/>
-```<br/>
-如图所示</p>
+plt.show()
+</code></pre>
+
+<p>如图所示</p>
 
 <p><img src="media/15198750755456/figure.png" alt="figure"/></p>
 
-<h1 id="toc_26">matplotlib画图api解释</h1>
+<h1 id="toc_5">matplotlib画图api解释</h1>
 
 <p>单独的讲解api很无聊.直接写代码画图,代码里都有详细的说明</p>
 
-<h2 id="toc_27">画2维的柱图和饼图</h2>
+<h2 id="toc_6">画2维的柱图和饼图</h2>
 
-<pre><code>
+<pre class="line-numbers"><code class="language-text">
 import numpy as np
 
 import matplotlib as mpl
@@ -602,31 +592,31 @@ plt.show()
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -701,7 +691,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

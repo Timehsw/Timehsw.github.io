@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -183,7 +190,7 @@
       <div class="article-content">
       <h1 id="toc_0">切换root账号</h1>
 
-<pre><code>macbook pro启用root的方法
+<pre class="line-numbers"><code class="language-text">macbook pro启用root的方法
 用管理员帐号进入shell:
 　　1) sudo passwd root
 　　2) 输入新的root密码。
@@ -199,19 +206,19 @@
 <p>安装破解软件的时候,需要设置成-允许从任何来源,不然会出现<br/>
 xxx.app已损坏,打不开.你应该将它移到废纸篓</p>
 
-<pre><code>sudo spctl --master-disable
+<pre class="line-numbers"><code class="language-text">sudo spctl --master-disable
 </code></pre>
 
 <h1 id="toc_2">安装brew包管理器</h1>
 
-<pre><code>ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+<pre class="line-numbers"><code class="language-text">ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
 更新 brew
 brew update
 </code></pre>
 
 <h1 id="toc_3">brew常用命令</h1>
 
-<pre><code>brew install xxx 安装xxx
+<pre class="line-numbers"><code class="language-text">brew install xxx 安装xxx
 brew uninstall xxx 卸载xxx
 brew list 列出已安装的软件
 brew update 更新brew
@@ -222,32 +229,32 @@ brew deps 显示包依赖
 
 <h1 id="toc_4">安装brew cask</h1>
 
-<pre><code>ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot; &lt; /dev/null 2&gt; /dev/null ; brew install caskroom/cask/brew-cask 2&gt; /dev/null
+<pre class="line-numbers"><code class="language-text">ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot; &lt; /dev/null 2&gt; /dev/null ; brew install caskroom/cask/brew-cask 2&gt; /dev/null
 
 </code></pre>
 
 <h1 id="toc_5">安装reds可视化客户端</h1>
 
-<pre><code>brew cask install rdm
+<pre class="line-numbers"><code class="language-text">brew cask install rdm
 </code></pre>
 
 <h1 id="toc_6">重新安装 python</h1>
 
 <p>Python会被安装到/usr/local/bin目录下</p>
 
-<pre><code>brew install python
+<pre class="line-numbers"><code class="language-text">brew install python
 </code></pre>
 
 <h1 id="toc_7">然后安装 ipython</h1>
 
-<pre><code>sudo pip install ipython
+<pre class="line-numbers"><code class="language-text">sudo pip install ipython
 </code></pre>
 
 <h1 id="toc_8">然后安装 jupyter notebook</h1>
 
 <p>执行ipynb文件,好东西.</p>
 
-<pre><code># 安装
+<pre class="line-numbers"><code class="language-text"># 安装
 sudo pip install jupyter
 # 运行
 jupyter notebook
@@ -255,12 +262,12 @@ jupyter notebook
 
 <h1 id="toc_9">安装 wget</h1>
 
-<pre><code>brew install wget
+<pre class="line-numbers"><code class="language-text">brew install wget
 </code></pre>
 
 <h1 id="toc_10">安装 node</h1>
 
-<pre><code>brew install node
+<pre class="line-numbers"><code class="language-text">brew install node
 </code></pre>
 
 <h1 id="toc_11">安装hexo</h1>
@@ -274,12 +281,12 @@ npm install -g hexo-cli
 <li>验证</li>
 </ul>
 
-<pre><code>输入 hexo 有提示就成了
+<pre class="line-numbers"><code class="language-text">输入 hexo 有提示就成了
 </code></pre>
 
 <h1 id="toc_12">配置 GitHub</h1>
 
-<pre><code>重新打开bash，输入：
+<pre class="line-numbers"><code class="language-text">重新打开bash，输入：
 ssh-keygen -t rsa -C &quot;Github的注册邮箱地址&quot;
 一路Enter过来就好，得到信息：
 Your public key has been saved in /Users/hushiwei/.ssh
@@ -289,7 +296,7 @@ New SSH key ——Title：blog —— Key：输入刚才复制的—— Add SSH 
 
 <h1 id="toc_13">安装pip(如果重新用 brew 安装了 python,那么 pip 已经安装了)</h1>
 
-<pre><code>wget https://bootstrap.pypa.io/get-pip.py
+<pre class="line-numbers"><code class="language-text">wget https://bootstrap.pypa.io/get-pip.py
 sudo python get-pip.py
 
 </code></pre>
@@ -302,7 +309,7 @@ sudo python get-pip.py
 <li>maven和Scala</li>
 </ul>
 
-<pre><code>.tgz
+<pre class="line-numbers"><code class="language-text">.tgz
 解压：tar zxvf FileName.tgz
 压缩：tar zcvf FileName.tgz FileName
 </code></pre>
@@ -310,13 +317,13 @@ sudo python get-pip.py
 <ul>
 <li>环境变量
 <code>
-hushiweideMacBook-Pro:Downloads hushiwei$ more .bash_profile
-alias ll=&#39;ls -lF&#39;
-alias ll=&#39;ls -alF&#39;
-JAVA_HOME=`/usr/libexec/java_home`
-SCALA_HOME=/Users/hushiwei/devApps/scala-2.10.5
-MAVEN_HOME=/Users/hushiwei/devApps/maven-3.3.9
-CLASSPAHT=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+hushiweideMacBook-Pro:Downloads hushiwei$ more .bash_profile<br/>
+alias ll=&#39;ls -lF&#39;<br/>
+alias ll=&#39;ls -alF&#39;<br/>
+JAVA_HOME=`/usr/libexec/java_home`<br/>
+SCALA_HOME=/Users/hushiwei/devApps/scala-2.10.5<br/>
+MAVEN_HOME=/Users/hushiwei/devApps/maven-3.3.9<br/>
+CLASSPAHT=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar<br/>
 PATH=$SCALA_HOME/bin:$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH:/usr/local/bin:
 </code></li>
 </ul>
@@ -475,31 +482,31 @@ PATH=$SCALA_HOME/bin:$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH:/usr/local/bin:
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -574,7 +581,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

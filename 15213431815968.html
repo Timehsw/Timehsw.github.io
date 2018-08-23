@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -194,7 +201,7 @@
 
 <h1 id="toc_1">基本使用</h1>
 
-<pre><code class="language-python"># 导入方式为基本惯例
+<pre class="line-numbers"><code class="language-python"># 导入方式为基本惯例
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
@@ -208,7 +215,7 @@ import matplotlib as mpl
 %matplotlib inline 
 </code></pre>
 
-<pre><code class="language-python"># 画一个线性图
+<pre class="line-numbers"><code class="language-python"># 画一个线性图
 # 调用plot的.plot方法绘制一些坐标
 # 这个.plot需要许多参数，但前两个是&#39;x&#39;和&#39;y&#39;坐标，
 # 我们放入列表。 这意味着，根据这些列表我们拥有 3 个坐标：(1,5) (2,7)和(3,4)。
@@ -224,7 +231,7 @@ plt.show()
 
 <p>figure：图形，matplotlib中的所有图像都是位于figure对象中，一个图像只能有一个figure对象。matplotlib 的 figure 就是一个 单独的 figure 小窗口, 小窗口里面还可以有更多的小图片.</p>
 
-<pre><code class="language-python">x=np.arange(-3,3,0.1)
+<pre class="line-numbers"><code class="language-python">x=np.arange(-3,3,0.1)
 y1=np.sin(x)
 y2=np.cos(x)
 # 创建一个图形
@@ -243,17 +250,20 @@ plt.show()
 
 <p>plot(x,y,color=&#39;red&#39;,linestyle=&#39;dashed&#39;,marker=&#39;o&#39;...)</p>
 
-<p>绘图中用到的直线属性包括:<br/>
-+ LineStyle：线形<br/>
-+ LineWidth：线宽<br/>
-+ Color：颜色<br/>
-+ Marker：标记点的形状<br/>
-+ label:用于图例的标签</p>
+<p>绘图中用到的直线属性包括:</p>
+
+<ul>
+<li>LineStyle：线形</li>
+<li>LineWidth：线宽</li>
+<li>Color：颜色</li>
+<li>Marker：标记点的形状</li>
+<li>label:用于图例的标签</li>
+</ul>
 
 <p><strong>Plot()</strong><br/>
 绘制线条或标记轴,参数是一个可变长度参数,允许多个X,Y对可选的格式字符串</p>
 
-<pre><code class="language-python"># 举例.两对坐标可以写在一个方法里面
+<pre class="line-numbers"><code class="language-python"># 举例.两对坐标可以写在一个方法里面
 x=np.arange(-3,3,0.1)
 y1=np.sin(x)
 y2=np.cos(x)
@@ -265,13 +275,13 @@ plt.show()
 
 <p>plot(y): 如果只接收一个值,就默认是Y值,那么X默认为0到n,使用默认的线条样式和颜色</p>
 
-<pre><code class="language-python">plt.plot(y1)
+<pre class="line-numbers"><code class="language-python">plt.plot(y1)
 plt.show()
 </code></pre>
 
 <p><img src="output_10_0.png" alt="png"/></p>
 
-<pre><code class="language-python">plt.plot([1,2,3],[5,7,4],color=&#39;red&#39;)
+<pre class="line-numbers"><code class="language-python">plt.plot([1,2,3],[5,7,4],color=&#39;red&#39;)
 plt.plot([4,5,6],[5,7,7],color=&#39;green&#39;)
 plt.plot([1,5,7],[5,7,7],color=&#39;blue&#39;,linestyle=&#39;dashed&#39;)
 plt.plot([1,5,7],[5,7,7],color=&#39;blue&#39;,linestyle=&#39;dashed&#39;,marker=&#39;o&#39;)
@@ -280,7 +290,7 @@ plt.show()
 
 <p><img src="output_11_0.png" alt="png"/></p>
 
-<pre><code class="language-python"># 简写
+<pre class="line-numbers"><code class="language-python"># 简写
 plt.plot([1,2,3],[5,7,4],&#39;ro--&#39;)
 plt.show()
 </code></pre>
@@ -301,7 +311,7 @@ gca获取当前坐标轴信息。使用spines设置边框,使用set_color设置�
 mpl.rcParams[&#39;font.sans-serif&#39;] = [&#39;SimHei&#39;]<br/>
 mpl.rcParams[&#39;axes.unicode_minus&#39;] = False</p>
 
-<pre><code class="language-python">x1 = [1,2,3]
+<pre class="line-numbers"><code class="language-python">x1 = [1,2,3]
 y1 = [5,7,4]
 x2 = [1,2,3]
 y2 = [10,14,12]
@@ -336,7 +346,7 @@ plt.show()
 
 <h1 id="toc_5">subplot子图</h1>
 
-<pre><code class="language-python">x1=[1,2,3]
+<pre class="line-numbers"><code class="language-python">x1=[1,2,3]
 y1=[5,7,4]
 x2=[1,2,3]
 y1=[10,14,12]
@@ -351,7 +361,7 @@ plt.show()
 
 <p><img src="output_16_0.png" alt="png"/></p>
 
-<pre><code class="language-python">import matplotlib.pyplot as plt   
+<pre class="line-numbers"><code class="language-python">import matplotlib.pyplot as plt   
 import numpy as np
 
 # 设置在jupyter中matplotlib的显示情况
@@ -383,12 +393,12 @@ plt.show()
 例：<br/>
 fig, ax = plt.subplots(2,2),其中参数分别代表子图的行数和列数，一共有 2x2 个图像。函数返回一个figure图像和一个子图ax的array列表。</p>
 
-<pre><code class="language-python">fig,axes=plt.subplots(2,2)
+<pre class="line-numbers"><code class="language-python">fig,axes=plt.subplots(2,2)
 print(fig)
 print(axes)
 </code></pre>
 
-<pre><code>Figure(432x288)
+<pre class="line-numbers"><code class="language-text">Figure(432x288)
 [[&lt;matplotlib.axes._subplots.AxesSubplot object at 0x114a9fef0&gt;
   &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1149c9978&gt;]
  [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1146f7a20&gt;
@@ -397,7 +407,7 @@ print(axes)
 
 <p><img src="output_19_1.png" alt="png"/></p>
 
-<pre><code class="language-python">import matplotlib.pyplot as plt
+<pre class="line-numbers"><code class="language-python">import matplotlib.pyplot as plt
 
 fig, axes = plt.subplots( nrows=4, ncols=1, sharex=True, sharey=False ) #gridspec_kw={&#39;height_ratios&#39;:[2,2,1,1]}
 
@@ -413,7 +423,7 @@ plt.show()
 
 <p><img src="output_20_0.png" alt="png"/></p>
 
-<pre><code class="language-python">import matplotlib.pyplot as plt
+<pre class="line-numbers"><code class="language-python">import matplotlib.pyplot as plt
 import numpy as np
 
 fig, axes = plt.subplots(2,2,sharex=True, sharey=True )
@@ -429,7 +439,7 @@ plt.show()
 
 <p><img src="output_21_0.png" alt="png"/></p>
 
-<pre><code class="language-python">import matplotlib.pyplot as plt
+<pre class="line-numbers"><code class="language-python">import matplotlib.pyplot as plt
 import numpy as np
 
 x=np.arange(1,7)
@@ -445,7 +455,7 @@ plt.show()
 
 <h1 id="toc_7">matplotlib-柱状图</h1>
 
-<pre><code>matplotlib.pyplot. bar (*args, **kwargs)
+<pre class="line-numbers"><code class="language-text">matplotlib.pyplot. bar (*args, **kwargs)
 bar(x, height, width, bottom, *, align=&#39;center&#39;, **kwargs)
 参数：
     x:数据标量
@@ -456,7 +466,7 @@ bar(x, height, width, bottom, *, align=&#39;center&#39;, **kwargs)
     如果为 &quot;居中&quot;, 则将x参数解释为条形中心的坐标。如果 &quot;边缘&quot;, 将条形按其左边缘对齐要对齐右边缘的条形图, 可传递负的宽度和对align=&#39;edge&#39;
 </code></pre>
 
-<pre><code class="language-python">import matplotlib.pyplot as plt
+<pre class="line-numbers"><code class="language-python">import matplotlib.pyplot as plt
 import numpy as np
 
 plt.figure(figsize=(8,6))
@@ -477,7 +487,7 @@ plt.show()
 
 <p><img src="output_1_0.png" alt="png"/></p>
 
-<pre><code>用柱状图表示第一季度的进出口数据
+<pre class="line-numbers"><code class="language-text">用柱状图表示第一季度的进出口数据
 进口数据：
     1月份  600亿美元
     2月份  700亿美元
@@ -488,7 +498,7 @@ plt.show()
     3月份  1000亿美元
 </code></pre>
 
-<pre><code class="language-python">import matplotlib.pyplot as plt
+<pre class="line-numbers"><code class="language-python">import matplotlib.pyplot as plt
 import numpy as np
 
 x = [1,2,3]
@@ -520,7 +530,7 @@ plt.show()
 
 <h1 id="toc_8">matplotlib-直方图</h1>
 
-<pre><code>matplotlib.pyplot.hist(x, bins=10, range=None,normed=False, weights=None, cumulative=False,bottom=None, histtype=&#39;bar&#39;, align=&#39;mid&#39;,
+<pre class="line-numbers"><code class="language-text">matplotlib.pyplot.hist(x, bins=10, range=None,normed=False, weights=None, cumulative=False,bottom=None, histtype=&#39;bar&#39;, align=&#39;mid&#39;,
                        orientation=u&#39;vertical&#39;, rwidth=None, log=False,color=None, label=None, stacked=False, hold=None,**kwargs) 
 – x: 一个列表或者多个列表（表示不同数据集，长度可以不一致）
 – range: 元组
@@ -533,7 +543,7 @@ plt.show()
 – color: 一种颜色或者颜色列表（针对不同数据集）
 </code></pre>
 
-<pre><code class="language-python">import matplotlib.pyplot as plt
+<pre class="line-numbers"><code class="language-python">import matplotlib.pyplot as plt
 #频率分布直方图
 data = ([1,1,2,3,3,3,3,3,4,5])    
 plt.hist(data,10, normed=1)
@@ -542,7 +552,7 @@ plt.show()
 
 <p><img src="output_5_0.png" alt="png"/></p>
 
-<pre><code class="language-python">import matplotlib.pyplot as plt
+<pre class="line-numbers"><code class="language-python">import matplotlib.pyplot as plt
 import numpy as np
 
 #展现出10000个随机数满足 平均值是100 标准差是15 呈现的一个正态分布曲线
@@ -562,7 +572,7 @@ plt.show()
 
 <h1 id="toc_9">matplotlib-散点图</h1>
 
-<pre><code>matplotlib.pyplot. scatter (x, y, s=none, c=none, marker=none, cmap= None, 
+<pre class="line-numbers"><code class="language-text">matplotlib.pyplot. scatter (x, y, s=none, c=none, marker=none, cmap= None, 
                             norm=none, vmin=none, vmax=none, alpha=none, Linewidths=none,
                             verts=none, edgecolors=none, hold=none, data= None, **kwargs)
 参数：
@@ -574,7 +584,7 @@ plt.show()
     alpha:散点的透明度
 </code></pre>
 
-<pre><code class="language-python">import matplotlib.pyplot as plt
+<pre class="line-numbers"><code class="language-python">import matplotlib.pyplot as plt
 import numpy as np
 x = [1,2,3,4,5,6,7,8]
 y = [5,2,4,2,1,4,5,2]
@@ -590,7 +600,7 @@ plt.show()
 
 <p><img src="output_8_0.png" alt="png"/></p>
 
-<pre><code class="language-python">import matplotlib.pyplot as plt
+<pre class="line-numbers"><code class="language-python">import matplotlib.pyplot as plt
 import numpy as np
 
 plt.figure(figsize=(8,6))
@@ -757,31 +767,31 @@ plt.show()
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -856,7 +866,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

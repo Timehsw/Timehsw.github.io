@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -194,7 +201,7 @@
 
 <h2 id="toc_1">序列化字符串</h2>
 
-<pre><code class="language-$xslt">import kafka.utils.VerifiableProperties
+<pre class="line-numbers"><code class="language-$xslt">import kafka.utils.VerifiableProperties
 
 /**
  * A decoder is a method of turning byte arrays into objects.
@@ -232,7 +239,7 @@ class StringDecoder(props: VerifiableProperties = null) extends Decoder[String] 
 
 <h2 id="toc_2">反序列化</h2>
 
-<pre><code class="language-$xslt">import kafka.utils.VerifiableProperties
+<pre class="line-numbers"><code class="language-$xslt">import kafka.utils.VerifiableProperties
 
 /**
  * An encoder is a method of turning objects into byte arrays.
@@ -276,7 +283,7 @@ class StringEncoder(props: VerifiableProperties = null) extends Encoder[String] 
 
 <h2 id="toc_3">时间</h2>
 
-<pre><code class="language-$xslt">/**
+<pre class="line-numbers"><code class="language-$xslt">/**
  * Some common constants
  */
 object Time {
@@ -322,7 +329,7 @@ object SystemTime extends Time {
 
 <h2 id="toc_4">加载配置文件</h2>
 
-<pre><code class="language-$xslt">  /**
+<pre class="line-numbers"><code class="language-$xslt">  /**
    * Read a properties file from the given path
    * @param filename The path of the file to read
    */
@@ -495,31 +502,31 @@ object SystemTime extends Time {
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -594,7 +601,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

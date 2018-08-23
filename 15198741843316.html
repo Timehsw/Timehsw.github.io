@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -199,7 +206,7 @@
 
 <p>如果没引上,使用如下依赖</p>
 
-<pre><code>&lt;!-- https://mvnrepository.com/artifact/com.typesafe/config --&gt;
+<pre class="line-numbers"><code class="language-text">&lt;!-- https://mvnrepository.com/artifact/com.typesafe/config --&gt;
 &lt;dependency&gt;
     &lt;groupId&gt;com.typesafe&lt;/groupId&gt;
     &lt;artifactId&gt;config&lt;/artifactId&gt;
@@ -218,70 +225,68 @@
 
 <h2 id="toc_2">加载配置文件的两种方式</h2>
 
-<p>目录结构<br/>
-<code><br/>
- hushiwei@localhost  ~/IdeaProjects/testProject/src/main  tree<br/>
-.<br/>
-├── java<br/>
-│   └── com<br/>
-│       └── husw<br/>
-├── resources<br/>
-│   ├── conf<br/>
-│   │   └── application.conf<br/>
-│   ├── testlog.txt<br/>
-│   └── log4j.properties<br/>
-└── scala<br/>
-</code></p>
+<p>目录结构</p>
 
-<p>配置文件示例<br/>
-```<br/>
-kafka {<br/>
-  topics = &quot;test_imp&quot; #注释<br/>
-  brokers = &quot;192.168.1.1:9092,192.168.2.1:9092&quot;<br/>
-  groupid=&quot;test_group1&quot;<br/>
-  offset_reset=&quot;smallest&quot; #smallest and largest<br/>
-}<br/>
-spark {<br/>
-  app_name = &quot;dsp_count&quot;<br/>
-  mode = &quot;local[2]&quot; #&quot;yarn-client&quot;<br/>
-  queue = &quot;normal&quot;<br/>
-  duration = 2<br/>
-  numFilesPerBatch = 1<br/>
-  stagingdir = &quot;/tmp/spark/checkpoint&quot;<br/>
-}</p>
-
-<pre><code>
-### 加载resources目录下的配置文件
-
-默认读取resources目录下的文件
+<pre class="line-numbers"><code class="language-text"> hushiwei@localhost  ~/IdeaProjects/testProject/src/main  tree
+.
+├── java
+│   └── com
+│       └── husw
+├── resources
+│   ├── conf
+│   │   └── application.conf
+│   ├── testlog.txt
+│   └── log4j.properties
+└── scala
 </code></pre>
 
-<p>val config = ConfigFactory.load(&quot;conf/application.conf&quot;)</p>
+<p>配置文件示例</p>
 
-<pre><code>
-### 加载任意指定位置的配置文件
-
-路径可以写任意的绝对路径,或者相对路径
-</code></pre>
-
-<p>val config = ConfigFactory.parseFile(new File(&quot;src/main/resources/conf/application.conf&quot;))</p>
-
-<pre><code>
-### 获取配置文件中的键值
-
-读取配置文件后返回了config对象.
-直接调用config对象相应的api即可获取配置数据了
-[Api文档](http://typesafehub.github.io/config/latest/api/com/typesafe/config/ConfigFactory.html)
-示例
-</code></pre>
-
-<pre><code>val topics = config.getString(&quot;kafka.topics&quot;).split(&quot;,&quot;).toSet
-println(topics)
-</code></pre>
-
-<pre><code>若要知道更详细的api说明,点击上面的链接即可.
+<pre class="line-numbers"><code class="language-text">kafka {
+  topics = &quot;test_imp&quot; #注释
+  brokers = &quot;192.168.1.1:9092,192.168.2.1:9092&quot;
+  groupid=&quot;test_group1&quot;
+  offset_reset=&quot;smallest&quot; #smallest and largest
+}
+spark {
+  app_name = &quot;dsp_count&quot;
+  mode = &quot;local[2]&quot; #&quot;yarn-client&quot;
+  queue = &quot;normal&quot;
+  duration = 2
+  numFilesPerBatch = 1
+  stagingdir = &quot;/tmp/spark/checkpoint&quot;
+}
 
 </code></pre>
+
+<h3 id="toc_3">加载resources目录下的配置文件</h3>
+
+<p>默认读取resources目录下的文件</p>
+
+<pre class="line-numbers"><code class="language-text"> val config = ConfigFactory.load(&quot;conf/application.conf&quot;)
+
+</code></pre>
+
+<h3 id="toc_4">加载任意指定位置的配置文件</h3>
+
+<p>路径可以写任意的绝对路径,或者相对路径</p>
+
+<pre class="line-numbers"><code class="language-text">  val config = ConfigFactory.parseFile(new File(&quot;src/main/resources/conf/application.conf&quot;))
+
+</code></pre>
+
+<h3 id="toc_5">获取配置文件中的键值</h3>
+
+<p>读取配置文件后返回了config对象.<br/>
+直接调用config对象相应的api即可获取配置数据了<br/>
+<a href="http://typesafehub.github.io/config/latest/api/com/typesafe/config/ConfigFactory.html">Api文档</a><br/>
+示例</p>
+
+<pre class="line-numbers"><code class="language-text">    val topics = config.getString(&quot;kafka.topics&quot;).split(&quot;,&quot;).toSet
+    println(topics)
+</code></pre>
+
+<p>若要知道更详细的api说明,点击上面的链接即可.</p>
 
 
     
@@ -292,8 +297,8 @@ println(topics)
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15198774045262.html" 
-          title="Previous Post: Ubuntu16.04使用Docker部署Gitlab">&laquo; Ubuntu16.04使用Docker部署Gitlab</a>
+          <a href="15299249656216.html" 
+          title="Previous Post: PyCharm使用技术">&laquo; PyCharm使用技术</a>
       
         </p>
         </div>
@@ -430,31 +435,31 @@ println(topics)
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -529,7 +534,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

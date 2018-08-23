@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -199,60 +206,60 @@
 
 <h4 id="toc_3">通过一维数组创建Series</h4>
 
-<pre><code class="language-python">import pandas as pd
+<pre class="line-numbers"><code class="language-python">import pandas as pd
 import numpy as np
 </code></pre>
 
-<pre><code class="language-python">ser01=pd.Series(np.array([1,2,3,4]))
+<pre class="line-numbers"><code class="language-python">ser01=pd.Series(np.array([1,2,3,4]))
 ser01
 </code></pre>
 
-<pre><code>0    1
+<pre class="line-numbers"><code class="language-text">0    1
 1    2
 2    3
 3    4
 dtype: int64
 </code></pre>
 
-<pre><code class="language-python">ser01.dtype
+<pre class="line-numbers"><code class="language-python">ser01.dtype
 </code></pre>
 
-<pre><code>dtype(&#39;int64&#39;)
+<pre class="line-numbers"><code class="language-text">dtype(&#39;int64&#39;)
 </code></pre>
 
-<pre><code class="language-python"># 查看ser01的索引
+<pre class="line-numbers"><code class="language-python"># 查看ser01的索引
 ser01.index
 </code></pre>
 
-<pre><code>RangeIndex(start=0, stop=4, step=1)
+<pre class="line-numbers"><code class="language-text">RangeIndex(start=0, stop=4, step=1)
 </code></pre>
 
-<pre><code class="language-python"># 查看ser01的值
+<pre class="line-numbers"><code class="language-python"># 查看ser01的值
 ser01.values
 </code></pre>
 
-<pre><code>array([1, 2, 3, 4])
+<pre class="line-numbers"><code class="language-text">array([1, 2, 3, 4])
 </code></pre>
 
-<pre><code class="language-python"># 重置索引
+<pre class="line-numbers"><code class="language-python"># 重置索引
 ser01.index=[&#39;hadoop&#39;,&#39;spark&#39;,&#39;flume&#39;,&#39;kafka&#39;]
 </code></pre>
 
-<pre><code class="language-python">ser01
+<pre class="line-numbers"><code class="language-python">ser01
 </code></pre>
 
-<pre><code>0    1
+<pre class="line-numbers"><code class="language-text">0    1
 1    2
 2    3
 3    4
 dtype: int64
 </code></pre>
 
-<pre><code class="language-python"># 指定类型,指定索引进行创建
+<pre class="line-numbers"><code class="language-python"># 指定类型,指定索引进行创建
 pd.Series([1,2,3,4,5],dtype=&#39;float&#39;,index=list(&#39;abcde&#39;))
 </code></pre>
 
-<pre><code>a    1.0
+<pre class="line-numbers"><code class="language-text">a    1.0
 b    2.0
 c    3.0
 d    4.0
@@ -262,7 +269,7 @@ dtype: float64
 
 <h4 id="toc_4">通过字典创建Series</h4>
 
-<pre><code class="language-python">dic={
+<pre class="line-numbers"><code class="language-python">dic={
     &#39;hadoop&#39;:90,
     &#39;spark&#39;:100,
     &#39;kafka&#39;:80
@@ -273,25 +280,25 @@ ser02=pd.Series(dic)
 ser02
 </code></pre>
 
-<pre><code>hadoop     90
+<pre class="line-numbers"><code class="language-text">hadoop     90
 kafka      80
 spark     100
 dtype: int64
 </code></pre>
 
-<pre><code class="language-python">ser02.values
+<pre class="line-numbers"><code class="language-python">ser02.values
 </code></pre>
 
-<pre><code>array([ 90,  80, 100])
+<pre class="line-numbers"><code class="language-text">array([ 90,  80, 100])
 </code></pre>
 
 <h3 id="toc_5">Series值的获取</h3>
 
-<pre><code class="language-python">ser03=pd.Series(np.arange(1,6),index=list(&#39;abcde&#39;))
+<pre class="line-numbers"><code class="language-python">ser03=pd.Series(np.arange(1,6),index=list(&#39;abcde&#39;))
 ser03
 </code></pre>
 
-<pre><code>a    1
+<pre class="line-numbers"><code class="language-text">a    1
 b    2
 c    3
 d    4
@@ -299,35 +306,35 @@ e    5
 dtype: int64
 </code></pre>
 
-<pre><code class="language-python"># 通过索引拿
+<pre class="line-numbers"><code class="language-python"># 通过索引拿
 ser03[&#39;a&#39;]
 </code></pre>
 
-<pre><code>1
+<pre class="line-numbers"><code class="language-text">1
 </code></pre>
 
-<pre><code class="language-python">ser03[&#39;c&#39;]
+<pre class="line-numbers"><code class="language-python">ser03[&#39;c&#39;]
 </code></pre>
 
-<pre><code>3
+<pre class="line-numbers"><code class="language-text">3
 </code></pre>
 
-<pre><code class="language-python">ser03[[&#39;a&#39;,&#39;c&#39;]]
+<pre class="line-numbers"><code class="language-python">ser03[[&#39;a&#39;,&#39;c&#39;]]
 </code></pre>
 
-<pre><code>a    1
+<pre class="line-numbers"><code class="language-text">a    1
 c    3
 dtype: int64
 </code></pre>
 
-<pre><code class="language-python"># 通过下标拿
+<pre class="line-numbers"><code class="language-python"># 通过下标拿
 ser03[1]
 </code></pre>
 
-<pre><code>2
+<pre class="line-numbers"><code class="language-text">2
 </code></pre>
 
-<pre><code class="language-python">...... ,
+<pre class="line-numbers"><code class="language-python">...... ,
 </code></pre>
 
 <h2 id="toc_6">DataFrame</h2>
@@ -335,7 +342,7 @@ ser03[1]
 <p>一个表格型的数据结构，包含有一组有序的列，每列可以是不同的值类型(数值、字符串、布尔型等)，<br/><br/>
 DataFrame即有行索引也有列索引，可以被看做是由Series组成的字典。</p>
 
-<pre><code class="language-python">df=pd.DataFrame({
+<pre class="line-numbers"><code class="language-python">df=pd.DataFrame({
     &#39;order_id&#39;:[&#39;1001&#39;,&#39;1002&#39;,&#39;1003&#39;,&#39;1004&#39;,&#39;1005&#39;,&#39;1006&#39;],
     &#39;member_id&#39;:[&#39;a01&#39;,&#39;a02&#39;,&#39;a03&#39;,&#39;a01&#39;,&#39;a02&#39;,&#39;a03&#39;],
     &#39;order_amt&#39;:[90,76,89,98,68,89],
@@ -343,20 +350,20 @@ DataFrame即有行索引也有列索引，可以被看做是由Series组成的�
 })
 df
 </code></pre>
-
 <div>
 <style>
     .dataframe thead tr:only-child th {
         text-align: right;
     }
 
-    .dataframe thead th {
-        text-align: left;
-    }
+<pre class="line-numbers"><code class="language-text">.dataframe thead th {
+    text-align: left;
+}
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+.dataframe tbody tr th {
+    vertical-align: top;
+}
+</code></pre>
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -417,18 +424,18 @@ df
 
 <h3 id="toc_7">去重</h3>
 
-<pre><code class="language-python">df[&#39;member_id&#39;].unique()
+<pre class="line-numbers"><code class="language-python">df[&#39;member_id&#39;].unique()
 </code></pre>
 
-<pre><code>array([&#39;a01&#39;, &#39;a02&#39;, &#39;a03&#39;], dtype=object)
+<pre class="line-numbers"><code class="language-text">array([&#39;a01&#39;, &#39;a02&#39;, &#39;a03&#39;], dtype=object)
 </code></pre>
 
 <h2 id="toc_8">简单聚合统计</h2>
 
-<pre><code class="language-python">df.order_amt.value_counts()
+<pre class="line-numbers"><code class="language-python">df.order_amt.value_counts()
 </code></pre>
 
-<pre><code>89    2
+<pre class="line-numbers"><code class="language-text">89    2
 98    1
 68    1
 76    1
@@ -436,22 +443,22 @@ df
 Name: order_amt, dtype: int64
 </code></pre>
 
-<pre><code class="language-python">df
+<pre class="line-numbers"><code class="language-python">df
 </code></pre>
-
 <div>
 <style>
     .dataframe thead tr:only-child th {
         text-align: right;
     }
 
-    .dataframe thead th {
-        text-align: left;
-    }
+<pre class="line-numbers"><code class="language-text">.dataframe thead th {
+    text-align: left;
+}
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+.dataframe tbody tr th {
+    vertical-align: top;
+}
+</code></pre>
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -510,16 +517,16 @@ Name: order_amt, dtype: int64
 </table>
 </div>
 
-<pre><code class="language-python">df.groupby(&#39;gender&#39;)[&#39;order_amt&#39;].count()
+<pre class="line-numbers"><code class="language-python">df.groupby(&#39;gender&#39;)[&#39;order_amt&#39;].count()
 </code></pre>
 
-<pre><code>gender
+<pre class="line-numbers"><code class="language-text">gender
 man      4
 women    2
 Name: order_amt, dtype: int64
 </code></pre>
 
-<pre><code class="language-python">df.groupby(
+<pre class="line-numbers"><code class="language-python">df.groupby(
 </code></pre>
 
 
@@ -669,31 +676,31 @@ Name: order_amt, dtype: int64
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -768,7 +775,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

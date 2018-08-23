@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -197,12 +204,10 @@
 
 <ul>
 <li>相同点
-
 <ul>
 <li>所有元素都具有相同的类型</li>
 </ul></li>
 <li>不同点
-
 <ul>
 <li>列表是不可变的,这意味着一个列表的元素可以不被分配来改变.</li>
 <li>列表底层是一个链表,而数组是平坦的.</li>
@@ -213,7 +218,7 @@
 
 <p>1.有以下几种常用的方式来定义列表</p>
 
-<pre><code>// List of Strings
+<pre class="line-numbers"><code class="language-text">// List of Strings
 val fruit: List[String] = List(&quot;apples&quot;, &quot;oranges&quot;, &quot;pears&quot;)
 
 // List of Integers
@@ -233,7 +238,7 @@ val dim: List[List[Int]] =
 
 <p>2.所有的列表可以使用两种基本的构建模块来定义,一个无尾Nil和::,但是这有明显的缺点.Nil也代表了空列表.上述的例子,也可以这样写</p>
 
-<pre><code>// List of Strings
+<pre class="line-numbers"><code class="language-text">// List of Strings
 val fruit = &quot;apples&quot; :: (&quot;oranges&quot; :: (&quot;pears&quot; :: Nil))
 
 // List of Integers
@@ -280,7 +285,7 @@ val dim = (1 :: (0 :: (0 :: Nil))) ::
 </tbody>
 </table>
 
-<pre><code>object Test {
+<pre class="line-numbers"><code class="language-text">object Test {
    def main(args: Array[String]) {
       val fruit = &quot;apples&quot; :: (&quot;oranges&quot; :: (&quot;pears&quot; :: Nil))
       val nums = Nil
@@ -301,7 +306,7 @@ val dim = (1 :: (0 :: (0 :: Nil))) ::
 
 <p>eg:</p>
 
-<pre><code>object Test {
+<pre class="line-numbers"><code class="language-text">object Test {
    def main(args: Array[String]) {
       val fruit1 = &quot;apples&quot; :: (&quot;oranges&quot; :: (&quot;pears&quot; :: Nil))
       val fruit2 = &quot;mangoes&quot; :: (&quot;banana&quot; :: Nil)
@@ -333,7 +338,7 @@ val dim = (1 :: (0 :: (0 :: Nil))) ::
 
 <p>eg</p>
 
-<pre><code>object Test {
+<pre class="line-numbers"><code class="language-text">object Test {
    def main(args: Array[String]) {
       val fruit = List.fill(3)(&quot;apples&quot;) // Repeats apples three times.
       println( &quot;fruit : &quot; + fruit  ) //fruit : List(apples, apples, apples)
@@ -352,7 +357,7 @@ val dim = (1 :: (0 :: (0 :: Nil))) ::
 
 <p>eg</p>
 
-<pre><code>object Test {
+<pre class="line-numbers"><code class="language-text">object Test {
    def main(args: Array[String]) {
       val fruit = &quot;apples&quot; :: (&quot;oranges&quot; :: (&quot;pears&quot; :: Nil))
       println( &quot;Before reverse fruit : &quot; + fruit )
@@ -420,7 +425,7 @@ val dim = (1 :: (0 :: (0 :: Nil))) ::
 
 <h2 id="toc_9">声明Set集合类</h2>
 
-<pre><code>// Empty set of integer type
+<pre class="line-numbers"><code class="language-text">// Empty set of integer type
 var s : Set[Int] = Set()
 
 // Set of integer type
@@ -461,7 +466,7 @@ var s = Set(1,3,5,7)
 
 <p>eg:</p>
 
-<pre><code>object Test {
+<pre class="line-numbers"><code class="language-text">object Test {
    def main(args: Array[String]) {
       val fruit = Set(&quot;apples&quot;, &quot;oranges&quot;, &quot;pears&quot;)
       val nums: Set[Int] = Set()
@@ -482,7 +487,7 @@ var s = Set(1,3,5,7)
 
 <p>eg</p>
 
-<pre><code>object Test {
+<pre class="line-numbers"><code class="language-text">object Test {
    def main(args: Array[String]) {
       val fruit1 = Set(&quot;apples&quot;, &quot;oranges&quot;, &quot;pears&quot;)
       val fruit2 = Set(&quot;mangoes&quot;, &quot;banana&quot;)
@@ -547,7 +552,7 @@ var s = Set(1,3,5,7)
 
 <h2 id="toc_14">声明Map类</h2>
 
-<pre><code>// Empty hash table whose keys are strings and values are integers:
+<pre class="line-numbers"><code class="language-text">// Empty hash table whose keys are strings and values are integers:
 var A:Map[Char,Int] = Map()
 
 // A map with keys and values.
@@ -586,7 +591,7 @@ val colors = Map(&quot;red&quot; -&gt; &quot;#FF0000&quot;, &quot;azure&quot; -&
 
 <h3 id="toc_16">举例</h3>
 
-<pre><code>object Test {
+<pre class="line-numbers"><code class="language-text">object Test {
    def main(args: Array[String]) {
       val colors = Map(&quot;red&quot; -&gt; &quot;#FF0000&quot;,
                        &quot;azure&quot; -&gt; &quot;#F0FFFF&quot;,
@@ -604,7 +609,7 @@ val colors = Map(&quot;red&quot; -&gt; &quot;#FF0000&quot;, &quot;azure&quot; -&
 
 <h3 id="toc_17">给可变映射添加元素</h3>
 
-<pre><code>A += (&#39;I&#39; -&gt; 1)
+<pre class="line-numbers"><code class="language-text">A += (&#39;I&#39; -&gt; 1)
 A += (&#39;J&#39; -&gt; 5)
 A += (&#39;K&#39; -&gt; 10)
 A += (&#39;L&#39; -&gt; 100)
@@ -618,7 +623,7 @@ A += (&#39;L&#39; -&gt; 100)
 
 <p>eg</p>
 
-<pre><code>object Test {
+<pre class="line-numbers"><code class="language-text">object Test {
    def main(args: Array[String]) {
       val colors1 = Map(&quot;red&quot; -&gt; &quot;#FF0000&quot;,
                         &quot;azure&quot; -&gt; &quot;#F0FFFF&quot;,
@@ -645,7 +650,7 @@ A += (&#39;L&#39; -&gt; 100)
 <p>方法很多,模式匹配最方便了</p>
 </blockquote>
 
-<pre><code>    val colors = Map(&quot;red&quot; -&gt; &quot;#FF0000&quot;,
+<pre class="line-numbers"><code class="language-text">    val colors = Map(&quot;red&quot; -&gt; &quot;#FF0000&quot;,
       &quot;azure&quot; -&gt; &quot;#F0FFFF&quot;,
       &quot;peru&quot; -&gt; &quot;#CD853F&quot;)
 
@@ -717,7 +722,7 @@ A += (&#39;L&#39; -&gt; 100)
 
 <p>一个元组的实际类型取决于它包含的元素和这些元素的类型的数目</p>
 
-<pre><code>val t = (1, &quot;hello&quot;, Console)
+<pre class="line-numbers"><code class="language-text">val t = (1, &quot;hello&quot;, Console)
 
 这是语法修饰(快捷方式)以下：
 
@@ -730,7 +735,7 @@ val t = new Tuple3(1, &quot;hello&quot;, Console)
 
 <h2 id="toc_24">访问元组中的元素</h2>
 
-<pre><code>object Test {
+<pre class="line-numbers"><code class="language-text">object Test {
    def main(args: Array[String]) {
       val t = (4,3,2,1)
 
@@ -747,7 +752,7 @@ val t = new Tuple3(1, &quot;hello&quot;, Console)
 <p>可以使用Tuple.productIterator()方法来遍历一个元组的所有元素</p>
 </blockquote>
 
-<pre><code>object Test {
+<pre class="line-numbers"><code class="language-text">object Test {
    def main(args: Array[String]) {
       val t = (4,3,2,1)
       t.productIterator.foreach{ i =&gt;println(&quot;Value = &quot; + i )}
@@ -760,7 +765,7 @@ val t = new Tuple3(1, &quot;hello&quot;, Console)
 <p>1.转换为字符串<br/>
 2.交换元素</p>
 
-<pre><code>object Test {
+<pre class="line-numbers"><code class="language-text">object Test {
    def main(args: Array[String]) {
       val t1 = new Tuple3(1, &quot;hello&quot;, Console)
       println(&quot;Concatenated String: &quot; + t1.toString() )
@@ -919,31 +924,31 @@ val t = new Tuple3(1, &quot;hello&quot;, Console)
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -1018,7 +1023,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

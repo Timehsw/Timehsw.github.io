@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -189,7 +196,7 @@
 
 <span id="more"></span><!-- more -->
 
-<pre><code>    val conf=new SparkConf().setAppName(&quot;aggregate&quot;).setMaster(&quot;local[*]&quot;)
+<pre class="line-numbers"><code class="language-text">    val conf=new SparkConf().setAppName(&quot;aggregate&quot;).setMaster(&quot;local[*]&quot;)
     val sc=new SparkContext(conf)
     val z=sc.parallelize(List(1,2,3,4,5,6),2)
 //打印每个分区里面的内容
@@ -222,7 +229,7 @@
 
 <p>将其中一个分区里面的元素跟另一个分区的每一个元素进行笛卡尔积计算.</p>
 
-<pre><code>    val conf = new SparkConf().setAppName(&quot;Cartesian&quot;).setMaster(&quot;local[*]&quot;)
+<pre class="line-numbers"><code class="language-text">    val conf = new SparkConf().setAppName(&quot;Cartesian&quot;).setMaster(&quot;local[*]&quot;)
     val sc = new SparkContext(conf)
     val data1 = Array[(String, Int)]((&quot;A1&quot;, 1), (&quot;A2&quot;, 2),
       (&quot;B1&quot;, 3), (&quot;B2&quot;, 4),
@@ -244,7 +251,7 @@
 <p>把元组作为元素的List转化成Map,主要是调用可变的HashMap</p>
 </blockquote>
 
-<pre><code>    val conf = new SparkConf().setAppName(&quot;CollectAsMap&quot;).setMaster(&quot;local[*]&quot;)
+<pre class="line-numbers"><code class="language-text">    val conf = new SparkConf().setAppName(&quot;CollectAsMap&quot;).setMaster(&quot;local[*]&quot;)
     val sc = new SparkContext(conf)
     val data = Array[(String, Int)]((&quot;A&quot;, 1), (&quot;B&quot;, 2),
       (&quot;B&quot;, 3), (&quot;C&quot;, 4),
@@ -272,7 +279,7 @@
 <p>def flatMap<a href="f:%20T%20=%3E%20TraversableOnce%5BU%5D">U: ClassTag</a>: RDD[U]</p>
 </blockquote>
 
-<pre><code>    val conf = new SparkConf().setAppName(&quot;FlatMap&quot;).setMaster(&quot;local[*]&quot;)
+<pre class="line-numbers"><code class="language-text">    val conf = new SparkConf().setAppName(&quot;FlatMap&quot;).setMaster(&quot;local[*]&quot;)
     val sc = new SparkContext(conf)
     val array=Array[String](&quot;Hello&quot;,&quot;World&quot;,&quot;hadoop&quot;)
     val strRDD=sc.parallelize(array)
@@ -288,7 +295,7 @@
 
 <p>会造成shuffle的算子，根据key分组</p>
 
-<pre><code>    var numMappers = 10
+<pre class="line-numbers"><code class="language-text">    var numMappers = 10
     var numPartition=10
     var numKVPairs = 100
     var valSize = 100
@@ -327,7 +334,7 @@
 <p>def groupBy<a href="f:%20T%20=%3E%20K">K</a>(implicit kt: ClassTag[K]): RDD[(K, Iterable[T])]</p>
 </blockquote>
 
-<pre><code>    val conf = new SparkConf().setAppName(&quot;GroupByAction&quot;).setMaster(&quot;local[*]&quot;)
+<pre class="line-numbers"><code class="language-text">    val conf = new SparkConf().setAppName(&quot;GroupByAction&quot;).setMaster(&quot;local[*]&quot;)
     val sc = new SparkContext(conf)
     val data = Array[(String, Int)]((&quot;A1&quot;, 1), (&quot;A2&quot;, 2),
       (&quot;B1&quot;, 6), (&quot;A2&quot;, 4),
@@ -354,7 +361,7 @@
 
 <p>Alias for cogroup</p>
 
-<pre><code>    val conf = new SparkConf().setAppName(&quot;GroupWith&quot;).setMaster(&quot;local[*]&quot;)
+<pre class="line-numbers"><code class="language-text">    val conf = new SparkConf().setAppName(&quot;GroupWith&quot;).setMaster(&quot;local[*]&quot;)
     val sc = new SparkContext(conf)
 
     val data1 = Array[(String, Int)]((&quot;A1&quot;, 1), (&quot;A2&quot;, 2),
@@ -378,7 +385,7 @@
 <p>def join<a href="other:%20RDD%5B(K,%20W)%5D,%20partitioner:%20Partitioner">W</a>: RDD[(K, (V, W))]</p>
 </blockquote>
 
-<pre><code>    val conf = new SparkConf().setAppName(&quot;JoinAction&quot;).setMaster(&quot;local[*]&quot;)
+<pre class="line-numbers"><code class="language-text">    val conf = new SparkConf().setAppName(&quot;JoinAction&quot;).setMaster(&quot;local[*]&quot;)
     val sc = new SparkContext(conf)
 
     val data1 = Array[(String, Int)]((&quot;A1&quot;, 1), (&quot;A2&quot;, 2),
@@ -405,7 +412,7 @@
 
 <p>(针对pair类型的RDD)根据这个K值,找出相应的value值，放入到List里面返回出来</p>
 
-<pre><code>
+<pre class="line-numbers"><code class="language-text">
     val conf = new SparkConf().setAppName(&quot;LookUp&quot;).setMaster(&quot;local[*]&quot;)
     val sc = new SparkContext(conf)
     val data = Array[(String, Int)]((&quot;A&quot;, 1), (&quot;B&quot;, 2),
@@ -427,7 +434,7 @@
 
 <p>是针对这个RDD的每个partition进行操作的，比如在进行数据库链接的时候，使用这个算子，可以减少</p>
 
-<pre><code>val conf = new SparkConf().setAppName(&quot;MapPartitionsRDD&quot;).setMaster(&quot;local[*]&quot;)
+<pre class="line-numbers"><code class="language-text">val conf = new SparkConf().setAppName(&quot;MapPartitionsRDD&quot;).setMaster(&quot;local[*]&quot;)
     val sc = new SparkContext(conf)
     val data = Array[(String, Int)]((&quot;A1&quot;, 1), (&quot;A2&quot;, 2),
       (&quot;B1&quot;, 1), (&quot;B2&quot;, 4),
@@ -454,7 +461,7 @@
 
 <p>不改变RDD原有的分区，也不改变Key值，修改value的值</p>
 
-<pre><code>    val conf = new SparkConf().setAppName(&quot;mapValues&quot;).setMaster(&quot;local[*]&quot;)
+<pre class="line-numbers"><code class="language-text">    val conf = new SparkConf().setAppName(&quot;mapValues&quot;).setMaster(&quot;local[*]&quot;)
     val sc = new SparkContext(conf)
     val data1 = Array[(String, Int)]((&quot;K&quot;, 1), (&quot;T&quot;, 2),
       (&quot;T&quot;, 3), (&quot;W&quot;, 4),
@@ -474,7 +481,7 @@
 
 <p>用指定的分区类来处理RDD</p>
 
-<pre><code>    val conf = new SparkConf().setAppName(&quot;partitionBy&quot;).setMaster(&quot;local[*]&quot;)
+<pre class="line-numbers"><code class="language-text">    val conf = new SparkConf().setAppName(&quot;partitionBy&quot;).setMaster(&quot;local[*]&quot;)
     val sc = new SparkContext(conf)
     val data1 = Array[(String, Int)]((&quot;K&quot;, 1), (&quot;T&quot;, 2),
       (&quot;T&quot;, 3), (&quot;W&quot;, 4),
@@ -494,7 +501,7 @@
 
 <p>command命令在windows上测不了额</p>
 
-<pre><code>    val conf = new SparkConf().setAppName(&quot;Pip&quot;).setMaster(&quot;local[*]&quot;)
+<pre class="line-numbers"><code class="language-text">    val conf = new SparkConf().setAppName(&quot;Pip&quot;).setMaster(&quot;local[*]&quot;)
     val sc = new SparkContext(conf)
     val data1 = Array[(String, Int)]((&quot;K1&quot;, 1), (&quot;K2&quot;, 2),
       (&quot;U1&quot;, 3), (&quot;U2&quot;, 4),
@@ -513,7 +520,7 @@
 
 <p>迭代处理之前的元素</p>
 
-<pre><code>    val conf = new SparkConf().setAppName(&quot;reduce&quot;).setMaster(&quot;local[*]&quot;)
+<pre class="line-numbers"><code class="language-text">    val conf = new SparkConf().setAppName(&quot;reduce&quot;).setMaster(&quot;local[*]&quot;)
     val sc = new SparkContext(conf)
     val data1 = Array[(String, Int)]((&quot;K1&quot;, 1), (&quot;K2&quot;, 2),
       (&quot;U1&quot;, 3), (&quot;U2&quot;, 4),
@@ -534,7 +541,7 @@
 
 <p>有好几个重载方法,可以指定分区数,分区的类</p>
 
-<pre><code>    val conf = new SparkConf().setAppName(&quot;reduceByKey&quot;).setMaster(&quot;local[*]&quot;)
+<pre class="line-numbers"><code class="language-text">    val conf = new SparkConf().setAppName(&quot;reduceByKey&quot;).setMaster(&quot;local[*]&quot;)
     val sc = new SparkContext(conf)
     val data1 = Array[(String, Int)]((&quot;K&quot;, 1), (&quot;U&quot;, 2),
       (&quot;U&quot;, 3), (&quot;W&quot;, 4),
@@ -551,7 +558,7 @@
 <p>def sortByKey(ascending: Boolean = true, numPartitions: Int = self.partitions.length): RDD[(K, V)]</p>
 </blockquote>
 
-<pre><code>    val conf = new SparkConf().setAppName(&quot;sortByKey&quot;).setMaster(&quot;local[*]&quot;)
+<pre class="line-numbers"><code class="language-text">    val conf = new SparkConf().setAppName(&quot;sortByKey&quot;).setMaster(&quot;local[*]&quot;)
     val sc = new SparkContext(conf)
 
     val data1 = Array[(String, Int)]((&quot;K1&quot;, 1), (&quot;K2&quot;, 2),
@@ -572,7 +579,7 @@
 <p>def take(num: Int): Array[T]</p>
 </blockquote>
 
-<pre><code>    val conf = new SparkConf().setAppName(&quot;take&quot;).setMaster(&quot;local[*]&quot;)
+<pre class="line-numbers"><code class="language-text">    val conf = new SparkConf().setAppName(&quot;take&quot;).setMaster(&quot;local[*]&quot;)
     val sc = new SparkContext(conf)
     val data1 = Array[(String, Int)]((&quot;K1&quot;, 1), (&quot;K2&quot;, 2),
       (&quot;U1&quot;, 3), (&quot;U2&quot;, 4),
@@ -591,7 +598,7 @@
 
 <p>union聚合算子,不会去重,如果需要去重,调用distinct算子</p>
 
-<pre><code>    val conf = new SparkConf().setAppName(&quot;union&quot;).setMaster(&quot;local[*]&quot;)
+<pre class="line-numbers"><code class="language-text">    val conf = new SparkConf().setAppName(&quot;union&quot;).setMaster(&quot;local[*]&quot;)
     val sc = new SparkContext(conf)
 
     val data1 = Array[(String, Int)]((&quot;K1&quot;, 1), (&quot;K2&quot;, 2),
@@ -616,7 +623,7 @@
 
 <p>设置了checkpoint后,写下来的数据,不会因为应用的停止而删除</p>
 
-<pre><code>    var numMappers = 10
+<pre class="line-numbers"><code class="language-text">    var numMappers = 10
     var numPartition = 10
     var numKVPairs = 100
     var valSize = 100
@@ -660,7 +667,7 @@
 
 <p>注意: zip算子默认是认为这两个RDD的分区数和每个分区里面的个数是一样的，如果不能保证这两个条件，那么就会报错。如果不符合，那么可以用zipPartitions</p>
 
-<pre><code>    val conf = new SparkConf().setAppName(&quot;zip&quot;).setMaster(&quot;local[*]&quot;)
+<pre class="line-numbers"><code class="language-text">    val conf = new SparkConf().setAppName(&quot;zip&quot;).setMaster(&quot;local[*]&quot;)
     val sc = new SparkContext(conf)
     //    构造数据集
     val numberRDD = sc.parallelize(1 to 20, 4)
@@ -691,7 +698,7 @@
 
 <p>这个的灵活性就比zip算子高得多了</p>
 
-<pre><code>    val conf = new SparkConf().setAppName(&quot;zipPartitions&quot;).setMaster(&quot;local[*]&quot;)
+<pre class="line-numbers"><code class="language-text">    val conf = new SparkConf().setAppName(&quot;zipPartitions&quot;).setMaster(&quot;local[*]&quot;)
     val sc = new SparkContext(conf)
     //    构造数据集
     val numberRDD = sc.parallelize(1 to 20, 4)
@@ -878,31 +885,31 @@
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -977,7 +984,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

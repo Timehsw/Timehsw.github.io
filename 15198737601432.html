@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -196,7 +203,7 @@
 
 <span id="more"></span><!-- more -->
 
-<pre><code>var arr:Array[String]=new Array[String](3)
+<pre class="line-numbers"><code class="language-text">var arr:Array[String]=new Array[String](3)
 or
 var arr=new Array[String](3)
 or
@@ -209,7 +216,7 @@ var arr=Array(&quot;hello&quot;,&quot;world&quot;,&quot;scala&quot;)
 
 <p>有以下的方式给数组变量赋值</p>
 
-<pre><code>arr(0)=&quot;hello&quot;
+<pre class="line-numbers"><code class="language-text">arr(0)=&quot;hello&quot;
 arr(1)=&quot;world&quot;
 arr(4/2)=&quot;scala&quot;
 创建的时候就赋值
@@ -221,7 +228,7 @@ arr(4/2)=&quot;scala&quot;
 
 <p><strong>创建,初始化,处理数组</strong></p>
 
-<pre><code>object Test {
+<pre class="line-numbers"><code class="language-text">object Test {
    def main(args: Array[String]) {
       var myList = Array(1.9, 2.9, 3.4, 3.5)
 
@@ -254,7 +261,7 @@ arr(4/2)=&quot;scala&quot;
 <p>在程序中，我们常常需要可变的数组，ArrayBuffer</p>
 </blockquote>
 
-<pre><code>    val buffer=new ArrayBuffer[Int]
+<pre class="line-numbers"><code class="language-text">    val buffer=new ArrayBuffer[Int]
     for (i&lt;- 0 until 10 if i%2==0) {
       buffer.+=(i)
     }
@@ -275,7 +282,7 @@ arr(4/2)=&quot;scala&quot;
 
 <h2 id="toc_5">创建scala多维数组</h2>
 
-<pre><code>import Array._
+<pre class="line-numbers"><code class="language-text">import Array._
 var myMatrix=ofDim[Int](3,3)
 </code></pre>
 
@@ -283,7 +290,7 @@ var myMatrix=ofDim[Int](3,3)
 
 <h2 id="toc_6">处理scala多维数组</h2>
 
-<pre><code>import Array._
+<pre class="line-numbers"><code class="language-text">import Array._
 
 object Test {
    def main(args: Array[String]) {
@@ -314,7 +321,7 @@ object Test {
 <p>使用concat()方法来连接两个数组</p>
 </blockquote>
 
-<pre><code>import Array._
+<pre class="line-numbers"><code class="language-text">import Array._
 
 object Test {
    def main(args: Array[String]) {
@@ -342,7 +349,7 @@ object Test {
 </ul>
 </blockquote>
 
-<pre><code>import Array._
+<pre class="line-numbers"><code class="language-text">import Array._
 
 object Test {
    def main(args: Array[String]) {
@@ -508,31 +515,31 @@ object Test {
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -607,7 +614,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

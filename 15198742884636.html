@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -237,7 +244,7 @@
 
 <p>接口代码如下:</p>
 
-<pre><code>/**
+<pre class="line-numbers"><code class="language-text">/**
  * Created by HuShiwei on 2016/10/18 0018.
  * FIFO先进先出
  */
@@ -266,26 +273,22 @@ public interface Queue {
 
 <ul>
 <li>如何判断队列是否满队列还是空队列
-
 <ul>
 <li>设计了一个循环数组</li>
 <li>设计一个队首指针front,和一个队尾指针rear</li>
 <li>front指向队列的首元素,rear指向队尾的最后一个元素+1的位置</li>
 </ul></li>
 <li>如何判断队列是空队列还是满队列?
-
 <ul>
 <li>当是空队列的时候,front=rear,两个指针都指向同一个位置</li>
 <li>当是满队列的时候,因为是循环数组,所以front=rear.这样我们就没办法区分是空队列还是满队列了.</li>
 </ul></li>
 <li>如何解决这个问题呢?
-
 <ul>
 <li>把数组的最后一个位置空出来,浪费最后的存储空间.</li>
 <li>这样,判断是满队列的时候,就可以根据(rear+1)%capacity=front</li>
 </ul></li>
 <li>注意点
-
 <ul>
 <li>队尾指针rear指向队尾元素+1的位置.这样在队尾入队的时候就可以指针赋值了</li>
 </ul></li>
@@ -293,12 +296,15 @@ public interface Queue {
 
 <h3 id="toc_4">代码实现</h3>
 
-<p><strong>注意: 在实现队列的时候，一定要记住</strong><br/>
-+ 队列的结构特性，FIFO<br/>
-+ 如何通过指针来操作<br/>
-+ 理解了这些,自己就可以很轻松的实现队列了</p>
+<p><strong>注意: 在实现队列的时候，一定要记住</strong></p>
 
-<pre><code>/**
+<ul>
+<li>队列的结构特性，FIFO</li>
+<li>如何通过指针来操作</li>
+<li>理解了这些,自己就可以很轻松的实现队列了</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">/**
  * 队列的顺序存储实现
  */
 public class QueueArray implements Queue {
@@ -537,31 +543,31 @@ public class QueueArray implements Queue {
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -636,7 +642,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

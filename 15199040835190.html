@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -185,7 +192,7 @@
       <div class="article-content">
       <h2 id="toc_0">报错信息</h2>
 
-<pre><code>Couldn`t find leader offsets for set([xxxxxxxxxxx,xx])
+<pre class="line-numbers"><code class="language-text">Couldn`t find leader offsets for set([xxxxxxxxxxx,xx])
 
 # 或者
 numRecords must not be negative
@@ -198,14 +205,14 @@ numRecords must not be negative
 <p>从博客中已经找不到直接的解决方案，那么只能从源码入手，从而看看能不能定位到问题所在。<br/>
 从这一行代码开始跟踪</p>
 
-<pre><code>KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, myTopic)
+<pre class="line-numbers"><code class="language-text">KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, myTopic)
 
 </code></pre>
 
 <p>发现了,先调用<code>getFromOffsets(kc, kafkaParams, topics)</code>获取到了起始offset.然后创建了一个<br/>
 <code>DirectKafkaInputDStream</code>对象.点进去</p>
 
-<pre><code>  def createDirectStream[
+<pre class="line-numbers"><code class="language-text">  def createDirectStream[
     K: ClassTag,
     V: ClassTag,
     KD &lt;: Decoder[K]: ClassTag,
@@ -225,7 +232,7 @@ numRecords must not be negative
 
 <p>找到这个对象里面的<code>compute</code>方法,重点从这个方法的逻辑开始分析</p>
 
-<pre><code>  override def compute(validTime: Time): Option[KafkaRDD[K, V, U, T, R]] = {
+<pre class="line-numbers"><code class="language-text">  override def compute(validTime: Time): Option[KafkaRDD[K, V, U, T, R]] = {
     val untilOffsets = clamp(latestLeaderOffsets(maxRetries))
     val rdd = KafkaRDD[K, V, U, T, R](
       context.sparkContext, kafkaParams, currentOffsets, untilOffsets, messageHandler)
@@ -260,15 +267,18 @@ numRecords must not be negative
 
 <p>综上所述,解决办法为添加以下参数:</p>
 
-<pre><code>--conf spark.streaming.kafka.maxRetries=50 \
+<pre class="line-numbers"><code class="language-text">--conf spark.streaming.kafka.maxRetries=50 \
 --conf spark.yarn.maxAppAttempts=10 \
 --conf spark.yarn.am.attemptFailuresValidityInterval=1h \
 </code></pre>
 
-<p>注意:<br/>
-1. spark.yarn.maxAppAttempts参数不能超过hadoop集群yarn.resourcemanager.am.max-attempts的最大值，如果超过将会取两者较小值<br/>
-2. 由于kafka切换leader导致的数据丢失,然后造成sparkstreaming程序报错,异常退出的情况下.我这通通常都是重启kafka,删除checkpoint,再重启sparkstreaming了.<br/>
-3. 后面我们不用原生的方式来存储offset.而是自己维护offset,那么以后更新迭代后就不用再删除checkpoint了,对业务的影响也最小了.</p>
+<p>注意:</p>
+
+<ol>
+<li>spark.yarn.maxAppAttempts参数不能超过hadoop集群yarn.resourcemanager.am.max-attempts的最大值，如果超过将会取两者较小值</li>
+<li>由于kafka切换leader导致的数据丢失,然后造成sparkstreaming程序报错,异常退出的情况下.我这通通常都是重启kafka,删除checkpoint,再重启sparkstreaming了.</li>
+<li>后面我们不用原生的方式来存储offset.而是自己维护offset,那么以后更新迭代后就不用再删除checkpoint了,对业务的影响也最小了.</li>
+</ol>
 
 
     
@@ -417,31 +427,31 @@ numRecords must not be negative
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -516,7 +526,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

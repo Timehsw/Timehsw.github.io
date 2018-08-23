@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -191,15 +198,15 @@
 
 <blockquote>
 <p>Docker 要求 Ubuntu 系统的内核版本高于 3.10 ，查看本页面的前提条件来验证你的Ubuntu版本是否支持 Docker 。<br/>
-打开控制台使用 uname -r命令来查看你当前的内核版本。<br/>
-<code><br/>
-$ uname -r<br/>
- 3.11.0-15-generic<br/>
-</code></p>
+打开控制台使用 uname -r命令来查看你当前的内核版本。</p>
+
+<pre class="line-numbers"><code class="language-text">$ uname -r
+ 3.11.0-15-generic
+</code></pre>
 
 <h2 id="toc_2">安装步骤</h2>
 
-<pre><code>sudo apt-get update
+<pre class="line-numbers"><code class="language-text">sudo apt-get update
 sudo apt-get update $ sudo apt-get install wget  //安装wget
 wget -qO- https://get.docker.com/ | sh     //获取最新版本的 Docker 安装包，输入完成之后，就会下载脚本并且安装Docker及依赖包。
 docker info //验证安装结果
@@ -212,9 +219,9 @@ docker info //验证安装结果
 <ul>
 <li>解决:
 <code>
-sudo su -                       //切换到root
-service docker start      //启动docker service
-docker images              //显示所有images
+sudo su -                       //切换到root<br/>
+service docker start      //启动docker service<br/>
+docker images              //显示所有images<br/>
 docker run hello-world  //重新运行
 </code>
 恩，是权限问题，当前用户没权限，root用户可以运行</li>
@@ -223,18 +230,18 @@ docker run hello-world  //重新运行
 
 <h1 id="toc_5">下载需要的镜像</h1>
 
-<p>以下脚本会下载gitlab,mysql,redis镜像<br/>
-<code><br/>
-docker pull sameersbn/gitlab:latest<br/>
-docker pull sameersbn/mysql:latest<br/>
-docker pull sameersbn/redis:latest<br/>
-</code></p>
+<p>以下脚本会下载gitlab,mysql,redis镜像</p>
+
+<pre class="line-numbers"><code class="language-text">docker pull sameersbn/gitlab:latest
+docker pull sameersbn/mysql:latest
+docker pull sameersbn/redis:latest
+</code></pre>
 
 <h1 id="toc_6">启动需要的镜像</h1>
 
 <h2 id="toc_7">启动redis</h2>
 
-<pre><code>docker run \
+<pre class="line-numbers"><code class="language-text">docker run \
   --name=gitlab_redis \
   -tid \
   sameersbn/redis:latest
@@ -242,72 +249,73 @@ docker pull sameersbn/redis:latest<br/>
 
 <h2 id="toc_8">启动mysql</h2>
 
-<p>注意这里写你的用户名和密码<br/>
+<p>注意这里写你的用户名和密码</p>
+
+<pre class="line-numbers"><code class="language-text">mkdir -p /opt/gitlab/mysql
+docker run \
+  --name=gitlab_mysql \
+  -tid \
+  -e &#39;DB_NAME=gitlabhq_production&#39; \
+  -e &#39;DB_USER=gitlab&#39; \
+  -e &#39;DB_PASS=password&#39; \
+  -v /opt/gitlab/mysql:/var/lib/mysql \
+  sameersbn/mysql:latest
+
+</code></pre>
+
+<h2 id="toc_9">启动gitlab</h2>
+
+<pre class="line-numbers"><code class="language-text">docker run \
+  --name=&#39;gitlab&#39; \
+  -itd \
+  --link gitlab_mysql:mysql \
+  --link gitlab_redis:redisio \
+  -e &#39;GITLAB_PORT=80&#39; \
+  -e &#39;GITLAB_SSH_PORT=22&#39; \
+  --env &#39;GITLAB_SECRETS_DB_KEY_BASE=long-and-random-alpha-numeric-string&#39; \
+  --env &#39;GITLAB_SECRETS_SECRET_KEY_BASE=long-and-random-alpha-numeric-string&#39; \
+  --env &#39;GITLAB_SECRETS_OTP_KEY_BASE=long-and-random-alpha-numeric-string&#39; \
+  -p 10022:22 -p 10080:80 \
+  -v /var/run/docker.sock:/run/docker.sock \
+  -v $(which docker):/bin/docker \
+  -v /opt/gitlab/data:/home/git/data \
+  -v /opt/gitlab/log:/var/log/gitlab \
+  sameersbn/gitlab:latest
+
+</code></pre>
+
+<p>这一步骤会耗时几分钟，因为这一步会做一些初始化操作,我们可以通过docker logs gitlab来查看安装过程。<br/>
+我们指定了10022作为ssh的访问端口，10080作为http的访问端口，</p>
+
+<p>执行完后，稍微过1-2分钟后，打开以下地址应该就可以访问gitlab了<br/>
+<a href="http://localhost:10080">http://localhost:10080</a><br/>
+如果是在服务器上搭建，请替换localhost为服务器地址</p>
+
+<h2 id="toc_10">注意:</h2>
+
+<p>当出了问题,可以用一些命令查看</p>
+
+<pre class="line-numbers"><code class="language-text"># 列出正在运行的容器
+root@bigdata:~# docker ps
+CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS              PORTS                                                   NAMES
+aa93b0654f4b        sameersbn/gitlab:latest   &quot;/sbin/entrypoint....&quot;   43 minutes ago      Up 13 minutes       443/tcp, 0.0.0.0:10022-&gt;22/tcp, 0.0.0.0:10080-&gt;80/tcp   gitlab
+881c31d50c53        sameersbn/mysql:latest    &quot;/sbin/entrypoint....&quot;   About an hour ago   Up 14 minutes       3306/tcp                                                gitlab_mysql
+e5573736680f        sameersbn/redis:latest    &quot;/sbin/entrypoint.sh&quot;    About an hour ago   Up 14 minutes       6379/tcp                                                gitlab_redis
+
+
+</code></pre>
+
+<ul>
+<li>列出所有容器的状态<br/>
 ```<br/>
-mkdir -p /opt/gitlab/mysql<br/>
-docker run \<br/>
-  --name=gitlab_mysql \<br/>
-  -tid \<br/>
-  -e &#39;DB_NAME=gitlabhq_production&#39; \<br/>
-  -e &#39;DB_USER=gitlab&#39; \<br/>
-  -e &#39;DB_PASS=password&#39; \<br/>
-  -v /opt/gitlab/mysql:/var/lib/mysql \<br/>
-  sameersbn/mysql:latest</p>
-
-<pre><code>
-## 启动gitlab
-
-
-</code></pre>
-
-<p>docker run \<br/>
-  --name=&#39;gitlab&#39; \<br/>
-  -itd \<br/>
-  --link gitlab_mysql:mysql \<br/>
-  --link gitlab_redis:redisio \<br/>
-  -e &#39;GITLAB_PORT=80&#39; \<br/>
-  -e &#39;GITLAB_SSH_PORT=22&#39; \<br/>
-  --env &#39;GITLAB_SECRETS_DB_KEY_BASE=long-and-random-alpha-numeric-string&#39; \<br/>
-  --env &#39;GITLAB_SECRETS_SECRET_KEY_BASE=long-and-random-alpha-numeric-string&#39; \<br/>
-  --env &#39;GITLAB_SECRETS_OTP_KEY_BASE=long-and-random-alpha-numeric-string&#39; \<br/>
-  -p 10022:22 -p 10080:80 \<br/>
-  -v /var/run/docker.sock:/run/docker.sock \<br/>
-  -v $(which docker):/bin/docker \<br/>
-  -v /opt/gitlab/data:/home/git/data \<br/>
-  -v /opt/gitlab/log:/var/log/gitlab \<br/>
-  sameersbn/gitlab:latest</p>
-
-<pre><code>
-这一步骤会耗时几分钟，因为这一步会做一些初始化操作,我们可以通过docker logs gitlab来查看安装过程。
-我们指定了10022作为ssh的访问端口，10080作为http的访问端口，
-
-执行完后，稍微过1-2分钟后，打开以下地址应该就可以访问gitlab了
-http://localhost:10080
-如果是在服务器上搭建，请替换localhost为服务器地址
-
-## 注意:
-当出了问题,可以用一些命令查看
-
-</code></pre>
-
-<h1 id="toc_9">列出正在运行的容器</h1>
-
-<p>root@bigdata:~# docker ps<br/>
-CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS              PORTS                                                   NAMES<br/>
-aa93b0654f4b        sameersbn/gitlab:latest   &quot;/sbin/entrypoint....&quot;   43 minutes ago      Up 13 minutes       443/tcp, 0.0.0.0:10022-&gt;22/tcp, 0.0.0.0:10080-&gt;80/tcp   gitlab<br/>
-881c31d50c53        sameersbn/mysql:latest    &quot;/sbin/entrypoint....&quot;   About an hour ago   Up 14 minutes       3306/tcp                                                gitlab_mysql<br/>
-e5573736680f        sameersbn/redis:latest    &quot;/sbin/entrypoint.sh&quot;    About an hour ago   Up 14 minutes       6379/tcp                                                gitlab_redis</p>
-
-<pre><code>+ 列出所有容器的状态
-</code></pre>
-
-<p>root@bigdata:~# docker ps -a<br/>
+root@bigdata:~# docker ps -a<br/>
 CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS              PORTS                                                   NAMES<br/>
 aa93b0654f4b        sameersbn/gitlab:latest   &quot;/sbin/entrypoint....&quot;   44 minutes ago      Up 14 minutes       443/tcp, 0.0.0.0:10022-&gt;22/tcp, 0.0.0.0:10080-&gt;80/tcp   gitlab<br/>
 881c31d50c53        sameersbn/mysql:latest    &quot;/sbin/entrypoint....&quot;   About an hour ago   Up 14 minutes       3306/tcp                                                gitlab_mysql<br/>
-e5573736680f        sameersbn/redis:latest    &quot;/sbin/entrypoint.sh&quot;    About an hour ago   Up 15 minutes       6379/tcp                                                gitlab_redis</p>
+e5573736680f        sameersbn/redis:latest    &quot;/sbin/entrypoint.sh&quot;    About an hour ago   Up 15 minutes       6379/tcp                                                gitlab_redis</li>
+</ul>
 
-<pre><code>后面可以是容易id,也可以是容器名称
+<pre class="line-numbers"><code class="language-text">后面可以是容易id,也可以是容器名称
 + docker start CONTAINER ID #启动容器
 + docker stop CONTAINER ID #停止容器
 + docker rm -f CONTAINER ID #删除容器
@@ -316,12 +324,13 @@ e5573736680f        sameersbn/redis:latest    &quot;/sbin/entrypoint.sh&quot;   
 # 进入docker中的服务器
 </code></pre>
 
-<p>docker exec -it 容器名字 bash<br/>
-<code><br/>
-举例:<br/>
-上面部署gitlab,我们还启动了一个mysql容器,我们可以进入这个mysql容器里面看看<br/>
-</code><br/>
-root@bigdata:~# docker exec -it gitlab_mysql bash<br/>
+<p>docker exec -it 容器名字 bash</p>
+
+<pre class="line-numbers"><code class="language-text">举例:
+上面部署gitlab,我们还启动了一个mysql容器,我们可以进入这个mysql容器里面看看
+</code></pre>
+
+<p>root@bigdata:~# docker exec -it gitlab_mysql bash<br/>
 root@881c31d50c53:/# mysql<br/>
 Welcome to the MySQL monitor.  Commands end with ; or \g.<br/>
 Your MySQL connection id is 16<br/>
@@ -337,7 +346,7 @@ owners.</p>
 
 <p>mysql&gt;</p>
 
-<pre><code>这样就进入了mysql容器中了.
+<pre class="line-numbers"><code class="language-text">这样就进入了mysql容器中了.
 
 # 加入开机启动
 
@@ -347,31 +356,36 @@ owners.</p>
 
 <p>echo &#39;docker start gitlab_redis&#39; &gt;&gt; /etc/rc.local<br/>
 echo &#39;docker start gitlab_mysql&#39; &gt;&gt; /etc/rc.local<br/>
-echo &#39;docker start gitlab&#39; &gt;&gt; /etc/rc.local<br/>
-```</p>
+echo &#39;docker start gitlab&#39; &gt;&gt; /etc/rc.local</p>
 
-<h1 id="toc_10">备份和恢复gitlab</h1>
+<pre class="line-numbers"><code class="language-text">
+# 备份和恢复gitlab
 
-<h2 id="toc_11">备份</h2>
-
-<pre><code>docker stop gitlab &amp;&amp; docker rm gitlab
-docker run --name=gitlab -it --rm [OPTIONS] \
-sameersbn/gitlab:latest app:rake gitlab:backup:create
+## 备份
 </code></pre>
 
-<h2 id="toc_12">恢复</h2>
+<p>docker stop gitlab &amp;&amp; docker rm gitlab<br/>
+docker run --name=gitlab -it --rm [OPTIONS] \<br/>
+sameersbn/gitlab:latest app:rake gitlab:backup:create</p>
 
-<pre><code>docker stop gitlab &amp;&amp; docker rm gitlab
-docker run --name=gitlab -it --rm [OPTIONS] \
-sameersbn/gitlab:latest app:rake gitlab:backup:restore
+<pre class="line-numbers"><code class="language-text">
+## 恢复
 </code></pre>
 
-<h2 id="toc_13">补充</h2>
+<p>docker stop gitlab &amp;&amp; docker rm gitlab<br/>
+docker run --name=gitlab -it --rm [OPTIONS] \<br/>
+sameersbn/gitlab:latest app:rake gitlab:backup:restore</p>
 
-<p>当进入了gitlab的web页面后,新建了一个项目.可以用下面的链接去把工程clone下来.<br/>
-ip换成你的ip地址.因为上面做了端口映射容器的80端口映射到外面是10080端口.</p>
+<pre class="line-numbers"><code class="language-text">
+## 补充
+当进入了gitlab的web页面后,新建了一个项目.可以用下面的链接去把工程clone下来.
+ip换成你的ip地址.因为上面做了端口映射容器的80端口映射到外面是10080端口.
 
-<pre><code>git clone http://10.211.55.7:10080/shiwei/learndocker.git
+</code></pre>
+
+<p>git clone <a href="http://10.211.55.7:10080/shiwei/learndocker.git">http://10.211.55.7:10080/shiwei/learndocker.git</a></p>
+
+<pre class="line-numbers"><code class="language-text">
 </code></pre>
 
 
@@ -391,8 +405,8 @@ ip换成你的ip地址.因为上面做了端口映射容器的80端口映射到�
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15198741843316.html" 
-          title="Next Post: 项目中配置文件的读取">项目中配置文件的读取 &raquo;</a>
+          <a  href="15299249656216.html" 
+          title="Next Post: PyCharm使用技术">PyCharm使用技术 &raquo;</a>
       
       </p>
         </div>
@@ -521,31 +535,31 @@ ip换成你的ip地址.因为上面做了端口映射容器的80端口映射到�
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -620,7 +634,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

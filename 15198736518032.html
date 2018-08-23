@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -190,7 +197,7 @@
 
 <span id="more"></span><!-- more -->
 
-<pre><code>@DeveloperApi
+<pre class="line-numbers"><code class="language-text">@DeveloperApi
 sealed trait JobResult
 
 @DeveloperApi
@@ -215,12 +222,12 @@ private[spark] case class JobFailed(exception: Exception) extends JobResult
 
 <p>比如定义了一个函数：</p>
 
-<pre><code>    def sum(x: Int)(y: Int) = x + y
+<pre class="line-numbers"><code class="language-text">    def sum(x: Int)(y: Int) = x + y
 </code></pre>
 
 <p>当调用sum的时候，如果不提供所有的参数或某些参数还未知时，比如</p>
 
-<pre><code>    sum _
+<pre class="line-numbers"><code class="language-text">    sum _
     sum(3)(_: Int)
     sum(_: Int)(3)
 </code></pre>
@@ -229,7 +236,7 @@ private[spark] case class JobFailed(exception: Exception) extends JobResult
 
 <p>下面这个变量signal引用了一个偏函数</p>
 
-<pre><code>    val signal: PartialFunction[Int, Int] = {
+<pre class="line-numbers"><code class="language-text">    val signal: PartialFunction[Int, Int] = {
         case x if x &gt; 1 =&gt; 1
         case x if x &lt; -1 =&gt; -1
     }
@@ -239,11 +246,11 @@ private[spark] case class JobFailed(exception: Exception) extends JobResult
 signal(0) 会抛出异常，因此使用前最好先signal.isDefinedAt(0)判断一下。</p>
 
 <ul>
-<li>偏函数主要用于这样一种场景:
+<li>偏函数主要用于这样一种场景:<br/>
 对某些值现在还无法给出具体的操作（即需求还不明朗），也有可能存在几种处理方式（视乎具体的需求）；我们可以先对需求明确的部分进行定义，比如上述除了0外的所有整数域，然后根据具体情况补充对其他域的定义，比如 :</li>
 </ul>
 
-<pre><code>    val composed_signal: PartialFunction[Int,Int] = signal.orElse{
+<pre class="line-numbers"><code class="language-text">    val composed_signal: PartialFunction[Int,Int] = signal.orElse{
     case 0 =&gt; 0
     }
 
@@ -252,7 +259,7 @@ signal(0) 会抛出异常，因此使用前最好先signal.isDefinedAt(0)判断�
 
 <p>或者对定义域进行一定的偏移（假如需求做了变更,  1 为无效的点）</p>
 
-<pre><code>    val new_signal: Function1[Int, Int] = signal.compose{
+<pre class="line-numbers"><code class="language-text">    val new_signal: Function1[Int, Int] = signal.compose{
       case x =&gt; x  - 1
     }
 
@@ -263,7 +270,7 @@ signal(0) 会抛出异常，因此使用前最好先signal.isDefinedAt(0)判断�
 
 <p>还可以用andThen将两个相关的偏函数串接起来</p>
 
-<pre><code>    val another_signal: PartialFunction[Int, Int] = {
+<pre class="line-numbers"><code class="language-text">    val another_signal: PartialFunction[Int, Int] = {
        case 0 =&gt;  0
        case x if x &gt; 0 =&gt; x - 1
        case x if x &lt; 0 =&gt; x + 1
@@ -282,17 +289,17 @@ signal(0) 会抛出异常，因此使用前最好先signal.isDefinedAt(0)判断�
 
 <p>比如我先定义一个函数</p>
 
-<pre><code>    def sum(a:Int,b:Int,c:Int)=a+b+c;
+<pre class="line-numbers"><code class="language-text">    def sum(a:Int,b:Int,c:Int)=a+b+c;
 </code></pre>
 
 <p>那么就可以从这个函数衍生出一个偏函数是这样的:</p>
 
-<pre><code>    def p_sum=sum(1,_:Int,_:Int)
+<pre class="line-numbers"><code class="language-text">    def p_sum=sum(1,_:Int,_:Int)
 </code></pre>
 
 <p>于是就可以这样调用p_sum(2,3), 相当于调用sum(1,2,3) 得到的结果是6. 这里的两个_分别对应函数sum对应位置的参数. 所以你也可以定义成</p>
 
-<pre><code>    def p_sum = sum (_:Int, 1, _:Int)
+<pre class="line-numbers"><code class="language-text">    def p_sum = sum (_:Int, 1, _:Int)
 </code></pre>
 
 <p>这东西有啥用呢? 一个是当你在代码中需要多次调用一个函数, 而其中的某个参数又总是一样的时候, 使用这个可以使你少敲一些代码. 另一个呢?</p>
@@ -308,7 +315,7 @@ signal(0) 会抛出异常，因此使用前最好先signal.isDefinedAt(0)判断�
 <p>1.本地函数<br/>
 Scala中提供了可以把函数定义在另一个函数中。就好象本地变量那样，这种本地函数仅在包含它的代码块中可见。</p>
 
-<pre><code> def processFile(fileName:String,width:Int){
+<pre class="line-numbers"><code class="language-text"> def processFile(fileName:String,width:Int){
       // 本地函数
       def processLine(line:String){
           // 长度大数指定的长度，进行打印
@@ -474,31 +481,31 @@ Scala中提供了可以把函数定义在另一个函数中。就好象本地变
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -573,7 +580,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

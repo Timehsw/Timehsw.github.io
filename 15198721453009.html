@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -187,19 +194,19 @@
 
 <h1 id="toc_0">在同一窗口下显示多个文件</h1>
 
-<pre><code>命令：vim filename1 filename2
+<pre class="line-numbers"><code class="language-text">命令：vim filename1 filename2
 </code></pre>
 
-<p>说明：上述命令同时打开了filename1，filename2两个文件，不过文件filename1的内容将占据整个vim窗口，要想在各个文件之间进行切换，我们可通过如下命令<br/>
-<code><br/>
-：n    #切换到下一个文件<br/>
-：N    #切换到上一个文件<br/>
-：n filename2   #切换到文件filename2<br/>
-</code></p>
+<p>说明：上述命令同时打开了filename1，filename2两个文件，不过文件filename1的内容将占据整个vim窗口，要想在各个文件之间进行切换，我们可通过如下命令</p>
+
+<pre class="line-numbers"><code class="language-text">：n    #切换到下一个文件
+：N    #切换到上一个文件
+：n filename2   #切换到文件filename2
+</code></pre>
 
 <p>我们提到每个打开的文件都对应着一个buffer，故可通过切换buffer来达到切换文件的目的，如下</p>
 
-<pre><code>：ls  列出vim打开的所有文件的信息，包括文件名，buffer id等
+<pre class="line-numbers"><code class="language-text">：ls  列出vim打开的所有文件的信息，包括文件名，buffer id等
 ：b2  切换到buffer id为2的buffer
 :bn   切换到当前buffer的下一个buffer
 :bp   切换当前buffer的前一个buffer
@@ -217,7 +224,7 @@
 
 <p>命令：</p>
 
-<pre><code>vim  -o filename1 filename2  # 水平分割窗口
+<pre class="line-numbers"><code class="language-text">vim  -o filename1 filename2  # 水平分割窗口
 vim  -O filename1 filename2  # 垂直分割窗口
 </code></pre>
 
@@ -247,18 +254,18 @@ vim  -O filename1 filename2  # 垂直分割窗口
 
 <h1 id="toc_3">在不关闭vim的情况下继续打开其他文件(实用)</h1>
 
-<p>可在vim中使用如下命令：<br/>
-```<br/>
-：e  file   #不会分割窗口</p>
+<p>可在vim中使用如下命令：</p>
 
-<p>：sp  file  #将会水平分割窗口</p>
+<pre class="line-numbers"><code class="language-text">：e  file   #不会分割窗口
 
-<p>：vsp  file  #将会垂直分割窗口<br/>
-```</p>
+：sp  file  #将会水平分割窗口
+
+：vsp  file  #将会垂直分割窗口
+</code></pre>
 
 <h1 id="toc_4">vim和shell之间切换(实用+1)</h1>
 
-<pre><code>：shell   # 切换到shell，此时vim在后台运行，在shell中输入命令exit，切换回vim
+<pre class="line-numbers"><code class="language-text">：shell   # 切换到shell，此时vim在后台运行，在shell中输入命令exit，切换回vim
 </code></pre>
 
 
@@ -405,31 +412,31 @@ vim  -O filename1 filename2  # 垂直分割窗口
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -504,7 +511,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

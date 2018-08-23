@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -334,9 +341,12 @@ H(Y|X) &amp; = \sum_{j=1}P(X=v_j)H(Y|X=v_j) \\\<br/>
 
 <h2 id="toc_11">决策树算法的停止条件</h2>
 
-<p>决策树构建的过程是一个递归的过程,所以必须给定停止条件,否则过程将不会进行停止,一般情况有两种停止条件:<br/>
-1. 当每个子节点只有一种类型的时候停止构建;<br/>
-2. 当前节点中记录数小于某个阈值,同时迭代次数达到给定值时,停止构建过程,此时使用\(\max(p(i))\)作为节点的对应类型</p>
+<p>决策树构建的过程是一个递归的过程,所以必须给定停止条件,否则过程将不会进行停止,一般情况有两种停止条件:</p>
+
+<ol>
+<li>当每个子节点只有一种类型的时候停止构建;</li>
+<li>当前节点中记录数小于某个阈值,同时迭代次数达到给定值时,停止构建过程,此时使用\(\max(p(i))\)作为节点的对应类型</li>
+</ol>
 
 <p>方式一可能会使树的节点过多,导致过拟合(Overfiting)等问题;<br/>
 比较常用的方式是使用方式二作为停止条件</p>
@@ -377,12 +387,10 @@ H(Y|X) &amp; = \sum_{j=1}P(X=v_j)H(Y|X=v_j) \\\<br/>
 
 <ul>
 <li><p>优点</p>
-
 <ul>
 <li>决策树构建速度快,实现简单</li>
 </ul></li>
 <li><p>缺点</p>
-
 <ul>
 <li>计算依赖于特征数目较多的特征,而属性值最多的属性并不一定最优</li>
 <li>ID3算法不是递增算法</li>
@@ -403,14 +411,12 @@ H(Y|X) &amp; = \sum_{j=1}P(X=v_j)H(Y|X=v_j) \\\<br/>
 
 <ul>
 <li><p>优点</p>
-
 <ul>
 <li>产生的规则易于理解</li>
 <li>准确率较高</li>
 <li>实现简单</li>
 </ul></li>
 <li><p>缺点</p>
-
 <ul>
 <li>对数据集需要进行多次顺序扫描和排序,所以效率较低</li>
 <li>只适合小规模数据集,需要将数据放到内存中</li>
@@ -511,9 +517,9 @@ H(Y|X) &amp; = \sum_{j=1}P(X=v_j)H(Y|X=v_j) \\\<br/>
 <li>sepal width in cm </li>
 <li>petal length in cm </li>
 <li>petal width in cm </li>
-<li>class: 
--- Iris Setosa 
--- Iris Versicolour 
+<li>class: <br/>
+-- Iris Setosa <br/>
+-- Iris Versicolour <br/>
 -- Iris Virginica</li>
 </ol>
 
@@ -547,9 +553,12 @@ H(Y|X) &amp; = \sum_{j=1}P(X=v_j)H(Y|X=v_j) \\\<br/>
     2. 将一个子树完全替代另外一颗子树.<br/>
     3. 后置剪枝的主要问题是计算效率问题,存在一定的浪费情况.</p>
 
-<p>后置剪枝总体思路(交叉验证):<br/>
-+ 由完全树\(T_0\)开始,剪枝部分节点得到\(T_1\),在此剪枝得到\(T_2\)...直到仅剩树根的树\(T_k\)<br/>
-+ 在验证数据集上对这k+1个树进行评价,选择最优树\(T_a\)(损失函数最小的树)</p>
+<p>后置剪枝总体思路(交叉验证):</p>
+
+<ul>
+<li>由完全树\(T_0\)开始,剪枝部分节点得到\(T_1\),在此剪枝得到\(T_2\)...直到仅剩树根的树\(T_k\)</li>
+<li>在验证数据集上对这k+1个树进行评价,选择最优树\(T_a\)(损失函数最小的树)</li>
+</ul>
 
 <h3 id="toc_29">决策树剪枝过程</h3>
 
@@ -616,7 +625,7 @@ c.因此也就是找到一个平衡</p>
 <p>下载地址:<a href="http://www.graphviz.org/">http://www.graphviz.org/</a><br/>
 Mac安装步骤</p>
 
-<pre><code># 安装graphviz服务
+<pre class="line-numbers"><code class="language-text"># 安装graphviz服务
 brew install graphviz
 
 # 安装python的graphviz插件
@@ -631,7 +640,7 @@ pip install pydotplus
 
 <p><strong>方式一:将模型输出dot文件,然后使用graphviz的命令将dot文件转换为pdf格式的文件</strong></p>
 
-<pre><code>from sklearn import tree
+<pre class="line-numbers"><code class="language-text">from sklearn import tree
 with open(&#39;iris.dot&#39;,&#39;w&#39;) as f:
     f = tree.export_graphviz(model,out_file=f)
 
@@ -641,7 +650,7 @@ with open(&#39;iris.dot&#39;,&#39;w&#39;) as f:
 
 <p><strong>方式二:直接使用pydotplus插件直接生成pdf文件进行保存</strong></p>
 
-<pre><code>from sklearn import tree
+<pre class="line-numbers"><code class="language-text">from sklearn import tree
 import pydotplus
 dot_data = tree.export_graphviz(model,out_file=None)
 graph=pydotplus.graph_from_dot_data(dot_data)
@@ -651,7 +660,7 @@ graph.write_pdf(&quot;iris2.pdf&quot;)
 
 <p><strong>方式三:使用Image对象直接显示pydotplus生成的图片</strong></p>
 
-<pre><code>from sklearn import tree
+<pre class="line-numbers"><code class="language-text">from sklearn import tree
 from IPython.display import Image
 import pydotplus
 
@@ -679,7 +688,7 @@ Image(graph.create_png)
         <p class="text-left" style="padding:15px 0px;">
       
           <a href="15255701784620.html" 
-          title="Previous Post: 集成学习---未完成">&laquo; 集成学习---未完成</a>
+          title="Previous Post: 集成学习">&laquo; 集成学习</a>
       
         </p>
         </div>
@@ -816,31 +825,31 @@ Image(graph.create_png)
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -915,7 +924,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

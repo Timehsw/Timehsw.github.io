@@ -4,7 +4,7 @@
   <title><![CDATA[Time渐行渐远]]></title>
   <link href="http://dmlcoding.com/atom.xml" rel="self"/>
   <link href="http://dmlcoding.com/"/>
-  <updated>2018-06-25T16:44:33+08:00</updated>
+  <updated>2018-08-23T13:13:23+08:00</updated>
   <id>http://dmlcoding.com/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -13,16 +13,104 @@
   <generator uri="http://www.mweb.im/">MWeb</generator>
   
   <entry>
-    <title type="html"><![CDATA[HMM(摘自:统计学习方法---未完成)]]></title>
+    <title type="html"><![CDATA[Mac 下高速免费下载百度云文件]]></title>
+    <link href="http://dmlcoding.com/15343116796404.html"/>
+    <updated>2018-08-15T13:41:19+08:00</updated>
+    <id>http://dmlcoding.com/15343116796404.html</id>
+    <content type="html"><![CDATA[
+<h1 id="toc_0">下载安装Aira2客户端</h1>
+
+<p>地址: <a href="https://github.com/yangshun1029/aria2gui/releases">https://github.com/yangshun1029/aria2gui/releases</a></p>
+
+<span id="more"></span><!-- more -->
+
+<p><img src="media/15343116796404/15343175848538.jpg" alt="" style="width:900px;"/></p>
+
+<h1 id="toc_1">安装Ghrome插件 BaiduExporter</h1>
+
+<p>下载地址: <a href="https://github.com/acgotaku/BaiduExporter/archive/master.zip">https://github.com/acgotaku/BaiduExporter/archive/master.zip</a></p>
+
+<p>这个只能这样安装<br/>
+<img src="media/15343116796404/15343119219617.jpg" alt="" style="width:941px;"/></p>
+
+<p><img src="media/15343116796404/15343119745283.jpg" alt="" style="width:1343px;"/><br/>
+<img src="media/15343116796404/15343122583040.jpg" alt="" style="width:614px;"/></p>
+
+<p><img src="media/15343116796404/15343121945795.jpg" alt="" style="width:743px;"/></p>
+
+<p>ok,搞定了</p>
+
+<h1 id="toc_2">总结</h1>
+
+<p>所有的包上传百度云备份一份</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[windows10和mac共享文件]]></title>
+    <link href="http://dmlcoding.com/15317970391028.html"/>
+    <updated>2018-07-17T11:10:39+08:00</updated>
+    <id>http://dmlcoding.com/15317970391028.html</id>
+    <content type="html"><![CDATA[
+<h1 id="toc_0">一,windows10访问mac电脑</h1>
+
+<h2 id="toc_1">1,先新建一个用于共享的登录账户</h2>
+
+<p>在系统偏好设置-&gt;用户与群组-&gt;点击黄色的锁-&gt;输入当前账户密码-&gt;点击左侧➕ ,新建一个<em>仅限共享</em>的用户(注意:是将普通账户改为仅限共享,记住密码)。</p>
+
+<span id="more"></span><!-- more -->
+
+<h2 id="toc_2">2,开启共享</h2>
+
+<p>系统偏好设置 -&gt; 共享 -&gt; 点开黄色的锁输入密码 -&gt; 勾选文件共享和远程登录 -&gt; 选中共享文件 -&gt; 点击共享文件夹的➕，添加要共享的文件夹 -&gt; 点击用户➕添加新建的第1步中添加的帐号 -&gt; 点击选项勾选使用SMB -&gt; 勾选windows文件共享中的新添加的账户点击完成.</p>
+
+<h2 id="toc_3">3,将mac加入到windows的工作组中</h2>
+
+<p>系统偏好设置-&gt;网络-&gt;选择你所要设置的网络-右侧下方的高级按钮-wins选项卡.注意工作组要在windows上查找，wins服务器也要在windows上查找匹配。</p>
+
+<h2 id="toc_4">4,windows中访问共享文件</h2>
+
+<p>windows+R -&gt; 输入:&quot;\mac ip地址&quot; ,如 \192.168.1.102 -&gt; 在弹出的对话框中输入mac中添加的账户和密码就能访问了.</p>
+
+<h1 id="toc_5">二，Mac访问windows10:</h1>
+
+<h2 id="toc_6">1,打开共享设置</h2>
+
+<p>1，控制面板-&gt; 网络和Internet -&gt; 网络和共享中心 -&gt; 高级共享设置 中专用和所有网络的都开启共享的设置.<br/>
+2，文件资源管理器（默认选中快速访问）-&gt; 查看 -&gt; 选项 -&gt; 查看 -&gt; 勾选 使用共享向导(推荐).</p>
+
+<h2 id="toc_7">2,在windows上新建用于mac登录的账户</h2>
+
+<p>windows+R -&gt; 输入:netplwiz -&gt; 点击添加 -&gt; 选择不使用Microsoft帐户 -&gt; 本地账户 -&gt; 输入用户名，密码等信息（注意记住用于mac登录）.</p>
+
+<h2 id="toc_8">3,设置要共享的文件夹</h2>
+
+<p>1,选中文件夹右键 -&gt; 属性 -&gt; 共享 -&gt; 高级共享 -&gt; 勾选共享此文件夹 -&gt; 选中权限 进行相应的权限设置 -&gt; 点击应用，确定.<br/>
+2,再次右键要共享的文件夹 -&gt; 属性 -&gt; 共享 -&gt; 共享(s) -&gt; 下拉箭头，添加之前第2部中增加的账户 -&gt; 设置权限级别.</p>
+
+<h2 id="toc_9">4,mac中访问windows中的共享文件夹</h2>
+
+<p>点击Finder -&gt; 左侧会有共享的设备 -&gt; 点击 连接身份 -&gt;输入第2步中创建的账户名和密码就可以访问了.</p>
+
+<h2 id="toc_10">注意:</h2>
+
+<p>2.3.4步就可以了</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[HMM(摘自:统计学习方法)]]></title>
     <link href="http://dmlcoding.com/15299155104492.html"/>
     <updated>2018-06-25T16:31:50+08:00</updated>
     <id>http://dmlcoding.com/15299155104492.html</id>
     <content type="html"><![CDATA[
 <p>HMM(隐马尔可夫模型的定义):隐马尔可夫模型是关于时序的概率模型,描述由一个隐藏的马尔可夫链随机生成不可观察的状态随机序列,再由各个状态生成一个观测而产生观测随机序列的过程.隐藏的马尔可夫链随机生成的状态的序列,称为状态序列(state sequence);每个状态生成一个观测,而由此产生的观测的随机序列,称为观测序列(observation sequence).序列的每一个位置又可以看作是一个时刻.</p>
 
-<p><img src="media/15299155104492/15299160364725.jpg" alt=""/></p>
-
 <span id="more"></span><!-- more -->
+
+<p><img src="media/15299155104492/15299160364725.jpg" alt=""/></p>
 
 <h1 id="toc_0">隐马尔可夫模型的相关定义</h1>
 
@@ -103,7 +191,7 @@ A,B,\pi 称为隐马尔可夫模型的三要素\]</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[EM算法---未完成]]></title>
+    <title type="html"><![CDATA[EM算法]]></title>
     <link href="http://dmlcoding.com/15299156181001.html"/>
     <updated>2018-06-25T16:33:38+08:00</updated>
     <id>http://dmlcoding.com/15299156181001.html</id>
@@ -113,7 +201,7 @@ A,B,\pi 称为隐马尔可夫模型的三要素\]</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[拉格朗日乘子法&KKT条件---未完成]]></title>
+    <title type="html"><![CDATA[拉格朗日乘子法&KKT条件]]></title>
     <link href="http://dmlcoding.com/15289333499679.html"/>
     <updated>2018-06-14T07:42:29+08:00</updated>
     <id>http://dmlcoding.com/15289333499679.html</id>
@@ -127,16 +215,15 @@ A,B,\pi 称为隐马尔可夫模型的三要素\]</p>
 <p>通常,我们要求解的函数优化问题,大致可分为以下3类</p>
 
 <ul>
-<li>无约束条件的优化问题:
+<li>无约束条件的优化问题:<br/>
 \[min f(X)\]</li>
-<li>只有等式约束的优化问题:
-\[min f(X) \\\
+<li>只有等式约束的优化问题:<br/>
+\[min f(X) \\\<br/>
 s.t: h_i(X)=0,i \in {1,2,...,n}\]</li>
 <li><p>含有不等式约束的优化问题:<br/>
 \[min f(X) \\\<br/>
 s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
      g_j(X) \leq 0, j \in {1,2,...,n} \]</p>
-
 <span id="more"></span><!-- more -->        </li>
 </ul>
 
@@ -255,7 +342,7 @@ s.t : x_1+10x_2 &gt; 10 \\\<br/>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[SVM(支持向量机)---未完成]]></title>
+    <title type="html"><![CDATA[SVM(支持向量机)]]></title>
     <link href="http://dmlcoding.com/15285262100303.html"/>
     <updated>2018-06-09T14:36:50+08:00</updated>
     <id>http://dmlcoding.com/15285262100303.html</id>
@@ -343,7 +430,7 @@ s.t:y^{(i)}\left(w^Tx^{(i)}+b\right) \geq 1,i=1,2,...,m &amp;\text {限制条件
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[聚类算法---未完成]]></title>
+    <title type="html"><![CDATA[聚类算法]]></title>
     <link href="http://dmlcoding.com/15284222434956.html"/>
     <updated>2018-06-08T09:44:03+08:00</updated>
     <id>http://dmlcoding.com/15284222434956.html</id>
@@ -389,19 +476,16 @@ s.t:y^{(i)}\left(w^Tx^{(i)}+b\right) \geq 1,i=1,2,...,m &amp;\text {限制条件
 
 <ul>
 <li>最小距离(SL聚类)
-
 <ul>
 <li>两个聚簇中最近的两个样本之间的距离(single/word-linkage聚类法)</li>
 <li>最终得到模型容易形成链式结构</li>
 </ul></li>
 <li>最大距离(CL聚类)
-
 <ul>
 <li>两个聚簇中最远的两个样本的距离(complete-linkage聚类法)</li>
 <li>如果存在异常值,那么构建可能不太稳定</li>
 </ul></li>
 <li>平均距离(AL聚类)
-
 <ul>
 <li>两个聚类中样本间两两距离的平均值(average-linkage聚类法)</li>
 <li>两个聚簇中样本间两两距离的中值(median-linkage聚类法)</li>
@@ -416,7 +500,7 @@ s.t:y^{(i)}\left(w^Tx^{(i)}+b\right) \geq 1,i=1,2,...,m &amp;\text {限制条件
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[集成学习---未完成]]></title>
+    <title type="html"><![CDATA[集成学习]]></title>
     <link href="http://dmlcoding.com/15255701784620.html"/>
     <updated>2018-05-06T09:29:38+08:00</updated>
     <id>http://dmlcoding.com/15255701784620.html</id>
@@ -515,7 +599,6 @@ s.t:y^{(i)}\left(w^Tx^{(i)}+b\right) \geq 1,i=1,2,...,m &amp;\text {限制条件
 
 <ul>
 <li><p>RF的主要优点</p>
-
 <ul>
 <li>1. 训练可以并行化,对于大规模样本的训练具有速度的优势;</li>
 <li>2. 由于进行随机选择决策树划分特征列表,这样在样本维度比较高的时候,仍然具有比较高的训练性能;</li>
@@ -525,7 +608,6 @@ s.t:y^{(i)}\left(w^Tx^{(i)}+b\right) \geq 1,i=1,2,...,m &amp;\text {限制条件
 <li>6. 对于部分特征的缺失不敏感.</li>
 </ul></li>
 <li><p>RF的主要缺点</p>
-
 <ul>
 <li>1. 在某些噪音比较大的特征上,RF模型容易陷入过拟合;</li>
 <li>2. 取值比较多的划分特征对RF的决策会产生更大的影响,从而有可能影响模型的效果.</li>
@@ -534,7 +616,7 @@ s.t:y^{(i)}\left(w^Tx^{(i)}+b\right) \geq 1,i=1,2,...,m &amp;\text {限制条件
 
 <h2 id="toc_8">随机森林算法案例</h2>
 
-<pre><code>```
+<pre class="line-numbers"><code class="language-text">```
 ```
 </code></pre>
 
@@ -546,9 +628,12 @@ s.t:y^{(i)}\left(w^Tx^{(i)}+b\right) \geq 1,i=1,2,...,m &amp;\text {限制条件
 
 <p>在随机森林的构建过程中,由于各棵树之间是没有关系的,相对独立的;在构建的过程中,构建第m棵子树的时候,不会考虑前面的m-1棵树.</p>
 
-<p>思考:<br/>
-1. 如果在构建第m棵子树的时候,考虑到前m-1棵子树的结果,会不会对最终结果产生有益的影响?<br/>
-2. 各个决策树组成随机森林后,在形成最终结果的时候能不能给定一种既定的决策顺序呢?</p>
+<p>思考:</p>
+
+<ol>
+<li>如果在构建第m棵子树的时候,考虑到前m-1棵子树的结果,会不会对最终结果产生有益的影响?</li>
+<li>各个决策树组成随机森林后,在形成最终结果的时候能不能给定一种既定的决策顺序呢?</li>
+</ol>
 
 <h1 id="toc_11">Boosting</h1>
 
@@ -614,14 +699,12 @@ f_k(x)=f_{k-1}(x)+\alpha_kG_k(x)<br/>
 
 <ul>
 <li><p>daBoost的优点如下:</p>
-
 <ul>
 <li>可以处理连续值和离散值;</li>
 <li>模型的鲁棒性比较强;</li>
 <li>解释强,结构简单.</li>
 </ul></li>
 <li><p>AdaBoost的缺点如下:</p>
-
 <ul>
 <li>对异常样本敏感,异常样本可能会在迭代过程中获得较高的权重值,最终影响模型效果.</li>
 </ul></li>
@@ -794,9 +877,12 @@ H(Y|X) &amp; = \sum_{j=1}P(X=v_j)H(Y|X=v_j) \\\<br/>
 
 <h2 id="toc_11">决策树算法的停止条件</h2>
 
-<p>决策树构建的过程是一个递归的过程,所以必须给定停止条件,否则过程将不会进行停止,一般情况有两种停止条件:<br/>
-1. 当每个子节点只有一种类型的时候停止构建;<br/>
-2. 当前节点中记录数小于某个阈值,同时迭代次数达到给定值时,停止构建过程,此时使用\(\max(p(i))\)作为节点的对应类型</p>
+<p>决策树构建的过程是一个递归的过程,所以必须给定停止条件,否则过程将不会进行停止,一般情况有两种停止条件:</p>
+
+<ol>
+<li>当每个子节点只有一种类型的时候停止构建;</li>
+<li>当前节点中记录数小于某个阈值,同时迭代次数达到给定值时,停止构建过程,此时使用\(\max(p(i))\)作为节点的对应类型</li>
+</ol>
 
 <p>方式一可能会使树的节点过多,导致过拟合(Overfiting)等问题;<br/>
 比较常用的方式是使用方式二作为停止条件</p>
@@ -837,12 +923,10 @@ H(Y|X) &amp; = \sum_{j=1}P(X=v_j)H(Y|X=v_j) \\\<br/>
 
 <ul>
 <li><p>优点</p>
-
 <ul>
 <li>决策树构建速度快,实现简单</li>
 </ul></li>
 <li><p>缺点</p>
-
 <ul>
 <li>计算依赖于特征数目较多的特征,而属性值最多的属性并不一定最优</li>
 <li>ID3算法不是递增算法</li>
@@ -863,14 +947,12 @@ H(Y|X) &amp; = \sum_{j=1}P(X=v_j)H(Y|X=v_j) \\\<br/>
 
 <ul>
 <li><p>优点</p>
-
 <ul>
 <li>产生的规则易于理解</li>
 <li>准确率较高</li>
 <li>实现简单</li>
 </ul></li>
 <li><p>缺点</p>
-
 <ul>
 <li>对数据集需要进行多次顺序扫描和排序,所以效率较低</li>
 <li>只适合小规模数据集,需要将数据放到内存中</li>
@@ -971,9 +1053,9 @@ H(Y|X) &amp; = \sum_{j=1}P(X=v_j)H(Y|X=v_j) \\\<br/>
 <li>sepal width in cm </li>
 <li>petal length in cm </li>
 <li>petal width in cm </li>
-<li>class: 
--- Iris Setosa 
--- Iris Versicolour 
+<li>class: <br/>
+-- Iris Setosa <br/>
+-- Iris Versicolour <br/>
 -- Iris Virginica</li>
 </ol>
 
@@ -1007,9 +1089,12 @@ H(Y|X) &amp; = \sum_{j=1}P(X=v_j)H(Y|X=v_j) \\\<br/>
     2. 将一个子树完全替代另外一颗子树.<br/>
     3. 后置剪枝的主要问题是计算效率问题,存在一定的浪费情况.</p>
 
-<p>后置剪枝总体思路(交叉验证):<br/>
-+ 由完全树\(T_0\)开始,剪枝部分节点得到\(T_1\),在此剪枝得到\(T_2\)...直到仅剩树根的树\(T_k\)<br/>
-+ 在验证数据集上对这k+1个树进行评价,选择最优树\(T_a\)(损失函数最小的树)</p>
+<p>后置剪枝总体思路(交叉验证):</p>
+
+<ul>
+<li>由完全树\(T_0\)开始,剪枝部分节点得到\(T_1\),在此剪枝得到\(T_2\)...直到仅剩树根的树\(T_k\)</li>
+<li>在验证数据集上对这k+1个树进行评价,选择最优树\(T_a\)(损失函数最小的树)</li>
+</ul>
 
 <h3 id="toc_29">决策树剪枝过程</h3>
 
@@ -1076,7 +1161,7 @@ c.因此也就是找到一个平衡</p>
 <p>下载地址:<a href="http://www.graphviz.org/">http://www.graphviz.org/</a><br/>
 Mac安装步骤</p>
 
-<pre><code># 安装graphviz服务
+<pre class="line-numbers"><code class="language-text"># 安装graphviz服务
 brew install graphviz
 
 # 安装python的graphviz插件
@@ -1091,7 +1176,7 @@ pip install pydotplus
 
 <p><strong>方式一:将模型输出dot文件,然后使用graphviz的命令将dot文件转换为pdf格式的文件</strong></p>
 
-<pre><code>from sklearn import tree
+<pre class="line-numbers"><code class="language-text">from sklearn import tree
 with open(&#39;iris.dot&#39;,&#39;w&#39;) as f:
     f = tree.export_graphviz(model,out_file=f)
 
@@ -1101,7 +1186,7 @@ with open(&#39;iris.dot&#39;,&#39;w&#39;) as f:
 
 <p><strong>方式二:直接使用pydotplus插件直接生成pdf文件进行保存</strong></p>
 
-<pre><code>from sklearn import tree
+<pre class="line-numbers"><code class="language-text">from sklearn import tree
 import pydotplus
 dot_data = tree.export_graphviz(model,out_file=None)
 graph=pydotplus.graph_from_dot_data(dot_data)
@@ -1111,7 +1196,7 @@ graph.write_pdf(&quot;iris2.pdf&quot;)
 
 <p><strong>方式三:使用Image对象直接显示pydotplus生成的图片</strong></p>
 
-<pre><code>from sklearn import tree
+<pre class="line-numbers"><code class="language-text">from sklearn import tree
 from IPython.display import Image
 import pydotplus
 
@@ -1285,19 +1370,16 @@ Image(graph.create_png)
 
 <ul>
 <li>优点
-
 <ul>
 <li>计算代价不高</li>
 <li>易于理解和实现</li>
 </ul></li>
 <li>缺点
-
 <ul>
 <li>容易欠拟合</li>
 <li>分类精度可能不高</li>
 </ul></li>
 <li>适用类型
-
 <ul>
 <li>数值型(数值型目标变量则可以从无限的数值集合中取值，如0.100，42.001等 (数值型目标变量主要用于回归分析))</li>
 <li>标称型数据(标称型目标变量的结果只在有限目标集中取值，如真与假(标称型目标变量主要用于分类))</li>
@@ -1352,16 +1434,17 @@ L(\theta) &amp; =p(\vec{y}|X;\theta) \\\<br/>
 
 <p>最大似然/极大似然函数的随机梯度</p>
 
+<p><img src="media/15198753668603/15350010973220.jpg" alt="" style="width:809px;"/></p>
+
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[梯度下降笔记&拉格朗日乘子法]]></title>
+    <title type="html"><![CDATA[梯度下降笔记]]></title>
     <link href="http://dmlcoding.com/15277385790025.html"/>
     <updated>2018-05-31T11:49:39+08:00</updated>
     <id>http://dmlcoding.com/15277385790025.html</id>
     <content type="html"><![CDATA[
-<p>SVM的前置知识</p>
 
 ]]></content>
   </entry>
@@ -1596,7 +1679,7 @@ L(\theta)&amp; =\prod_{i=1}^mp(y^{(i)}|x^{(i)};\theta)\\\<br/>
 
 <p>1.构造测试数据</p>
 
-<pre><code class="language-python">import numpy as np
+<pre class="line-numbers"><code class="language-python">import numpy as np
 import pandas as pd
 
 # 构造测试数据y=3x1+x2
@@ -1610,7 +1693,7 @@ df=pd.DataFrame({
 
 <p>2.抽取x和y</p>
 
-<pre><code class="language-python"># 抽取x和y
+<pre class="line-numbers"><code class="language-python"># 抽取x和y
 x=df[[&#39;x1&#39;,&#39;x2&#39;]]
 # 将y转换成n行1列的列向量
 y=df[&#39;y&#39;].values.reshape((-1,1))
@@ -1631,14 +1714,14 @@ y=df[&#39;y&#39;].values.reshape((-1,1))
 <li>I:求矩阵的逆</li>
 </ul>
 
-<pre><code class="language-python"># 将公式转成python代码,计算theta值
+<pre class="line-numbers"><code class="language-python"># 将公式转成python代码,计算theta值
 
 np.dot(np.mat(x.T.dot(x)).I,x.T).dot(y)
 </code></pre>
 
 <p>4.结果输出</p>
 
-<pre><code>    matrix([[ 2.],
+<pre class="line-numbers"><code class="language-text">    matrix([[ 2.],
             [ 1.]])
 </code></pre>
 
@@ -1671,7 +1754,7 @@ np.dot(np.mat(x.T.dot(x)).I,x.T).dot(y)
 
 <p>代码示例如下(机器学习的简单开发流程):</p>
 
-<pre><code># -*- coding: utf-8 -*-
+<pre class="line-numbers"><code class="language-text"># -*- coding: utf-8 -*-
 &#39;&#39;&#39;
     Created by hushiwei on 2018/4/27.
 
@@ -1785,7 +1868,7 @@ plt.show()
 
 <p>结果输出:</p>
 
-<pre><code>准确率: 0.24409311805909026
+<pre class="line-numbers"><code class="language-text">准确率: 0.24409311805909026
 rmse: 1.164092345973625
 特征的系数为: [(&#39;年&#39;, 0.0), (&#39;月&#39;, 1.1102230246251565e-16), (&#39;日&#39;, -1.415881661733238), (&#39;时&#39;, -0.9349532432495644), (&#39;分&#39;, -0.10214075598497), (&#39;秒&#39;, 0.0)]
 </code></pre>
@@ -1800,7 +1883,7 @@ rmse: 1.164092345973625
 
 <p>代码示例:</p>
 
-<pre><code># -*- coding: utf-8 -*-
+<pre class="line-numbers"><code class="language-text"># -*- coding: utf-8 -*-
 &#39;&#39;&#39;
     Created by hushiwei on 2018/4/27.
 
@@ -1891,7 +1974,7 @@ plt.show()
 
 <p>模型预测结果</p>
 
-<pre><code>电流训练准确率:  0.9909657573073489
+<pre class="line-numbers"><code class="language-text">电流训练准确率:  0.9909657573073489
 电流预测准确率:  0.9920420609708968
 电流参数:  [5.07744316 0.07191391]
 </code></pre>
@@ -1989,10 +2072,13 @@ plt.show()
 
 <p>对于下面的基础知识,不管是大学的时候没学好,还是由于时间太长了,导致自己忘记了.都无所谓了.既然打算学习机器学习,那么就不得不花时间去重拾这些知识.</p>
 
-<p>至于如何学,很多说法,我在网上看了很多,比如:<br/>
-1. 看视频学习;<br/>
-2. 看教程学习;<br/>
-3. 边学习边看.</p>
+<p>至于如何学,很多说法,我在网上看了很多,比如:</p>
+
+<ol>
+<li>看视频学习;</li>
+<li>看教程学习;</li>
+<li>边学习边看.</li>
+</ol>
 
 <span id="more"></span><!-- more -->
 
@@ -2015,7 +2101,7 @@ plt.show()
     <updated>2018-04-21T11:49:16+08:00</updated>
     <id>http://dmlcoding.com/15242825563762.html</id>
     <content type="html"><![CDATA[
-<pre><code>import matplotlib as mpl
+<pre class="line-numbers"><code class="language-text">import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 ## 设置字符集，防止中文乱码
@@ -2033,15 +2119,15 @@ mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
 
 <h2 id="toc_1">1. 下载SimHei.ttf字体</h2>
 
-<pre><code>http://www.fontpalace.com/font-details/SimHei/
+<pre class="line-numbers"><code class="language-text">http://www.fontpalace.com/font-details/SimHei/
 </code></pre>
 
 <h2 id="toc_2">2. 查看matplotlib的字体存放目录</h2>
 
-<pre><code>/Users/hushiwei/anaconda3/lib/python3.6/site-packages/matplotlib/mpl-data
+<pre class="line-numbers"><code class="language-text">/Users/hushiwei/anaconda3/lib/python3.6/site-packages/matplotlib/mpl-data
 </code></pre>
 
-<pre><code>total 64
+<pre class="line-numbers"><code class="language-text">total 64
 drwxr-xr-x   6 hushiwei  staff    192  1 18 12:03 ./
 drwxr-xr-x  86 hushiwei  staff   2752  1 18 12:03 ../
 drwxr-xr-x   5 hushiwei  staff    160  1 18 12:03 fonts/
@@ -2122,12 +2208,10 @@ drwxr-xr-x  27 hushiwei  staff    864  1 18 12:03 stylelib/
 
 <ol>
 <li><p>内嵌模式:公式直接放在文字之间，公式高度一般受文本高度限制: <code>$ latex $</code></p>
-
 <blockquote>
 <p>文字\(\sum_{i=0}^{n}i^2\) 文字</p>
 </blockquote></li>
 <li><p>独立模式:公式另起一行，高度可调整</p>
-
 <blockquote>
 <p>文字\[\sum_{i=0}^{n}i^2\]文字</p>
 </blockquote></li>
@@ -2141,13 +2225,9 @@ drwxr-xr-x  27 hushiwei  staff    864  1 18 12:03 stylelib/
 
 <ul>
 <li><p>上标<code>^{角标}</code>，下标<code>_{角标}</code>, 默认情况下，上下标符号仅仅对下一个组起作用。</p>
-
 <p><code>x_1</code> : \(x_1\) </p>
-
 <p><code>x_1^2</code> : \(x_1^2\) </p>
-
 <p><code>x^{2_1}</code> : \(x^{2_1}\) </p>
-
 <p><code>x_{(22)}^{(n)}</code> : \(x_{(22)}^{(n)}\)</p></li>
 </ul>
 
@@ -2155,11 +2235,8 @@ drwxr-xr-x  27 hushiwei  staff    864  1 18 12:03 stylelib/
 
 <ul>
 <li><p><code>\frac{分子}{分母}</code></p>
-
 <p><code>\frac ab</code> : \(\frac ab\)</p>
-
 <p><code>\frac{x+y}{2}</code> : \(\frac{x+y}{2}\)</p>
-
 <p><code>\frac{1}{1+\frac{1}{2}}</code> : \(\frac{1}{1+\frac{1}{2}}\)</p></li>
 </ul>
 
@@ -2167,11 +2244,8 @@ drwxr-xr-x  27 hushiwei  staff    864  1 18 12:03 stylelib/
 
 <ul>
 <li><p>开平方：<code>\sqrt{表达式}</code>；开n次方：<code>\sqrt[n]{表达式}</code></p>
-
 <p><code>\sqrt{2}&lt;\sqrt[3]{3}</code> : \(\sqrt{2}&lt;\sqrt[3]{3}\)</p>
-
 <p><code>\sqrt[4]{\frac xy}</code> ：\(\sqrt[4]{\frac xy} \)</p>
-
 <p><code>\sqrt{1+\sqrt[^p]{1+a^2}}</code> : \(\sqrt{1+\sqrt[^p]{1+a^2}}\)</p></li>
 </ul>
 
@@ -2179,13 +2253,9 @@ drwxr-xr-x  27 hushiwei  staff    864  1 18 12:03 stylelib/
 
 <ul>
 <li><p>求和<code>\sum</code> ; 求积分<code>\int</code>; 上下限就是<code>上标和下标</code></p>
-
 <p><code>\int_1^\infty</code> ：\(\int_1^\infty\)</p>
-
 <p><code>\int_a^b f(x)dx</code> : \(\int_a^b f(x)dx\)</p>
-
 <p><code>\sum_1^n</code> ：\(\sum_1^n\)</p>
-
 <p><code>\sum_{k=1}^n\frac{1}{k}</code> : \(\sum_{k=1}^n\frac{1}{k}\)</p></li>
 </ul>
 
@@ -2233,7 +2303,6 @@ drwxr-xr-x  27 hushiwei  staff    864  1 18 12:03 stylelib/
 <code>\sin x</code> , <code>\arctan x</code>, <code>\lim_{1\to\infty}</code> : \(\sin x\),\(\arctan x\),\(\lim_{1\to\infty}\)</li>
 <li>比较运算符：
 <code>\lt \gt \le \ge \neq</code> ： \(\lt \gt \le \ge \neq\)
-
 <ul>
 <li>在这些运算符前面加上<code>\not</code>
 <code>\not\lt</code> ：\(\not\lt\)</li>
@@ -2303,20 +2372,15 @@ drwxr-xr-x  27 hushiwei  staff    864  1 18 12:03 stylelib/
 <ul>
 <li><p>注意 : 原始符号并不会随着公式大小缩放。如，<code>(\frac12)</code> ：\((\frac12)\)。可以使用\left(…\right)来自适应的调整括号大小。<br/>
 如1.1和1.2公式，公式1.2中的括号是经过缩放的。</p>
-
 <p><code>\lbrace \sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6} \rbrace \tag{1.1}</code><br/>
 \[\lbrace\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}\rbrace\tag{1.1}\]</p>
-
 <p><code>\left \lbrace \sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6} \right\rbrace \tag{1.2}</code><br/>
 \[\left \lbrace \sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6} \right\rbrace\tag{1.2}\]</p></li>
 <li><p>定界符之前冠以 \left（修饰左定界符）或 \right（修饰右定界符），可以得到自适应缩放的定界符，它们会根据定界符所包围的公式大小自适应缩放</p>
-
 <p><code>\left( \sum_{k=\frac{1}{2}}^{N^2}\frac{1}{k} \right)</code><br/>
 \[ \left( \sum_{k=\frac{1}{2}}^{N^2}\frac{1}{k} \right) \]</p></li>
 <li><p>诸如()、[]、{}、|等分割公式的称为定界符，前面加上\big，\Big，\bigg，\Bigg可以放大这些符号，我比较喜欢用自适应的放大命令，<code>\left...\right</code>，例如</p>
-
 <p><code>$$\left. \frac{\partial f(x, y)}{\partial x}\right|_{x=0}$$</code></p>
-
 <p>\[\left. \frac{\partial f(x, y)}{\partial x}\right|_{x=0}\]</p></li>
 </ul>
 
@@ -2810,7 +2874,7 @@ a_3x+b_3y+c_3z &amp;=d_3 <br/>
 \]</p>
 
 <ul>
-<li>连分数
+<li>连分数<br/>
 书写连分数表达式时，请使用<code>\cfrac</code>代替<code>\frac</code>或者<code>\over</code>,两者效果对比如下：</li>
 </ul>
 
@@ -2827,9 +2891,12 @@ x = a_0 + \frac{1^2}{a_1<br/>
 
 <blockquote>
 <p><strong>转义</strong><br/>
-  一些MathJax使用的特殊字符，可以使用<code>\</code>或者<code>\\</code>转义为原来的含义。如<code>\$</code>表示<code>$</code>，<code>\\_</code>表示下划线。<br/>
-- 注意: 换行和方程组的开始<code>{</code>等, 常常需要转义, 用<code>\</code>或者<code>\\</code>或者<code>\\\</code>或者<code>\\\\</code><br/>
-<a href="https://github.com/Simshang/blog/blob/master/source/_posts/Demo-LaTeX.md">Markdown文件</a></p>
+  一些MathJax使用的特殊字符，可以使用<code>\</code>或者<code>\\</code>转义为原来的含义。如<code>\$</code>表示<code>$</code>，<code>\\_</code>表示下划线。</p>
+
+<ul>
+<li>注意: 换行和方程组的开始<code>{</code>等, 常常需要转义, 用<code>\</code>或者<code>\\</code>或者<code>\\\</code>或者<code>\\\\</code>
+<a href="https://github.com/Simshang/blog/blob/master/source/_posts/Demo-LaTeX.md">Markdown文件</a></li>
+</ul>
 </blockquote>
 
 <h3 id="toc_31">转载参考:</h3>
@@ -2892,7 +2959,7 @@ x = a_0 + \frac{1^2}{a_1<br/>
 
 <h2 id="toc_2">代码实验</h2>
 
-<pre><code># -*- coding: utf-8 -*-
+<pre class="line-numbers"><code class="language-text"># -*- coding: utf-8 -*-
 &#39;&#39;&#39;
     Created by hushiwei on 2018/4/1.
 
@@ -2960,7 +3027,7 @@ Y_n &amp; =X_1+X_2+ \cdots +X_n \\\<br/>
 
 <h2 id="toc_6">代码实验</h2>
 
-<pre><code># -*- coding: utf-8 -*-
+<pre class="line-numbers"><code class="language-text"># -*- coding: utf-8 -*-
 &#39;&#39;&#39;
     Created by hushiwei on 2018/4/1.
     desc :中心极限定理
@@ -3058,7 +3125,7 @@ when initializing their respective MetricsSystems.</p>
 
 <p>直接添加到命令行后</p>
 
-<pre><code>--files=/yourPath/metrics.properties 
+<pre class="line-numbers"><code class="language-text">--files=/yourPath/metrics.properties 
 --conf spark.metrics.conf=metrics.properties
 
 </code></pre>
@@ -3067,7 +3134,7 @@ when initializing their respective MetricsSystems.</p>
 
 <p>新建<code>metrics.properties</code>文件,内容如下</p>
 
-<pre><code>
+<pre class="line-numbers"><code class="language-text">
 driver.source.jvm.class=org.apache.spark.metrics.source.JvmSource
 executor.source.jvm.class=org.apache.spark.metrics.source.JvmSource
 
@@ -3082,7 +3149,7 @@ executor.source.jvm.class=org.apache.spark.metrics.source.JvmSource
 
 <h3 id="toc_2">jmx-sink</h3>
 
-<pre><code>master.source.jvm.class=org.apache.spark.metrics.source.JvmSource
+<pre class="line-numbers"><code class="language-text">master.source.jvm.class=org.apache.spark.metrics.source.JvmSource
 worker.source.jvm.class=org.apache.spark.metrics.source.JvmSource
 driver.source.jvm.class=org.apache.spark.metrics.source.JvmSource
 executor.source.jvm.class=org.apache.spark.metrics.source.JvmSource
@@ -3100,608 +3167,6 @@ executor.source.jvm.class=org.apache.spark.metrics.source.JvmSource
 <p>sink指定你要输出到哪里</p>
 
 <p>刚才这个例子里面,就是sink输出到console</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Spark Metrics分析]]></title>
-    <link href="http://dmlcoding.com/15223141973169.html"/>
-    <updated>2018-03-29T17:03:17+08:00</updated>
-    <id>http://dmlcoding.com/15223141973169.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0">MetricsSystem类注释翻译</h2>
-
-<p><img src="media/15223141973169/15223151043399.jpg" alt=""/></p>
-
-<span id="more"></span><!-- more -->
-
-<p>Spark Metrics System 结合源代码由特定的&quot;实例&quot;创建.<br/>
-Sink,定期的拉取source中的度量数据(metrics data)到目标sink中.</p>
-
-<p>&quot;实例&quot;指定&quot;谁&quot;(角色)使用metrics system.在spark中有几个角色,比如master,worker,executor,client driver.这些角色会创建度量系统进行监控.<br/>
-所以实例代表这些角色.目前在spark中,已经实现了几个实例:master,worker,executor,driver,application.</p>
-
-<p>&quot;Source&quot;指定&quot;从哪里&quot;(来源)去收集指标数据.在度量系统中,这存在两种来源:<br/>
-1.Spark内部源,如MasterSource,WorkerSource等.它们将收集Spark组件的内部状态,这些源与实例相关,并将在创建特定度量标准系统后添加.<br/>
-2.通用源,比如JvmSource,这些将收集低级别的状态,由配置进行配置并通过反射加载.</p>
-
-<p>&quot;Sink&quot;指定将Metrics data 输出到哪里(目的地).多个sinks可以共存并且metrics可以都flush到这些sinks中.</p>
-
-<p>Metrics配置格式如下所示</p>
-
-<pre><code>[instance].[sink|source].[name].[options] = xxxx
-</code></pre>
-
-<p>[instance]可以是&quot;master&quot;,&quot;worker&quot;,&quot;executor&quot;,&quot;driver&quot;,&quot;applications&quot;这意味着只有指定的实例才具有这个属性.可以用&quot;*&quot;来替换实例名,这意味着所有的这些实例将拥有此属性.</p>
-
-<p>[sink|source]表示此属性是属于source还是sink.这个字段只能是source或者sink.</p>
-
-<p>[name] 指定source或者sink的名字.如果它是自定义的.</p>
-
-<p>[options] 代表这个source或者sink的具体属性</p>
-
-<h2 id="toc_1">Metrics系统</h2>
-
-<p>Spark拥有一个基于Coda Hale Metrics Library的可配置Metrics系统,这个Metrics系统通过配置文件进行配置。</p>
-
-<p>Spark的Metrics系统允许用户把Spark metrics信息报告到各种各样的sink包含HTTP和 JMX、CSV文件。</p>
-
-<p>Spark的metrics系统解耦到每个Spark组件的实例中。每个实例里，你可以配置一组sink（metrics被报告到的地方）。</p>
-
-<p>注：Coda Hale Metrics使用的Yammer.com开发的Metrics框架，官方网址是<a href="https://github.com/dropwizard/metrics">https://github.com/dropwizard/metrics</a> ，相关文档可在<a href="https://dropwizard.github.io/metrics">https://dropwizard.github.io/metrics</a> 查看。</p>
-
-<h2 id="toc_2">配置文件</h2>
-
-<p>默认的配置文件为“$SPARK_HOME/conf/metrics.properties”，Spark启动时候会自动加载它。</p>
-
-<p>如果想修改配置文件位置，可以使用java的运行时属性<code>-Dspark.metrics.conf=xxx</code>进行修改。。</p>
-
-<h2 id="toc_3">Spark的Metrics系统支持的实例：</h2>
-
-<ul>
-<li><p>master：Spark standalone模式的 master进程。</p></li>
-<li><p>applications：master进程里的一个组件，为各种应用作汇报.</p></li>
-<li><p>worker：Spark standalone模式的一个worker进程。</p></li>
-<li><p>executor：一个Spark executor.</p></li>
-<li><p>driver：Spark driver进程(该进程指创建SparkContext的那个).</p></li>
-</ul>
-
-<h2 id="toc_4">Spark的Metrics系统支持的Sink：</h2>
-
-<p>　　Sink指定metrics信息发送到哪，每个instance可以设置一个或多个Sink。</p>
-
-<p>　　Sink源码位于包org.apache.spark.metrics.sink中。</p>
-
-<h3 id="toc_5">ConsoleSink</h3>
-
-<p>　　记录Metrics信息到Console中。</p>
-
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>class</td>
-<td>org.apache.spark.metrics.sink.ConsoleSink</td>
-<td>Sink类</td>
-</tr>
-<tr>
-<td>period</td>
-<td>10</td>
-<td>轮询间隔</td>
-</tr>
-<tr>
-<td>unit</td>
-<td>seconds</td>
-<td>轮询间隔的单位</td>
-</tr>
-</tbody>
-</table>
-
-<h3 id="toc_6">CSVSink</h3>
-
-<p>　　定期的把Metrics信息导出到CSV文件中。</p>
-
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>class</td>
-<td>org.apache.spark.metrics.sink.CsvSink</td>
-<td>Sink类</td>
-</tr>
-<tr>
-<td>period</td>
-<td>10</td>
-<td>轮询间隔</td>
-</tr>
-<tr>
-<td>unit</td>
-<td>seconds</td>
-<td>轮询间隔的单位</td>
-</tr>
-<tr>
-<td>directory</td>
-<td>/tmp</td>
-<td>CSV文件存储的位置</td>
-</tr>
-</tbody>
-</table>
-
-<h3 id="toc_7">JmxSink</h3>
-
-<p>可以通过JMX方式访问Mertics信息</p>
-
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>class</td>
-<td>org.apache.spark.metrics.sink.JmxSink</td>
-<td>Sink类</td>
-</tr>
-</tbody>
-</table>
-
-<h3 id="toc_8">MetricsServlet</h3>
-
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>class</td>
-<td>org.apache.spark.metrics.sink.MetricsServlet</td>
-<td>Sink类</td>
-</tr>
-<tr>
-<td>path</td>
-<td>VARIES*</td>
-<td>Path prefix from the web server root</td>
-</tr>
-<tr>
-<td>sample</td>
-<td>false</td>
-<td>Whether to show entire set of samples for histograms (&#39;false&#39; or &#39;true&#39;) ｜</td>
-</tr>
-</tbody>
-</table>
-
-<p>　　除master之外所有实例的默认路径为“/metrics/json”。</p>
-
-<p>　　master有两个路径: “/metrics/aplications/json” App的信息、 “/metrics/master/json” Master的信息</p>
-
-<h3 id="toc_9">GraphiteSink</h3>
-
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>class</td>
-<td>org.apache.spark.metrics.sink.GraphiteSink</td>
-<td>Sink类</td>
-</tr>
-<tr>
-<td>host</td>
-<td>NONE</td>
-<td>Graphite服务器主机名</td>
-</tr>
-<tr>
-<td>port</td>
-<td>NONE</td>
-<td>Graphite服务器端口</td>
-</tr>
-<tr>
-<td>period</td>
-<td>10</td>
-<td>轮询间隔</td>
-</tr>
-<tr>
-<td>unit</td>
-<td>seconds</td>
-<td>轮询间隔的单位</td>
-</tr>
-<tr>
-<td>prefix</td>
-<td>EMPTY STRING</td>
-<td>Prefix to prepend to metric name</td>
-</tr>
-</tbody>
-</table>
-
-<h3 id="toc_10">GangliaSink</h3>
-
-<p>由于Licene限制，默认没有放到默认的build里面。需要自己打包</p>
-
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>class</td>
-<td>org.apache.spark.metrics.sink.GangliaSink</td>
-<td>Sink类</td>
-</tr>
-<tr>
-<td>host</td>
-<td>NONE</td>
-<td>Ganglia 服务器的主机名或multicast group</td>
-</tr>
-<tr>
-<td>port</td>
-<td>NONE</td>
-<td>Ganglia服务器的端口</td>
-</tr>
-<tr>
-<td>period</td>
-<td>10</td>
-<td>轮询间隔</td>
-</tr>
-<tr>
-<td>unit</td>
-<td>seconds</td>
-<td>轮询间隔的单位</td>
-</tr>
-<tr>
-<td>ttl</td>
-<td>1</td>
-<td>TTL of messages sent by Ganglia</td>
-</tr>
-<tr>
-<td>mode</td>
-<td>multicast</td>
-<td>Ganglia网络模式(&#39;unicast&#39; or &#39;multicast&#39;)</td>
-</tr>
-</tbody>
-</table>
-
-<h2 id="toc_11">source：</h2>
-
-<p>第一种为Spark内部source，MasterSource、WorkerSource等，它们会接收Spark组件的内部状态；<br/>
-　　第二种为通用source，如：JvmSource，它收集低级别的状态</p>
-
-<h2 id="toc_12">示例</h2>
-
-<h3 id="toc_13">通过类名为所有实例开启ConsoleSink</h3>
-
-<pre><code>*.sink.console.class=org.apache.spark.metrics.sink.ConsoleSink
-
-ConsoleSink的轮询周期 *.sink.console.period=10
-
-*.sink.console.unit=seconds
-
-**Master实例重置轮询周期**
-
-master.sink.console.period=15
-
-master.sink.console.unit=seconds
-</code></pre>
-
-<h3 id="toc_14">通过类名为所有实例开启JmxSink</h3>
-
-<pre><code>*.sink.jmx.class=org.apache.spark.metrics.sink.JmxSink
-</code></pre>
-
-<h3 id="toc_15">为所有实例开启CsvSink</h3>
-
-<pre><code>*.sink.csv.class=org.apache.spark.metrics.sink.CsvSink
-</code></pre>
-
-<p><strong>CsvSink的轮询周期</strong></p>
-
-<pre><code>*.sink.csv.period=1
-
-*.sink.csv.unit=minutes
-</code></pre>
-
-<p>Polling directory for CsvSink *.sink.csv.directory=/tmp/</p>
-
-<p><strong>Worker实例重置轮询周期</strong></p>
-
-<pre><code>worker.sink.csv.period=10
-
-worker.sink.csv.unit=minutes
-</code></pre>
-
-<h3 id="toc_16">为master和worker、driver、executor开启jvm source</h3>
-
-<pre><code>
-master.source.jvm.class=org.apache.spark.metrics.source.JvmSource
-
-worker.source.jvm.class=org.apache.spark.metrics.source.JvmSource
-
-driver.source.jvm.class=org.apache.spark.metrics.source.JvmSource
-
-executor.source.jvm.class=org.apache.spark.metrics.source.JvmSource
-</code></pre>
-
-<h2 id="toc_17">参考文档：</h2>
-
-<pre><code>${SPARK_HOME}/conf/metrics.properties.template
-http://spark.apache.org/docs/latest/monitoring.html
-</code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Hadoop RPC运行机制]]></title>
-    <link href="http://dmlcoding.com/15222053353935.html"/>
-    <updated>2018-03-28T10:48:55+08:00</updated>
-    <id>http://dmlcoding.com/15222053353935.html</id>
-    <content type="html"><![CDATA[
-<p>RPC是一种通过网络从远程计算机上请求服务的机制，封装了具体实现，使用户不需要了解底层网络技术。目前存在许多开源RPC框架，比较有名的有Thrift、Protocol Buffers和Avro。Hadoop RPC与他们一样，均由两部分组成：对象序列化和远程过程调用</p>
-
-<p>什么是远程过程调用?</p>
-
-<span id="more"></span><!-- more -->
-
-<p>首先从字面上解释，“过程”在Java中指的就是对象中的方法，“远程”是指不同机器上的进程（狭义），或者不同的进程（广义）（为了简单，下文不对这种情况进行说明）。因此，RPC就是允许程序调用其他机器上的对象方法。</p>
-
-<p>RPC是属于典型的C/S结构，提供服务的一方称为server，请求服务的一方称为client。server端提供对象方法供client端调用，被调用的对象方法的执行发生在server端。</p>
-
-<p>上面这样解释其实已经很明白了,为了更直观的理解.<br/>
-那么就不废话了,直接上一个例子,用代码说话.</p>
-
-<h1 id="toc_0">RPC 实例</h1>
-
-<blockquote>
-<p>简单来说,就是在client调用远程服务器里面的方法就像在本地调用自己的方法一样.</p>
-</blockquote>
-
-<p>我们的实例用hadoop rpc框架,那么我们需要引入对应的依赖</p>
-
-<pre><code>    &lt;dependency&gt;
-        &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;
-        &lt;artifactId&gt;hadoop-common&lt;/artifactId&gt;
-        &lt;version&gt;2.7.1&lt;/version&gt;
-    &lt;/dependency&gt;
-</code></pre>
-
-<p>Hadoop RPC主要由三个大类组成，即RPC、Client和Server，分别对应对外编程接口、客户端实现和服务器实现</p>
-
-<p>代码分为两部分</p>
-
-<ul>
-<li>服务端的逻辑代码(server-rpc)</li>
-<li>客户端调用服务端的逻辑代码(client-rpc)</li>
-</ul>
-
-<p><img src="media/15222053353935/15222165453483.jpg" alt=""/></p>
-
-<h3 id="toc_1">服务端server-rpc</h3>
-
-<p>RPCLearningServiceInterface <br/>
-定义一个接口,我们想要客户端调用的方法</p>
-
-<pre><code>/**
- * Created by hushiwei on 2018/3/28.
- * desc : RPC协议是client端和server端之间的通信接口，它定义了server端对外提供的服务接口。
- */
-public interface RPCLearningServiceInterface {
-
-    // 协议版本号,不同版本号的client和sever之间不能相互通信
-    static final long versionID = 1L;
-
-    // 登录方法
-    String loging(String name);
-
-    // 乘法
-    String multip(int a, int b);
-}
-
-
-</code></pre>
-
-<p>RPCLearningServiceImpl</p>
-
-<p>接口的具体实现类</p>
-
-<pre><code>/**
- * Created by hushiwei on 2018/3/28.
- * desc :Hadoop RPC协议通常是一个Java接口，定义了server端对外提供的服务接口，需要在server端进行实现
- *
- * server端的协议实现中不需要关注Socket通信
- *
- */
-public class RPCLearningServiceImpl implements RPCLearningServiceInterface {
-    @Override
-    public String loging(String name) {
-        System.out.println(&quot;Exec Login function ...&quot;);
-        return &quot;Hello, &quot; + name + &quot;. Welcome you!&quot;;
-    }
-
-    @Override
-    public String multip(int a, int b) {
-        System.out.println(&quot;Prepare to exec multip function in server ....&quot;);
-        return a + &quot; * &quot; + b + &quot; = &quot; + a * b;
-    }
-}
-
-</code></pre>
-
-<p>RpcLearningServer</p>
-
-<p>server-rpc的启动类</p>
-
-<pre><code>
-/**
- * Created by hushiwei on 2018/3/28.
- * desc :
- *
- * java -classpath MapReduce-1.0-SNAPSHOT-jar-with-dependencies.jar com.hushiwei.mr.rpc.rpcserver.RpcLearningServer
- */
-public class RpcLearningServer {
-    public static void main(String[] args) throws IOException {
-
-        // 创建RPC.Builder实例builder,用于构造RPC server
-        RPC.Builder builder = new RPC.Builder(new Configuration());
-
-        // 向builder传递一些必要的参数,如主机,端口号,真实业务逻辑实例,协议接口
-        builder.setBindAddress(&quot;localhost&quot;).setPort(45666)
-                .setInstance(new RPCLearningServiceImpl())
-                .setProtocol(RPCLearningServiceInterface.class);
-
-        // 构造rpc server
-        RPC.Server server = builder.build();
-
-        // 启动server
-        server.start();
-
-    }
-}
-
-</code></pre>
-
-<h3 id="toc_2">客户端client-rpc</h3>
-
-<p>ClientController</p>
-
-<p>客户端的代码里面调用了服务端提供的api</p>
-
-<pre><code>/**
- * Created by hushiwei on 2018/3/28.
- * desc : ClientController is a RPC client
- */
-public class ClientController {
-    public static void main(String[] args) throws IOException {
-
-        // 通过rpc拿到loginServiceinterface的代理对象
-        RPCLearningServiceInterface service = RPC.getProxy(RPCLearningServiceInterface.class, 1L, new InetSocketAddress(&quot;localhost&quot;, 45666), new Configuration());
-
-        // 像本地调用一样,就可以调用服务端的方法
-        String result = service.loging(&quot;Hushiwei&quot;);
-        System.out.println(&quot;rpc client result: &quot; + result);
-
-        String res = service.multip(6, 8);
-        System.out.println(res);
-
-
-        // 关闭连接
-        RPC.stopProxy(service);
-    }
-}
-
-
-</code></pre>
-
-<h3 id="toc_3">本地执行</h3>
-
-<ul>
-<li>为了方便,我在本机进行测试,服务器地址写的localhost</li>
-<li>我在idea中进行开发的,直接run起来</li>
-</ul>
-
-<p>运行<code>RpcLearningServer</code>类,启动rpc服务<br/>
-<img src="media/15222053353935/15222166749600.jpg" alt=""/></p>
-
-<p>运行<code>ClientController</code>类,启动client,进行远程调用<br/>
-<img src="media/15222053353935/15222167326547.jpg" alt=""/></p>
-
-<p>此时,看服务端的输出<br/>
-<img src="media/15222053353935/15222167785896.jpg" alt=""/></p>
-
-<p>这个也说明了,远程调用过程是在服务端执行的.</p>
-
-<h3 id="toc_4">远程执行</h3>
-
-<p>刚刚在本地执行的,为了更说明问题.我把服务器地址从<code>localhost</code>改成服务器的主机名<code>u006</code>,然后代码编译打包,上传到服务器上.<br/>
-在远程服务器上启动rpc-server.然后再本地执行客户端的代码.<br/>
-这样更能清楚的明白rpc的运行过程了</p>
-
-<pre><code>java -classpath MapReduce-1.0-SNAPSHOT-jar-with-dependencies.jar com.hushiwei.mr.rpc.rpcserver.RpcLearningServer
-</code></pre>
-
-<p><img src="media/15222053353935/15222171711365.jpg" alt=""/></p>
-
-<p>在服务器上启动了rpc-server,现在客户端还没启动,服务器上也没有任何输出.</p>
-
-<p>接着在本地执行客户端代码<br/>
-<img src="media/15222053353935/15222172448137.jpg" alt=""/></p>
-
-<p>紧跟着,服务器上也有相应的输出了.<br/>
-<img src="media/15222053353935/15222172751812.jpg" alt=""/></p>
-
-<p>补充:<br/>
-在服务器上启动rpcserver后,可以用<code>jps -m</code>查看这个服务器的启动情况</p>
-
-<pre><code>[hadoop@U006 ~]$ jps -m
-30432 Jps -m
-6979 RpcLearningServer
-</code></pre>
-
-<p>或者查看代码里面用的端口是否被占用中</p>
-
-<pre><code>[hadoop@U006 ~]$ netstat -natp | grep 45666
-(Not all processes could be identified, non-owned process info
- will not be shown, you would have to be root to see it all.)
-tcp        0      0 ::ffff:10.10.25.13:45666    :::*                        LISTEN      6979/java
-</code></pre>
-
-<p>是不是很熟悉,我们曾经安装hadoop后,用<code>jps -m</code>也可以看到hadoop里面的一些进程.比如<br/>
-<code>NameNode</code>、<code>DataNode</code>、<code>ResourceManager</code>、<code>NodeManager</code>.</p>
-
-<p>所以这些进程都是作为一个RPCserver,并对外提供RPC服务的.</p>
-
-<h1 id="toc_5">总结</h1>
-
-<p>定义RPC协议,实现RPC协议<br/>
-<img src="media/15222053353935/15222165453483.jpg" alt=""/></p>
-
-<p>构造并启动RPC服务<br/>
-<img src="media/15222053353935/15222174334242.jpg" alt=""/></p>
-
-<p>构成RPC客户端并发送RPC请求<br/>
-<img src="media/15222053353935/15222173920962.jpg" alt=""/></p>
-
-<p>使用Hadoop RPC的4个步骤</p>
-
-<ul>
-<li>定义RPC协议</li>
-<li>实现RPC协议</li>
-<li>构造并启动RPC server</li>
-<li>构造RPC client并发送RPC请求</li>
-</ul>
 
 ]]></content>
   </entry>

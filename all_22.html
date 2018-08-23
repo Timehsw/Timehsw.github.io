@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -161,6 +168,127 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
+                <a class="clearlink" href="15198733143325.html">
+                
+                  <h1>PySpark做日志分析</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">第一步:给你的样本日志目录修改这个参数</h2>
+
+<p>在这个例子里面，我们会用到这个样本文件&quot;/databricks-datasets/sample_logs&quot;,样本数据已经存储到DBFS(Databricks的文件系统)</p>
+
+<blockquote>
+<p>DBFS_SAMPLES_LOGS_FOLDER=&quot;/databricks-datasets/samples_logs&quot; #path to the log file to be analyzed</p>
+</blockquote>
+
+<h2 id="toc_1">第二步:为Apache访问日志的每一行创建一个解析器以此来创建一个Row对象</h2>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15198733143325.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2016/11/12</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Spark.html'>Spark</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15198736518032.html">
+                
+                  <h1>ScalaNote</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">1.sealed trait</h2>
+
+<blockquote>
+<p>被sealed 声明的 trait仅能被同一文件的的类继承。<br/>
+  除了这个，我们通常将sealed用于枚举中，因为编译器在编译的时候知道这个trait被哪些类继承过，因此我们在match时对sealed trait进行case 的时候，如果你没有判断全部编译器在编译时就会报错。</p>
+</blockquote>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15198736518032.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2016/11/12</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Scala.html'>Scala</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15198714756091.html">
+                
+                  <h1>浅谈逻辑</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h1 id="toc_0">问题</h1>
+
+<ul>
+<li>写着写着,突然写不下去了</li>
+<li>被外界打断了,不知道怎么写下去</li>
+<li>写完之后,逻辑不通发现自己都看不懂</li>
+</ul>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15198714756091.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2016/11/12</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Writer.html'>Writer</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="15198664916272.html">
                 
                   <h1>机器学习实战之决策树</h1>
@@ -220,136 +348,6 @@
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='Mysql.html'>Mysql</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15198766411736.html">
-                
-                  <h1>Git 命令</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h1 id="toc_0">git 常用命令</h1>
-
-<h2 id="toc_1">git 配置命令</h2>
-
-<p>git init                                                  # 初始化本地git仓库（创建新仓库）<br/>
-git config --global user.name &quot;xxx&quot;                       # 配置用户名<br/>
-git config --global user.email &quot;<a href="mailto:xxx@xxx.com">xxx@xxx.com</a>&quot;              # 配置邮件<br/>
-ssh-keygen -t rsa -C <a href="mailto:xxx@xxx.com">xxx@xxx.com</a>                 # 生成SSH秘钥<br/>
-git config --global color.ui true                         # git status等命令自动着色<br/>
-git config --global color.status auto<br/>
-git config --global color.diff auto</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15198766411736.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2016/10/23</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='DevTools.html'>DevTools</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15198777730178.html">
-                
-                  <h1>CentOS 常用开发环境</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h1 id="toc_0">安装gcc</h1>
-
-<p>yum -y install gcc gcc-c++ kernel-devel</p>
-
-<h1 id="toc_1">安装python2.7</h1>
-
-<p>wget <a href="https://www.python.org/ftp/python/2.7.8/Python-2.7.8.tgz">https://www.python.org/ftp/python/2.7.8/Python-2.7.8.tgz</a></p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15198777730178.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2016/10/20</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15241221126545.html">
-                
-                  <h1>Maven笔记2</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>1.运行mvn命令实际上是执行Java命令,既然是运行Java,那么运行Java命令可用的参数当然也应该在运行mvn命令时可用.这个时候<code>MAVEN_OPTS</code>环境变量就能派上用场.</p>
-
-<p>通常都需要加大<code>MAVEN_OPTS</code>的值,因为当项目比较大的时候,使用MAVEN构建项目,需要占用大量的内存.如果没有该配置,则很容易得到<code>java.lang.OutOfMemeoryError</code>.</p>
-
-<h2 id="toc_0">属性</h2>
-
-<ul>
-<li>内置属性</li>
-<li>pom属性</li>
-<li>自定义属性</li>
-<li>Settings属性</li>
-<li>Java系统属性</li>
-<li>环境变量属性</li>
-</ul>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2016/9/25</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Maven.html'>Maven</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -489,31 +487,31 @@ git config --global color.diff auto</p>
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -588,7 +586,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

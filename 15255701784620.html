@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  集成学习---未完成 - Time渐行渐远
+  集成学习 - Time渐行渐远
   
   </title>
   
@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -161,7 +168,7 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>集成学习---未完成</h1>
+          <h1>集成学习</h1>
      
         <div class="read-more clearfix">
           <span class="date">2018/5/6</span>
@@ -275,7 +282,6 @@
 
 <ul>
 <li><p>RF的主要优点</p>
-
 <ul>
 <li>1. 训练可以并行化,对于大规模样本的训练具有速度的优势;</li>
 <li>2. 由于进行随机选择决策树划分特征列表,这样在样本维度比较高的时候,仍然具有比较高的训练性能;</li>
@@ -285,7 +291,6 @@
 <li>6. 对于部分特征的缺失不敏感.</li>
 </ul></li>
 <li><p>RF的主要缺点</p>
-
 <ul>
 <li>1. 在某些噪音比较大的特征上,RF模型容易陷入过拟合;</li>
 <li>2. 取值比较多的划分特征对RF的决策会产生更大的影响,从而有可能影响模型的效果.</li>
@@ -294,7 +299,7 @@
 
 <h2 id="toc_8">随机森林算法案例</h2>
 
-<pre><code>```
+<pre class="line-numbers"><code class="language-text">```
 ```
 </code></pre>
 
@@ -306,9 +311,12 @@
 
 <p>在随机森林的构建过程中,由于各棵树之间是没有关系的,相对独立的;在构建的过程中,构建第m棵子树的时候,不会考虑前面的m-1棵树.</p>
 
-<p>思考:<br/>
-1. 如果在构建第m棵子树的时候,考虑到前m-1棵子树的结果,会不会对最终结果产生有益的影响?<br/>
-2. 各个决策树组成随机森林后,在形成最终结果的时候能不能给定一种既定的决策顺序呢?</p>
+<p>思考:</p>
+
+<ol>
+<li>如果在构建第m棵子树的时候,考虑到前m-1棵子树的结果,会不会对最终结果产生有益的影响?</li>
+<li>各个决策树组成随机森林后,在形成最终结果的时候能不能给定一种既定的决策顺序呢?</li>
+</ol>
 
 <h1 id="toc_11">Boosting</h1>
 
@@ -374,14 +382,12 @@ f_k(x)=f_{k-1}(x)+\alpha_kG_k(x)<br/>
 
 <ul>
 <li><p>daBoost的优点如下:</p>
-
 <ul>
 <li>可以处理连续值和离散值;</li>
 <li>模型的鲁棒性比较强;</li>
 <li>解释强,结构简单.</li>
 </ul></li>
 <li><p>AdaBoost的缺点如下:</p>
-
 <ul>
 <li>对异常样本敏感,异常样本可能会在迭代过程中获得较高的权重值,最终影响模型效果.</li>
 </ul></li>
@@ -402,7 +408,7 @@ f_k(x)=f_{k-1}(x)+\alpha_kG_k(x)<br/>
         <p class="text-left" style="padding:15px 0px;">
       
           <a href="15284222434956.html" 
-          title="Previous Post: 聚类算法---未完成">&laquo; 聚类算法---未完成</a>
+          title="Previous Post: 聚类算法">&laquo; 聚类算法</a>
       
         </p>
         </div>
@@ -539,31 +545,31 @@ f_k(x)=f_{k-1}(x)+\alpha_kG_k(x)<br/>
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -638,7 +644,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];

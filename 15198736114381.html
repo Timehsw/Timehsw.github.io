@@ -74,10 +74,17 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -192,7 +199,7 @@
 
 <p>添加以下依赖后,然后就可以在类中继承FunSuite类,就可以写测试类了</p>
 
-<pre><code>        &lt;dependency&gt;
+<pre class="line-numbers"><code class="language-text">        &lt;dependency&gt;
             &lt;groupId&gt;org.scalatest&lt;/groupId&gt;
             &lt;artifactId&gt;scalatest_2.10&lt;/artifactId&gt;
             &lt;version&gt;2.2.1&lt;/version&gt;
@@ -203,30 +210,30 @@
 
 <h2 id="toc_2">scala测试报告插件</h2>
 
-<p>如果嫌麻烦也不用加下面的插件.插件写这里,这是为了做记录<br/>
-<code><br/>
-      &lt;plugin&gt;<br/>
-        &lt;groupId&gt;org.scalatest&lt;/groupId&gt;<br/>
-        &lt;artifactId&gt;scalatest-maven-plugin&lt;/artifactId&gt;<br/>
-        &lt;version&gt;1.0&lt;/version&gt;<br/>
-        &lt;configuration&gt;<br/>
-          &lt;reportsDirectory&gt;${project.build.directory}/surefire-reports&lt;/reportsDirectory&gt;<br/>
-          &lt;junitxml&gt;.&lt;/junitxml&gt;<br/>
-          &lt;filereports&gt;WDF TestSuite.txt&lt;/filereports&gt;<br/>
-          &lt;argLine&gt;-XX:MaxPermSize=256m -Xmx2g&lt;/argLine&gt;<br/>
-        &lt;/configuration&gt;<br/>
-        &lt;executions&gt;<br/>
-          &lt;execution&gt;<br/>
-            &lt;id&gt;test&lt;/id&gt;<br/>
-            &lt;goals&gt;<br/>
-              &lt;goal&gt;test&lt;/goal&gt;<br/>
-            &lt;/goals&gt;<br/>
-          &lt;/execution&gt;<br/>
-        &lt;/executions&gt;<br/>
-      &lt;/plugin&gt;<br/>
-</code></p>
+<p>如果嫌麻烦也不用加下面的插件.插件写这里,这是为了做记录</p>
 
-<pre><code>
+<pre class="line-numbers"><code class="language-text">      &lt;plugin&gt;
+        &lt;groupId&gt;org.scalatest&lt;/groupId&gt;
+        &lt;artifactId&gt;scalatest-maven-plugin&lt;/artifactId&gt;
+        &lt;version&gt;1.0&lt;/version&gt;
+        &lt;configuration&gt;
+          &lt;reportsDirectory&gt;${project.build.directory}/surefire-reports&lt;/reportsDirectory&gt;
+          &lt;junitxml&gt;.&lt;/junitxml&gt;
+          &lt;filereports&gt;WDF TestSuite.txt&lt;/filereports&gt;
+          &lt;argLine&gt;-XX:MaxPermSize=256m -Xmx2g&lt;/argLine&gt;
+        &lt;/configuration&gt;
+        &lt;executions&gt;
+          &lt;execution&gt;
+            &lt;id&gt;test&lt;/id&gt;
+            &lt;goals&gt;
+              &lt;goal&gt;test&lt;/goal&gt;
+            &lt;/goals&gt;
+          &lt;/execution&gt;
+        &lt;/executions&gt;
+      &lt;/plugin&gt;
+</code></pre>
+
+<pre class="line-numbers"><code class="language-text">
 &lt;plugin&gt;
         &lt;groupId&gt;net.alchim31.maven&lt;/groupId&gt;
         &lt;artifactId&gt;scala-maven-plugin&lt;/artifactId&gt;
@@ -261,7 +268,7 @@
 
 <h1 id="toc_3">实践例子</h1>
 
-<pre><code>import org.scalatest.{BeforeAndAfterAll, FunSuite, ShouldMatchers}
+<pre class="line-numbers"><code class="language-text">import org.scalatest.{BeforeAndAfterAll, FunSuite, ShouldMatchers}
 
 /**
   * Created by hushiwei
@@ -295,10 +302,13 @@ class ScalaFunc extends FunSuite with BeforeAndAfterAll with ShouldMatchers{
 
 </code></pre>
 
-<p><strong>注意</strong>:<br/>
-1. 测试类必须是class,不能是object<br/>
-2. beforeAll与afterAll都是可选的.<br/>
-3. 与Junit都是类似的.</p>
+<p><strong>注意</strong>:</p>
+
+<ol>
+<li>测试类必须是class,不能是object</li>
+<li>beforeAll与afterAll都是可选的.</li>
+<li>与Junit都是类似的.</li>
+</ol>
 
 
     
@@ -447,31 +457,31 @@ class ScalaFunc extends FunSuite with BeforeAndAfterAll with ShouldMatchers{
 	      
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法---未完成)</a>
+			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法---未完成</a>
+			        <a href="15317970391028.html">windows10和mac共享文件</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件---未完成</a>
+			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15285262100303.html">SVM(支持向量机)---未完成</a>
+			        <a href="15299156181001.html">EM算法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15284222434956.html">聚类算法---未完成</a>
+			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
 			      </li>
 		     
 		  
@@ -546,7 +556,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 <script>
 var _hmt = _hmt || [];
