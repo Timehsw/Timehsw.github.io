@@ -168,25 +168,77 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15285262100303.html">
+                <a class="clearlink" href="15395734385439.html">
                 
-                  <h1>SVM(支持向量机)</h1>
+                  <h1>模型评估 K-S值和AUC的区别</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>支持向量机(Support Vecor Machine,SVM)本身是一个<strong>二元分类算法</strong>,是对感知器算法模型的一种扩展,现在的SVM算法支持线性分类和非线性分类的分类应用,并且也能够直接将SVM应用于回归应用中.同时通过OvR或者OvO的方式我们也可以将SVM应用在多元分类领域中.在不考虑集成算法,不考虑特定的数据集的时候,在分类算法中SVM可以说是特别优秀的.</p>
+                        	<p>在模型建立之后，必须对模型的效果进行评估，因为数据挖掘是一个探索的过程，评估-优化是一个永恒的过程。在分类模型评估中，最常用的两种评估标准就是K-S值和AUC值。</p>
 
-<p><strong>线性可分(Linearly Separable)</strong>:在数据集中,如果可以找出一个超平面,将两组数据分开,那么这个数据集叫做线性可分数据.</p>
+<p>可能有人会问了，为什么不直接看正确率呢？你可以这么想，如果一批样本中，正样本占到90%，负样本只占10%，那么我即使模型什么也不做，把样本全部判定为正，也能有90%的正确率咯？所以，用AUC值够保证你在样本不均衡的情况下也能准确评估模型的好坏，而K-S值不仅能告诉你准确与否，还能告诉你模型对好坏客户是否有足够的区分度。</p>
 
-<p><strong>线性不可分(Linear Inseparable)</strong>:在数据集中,没法找出一个超平面,能够将两组数据分开,那么这个数据集就叫做线性不可分数据.</p>
+<p>下面分别看两种评估指标的概念。</p>
 
-<p><strong>分割超平面(Separating Hyperplane)</strong>:将数据集分割开来的直线/平面叫做分割超平面.</p>
+<h1 id="toc_0">一、ROC曲线和AUC值</h1>
 
-<p><strong>间隔(Margin)</strong>:数据点到分割超平面的距离称为间隔.</p>
+<p>在逻辑回归、随机森林、GBDT、XGBoost这些模型中，模型训练完成之后，每个样本都会获得对应的两个概率值，一个是样本为正样本的概率，一个是样本为负样本的概率。把每个样本为正样本的概率取出来，进行排序，然后选定一个阈值，将大于这个阈值的样本判定为正样本，小于阈值的样本判定为负样本，然后可以得到两个值，<strong>一个是真正率，一个是假正率。</strong></p>
 
-<p><strong>支持向量(Support Vector)</strong>:离分割超平面最近的那些点叫做支持向量.</p>
+<p>真正率即判定为正样本且实际为正样本的样本数/所有的正样本数，假正率为判定为正样本实际为负样本的样本数/所有的负样本数。每选定一个阈值，就能得到一对真正率和假正率，由于判定为正样本的概率值区间为[0,1]，那么阈值必然在这个区间内选择，因此在此区间内不停地选择不同的阈值，重复这个过程，就能得到一系列的真正率和假正率，以这两个序列作为横纵坐标，即可得到ROC曲线了。<strong>而ROC曲线下方的面积，即为AUC值。</strong></p>
 
+<p>对于AUC值，也许有一个更直观的理解，那就是，在按照正样本概率值对所有样本排序后，任意选取一对正负样本，正样本排在负样本之前的概率值，即为AUC值。也就是说，当所有的正样本在排序后都能排在负样本之前时，就证明所有的样本都被正确分类了，此时的AUC值也会为1。那么AUC值也就很好算了，如果有N个负样本，其中正样本有M个，那么可取的所有带正样本的样本对数对于排在第一位的正样本来说，有M+N-1个，但其中包含M-1对（正，正）的样本，而对于后面所有的正样本而言，能够取到的正样本概率大于负样本对数肯定小于其位置-1。</p>
+
+<h1 id="toc_1">K-S曲线</h1>
+
+<p>KS(Kolmogorov-Smirnov)值越大，表示模型能够将正、负客户区分开的程度越大。KS值的取值范围是[0，1] </p>
+
+<p>通常来讲，KS&gt;0.2即表示模型有较好的预测准确性。</p>
+
+<p>K-S曲线其实数据来源和本质和ROC曲线是一致的，只是ROC曲线是把真正率和假正率当作横纵轴，而K-S曲线是把真正率和假正率都当作是纵轴，横轴则由选定的阈值来充当。</p>
+
+<p>下面这一段解释得更详细的K-S和AUC的区别是参考的这篇博客：</p>
+
+<p><a href="https://blog.csdn.net/sinat_30316741/article/details/80018932">https://blog.csdn.net/sinat_30316741/article/details/80018932</a></p>
+
+<blockquote>
+<p>由于ks值能找出模型中差异最大的一个分段，因此适合用于cut_off，像评分卡这种就很适合用ks值来评估。但是ks值只能反映出哪个分段是区分最大的，而不能总体反映出所有分段的效果，因果AUC值更能胜任。 <br/>
+ROC值一般在0.5-1.0之间。值越大表示模型判断准确性越高，即越接近1越好。ROC=0.5表示模型的预测能力与随机结果没有差别。 <br/>
+KS值表示了模型将+和-区分开来的能力。值越大，模型的预测准确性越好。一般，KS&gt;0.2即可认为模型有比较好的预测准确性。</p>
+</blockquote>
+
+<p>好了，引用结束。 <br/>
+K-S值一般是很难达到0.6的，在0.2~0.6之间都不错。一般如果是如果负样本对业务影响极大，那么区分度肯定就很重要，此时K-S比AUC更合适用作模型评估，如果没什么特别的影响，那么用AUC就很好了。</p>
+
+<h1 id="toc_2">三、KS的计算和曲线绘制</h1>
+
+<p>代码如果要用，最好自己改改，因为这个数据格式是我自己用的，计算方式也是跟数据格式有关系的，工作中用的可能不一样，所以最好是自己根据自己的写一个，这个也只是我根据自己的数据格式来写的，重要的是思路，不是代码本身。而且我画的曲线是折线，最好是自己考虑写一个平滑曲线的。</p>
+
+<pre class="line-numbers"><code class="language-text">import matplotlib.pyplot as plt
+#第一个参数是模型的预测值，第二个参数是模型的真实值
+def draw_ks_curve(predict_result,true_result):
+    tpr_list = []  #存放真正率数据
+    fpr_list = []  #存放假正率数据
+    dif_list = []  #存放真假正率差值
+    max_ks_dot = []
+
+    for i in np.arange(0,1.1,0.1):
+        tpr = 0
+        fpr = 0
+        for j in range(len(predict_result)):
+            if list(predict_result[j])[0]&gt;i and true_result[j]==1:
+               tpr = tpr+1
+               tpr_list.append(tpr)
+            if list(predict_result[j])[0]&gt;i and true_result[j]==0:
+               fpr = fpr+1
+               fpr_list.append(fpr)
+        tpr = tpr/sum(true_result)
+        fpr = fpr/(len(true_result)-sum(true_result))
+    fig = plt.figure(num=1, figsize=(15, 8),dpi=80)     #开启一个窗口，同时设置大小，分辨率
+    plt.plot(np.arange(0,1,0.1),tpr_list)
+    plt.plot(np.arange(0,1,0.1),fpr_list)
+
+</code></pre>
 
                         
                       </div>
@@ -194,8 +246,8 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15285262100303.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/6/9</span>
+                  
+                    <span class="date">2018/10/15</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -212,9 +264,117 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15284222434956.html">
+                <a class="clearlink" href="15343116796404.html">
                 
-                  <h1>聚类算法</h1>
+                  <h1>Mac 下高速免费下载百度云文件</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h1 id="toc_0">下载安装Aira2客户端</h1>
+
+<p>地址: <a href="https://github.com/yangshun1029/aria2gui/releases">https://github.com/yangshun1029/aria2gui/releases</a></p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15343116796404.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/8/15</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Mac.html'>Mac</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15317970391028.html">
+                
+                  <h1>windows10和mac共享文件</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h1 id="toc_0">一,windows10访问mac电脑</h1>
+
+<h2 id="toc_1">1,先新建一个用于共享的登录账户</h2>
+
+<p>在系统偏好设置-&gt;用户与群组-&gt;点击黄色的锁-&gt;输入当前账户密码-&gt;点击左侧➕ ,新建一个<em>仅限共享</em>的用户(注意:是将普通账户改为仅限共享,记住密码)。</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15317970391028.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/7/17</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Mac.html'>Mac</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15299155104492.html">
+                
+                  <h1>HMM(摘自:统计学习方法)</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>HMM(隐马尔可夫模型的定义):隐马尔可夫模型是关于时序的概率模型,描述由一个隐藏的马尔可夫链随机生成不可观察的状态随机序列,再由各个状态生成一个观测而产生观测随机序列的过程.隐藏的马尔可夫链随机生成的状态的序列,称为状态序列(state sequence);每个状态生成一个观测,而由此产生的观测的随机序列,称为观测序列(observation sequence).序列的每一个位置又可以看作是一个时刻.</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15299155104492.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/6/25</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15299156181001.html">
+                
+                  <h1>EM算法</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
@@ -226,132 +386,9 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15284222434956.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/6/8</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15255701784620.html">
-                
-                  <h1>集成学习</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>集成学习的思想是将若干个学习器(分类器&amp;回归器)组合之后产生一个新学习器.弱分类器(weak learner)指那些分类准确率只稍微好于随机猜测的分类器(error rate&lt; 0.5).</p>
-
-<p>集成算法的成功在于保证弱分类器的多样性(Diversity).而且集成不稳定的算法也能够得到一个比较明显的性能提升.</p>
-
-<p>常见的集成学习思想有:</p>
-
-<ul>
-<li>Bagging</li>
-<li>Boosting</li>
-<li>Stacking</li>
-</ul>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15255701784620.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/5/6</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15255685118456.html">
-                
-                  <h1>决策树</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>在决策树算法的学习过程中,信息增益是特征选择的一个重要指标.它定义为一个特征能够为分类系统带来多少信息,带来的信息越多,说明该特征越重要,相应的信息增益也就越大<br/>
-<img src="media/15255685118456/15256176444642.jpg" alt=""/></p>
-
-<h1 id="toc_0">信息熵(Entropy)</h1>
-
-<p>\[H(X)=-\sum_{i=1}^mp_i\log_2(p_i)\]</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15255685118456.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/5/3</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15277324362749.html">
-                
-                  <h1>KNN</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>K近邻(K-nearst neighbors,KNN)是一种基本的机器学习算法,所谓K近邻,就是K个最近的邻居的意思,说的是每个样本都可以用它最接近的K个邻居来代表.</p>
-
-<p>比如:判断一个人的人品,只需要观察与他来往最密切的几个人的人品好坏就可以得出,即,&quot;近朱者赤,近墨者黑&quot;.</p>
-
-<p>KNN算法既可以应用于分类应用中,也可以应用在回归应用中.KNN在做回归和分类的主要区别在于最后做预测的时候决策方式不同,<strong>KNN在分类预测时,一般采用多数表决法;而在做回归预测时,一般采用平均值法.</strong></p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15277324362749.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/5/2</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
+                  
+                    <span class="date">2018/6/20</span>
+                    
           				   
                   </div>
                   <div class="more-right right">
@@ -402,7 +439,7 @@
 <a target="_blank" class="weibo" href="http://weibo.com/hswnice" title="weibo">Weibo</a>
 <a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
-<a target="_blank" class="email" href="mailto:hsw_v5@163.com" title="Email">Email</a>
+<a target="_blank" class="email" href="mailto:hswv5@foxmail.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
                 
               	 </div>
@@ -491,31 +528,31 @@
 	      
 		      
 			      <li class="post">
-			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
+			        <a href="15423390877662.html">Pandas 中map, applymap and apply的区别</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15317970391028.html">windows10和mac共享文件</a>
+			        <a href="15420931314995.html">Objective vs. Cost vs. Loss vs. Error Function</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
+			        <a href="15402913817590.html">将python生成的base64图片,在浏览器上展示出来</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法</a>
+			        <a href="15398508250689.html">Isolation Forest</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
+			        <a href="15396891344806.html">聚类算法评估指标</a>
 			      </li>
 		     
 		  

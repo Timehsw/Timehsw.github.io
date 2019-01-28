@@ -1,0 +1,817 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  聚类算法评估指标 - Time渐行渐远
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Time渐行渐远" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:dmlcoding.com ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li id=""><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li id=""><a target="_blank" href="about.html">ABOUT</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Time渐行渐远</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="BigData.html">BigData</a></li>
+        
+            <li><a href="Python.html">Python</a></li>
+        
+            <li><a href="Linux.html">Linux</a></li>
+        
+            <li><a href="Life.html">Life</a></li>
+        
+            <li><a href="Spark.html">Spark</a></li>
+        
+            <li><a href="Hive.html">Hive</a></li>
+        
+            <li><a href="Yarn.html">Yarn</a></li>
+        
+            <li><a href="Scala.html">Scala</a></li>
+        
+            <li><a href="VPS.html">VPS</a></li>
+        
+            <li><a href="MachineLearning.html">MachineLearning</a></li>
+        
+            <li><a href="Writer.html">Writer</a></li>
+        
+            <li><a href="Shell.html">Shell</a></li>
+        
+            <li><a href="Algorithm.html">Algorithm</a></li>
+        
+            <li><a href="Mac.html">Mac</a></li>
+        
+            <li><a href="Presto.html">Presto</a></li>
+        
+            <li><a href="Mysql.html">Mysql</a></li>
+        
+            <li><a href="Maven.html">Maven</a></li>
+        
+            <li><a href="Kafka.html">Kafka</a></li>
+        
+            <li><a href="Java.html">Java</a></li>
+        
+            <li><a href="DevTools.html">DevTools</a></li>
+        
+            <li><a href="Hbase.html">Hbase</a></li>
+        
+            <li><a href="ELK.html">ELK</a></li>
+        
+            <li><a href="Druid.html">Druid</a></li>
+        
+            <li><a href="Docker.html">Docker</a></li>
+        
+            <li><a href="DesignPattern.html">DesignPattern</a></li>
+        
+            <li><a href="Computer.html">Computer</a></li>
+        
+            <li><a href="Redis.html">Redis</a></li>
+        
+            <li><a href="Zookeeper.html">Zookeeper</a></li>
+        
+            <li><a href="BlockChain.html">BlockChain</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>聚类算法评估指标</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2018/10/16</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h1 id="toc_0">Not Given Label</h1>
+
+<h2 id="toc_1">1、Compactness(紧密性)(CP)</h2>
+
+<h1 id="toc_2">代码实现</h1>
+
+<pre class="line-numbers"><code class="language-text"># -*- coding: utf-8 -*-
+&#39;&#39;&#39;
+    Created by hushiwei on 2018/10/16
+    Desc : 进行聚类算法的评估指标计算
+    Note : CP指数,SP指数,DB,DVI
+&#39;&#39;&#39;
+
+# 导入包
+from numpy import *
+import numpy as np
+import pandas as pd
+from sklearn.datasets import make_blobs  # 导入产生模拟数据的方法
+from sklearn.cluster import KMeans  # 导入kmeans 类
+import time
+from MachineLearning.cluster_evaluate.calculate_dvi import dunn
+
+def distEclud(vecA, vecB, axis=None):
+    &#39;&#39;&#39;
+    求两个向量之间的距离,计算欧几里得距离
+    same as : np.linalg.norm(np.asarray(datas[0].iloc[0].values) - np.asarray(datas[0].iloc[1].values))
+    :param vecA: 中心点
+    :param vecB: 数据点
+    :param axis: np.sum的参数
+    :return:
+    &#39;&#39;&#39;
+    return np.sqrt(np.sum(np.power(vecA - vecB, 2), axis=axis))
+
+
+def calculate_cp_i(cluster_center, cluster_point):
+    &#39;&#39;&#39;
+    计算聚类类各点到聚类中心的平均距离
+    :param cluster_center: 聚类中心点
+    :param cluster_point: 聚类样本点
+    :return:
+    &#39;&#39;&#39;
+    return np.average(distEclud(cluster_center, cluster_point, axis=1))
+
+
+def calculate_cp(cluster_centers, cluster_points):
+    &#39;&#39;&#39;
+    CP,计算每一个类各点到聚类中心的平均距离
+    CP越低意味着类内聚类距离越近
+    :param cluster_centers: 聚类中心点
+    :param cluster_points: 聚类样本点
+    :return:
+    &#39;&#39;&#39;
+
+    cps = [calculate_cp_i(cluster_centers[i], cluster_points[i]) for i in arange(len(cluster_centers))]
+    cp = np.average(cps)
+    return cp
+
+
+def calculate_sp(cluster_centers):
+    &#39;&#39;&#39;
+    SP,计算各聚类中心两两之间的平均距离
+    SP越高意味类间聚类距离越远
+    :param cluster_centers:
+    :return:
+    &#39;&#39;&#39;
+    k = len(cluster_centers)
+    res = []
+    for i in arange(k):
+        tmp = []
+        for j in arange(i + 1, k):
+            tmp.append(distEclud(cluster_centers[i], cluster_centers[j]))
+        res.append(np.sum(tmp))
+
+    sp = (2 / (k * k - k)) * np.sum(res)
+    return sp
+
+
+def calculate_db(cluster_centers, cluster_points):
+    &#39;&#39;&#39;
+    DB,计算任意两类别的类内距离平均距离(CP)之和除以两聚类中心距离求最大值
+    DB越小意味着类内距离越小 同时类间距离越大
+    :param cluster_centers: 聚类中心点
+    :param cluster_points: 聚类样本点
+    :return:
+    &#39;&#39;&#39;
+    n_cluster = len(cluster_centers)
+    cps = [calculate_cp_i(cluster_centers[i], cluster_points[i]) for i in arange(n_cluster)]
+    db = []
+
+    for i in range(n_cluster):
+        for j in range(n_cluster):
+            if j != i:
+                db.append((cps[i] + cps[j]) / distEclud(cluster_centers[i], cluster_centers[j]))
+    db = (np.max(db) / n_cluster)
+    return db
+
+
+def calculate_dvi(cluster_points):
+    &#39;&#39;&#39;
+    DVI计算,任意两个簇元素的最短距离(类间)除以任意簇中的最大距离(类内).
+    DVI越大意味着类间距离越大 同时类内距离越小。
+    :param cluster_points:
+    :return:
+    &#39;&#39;&#39;
+    # calcuation of maximum distance
+    d1 = []
+    d2 = []
+    d3 = []
+    # 类内最大距离
+    for k, cluster_point in cluster_points.items():
+        # 遍历每一个簇中每一个元素
+        for i in range(len(cluster_point)):
+            temp1 = cluster_point.iloc[i].values
+            for j in range(len(cluster_point)):
+                temp2 = cluster_point.iloc[j].values
+
+                # 求簇内两元素的距离
+                dist = distEclud(temp1, temp2)
+                d1.insert(j, dist)
+
+            d2.insert(i, max(d1))
+            d1 = []
+
+        d3.insert(k, max(d2))
+        d2 = []
+    xmax = max(d3)
+
+    # calcuation of minimun distance
+    d1 = []
+    d2 = []
+    d3 = []
+    d4 = []
+    # 类间最小距离
+    for k, cluster_point in cluster_points.items():
+        # 遍历每一个簇中每一个元素
+        for j in range(len(cluster_point)):
+            temp1 = cluster_point.iloc[j].values
+            for key in cluster_points.keys():
+                if not key == k:
+                    other_cluster_df = cluster_points[key]
+                    for index in range(len(other_cluster_df)):
+                        temp2 = other_cluster_df.iloc[index].values
+                        dist = distEclud(temp1, temp2)
+                        d1.insert(index, dist)
+
+                    d2.insert(key, min(d1))
+                    d1 = []
+            d3.insert(j, min(d2))
+            d2 = []
+        d4.insert(k, min(d3))
+    xmin = min(d4)
+
+    dunn_index = xmin / xmax
+    return dunn_index
+
+
+if __name__ == &#39;__main__&#39;:
+    # 1. 产生模拟数据
+    N = 1000
+    centers = 4
+    X, Y = make_blobs(n_samples=N, n_features=2, centers=centers, random_state=28)
+    # df = pd.DataFrame(X, columns=list(&#39;abcdefghij&#39;))
+    # df.to_csv(
+    #     &#39;/Users/hushiwei/PycharmProjects/gai_platform/data/data_spliter/local_debug_data/cluster_data/cluster_data.csv&#39;,
+    #     sep=&#39;,&#39;, index=False)
+    # sys.exit()
+
+    # 2. 模型构建
+    km = KMeans(n_clusters=centers, init=&#39;random&#39;, random_state=28)
+    km.fit(X)
+
+    # 模型的预测
+    y_hat = km.predict(X[:10])
+    print(y_hat)
+
+    print(&quot;所有样本距离所属簇中心点的总距离和为:%.5f&quot; % km.inertia_)
+    print(&quot;所有样本距离所属簇中心点的平均距离为:%.5f&quot; % (km.inertia_ / N))
+
+    print(&quot;所有的中心点聚类中心坐标:&quot;)
+    cluster_centers = km.cluster_centers_
+    print(cluster_centers)
+
+    print(&quot;score其实就是所有样本点离所属簇中心点距离和的相反数:&quot;)
+    print(km.score(X))
+
+    # 统计各个聚簇点的类别数目
+    r1 = pd.Series(km.labels_).value_counts()
+
+    kmlabels = km.labels_  # 得到类别，label_ 是内部变量
+    X = pd.DataFrame(X, columns=list(&#39;ab&#39;))
+    r = pd.concat([X, pd.Series(kmlabels, index=X.index)], axis=1)  # 详细输出每个样本对应的类别，横向连接（0是纵向），得到聚类中心对应的类别下的数目
+
+    r.columns = list(X.columns) + [&#39;class&#39;]  # 重命名表头  加一列的表头
+    print(r.head())
+
+    # 根据聚类信息,将数据进行分类{聚类id:聚类点}
+    cluster_centers = {k: value for k, value in enumerate(cluster_centers)}
+    cluster_points = {label: r[r[&#39;class&#39;] == label].drop(columns=[&#39;class&#39;]) for label in np.unique(km.labels_)}
+
+    print(&#39;~&#39; * 10, &#39;evaluate kmeans&#39;, &#39;~&#39; * 10)
+
+    cp = calculate_cp(cluster_centers, cluster_points)
+    print(&#39;cp : &#39;, cp)
+
+    sp = calculate_sp(cluster_centers)
+    print(&#39;sp : &#39;, sp)
+
+    dp = calculate_db(cluster_centers, cluster_points)
+    print(&#39;dp : &#39;, dp)
+
+    start=time.time()
+    # dvi = calculate_dvi(cluster_points)
+    # print(&#39;dvi : &#39;, dvi)
+
+
+    a = [point.values for point in cluster_points.values()]
+    di=dunn(a)
+    print(&#39;di : &#39;,di)
+
+    print(&quot;dvi cost &quot;,time.time()-start)
+
+</code></pre>
+
+<p>dvi的计算,代码2</p>
+
+<pre class="line-numbers"><code class="language-text"># -*- coding: utf-8 -*-
+&#39;&#39;&#39;
+    Created by hushiwei on 2018/10/23
+    Desc : 计算dvi
+    Note : 这个和那个,有区别
+&#39;&#39;&#39;
+
+import numpy as np
+from sklearn.metrics.pairwise import euclidean_distances
+
+
+def delta(ck, cl):
+    values = np.ones([len(ck), len(cl)]) * 10000
+
+    for i in range(0, len(ck)):
+        for j in range(0, len(cl)):
+            values[i, j] = np.linalg.norm(ck[i] - cl[j])
+
+    return np.min(values)
+
+
+def big_delta(ci):
+    values = np.zeros([len(ci), len(ci)])
+
+    for i in range(0, len(ci)):
+        for j in range(0, len(ci)):
+            values[i, j] = np.linalg.norm(ci[i] - ci[j])
+
+    return np.max(values)
+
+
+def dunn(k_list):
+    &quot;&quot;&quot; Dunn index [CVI]
+
+    Parameters
+    ----------
+    k_list : list of np.arrays
+        A list containing a numpy array for each cluster |c| = number of clusters
+        c[K] is np.array([N, p]) (N : number of samples in cluster K, p : sample dimension)
+    &quot;&quot;&quot;
+    deltas = np.ones([len(k_list), len(k_list)]) * 1000000
+    big_deltas = np.zeros([len(k_list), 1])
+    l_range = list(range(0, len(k_list)))
+
+    for k in l_range:
+        for l in (l_range[0:k] + l_range[k + 1:]):
+            deltas[k, l] = delta(k_list[k], k_list[l])
+
+        big_deltas[k] = big_delta(k_list[k])
+
+    di = np.min(deltas) / np.max(big_deltas)
+    return di
+
+
+def delta_fast(ck, cl, distances):
+    values = distances[np.where(ck)][:, np.where(cl)]
+    values = values[np.nonzero(values)]
+
+    return np.min(values)
+
+
+def big_delta_fast(ci, distances):
+    values = distances[np.where(ci)][:, np.where(ci)]
+    values = values[np.nonzero(values)]
+
+    return np.max(values)
+
+
+def dunn_fast(points, labels):
+    &quot;&quot;&quot; Dunn index - FAST (using sklearn pairwise euclidean_distance function)
+
+    Parameters
+    ----------
+    points : np.array
+        np.array([N, p]) of all points
+    labels: np.array
+        np.array([N]) labels of all points
+    &quot;&quot;&quot;
+    distances = euclidean_distances(points)
+    ks = np.sort(np.unique(labels))
+
+    deltas = np.ones([len(ks), len(ks)]) * 1000000
+    big_deltas = np.zeros([len(ks), 1])
+
+    l_range = list(range(0, len(ks)))
+
+    for k in l_range:
+        for l in (l_range[0:k] + l_range[k + 1:]):
+            deltas[k, l] = delta_fast((labels == ks[k]), (labels == ks[l]), distances)
+
+        big_deltas[k] = big_delta_fast((labels == ks[k]), distances)
+
+    di = np.min(deltas) / np.max(big_deltas)
+    return di
+
+
+def big_s(x, center):
+    len_x = len(x)
+    total = 0
+
+    for i in range(len_x):
+        total += np.linalg.norm(x[i] - center)
+
+    return total / len_x
+
+
+def davisbouldin(k_list, k_centers):
+    &quot;&quot;&quot; Davis Bouldin Index
+
+    Parameters
+    ----------
+    k_list : list of np.arrays
+        A list containing a numpy array for each cluster |c| = number of clusters
+        c[K] is np.array([N, p]) (N : number of samples in cluster K, p : sample dimension)
+    k_centers : np.array
+        The array of the cluster centers (prototypes) of type np.array([K, p])
+    &quot;&quot;&quot;
+    len_k_list = len(k_list)
+    big_ss = np.zeros([len_k_list], dtype=np.float64)
+    d_eucs = np.zeros([len_k_list, len_k_list], dtype=np.float64)
+    db = 0
+
+    for k in range(len_k_list):
+        big_ss[k] = big_s(k_list[k], k_centers[k])
+
+    for k in range(len_k_list):
+        for l in range(0, len_k_list):
+            d_eucs[k, l] = np.linalg.norm(k_centers[k] - k_centers[l])
+
+    for k in range(len_k_list):
+        values = np.zeros([len_k_list - 1], dtype=np.float64)
+        for l in range(0, k):
+            values[l] = (big_ss[k] + big_ss[l]) / d_eucs[k, l]
+        for l in range(k + 1, len_k_list):
+            values[l - 1] = (big_ss[k] + big_ss[l]) / d_eucs[k, l]
+
+        db += np.max(values)
+    res = db / len_k_list
+    return res
+</code></pre>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15398508250689.html" 
+          title="Previous Post: Isolation Forest">&laquo; Isolation Forest</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15395734385439.html" 
+          title="Next Post: 模型评估 K-S值和AUC的区别">模型评估 K-S值和AUC的区别 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://s.gravatar.com/avatar/2d9bdeec5ad2754d8a47063df1346ee8?s=80" /></div>
+            
+                <h1>Time渐行渐远</h1>
+                <div class="site-des">Coding Changing The World</div>
+                <div class="social">
+
+
+
+
+
+
+
+<a target="_blank" class="weibo" href="http://weibo.com/hswnice" title="weibo">Weibo</a>
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:hswv5@foxmail.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="BigData.html"><strong>BigData</strong></a>
+        
+            <a href="Python.html"><strong>Python</strong></a>
+        
+            <a href="Linux.html"><strong>Linux</strong></a>
+        
+            <a href="Life.html"><strong>Life</strong></a>
+        
+            <a href="Spark.html"><strong>Spark</strong></a>
+        
+            <a href="Hive.html"><strong>Hive</strong></a>
+        
+            <a href="Yarn.html"><strong>Yarn</strong></a>
+        
+            <a href="Scala.html"><strong>Scala</strong></a>
+        
+            <a href="VPS.html"><strong>VPS</strong></a>
+        
+            <a href="MachineLearning.html"><strong>MachineLearning</strong></a>
+        
+            <a href="Writer.html"><strong>Writer</strong></a>
+        
+            <a href="Shell.html"><strong>Shell</strong></a>
+        
+            <a href="Algorithm.html"><strong>Algorithm</strong></a>
+        
+            <a href="Mac.html"><strong>Mac</strong></a>
+        
+            <a href="Presto.html"><strong>Presto</strong></a>
+        
+            <a href="Mysql.html"><strong>Mysql</strong></a>
+        
+            <a href="Maven.html"><strong>Maven</strong></a>
+        
+            <a href="Kafka.html"><strong>Kafka</strong></a>
+        
+            <a href="Java.html"><strong>Java</strong></a>
+        
+            <a href="DevTools.html"><strong>DevTools</strong></a>
+        
+            <a href="Hbase.html"><strong>Hbase</strong></a>
+        
+            <a href="ELK.html"><strong>ELK</strong></a>
+        
+            <a href="Druid.html"><strong>Druid</strong></a>
+        
+            <a href="Docker.html"><strong>Docker</strong></a>
+        
+            <a href="DesignPattern.html"><strong>DesignPattern</strong></a>
+        
+            <a href="Computer.html"><strong>Computer</strong></a>
+        
+            <a href="Redis.html"><strong>Redis</strong></a>
+        
+            <a href="Zookeeper.html"><strong>Zookeeper</strong></a>
+        
+            <a href="BlockChain.html"><strong>BlockChain</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15423390877662.html">Pandas 中map, applymap and apply的区别</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15420931314995.html">Objective vs. Cost vs. Loss vs. Error Function</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15402913817590.html">将python生成的base64图片,在浏览器上展示出来</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15398508250689.html">Isolation Forest</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15396891344806.html">聚类算法评估指标</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?2a025c7742b90ad62b1e767e1b7f2f29";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </body>
+</html>

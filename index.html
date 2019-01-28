@@ -168,17 +168,72 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15343116796404.html">
+                <a class="clearlink" href="15423390877662.html">
                 
-                  <h1>Mac 下高速免费下载百度云文件</h1>
+                  <h1>Pandas 中map, applymap and apply的区别</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h1 id="toc_0">下载安装Aira2客户端</h1>
+                        	<p>Summing up, apply works on a row / column basis of a DataFrame, applymap works element-wise on a DataFrame, and map works element-wise on a Series.</p>
 
-<p>地址: <a href="https://github.com/yangshun1029/aria2gui/releases">https://github.com/yangshun1029/aria2gui/releases</a></p>
+<h1 id="toc_0">1.apply()</h1>
 
+<p>当想让方程作用在一维的向量上时，可以使用apply来完成，如下所示</p>
+
+<pre class="line-numbers"><code class="language-text">In [116]: frame = DataFrame(np.random.randn(4, 3), columns=list(&#39;bde&#39;), index=[&#39;Utah&#39;, &#39;Ohio&#39;, &#39;Texas&#39;, &#39;Oregon&#39;])
+
+In [117]: frame
+Out[117]: 
+               b         d         e
+Utah   -0.029638  1.081563  1.280300
+Ohio    0.647747  0.831136 -1.549481
+Texas   0.513416 -0.884417  0.195343
+Oregon -0.485454 -0.477388 -0.309548
+
+In [118]: f = lambda x: x.max() - x.min()
+
+In [119]: frame.apply(f)
+Out[119]: 
+b    1.133201
+d    1.965980
+e    2.829781
+dtype: float64
+
+</code></pre>
+
+<p>但是因为大多数的列表统计方程 (比如 sum 和 mean)是DataFrame的函数，所以apply很多时候不是必须的</p>
+
+<h1 id="toc_1">2.applymap()</h1>
+
+<p>如果想让方程作用于DataFrame中的每一个元素，可以使用applymap().用法如下所示</p>
+
+<pre class="line-numbers"><code class="language-text">In [120]: format = lambda x: &#39;%.2f&#39; % x
+
+In [121]: frame.applymap(format)
+Out[121]: 
+            b      d      e
+Utah    -0.03   1.08   1.28
+Ohio     0.65   0.83  -1.55
+Texas    0.51  -0.88   0.20
+Oregon  -0.49  -0.48  -0.31
+
+</code></pre>
+
+<h1 id="toc_2">3.map()</h1>
+
+<p>map()只要是作用将函数作用于一个Series的每一个元素，用法如下所示</p>
+
+<pre class="line-numbers"><code class="language-text">In [122]: frame[&#39;e&#39;].map(format)
+Out[122]: 
+Utah       1.28
+Ohio      -1.55
+Texas      0.20
+Oregon    -0.31
+Name: e, dtype: object
+</code></pre>
+
+<p>总的来说就是apply()是一种让函数作用于列或者行操作，applymap()是一种让函数作用于DataFrame每一个元素的操作，而map是一种让函数作用于Series每一个元素的操作</p>
 
                         
                       </div>
@@ -186,11 +241,11 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15343116796404.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/8/15</span>
+                  
+                    <span class="date">2018/11/16</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Mac.html'>Mac</a></span>
+          					    <span class="posted-in"><a href='Python.html'>Python</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -204,19 +259,38 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15317970391028.html">
+                <a class="clearlink" href="15420931314995.html">
                 
-                  <h1>windows10和mac共享文件</h1>
+                  <h1>Objective vs. Cost vs. Loss vs. Error Function</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h1 id="toc_0">一,windows10访问mac电脑</h1>
+                        	<p><strong><u>The function we want to minimize or maximize is called the objective function, or criterion. When we are minimizing it, we may also call it the cost function, loss function, or error function - these terms are synonymous. The cost function is used more in optimization problem and loss function is used in parameter estimation.</u></strong></p>
 
-<h2 id="toc_1">1,先新建一个用于共享的登录账户</h2>
+<p>The loss function (or error) is for a single training example, while the cost function is over the entire training set (or mini-batch for mini-batch gradient descent). Therefore, a loss function is a part of a cost function which is a type of an objective function.  Objective function, cost function, loss function: are they the same thing? | </p>
 
-<p>在系统偏好设置-&gt;用户与群组-&gt;点击黄色的锁-&gt;输入当前账户密码-&gt;点击左侧➕ ,新建一个<em>仅限共享</em>的用户(注意:是将普通账户改为仅限共享,记住密码)。</p>
+<p>StackExchange</p>
 
+<ul>
+<li> Loss function is usually a function defined on a data point, prediction and label, and measures the penalty. For example:
+<ul>
+<li> square loss l(f(xi|θ),yi)=(f(xi|θ)−yi)2, used in linear regression</li>
+<li> hinge loss l(f(xi|θ),yi)=max(0,1−f(xi|θ)yi), used in SVM</li>
+<li> 0/1 loss l(f(xi|θ),yi)=1⟺f(xi|θ)≠yi, used in theoretical analysis and definition of accuracy</li>
+</ul></li>
+<li> Cost function is usually more general. It might be a sum of loss functions over your training set plus some model complexity penalty (regularization). For example:
+<ul>
+<li> Mean Squared Error MSE(θ)=1N∑Ni=1(f(xi|θ)−yi)2</li>
+<li> SVM cost function SVM(θ)=∥θ∥2+C∑Ni=1ξi (there are additional constraints connecting ξi with C and with training set)</li>
+</ul></li>
+<li> Objective function is the most general term for any function that you optimize during training. For example, a probability of generating training set in maximum likelihood approach is a well defined objective function, but it is not a loss function nor cost function (however you could define an equivalent cost function). For example:
+<ul>
+<li> MLE is a type of objective function (which you maximize)</li>
+<li>Divergence between classes can be an objective function but it is barely a cost function, unless you define something artificial, like 1-Divergence, and name it a cost</li>
+</ul></li>
+<li> Error function - Backpropagation; or automatic differentiation, is commonly used by the gradient descent optimization algorithm to adjust the weight of neurons by calculating the gradient of the loss function. This technique is also sometimes called backward propagation of errors, because the error is calculated at the output and distributed back through the network layers. Backpropagation | Wikipedia</li>
+</ul>
 
                         
                       </div>
@@ -224,42 +298,8 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15317970391028.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/7/17</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Mac.html'>Mac</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15299155104492.html">
-                
-                  <h1>HMM(摘自:统计学习方法)</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>HMM(隐马尔可夫模型的定义):隐马尔可夫模型是关于时序的概率模型,描述由一个隐藏的马尔可夫链随机生成不可观察的状态随机序列,再由各个状态生成一个观测而产生观测随机序列的过程.隐藏的马尔可夫链随机生成的状态的序列,称为状态序列(state sequence);每个状态生成一个观测,而由此产生的观测的随机序列,称为观测序列(observation sequence).序列的每一个位置又可以看作是一个时刻.</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15299155104492.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/6/25</span>
+                  
+                    <span class="date">2018/11/13</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -276,14 +316,59 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15299156181001.html">
+                <a class="clearlink" href="15402913817590.html">
                 
-                  <h1>EM算法</h1>
+                  <h1>将python生成的base64图片,在浏览器上展示出来</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	
+                        	<p>方便调试</p>
+
+<pre class="line-numbers"><code class="language-text">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;show base64 pic&lt;/title&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id=&#39;root&#39;&gt;
+        &lt;img src=&quot;data:image/png;base64,这里是base64的内容,替换掉即可(中文部分)&quot; /&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<pre class="line-numbers"><code class="language-text">#!/usr/bin/env python 
+
+import base64
+
+import pandas as pd
+import pydotplus
+from IPython.display import Image
+from sklearn import tree
+from sklearn.tree import DecisionTreeClassifier
+
+data = pd.read_csv(&quot;./datas/demos.csv&quot;)
+train_data = data.drop(&quot;label&quot;, axis=1)
+target = data[&quot;label&quot;]
+
+DTmodel = DecisionTreeClassifier(max_depth=4)
+DTmodel = DTmodel.fit(train_data, target)
+print(DTmodel)
+
+# 将决策树的图片转成base64
+dot_data = tree.export_graphviz(DTmodel, out_file=None)
+graph = pydotplus.graph_from_dot_data(dot_data)
+pic_base64 = base64.b64encode(Image(graph.create_png()).data).decode(&#39;utf8&#39;)
+
+print(pic_base64)
+
+</code></pre>
+
+<p>将打印出来的pic_base64的内容替换到html里面的中文部分,然后用浏览器打开这个html文件即可看到图片</p>
+
                         
                       </div>
                   </div>
@@ -291,8 +376,10 @@
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2018/6/20</span>
-                    
+                    <span class="date">2018/10/23</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Python.html'>Python</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -306,31 +393,25 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15289333499679.html">
+                <a class="clearlink" href="15398508250689.html">
                 
-                  <h1>拉格朗日乘子法&KKT条件</h1>
+                  <h1>Isolation Forest</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>如果不理解拉格朗日乘子法和KKT条件的相关原理,则不可能真正理解SVM的计算方法.</p>
+                        	<p>scikit-learn返回:是异常点(-1)或者不是异常点(1)</p>
 
-<p>这是我们学习SVM的大前提</p>
+<p><img src="media/15398508250689/15398521143637.jpg" alt=""/></p>
 
-<h1 id="toc_0">优化问题</h1>
+<p>孤立森林--&gt;查看数据页面,如上所示<br/>
+原始数据的所有列,预测出来是否是异常值,也即是是否偏离(偏移即是-1),偏移度也就是decision_function算出来的值,返回样本的异常评分，值越小表示越有可能是异常样本<br/>
+data,model.predict(X_train),model.decision_function(X_train)</p>
 
-<p>通常,我们要求解的函数优化问题,大致可分为以下3类</p>
+<pre class="line-numbers"><code class="language-text">df=pd.concat([pd.DataFrame(X_train),pd.Series(clf.predict(X_train)), pd.Series(clf.decision_function(X_train))], axis=1)
 
-<ul>
-<li>无约束条件的优化问题:<br/>
-\[min f(X)\]</li>
-<li>只有等式约束的优化问题:<br/>
-\[min f(X) \\\<br/>
-s.t: h_i(X)=0,i \in {1,2,...,n}\]</li>
-<li><p>含有不等式约束的优化问题:<br/>
-\[min f(X) \\\<br/>
-s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
-     g_j(X) \leq 0, j \in {1,2,...,n} \]</p>
+df.columns = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
+</code></pre>
 
                         
                       </div>
@@ -338,8 +419,405 @@ s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15289333499679.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/6/14</span>
+                  
+                    <span class="date">2018/10/18</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15396891344806.html">
+                
+                  <h1>聚类算法评估指标</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h1 id="toc_0">Not Given Label</h1>
+
+<h2 id="toc_1">1、Compactness(紧密性)(CP)</h2>
+
+<h1 id="toc_2">代码实现</h1>
+
+<pre class="line-numbers"><code class="language-text"># -*- coding: utf-8 -*-
+&#39;&#39;&#39;
+    Created by hushiwei on 2018/10/16
+    Desc : 进行聚类算法的评估指标计算
+    Note : CP指数,SP指数,DB,DVI
+&#39;&#39;&#39;
+
+# 导入包
+from numpy import *
+import numpy as np
+import pandas as pd
+from sklearn.datasets import make_blobs  # 导入产生模拟数据的方法
+from sklearn.cluster import KMeans  # 导入kmeans 类
+import time
+from MachineLearning.cluster_evaluate.calculate_dvi import dunn
+
+def distEclud(vecA, vecB, axis=None):
+    &#39;&#39;&#39;
+    求两个向量之间的距离,计算欧几里得距离
+    same as : np.linalg.norm(np.asarray(datas[0].iloc[0].values) - np.asarray(datas[0].iloc[1].values))
+    :param vecA: 中心点
+    :param vecB: 数据点
+    :param axis: np.sum的参数
+    :return:
+    &#39;&#39;&#39;
+    return np.sqrt(np.sum(np.power(vecA - vecB, 2), axis=axis))
+
+
+def calculate_cp_i(cluster_center, cluster_point):
+    &#39;&#39;&#39;
+    计算聚类类各点到聚类中心的平均距离
+    :param cluster_center: 聚类中心点
+    :param cluster_point: 聚类样本点
+    :return:
+    &#39;&#39;&#39;
+    return np.average(distEclud(cluster_center, cluster_point, axis=1))
+
+
+def calculate_cp(cluster_centers, cluster_points):
+    &#39;&#39;&#39;
+    CP,计算每一个类各点到聚类中心的平均距离
+    CP越低意味着类内聚类距离越近
+    :param cluster_centers: 聚类中心点
+    :param cluster_points: 聚类样本点
+    :return:
+    &#39;&#39;&#39;
+
+    cps = [calculate_cp_i(cluster_centers[i], cluster_points[i]) for i in arange(len(cluster_centers))]
+    cp = np.average(cps)
+    return cp
+
+
+def calculate_sp(cluster_centers):
+    &#39;&#39;&#39;
+    SP,计算各聚类中心两两之间的平均距离
+    SP越高意味类间聚类距离越远
+    :param cluster_centers:
+    :return:
+    &#39;&#39;&#39;
+    k = len(cluster_centers)
+    res = []
+    for i in arange(k):
+        tmp = []
+        for j in arange(i + 1, k):
+            tmp.append(distEclud(cluster_centers[i], cluster_centers[j]))
+        res.append(np.sum(tmp))
+
+    sp = (2 / (k * k - k)) * np.sum(res)
+    return sp
+
+
+def calculate_db(cluster_centers, cluster_points):
+    &#39;&#39;&#39;
+    DB,计算任意两类别的类内距离平均距离(CP)之和除以两聚类中心距离求最大值
+    DB越小意味着类内距离越小 同时类间距离越大
+    :param cluster_centers: 聚类中心点
+    :param cluster_points: 聚类样本点
+    :return:
+    &#39;&#39;&#39;
+    n_cluster = len(cluster_centers)
+    cps = [calculate_cp_i(cluster_centers[i], cluster_points[i]) for i in arange(n_cluster)]
+    db = []
+
+    for i in range(n_cluster):
+        for j in range(n_cluster):
+            if j != i:
+                db.append((cps[i] + cps[j]) / distEclud(cluster_centers[i], cluster_centers[j]))
+    db = (np.max(db) / n_cluster)
+    return db
+
+
+def calculate_dvi(cluster_points):
+    &#39;&#39;&#39;
+    DVI计算,任意两个簇元素的最短距离(类间)除以任意簇中的最大距离(类内).
+    DVI越大意味着类间距离越大 同时类内距离越小。
+    :param cluster_points:
+    :return:
+    &#39;&#39;&#39;
+    # calcuation of maximum distance
+    d1 = []
+    d2 = []
+    d3 = []
+    # 类内最大距离
+    for k, cluster_point in cluster_points.items():
+        # 遍历每一个簇中每一个元素
+        for i in range(len(cluster_point)):
+            temp1 = cluster_point.iloc[i].values
+            for j in range(len(cluster_point)):
+                temp2 = cluster_point.iloc[j].values
+
+                # 求簇内两元素的距离
+                dist = distEclud(temp1, temp2)
+                d1.insert(j, dist)
+
+            d2.insert(i, max(d1))
+            d1 = []
+
+        d3.insert(k, max(d2))
+        d2 = []
+    xmax = max(d3)
+
+    # calcuation of minimun distance
+    d1 = []
+    d2 = []
+    d3 = []
+    d4 = []
+    # 类间最小距离
+    for k, cluster_point in cluster_points.items():
+        # 遍历每一个簇中每一个元素
+        for j in range(len(cluster_point)):
+            temp1 = cluster_point.iloc[j].values
+            for key in cluster_points.keys():
+                if not key == k:
+                    other_cluster_df = cluster_points[key]
+                    for index in range(len(other_cluster_df)):
+                        temp2 = other_cluster_df.iloc[index].values
+                        dist = distEclud(temp1, temp2)
+                        d1.insert(index, dist)
+
+                    d2.insert(key, min(d1))
+                    d1 = []
+            d3.insert(j, min(d2))
+            d2 = []
+        d4.insert(k, min(d3))
+    xmin = min(d4)
+
+    dunn_index = xmin / xmax
+    return dunn_index
+
+
+if __name__ == &#39;__main__&#39;:
+    # 1. 产生模拟数据
+    N = 1000
+    centers = 4
+    X, Y = make_blobs(n_samples=N, n_features=2, centers=centers, random_state=28)
+    # df = pd.DataFrame(X, columns=list(&#39;abcdefghij&#39;))
+    # df.to_csv(
+    #     &#39;/Users/hushiwei/PycharmProjects/gai_platform/data/data_spliter/local_debug_data/cluster_data/cluster_data.csv&#39;,
+    #     sep=&#39;,&#39;, index=False)
+    # sys.exit()
+
+    # 2. 模型构建
+    km = KMeans(n_clusters=centers, init=&#39;random&#39;, random_state=28)
+    km.fit(X)
+
+    # 模型的预测
+    y_hat = km.predict(X[:10])
+    print(y_hat)
+
+    print(&quot;所有样本距离所属簇中心点的总距离和为:%.5f&quot; % km.inertia_)
+    print(&quot;所有样本距离所属簇中心点的平均距离为:%.5f&quot; % (km.inertia_ / N))
+
+    print(&quot;所有的中心点聚类中心坐标:&quot;)
+    cluster_centers = km.cluster_centers_
+    print(cluster_centers)
+
+    print(&quot;score其实就是所有样本点离所属簇中心点距离和的相反数:&quot;)
+    print(km.score(X))
+
+    # 统计各个聚簇点的类别数目
+    r1 = pd.Series(km.labels_).value_counts()
+
+    kmlabels = km.labels_  # 得到类别，label_ 是内部变量
+    X = pd.DataFrame(X, columns=list(&#39;ab&#39;))
+    r = pd.concat([X, pd.Series(kmlabels, index=X.index)], axis=1)  # 详细输出每个样本对应的类别，横向连接（0是纵向），得到聚类中心对应的类别下的数目
+
+    r.columns = list(X.columns) + [&#39;class&#39;]  # 重命名表头  加一列的表头
+    print(r.head())
+
+    # 根据聚类信息,将数据进行分类{聚类id:聚类点}
+    cluster_centers = {k: value for k, value in enumerate(cluster_centers)}
+    cluster_points = {label: r[r[&#39;class&#39;] == label].drop(columns=[&#39;class&#39;]) for label in np.unique(km.labels_)}
+
+    print(&#39;~&#39; * 10, &#39;evaluate kmeans&#39;, &#39;~&#39; * 10)
+
+    cp = calculate_cp(cluster_centers, cluster_points)
+    print(&#39;cp : &#39;, cp)
+
+    sp = calculate_sp(cluster_centers)
+    print(&#39;sp : &#39;, sp)
+
+    dp = calculate_db(cluster_centers, cluster_points)
+    print(&#39;dp : &#39;, dp)
+
+    start=time.time()
+    # dvi = calculate_dvi(cluster_points)
+    # print(&#39;dvi : &#39;, dvi)
+
+
+    a = [point.values for point in cluster_points.values()]
+    di=dunn(a)
+    print(&#39;di : &#39;,di)
+
+    print(&quot;dvi cost &quot;,time.time()-start)
+
+</code></pre>
+
+<p>dvi的计算,代码2</p>
+
+<pre class="line-numbers"><code class="language-text"># -*- coding: utf-8 -*-
+&#39;&#39;&#39;
+    Created by hushiwei on 2018/10/23
+    Desc : 计算dvi
+    Note : 这个和那个,有区别
+&#39;&#39;&#39;
+
+import numpy as np
+from sklearn.metrics.pairwise import euclidean_distances
+
+
+def delta(ck, cl):
+    values = np.ones([len(ck), len(cl)]) * 10000
+
+    for i in range(0, len(ck)):
+        for j in range(0, len(cl)):
+            values[i, j] = np.linalg.norm(ck[i] - cl[j])
+
+    return np.min(values)
+
+
+def big_delta(ci):
+    values = np.zeros([len(ci), len(ci)])
+
+    for i in range(0, len(ci)):
+        for j in range(0, len(ci)):
+            values[i, j] = np.linalg.norm(ci[i] - ci[j])
+
+    return np.max(values)
+
+
+def dunn(k_list):
+    &quot;&quot;&quot; Dunn index [CVI]
+
+    Parameters
+    ----------
+    k_list : list of np.arrays
+        A list containing a numpy array for each cluster |c| = number of clusters
+        c[K] is np.array([N, p]) (N : number of samples in cluster K, p : sample dimension)
+    &quot;&quot;&quot;
+    deltas = np.ones([len(k_list), len(k_list)]) * 1000000
+    big_deltas = np.zeros([len(k_list), 1])
+    l_range = list(range(0, len(k_list)))
+
+    for k in l_range:
+        for l in (l_range[0:k] + l_range[k + 1:]):
+            deltas[k, l] = delta(k_list[k], k_list[l])
+
+        big_deltas[k] = big_delta(k_list[k])
+
+    di = np.min(deltas) / np.max(big_deltas)
+    return di
+
+
+def delta_fast(ck, cl, distances):
+    values = distances[np.where(ck)][:, np.where(cl)]
+    values = values[np.nonzero(values)]
+
+    return np.min(values)
+
+
+def big_delta_fast(ci, distances):
+    values = distances[np.where(ci)][:, np.where(ci)]
+    values = values[np.nonzero(values)]
+
+    return np.max(values)
+
+
+def dunn_fast(points, labels):
+    &quot;&quot;&quot; Dunn index - FAST (using sklearn pairwise euclidean_distance function)
+
+    Parameters
+    ----------
+    points : np.array
+        np.array([N, p]) of all points
+    labels: np.array
+        np.array([N]) labels of all points
+    &quot;&quot;&quot;
+    distances = euclidean_distances(points)
+    ks = np.sort(np.unique(labels))
+
+    deltas = np.ones([len(ks), len(ks)]) * 1000000
+    big_deltas = np.zeros([len(ks), 1])
+
+    l_range = list(range(0, len(ks)))
+
+    for k in l_range:
+        for l in (l_range[0:k] + l_range[k + 1:]):
+            deltas[k, l] = delta_fast((labels == ks[k]), (labels == ks[l]), distances)
+
+        big_deltas[k] = big_delta_fast((labels == ks[k]), distances)
+
+    di = np.min(deltas) / np.max(big_deltas)
+    return di
+
+
+def big_s(x, center):
+    len_x = len(x)
+    total = 0
+
+    for i in range(len_x):
+        total += np.linalg.norm(x[i] - center)
+
+    return total / len_x
+
+
+def davisbouldin(k_list, k_centers):
+    &quot;&quot;&quot; Davis Bouldin Index
+
+    Parameters
+    ----------
+    k_list : list of np.arrays
+        A list containing a numpy array for each cluster |c| = number of clusters
+        c[K] is np.array([N, p]) (N : number of samples in cluster K, p : sample dimension)
+    k_centers : np.array
+        The array of the cluster centers (prototypes) of type np.array([K, p])
+    &quot;&quot;&quot;
+    len_k_list = len(k_list)
+    big_ss = np.zeros([len_k_list], dtype=np.float64)
+    d_eucs = np.zeros([len_k_list, len_k_list], dtype=np.float64)
+    db = 0
+
+    for k in range(len_k_list):
+        big_ss[k] = big_s(k_list[k], k_centers[k])
+
+    for k in range(len_k_list):
+        for l in range(0, len_k_list):
+            d_eucs[k, l] = np.linalg.norm(k_centers[k] - k_centers[l])
+
+    for k in range(len_k_list):
+        values = np.zeros([len_k_list - 1], dtype=np.float64)
+        for l in range(0, k):
+            values[l] = (big_ss[k] + big_ss[l]) / d_eucs[k, l]
+        for l in range(k + 1, len_k_list):
+            values[l - 1] = (big_ss[k] + big_ss[l]) / d_eucs[k, l]
+
+        db += np.max(values)
+    res = db / len_k_list
+    return res
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/10/16</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -393,7 +871,7 @@ s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
 <a target="_blank" class="weibo" href="http://weibo.com/hswnice" title="weibo">Weibo</a>
 <a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
-<a target="_blank" class="email" href="mailto:hsw_v5@163.com" title="Email">Email</a>
+<a target="_blank" class="email" href="mailto:hswv5@foxmail.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
                 
               	 </div>
@@ -482,31 +960,31 @@ s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
 	      
 		      
 			      <li class="post">
-			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
+			        <a href="15423390877662.html">Pandas 中map, applymap and apply的区别</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15317970391028.html">windows10和mac共享文件</a>
+			        <a href="15420931314995.html">Objective vs. Cost vs. Loss vs. Error Function</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
+			        <a href="15402913817590.html">将python生成的base64图片,在浏览器上展示出来</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法</a>
+			        <a href="15398508250689.html">Isolation Forest</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
+			        <a href="15396891344806.html">聚类算法评估指标</a>
 			      </li>
 		     
 		  

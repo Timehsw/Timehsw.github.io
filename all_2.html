@@ -168,26 +168,31 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15198753668603.html">
+                <a class="clearlink" href="15289333499679.html">
                 
-                  <h1>逻辑回归</h1>
+                  <h1>拉格朗日乘子法&KKT条件</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>不知道什么是逻辑回归,但是也许看完接下来的文章,你会有个大概的印象吧</p>
+                        	<p>如果不理解拉格朗日乘子法和KKT条件的相关原理,则不可能真正理解SVM的计算方法.</p>
 
-<h1 id="toc_0">简单介绍Logistic回归</h1>
+<p>这是我们学习SVM的大前提</p>
 
-<h2 id="toc_1">Logistic回归用到的知识点</h2>
+<h1 id="toc_0">优化问题</h1>
+
+<p>通常,我们要求解的函数优化问题,大致可分为以下3类</p>
 
 <ul>
-<li>Sigmoid函数和Logistic回归分类器</li>
-<li>最优化理论初步</li>
-<li>梯度下降最优化算法</li>
-<li>数据中的缺失项处理</li>
-</ul>
-
+<li>无约束条件的优化问题:<br/>
+\[min f(X)\]</li>
+<li>只有等式约束的优化问题:<br/>
+\[min f(X) \\\<br/>
+s.t: h_i(X)=0,i \in {1,2,...,n}\]</li>
+<li><p>含有不等式约束的优化问题:<br/>
+\[min f(X) \\\<br/>
+s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
+     g_j(X) \leq 0, j \in {1,2,...,n} \]</p>
 
                         
                       </div>
@@ -195,8 +200,8 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15198753668603.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/4/29</span>
+                   <a href="15289333499679.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/6/14</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -213,9 +218,53 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15277385790025.html">
+                <a class="clearlink" href="15285262100303.html">
                 
-                  <h1>梯度下降笔记</h1>
+                  <h1>SVM(支持向量机)</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>支持向量机(Support Vecor Machine,SVM)本身是一个<strong>二元分类算法</strong>,是对感知器算法模型的一种扩展,现在的SVM算法支持线性分类和非线性分类的分类应用,并且也能够直接将SVM应用于回归应用中.同时通过OvR或者OvO的方式我们也可以将SVM应用在多元分类领域中.在不考虑集成算法,不考虑特定的数据集的时候,在分类算法中SVM可以说是特别优秀的.</p>
+
+<p><strong>线性可分(Linearly Separable)</strong>:在数据集中,如果可以找出一个超平面,将两组数据分开,那么这个数据集叫做线性可分数据.</p>
+
+<p><strong>线性不可分(Linear Inseparable)</strong>:在数据集中,没法找出一个超平面,能够将两组数据分开,那么这个数据集就叫做线性不可分数据.</p>
+
+<p><strong>分割超平面(Separating Hyperplane)</strong>:将数据集分割开来的直线/平面叫做分割超平面.</p>
+
+<p><strong>间隔(Margin)</strong>:数据点到分割超平面的距离称为间隔.</p>
+
+<p><strong>支持向量(Support Vector)</strong>:离分割超平面最近的那些点叫做支持向量.</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15285262100303.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/6/9</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15284222434956.html">
+                
+                  <h1>聚类算法</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
@@ -227,8 +276,8 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
-                    <span class="date">2018/4/28</span>
+                   <a href="15284222434956.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/6/8</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -245,18 +294,25 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15299158833805.html">
+                <a class="clearlink" href="15255701784620.html">
                 
-                  <h1>什么是最小二乘法</h1>
+                  <h1>集成学习</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>最小二乘法(又称最小平方法)是一种数学优化技术.他通过最小化误差的平方和寻找数据的最佳函数匹配.</p>
+                        	<p>集成学习的思想是将若干个学习器(分类器&amp;回归器)组合之后产生一个新学习器.弱分类器(weak learner)指那些分类准确率只稍微好于随机猜测的分类器(error rate&lt; 0.5).</p>
 
-<p>利用最小二乘法可以简便地求得未知的数据,并使得这些求得的数据与实际数据之间误差的平方和为最小.</p>
+<p>集成算法的成功在于保证弱分类器的多样性(Diversity).而且集成不稳定的算法也能够得到一个比较明显的性能提升.</p>
 
-<p><img src="media/15294841337807/15296334116393.jpg" alt=""/></p>
+<p>常见的集成学习思想有:</p>
+
+<ul>
+<li>Bagging</li>
+<li>Boosting</li>
+<li>Stacking</li>
+</ul>
+
 
                         
                       </div>
@@ -264,8 +320,8 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
-                    <span class="date">2018/4/27</span>
+                   <a href="15255701784620.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/5/6</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -282,40 +338,19 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15248143200628.html">
+                <a class="clearlink" href="15255685118456.html">
                 
-                  <h1>回归算法</h1>
+                  <h1>决策树</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>总结一下,这一节主要记录了下面的内容</p>
+                        	<p>在决策树算法的学习过程中,信息增益是特征选择的一个重要指标.它定义为一个特征能够为分类系统带来多少信息,带来的信息越多,说明该特征越重要,相应的信息增益也就越大<br/>
+<img src="media/15255685118456/15256176444642.jpg" alt=""/></p>
 
-<ol>
-<li>什么是回归算法.</li>
-<li>线性回归,单变量线性回归,多变量线性回归</li>
-<li>代价函数</li>
-<li>过拟合与欠拟合</li>
-<li>正则项</li>
-</ol>
+<h1 id="toc_0">信息熵(Entropy)</h1>
 
-<p>在这篇文章中,主要介绍了什么是回归算法,以及简单的线性回归.包括单变量线性回归和多变量线性回归.</p>
-
-<p>同时介绍了用最小二乘法求解\(\theta\)值.接下介绍了防止过拟合问题,加入正则项.</p>
-
-<p>最后介绍了如何评价模型的效果.</p>
-
-<h1 id="toc_0">什么是回归算法</h1>
-
-<ol>
-<li>回归算法是一种有监督算法;</li>
-<li>回归算法是一种比较常用的机器学习算法,用于建立解释变量(自变量X)和观测值(因变量Y)之间的关系;</li>
-<li>从机器学习的角度来讲,用于构建一个算法模型(函数)来做属性(X)与标签(Y)之间的映射关系,在算法的学习过程中,试图寻找一个函数h:使得\(R^d\to R\)使得参数之间的关系拟合性最好;</li>
-<li>回归算法中,算法(函数)的最终结果是一个<strong>连续</strong>的数据值,输入值(属性值)是一个d维度的属性/数值向量;</li>
-<li>因此,回归算法是用于预测连续型数值输出的算法.</li>
-</ol>
-
-<p>常用的回归算法有几种:比如,线性回归,Logistic回归,Softmax回归等等.先说最简单的线性回归算法.</p>
+<p>\[H(X)=-\sum_{i=1}^mp_i\log_2(p_i)\]</p>
 
 
                         
@@ -324,52 +359,8 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15248143200628.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/4/27</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15263722402424.html">
-                
-                  <h1>学习机器学习</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>机器不能代替你学习,代替你成长,终归还得自己踏实学习!</p>
-
-<p>对于下面的基础知识,不管是大学的时候没学好,还是由于时间太长了,导致自己忘记了.都无所谓了.既然打算学习机器学习,那么就不得不花时间去重拾这些知识.</p>
-
-<p>至于如何学,很多说法,我在网上看了很多,比如:</p>
-
-<ol>
-<li>看视频学习;</li>
-<li>看教程学习;</li>
-<li>边学习边看.</li>
-</ol>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15263722402424.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/4/26</span>
+                   <a href="15255685118456.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/5/3</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -423,7 +414,7 @@
 <a target="_blank" class="weibo" href="http://weibo.com/hswnice" title="weibo">Weibo</a>
 <a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
-<a target="_blank" class="email" href="mailto:hsw_v5@163.com" title="Email">Email</a>
+<a target="_blank" class="email" href="mailto:hswv5@foxmail.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
                 
               	 </div>
@@ -512,31 +503,31 @@
 	      
 		      
 			      <li class="post">
-			        <a href="15343116796404.html">Mac 下高速免费下载百度云文件</a>
+			        <a href="15423390877662.html">Pandas 中map, applymap and apply的区别</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15317970391028.html">windows10和mac共享文件</a>
+			        <a href="15420931314995.html">Objective vs. Cost vs. Loss vs. Error Function</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299155104492.html">HMM(摘自:统计学习方法)</a>
+			        <a href="15402913817590.html">将python生成的base64图片,在浏览器上展示出来</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15299156181001.html">EM算法</a>
+			        <a href="15398508250689.html">Isolation Forest</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15289333499679.html">拉格朗日乘子法&KKT条件</a>
+			        <a href="15396891344806.html">聚类算法评估指标</a>
 			      </li>
 		     
 		  
