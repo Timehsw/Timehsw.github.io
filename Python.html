@@ -177,63 +177,6 @@
                         
                         	<p>Summing up, apply works on a row / column basis of a DataFrame, applymap works element-wise on a DataFrame, and map works element-wise on a Series.</p>
 
-<h1 id="toc_0">1.apply()</h1>
-
-<p>当想让方程作用在一维的向量上时，可以使用apply来完成，如下所示</p>
-
-<pre class="line-numbers"><code class="language-text">In [116]: frame = DataFrame(np.random.randn(4, 3), columns=list(&#39;bde&#39;), index=[&#39;Utah&#39;, &#39;Ohio&#39;, &#39;Texas&#39;, &#39;Oregon&#39;])
-
-In [117]: frame
-Out[117]: 
-               b         d         e
-Utah   -0.029638  1.081563  1.280300
-Ohio    0.647747  0.831136 -1.549481
-Texas   0.513416 -0.884417  0.195343
-Oregon -0.485454 -0.477388 -0.309548
-
-In [118]: f = lambda x: x.max() - x.min()
-
-In [119]: frame.apply(f)
-Out[119]: 
-b    1.133201
-d    1.965980
-e    2.829781
-dtype: float64
-
-</code></pre>
-
-<p>但是因为大多数的列表统计方程 (比如 sum 和 mean)是DataFrame的函数，所以apply很多时候不是必须的</p>
-
-<h1 id="toc_1">2.applymap()</h1>
-
-<p>如果想让方程作用于DataFrame中的每一个元素，可以使用applymap().用法如下所示</p>
-
-<pre class="line-numbers"><code class="language-text">In [120]: format = lambda x: &#39;%.2f&#39; % x
-
-In [121]: frame.applymap(format)
-Out[121]: 
-            b      d      e
-Utah    -0.03   1.08   1.28
-Ohio     0.65   0.83  -1.55
-Texas    0.51  -0.88   0.20
-Oregon  -0.49  -0.48  -0.31
-
-</code></pre>
-
-<h1 id="toc_2">3.map()</h1>
-
-<p>map()只要是作用将函数作用于一个Series的每一个元素，用法如下所示</p>
-
-<pre class="line-numbers"><code class="language-text">In [122]: frame[&#39;e&#39;].map(format)
-Out[122]: 
-Utah       1.28
-Ohio      -1.55
-Texas      0.20
-Oregon    -0.31
-Name: e, dtype: object
-</code></pre>
-
-<p>总的来说就是apply()是一种让函数作用于列或者行操作，applymap()是一种让函数作用于DataFrame每一个元素的操作，而map是一种让函数作用于Series每一个元素的操作</p>
 
                         
                       </div>
@@ -241,7 +184,7 @@ Name: e, dtype: object
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="15423390877662.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2018/11/16</span>
                     <span>posted in&nbsp;</span> 
           				  
@@ -283,34 +226,6 @@ Name: e, dtype: object
 &lt;/html&gt;
 </code></pre>
 
-<pre class="line-numbers"><code class="language-text">#!/usr/bin/env python 
-
-import base64
-
-import pandas as pd
-import pydotplus
-from IPython.display import Image
-from sklearn import tree
-from sklearn.tree import DecisionTreeClassifier
-
-data = pd.read_csv(&quot;./datas/demos.csv&quot;)
-train_data = data.drop(&quot;label&quot;, axis=1)
-target = data[&quot;label&quot;]
-
-DTmodel = DecisionTreeClassifier(max_depth=4)
-DTmodel = DTmodel.fit(train_data, target)
-print(DTmodel)
-
-# 将决策树的图片转成base64
-dot_data = tree.export_graphviz(DTmodel, out_file=None)
-graph = pydotplus.graph_from_dot_data(dot_data)
-pic_base64 = base64.b64encode(Image(graph.create_png()).data).decode(&#39;utf8&#39;)
-
-print(pic_base64)
-
-</code></pre>
-
-<p>将打印出来的pic_base64的内容替换到html里面的中文部分,然后用浏览器打开这个html文件即可看到图片</p>
 
                         
                       </div>
@@ -318,7 +233,7 @@ print(pic_base64)
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="15402913817590.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2018/10/23</span>
                     <span>posted in&nbsp;</span> 
           				  

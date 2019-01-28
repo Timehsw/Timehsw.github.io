@@ -181,64 +181,6 @@
 
 <p>下面分别看两种评估指标的概念。</p>
 
-<h1 id="toc_0">一、ROC曲线和AUC值</h1>
-
-<p>在逻辑回归、随机森林、GBDT、XGBoost这些模型中，模型训练完成之后，每个样本都会获得对应的两个概率值，一个是样本为正样本的概率，一个是样本为负样本的概率。把每个样本为正样本的概率取出来，进行排序，然后选定一个阈值，将大于这个阈值的样本判定为正样本，小于阈值的样本判定为负样本，然后可以得到两个值，<strong>一个是真正率，一个是假正率。</strong></p>
-
-<p>真正率即判定为正样本且实际为正样本的样本数/所有的正样本数，假正率为判定为正样本实际为负样本的样本数/所有的负样本数。每选定一个阈值，就能得到一对真正率和假正率，由于判定为正样本的概率值区间为[0,1]，那么阈值必然在这个区间内选择，因此在此区间内不停地选择不同的阈值，重复这个过程，就能得到一系列的真正率和假正率，以这两个序列作为横纵坐标，即可得到ROC曲线了。<strong>而ROC曲线下方的面积，即为AUC值。</strong></p>
-
-<p>对于AUC值，也许有一个更直观的理解，那就是，在按照正样本概率值对所有样本排序后，任意选取一对正负样本，正样本排在负样本之前的概率值，即为AUC值。也就是说，当所有的正样本在排序后都能排在负样本之前时，就证明所有的样本都被正确分类了，此时的AUC值也会为1。那么AUC值也就很好算了，如果有N个负样本，其中正样本有M个，那么可取的所有带正样本的样本对数对于排在第一位的正样本来说，有M+N-1个，但其中包含M-1对（正，正）的样本，而对于后面所有的正样本而言，能够取到的正样本概率大于负样本对数肯定小于其位置-1。</p>
-
-<h1 id="toc_1">K-S曲线</h1>
-
-<p>KS(Kolmogorov-Smirnov)值越大，表示模型能够将正、负客户区分开的程度越大。KS值的取值范围是[0，1] </p>
-
-<p>通常来讲，KS&gt;0.2即表示模型有较好的预测准确性。</p>
-
-<p>K-S曲线其实数据来源和本质和ROC曲线是一致的，只是ROC曲线是把真正率和假正率当作横纵轴，而K-S曲线是把真正率和假正率都当作是纵轴，横轴则由选定的阈值来充当。</p>
-
-<p>下面这一段解释得更详细的K-S和AUC的区别是参考的这篇博客：</p>
-
-<p><a href="https://blog.csdn.net/sinat_30316741/article/details/80018932">https://blog.csdn.net/sinat_30316741/article/details/80018932</a></p>
-
-<blockquote>
-<p>由于ks值能找出模型中差异最大的一个分段，因此适合用于cut_off，像评分卡这种就很适合用ks值来评估。但是ks值只能反映出哪个分段是区分最大的，而不能总体反映出所有分段的效果，因果AUC值更能胜任。 <br/>
-ROC值一般在0.5-1.0之间。值越大表示模型判断准确性越高，即越接近1越好。ROC=0.5表示模型的预测能力与随机结果没有差别。 <br/>
-KS值表示了模型将+和-区分开来的能力。值越大，模型的预测准确性越好。一般，KS&gt;0.2即可认为模型有比较好的预测准确性。</p>
-</blockquote>
-
-<p>好了，引用结束。 <br/>
-K-S值一般是很难达到0.6的，在0.2~0.6之间都不错。一般如果是如果负样本对业务影响极大，那么区分度肯定就很重要，此时K-S比AUC更合适用作模型评估，如果没什么特别的影响，那么用AUC就很好了。</p>
-
-<h1 id="toc_2">三、KS的计算和曲线绘制</h1>
-
-<p>代码如果要用，最好自己改改，因为这个数据格式是我自己用的，计算方式也是跟数据格式有关系的，工作中用的可能不一样，所以最好是自己根据自己的写一个，这个也只是我根据自己的数据格式来写的，重要的是思路，不是代码本身。而且我画的曲线是折线，最好是自己考虑写一个平滑曲线的。</p>
-
-<pre class="line-numbers"><code class="language-text">import matplotlib.pyplot as plt
-#第一个参数是模型的预测值，第二个参数是模型的真实值
-def draw_ks_curve(predict_result,true_result):
-    tpr_list = []  #存放真正率数据
-    fpr_list = []  #存放假正率数据
-    dif_list = []  #存放真假正率差值
-    max_ks_dot = []
-
-    for i in np.arange(0,1.1,0.1):
-        tpr = 0
-        fpr = 0
-        for j in range(len(predict_result)):
-            if list(predict_result[j])[0]&gt;i and true_result[j]==1:
-               tpr = tpr+1
-               tpr_list.append(tpr)
-            if list(predict_result[j])[0]&gt;i and true_result[j]==0:
-               fpr = fpr+1
-               fpr_list.append(fpr)
-        tpr = tpr/sum(true_result)
-        fpr = fpr/(len(true_result)-sum(true_result))
-    fig = plt.figure(num=1, figsize=(15, 8),dpi=80)     #开启一个窗口，同时设置大小，分辨率
-    plt.plot(np.arange(0,1,0.1),tpr_list)
-    plt.plot(np.arange(0,1,0.1),fpr_list)
-
-</code></pre>
 
                         
                       </div>
@@ -246,7 +188,7 @@ def draw_ks_curve(predict_result,true_result):
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="15395734385439.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2018/10/15</span>
                     <span>posted in&nbsp;</span> 
           				  

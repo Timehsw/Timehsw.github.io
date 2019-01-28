@@ -4,7 +4,7 @@
   <title><![CDATA[Time渐行渐远]]></title>
   <link href="http://dmlcoding.com/atom.xml" rel="self"/>
   <link href="http://dmlcoding.com/"/>
-  <updated>2019-01-28T14:47:27+08:00</updated>
+  <updated>2019-01-28T14:51:42+08:00</updated>
   <id>http://dmlcoding.com/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -19,6 +19,8 @@
     <id>http://dmlcoding.com/15423390877662.html</id>
     <content type="html"><![CDATA[
 <p>Summing up, apply works on a row / column basis of a DataFrame, applymap works element-wise on a DataFrame, and map works element-wise on a Series.</p>
+
+<span id="more"></span><!-- more -->
 
 <h1 id="toc_0">1.apply()</h1>
 
@@ -89,6 +91,8 @@ Name: e, dtype: object
     <content type="html"><![CDATA[
 <p><strong><u>The function we want to minimize or maximize is called the objective function, or criterion. When we are minimizing it, we may also call it the cost function, loss function, or error function - these terms are synonymous. The cost function is used more in optimization problem and loss function is used in parameter estimation.</u></strong></p>
 
+<span id="more"></span><!-- more -->
+
 <p>The loss function (or error) is for a single training example, while the cost function is over the entire training set (or mini-batch for mini-batch gradient descent). Therefore, a loss function is a part of a cost function which is a type of an objective function.  Objective function, cost function, loss function: are they the same thing? | </p>
 
 <p>StackExchange</p>
@@ -138,6 +142,8 @@ Name: e, dtype: object
   &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
+
+<span id="more"></span><!-- more -->
 
 <pre class="line-numbers"><code class="language-text">#!/usr/bin/env python 
 
@@ -202,6 +208,8 @@ df.columns = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
 <h1 id="toc_0">Not Given Label</h1>
 
 <h2 id="toc_1">1、Compactness(紧密性)(CP)</h2>
+
+<span id="more"></span><!-- more -->
 
 <h1 id="toc_2">代码实现</h1>
 
@@ -579,6 +587,8 @@ def davisbouldin(k_list, k_centers):
 <p>可能有人会问了，为什么不直接看正确率呢？你可以这么想，如果一批样本中，正样本占到90%，负样本只占10%，那么我即使模型什么也不做，把样本全部判定为正，也能有90%的正确率咯？所以，用AUC值够保证你在样本不均衡的情况下也能准确评估模型的好坏，而K-S值不仅能告诉你准确与否，还能告诉你模型对好坏客户是否有足够的区分度。</p>
 
 <p>下面分别看两种评估指标的概念。</p>
+
+<span id="more"></span><!-- more -->
 
 <h1 id="toc_0">一、ROC曲线和AUC值</h1>
 
