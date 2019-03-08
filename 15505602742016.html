@@ -1,0 +1,740 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  构建信用风险类型的特征 - Time渐行渐远
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Time渐行渐远" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:dmlcoding.com ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li id=""><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li id=""><a target="_blank" href="about.html">ABOUT</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Time渐行渐远</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="collections.html">COLLECTION</a></li>
+        
+        <li><a target="_self" href="tools.html">TOOLS</a></li>
+        
+        <li><a target="_blank" href="about.html">ABOUT</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="ScoreCard.html">ScoreCard</a></li>
+        
+            <li><a href="Kg.html">Kg</a></li>
+        
+            <li><a href="BigData.html">BigData</a></li>
+        
+            <li><a href="Python.html">Python</a></li>
+        
+            <li><a href="Linux.html">Linux</a></li>
+        
+            <li><a href="Life.html">Life</a></li>
+        
+            <li><a href="Spark.html">Spark</a></li>
+        
+            <li><a href="Hive.html">Hive</a></li>
+        
+            <li><a href="Yarn.html">Yarn</a></li>
+        
+            <li><a href="Scala.html">Scala</a></li>
+        
+            <li><a href="VPS.html">VPS</a></li>
+        
+            <li><a href="MachineLearning.html">MachineLearning</a></li>
+        
+            <li><a href="Writer.html">Writer</a></li>
+        
+            <li><a href="Shell.html">Shell</a></li>
+        
+            <li><a href="Algorithm.html">Algorithm</a></li>
+        
+            <li><a href="Mac.html">Mac</a></li>
+        
+            <li><a href="Presto.html">Presto</a></li>
+        
+            <li><a href="Mysql.html">Mysql</a></li>
+        
+            <li><a href="Maven.html">Maven</a></li>
+        
+            <li><a href="Kafka.html">Kafka</a></li>
+        
+            <li><a href="Java.html">Java</a></li>
+        
+            <li><a href="DevTools.html">DevTools</a></li>
+        
+            <li><a href="Hbase.html">Hbase</a></li>
+        
+            <li><a href="ELK.html">ELK</a></li>
+        
+            <li><a href="Druid.html">Druid</a></li>
+        
+            <li><a href="Docker.html">Docker</a></li>
+        
+            <li><a href="DesignPattern.html">DesignPattern</a></li>
+        
+            <li><a href="Computer.html">Computer</a></li>
+        
+            <li><a href="Redis.html">Redis</a></li>
+        
+            <li><a href="Zookeeper.html">Zookeeper</a></li>
+        
+            <li><a href="BlockChain.html">BlockChain</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>构建信用风险类型的特征</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2019/2/19</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='ScoreCard.html'>ScoreCard</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p><strong>简述建模过程</strong></p>
+
+<ul>
+<li>数据预处理
+<ul>
+<li>时间格式</li>
+<li>缺失值</li>
+<li>极值</li>
+</ul></li>
+<li>特征构造
+<ul>
+<li>计数</li>
+<li>比例</li>
+<li>距离</li>
+</ul></li>
+<li>特征选择
+<ul>
+<li>相关性</li>
+<li>差异性</li>
+<li>显著性</li>
+</ul></li>
+<li><p>模型参数估计</p>
+<ul>
+<li>回归系数</li>
+<li>模型复杂度</li>
+</ul>
+<span id="more"></span><!-- more --></li>
+</ul>
+
+<h2 id="toc_0">常用数据格式的处理方式</h2>
+
+<p>一般而言原始数据带有一定的格式,需要转换成正确的格式.<br/>
+例如:</p>
+
+<ul>
+<li>利率<br/>
+带%的百分比,需要转化成浮点数</li>
+<li>日期<br/>
+Nov-17,需要转化为Python的时间</li>
+<li>工作年限<br/>
+&quot;<1 year"转化为0,">10years&quot;转化为11</li>
+<li>...</li>
+</ul>
+
+<h2 id="toc_1">文本类的数据的处理方式</h2>
+
+<ul>
+<li>主题提取<br/>
+优点: 提取准确,详细的信息,对风险的评估非常有效<br/>
+缺点: NPL的模型较为复杂,且需要足够多的训练样本</li>
+<li>编码<br/>
+优点: 简单<br/>
+缺点: 信息丢失很高</li>
+</ul>
+
+<h2 id="toc_2">缺失值的处理方式</h2>
+
+<p>缺失在数据分析的工作是频繁出现的</p>
+
+<ul>
+<li>缺失的种类
+<ul>
+<li>完全随机缺失</li>
+<li>随机缺失</li>
+<li>完全非随机缺失</li>
+</ul></li>
+<li>处理的方法
+<ul>
+<li>补缺</li>
+<li>作为一种状态</li>
+</ul></li>
+</ul>
+
+<h2 id="toc_3">常用的特征衍生方式</h2>
+
+<ul>
+<li>计数: 过去1年内申请贷款的总次数</li>
+<li>求和: 过去1年内的网店消费总额</li>
+<li>比例: 贷款申请额度与年收入的占比</li>
+<li>时间差: 第一次开户距今时长</li>
+<li>波动率: 过去3年内每份工作的时间的标准差</li>
+</ul>
+
+<h1 id="toc_4">特征的分箱</h1>
+
+<p>对特征做分箱操作</p>
+
+<h2 id="toc_5">分箱的一些描述</h2>
+
+<ul>
+<li>分箱的定义
+<ul>
+<li>将连续变量离散化</li>
+<li>将多状态的离散变量合并成少状态</li>
+</ul></li>
+<li>分箱的重要性
+<ul>
+<li>稳定性: 避免特征中无意义的波动对评分带来的波动</li>
+<li>健壮性: 避免了极端值的影响</li>
+</ul></li>
+<li>分箱的优势
+<ul>
+<li>可以将缺失作为独立的一个箱带入模型中</li>
+<li>将所有变量变换到相似的尺度上</li>
+</ul></li>
+<li>分箱的限制
+<ul>
+<li>计算量大</li>
+<li>分箱后需要编码</li>
+</ul></li>
+</ul>
+
+<h2 id="toc_6">常用的分箱方法</h2>
+
+<ul>
+<li>有监督
+<ul>
+<li>Best-KS</li>
+<li>ChiMerge</li>
+</ul></li>
+<li>无监督
+<ul>
+<li>等频</li>
+<li>等距</li>
+<li>聚类</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_7">Best-KS</h3>
+
+<p>原理: 让分箱后组别的分布的差异最大化</p>
+
+<p><strong>对于连续变量</strong></p>
+
+<ol>
+<li>排序, \(x=\lbrace X_1,X_2,...,X_k\rbrace \)</li>
+<li>计算每一点的KS值</li>
+<li>选择最大的KS对应的特征值</li>
+</ol>
+
+<h3 id="toc_8">卡方分箱法</h3>
+
+<h3 id="toc_9">注意</h3>
+
+<p>对于连续型变量</p>
+
+<ol>
+<li>使用ChiMerge进行分箱,默认分为5个箱.</li>
+<li>检查分箱后的bad rate单调性;倘若不满足,需要进行相邻两箱的合并,直到bad rate为止.</li>
+</ol>
+
+<h1 id="toc_10">WOE编码</h1>
+
+<blockquote>
+<p>WOE(weight of evidence,证据权重)<br/>
+一种有监督的编码方式,将预测类别的集中度的属性作为编码的数值</p>
+</blockquote>
+
+<p>优势</p>
+
+<ol>
+<li>将特征的值规范到相近的尺度上(经验上讲,WOE的绝对值波动范围在0.1~3之间)</li>
+<li>具有业务含义</li>
+</ol>
+
+<p>缺点</p>
+
+<ol>
+<li>需要每箱中同时包含好,坏两个类别</li>
+</ol>
+
+<h2 id="toc_11">WOE计算公式</h2>
+
+<p><img src="media/15505602742016/15505691302453.jpg" alt=""/></p>
+
+<h2 id="toc_12">WOE编码的意义</h2>
+
+<ol>
+<li>符号和好样本比例相关</li>
+<li>要求回归模型的系数为负</li>
+</ol>
+
+<h1 id="toc_13">特征信息度的计算和意义</h1>
+
+<p>可以用信息度来进行变量挑选</p>
+
+<p>在评分卡模型中,变量挑选是非常重要的工作.比如:<br/>
+如果变量之间具有共线性,线性相关性,那么就会造成信息冗余,这就降低了显著性,甚至造成符号失真.<br/>
+变量太多的话,也加剧了后期验证,部署,监控的负担.而且有些变量在业务上含义不充分,解释性比较低.</p>
+
+<p>这里是进行变量挑选的一些依据</p>
+
+<ol>
+<li>带约束Lasso</li>
+<li>特征重要性:随机森林</li>
+<li>模型拟合优度和复杂度:基于AIC的逐步回归</li>
+<li>变量信息度:IV</li>
+</ol>
+
+<p>IV(Information Value),衡量特征包含预测变量浓度的一种指标<br/>
+<img src="media/15505602742016/15505713539693.jpg" alt=""/></p>
+
+<p>特征信息度的结构<br/>
+\[IV_i=(G_i-B_i)\times \log{\dfrac{G_i}{B_i}} = (G_i-B_i)\times WOE_i\]</p>
+
+<p>其中,G_i,B_i代表箱i中好坏样本占全体好坏样本的比例.<br/>
+WOE:衡量两类样本分布的差异性<br/>
+(G_i,B_i):衡量差异的重要性<br/>
+例如:<br/>
+G_1=0.2,B_1=0.1与G_2=0.02,B_2=0.01<br/>
+\[WOE_1=WOE_2=log(2) \\\<br/>
+IV_1=(0.2-0.1)\times log(2)=0.1 \times log(2) \\\<br/>
+IV_2=(0.02-0.01) \times log(2)=0.01 \times log(2)\]</p>
+
+<h2 id="toc_14">特征信息度的作用</h2>
+
+<p><strong>挑选变量</strong></p>
+
+<ul>
+<li>非负指标</li>
+<li>高IV表示该特征和目标变量的关联度高</li>
+<li>目标变量只能是二分类</li>
+<li>过高的IV,可能有潜在的风险</li>
+<li>特征分箱越细,IV越高</li>
+<li>常用的阈值
+<ul>
+<li>&lt;=0.02 : 没有预测性,不可用</li>
+<li>0.02 ~ 0.1 : 弱预测性</li>
+<li>0.1 ~ 0.2 : 有一定的预测性</li>
+<li>0.2+ : 高预测性</li>
+</ul></li>
+</ul>
+
+<h1 id="toc_15">信用风险中的单变量分析和多变量分析</h1>
+
+<h2 id="toc_16">单变量分析</h2>
+
+<p>目的:根据变量某些属性,从初选名单(long list)中筛选出合适的变量进入缩减名单(short list)</p>
+
+<p>那么需要分析变量属性</p>
+
+<ol>
+<li>变量的显著性(高IV)</li>
+<li>变量的分布</li>
+<li>变量的业务含义</li>
+</ol>
+
+<p>以分箱后的WOE为例</p>
+
+<ol>
+<li>用IV检验有效性</li>
+<li>连续变量bad rate的单调性(可以放宽到U型)</li>
+<li>单一区间的占比不宜过高</li>
+</ol>
+
+<h2 id="toc_17">多变量分析</h2>
+
+<p>变量的两两相关性</p>
+
+<p>当相关性高时,只能保留一个.</p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15517601129865.html" 
+          title="Previous Post: neo4j案例">&laquo; neo4j案例</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15488325444778.html" 
+          title="Next Post: XGBoost">XGBoost &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          <div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://dmlcoding.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://s.gravatar.com/avatar/2d9bdeec5ad2754d8a47063df1346ee8?s=80" /></div>
+            
+                <h1>Time渐行渐远</h1>
+                <div class="site-des">Coding Changing The World</div>
+                <div class="social">
+
+
+
+
+
+
+
+<a target="_blank" class="weibo" href="http://weibo.com/hswnice" title="weibo">Weibo</a>
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HswTime" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Timehsw" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:hswv5@foxmail.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="ScoreCard.html"><strong>ScoreCard</strong></a>
+        
+            <a href="Kg.html"><strong>Kg</strong></a>
+        
+            <a href="BigData.html"><strong>BigData</strong></a>
+        
+            <a href="Python.html"><strong>Python</strong></a>
+        
+            <a href="Linux.html"><strong>Linux</strong></a>
+        
+            <a href="Life.html"><strong>Life</strong></a>
+        
+            <a href="Spark.html"><strong>Spark</strong></a>
+        
+            <a href="Hive.html"><strong>Hive</strong></a>
+        
+            <a href="Yarn.html"><strong>Yarn</strong></a>
+        
+            <a href="Scala.html"><strong>Scala</strong></a>
+        
+            <a href="VPS.html"><strong>VPS</strong></a>
+        
+            <a href="MachineLearning.html"><strong>MachineLearning</strong></a>
+        
+            <a href="Writer.html"><strong>Writer</strong></a>
+        
+            <a href="Shell.html"><strong>Shell</strong></a>
+        
+            <a href="Algorithm.html"><strong>Algorithm</strong></a>
+        
+            <a href="Mac.html"><strong>Mac</strong></a>
+        
+            <a href="Presto.html"><strong>Presto</strong></a>
+        
+            <a href="Mysql.html"><strong>Mysql</strong></a>
+        
+            <a href="Maven.html"><strong>Maven</strong></a>
+        
+            <a href="Kafka.html"><strong>Kafka</strong></a>
+        
+            <a href="Java.html"><strong>Java</strong></a>
+        
+            <a href="DevTools.html"><strong>DevTools</strong></a>
+        
+            <a href="Hbase.html"><strong>Hbase</strong></a>
+        
+            <a href="ELK.html"><strong>ELK</strong></a>
+        
+            <a href="Druid.html"><strong>Druid</strong></a>
+        
+            <a href="Docker.html"><strong>Docker</strong></a>
+        
+            <a href="DesignPattern.html"><strong>DesignPattern</strong></a>
+        
+            <a href="Computer.html"><strong>Computer</strong></a>
+        
+            <a href="Redis.html"><strong>Redis</strong></a>
+        
+            <a href="Zookeeper.html"><strong>Zookeeper</strong></a>
+        
+            <a href="BlockChain.html"><strong>BlockChain</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15520132048516.html">Neo4j导入方式</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15517601129865.html">neo4j案例</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15505602742016.html">构建信用风险类型的特征</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15488325444778.html">XGBoost</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15488325386128.html">GBDT</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?2a025c7742b90ad62b1e767e1b7f2f29";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </body>
+</html>

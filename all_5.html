@@ -89,6 +89,10 @@
     <li><label>Categories</label></li>
 
         
+            <li><a href="ScoreCard.html">ScoreCard</a></li>
+        
+            <li><a href="Kg.html">Kg</a></li>
+        
             <li><a href="BigData.html">BigData</a></li>
         
             <li><a href="Python.html">Python</a></li>
@@ -168,16 +172,40 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15224029526508.html">
+                <a class="clearlink" href="15248143200628.html">
                 
-                  <h1>Spark-Metrics 实战</h1>
+                  <h1>回归算法</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p><a href="http://metrics.dropwizard.io/3.1.0/getting-started/">http://metrics.dropwizard.io/3.1.0/getting-started/</a><br/>
-<a href="http://metrics.dropwizard.io/3.1.0/manual/core/">http://metrics.dropwizard.io/3.1.0/manual/core/</a><br/>
-<a href="http://wuchong.me/blog/2015/08/01/getting-started-with-metrics/">http://wuchong.me/blog/2015/08/01/getting-started-with-metrics/</a></p>
+                        	<p>总结一下,这一节主要记录了下面的内容</p>
+
+<ol>
+<li>什么是回归算法.</li>
+<li>线性回归,单变量线性回归,多变量线性回归</li>
+<li>代价函数</li>
+<li>过拟合与欠拟合</li>
+<li>正则项</li>
+</ol>
+
+<p>在这篇文章中,主要介绍了什么是回归算法,以及简单的线性回归.包括单变量线性回归和多变量线性回归.</p>
+
+<p>同时介绍了用最小二乘法求解\(\theta\)值.接下介绍了防止过拟合问题,加入正则项.</p>
+
+<p>最后介绍了如何评价模型的效果.</p>
+
+<h1 id="toc_0">什么是回归算法</h1>
+
+<ol>
+<li>回归算法是一种有监督算法;</li>
+<li>回归算法是一种比较常用的机器学习算法,用于建立解释变量(自变量X)和观测值(因变量Y)之间的关系;</li>
+<li>从机器学习的角度来讲,用于构建一个算法模型(函数)来做属性(X)与标签(Y)之间的映射关系,在算法的学习过程中,试图寻找一个函数h:使得\(R^d\to R\)使得参数之间的关系拟合性最好;</li>
+<li>回归算法中,算法(函数)的最终结果是一个<strong>连续</strong>的数据值,输入值(属性值)是一个d维度的属性/数值向量;</li>
+<li>因此,回归算法是用于预测连续型数值输出的算法.</li>
+</ol>
+
+<p>常用的回归算法有几种:比如,线性回归,Logistic回归,Softmax回归等等.先说最简单的线性回归算法.</p>
 
 
                         
@@ -186,125 +214,8 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15224029526508.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/3/30</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Spark.html'>Spark</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15223141973169.html">
-                
-                  <h1>Spark Metrics分析</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">MetricsSystem类注释翻译</h2>
-
-<p><img src="media/15223141973169/15223151043399.jpg" alt=""/></p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15223141973169.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/3/29</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Spark.html'>Spark</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15222053353935.html">
-                
-                  <h1>Hadoop RPC运行机制</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>RPC是一种通过网络从远程计算机上请求服务的机制，封装了具体实现，使用户不需要了解底层网络技术。目前存在许多开源RPC框架，比较有名的有Thrift、Protocol Buffers和Avro。Hadoop RPC与他们一样，均由两部分组成：对象序列化和远程过程调用</p>
-
-<p>什么是远程过程调用?</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15222053353935.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/3/28</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='BigData.html'>BigData</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15221149143615.html">
-                
-                  <h1>概率分布函数和概率密度函数</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<blockquote>
-<p>研究一个随机变量,不只要看它能取哪些值,更重要的是它取各种值的概率如何!</p>
-</blockquote>
-
-<ul>
-<li>概率分布函数</li>
-<li>概率密度函数</li>
-</ul>
-
-<h2 id="toc_0">离散型随机变量</h2>
-
-<p>在理解这两个词之前</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15221149143615.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/3/27</span>
+                   <a href="15248143200628.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/4/27</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -321,16 +232,25 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15220339795263.html">
+                <a class="clearlink" href="15263722402424.html">
                 
-                  <h1>分布式系统的一致性</h1>
+                  <h1>学习机器学习</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p><img src="media/15220339795263/15221454798314.jpg" alt=""/></p>
+                        	<p>机器不能代替你学习,代替你成长,终归还得自己踏实学习!</p>
 
-<p>先上个图,未完待续......</p>
+<p>对于下面的基础知识,不管是大学的时候没学好,还是由于时间太长了,导致自己忘记了.都无所谓了.既然打算学习机器学习,那么就不得不花时间去重拾这些知识.</p>
+
+<p>至于如何学,很多说法,我在网上看了很多,比如:</p>
+
+<ol>
+<li>看视频学习;</li>
+<li>看教程学习;</li>
+<li>边学习边看.</li>
+</ol>
+
 
                         
                       </div>
@@ -338,11 +258,125 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
-                    <span class="date">2018/3/26</span>
+                   <a href="15263722402424.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/4/26</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='BigData.html'>BigData</a></span>
+          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15242825563762.html">
+                
+                  <h1>python-matplotlib画图中文显示不出来</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<pre class="line-numbers"><code class="language-text">import matplotlib as mpl
+import matplotlib.pyplot as plt
+
+## 设置字符集，防止中文乱码
+mpl.rcParams[&#39;font.sans-serif&#39;]=[u&#39;simHei&#39;]
+mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
+</code></pre>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15242825563762.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/4/21</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Python.html'>Python</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15235878044126.html">
+                
+                  <h1>Markdown中用LaTex语法写数学公式</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p><img src="media/15235878044126/15249021210382.jpg" alt=""/></p>
+
+<p>最近在学习机器学习和神经网络的一些知识, 在用Markdown做笔记的时候, 发现公式用到LaTeX十分方便, 写篇文章记录在学习过程中的常用的LaTeX公式和用法, 因为本博客支持MathJax, <code>MathJax</code>是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，MathJax可以解析<code>Latex</code>、<code>MathML</code>和<code>ASCIIMathML</code>的标记语言。</p>
+
+<h2 id="toc_0">关键字索引</h2>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15235878044126.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/4/13</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='DevTools.html'>DevTools</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15228352753621.html">
+                
+                  <h1>如何优雅的设计数据分层</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h1 id="toc_0">理论</h1>
+
+<p><img src="media/15228352753621/15231557165878.jpg" alt=""/></p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15228352753621.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/4/4</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Hive.html'>Hive</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -408,6 +442,10 @@
                 <div class="side-content">
 
       	<p class="cat-list">
+        
+            <a href="ScoreCard.html"><strong>ScoreCard</strong></a>
+        
+            <a href="Kg.html"><strong>Kg</strong></a>
         
             <a href="BigData.html"><strong>BigData</strong></a>
         
@@ -482,31 +520,31 @@
 	      
 		      
 			      <li class="post">
-			        <a href="15423390877662.html">Pandas 中map, applymap and apply的区别</a>
+			        <a href="15520132048516.html">Neo4j导入方式</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15420931314995.html">Objective vs. Cost vs. Loss vs. Error Function</a>
+			        <a href="15517601129865.html">neo4j案例</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15402913817590.html">将python生成的base64图片,在浏览器上展示出来</a>
+			        <a href="15505602742016.html">构建信用风险类型的特征</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15398508250689.html">Isolation Forest</a>
+			        <a href="15488325444778.html">XGBoost</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15396891344806.html">聚类算法评估指标</a>
+			        <a href="15488325386128.html">GBDT</a>
 			      </li>
 		     
 		  

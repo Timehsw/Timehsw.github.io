@@ -4,13 +4,764 @@
   <title><![CDATA[Time渐行渐远]]></title>
   <link href="http://dmlcoding.com/atom.xml" rel="self"/>
   <link href="http://dmlcoding.com/"/>
-  <updated>2019-01-28T18:18:59+08:00</updated>
+  <updated>2019-03-08T18:31:12+08:00</updated>
   <id>http://dmlcoding.com/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[Neo4j导入方式]]></title>
+    <link href="http://dmlcoding.com/15520132048516.html"/>
+    <updated>2019-03-08T10:46:44+08:00</updated>
+    <id>http://dmlcoding.com/15520132048516.html</id>
+    <content type="html"><![CDATA[
+<p>初次使用Neo4j图数据库时,我们可能需要将在关系数据库或其他存储形式的数据批量导入到Neo4j图数据库中.因此,这里我将介绍怎样使用Neo4j导入工具来批量导入数据.<br/>
+目前,导入到Neo4j的工具有两种:</p>
+
+<ol>
+<li><code>load csv</code>指令.</li>
+<li><code>neo4j-import</code>工具.</li>
+</ol>
+
+<span id="more"></span><!-- more -->
+
+<p>然而,这两种工具都是基于CSV文件的,那么我们就需要先有CSV文件了.这里我不详细阐述如何获取CSV文件了.</p>
+
+<h1 id="toc_0">关系数据库导出为CSV</h1>
+
+<ol>
+<li>借助GUI数据库管理工具,比如<code>DataGrip</code>,<code>Navicat</code>等等工具,都有将表数据导出为CSV文件的功能.</li>
+<li>借助数据库查询语句导出指令.比如<code>mysql</code>的<code>into outfile &lt;导出的目录和文件名&gt;</code>.等等之类的了.</li>
+</ol>
+
+<h1 id="toc_1">CSV内容格式注意事项</h1>
+
+<h1 id="toc_2">使用Cypher create语句,为每一条数据写一个create</h1>
+
+<h1 id="toc_3">使用java api</h1>
+
+<h1 id="toc_4">使用Load CSV指令导入到Neo4j</h1>
+
+<p>以<code>权力的游戏</code>的数据作为测试数据<br/>
+<a href="https://www.macalester.edu/%7Eabeverid/data/stormofswords.csv">下载地址</a></p>
+
+<pre class="line-numbers"><code class="language-text">Source,Target,Weight
+Aemon,Grenn,5
+Aemon,Samwell,31
+Aerys,Jaime,18
+Aerys,Robert,6
+Aerys,Tyrion,5
+Aerys,Tywin,8
+Alliser,Mance,5
+Amory,Oberyn,5
+...
+</code></pre>
+
+<h2 id="toc_5">Load CSV读取但不存入数据库</h2>
+
+<p>注意:从本地加载文件的时候,相对路径(相对于)</p>
+
+<pre class="line-numbers"><code class="language-text">bash-4.4# pwd
+/var/lib/neo4j/import
+bash-4.4# ls
+relation.csv       stormofswords.csv
+</code></pre>
+
+<p>查询</p>
+
+<pre class="line-numbers"><code class="language-text">// 查看CSV文件行数
+load csv from &quot;file:///stormofswords.csv&quot; as line
+ return count(*)
+</code></pre>
+
+<p>输出<br/>
+<img src="https://raw.githubusercontent.com/Timehsw/gitnote-images/master/neo4j/import/import_read_csv.png" alt=""/></p>
+
+<pre class="line-numbers"><code class="language-text">// 查看CSV文件前5行
+load csv from &quot;file:///stormofswords.csv&quot; as line
+with line
+return line 
+limit 5;
+</code></pre>
+
+<p><img src="https://raw.githubusercontent.com/Timehsw/gitnote-images/master/neo4j/import/read_csv_top5.png" alt=""/></p>
+
+<pre class="line-numbers"><code class="language-text">// 查看CSV文件,并带有头部数据
+load csv with headers from &quot;file:///stormofswords.csv&quot; as line
+with line
+return line 
+limit 5;
+</code></pre>
+
+<p><img src="https://raw.githubusercontent.com/Timehsw/gitnote-images/master/neo4j/import/read_csv_with_headers.png" alt=""/></p>
+
+<p>这几个例子仅仅是用来读取CSV文件,它并没有将数据存入到neo4j的数据库中.</p>
+
+<h2 id="toc_6">LOAD CSV指令用法</h2>
+
+<p><code>load csv from &quot;file-url&quot; as line</code> </p>
+
+<ol>
+<li>这条指令就是将指定路径下的CSV文件读取出来</li>
+<li>其中的&quot;file-url&quot;就是文件的地址,可以是本地文件路径也可以是网址,只要能从地址中读取到CSV文件即可.</li>
+<li>因此也可以这样写.</li>
+</ol>
+
+<pre class="line-numbers"><code class="language-text"> LOAD CSV FROM &quot;https://www.macalester.edu/~abeverid/data/stormofswords.csv&quot; as line
+ return line
+</code></pre>
+
+<p>这样就可以读取网址指定的movie.csv文件.<br/>
+或者可以使用本地文件路径.</p>
+
+<pre class="line-numbers"><code class="language-text">// 由于配置文件
+conf/neo4j.conf
+这个配置项
+dbms.directories.import=import
+</code></pre>
+
+<p>所以读取本地文件的时候,我们需要把文件放到import目录下</p>
+
+<h2 id="toc_7">导入CSV时附带表头</h2>
+
+<p>我们将使用一个简单的数据模型<code>(:Character {name})-[:INTERACTS {weight}]-&gt;(:Character {name})</code>。带有标签的节点Character表示文本中的角色，单个关系类型INTERACTS从该角色连接到另一个文本中交互的角色。我们将把角色名作为node属性name存储，把两个角色之间的交互数作为relationships属性weight存储。</p>
+
+<p>首先，我们必须创建一个约束来断言我们架构的完整性：</p>
+
+<pre class="line-numbers"><code class="language-text">CREATE CONSTRAINT ON (c:Character) ASSERT c.name IS UNIQUE;
+</code></pre>
+
+<p>一旦创建了约束（该语句也将构建一个索引，它将提高通过角色名查找的性能），我们可以使用Cypher的LOAD CSV语句来导入数据：</p>
+
+<p>头部由<code>row.Source</code>,<code>tow.Target</code>指定</p>
+
+<pre class="line-numbers"><code class="language-text">LOAD CSV WITH HEADERS FROM &quot;file:///stormofswords.csv&quot; AS row
+MERGE (src:Character {name: row.Source})
+MERGE (tgt:Character {name: row.Target})
+MERGE (src)-[r:INTERACTS]-&gt;(tgt)
+ON CREATE SET r.weight = toInt(row.Weight)
+return *
+</code></pre>
+
+<p><img src="https://raw.githubusercontent.com/Timehsw/gitnote-images/master/neo4j/import/stormofswords.png" alt=""/></p>
+
+<h2 id="toc_8">导入CSV大文件</h2>
+
+<p>如果要导入包含大量数据的CSV文件,则可以使用<code>PERIODIC COMMIT字句</code>.</p>
+
+<ol>
+<li>使用<code>PERIODIC COMMIT</code>指示neo4j在执行完一定行数后提交数据再继续,这样减少了内存开销.</li>
+<li>使用<code>PERIODIC COMMIT</code>默认值为1000行,因此数据将每一千行提交一次.</li>
+<li>要使用<code>PERIODIC COMMIT</code>,只需要在LOAD CSV 语句之前插入<code>USING PERIODIC COMMIT</code>语句</li>
+</ol>
+
+<pre class="line-numbers"><code class="language-text">USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM &quot;file:///stormofswords.csv&quot; AS row
+MERGE (src:Character {name: row.Source})
+MERGE (tgt:Character {name: row.Target})
+MERGE (src)-[r:INTERACTS]-&gt;(tgt)
+ON CREATE SET r.weight = toInt(row.Weight)
+</code></pre>
+
+<p>可以让其每800行提交一次,如下所示.</p>
+
+<pre class="line-numbers"><code class="language-text">USING PERIODIC COMMIT 800
+LOAD CSV WITH HEADERS FROM &quot;file:///stormofswords.csv&quot; AS row
+MERGE (src:Character {name: row.Source})
+MERGE (tgt:Character {name: row.Target})
+MERGE (src)-[r:INTERACTS]-&gt;(tgt)
+ON CREATE SET r.weight = toInt(row.Weight)
+</code></pre>
+
+<h1 id="toc_9">使用neo4j-import 工具导入到Neo4j</h1>
+
+<p>从neo4j 2.2版本开始,系统就自带了一个大数据量的导入工具<code>neo4j-import</code>,可支持并行,可扩展的大规模CSV数据导入.</p>
+
+<pre class="line-numbers"><code class="language-text">bash-4.4# pwd
+/var/lib/neo4j/bin
+bash-4.4# ls
+cypher-shell  neo4j         neo4j-admin   neo4j-import  tools
+</code></pre>
+
+<h2 id="toc_10">neo4j-import用法</h2>
+
+<p>然而却提示neo4j-import过时了,推荐用新的neo4j-admin了.</p>
+
+<pre class="line-numbers"><code class="language-text">bash-4.4# bin/neo4j-import
+WARNING: neo4j-import is deprecated and support for it will be removed in a future
+version of Neo4j; please use neo4j-admin import instead.
+Neo4j Import Tool
+    neo4j-import is used to create a new Neo4j database from data in CSV files. See
+    the chapter &quot;Import Tool&quot; in the Neo4j Manual for details on the CSV file format
+    - a special kind of header is required.
+</code></pre>
+
+<p>看了一下neo4j-admin的帮助文档,其实import功能只是一个子集罢了.admin里面包含了更多的功能.</p>
+
+<h2 id="toc_11">1. phones.csv 记录电话号列表，作为nodes结点</h2>
+
+<p><img src="https://raw.githubusercontent.com/Timehsw/gitnote-images/master/neo4j/import/phone_nums.png" alt=""/></p>
+
+<h2 id="toc_12">2. phone_header.csv 标题文件只有一行数据</h2>
+
+<pre class="line-numbers"><code class="language-text">phone:ID
+</code></pre>
+
+<h2 id="toc_13">3. call.csv 该文件记录通话记录的信息，作为以后关系的建立和关系属性的添加</h2>
+
+<p><img src="https://raw.githubusercontent.com/Timehsw/gitnote-images/master/neo4j/import/phone_call.png" alt=""/></p>
+
+<h2 id="toc_14">4. call_header.csv 通话记录头信息</h2>
+
+<pre class="line-numbers"><code class="language-text">:START_ID,:END_ID,duration,num,average
+</code></pre>
+
+<h2 id="toc_15">5. CSV文件准备好了,开始执行导入</h2>
+
+<p>注意:执行之前,要打开conf/neo4j.conf文件,将#dbms.directories.import=import注释.然后文件写绝对路径.不然容易报错</p>
+
+<pre class="line-numbers"><code class="language-text">neo4j-admin import \
+    --database=graph_demo.db \
+    --nodes:phone=&quot;/var/lib/neo4j/import/phone_header.csv,phones.csv&quot; \
+    --ignore-duplicate-nodes=true \
+    --ignore-missing-nodes=true \
+    --relationships:call=&quot;/var/lib/neo4j/import/call_header.csv,call.csv&quot;
+</code></pre>
+
+<ul>
+<li>这里以防我们新建的数据库已经存在，我们选择删除已有库再进行导入</li>
+<li><p>记得要先关闭neo4j</p></li>
+<li><p>--nodes子句开头的CSV文件是节点CSV文件</p></li>
+<li><p>--relationships开头的是关系CSV文件</p></li>
+<li><p>--into子句指明了导入的neo4j数据库名称,其中不能包含现有数据库</p></li>
+<li><p>--id-type子句指明了生成节点,关系的主键类型为string类型</p></li>
+</ul>
+
+<p>注意:由于neo4j-import工具不能使用Cypher语句创建节点,关系,所以需要为节点和关系分别提供不同的csv文件</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[neo4j案例]]></title>
+    <link href="http://dmlcoding.com/15517601129865.html"/>
+    <updated>2019-03-05T12:28:32+08:00</updated>
+    <id>http://dmlcoding.com/15517601129865.html</id>
+    <content type="html"><![CDATA[
+<p><a href="https://neo4j.com/graphgist/credit-card-fraud-detection">官网案例</a></p>
+
+<h1 id="toc_0">GraphGist: Credit Card Fraud Detection(使用图数据库进行盗刷欺诈侦测)</h1>
+
+<h1 id="toc_1">数据准备</h1>
+
+<p>建立节点 </p>
+
+<span id="more"></span><!-- more -->
+
+<h2 id="toc_2">建立用户节点</h2>
+
+<pre class="line-numbers"><code class="language-text">// Create customers
+CREATE (Paul:Person {id:&#39;1&#39;, name:&#39;Paul&#39;, gender:&#39;man&#39;, age:&#39;50&#39;})
+CREATE (Jean:Person {id:&#39;2&#39;, name:&#39;Jean&#39;, gender:&#39;man&#39;, age:&#39;48&#39;})
+CREATE (Dan:Person {id:&#39;3&#39;, name:&#39;Dan&#39;, gender:&#39;man&#39;, age:&#39;23&#39;})
+CREATE (Marc:Person {id:&#39;4&#39;, name:&#39;Marc&#39;, gender:&#39;man&#39;, age:&#39;30&#39;})
+CREATE (John:Person {id:&#39;5&#39;, name:&#39;John&#39;, gender:&#39;man&#39;, age:&#39;31&#39;})
+CREATE (Zoey:Person {id:&#39;6&#39;, name:&#39;Zoey&#39;, gender:&#39;woman&#39;, age:&#39;52&#39;})
+CREATE (Ava:Person {id:&#39;7&#39;, name:&#39;Ava&#39;, gender:&#39;woman&#39;, age:&#39;23&#39;})
+CREATE (Olivia:Person {id:&#39;8&#39;, name:&#39;Olivia&#39;, gender:&#39;woman&#39;, age:&#39;58&#39;})
+CREATE (Mia:Person {id:&#39;9&#39;, name:&#39;Mia&#39;, gender:&#39;woman&#39;, age:&#39;51&#39;})
+CREATE (Madison:Person {id:&#39;10&#39;, name:&#39;Madison&#39;, gender:&#39;woman&#39;, age:&#39;37&#39;})
+
+</code></pre>
+
+<h2 id="toc_3">建立商品节点</h2>
+
+<pre class="line-numbers"><code class="language-text">// Create merchants
+CREATE (Amazon:Merchant {id:&#39;11&#39;, name:&#39;Amazon&#39;, street:&#39;2626 Wilkinson Court&#39;, address:&#39;San Bernardino, CA 92410&#39;})
+CREATE (Abercrombie:Merchant {id:&#39;12&#39;, name:&#39;Abercrombie&#39;, street:&#39;4355 Walnut Street&#39;, age:&#39;San Bernardino, CA 92410&#39;})
+CREATE (Wallmart:Merchant {id:&#39;13&#39;, name:&#39;Wallmart&#39;, street:&#39;2092 Larry Street&#39;, age:&#39;San Bernardino, CA 92410&#39;})
+CREATE (MacDonalds:Merchant {id:&#39;14&#39;, name:&#39;MacDonalds&#39;, street:&#39;1870 Caynor Circle&#39;, age:&#39;San Bernardino, CA 92410&#39;})
+CREATE (American_Apparel:Merchant {id:&#39;15&#39;, name:&#39;American Apparel&#39;, street:&#39;1381 Spruce Drive&#39;, age:&#39;San Bernardino, CA 92410&#39;})
+CREATE (Just_Brew_It:Merchant {id:&#39;16&#39;, name:&#39;Just Brew It&#39;, street:&#39;826 Anmoore Road&#39;, age:&#39;San Bernardino, CA 92410&#39;})
+CREATE (Justice:Merchant {id:&#39;17&#39;, name:&#39;Justice&#39;, street:&#39;1925 Spring Street&#39;, age:&#39;San Bernardino, CA 92410&#39;})
+CREATE (Sears:Merchant {id:&#39;18&#39;, name:&#39;Sears&#39;, street:&#39;4209 Elsie Drive&#39;, age:&#39;San Bernardino, CA 92410&#39;})
+CREATE (Soccer_for_the_City:Merchant {id:&#39;19&#39;, name:&#39;Soccer for the City&#39;, street:&#39;86 D Street&#39;, age:&#39;San Bernardino, CA 92410&#39;})
+CREATE (Sprint:Merchant {id:&#39;20&#39;, name:&#39;Sprint&#39;, street:&#39;945 Kinney Street&#39;, age:&#39;San Bernardino, CA 92410&#39;})
+CREATE (Starbucks:Merchant {id:&#39;21&#39;, name:&#39;Starbucks&#39;, street:&#39;3810 Apple Lane&#39;, age:&#39;San Bernardino, CA 92410&#39;})
+CREATE (Subway:Merchant {id:&#39;22&#39;, name:&#39;Subway&#39;, street:&#39;3778 Tenmile Road&#39;, age:&#39;San Bernardino, CA 92410&#39;})
+CREATE (Apple_Store:Merchant {id:&#39;23&#39;, name:&#39;Apple Store&#39;, street:&#39;349 Bel Meadow Drive&#39;, age:&#39;Kansas City, MO 64105&#39;})
+CREATE (Urban_Outfitters:Merchant {id:&#39;24&#39;, name:&#39;Urban Outfitters&#39;, street:&#39;99 Strother Street&#39;, age:&#39;Kansas City, MO 64105&#39;})
+CREATE (RadioShack:Merchant {id:&#39;25&#39;, name:&#39;RadioShack&#39;, street:&#39;3306 Douglas Dairy Road&#39;, age:&#39;Kansas City, MO 64105&#39;})
+CREATE (Macys:Merchant {id:&#39;26&#39;, name:&#39;Macys&#39;, street:&#39;2912 Nutter Street&#39;, age:&#39;Kansas City, MO 64105&#39;})
+</code></pre>
+
+<h2 id="toc_4">建立交易历史记录节点</h2>
+
+<pre class="line-numbers"><code class="language-text">// Create transaction history
+CREATE (Paul)-[:HAS_BOUGHT_AT {amount:&#39;986&#39;, time:&#39;4/17/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Just_Brew_It)
+CREATE (Paul)-[:HAS_BOUGHT_AT {amount:&#39;239&#39;, time:&#39;5/15/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Starbucks)
+CREATE (Paul)-[:HAS_BOUGHT_AT {amount:&#39;475&#39;, time:&#39;3/28/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Sears)
+CREATE (Paul)-[:HAS_BOUGHT_AT {amount:&#39;654&#39;, time:&#39;3/20/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Wallmart)
+CREATE (Jean)-[:HAS_BOUGHT_AT {amount:&#39;196&#39;, time:&#39;7/24/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Soccer_for_the_City)
+CREATE (Jean)-[:HAS_BOUGHT_AT {amount:&#39;502&#39;, time:&#39;4/9/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Abercrombie)
+CREATE (Jean)-[:HAS_BOUGHT_AT {amount:&#39;848&#39;, time:&#39;5/29/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Wallmart)
+CREATE (Jean)-[:HAS_BOUGHT_AT {amount:&#39;802&#39;, time:&#39;3/11/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Amazon)
+CREATE (Jean)-[:HAS_BOUGHT_AT {amount:&#39;203&#39;, time:&#39;3/27/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Subway)
+CREATE (Dan)-[:HAS_BOUGHT_AT {amount:&#39;35&#39;, time:&#39;1/23/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(MacDonalds)
+CREATE (Dan)-[:HAS_BOUGHT_AT {amount:&#39;605&#39;, time:&#39;1/27/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(MacDonalds)
+CREATE (Dan)-[:HAS_BOUGHT_AT {amount:&#39;62&#39;, time:&#39;9/17/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Soccer_for_the_City)
+CREATE (Dan)-[:HAS_BOUGHT_AT {amount:&#39;141&#39;, time:&#39;11/14/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Amazon)
+CREATE (Marc)-[:HAS_BOUGHT_AT {amount:&#39;134&#39;, time:&#39;4/14/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Amazon)
+CREATE (Marc)-[:HAS_BOUGHT_AT {amount:&#39;336&#39;, time:&#39;4/3/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(American_Apparel)
+CREATE (Marc)-[:HAS_BOUGHT_AT {amount:&#39;964&#39;, time:&#39;3/22/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Wallmart)
+CREATE (Marc)-[:HAS_BOUGHT_AT {amount:&#39;430&#39;, time:&#39;8/10/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Sears)
+CREATE (Marc)-[:HAS_BOUGHT_AT {amount:&#39;11&#39;, time:&#39;9/4/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Soccer_for_the_City)
+CREATE (John)-[:HAS_BOUGHT_AT {amount:&#39;545&#39;, time:&#39;10/6/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Soccer_for_the_City)
+CREATE (John)-[:HAS_BOUGHT_AT {amount:&#39;457&#39;, time:&#39;10/15/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Sprint)
+CREATE (John)-[:HAS_BOUGHT_AT {amount:&#39;468&#39;, time:&#39;7/29/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Justice)
+CREATE (John)-[:HAS_BOUGHT_AT {amount:&#39;768&#39;, time:&#39;11/28/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(American_Apparel)
+CREATE (John)-[:HAS_BOUGHT_AT {amount:&#39;921&#39;, time:&#39;3/12/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Just_Brew_It)
+CREATE (Zoey)-[:HAS_BOUGHT_AT {amount:&#39;740&#39;, time:&#39;12/15/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(MacDonalds)
+CREATE (Zoey)-[:HAS_BOUGHT_AT {amount:&#39;510&#39;, time:&#39;11/27/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Abercrombie)
+CREATE (Zoey)-[:HAS_BOUGHT_AT {amount:&#39;414&#39;, time:&#39;1/20/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Just_Brew_It)
+CREATE (Zoey)-[:HAS_BOUGHT_AT {amount:&#39;721&#39;, time:&#39;7/17/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Amazon)
+CREATE (Zoey)-[:HAS_BOUGHT_AT {amount:&#39;353&#39;, time:&#39;10/25/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Subway)
+CREATE (Ava)-[:HAS_BOUGHT_AT {amount:&#39;681&#39;, time:&#39;12/28/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Sears)
+CREATE (Ava)-[:HAS_BOUGHT_AT {amount:&#39;87&#39;, time:&#39;2/19/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Wallmart)
+CREATE (Ava)-[:HAS_BOUGHT_AT {amount:&#39;533&#39;, time:&#39;8/6/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(American_Apparel)
+CREATE (Ava)-[:HAS_BOUGHT_AT {amount:&#39;723&#39;, time:&#39;1/8/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(American_Apparel)
+CREATE (Ava)-[:HAS_BOUGHT_AT {amount:&#39;627&#39;, time:&#39;5/20/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Just_Brew_It)
+CREATE (Olivia)-[:HAS_BOUGHT_AT {amount:&#39;74&#39;, time:&#39;9/4/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Soccer_for_the_City)
+CREATE (Olivia)-[:HAS_BOUGHT_AT {amount:&#39;231&#39;, time:&#39;7/12/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Wallmart)
+CREATE (Olivia)-[:HAS_BOUGHT_AT {amount:&#39;924&#39;, time:&#39;10/4/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Soccer_for_the_City)
+CREATE (Olivia)-[:HAS_BOUGHT_AT {amount:&#39;742&#39;, time:&#39;8/12/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Just_Brew_It)
+CREATE (Mia)-[:HAS_BOUGHT_AT {amount:&#39;276&#39;, time:&#39;12/24/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Soccer_for_the_City)
+CREATE (Mia)-[:HAS_BOUGHT_AT {amount:&#39;66&#39;, time:&#39;4/16/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Starbucks)
+CREATE (Mia)-[:HAS_BOUGHT_AT {amount:&#39;467&#39;, time:&#39;12/23/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(MacDonalds)
+CREATE (Mia)-[:HAS_BOUGHT_AT {amount:&#39;830&#39;, time:&#39;3/13/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Sears)
+CREATE (Mia)-[:HAS_BOUGHT_AT {amount:&#39;240&#39;, time:&#39;7/9/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Amazon)
+CREATE (Mia)-[:HAS_BOUGHT_AT {amount:&#39;164&#39;, time:&#39;12/26/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Soccer_for_the_City)
+CREATE (Madison)-[:HAS_BOUGHT_AT {amount:&#39;630&#39;, time:&#39;10/6/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(MacDonalds)
+CREATE (Madison)-[:HAS_BOUGHT_AT {amount:&#39;19&#39;, time:&#39;7/29/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Abercrombie)
+CREATE (Madison)-[:HAS_BOUGHT_AT {amount:&#39;352&#39;, time:&#39;12/16/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Subway)
+CREATE (Madison)-[:HAS_BOUGHT_AT {amount:&#39;147&#39;, time:&#39;8/3/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Amazon)
+CREATE (Madison)-[:HAS_BOUGHT_AT {amount:&#39;91&#39;, time:&#39;6/29/2014&#39;, status:&#39;Undisputed&#39;}]-&gt;(Wallmart)
+CREATE (Paul)-[:HAS_BOUGHT_AT {amount:&#39;1021&#39;, time:&#39;7/18/2014&#39;, status:&#39;Disputed&#39;}]-&gt;(Apple_Store)
+CREATE (Paul)-[:HAS_BOUGHT_AT {amount:&#39;1732&#39;, time:&#39;5/10/2014&#39;, status:&#39;Disputed&#39;}]-&gt;(Urban_Outfitters)
+CREATE (Paul)-[:HAS_BOUGHT_AT {amount:&#39;1415&#39;, time:&#39;4/1/2014&#39;, status:&#39;Disputed&#39;}]-&gt;(RadioShack)
+CREATE (Paul)-[:HAS_BOUGHT_AT {amount:&#39;1849&#39;, time:&#39;12/20/2014&#39;, status:&#39;Disputed&#39;}]-&gt;(Macys)
+CREATE (Marc)-[:HAS_BOUGHT_AT {amount:&#39;1914&#39;, time:&#39;7/18/2014&#39;, status:&#39;Disputed&#39;}]-&gt;(Apple_Store)
+CREATE (Marc)-[:HAS_BOUGHT_AT {amount:&#39;1424&#39;, time:&#39;5/10/2014&#39;, status:&#39;Disputed&#39;}]-&gt;(Urban_Outfitters)
+CREATE (Marc)-[:HAS_BOUGHT_AT {amount:&#39;1721&#39;, time:&#39;4/1/2014&#39;, status:&#39;Disputed&#39;}]-&gt;(RadioShack)
+CREATE (Marc)-[:HAS_BOUGHT_AT {amount:&#39;1003&#39;, time:&#39;12/20/2014&#39;, status:&#39;Disputed&#39;}]-&gt;(Macys)
+CREATE (Olivia)-[:HAS_BOUGHT_AT {amount:&#39;1149&#39;, time:&#39;7/18/2014&#39;, status:&#39;Disputed&#39;}]-&gt;(Apple_Store)
+CREATE (Olivia)-[:HAS_BOUGHT_AT {amount:&#39;1152&#39;, time:&#39;8/10/2014&#39;, status:&#39;Disputed&#39;}]-&gt;(Urban_Outfitters)
+CREATE (Olivia)-[:HAS_BOUGHT_AT {amount:&#39;1884&#39;, time:&#39;8/1/2014&#39;, status:&#39;Disputed&#39;}]-&gt;(RadioShack)
+CREATE (Olivia)-[:HAS_BOUGHT_AT {amount:&#39;1790&#39;, time:&#39;12/20/2014&#39;, status:&#39;Disputed&#39;}]-&gt;(Macys)
+CREATE (Madison)-[:HAS_BOUGHT_AT {amount:&#39;1925&#39;, time:&#39;7/18/2014&#39;, status:&#39;Disputed&#39;}]-&gt;(Apple_Store)
+CREATE (Madison)-[:HAS_BOUGHT_AT {amount:&#39;1374&#39;, time:&#39;7/10/2014&#39;, status:&#39;Disputed&#39;}]-&gt;(Urban_Outfitters)
+CREATE (Madison)-[:HAS_BOUGHT_AT {amount:&#39;1368&#39;, time:&#39;7/1/2014&#39;, status:&#39;Disputed&#39;}]-&gt;(RadioShack)
+CREATE (Madison)-[:HAS_BOUGHT_AT {amount:&#39;1816&#39;, time:&#39;12/20/2014&#39;, status:&#39;Disputed&#39;}]-&gt;(Macys)
+RETURN *
+
+</code></pre>
+
+<p><img src="https://raw.githubusercontent.com/Timehsw/gitnote-images/master/neo4j/case/20190305150014.png" alt=""/></p>
+
+<h1 id="toc_5">查询</h1>
+
+<h2 id="toc_6">识别所有的欺诈性交易</h2>
+
+<p>查看在交易的过程中发生争吵的人和商店.</p>
+
+<pre class="line-numbers"><code class="language-text">MATCH (victim:Person)-[r:HAS_BOUGHT_AT]-&gt;(merchant)
+WHERE r.status = &quot;Disputed&quot;
+RETURN victim.name AS `Customer Name`, merchant.name AS `Store Name`, r.amount AS Amount, r.time AS `Transaction Time`
+ORDER BY `Transaction Time` DESC
+</code></pre>
+
+<p><img src="https://raw.githubusercontent.com/Timehsw/gitnote-images/master/neo4j/case/20190305152050.png" alt=""/></p>
+
+<p>查找了Disputed可疑交易对应的受害者</p>
+
+<p>分析:<br/>
+现在我们知道哪些客服和哪些商家参与了我们的欺诈案件.<br/>
+但我们正在寻找的罪犯在哪里？<br/>
+可以想象,这里有用的是每次欺诈交易的交易日期。</p>
+
+<p>继续查</p>
+
+<pre class="line-numbers"><code class="language-text">MATCH (victim:Person)-[r:HAS_BOUGHT_AT]-&gt;(merchant)
+WHERE r.status = &quot;Disputed&quot;
+MATCH (victim)-[t:HAS_BOUGHT_AT]-&gt;(othermerchants)
+WHERE t.status = &quot;Undisputed&quot; AND t.time &lt; r.time
+WITH victim, othermerchants, t ORDER BY t.time DESC
+RETURN victim.name AS `Customer Name`, othermerchants.name AS `Store Name`, t.amount AS Amount, t.time AS `Transaction Time`
+ORDER BY `Transaction Time` DESC
+</code></pre>
+
+<p>分析这个查询</p>
+
+<pre class="line-numbers"><code class="language-text">MATCH (victim)-[t:HAS_BOUGHT_AT]-&gt;(othermerchants)
+WHERE t.status = &quot;Undisputed&quot; AND t.time &lt; r.time
+</code></pre>
+
+<p>这段话表示查找所有受害者victim在可疑交易时间之前还在哪些商店有过正常购买记录。在这些正常购买的时候可能发生了卡号泄露。所以根据受害者之前的所有正常交易商店可能推断泄露地点。 </p>
+
+<p>现在我们想要找到共同点.在所有这些看似无害的交易中是否有共同商人？</p>
+
+<pre class="line-numbers"><code class="language-text">MATCH (victim:Person)-[r:HAS_BOUGHT_AT]-&gt;(merchant)
+WHERE r.status = &quot;Disputed&quot;
+MATCH (victim:Person)-[r:HAS_BOUGHT_AT]-&gt;(merchant)
+WHERE r.status = &quot;Disputed&quot;
+MATCH (victim)-[t:HAS_BOUGHT_AT]-&gt;(othermerchants)
+WHERE t.status = &quot;Undisputed&quot; AND t.time &lt; r.time
+WITH victim, othermerchants, t ORDER BY t.time DESC
+RETURN DISTINCT othermerchants.name AS `Suspicious Store`, count(DISTINCT t) AS Count, collect(DISTINCT victim.name) AS Victims
+ORDER BY Count DESC
+</code></pre>
+
+<p>这个查询的关键点在于<br/>
+<strong>RETURN DISTINCT othermerchants.name AS <code>Suspicious Store</code>, count(DISTINCT t) AS Count, collect(DISTINCT victim.name) AS Victims</strong><br/>
+看下表，查出了可疑的商店，比如Wallmart发生过4次可能被盗卡的交易场景。<br/>
+<img src="https://raw.githubusercontent.com/Timehsw/gitnote-images/master/neo4j/case/20190305153514.png" alt=""/></p>
+
+<h1 id="toc_7">最后小偷在哪呢?</h1>
+
+<p><img src="https://raw.githubusercontent.com/Timehsw/gitnote-images/master/neo4j/case/20190305153828.png" alt=""/><br/>
+在每次欺诈交易中，信用卡持有人都在前一天访问了沃尔玛。我们现在知道客户的信用卡号码被盗的位置和日期。</p>
+
+<p>剩下的交给警察叔叔就行了!</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[构建信用风险类型的特征]]></title>
+    <link href="http://dmlcoding.com/15505602742016.html"/>
+    <updated>2019-02-19T15:11:14+08:00</updated>
+    <id>http://dmlcoding.com/15505602742016.html</id>
+    <content type="html"><![CDATA[
+<p><strong>简述建模过程</strong></p>
+
+<ul>
+<li>数据预处理
+<ul>
+<li>时间格式</li>
+<li>缺失值</li>
+<li>极值</li>
+</ul></li>
+<li>特征构造
+<ul>
+<li>计数</li>
+<li>比例</li>
+<li>距离</li>
+</ul></li>
+<li>特征选择
+<ul>
+<li>相关性</li>
+<li>差异性</li>
+<li>显著性</li>
+</ul></li>
+<li><p>模型参数估计</p>
+<ul>
+<li>回归系数</li>
+<li>模型复杂度</li>
+</ul>
+<span id="more"></span><!-- more --></li>
+</ul>
+
+<h2 id="toc_0">常用数据格式的处理方式</h2>
+
+<p>一般而言原始数据带有一定的格式,需要转换成正确的格式.<br/>
+例如:</p>
+
+<ul>
+<li>利率<br/>
+带%的百分比,需要转化成浮点数</li>
+<li>日期<br/>
+Nov-17,需要转化为Python的时间</li>
+<li>工作年限<br/>
+&quot;<1 year"转化为0,">10years&quot;转化为11</li>
+<li>...</li>
+</ul>
+
+<h2 id="toc_1">文本类的数据的处理方式</h2>
+
+<ul>
+<li>主题提取<br/>
+优点: 提取准确,详细的信息,对风险的评估非常有效<br/>
+缺点: NPL的模型较为复杂,且需要足够多的训练样本</li>
+<li>编码<br/>
+优点: 简单<br/>
+缺点: 信息丢失很高</li>
+</ul>
+
+<h2 id="toc_2">缺失值的处理方式</h2>
+
+<p>缺失在数据分析的工作是频繁出现的</p>
+
+<ul>
+<li>缺失的种类
+<ul>
+<li>完全随机缺失</li>
+<li>随机缺失</li>
+<li>完全非随机缺失</li>
+</ul></li>
+<li>处理的方法
+<ul>
+<li>补缺</li>
+<li>作为一种状态</li>
+</ul></li>
+</ul>
+
+<h2 id="toc_3">常用的特征衍生方式</h2>
+
+<ul>
+<li>计数: 过去1年内申请贷款的总次数</li>
+<li>求和: 过去1年内的网店消费总额</li>
+<li>比例: 贷款申请额度与年收入的占比</li>
+<li>时间差: 第一次开户距今时长</li>
+<li>波动率: 过去3年内每份工作的时间的标准差</li>
+</ul>
+
+<h1 id="toc_4">特征的分箱</h1>
+
+<p>对特征做分箱操作</p>
+
+<h2 id="toc_5">分箱的一些描述</h2>
+
+<ul>
+<li>分箱的定义
+<ul>
+<li>将连续变量离散化</li>
+<li>将多状态的离散变量合并成少状态</li>
+</ul></li>
+<li>分箱的重要性
+<ul>
+<li>稳定性: 避免特征中无意义的波动对评分带来的波动</li>
+<li>健壮性: 避免了极端值的影响</li>
+</ul></li>
+<li>分箱的优势
+<ul>
+<li>可以将缺失作为独立的一个箱带入模型中</li>
+<li>将所有变量变换到相似的尺度上</li>
+</ul></li>
+<li>分箱的限制
+<ul>
+<li>计算量大</li>
+<li>分箱后需要编码</li>
+</ul></li>
+</ul>
+
+<h2 id="toc_6">常用的分箱方法</h2>
+
+<ul>
+<li>有监督
+<ul>
+<li>Best-KS</li>
+<li>ChiMerge</li>
+</ul></li>
+<li>无监督
+<ul>
+<li>等频</li>
+<li>等距</li>
+<li>聚类</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_7">Best-KS</h3>
+
+<p>原理: 让分箱后组别的分布的差异最大化</p>
+
+<p><strong>对于连续变量</strong></p>
+
+<ol>
+<li>排序, \(x=\lbrace X_1,X_2,...,X_k\rbrace \)</li>
+<li>计算每一点的KS值</li>
+<li>选择最大的KS对应的特征值</li>
+</ol>
+
+<h3 id="toc_8">卡方分箱法</h3>
+
+<h3 id="toc_9">注意</h3>
+
+<p>对于连续型变量</p>
+
+<ol>
+<li>使用ChiMerge进行分箱,默认分为5个箱.</li>
+<li>检查分箱后的bad rate单调性;倘若不满足,需要进行相邻两箱的合并,直到bad rate为止.</li>
+</ol>
+
+<h1 id="toc_10">WOE编码</h1>
+
+<blockquote>
+<p>WOE(weight of evidence,证据权重)<br/>
+一种有监督的编码方式,将预测类别的集中度的属性作为编码的数值</p>
+</blockquote>
+
+<p>优势</p>
+
+<ol>
+<li>将特征的值规范到相近的尺度上(经验上讲,WOE的绝对值波动范围在0.1~3之间)</li>
+<li>具有业务含义</li>
+</ol>
+
+<p>缺点</p>
+
+<ol>
+<li>需要每箱中同时包含好,坏两个类别</li>
+</ol>
+
+<h2 id="toc_11">WOE计算公式</h2>
+
+<p><img src="media/15505602742016/15505691302453.jpg" alt=""/></p>
+
+<h2 id="toc_12">WOE编码的意义</h2>
+
+<ol>
+<li>符号和好样本比例相关</li>
+<li>要求回归模型的系数为负</li>
+</ol>
+
+<h1 id="toc_13">特征信息度的计算和意义</h1>
+
+<p>可以用信息度来进行变量挑选</p>
+
+<p>在评分卡模型中,变量挑选是非常重要的工作.比如:<br/>
+如果变量之间具有共线性,线性相关性,那么就会造成信息冗余,这就降低了显著性,甚至造成符号失真.<br/>
+变量太多的话,也加剧了后期验证,部署,监控的负担.而且有些变量在业务上含义不充分,解释性比较低.</p>
+
+<p>这里是进行变量挑选的一些依据</p>
+
+<ol>
+<li>带约束Lasso</li>
+<li>特征重要性:随机森林</li>
+<li>模型拟合优度和复杂度:基于AIC的逐步回归</li>
+<li>变量信息度:IV</li>
+</ol>
+
+<p>IV(Information Value),衡量特征包含预测变量浓度的一种指标<br/>
+<img src="media/15505602742016/15505713539693.jpg" alt=""/></p>
+
+<p>特征信息度的结构<br/>
+\[IV_i=(G_i-B_i)\times \log{\dfrac{G_i}{B_i}} = (G_i-B_i)\times WOE_i\]</p>
+
+<p>其中,G_i,B_i代表箱i中好坏样本占全体好坏样本的比例.<br/>
+WOE:衡量两类样本分布的差异性<br/>
+(G_i,B_i):衡量差异的重要性<br/>
+例如:<br/>
+G_1=0.2,B_1=0.1与G_2=0.02,B_2=0.01<br/>
+\[WOE_1=WOE_2=log(2) \\\<br/>
+IV_1=(0.2-0.1)\times log(2)=0.1 \times log(2) \\\<br/>
+IV_2=(0.02-0.01) \times log(2)=0.01 \times log(2)\]</p>
+
+<h2 id="toc_14">特征信息度的作用</h2>
+
+<p><strong>挑选变量</strong></p>
+
+<ul>
+<li>非负指标</li>
+<li>高IV表示该特征和目标变量的关联度高</li>
+<li>目标变量只能是二分类</li>
+<li>过高的IV,可能有潜在的风险</li>
+<li>特征分箱越细,IV越高</li>
+<li>常用的阈值
+<ul>
+<li>&lt;=0.02 : 没有预测性,不可用</li>
+<li>0.02 ~ 0.1 : 弱预测性</li>
+<li>0.1 ~ 0.2 : 有一定的预测性</li>
+<li>0.2+ : 高预测性</li>
+</ul></li>
+</ul>
+
+<h1 id="toc_15">信用风险中的单变量分析和多变量分析</h1>
+
+<h2 id="toc_16">单变量分析</h2>
+
+<p>目的:根据变量某些属性,从初选名单(long list)中筛选出合适的变量进入缩减名单(short list)</p>
+
+<p>那么需要分析变量属性</p>
+
+<ol>
+<li>变量的显著性(高IV)</li>
+<li>变量的分布</li>
+<li>变量的业务含义</li>
+</ol>
+
+<p>以分箱后的WOE为例</p>
+
+<ol>
+<li>用IV检验有效性</li>
+<li>连续变量bad rate的单调性(可以放宽到U型)</li>
+<li>单一区间的占比不宜过高</li>
+</ol>
+
+<h2 id="toc_17">多变量分析</h2>
+
+<p>变量的两两相关性</p>
+
+<p>当相关性高时,只能保留一个.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[XGBoost]]></title>
+    <link href="http://dmlcoding.com/15488325444778.html"/>
+    <updated>2019-01-30T15:15:44+08:00</updated>
+    <id>http://dmlcoding.com/15488325444778.html</id>
+    <content type="html"><![CDATA[
+<h1 id="toc_0">XGBoost概述</h1>
+
+<ul>
+<li>XGBoost是GBDT算法的一种变种，是一种常用的有监督集成学习算法；是一种伸缩性强、便捷的可并行构建模型的Gradient Boosting算法。
+<ul>
+<li>XGBoost官网：<a href="http://xgboost.readthedocs.io">http://xgboost.readthedocs.io</a> </li>
+<li>XGBoost Github源码位置：<a href="https://github.com/dmlc/xgboost">https://github.com/dmlc/xgboost</a></li>
+<li>XGBoost支持开发语言：Python、R、Java、Scala、C++等。</li>
+</ul></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[GBDT]]></title>
+    <link href="http://dmlcoding.com/15488325386128.html"/>
+    <updated>2019-01-30T15:15:38+08:00</updated>
+    <id>http://dmlcoding.com/15488325386128.html</id>
+    <content type="html"><![CDATA[
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Adaboost]]></title>
+    <link href="http://dmlcoding.com/15488325277802.html"/>
+    <updated>2019-01-30T15:15:27+08:00</updated>
+    <id>http://dmlcoding.com/15488325277802.html</id>
+    <content type="html"><![CDATA[
+<h1 id="toc_0">AdaBoost算法原理简述</h1>
+
+<p><strong>Adaptive Boosting</strong> 是一种迭代算法.每一轮迭代中会在训练集上产生一个新的学习器,然后使用该学习器对所有样本进行预测,以评估每个样本的重要性.换句话来讲,算法会为每个样本赋予一个权重,每次用训练好的学习器标注/预测各个样本.如果某个样本点被预测的越正确,则将其权重降低;否则提高样本的权重.权重越高的样本在下一轮迭代训练中所占的比重就越大,也就是越难区分的样本在训练过程中会变得越重要.</p>
+
+<span id="more"></span><!-- more -->
+
+<p>整个迭代过程直到错误率足够小或者达到一定的迭代次数为止.</p>
+
+<p>AdaBoost 算法的核心,样本加权.<br/>
+<img src="media/15488325277802/15490045182494.jpg" alt="" style="width:664px;"/></p>
+
+<h1 id="toc_1">AdaBoost算法推理</h1>
+
+<p>AdaBoost算法将基分类器进行线性组合作为强分类器,同时给分类误差率较小的基分类器以大的权重,给分类误差率较大的基分类器以小的权重值;构建的线性组合</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Pandas 中map, applymap and apply的区别]]></title>
@@ -1354,1350 +2105,6 @@ f_k(x)=f_{k-1}(x)+\alpha_kG_k(x)<br/>
 
 <p>Stacking是指训练一个模型用于组合(combine)其他模型(基模型/基学习器)的技术.即首先训练出多个不同的模型,然后再以之前训练的各个模型的输出作为输入来新训练一个新的模型,从而得到一个最终的模型.一般情况下使用单层的Logistic回归作为组合模型<br/>
 <img src="media/15255701784620/15260322012383.jpg" alt=""/></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[决策树]]></title>
-    <link href="http://dmlcoding.com/15255685118456.html"/>
-    <updated>2018-05-06T09:01:51+08:00</updated>
-    <id>http://dmlcoding.com/15255685118456.html</id>
-    <content type="html"><![CDATA[
-<p>在决策树算法的学习过程中,信息增益是特征选择的一个重要指标.它定义为一个特征能够为分类系统带来多少信息,带来的信息越多,说明该特征越重要,相应的信息增益也就越大<br/>
-<img src="media/15255685118456/15256176444642.jpg" alt=""/></p>
-
-<h1 id="toc_0">信息熵(Entropy)</h1>
-
-<p>\[H(X)=-\sum_{i=1}^mp_i\log_2(p_i)\]</p>
-
-<span id="more"></span><!-- more -->
-
-<ul>
-<li>信息量:指的是一个样本/事件所蕴含的信息,如果一个事件的概率越大,那么就可以认为该事件所蕴含的信息越少.比如:总所周知的&quot;太阳从东方升起&quot;.因为是确定事件,所以不携带任何信息量.</li>
-<li>信息熵:1948年,香农引入信息熵;<strong>一个系统越是有序,信息熵就越低;一个系统越是混乱,信息熵就越高.</strong> 所以,信息熵被认为是一个系统有序程度的度量</li>
-<li>信息熵就是用来描述系统信息量的不确定度(复杂度)的.</li>
-</ul>
-
-<p>High Entropy(高信息熵):表示随机变量X是均匀分布的,各种取值情况是等概率出现的.<br/>
-Low Entropy(低信息熵):表示随机变量X各种取值不是等概率出现.可能出现有的事件概率很大,有的事件概率很小.</p>
-
-<h2 id="toc_1">条件熵H(Y|X)</h2>
-
-<blockquote>
-<p>给定条件X的情况下,随机变量Y的信息熵就叫做条件熵</p>
-</blockquote>
-
-<p>在计算条件熵的情况下,先计算一个小例子.看下面这张图<br/>
-<img src="media/15255685118456/15256671505083.jpg" alt=""/></p>
-
-<p>我们可以得出<br/>
-P(X=数学)=4/8=0.5<br/>
-P(Y=M)=4/8=0.5<br/>
-P(X=数学,Y=F)=2/8=0.25<br/>
-p(Y=M|X=英语)=0(由图可知,英语专业的都是女生)</p>
-
-<p>根据这个公式,计算H(X)和H(Y)<br/>
-\[H(X)=-\sum_{i=1}^mp_i\log_2(p_i)\]<br/>
-因为:<br/>
-P(X=数学)=0.5<br/>
-P(X=英语)=0.25<br/>
-P(X=IT)=0.25<br/>
-所以:<br/>
-\[H(X)=-0.5log_2{0.5}-0.25log_2{0.25}-0.25log_2{0.25}=1.5\]</p>
-
-<p>因为:<br/>
-P(Y=M)=4/8=0.5<br/>
-P(Y=F)=4/8=0.5<br/>
-\[H(Y)=-0.5log_2{0.5}-0.5log_2{0.5}=1\]</p>
-
-<p>比如:当专业(X)为数学的时候,Y的信息熵的值为:H(Y|X=数学)</p>
-
-<p><img src="media/15255685118456/15256671787875.jpg" alt=""/></p>
-
-<p>摘出专业都是数学的这部分,性别符合均匀分布.因此条件熵为1<br/>
-\[H(Y|X=数学)=1\]</p>
-
-<p>给定条件X的情况下,所有不同X值情况下Y的信息熵的平均值叫做条件熵.<br/>
-\[H(Y|X)=\sum_{j=1}P(X=v_j)H(Y|X=v_j)\]</p>
-
-<p><img src="media/15255685118456/15256888532803.jpg" alt=""/></p>
-
-<p>\[H(Y|X)=0.5*1+0.25*0+0.25*0=0.5\]</p>
-
-<p>给定条件X的情况下,所有不同X值情况下Y的信息熵的平均值叫做条件熵.另外一个公司如下所示:<br/>
-\[H(Y|X)=H(X,Y)-H(X)\]<br/>
-事件(X,Y)发生所包含的熵,减去事件X单独发生的熵,即为在事件X发生的前提下,Y发生&quot;新&quot;带来的熵,这个也就是条件熵本身的概念.</p>
-
-<p>参考:<a href="https://blog.csdn.net/pipisorry/article/details/51695283">https://blog.csdn.net/pipisorry/article/details/51695283</a></p>
-
-<h2 id="toc_2">条件熵H(Y|X)公式推导</h2>
-
-<p>\[<br/>
-\begin{aligned}<br/>
-H(Y|X) &amp; = \sum_{j=1}P(X=v_j)H(Y|X=v_j) \\\<br/>
-&amp; = \sum_xP(X)H(Y|X) \\\<br/>
-&amp; = \sum_xp(x)\left(-\sum_yp(y|x)\log(p(y|x))\right) \\\<br/>
-&amp; = -\sum_x\sum_yp(x,y)log\left(\dfrac{p(x,y)}{p(x)}\right) \\\<br/>
-&amp; = -\sum_x\sum_yp(x,y)log(p(x,y))-\left [-\sum_x \left (\sum_yp(x,y) \right )\log(p(x)) \right ] \\\<br/>
-&amp; = H(X,Y)- \left [-\sum_xp(x)\log(p(x)) \right ] \\\<br/>
-&amp; = H(X,Y)-H(X)<br/>
-\end{aligned} <br/>
-\]</p>
-
-<h2 id="toc_3">信息增益</h2>
-
-<p>信息增益恰好是:信息熵-条件熵</p>
-
-<p>也就是说,信息增益代表了在一个条件下,信息复杂度(不确定性)减少的程度.</p>
-
-<p>那么我们现在也很好理解了,在决策树算法中,我们的关键就是每次选择一个特征,特征有多个,那么到底按照什么标准来选择哪一个特征.</p>
-
-<p>这个问题就可以用信息增益率来度量.如果选择一个特征后,信息增益率最大(信息不确定性减少的程度最大),那么我们就选取这个特征</p>
-
-<h1 id="toc_4">决策树(Decision Tree)</h1>
-
-<h2 id="toc_5">什么是决策树</h2>
-
-<p>决策树是在已知各种情况发生概率的基础上,通过构建决策树来进行分析的一种方式,是一种直观应用概率分析的一种图解法;决策树是一种预测模型,代表的是对象属性与对象值之间的映射关系;决策树是一种树形结构,其中每个内部节点表示一个属性的测试,每个分支表示一个测试输出,每个叶节点代表一种类别;决策树是一种非常常用的有监督的分类算法.</p>
-
-<p>决策树的决策过程就是从根节点开始,测试待分类项中对应的特征属性,并按照其值选择输出分支,直到叶子节点,将叶子节点的存放的类别作为决策结果.</p>
-
-<p>决策树分为两大类:分类树和回归树,前者用于分类标签值,后者用于预测连续值,常用算法有ID3,C4.5,CART等</p>
-
-<h2 id="toc_6">决策树的构建过程</h2>
-
-<p>决策树算法的重点是决策树的构造;决策树的构造就是进行属性选择度量,确定各个特征属性之间的拓扑结构(树结构);构建决策树的关键步骤就是分裂属性,分裂属性是指在某个节点按照某一个类特征属性的不同划分构建不同的分支,其目标就是让各个分裂子集尽可能的&quot;纯&quot;(让一个分类子类中待分类的项尽可能的属于同一个类别).</p>
-
-<p>构建步骤如下:</p>
-
-<ol>
-<li>将所有的特征看成一个一个的节点;</li>
-<li>遍历每个特征的每一种分割方式,找到最好的分割点;将数据划分为不同的子节点.eg:\(N_1,N_2...N_m\);计算划分之后所有子节点的&quot;纯度&quot;信息;</li>
-<li>对第二步产生的分割,选择出最优的特征以及最优的划分方式;得出最终的子节点:\(N_1,N_2...N_m\);</li>
-<li>对子节点\(N_1,N_2...N_m\)分别继续执行2-3步,直到每个最终的子节点都足够&quot;纯&quot;.</li>
-</ol>
-
-<h2 id="toc_7">决策树特征属性类型</h2>
-
-<p>属性类型当然可以是离散型和连续型.</p>
-
-<p>根据特征属性的类型不同,在构建决策树的时候,采用不同的方式,具体如下:</p>
-
-<ol>
-<li>属性是离散值,而且不要求生成的是二叉决策树,此时一个属性就是一个分支.</li>
-<li>属性是离散值,而且要求生成的是二叉决策树,此时使用属性划分的子集进行测试,按照&quot;属于此子集&quot;和&quot;不属于此子集&quot;分成两个分支.</li>
-<li>属性是连续值,可以确定一个值作为分裂点split_point,按照&gt;split_point和&lt;=split_point生成两个分支.</li>
-</ol>
-
-<h2 id="toc_8">决策树分割属性选择</h2>
-
-<p>决策树算法是一种&quot;贪心&quot;算法策略,只考虑在当前数据特征情况下的<strong>最好分割方式</strong>,不能进行回溯操作.</p>
-
-<p>对于整体的数据集而言,按照所有的特征属性进行划分操作,对所有的划分操作的结果集的&quot;<strong>纯度</strong>&quot;进行比较.选择&quot;纯度&quot;越高的特征属性作为当前需要分割的数据集进行分割操作,持续迭代,直到得到最终结果.决策树是通过&quot;纯度&quot;来选择分割特征属性点的.</p>
-
-<p>说了这么多&quot;纯&quot;,那么究竟该如何量化纯度值呢?</p>
-
-<h2 id="toc_9">决策树量化纯度</h2>
-
-<p>决策树的构建是基于<strong>样本概率</strong>和<strong>纯度</strong>进行构建操作的,那么进行判断数据集是否&quot;纯&quot;可以通过三个公式进行判断,分别是<strong>Gini系数</strong>,<strong>熵(Entropy)</strong>,<strong>错误率</strong>.<strong>这三个公式值越大,表示数据越&quot;不纯&quot;.越小表示越&quot;纯&quot;</strong>;实践证明这三个公式效果差不多,一般情况使用熵公式</p>
-
-<p>\[Gini=1-\sum_{i=1}^nP(i)^2\]</p>
-
-<p>\[H(Entropy)=-\sum_{i=1}^nP(i)\log_2(P(i))\]</p>
-
-<p>\[Error=1-max  \sideset{_{i=1}^n}{}\lbrace P(i) \rbrace\]</p>
-
-<h2 id="toc_10">决策树量化纯度</h2>
-
-<p>当计算出各个特征属性的量化纯度值后使用<strong>信息增益度</strong>来选择出当前数据集的分割特征属性;<strong>如果信息增益度的值越大,表示在该特征属性上会损失的纯度越大,那么该属性就越应该在决策树的上层</strong>,计算公式为:<br/>
-\[Gain=\Delta=H(D)-H(D|A)\]</p>
-
-<p>Gain为A为特征对训练数据集D的信息增益,它为集合D的经验熵H(D)与特征A给定条件下D的经验条件熵H(D|A)之差</p>
-
-<h2 id="toc_11">决策树算法的停止条件</h2>
-
-<p>决策树构建的过程是一个递归的过程,所以必须给定停止条件,否则过程将不会进行停止,一般情况有两种停止条件:</p>
-
-<ol>
-<li>当每个子节点只有一种类型的时候停止构建;</li>
-<li>当前节点中记录数小于某个阈值,同时迭代次数达到给定值时,停止构建过程,此时使用\(\max(p(i))\)作为节点的对应类型</li>
-</ol>
-
-<p>方式一可能会使树的节点过多,导致过拟合(Overfiting)等问题;<br/>
-比较常用的方式是使用方式二作为停止条件</p>
-
-<h2 id="toc_12">决策树算法效果评估(重新听,补充这里的推导算法)</h2>
-
-<p>决策树的效果评估和一般的分类算法一样,采用<strong>混淆矩阵</strong>来进行计算准确率,召回率,精确率等指标.</p>
-
-<p>也可以采用叶子节点的纯度值总和来评估算法的效果.值越小,效果越好.</p>
-
-<p>也就是决策树的损失函数(该值越小,算法效果越好)<br/>
-\[C(T)=\sum_{t=1}^{leaf}\dfrac{|D_t|}{|D|}H(t)\]</p>
-
-<h3 id="toc_13">决策树直观理解结果计算</h3>
-
-<p><img src="media/15255685118456/15256176444642.jpg" alt=""/></p>
-
-<h1 id="toc_14">决策树生成算法</h1>
-
-<p>建立决策树的主要是以下三种算法</p>
-
-<ul>
-<li>ID3</li>
-<li>C4.5</li>
-<li>CART(Classification And Regression Tree)</li>
-</ul>
-
-<h2 id="toc_15">ID3算法</h2>
-
-<p>ID3算法是决策树的一个经典的构造算法,内部使用信息熵以及信息增益来进行构建;每次迭代选择信息增益最大的特征属性作为分割属性.</p>
-
-<p>也就是会用到前面写到的两个公式</p>
-
-<p>\[H(D)=-\sum_{i=1}^nP(i)\log_2(P(i))\]<br/>
-\[Gain=\Delta=H(D)-H(D|A)\]</p>
-
-<h2 id="toc_16">ID3算法优缺点</h2>
-
-<ul>
-<li><p>优点</p>
-<ul>
-<li>决策树构建速度快,实现简单</li>
-</ul></li>
-<li><p>缺点</p>
-<ul>
-<li>计算依赖于特征数目较多的特征,而属性值最多的属性并不一定最优</li>
-<li>ID3算法不是递增算法</li>
-<li>ID3算法是单变量决策树,对于特征属性之间的关系不会考虑</li>
-<li>抗噪性差</li>
-<li>只适合小规模数据集,需要将数据放到内存中</li>
-</ul></li>
-</ul>
-
-<h2 id="toc_17">C4.5算法</h2>
-
-<p>在ID3算法的基础上,进行算法优化提出的一种算法(C4.5);现在C4.5已经是特别经典的一种决策树构造算法;使用<strong>信息增益率</strong>来取代ID3算法中的信息增益,在树的构造过程中会<strong>进行剪枝操作进行优化</strong>;能够自动完成对连续属性的离散化处理;C4.5算法在选中分割属性的时候选择信息增益率最大的属性,涉及到的公式为:<br/>
-\[H(D)=-\sum_{i=1}^nP(i)\log_2(P(i))\]<br/>
-\[Gain=\Delta=H(D)-H(D|A)\]<br/>
-\[Gain\_ration(A)=\dfrac{Gain(A)}{H(A)}\]</p>
-
-<h2 id="toc_18">C4.5算法优缺点</h2>
-
-<ul>
-<li><p>优点</p>
-<ul>
-<li>产生的规则易于理解</li>
-<li>准确率较高</li>
-<li>实现简单</li>
-</ul></li>
-<li><p>缺点</p>
-<ul>
-<li>对数据集需要进行多次顺序扫描和排序,所以效率较低</li>
-<li>只适合小规模数据集,需要将数据放到内存中</li>
-</ul></li>
-</ul>
-
-<p>总结:属性越多,信息增益率越大</p>
-
-<h2 id="toc_19">CART算法</h2>
-
-<p>使用<strong>基尼系数</strong>作为数据纯度的量化指标来构建的决策树算法就叫做CART(Classification And Regression Tree,分类回归树)算法.CART算法使用<strong>GINI增益</strong>作为分割属性选择的标准,选择GINI增益最大的作为当前数据集的分割属性;可用于分类和归类两类问题.强调备注:CART构建的是二叉树.</p>
-
-<p>\[Gini=1-\sum_{i=1}^nP(i)^2\]<br/>
-\[Gain=\Delta=Gini(D)-Gini(D|A)\]</p>
-
-<h2 id="toc_20">ID3,C4.5,CART分类算法总结</h2>
-
-<ol>
-<li>ID3和C4.5算法只适合在小规模数据集上使用</li>
-<li>ID3和C4.5算法都是单变量决策树</li>
-<li>当属性值取值比较多的时候,最好考虑C4.5算法,ID3得出的效果会比较差</li>
-<li>决策树分类一般情况只适合小数据量的情况(数据可以放内存)</li>
-<li>CART算法是三种算法中最常用的一种决策树构建算法</li>
-<li>三种算法的区别仅仅只是对于当前树的评价标准不同而已,<em>ID3使用信息增益</em>,<em>C4.5使用信息增益率</em>,<em>CART使用基尼系数</em></li>
-<li>CART算法构建的一定是二叉树,ID3和C4.5构建的不一定是二叉树</li>
-</ol>
-
-<table>
-<thead>
-<tr>
-<th>算法</th>
-<th>支持模型</th>
-<th>树结构</th>
-<th>特征选择</th>
-<th>连续值处理</th>
-<th>缺失值处理</th>
-<th>剪枝</th>
-<th>特征属性多次使用</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>ID3</td>
-<td>分类</td>
-<td>多叉树</td>
-<td>信息增益</td>
-<td>不支持</td>
-<td>不支持</td>
-<td>不支持</td>
-<td>不支持</td>
-</tr>
-<tr>
-<td>C4.5</td>
-<td>分类</td>
-<td>多叉树</td>
-<td>信息增益率</td>
-<td>支持</td>
-<td>支持</td>
-<td>支持</td>
-<td>不支持</td>
-</tr>
-<tr>
-<td>CART</td>
-<td>分类,回归</td>
-<td>二叉树</td>
-<td>基尼系数,均方差</td>
-<td>支持</td>
-<td>支持</td>
-<td>支持</td>
-<td>支持</td>
-</tr>
-</tbody>
-</table>
-
-<h1 id="toc_21">案例一:使用鸢尾花数据分类(分类树案例)</h1>
-
-<p>使用决策树算法API对鸢尾花数据进行分类操作,并理解及进行决策树API的相关参数优化</p>
-
-<p><a href="http://archive.ics.uci.edu/ml/datasets/Iris">数据来源</a></p>
-
-<h2 id="toc_22">鸢尾花数据集描述</h2>
-
-<p>Data Set Information:</p>
-
-<p>This is perhaps the best known database to be found in the pattern recognition literature. Fisher&#39;s paper is a classic in the field and is referenced frequently to this day. (See Duda &amp; Hart, for example.) The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. One class is linearly separable from the other 2; the latter are NOT linearly separable from each other. </p>
-
-<p>Predicted attribute: class of iris plant. </p>
-
-<p>This is an exceedingly simple domain. </p>
-
-<p>This data differs from the data presented in Fishers article (identified by Steve Chadwick, spchadwick &#39;@&#39; espeedaz.net ). The 35th sample should be: 4.9,3.1,1.5,0.2,&quot;Iris-setosa&quot; where the error is in the fourth feature. The 38th sample: 4.9,3.6,1.4,0.1,&quot;Iris-setosa&quot; where the errors are in the second and third features.</p>
-
-<p>Attribute Information:</p>
-
-<ol>
-<li>sepal length in cm </li>
-<li>sepal width in cm </li>
-<li>petal length in cm </li>
-<li>petal width in cm </li>
-<li>class: <br/>
--- Iris Setosa <br/>
--- Iris Versicolour <br/>
--- Iris Virginica</li>
-</ol>
-
-<h1 id="toc_23">分类树和回归树的区别</h1>
-
-<p>分类树采用信息增益,信息增益率,基尼系数来评价树的效果,都是基于概率值进行判断的;而分类树的叶子节点的预测值一般为叶子节点中概率最大的类别作为当前叶子的预测值</p>
-
-<p>在回归树中,叶子节点的预测值一般为叶子节点中所有值的均值来作为当前叶子节点的预测值.所以在回归树中一般采用MSE作为树的评价指标,即均方差.<br/>
-\[MSE=\dfrac{1}{n}\sum_{i=1}^n(y_i-\hat y_i)^2\]</p>
-
-<p>一般情况下,只会使用CART算法构建回归树.</p>
-
-<h1 id="toc_24">案例二:波士顿房屋租赁价格预测(回归树案例)</h1>
-
-<h1 id="toc_25">决策树过拟合和欠拟合</h1>
-
-<h1 id="toc_26">决策树优化策略</h1>
-
-<h2 id="toc_27">剪枝优化</h2>
-
-<p>决策树过渡拟合一般情况是由于节点过多导致的,剪枝优化对决策树的正确率影响是比较大的,也是最常用的一种优化方式</p>
-
-<p>决策树的剪枝是决策树算法中最基本,最有用的一种优化方案,主要分为两大类</p>
-
-<h3 id="toc_28">决策树的剪枝方案</h3>
-
-<p><strong>前置剪枝</strong>:在构建决策树的过程中,提前停止.结果是决策树一般比较小,实践证明这种策略无法得到比较好的结果</p>
-
-<p><strong>后置剪枝</strong>:在决策树构建好后,然后再开始裁剪,一般使用两种方式:<br/>
-    1. 用单一叶子节点代替整个子树.叶子点的分类采用子树中最主要的分类;<br/>
-    2. 将一个子树完全替代另外一颗子树.<br/>
-    3. 后置剪枝的主要问题是计算效率问题,存在一定的浪费情况.</p>
-
-<p>后置剪枝总体思路(交叉验证):</p>
-
-<ul>
-<li>由完全树\(T_0\)开始,剪枝部分节点得到\(T_1\),在此剪枝得到\(T_2\)...直到仅剩树根的树\(T_k\)</li>
-<li>在验证数据集上对这k+1个树进行评价,选择最优树\(T_a\)(损失函数最小的树)</li>
-</ul>
-
-<h3 id="toc_29">决策树剪枝过程</h3>
-
-<p>对于给定的决策树\(T_0\):</p>
-
-<ol>
-<li>计算所有内部非叶子节点的<strong>剪枝系数</strong></li>
-<li>查找<strong>最小剪枝系数</strong>的节点,将其子节点进行删除操作,进行剪枝得到决策树\(T_k\);如果存在多个最小剪枝系数节点,选择包含<strong>数据项最多</strong>的节点进行剪枝操作</li>
-<li>重复上述操作,直到产生的剪枝决策树\(T_k\)只有1个节点</li>
-<li>得到决策树\(T_0T_1T_2...T_k\)</li>
-<li>使用<strong>验证样本集</strong>选择最优子树\(T_a\)</li>
-</ol>
-
-<p>使用验证集选择最优子树的标准,可以使用原始损失函数来考虑:<br/>
-\[loss=\sum_{t=1}^{leaf}\dfrac{|D_t|}{|D|}H(t)\]</p>
-
-<h3 id="toc_30">决策树剪枝损失函数及剪枝系数</h3>
-
-<p>原始损失函数<br/>
-\[loss=\sum_{t=1}^{leaf}\dfrac{|D_t|}{|D|}H(t)\]</p>
-
-<p>叶节点越多,决策树越复杂,损失越大;修正添加剪枝系数,修改后的损失函数为<br/>
-\[loss_{\alpha}=loss+\alpha*leaf\]</p>
-
-<p>考虑根节点为r的子树,剪枝前后的损失函数分别为loss(R)和loss(r),当这两者相等的时候,可以求得剪枝系数<br/>
-\[loss_{\alpha}(r)=loss(r)+\alpha\]<br/>
-\[loss_{\alpha}(R)=loss(R)+\alpha*R_{leaf}\]<br/>
-\[\alpha=\dfrac{loss(r)-loss(R)}{R_{leaf}-1}\]</p>
-
-<h2 id="toc_31">Random Forest(随机森林)</h2>
-
-<p>利用训练数据随机产生多个决策树,形成一个森林.然后使用这个森林对数据进行预测,选取最多结果作为预测结果.</p>
-
-<h1 id="toc_32">总结</h1>
-
-<p>1.分类树和回归树<br/>
-区别:<br/>
-a. 分类树中使用信息熵,gini系数,错误率作为数&quot;纯度&quot;的度量指标;回归树中使用MSE,MAE作为树的&quot;纯度&quot;度量指标;<br/>
-b.分类树使用叶子节点中包含最多那个类别作为当前叶子的预测值;回归树中使用叶子节点中包含的所有样本的目标属性的均值作为当前叶子的预测值.</p>
-
-<p>2.决策树的构建过程<br/>
-思想:<br/>
-让每次分裂数据集的时候,让分裂之后的数据集更加的&quot;纯&quot;(让数据更有区分能力)</p>
-
-<p>3.决策树分裂属性选择方式<br/>
-a.基于最优划分的规则进行选择:迭代计算所有特征属性上所有划分方式后的&quot;纯度&quot;,选择划分后更加&quot;纯&quot;的一种方式(信息增益,信息增益率).---&gt;<br/>
-只能说明在当前数据集上是最优的,所以可能会存在一定的过拟合情况.<br/>
-b.基于随机的划分规则:每次划分的时候,都是先选择一定数目的特征,然后在这部分特征中选择出一个最优的划分特征.因为每次选的划分特征都是局部最优的,相对来讲,可以增加模型的鲁棒性,降低模型的过拟合性.</p>
-
-<p>4.决策树的欠拟合,过拟合<br/>
-a.可以通过增加树的深度来缓解决策树欠拟合这个问题<br/>
-b.我们可以通过限制树的复杂程度来缓解这个过拟合的问题<br/>
-c.因此也就是找到一个平衡</p>
-
-<p>5.网格交叉验证(GridSearchCV)<br/>
-6.决策树的效果评估</p>
-
-<h1 id="toc_33">决策树可视化</h1>
-
-<p>决策树可视化可以方便我们直观的观察所构建的树模型;决策树可视化依赖graphiz服务,所以我们在进行可视化之前,安装对应的服务.</p>
-
-<h2 id="toc_34">安装</h2>
-
-<p>下载地址:<a href="http://www.graphviz.org/">http://www.graphviz.org/</a><br/>
-Mac安装步骤</p>
-
-<pre class="line-numbers"><code class="language-text"># 安装graphviz服务
-brew install graphviz
-
-# 安装python的graphviz插件
-pip install graphviz
-
-# 安装python的pydotplus插件
-pip install pydotplus
-
-</code></pre>
-
-<h2 id="toc_35">使用方式</h2>
-
-<p><strong>方式一:将模型输出dot文件,然后使用graphviz的命令将dot文件转换为pdf格式的文件</strong></p>
-
-<pre class="line-numbers"><code class="language-text">from sklearn import tree
-with open(&#39;iris.dot&#39;,&#39;w&#39;) as f:
-    f = tree.export_graphviz(model,out_file=f)
-
-
-# 命令行执行dot命令 dot -Tpdf iris.dot -o iris.pdf
-</code></pre>
-
-<p><strong>方式二:直接使用pydotplus插件直接生成pdf文件进行保存</strong></p>
-
-<pre class="line-numbers"><code class="language-text">from sklearn import tree
-import pydotplus
-dot_data = tree.export_graphviz(model,out_file=None)
-graph=pydotplus.graph_from_dot_data(dot_data)
-graph.write_pdf(&quot;iris2.pdf&quot;)
-# graph.write_png(&quot;iris3.png&quot;)
-</code></pre>
-
-<p><strong>方式三:使用Image对象直接显示pydotplus生成的图片</strong></p>
-
-<pre class="line-numbers"><code class="language-text">from sklearn import tree
-from IPython.display import Image
-import pydotplus
-
-dot_data=tree.export_graphviz(model,put_file=None,
-    feature_names=[&#39;sepal length&#39;,&#39;sepal width&#39;,&#39;petal length&#39;,&#39;petal width&#39;],
-    class_names=[&#39;Iris-setosa&#39;,&#39;Iris-versicolor&#39;,&#39;Iris-virgincia&#39;],
-    filled=True,rounded=True,
-    special_characters=True)
-    
-graph=pydotplus.graph_from_dot_data(dot_data)
-Image(graph.create_png)
-</code></pre>
-
-<h1 id="toc_36">参考</h1>
-
-<p>[1]: </p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[KNN]]></title>
-    <link href="http://dmlcoding.com/15277324362749.html"/>
-    <updated>2018-05-31T10:07:16+08:00</updated>
-    <id>http://dmlcoding.com/15277324362749.html</id>
-    <content type="html"><![CDATA[
-<p>K近邻(K-nearst neighbors,KNN)是一种基本的机器学习算法,所谓K近邻,就是K个最近的邻居的意思,说的是每个样本都可以用它最接近的K个邻居来代表.</p>
-
-<p>比如:判断一个人的人品,只需要观察与他来往最密切的几个人的人品好坏就可以得出,即,&quot;近朱者赤,近墨者黑&quot;.</p>
-
-<p>KNN算法既可以应用于分类应用中,也可以应用在回归应用中.KNN在做回归和分类的主要区别在于最后做预测的时候决策方式不同,<strong>KNN在分类预测时,一般采用多数表决法;而在做回归预测时,一般采用平均值法.</strong></p>
-
-<span id="more"></span><!-- more -->
-
-<h1 id="toc_0">KNN算法原理</h1>
-
-<ol>
-<li>从训练集合中获取K个离待预测样本距离最近的样本数据;</li>
-<li>根据获取得到的K个样本数据来预测当前待预测样本的目标属性值</li>
-</ol>
-
-<p><img src="media/15277324362749/15277329582308.jpg" alt=""/></p>
-
-<p>如上图所示,绿色圆要被决定赋予那一个类呢,是红色三角形还是蓝色矩形?</p>
-
-<ol>
-<li>如果K=3,由于红色三角形所占比例为2/3,绿色圆将被赋予红色三角形这个类.(多数投票)</li>
-<li>如果K=5,由于蓝色四方形比例为3/5,因此绿色圆被赋予蓝色矩形.</li>
-</ol>
-
-<h1 id="toc_1">KNN三要素</h1>
-
-<p>在KNN算法中,非常重要的主要是三个因素:</p>
-
-<ul>
-<li><strong>K值的选择</strong>:对于K值的选择,一般根据样本分布选择一个较小的值,然后通过<strong>交叉验证</strong>来选择一个比较合适的最终值;当选择比较小的K值的时候,表示使用较小领域中的样本进行预测,训练误差会减小,但是会导致模型变得复杂,容易过拟合;当选择较大的K值的时候,表示使用较大领域中的样本进行预测,训练误差会增大,同时会使模型变得简单,容易导致欠拟合.</li>
-<li><strong>距离的度量</strong>:一般使用欧式距离(即,欧几里得距离);</li>
-<li><strong>决策规则</strong>:在分类模型中,主要使用多数表决法或者加权多数表决法;在回归模型中,主要使用平均值法或者加权平均值法.加权的时候,可以认为距离越近的权重也应该越大.</li>
-</ul>
-
-<p>\[D(x,y) = \sqrt{(x_1-y_1)^2 + (x_2-y_2)^2 + ... + (x_n-y_n)^2} = \sqrt{\sum\limits_{i=1}^{n}(x_i-y_i)^2}\]</p>
-
-<h1 id="toc_2">KNN预测规则</h1>
-
-<p>既然KNN算法既可以用在分类场景中,也可以用在回归场景中,那么针对不同的场景,KNN也有不同的预测规则</p>
-
-<h2 id="toc_3">KNN分类预测规则</h2>
-
-<p>在KNN分类应用中,一般采用对数投票或者加权多数表决法.</p>
-
-<p><img src="media/15277324362749/15277370065477.jpg" alt=""/></p>
-
-<ul>
-<li><p><strong>多数表决法</strong>: 每个邻近样本的权重是一样的,也就是说最终预测的结果为出现类别最多的那个类,比如上图中蓝色矩形的最终类别为红色圆;</p></li>
-<li><p><strong>加权多数表决法</strong>:每个邻近样本的权重是不一样的,一般情况下采用权重和距离成反比的方式来计算,也就是说最终预测结果是出现权重最大的那个类别:比如上图中,假设三个红色圆点到预测样本点的距离均为2,两个黄色星到预测样本点距离为1,那么蓝色圆圈的最终类别为黄色.(\(\frac12*3 &lt; 1*2\))</p></li>
-</ul>
-
-<h2 id="toc_4">KNN回归预测规则</h2>
-
-<p>在KNN回归应用中,一般采用平均值法或者加权平均值法.<br/>
-<img src="media/15277324362749/15277369863901.jpg" alt=""/></p>
-
-<ul>
-<li><p><strong>平均值法</strong>: 每个邻近样本的权重是一样的,也就是说最终预测的结果为所有邻近样本的目标属性值的均值;比如上图中,蓝色方块的最终预测值为\((3+3+3+2+2)/5=2.6\).</p></li>
-<li><p><strong>加权平均值法</strong>:每个邻近样本的权重是不一样的,一般情况下采用权重和距离成反比的方式来计算,也就是说在计算均值的时候进行加权操作;比如上图中,假设上面三个点到待预测样本点的距离均为2,下面两个点到待预测样本点距离为1.那么蓝色方块的最终预测值为2.43.</p></li>
-</ul>
-
-<h1 id="toc_5">KNN算法实现方式</h1>
-
-<p>KNN算法的重点在于找出K个最近邻的点,主要方式有一下几种:</p>
-
-<ul>
-<li><strong>蛮力实现(brute)</strong>:计算预测样本到所有训练集样本的距离,然后选择最小的K个距离即可得到K个最近邻点.缺点在于当特征数比较多,样本数比较多的时候,算法的执行效率比较低;</li>
-<li><strong>KD树(kd_tree)</strong>:KD树算法中,首先是对训练数据进行建模,构建KD树,然后再根据建好的模型来获取邻近样本数据.</li>
-<li>除此之外,还有一些从kd_tree修改后的求解最邻近点的算法,比如:Ball Tree,BBF Tree,MVP tree等</li>
-</ul>
-
-<p>接下来重点说一下KD树的构建过程</p>
-
-<h1 id="toc_6">KD Tree</h1>
-
-<p>KD Tree是KNN算法中用于计算最近邻的快速,便捷构建方式.</p>
-
-<p>当样本数据量少的时候,我们可以使用brute这种暴力的方式进行求解最近邻,即计算到所有样本的距离.但是当样本量比较大的时候,直接计算所有样本的距离,工作量有点大,所以在这种情况下,我们可以使用kd_tree来快速的计算.</p>
-
-<h2 id="toc_7">KD Tree构建方式</h2>
-
-<p>KD树采用从m个样本的n维特征中,分别计算n个特征取值的方差,用方差最大的第k维特征\(n_k\)作为根节点.对于这个特征,选择取值的中位数\(n_{kv}\)作为样本的划分点,对于小于该值的样本划分到左子树,对于大于等于该值的样本划分到右子树,对于左右子树采用同样的方式找方差最大的特征最为根节点,递归即可产生KD树.(可以认为方差越大,越具有区分能力)</p>
-
-<p><img src="media/15277324362749/15277383424878.jpg" alt="KD树构建过程"/></p>
-
-<p>比如我们有二维样本6个，{(2,3)，(5,4)，(9,6)，(4,7)，(8,1)，(7,2)}，构建kd树的具体步骤如草稿所示<br/>
-<img src="media/15277324362749/15277404253921.jpg" alt=""/></p>
-
-<p>构建的完整子树就如图所示<br/>
-<img src="media/15277324362749/15278193600353.jpg" alt=""/></p>
-
-<h2 id="toc_8">KD Tree查找最近邻</h2>
-
-<p>当我们生成KD树以后,就可以去预测测试集里面的样本目标点了.对于一个目标点,我们首先在KD树里面找到包含目标点的叶子节点.以目标点为圆心,以目标点到叶子节点样本实例的距离为半径,得到一个超球体,最近邻的点一定在这个超球体内部.然后返回叶子节点的父节点,检查另一个子节点包含的超矩形体是否和超球体相交,如果相交就到这个子节点寻找是否有更加近的近邻,有的话就更新最近邻.如果不相交那就简单了,我们直接返回父节点的父节点,在另一个子树继续搜索最近邻.当回溯到根节点时,算法结束,此时保存的最近邻节点就是最终的最近邻.</p>
-
-<p>具体过程如图所示<br/>
-<img src="media/15277324362749/15277426727922.jpg" alt=""/></p>
-
-<p><img src="media/15277324362749/15278221391077.jpg" alt=""/></p>
-
-<h1 id="toc_9">参考引用</h1>
-
-<ul>
-<li><a href="https://zh.wikipedia.org/wiki/%E6%9C%80%E8%BF%91%E9%84%B0%E5%B1%85%E6%B3%95">KNN wiki</a></li>
-<li><a href="https://www.cnblogs.com/pinard/p/6061661.html">K近邻法(KNN)原理小结</a></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[逻辑回归]]></title>
-    <link href="http://dmlcoding.com/15198753668603.html"/>
-    <updated>2018-03-01T11:36:06+08:00</updated>
-    <id>http://dmlcoding.com/15198753668603.html</id>
-    <content type="html"><![CDATA[
-<p>不知道什么是逻辑回归,但是也许看完接下来的文章,你会有个大概的印象吧</p>
-
-<h1 id="toc_0">简单介绍Logistic回归</h1>
-
-<h2 id="toc_1">Logistic回归用到的知识点</h2>
-
-<ul>
-<li>Sigmoid函数和Logistic回归分类器</li>
-<li>最优化理论初步</li>
-<li>梯度下降最优化算法</li>
-<li>数据中的缺失项处理</li>
-</ul>
-
-<span id="more"></span><!-- more -->
-
-<h2 id="toc_2">Logistic回归的一般过程</h2>
-
-<ul>
-<li>1.收集数据:采用任意方法收集数据</li>
-<li>2.准备数据:由于需要进行距离计算,因此要求数据类型为数值型.另外,结构化数据格式则最佳.</li>
-<li>3.分析数据:采用任意方法对数据进行分析.</li>
-<li>4.训练算法:大部分时间将用于训练,训练的目的是为了找到最佳的分类回归系数.</li>
-<li>5.使用算法:首先,我们需要一些输入数据,并将其转换成对应的结构化数值;接着,基于训练好的回归系数就可以对这些数值进行简单的回归计算,判定他们属于哪个类别;在这之后,我们就可以在输出的类别上做一些其他分析工作.</li>
-</ul>
-
-<h1 id="toc_3">基于Logistic回归和Sigmoid函数的分类</h1>
-
-<h2 id="toc_4">Logistic回归</h2>
-
-<ul>
-<li>优点
-<ul>
-<li>计算代价不高</li>
-<li>易于理解和实现</li>
-</ul></li>
-<li>缺点
-<ul>
-<li>容易欠拟合</li>
-<li>分类精度可能不高</li>
-</ul></li>
-<li>适用类型
-<ul>
-<li>数值型(数值型目标变量则可以从无限的数值集合中取值，如0.100，42.001等 (数值型目标变量主要用于回归分析))</li>
-<li>标称型数据(标称型目标变量的结果只在有限目标集中取值，如真与假(标称型目标变量主要用于分类))</li>
-</ul></li>
-</ul>
-
-<p>基本公式:<br/>
-Sigmoid函数具体的计算公式</p>
-
-<p>\[p=h_{\theta}(x)=g(\theta^Tx)=\dfrac{1}{1+e^{-\theta^Tx}}\]<br/>
-\[g(z)=\dfrac{1}{1+e^{-z}}\]</p>
-
-<p><img src="media/15198753668603/15253390268591.jpg" alt=""/></p>
-
-<p>\[<br/>
-\begin{aligned}<br/>
-g^{&#39;}(X)&amp; =\left(\dfrac{1}{1+e^{-z}}\right)^{&#39;} \\\<br/>
-&amp; = \dfrac{e^{-z}}{(1+e^{-z})^2} \\\<br/>
-&amp; = \dfrac{1}{1+e^{-z}}\cdot \dfrac{e^{-z}}{1+e{-z}} \\\<br/>
-&amp; = \dfrac{1}{1+e^{-z}}\cdot \left(1-\dfrac{1}{1+e^{-z}}\right) \\\<br/>
-&amp; = g(z)\cdot (1-g(z))<br/>
-\end{aligned}<br/>
-\]</p>
-
-<h2 id="toc_5">logistic 回归及似然函数</h2>
-
-<p>假设<br/>
-\[<br/>
-\begin{aligned}<br/>
-P(y=1|x;\theta)&amp; =h_{\theta}(x) \\\<br/>
-P(y=0|x;\theta)&amp; =1-h_{\theta}(x) \\\<br/>
-P(y|x;\theta)&amp; =(h_{\theta}(x))^y(1-h_{\theta}(x))^{(1-y)}<br/>
-\end{aligned}<br/>
-\]</p>
-
-<p>似然函数:<br/>
-\[<br/>
-\begin{aligned}<br/>
-L(\theta) &amp; =p(\vec{y}|X;\theta) \\\<br/>
-&amp; =\prod_{i=1}^m p(y^{(i)}|x^{(i)};\theta) \\\<br/>
-&amp; = \prod_{i=1}^m (h_{\theta}(x^{(i)}))^{y^{(i)}}(1-h_{\theta}(x^{(i)}))^{(1-y^{(i)})}<br/>
-\end{aligned}<br/>
-\]</p>
-
-<p>对数似然函数:<br/>
-\[<br/>
-\begin{aligned}<br/>
-\ell(\theta) &amp; =\log L(\theta) \\\<br/>
-&amp; = \sum_{i=1}^m\left(y^{(i)}\log h_{\theta}(x^{(i)})+(1-y^{(i)})\log (1-h_{\theta}(x^{(i)}))\right)<br/>
-\end{aligned}<br/>
-\]</p>
-
-<p>最大似然/极大似然函数的随机梯度</p>
-
-<p><img src="media/15198753668603/15350010973220.jpg" alt="" style="width:809px;"/></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[梯度下降笔记]]></title>
-    <link href="http://dmlcoding.com/15277385790025.html"/>
-    <updated>2018-05-31T11:49:39+08:00</updated>
-    <id>http://dmlcoding.com/15277385790025.html</id>
-    <content type="html"><![CDATA[
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[什么是最小二乘法]]></title>
-    <link href="http://dmlcoding.com/15299158833805.html"/>
-    <updated>2018-06-25T16:38:03+08:00</updated>
-    <id>http://dmlcoding.com/15299158833805.html</id>
-    <content type="html"><![CDATA[
-<p>最小二乘法(又称最小平方法)是一种数学优化技术.他通过最小化误差的平方和寻找数据的最佳函数匹配.</p>
-
-<p>利用最小二乘法可以简便地求得未知的数据,并使得这些求得的数据与实际数据之间误差的平方和为最小.</p>
-
-<p><img src="media/15294841337807/15296334116393.jpg" alt=""/></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[回归算法]]></title>
-    <link href="http://dmlcoding.com/15248143200628.html"/>
-    <updated>2018-04-27T15:32:00+08:00</updated>
-    <id>http://dmlcoding.com/15248143200628.html</id>
-    <content type="html"><![CDATA[
-<p>总结一下,这一节主要记录了下面的内容</p>
-
-<ol>
-<li>什么是回归算法.</li>
-<li>线性回归,单变量线性回归,多变量线性回归</li>
-<li>代价函数</li>
-<li>过拟合与欠拟合</li>
-<li>正则项</li>
-</ol>
-
-<p>在这篇文章中,主要介绍了什么是回归算法,以及简单的线性回归.包括单变量线性回归和多变量线性回归.</p>
-
-<p>同时介绍了用最小二乘法求解\(\theta\)值.接下介绍了防止过拟合问题,加入正则项.</p>
-
-<p>最后介绍了如何评价模型的效果.</p>
-
-<h1 id="toc_0">什么是回归算法</h1>
-
-<ol>
-<li>回归算法是一种有监督算法;</li>
-<li>回归算法是一种比较常用的机器学习算法,用于建立解释变量(自变量X)和观测值(因变量Y)之间的关系;</li>
-<li>从机器学习的角度来讲,用于构建一个算法模型(函数)来做属性(X)与标签(Y)之间的映射关系,在算法的学习过程中,试图寻找一个函数h:使得\(R^d\to R\)使得参数之间的关系拟合性最好;</li>
-<li>回归算法中,算法(函数)的最终结果是一个<strong>连续</strong>的数据值,输入值(属性值)是一个d维度的属性/数值向量;</li>
-<li>因此,回归算法是用于预测连续型数值输出的算法.</li>
-</ol>
-
-<p>常用的回归算法有几种:比如,线性回归,Logistic回归,Softmax回归等等.先说最简单的线性回归算法.</p>
-
-<span id="more"></span><!-- more -->
-
-<h2 id="toc_1">线性回归</h2>
-
-<p>一个很常见的例子,根据房屋面积来预测房价(不考虑其他的环境因素).</p>
-
-<p>假如我们有一些关于房屋面积和租赁价格的数据,比如</p>
-
-<table>
-<thead>
-<tr>
-<th>房屋面积(m<sup>2)</sup></th>
-<th>租赁价格(1000/元)</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>10</td>
-<td>0.8</td>
-</tr>
-<tr>
-<td>15</td>
-<td>1</td>
-</tr>
-<tr>
-<td>20</td>
-<td>1.8</td>
-</tr>
-<tr>
-<td>30</td>
-<td>2</td>
-</tr>
-<tr>
-<td>50</td>
-<td>3.2</td>
-</tr>
-<tr>
-<td>60</td>
-<td>3</td>
-</tr>
-<tr>
-<td>60</td>
-<td>3.1</td>
-</tr>
-<tr>
-<td>70</td>
-<td>3.5</td>
-</tr>
-</tbody>
-</table>
-
-<p>那么一个问题来了,请问,如果现在有一个房屋面积为55平,请问最终的租赁价格是多少比较合适呢?</p>
-
-<p>这个数据里面只有1个条件.很显然,在生活中,房价是和很多因素相关,比如房屋的面积,房间的数量,地理位置等等.</p>
-
-<p>那么第一个例子,其实就是单变量线性回归.第二个当然就是多变量线性回归了.</p>
-
-<p>公式描述如下:</p>
-
-<p>\[<br/>
-\begin{aligned}<br/>
-h_{\theta}(x)&amp; =\theta_0+\theta_1x_1+\cdots+\theta_nx_n \\\<br/>
-&amp; = \theta_01+\theta_1x_1+\cdots+\theta_nx_n \\\<br/>
-&amp; = \theta_0x_0+\theta_1x_1+\cdots+\theta_nx_n \\\<br/>
-&amp; = \sum_{i=0}^n\theta_ix_i \\\<br/>
-&amp; = \theta^Tx<br/>
-\end{aligned}<br/>
-\]</p>
-
-<p>所以在线性回归中,最终的要求也就是计算出\(\theta\)值,并选择最优的\(\theta\)值构成算法公式.</p>
-
-<p>这里就涉及到两个问题:</p>
-
-<ol>
-<li>计算出\(\theta\)值;</li>
-<li>选择最优的\(\theta\)值.</li>
-</ol>
-
-<p>对于第一个问题,在机器学习中,一般都是用列向量表示数据,因此公式的最后两行,也就是将第一个列向量转置成为行向量.这样就可以转换成一个行向量与列向量相乘,也就是矩阵相乘了.公式描述就能直观了.</p>
-
-<p>对于第二个问题,就是找代价函数的最小值.后面会说到.</p>
-
-<h3 id="toc_2">单变量线性回归</h3>
-
-<p>因为只含有一个特征/输入变量,因此这样的问题叫做单变量线性回归问题.</p>
-
-<p>公式描述如下:</p>
-
-<p>\[h_{\theta}=\theta_0+ \theta_1x\]</p>
-
-<h3 id="toc_3">多变量线性回归</h3>
-
-<p>公式如下:<br/>
-\[h_{\theta}(x) =\theta_0+\theta_1x_1+\cdots+\theta_nx_n\]</p>
-
-<h1 id="toc_4">代价函数(Cost Function)</h1>
-
-<p>我们选择的参数\(\theta\)决定了我们得到的直线相对于我们的训练集的准确程度,模型所预测的值与训练集中实际值之间的差距就是建模误差(modeling error).</p>
-
-<p>我们的目标便是选择出可以使得<strong>建模误差的平方和</strong>能够<strong>最小</strong>的<strong>模型参数</strong>.<strong>即使得代价函数最小</strong>.</p>
-
-<p>\[J(\theta_0,\theta_1)=\dfrac{1}{2m}\sum_{i=1}^m(h_{\theta}(x^{(i)})-y^{(i)})^2\]</p>
-
-<p>\(h_{\theta}(x^{(i)})\)也就是我们的回归函数,即预测值.\(y^{(i)}\)是数据给定的真实值.</p>
-
-<p>接下来说一下公式的推导过程</p>
-
-<h1 id="toc_5">公式推导</h1>
-
-<h2 id="toc_6">原理说明</h2>
-
-<p>很显然,不可能找到一个算法可以百分百的预测正确,而且在实际问题中,总会有一些因素会造成误差.因此我们给线性回归的公式加上一个误差函数\(\epsilon^{(i)}\),这样就更合理了.</p>
-
-<p>\[y^{(i)}=\theta^Tx^{(i)}+\epsilon^{(i)}\]</p>
-
-<p><strong>补充说明</strong>:\(\epsilon^{(i)}(1\leq i \leq n)\)是独立同分布的,服从均值为0,方差为某定值\(\sigma^2\)的高斯分布.实际问题中,很多随机现象可以看到看到众多因素的独立影响的综合反应,往往服从正态分布.原理是因为中心极限定理.</p>
-
-<p>因为,误差函数服从高斯分布,因此\(p(\epsilon^{(i)})=\frac{1}{\sqrt{2\pi}\sigma}e^{\left(-\dfrac{(\epsilon^{(i)})^2}{2\sigma^2}\right)}\)</p>
-
-<p>因此,咱们也可以说是在某个因素发生的条件下,y发生的概率.所以可以改写成\(p(y^{(i)}|x^{(i)};\theta)=\frac{1}{\sqrt{2\pi}\sigma}e^{\left(-\dfrac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2}\right)}\)</p>
-
-<p>最后,根据极大似然函数方法,咱们来求解这个\(\theta\)值.</p>
-
-<h2 id="toc_7">\(\theta\)值推导过程以及求解</h2>
-
-<p>根据极大似然函数,来求解\(\theta\)值,那么将公式改写成</p>
-
-<p>\[\begin{aligned}<br/>
-L(\theta)&amp; =\prod_{i=1}^mp(y^{(i)}|x^{(i)};\theta)\\\<br/>
-&amp; = \prod_{i=1}^m\frac{1}{\sqrt{2\pi}\sigma}e^{\left(-\dfrac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2}\right)}<br/>
-\end{aligned}\]</p>
-
-<p>最大似然,也就是要使这个方程的结果最大.连乘不好求,一般都是对连乘取对数.</p>
-
-<p>现在转成求对数似然</p>
-
-<p>\[<br/>
-\begin{align}<br/>
-\ell(\theta)&amp; =\log L(\theta) \\\<br/>
-&amp; = \log\prod_{i=1}^m\frac{1}{\sqrt{2\pi}\sigma}e^{\Big(-\dfrac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2}\Big)} \\\<br/>
-&amp; = \sum_{i=1}^m\log\frac{1}{\sqrt{2\pi}\sigma}+\sum_{i=1}^m \log e^{\Big(-\dfrac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2}\Big)} \\\<br/>
-&amp; = m\log\frac{1}{\sqrt{2\pi}\sigma}-\frac{1}{\sigma^2}\cdot\frac{1}{2}\sum_{i=1}^m\Big(y^{(i)}-\theta^Tx{(i)}\Big)^2<br/>
-\end{align}<br/>
-\]</p>
-
-<p>因为\(m\log\frac{1}{\sqrt{2\pi}\sigma}\)是一个常数,要使\(\ell(\theta)\)最大,那么也就是使这个式子的结果最小.保留\(\dfrac 12\)是因为求导求最小值的时候会约去参数.</p>
-
-<p>这样就得到了我们的损失函数:<br/>
-\[loss(y_j,\hat{y_j})=J(\theta)=\frac{1}{2}\sum_{i=1}^{m}\left(h_\theta(x^{(i)}-y^{(i)})\right)^2\]</p>
-
-<p>我们的目标是最小化损失函数.</p>
-
-<p>注意:矩阵的平方也等于矩阵的转置乘以矩阵.</p>
-
-<p>\[J(\theta)=\cfrac{1}{2}\sum_{i=1}^{m}(h_{\theta}(x^{(i)})-y^{(i)})^2=\cfrac{1}{2}(X\theta-Y)^T(X\theta-Y) \to \min \limits_{\theta}J(\theta)\]</p>
-
-<p>既然是求最小值,那么肯定是通过求导来计算.对这个损失函数进行求导运算.</p>
-
-<p>\[<br/>
-\begin{aligned}<br/>
-\nabla J(\theta)&amp; =\nabla_{\theta}\Big(\cfrac{1}{2}(X\theta-Y)^T(X\theta-Y)\Big) \\\<br/>
-&amp; = \nabla_{\theta}\Big(\cfrac{1}{2}(\theta^TX^T-Y^T)(X\theta-Y)\Big) \\\<br/>
-&amp; = \nabla_{\theta}\Big(\cfrac{1}{2}(\theta^TX^TX\theta-\theta^TX^TY-Y^TX\theta+Y^TY)\Big) \\\<br/>
-&amp; = \cfrac{1}{2}\Big(2X^TX\theta-X^T-(Y^TX)^T\Big) \\\<br/>
-&amp; = X^TX\theta-X^TY<br/>
-\end{aligned}<br/>
-\]</p>
-
-<p>因此求解\(\theta\)的公式就推导出来了(最小二乘法).</p>
-
-<p>\[\theta=(X^TX)^{-1}X^TY\]</p>
-
-<h2 id="toc_8">公式验证</h2>
-
-<p>求解\(\theta\)值的公式已经推导出来了,那让我们来校验一下,是否正确呢?</p>
-
-<p>用python的科学计算包可以很方便的来做科学计算,废话不多说看代码吧.</p>
-
-<p>1.构造测试数据</p>
-
-<pre class="line-numbers"><code class="language-python">import numpy as np
-import pandas as pd
-
-# 构造测试数据y=3x1+x2
-df=pd.DataFrame({
-    &quot;x1&quot;:[1,2,3,4,5,6],
-    &quot;x2&quot;:[1,2,1,2,1,2],
-    &quot;y&quot;:[3,6,7,10,11,14]
-})
-
-</code></pre>
-
-<p>2.抽取x和y</p>
-
-<pre class="line-numbers"><code class="language-python"># 抽取x和y
-x=df[[&#39;x1&#39;,&#39;x2&#39;]]
-# 将y转换成n行1列的列向量
-y=df[&#39;y&#39;].values.reshape((-1,1))
-
-</code></pre>
-
-<p>3.求解\(\theta\) 值</p>
-
-<p><em>根据公式计算\(\theta\)</em>值,推导过程上面已经详述了.<br/>
-\[\theta=(X^TX)^{-1}X^TY\]</p>
-
-<p><em>numpy</em> api说明:</p>
-
-<ul>
-<li>mat:将ndarray转成matrix</li>
-<li>dot:矩阵乘法</li>
-<li>T:求矩阵的转置</li>
-<li>I:求矩阵的逆</li>
-</ul>
-
-<pre class="line-numbers"><code class="language-python"># 将公式转成python代码,计算theta值
-
-np.dot(np.mat(x.T.dot(x)).I,x.T).dot(y)
-</code></pre>
-
-<p>4.结果输出</p>
-
-<pre class="line-numbers"><code class="language-text">    matrix([[ 2.],
-            [ 1.]])
-</code></pre>
-
-<p>很明显,计算结果正确.两个系数分别是2和1</p>
-
-<h1 id="toc_9">最小二乘法的参数最优解</h1>
-
-<p>求解\(\theta\)的公式为\(\theta=(X^TX)^{-1}X^TY\).但是最小二乘法的使用要求矩阵\(X^TX\)是可逆的.</p>
-
-<p>为了防止不可逆或者过拟合的问题存在,可以<strong>增加额外数据影响</strong>,导致最终的矩阵是可逆的.</p>
-
-<p>\[\theta=(X^TX+\lambda I)^{-1}X^TY\]</p>
-
-<p>注意:最小二乘法直接求解的难点:矩阵逆的求解是一个难处.<br/>
-因此,后面会说到另一种求解办法,即,梯度下降法来求解.</p>
-
-<h1 id="toc_10">线性回归案例</h1>
-
-<p><strong>数据来源</strong>:<a href="https://archive.ics.uci.edu/ml/datasets/individual+household+electric+power+consumption">https://archive.ics.uci.edu/ml/datasets/individual+household+electric+power+consumption</a></p>
-
-<p>数据描述:现有一批描述家庭用电情况的数据,对数据进行算法模型预测,并最终得到预测模型(每天各个时间段和功率之间的关系,功率与电流之间的关系等)</p>
-
-<p><img src="media/15248143200628/15264383529325.jpg" alt=""/></p>
-
-<p>我们使用 <code>sklearn</code> 库中的 <code>linear_model</code> 中的 <code>LinerRegression</code>来获取算法,让我们来做一个成功的<code>调包侠</code>,哈哈哈哈.</p>
-
-<h2 id="toc_11">线性回归预测时间和功率之间的关系</h2>
-
-<p>虽然调api不用我们来实现算法的实现了,但是学习的过程还是应该掌握公式的推导比较好.</p>
-
-<p>代码示例如下(机器学习的简单开发流程):</p>
-
-<pre class="line-numbers"><code class="language-text"># -*- coding: utf-8 -*-
-&#39;&#39;&#39;
-    Created by hushiwei on 2018/4/27.
-
-    1:时间与功率之间的关系
-&#39;&#39;&#39;
-
-import numpy as np
-import pandas as pd
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-
-# 设置字符集,防止中文乱码
-mpl.rcParams[&#39;font.sans-serif&#39;]=[u&#39;simHei&#39;]
-mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
-
-
-# 加载数据
-df = pd.read_csv(
-    &quot;/Users/hushiwei/PycharmProjects/Python-AI/MachineLearning/LinearRegression/datas/household_power_consumption_1000.txt&quot;,
-    sep=&quot;;&quot;)
-print(df.head())
-
-# 异常数据处理
-new_df = df.replace(&#39;?&#39;, np.nan)
-datas = new_df.dropna(axis=0, how=&#39;any&#39;)
-
-# 观察数据
-
-print(datas.describe())
-
-
-# 处理时间
-
-def date_format(dt):
-    import time
-    t = time.strptime(&#39; &#39;.join(dt), &#39;%d/%m/%Y %H:%M:%S&#39;)
-    return (t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec)
-
-
-# 获取X和Y,并将时间转换为数值型变量
-# X:时间
-# Y:用电量
-
-X=datas.iloc[:,0:2]
-X=X.apply(lambda x:pd.Series(date_format(x)),axis=1)
-Y=datas[&#39;Global_active_power&#39;]
-
-
-print(X.head())
-print(Y.head())
-
-
-# 划分数据集
-X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.2,random_state=0)
-
-# 对数据进行标准化
-ss=StandardScaler()
-
-# 训练并转换
-X_train=ss.fit_transform(X_train)
-# 直接使用在模型构建数据上进行一个数据标准化操作
-X_test=ss.transform(X_test)
-
-# 这里,fit_transform和transform的区别?
-# fit_tranform是计算并转换,在这个过程中会计算出均值和方差,然后将变量进行标准化去量纲
-# transform是转换,它将用上面计算出的均值和方差来进行标准化去量纲.
-# 因为训练集的数据相较于测试集更多 ,所以测试集也延用训练集算出来的均值和方差
-# 因此fit_transform在transform上面调用
-
-# 模型训练
-
-liner=LinearRegression()
-liner.fit(X_train,Y_train)
-
-
-# 模型校验
-
-y_predict=liner.predict(X_test)
-time_name=[&#39;年&#39;,&#39;月&#39;,&#39;日&#39;,&#39;时&#39;,&#39;分&#39;,&#39;秒&#39;]
-print(&quot;准确率:&quot;,liner.score(X_train,Y_train))
-mse=np.average((y_predict-Y_test)**2)
-rmse=np.sqrt(mse)
-print(&#39;rmse:&#39;,rmse)
-print(&quot;特征的系数为:&quot;,list(zip(time_name,liner.coef_)))
-
-# 模型保存
-
-# from sklearn.externals import joblib
-#
-# joblib.dump(ss,&quot;data_ss.model&quot;) ## 将标准化模型保存
-# joblib.dump(liner,&quot;data_lr.model&quot;) ## 将模型保存
-#
-# joblib.load(&quot;data_ss.model&quot;) ## 加载模型
-# joblib.load(&quot;data_lr.model&quot;) ## 加载模型
-
-# 预测值和实际值可视化画图比较
-
-t=np.arange(len(X_test))
-plt.figure(facecolor=&#39;w&#39;)
-plt.plot(t,Y_test,&#39;r-&#39;,linewidth=2,label=&#39;真实值&#39;)
-plt.plot(t,y_predict,&#39;g-&#39;,linewidth=2,label=&#39;预测值&#39;)
-plt.legend(loc=&#39;upper left&#39;)
-plt.title(&quot;线性回归预测时间与功率之间的关系&quot;,fontsize=20)
-plt.grid(b=True)
-plt.show()
-
-</code></pre>
-
-<p>结果输出:</p>
-
-<pre class="line-numbers"><code class="language-text">准确率: 0.24409311805909026
-rmse: 1.164092345973625
-特征的系数为: [(&#39;年&#39;, 0.0), (&#39;月&#39;, 1.1102230246251565e-16), (&#39;日&#39;, -1.415881661733238), (&#39;时&#39;, -0.9349532432495644), (&#39;分&#39;, -0.10214075598497), (&#39;秒&#39;, 0.0)]
-</code></pre>
-
-<p>可视化显示:</p>
-
-<p><img src="media/15248143200628/15264444548035.jpg" alt=""/></p>
-
-<p>从这个结果可以看出,预测效果不太好,可能是时间与功率没啥关系,我们现在换一下因变量与自变量</p>
-
-<h2 id="toc_12">线性回归预测功率与电流之间的关系</h2>
-
-<p>代码示例:</p>
-
-<pre class="line-numbers"><code class="language-text"># -*- coding: utf-8 -*-
-&#39;&#39;&#39;
-    Created by hushiwei on 2018/4/27.
-
-    desc: 功率与电流之间的关系
-&#39;&#39;&#39;
-
-import numpy as np
-import pandas as pd
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-
-# 设置字符集,防止中文乱码
-mpl.rcParams[&#39;font.sans-serif&#39;]=[u&#39;simHei&#39;]
-mpl.rcParams[&#39;axes.unicode_minus&#39;]=False
-
-
-# 加载数据
-df = pd.read_csv(
-    &quot;/Users/hushiwei/PycharmProjects/Python-AI/MachineLearning/LinearRegression/datas/household_power_consumption_1000.txt&quot;,
-    sep=&quot;;&quot;)
-print(df.head())
-
-# 异常数据处理
-new_df = df.replace(&#39;?&#39;, np.nan)
-datas = new_df.dropna(axis=0, how=&#39;any&#39;)
-
-# 观察数据
-
-print(datas.describe())
-
-
-
-X=datas.iloc[:,2:4]
-Y=datas.iloc[:,5]
-
-
-print(X.head())
-print(Y.head())
-
-
-# 划分数据集
-X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.2,random_state=0)
-
-# 对数据进行标准化
-ss=StandardScaler()
-
-# 训练并转换
-X_train=ss.fit_transform(X_train)
-# 直接使用在模型构建数据上进行一个数据标准化操作
-X_test=ss.transform(X_test)
-
-# 这里,fit_transform和transform的区别?
-# fit_tranform是计算并转换,在这个过程中会计算出均值和方差,然后将变量进行标准化去量纲
-# transform是转换,它将用上面计算出的均值和方差来进行标准化去量纲.
-# 因为训练集的数据相较于测试集更多 ,所以测试集也延用训练集算出来的均值和方差
-# 因此fit_transform在transform上面调用
-
-# 模型训练
-
-liner=LinearRegression()
-liner.fit(X_train,Y_train)
-
-
-# 模型校验
-
-y_predict=liner.predict(X_test)
-print(&quot;电流训练准确率: &quot;,liner.score(X_train,Y_train))
-print(&quot;电流预测准确率: &quot;,liner.score(X_test,Y_test))
-print(&quot;电流参数: &quot;,liner.coef_)
-
-
-
-# 预测值和实际值可视化画图比较
-
-t=np.arange(len(X_test))
-plt.figure(facecolor=&#39;w&#39;)
-plt.plot(t,Y_test,&#39;r-&#39;,linewidth=2,label=&#39;真实值&#39;)
-plt.plot(t,y_predict,&#39;g-&#39;,linewidth=2,label=&#39;预测值&#39;)
-plt.legend(loc=&#39;upper left&#39;)
-plt.title(&quot;线性回归预测时间与功率之间的关系&quot;,fontsize=20)
-plt.grid(b=True)
-plt.show()
-
-</code></pre>
-
-<p>模型预测结果</p>
-
-<pre class="line-numbers"><code class="language-text">电流训练准确率:  0.9909657573073489
-电流预测准确率:  0.9920420609708968
-电流参数:  [5.07744316 0.07191391]
-</code></pre>
-
-<p><img src="media/15248143200628/15264449452427.jpg" alt=""/></p>
-
-<p>从图中也可以看出,效果很明显,预测得非常好.</p>
-
-<h1 id="toc_13">线性回归的过拟合和正则项</h1>
-
-<p>我们用线性回归的时候,可能拟合的不是那么好,那么可以加大阶数,去拟合.</p>
-
-<p>但是也不是阶数越高效果越好.为什么这么说呢?看例子分析.</p>
-
-<p>我们的目标函数是(之前已经写过推导过程):<br/>
-\[J(\theta)=\dfrac{1}{2}\sum_{i=1}^m(h_{\theta}(x^{(i)})-y^{(i)})^2\]</p>
-
-<p>为了防止数据过拟合,也就是\(\theta\)值在样本空间中不能过大/过小,可以在目标函数之上增加一个平方和损失:<br/>
-\[J(\theta)=\dfrac{1}{2}\sum_{i=1}^m(h_{\theta}(x^{(i)})-y^{(i)})^2+\lambda\sum_{i=1}^n\theta_j^2\]</p>
-
-<p>我们如果对这个函数进行求导计算会得出之前写的一个函数,即<br/>
-\[\theta=(X^TX+\lambda I)^{-1}X^TY\]</p>
-
-<p>注意:这里新加的\(\lambda\sum_{i=1}^n\theta_j^2\),也叫正则项(norm).这里的这个正则项叫做L2-norm.所以还有其他的正则项,且看后续说明.</p>
-
-<h2 id="toc_14">正则项</h2>
-
-<p><strong>L2正则(L2-norm)</strong>:\(\lambda\sum_{i=1}^n\theta_j^2 \quad \lambda &gt; 0\)</p>
-
-<p><strong>L1正则(L1-norm)</strong>:\(\lambda\sum_{i=1}^n|\theta_j| \quad \lambda &gt; 0\)</p>
-
-<h2 id="toc_15">Ridge回归</h2>
-
-<p>使用L2正则的线性回归模型就称为Ridge回归(也叫岭回归)<br/>
-\[J(\theta)=\dfrac{1}{2}\sum_{i=1}^m(h_{\theta}(x^{(i)})-y^{(i)})^2+\lambda\sum_{i=1}^n\theta_j^2 \qquad \lambda &gt; 0\]</p>
-
-<h2 id="toc_16">Lasso回归</h2>
-
-<p>使用L1正则的线性回归模型就称为LASSO回归(Least Absolute Shrinkage and Selection Operator)<br/>
-\[J(\theta)=\dfrac{1}{2}\sum_{i=1}^m(h_{\theta}(x^{(i)})-y^{(i)})^2+\lambda\sum_{i=1}^n|\theta_j| \qquad \lambda &gt; 0\]</p>
-
-<h2 id="toc_17">Ridge(L2-norm)和LASSO(L1-norm)比较</h2>
-
-<p>L2-norm中,由于对于各个维度的参数缩放是在一个圆内缩放的,不可能导致有维度参数变为0的情况,那么也就不会产生稀疏解;实际应用中,数据的维度中是存在噪音和冗余的,稀疏的解可以找到有用的维度并且减少冗余,提高回归预测的准确性和鲁棒性(减少了overfitting)(L1-norm可以达到最终解的稀疏性的要求)</p>
-
-<p>Ridge模型具有较高的准确性,鲁棒性以及稳定性;LASSO模型具有较高的求解速度.</p>
-
-<p>如果既要考虑稳定性也考虑求解的速度,就使用Elastic Net<br/>
-<img src="media/15248143200628/15265465368148.jpg" alt=""/></p>
-
-<h2 id="toc_18">Elastic Net</h2>
-
-<p>同时使用L1正则和L2正则的线性回归模型就称为Elastic Net算法(弹性网络算法)</p>
-
-<p>\[J(\theta)=\dfrac{1}{2}\sum_{i=1}^m(h_{\theta}(x^{(i)})-y^{(i)})^2+\lambda \left(p\sum_{j=1}^n|\theta_j| +(1-p)\sum_{j=1}^n\theta_j^2 \right) \qquad \lambda &gt; 0 , p \in [0,1]\]</p>
-
-<h1 id="toc_19">模型效果判断</h1>
-
-<p>MSE:误差平方和,越趋近于0表示模型越拟合训练数据<br/>
-\[MSE=\dfrac{1}{m}\sum_{i=1}^m(y_i-\hat y_i)^2\]</p>
-
-<p>RMSE:MSE的平方根,作用同MSE<br/>
-\[RMSE=\sqrt{MSE}=\sqrt{\dfrac{1}{m}\sum_{i=1}^m(y_i-\hat y_i)^2}\]</p>
-
-<p>\(R^2\):取值范围(负无穷,1],值越大表示模型越拟合训练数据;最优解是1;当模型预测为随机值的时候,有可能为负;若预测值恒为样本期望,\(R^2\)为0</p>
-
-<p>TSS:总平方和TSS(Total Sum Of Squares),表示样本之间的差异情况,是伪方差的m倍.</p>
-
-<p>RSS:残差平方和RSS(Residual Sum Of Squares),表示预测值和样本值之间的差异情况,是MSE的m倍</p>
-
-<p>\[R^2=1-\dfrac{RSS}{TSS}=1-\dfrac{\sum_{i=1}^m(y_i-\hat y_i)^2}{\sum_{i=1}^m(y_i-\overline y)^2} \qquad \overline y=\dfrac{1}{m}\sum_{i=1}^my_i\]</p>
-
-<h1 id="toc_20">机器学习调参</h1>
-
-<h2 id="toc_21">调参</h2>
-
-<p>在实际工作中,对于各种算法模型(线性回归)来讲,我们需要获取\(\theta,\lambda,p\)的值;\(\theta\)的求解其实就是算法模型的求解,一般不需要开发人员参与(算法已经实现),主要需要求解的是\(\lambda\)和p的值,这个过程就叫做<strong>调参(超参)</strong></p>
-
-<h2 id="toc_22">交叉验证</h2>
-
-<p>将训练数据分为多份,其中一份进行数据验证并获取最优的超参:\(\lambda\)和p;比如:十折交叉验证,五折交叉验证(scikit-learn中默认)等</p>
-
-<p><img src="media/15248143200628/15267171709516.jpg" alt=""/></p>
 
 ]]></content>
   </entry>

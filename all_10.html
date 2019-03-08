@@ -89,6 +89,10 @@
     <li><label>Categories</label></li>
 
         
+            <li><a href="ScoreCard.html">ScoreCard</a></li>
+        
+            <li><a href="Kg.html">Kg</a></li>
+        
             <li><a href="BigData.html">BigData</a></li>
         
             <li><a href="Python.html">Python</a></li>
@@ -168,15 +172,21 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15198769093559.html">
+                <a class="clearlink" href="15198745641385.html">
                 
-                  <h1>二八定律与长尾理论</h1>
+                  <h1>Presto的学习笔记</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>刚入广告行业的时候,有时候会听同事们说长尾啥的.一直不太明白长尾是啥意思.最近看一本书,书里面提到了一个二八定律.<br/>
-本着好奇的态度,搜索了一下二八定律<a href="%5B%5D()"></a>,没想到顺带都提到了长尾理论.接着这个机会,好好理解一下二八定律与长尾理论.</p>
+                        	<h1 id="toc_0">是什么?可以做什么?</h1>
+
+<ol>
+<li>Presto是一个开源的分布式SQL查询引擎，适用于交互式分析查询，数据量支持GB到PB字节。</li>
+<li>Presto支持在线数据查询，包括Hive, Cassandra, 关系数据库以及专有数据存储。 一条Presto查询可以将多个数据源的数据进行合并，可以跨越整个组织进行分析。</li>
+<li>作为Hive和Pig（Hive和Pig都是通过MapReduce的管道流来完成HDFS数据的查询）的替代者，Presto不仅可以访问HDFS，也可以操作不同的数据源，包括：RDBMS和其他的数据源（例如：Cassandra）。</li>
+<li>查询后的数据自动分页,这个很不错.</li>
+</ol>
 
 
                         
@@ -185,11 +195,11 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15198769093559.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/9/19</span>
+                   <a href="15198745641385.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/10/11</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Writer.html'>Writer</a></span>
+          					    <span class="posted-in"><a href='Presto.html'>Presto</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -203,23 +213,17 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15198769472354.html">
+                <a class="clearlink" href="15219482100406.html">
                 
-                  <h1>ELK搭建使用</h1>
+                  <h1>字符串编码转换</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<blockquote>
-<p>elk搭建记录,学习资料.</p>
-</blockquote>
-
-<h1 id="toc_0">ELK学习资料</h1>
-
-<ul>
-<li><a href="https://www.gitbook.com/book/chenryn/elk-stack-guide-cn/details">ELKstack 中文指南</a></li>
-<li><a href="https://www.gitbook.com/book/looly/elasticsearch-the-definitive-guide-cn/details">Elasticsearch权威指南（中文版）</a></li>
-<li>.....</li>
+                        	<ul>
+<li>乱码之类的几乎都是由汉字引起的。</li>
+<li>任何平台的任何编码 都能和 Unicode 互相转换</li>
+<li>UTF-8 与 GBK 互相转换，那就先把UTF-8转换成Unicode，再从Unicode转换成GBK，反之同理。</li>
 </ul>
 
 
@@ -229,48 +233,8 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15198769472354.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/9/17</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ELK.html'>ELK</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15198744609518.html">
-                
-                  <h1>Python读取文件编码及内容</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<blockquote>
-<p>当你不知道文件的具体编码方式的时候,如何正确的读取文件内容呢?</p>
-</blockquote>
-
-<h1 id="toc_0">报错日志</h1>
-
-<p>当我们不知道文件编码方式的时候,贸然的读取文件,有时候就会出现这些问题</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15198744609518.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/9/13</span>
+                   <a href="15219482100406.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/10/4</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='Python.html'>Python</a></span>
@@ -287,19 +251,16 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15198733795152.html">
+                <a class="clearlink" href="15219476833792.html">
                 
-                  <h1>spark开发中遇到的问题</h1>
+                  <h1>json和jsonPATH[整理自网络]</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h1 id="toc_0">spark连接mysql</h1>
+                        	<p>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式，它使得人们很容易的进行阅读和编写。同时也方便了机器进行解析和生成。适用于进行数据交互的场景，比如网站前台与后台之间的数据交互。</p>
 
-<h2 id="toc_1">问题描述</h2>
-
-<pre class="line-numbers"><code class="language-text">总是报no suitable driver以及   jdbc.mysql.driver类似这样的错误
-</code></pre>
+<p>JSON和XML的比较可谓不相上下。</p>
 
 
                         
@@ -308,11 +269,11 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15198733795152.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/9/12</span>
+                   <a href="15219476833792.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/10/3</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Spark.html'>Spark</a></span>
+          					    <span class="posted-in"><a href='Python.html'>Python</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -326,14 +287,23 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15198767503226.html">
+                <a class="clearlink" href="15219455706450.html">
                 
-                  <h1>诗经 <<伐檀>></h1>
+                  <h1>xml和xpath[整理自网络]</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p><img src="media/15198767503226/fatan.png" alt="fatan"/></p>
+                        	<h2 id="toc_0">什么是XML</h2>
+
+<ul>
+<li>XML 指可扩展标记语言（EXtensible Markup Language）</li>
+<li>XML 是一种标记语言，很类似 HTML</li>
+<li>XML 的设计宗旨是传输数据，而非显示数据</li>
+<li>XML 的标签需要我们自行定义。</li>
+<li>XML 被设计为具有自我描述性。</li>
+<li>XML 是 W3C 的推荐标准</li>
+</ul>
 
 
                         
@@ -342,11 +312,49 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15198767503226.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/8/23</span>
+                   <a href="15219455706450.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/10/2</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Writer.html'>Writer</a></span>
+          					    <span class="posted-in"><a href='Python.html'>Python</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15219449578725.html">
+                
+                  <h1>python-requests[整理自网络]</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">Requests: 让 HTTP 服务人类</h2>
+
+<p>虽然Python的标准库中 urllib2 模块已经包含了平常我们使用的大多数功能，但是它的 API 使用起来让人感觉不太好，而 Requests 自称 “HTTP for Humans”，说明使用更简洁方便。</p>
+
+<p>Requests 继承了urllib2的所有特性。Requests支持HTTP连接保持和连接池，支持使用cookie保持会话，支持文件上传，支持自动确定响应内容的编码，支持国际化的 URL 和 POST 数据自动编码。</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15219449578725.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/10/1</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Python.html'>Python</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -412,6 +420,10 @@
                 <div class="side-content">
 
       	<p class="cat-list">
+        
+            <a href="ScoreCard.html"><strong>ScoreCard</strong></a>
+        
+            <a href="Kg.html"><strong>Kg</strong></a>
         
             <a href="BigData.html"><strong>BigData</strong></a>
         
@@ -486,31 +498,31 @@
 	      
 		      
 			      <li class="post">
-			        <a href="15423390877662.html">Pandas 中map, applymap and apply的区别</a>
+			        <a href="15520132048516.html">Neo4j导入方式</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15420931314995.html">Objective vs. Cost vs. Loss vs. Error Function</a>
+			        <a href="15517601129865.html">neo4j案例</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15402913817590.html">将python生成的base64图片,在浏览器上展示出来</a>
+			        <a href="15505602742016.html">构建信用风险类型的特征</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15398508250689.html">Isolation Forest</a>
+			        <a href="15488325444778.html">XGBoost</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15396891344806.html">聚类算法评估指标</a>
+			        <a href="15488325386128.html">GBDT</a>
 			      </li>
 		     
 		  

@@ -89,6 +89,10 @@
     <li><label>Categories</label></li>
 
         
+            <li><a href="ScoreCard.html">ScoreCard</a></li>
+        
+            <li><a href="Kg.html">Kg</a></li>
+        
             <li><a href="BigData.html">BigData</a></li>
         
             <li><a href="Python.html">Python</a></li>
@@ -168,18 +172,16 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15395734385439.html">
+                <a class="clearlink" href="15488325277802.html">
                 
-                  <h1>模型评估 K-S值和AUC的区别</h1>
+                  <h1>Adaboost</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>在模型建立之后，必须对模型的效果进行评估，因为数据挖掘是一个探索的过程，评估-优化是一个永恒的过程。在分类模型评估中，最常用的两种评估标准就是K-S值和AUC值。</p>
+                        	<h1 id="toc_0">AdaBoost算法原理简述</h1>
 
-<p>可能有人会问了，为什么不直接看正确率呢？你可以这么想，如果一批样本中，正样本占到90%，负样本只占10%，那么我即使模型什么也不做，把样本全部判定为正，也能有90%的正确率咯？所以，用AUC值够保证你在样本不均衡的情况下也能准确评估模型的好坏，而K-S值不仅能告诉你准确与否，还能告诉你模型对好坏客户是否有足够的区分度。</p>
-
-<p>下面分别看两种评估指标的概念。</p>
+<p><strong>Adaptive Boosting</strong> 是一种迭代算法.每一轮迭代中会在训练集上产生一个新的学习器,然后使用该学习器对所有样本进行预测,以评估每个样本的重要性.换句话来讲,算法会为每个样本赋予一个权重,每次用训练好的学习器标注/预测各个样本.如果某个样本点被预测的越正确,则将其权重降低;否则提高样本的权重.权重越高的样本在下一轮迭代训练中所占的比重就越大,也就是越难区分的样本在训练过程中会变得越重要.</p>
 
 
                         
@@ -188,8 +190,8 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15395734385439.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/10/15</span>
+                   <a href="15488325277802.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2019/1/30</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -206,16 +208,14 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15343116796404.html">
+                <a class="clearlink" href="15423390877662.html">
                 
-                  <h1>Mac 下高速免费下载百度云文件</h1>
+                  <h1>Pandas 中map, applymap and apply的区别</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h1 id="toc_0">下载安装Aira2客户端</h1>
-
-<p>地址: <a href="https://github.com/yangshun1029/aria2gui/releases">https://github.com/yangshun1029/aria2gui/releases</a></p>
+                        	<p>Summing up, apply works on a row / column basis of a DataFrame, applymap works element-wise on a DataFrame, and map works element-wise on a Series.</p>
 
 
                         
@@ -224,11 +224,11 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15343116796404.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/8/15</span>
+                   <a href="15423390877662.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/11/16</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Mac.html'>Mac</a></span>
+          					    <span class="posted-in"><a href='Python.html'>Python</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -242,18 +242,14 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15317970391028.html">
+                <a class="clearlink" href="15420931314995.html">
                 
-                  <h1>windows10和mac共享文件</h1>
+                  <h1>Objective vs. Cost vs. Loss vs. Error Function</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h1 id="toc_0">一,windows10访问mac电脑</h1>
-
-<h2 id="toc_1">1,先新建一个用于共享的登录账户</h2>
-
-<p>在系统偏好设置-&gt;用户与群组-&gt;点击黄色的锁-&gt;输入当前账户密码-&gt;点击左侧➕ ,新建一个<em>仅限共享</em>的用户(注意:是将普通账户改为仅限共享,记住密码)。</p>
+                        	<p><strong><u>The function we want to minimize or maximize is called the objective function, or criterion. When we are minimizing it, we may also call it the cost function, loss function, or error function - these terms are synonymous. The cost function is used more in optimization problem and loss function is used in parameter estimation.</u></strong></p>
 
 
                         
@@ -262,42 +258,8 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15317970391028.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/7/17</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Mac.html'>Mac</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15299155104492.html">
-                
-                  <h1>HMM(摘自:统计学习方法)</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>HMM(隐马尔可夫模型的定义):隐马尔可夫模型是关于时序的概率模型,描述由一个隐藏的马尔可夫链随机生成不可观察的状态随机序列,再由各个状态生成一个观测而产生观测随机序列的过程.隐藏的马尔可夫链随机生成的状态的序列,称为状态序列(state sequence);每个状态生成一个观测,而由此产生的观测的随机序列,称为观测序列(observation sequence).序列的每一个位置又可以看作是一个时刻.</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15299155104492.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/6/25</span>
+                   <a href="15420931314995.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/11/13</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -314,14 +276,75 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15299156181001.html">
+                <a class="clearlink" href="15402913817590.html">
                 
-                  <h1>EM算法</h1>
+                  <h1>将python生成的base64图片,在浏览器上展示出来</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	
+                        	<p>方便调试</p>
+
+<pre class="line-numbers"><code class="language-text">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;show base64 pic&lt;/title&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id=&#39;root&#39;&gt;
+        &lt;img src=&quot;data:image/png;base64,这里是base64的内容,替换掉即可(中文部分)&quot; /&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15402913817590.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/10/23</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Python.html'>Python</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15398508250689.html">
+                
+                  <h1>Isolation Forest</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>scikit-learn返回:是异常点(-1)或者不是异常点(1)</p>
+
+<p><img src="media/15398508250689/15398521143637.jpg" alt=""/></p>
+
+<p>孤立森林--&gt;查看数据页面,如上所示<br/>
+原始数据的所有列,预测出来是否是异常值,也即是是否偏离(偏移即是-1),偏移度也就是decision_function算出来的值,返回样本的异常评分，值越小表示越有可能是异常样本<br/>
+data,model.predict(X_train),model.decision_function(X_train)</p>
+
+<pre class="line-numbers"><code class="language-text">df=pd.concat([pd.DataFrame(X_train),pd.Series(clf.predict(X_train)), pd.Series(clf.decision_function(X_train))], axis=1)
+
+df.columns = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
+</code></pre>
+
                         
                       </div>
                   </div>
@@ -329,8 +352,10 @@
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2018/6/20</span>
-                    
+                    <span class="date">2018/10/18</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -396,6 +421,10 @@
                 <div class="side-content">
 
       	<p class="cat-list">
+        
+            <a href="ScoreCard.html"><strong>ScoreCard</strong></a>
+        
+            <a href="Kg.html"><strong>Kg</strong></a>
         
             <a href="BigData.html"><strong>BigData</strong></a>
         
@@ -470,31 +499,31 @@
 	      
 		      
 			      <li class="post">
-			        <a href="15423390877662.html">Pandas 中map, applymap and apply的区别</a>
+			        <a href="15520132048516.html">Neo4j导入方式</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15420931314995.html">Objective vs. Cost vs. Loss vs. Error Function</a>
+			        <a href="15517601129865.html">neo4j案例</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15402913817590.html">将python生成的base64图片,在浏览器上展示出来</a>
+			        <a href="15505602742016.html">构建信用风险类型的特征</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15398508250689.html">Isolation Forest</a>
+			        <a href="15488325444778.html">XGBoost</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15396891344806.html">聚类算法评估指标</a>
+			        <a href="15488325386128.html">GBDT</a>
 			      </li>
 		     
 		  

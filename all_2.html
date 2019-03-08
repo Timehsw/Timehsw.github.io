@@ -89,6 +89,10 @@
     <li><label>Categories</label></li>
 
         
+            <li><a href="ScoreCard.html">ScoreCard</a></li>
+        
+            <li><a href="Kg.html">Kg</a></li>
+        
             <li><a href="BigData.html">BigData</a></li>
         
             <li><a href="Python.html">Python</a></li>
@@ -168,31 +172,17 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15289333499679.html">
+                <a class="clearlink" href="15396891344806.html">
                 
-                  <h1>拉格朗日乘子法&KKT条件</h1>
+                  <h1>聚类算法评估指标</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>如果不理解拉格朗日乘子法和KKT条件的相关原理,则不可能真正理解SVM的计算方法.</p>
+                        	<h1 id="toc_0">Not Given Label</h1>
 
-<p>这是我们学习SVM的大前提</p>
+<h2 id="toc_1">1、Compactness(紧密性)(CP)</h2>
 
-<h1 id="toc_0">优化问题</h1>
-
-<p>通常,我们要求解的函数优化问题,大致可分为以下3类</p>
-
-<ul>
-<li>无约束条件的优化问题:<br/>
-\[min f(X)\]</li>
-<li>只有等式约束的优化问题:<br/>
-\[min f(X) \\\<br/>
-s.t: h_i(X)=0,i \in {1,2,...,n}\]</li>
-<li><p>含有不等式约束的优化问题:<br/>
-\[min f(X) \\\<br/>
-s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
-     g_j(X) \leq 0, j \in {1,2,...,n} \]</p>
 
                         
                       </div>
@@ -200,8 +190,8 @@ s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15289333499679.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/6/14</span>
+                   <a href="15396891344806.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/10/16</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -218,24 +208,18 @@ s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15285262100303.html">
+                <a class="clearlink" href="15395734385439.html">
                 
-                  <h1>SVM(支持向量机)</h1>
+                  <h1>模型评估 K-S值和AUC的区别</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>支持向量机(Support Vecor Machine,SVM)本身是一个<strong>二元分类算法</strong>,是对感知器算法模型的一种扩展,现在的SVM算法支持线性分类和非线性分类的分类应用,并且也能够直接将SVM应用于回归应用中.同时通过OvR或者OvO的方式我们也可以将SVM应用在多元分类领域中.在不考虑集成算法,不考虑特定的数据集的时候,在分类算法中SVM可以说是特别优秀的.</p>
+                        	<p>在模型建立之后，必须对模型的效果进行评估，因为数据挖掘是一个探索的过程，评估-优化是一个永恒的过程。在分类模型评估中，最常用的两种评估标准就是K-S值和AUC值。</p>
 
-<p><strong>线性可分(Linearly Separable)</strong>:在数据集中,如果可以找出一个超平面,将两组数据分开,那么这个数据集叫做线性可分数据.</p>
+<p>可能有人会问了，为什么不直接看正确率呢？你可以这么想，如果一批样本中，正样本占到90%，负样本只占10%，那么我即使模型什么也不做，把样本全部判定为正，也能有90%的正确率咯？所以，用AUC值够保证你在样本不均衡的情况下也能准确评估模型的好坏，而K-S值不仅能告诉你准确与否，还能告诉你模型对好坏客户是否有足够的区分度。</p>
 
-<p><strong>线性不可分(Linear Inseparable)</strong>:在数据集中,没法找出一个超平面,能够将两组数据分开,那么这个数据集就叫做线性不可分数据.</p>
-
-<p><strong>分割超平面(Separating Hyperplane)</strong>:将数据集分割开来的直线/平面叫做分割超平面.</p>
-
-<p><strong>间隔(Margin)</strong>:数据点到分割超平面的距离称为间隔.</p>
-
-<p><strong>支持向量(Support Vector)</strong>:离分割超平面最近的那些点叫做支持向量.</p>
+<p>下面分别看两种评估指标的概念。</p>
 
 
                         
@@ -244,8 +228,8 @@ s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15285262100303.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/6/9</span>
+                   <a href="15395734385439.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/10/15</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -262,25 +246,29 @@ s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15284222434956.html">
+                <a class="clearlink" href="15343116796404.html">
                 
-                  <h1>聚类算法</h1>
+                  <h1>Mac 下高速免费下载百度云文件</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	
+                        	<h1 id="toc_0">下载安装Aira2客户端</h1>
+
+<p>地址: <a href="https://github.com/yangshun1029/aria2gui/releases">https://github.com/yangshun1029/aria2gui/releases</a></p>
+
+
                         
                       </div>
                   </div>
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15284222434956.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/6/8</span>
+                   <a href="15343116796404.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/8/15</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
+          					    <span class="posted-in"><a href='Mac.html'>Mac</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -294,24 +282,18 @@ s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15255701784620.html">
+                <a class="clearlink" href="15317970391028.html">
                 
-                  <h1>集成学习</h1>
+                  <h1>windows10和mac共享文件</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>集成学习的思想是将若干个学习器(分类器&amp;回归器)组合之后产生一个新学习器.弱分类器(weak learner)指那些分类准确率只稍微好于随机猜测的分类器(error rate&lt; 0.5).</p>
+                        	<h1 id="toc_0">一,windows10访问mac电脑</h1>
 
-<p>集成算法的成功在于保证弱分类器的多样性(Diversity).而且集成不稳定的算法也能够得到一个比较明显的性能提升.</p>
+<h2 id="toc_1">1,先新建一个用于共享的登录账户</h2>
 
-<p>常见的集成学习思想有:</p>
-
-<ul>
-<li>Bagging</li>
-<li>Boosting</li>
-<li>Stacking</li>
-</ul>
+<p>在系统偏好设置-&gt;用户与群组-&gt;点击黄色的锁-&gt;输入当前账户密码-&gt;点击左侧➕ ,新建一个<em>仅限共享</em>的用户(注意:是将普通账户改为仅限共享,记住密码)。</p>
 
 
                         
@@ -320,11 +302,11 @@ s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15255701784620.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/5/6</span>
+                   <a href="15317970391028.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/7/17</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
+          					    <span class="posted-in"><a href='Mac.html'>Mac</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -338,19 +320,14 @@ s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15255685118456.html">
+                <a class="clearlink" href="15299155104492.html">
                 
-                  <h1>决策树</h1>
+                  <h1>HMM(摘自:统计学习方法)</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>在决策树算法的学习过程中,信息增益是特征选择的一个重要指标.它定义为一个特征能够为分类系统带来多少信息,带来的信息越多,说明该特征越重要,相应的信息增益也就越大<br/>
-<img src="media/15255685118456/15256176444642.jpg" alt=""/></p>
-
-<h1 id="toc_0">信息熵(Entropy)</h1>
-
-<p>\[H(X)=-\sum_{i=1}^mp_i\log_2(p_i)\]</p>
+                        	<p>HMM(隐马尔可夫模型的定义):隐马尔可夫模型是关于时序的概率模型,描述由一个隐藏的马尔可夫链随机生成不可观察的状态随机序列,再由各个状态生成一个观测而产生观测随机序列的过程.隐藏的马尔可夫链随机生成的状态的序列,称为状态序列(state sequence);每个状态生成一个观测,而由此产生的观测的随机序列,称为观测序列(observation sequence).序列的每一个位置又可以看作是一个时刻.</p>
 
 
                         
@@ -359,8 +336,8 @@ s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15255685118456.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/5/3</span>
+                   <a href="15299155104492.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/6/25</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -429,6 +406,10 @@ s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
                 <div class="side-content">
 
       	<p class="cat-list">
+        
+            <a href="ScoreCard.html"><strong>ScoreCard</strong></a>
+        
+            <a href="Kg.html"><strong>Kg</strong></a>
         
             <a href="BigData.html"><strong>BigData</strong></a>
         
@@ -503,31 +484,31 @@ s.t: h_i(X)=0,i \in {1,2,...,n} \\\<br/>
 	      
 		      
 			      <li class="post">
-			        <a href="15423390877662.html">Pandas 中map, applymap and apply的区别</a>
+			        <a href="15520132048516.html">Neo4j导入方式</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15420931314995.html">Objective vs. Cost vs. Loss vs. Error Function</a>
+			        <a href="15517601129865.html">neo4j案例</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15402913817590.html">将python生成的base64图片,在浏览器上展示出来</a>
+			        <a href="15505602742016.html">构建信用风险类型的特征</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15398508250689.html">Isolation Forest</a>
+			        <a href="15488325444778.html">XGBoost</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15396891344806.html">聚类算法评估指标</a>
+			        <a href="15488325386128.html">GBDT</a>
 			      </li>
 		     
 		  

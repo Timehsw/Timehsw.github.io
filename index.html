@@ -89,6 +89,10 @@
     <li><label>Categories</label></li>
 
         
+            <li><a href="ScoreCard.html">ScoreCard</a></li>
+        
+            <li><a href="Kg.html">Kg</a></li>
+        
             <li><a href="BigData.html">BigData</a></li>
         
             <li><a href="Python.html">Python</a></li>
@@ -168,14 +172,20 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15423390877662.html">
+                <a class="clearlink" href="15520132048516.html">
                 
-                  <h1>Pandas 中map, applymap and apply的区别</h1>
+                  <h1>Neo4j导入方式</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>Summing up, apply works on a row / column basis of a DataFrame, applymap works element-wise on a DataFrame, and map works element-wise on a Series.</p>
+                        	<p>初次使用Neo4j图数据库时,我们可能需要将在关系数据库或其他存储形式的数据批量导入到Neo4j图数据库中.因此,这里我将介绍怎样使用Neo4j导入工具来批量导入数据.<br/>
+目前,导入到Neo4j的工具有两种:</p>
+
+<ol>
+<li><code>load csv</code>指令.</li>
+<li><code>neo4j-import</code>工具.</li>
+</ol>
 
 
                         
@@ -184,11 +194,11 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15423390877662.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/11/16</span>
+                   <a href="15520132048516.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2019/3/8</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Python.html'>Python</a></span>
+          					    <span class="posted-in"><a href='Kg.html'>Kg</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -202,14 +212,20 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15420931314995.html">
+                <a class="clearlink" href="15517601129865.html">
                 
-                  <h1>Objective vs. Cost vs. Loss vs. Error Function</h1>
+                  <h1>neo4j案例</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p><strong><u>The function we want to minimize or maximize is called the objective function, or criterion. When we are minimizing it, we may also call it the cost function, loss function, or error function - these terms are synonymous. The cost function is used more in optimization problem and loss function is used in parameter estimation.</u></strong></p>
+                        	<p><a href="https://neo4j.com/graphgist/credit-card-fraud-detection">官网案例</a></p>
+
+<h1 id="toc_0">GraphGist: Credit Card Fraud Detection(使用图数据库进行盗刷欺诈侦测)</h1>
+
+<h1 id="toc_1">数据准备</h1>
+
+<p>建立节点 </p>
 
 
                         
@@ -218,11 +234,11 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15420931314995.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/11/13</span>
+                   <a href="15517601129865.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2019/3/5</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
+          					    <span class="posted-in"><a href='Kg.html'>Kg</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -236,30 +252,39 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15402913817590.html">
+                <a class="clearlink" href="15505602742016.html">
                 
-                  <h1>将python生成的base64图片,在浏览器上展示出来</h1>
+                  <h1>构建信用风险类型的特征</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>方便调试</p>
+                        	<p><strong>简述建模过程</strong></p>
 
-<pre class="line-numbers"><code class="language-text">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;show base64 pic&lt;/title&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div id=&#39;root&#39;&gt;
-        &lt;img src=&quot;data:image/png;base64,这里是base64的内容,替换掉即可(中文部分)&quot; /&gt;
-    &lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
+<ul>
+<li>数据预处理
+<ul>
+<li>时间格式</li>
+<li>缺失值</li>
+<li>极值</li>
+</ul></li>
+<li>特征构造
+<ul>
+<li>计数</li>
+<li>比例</li>
+<li>距离</li>
+</ul></li>
+<li>特征选择
+<ul>
+<li>相关性</li>
+<li>差异性</li>
+<li>显著性</li>
+</ul></li>
+<li><p>模型参数估计</p>
+<ul>
+<li>回归系数</li>
+<li>模型复杂度</li>
+</ul>
 
                         
                       </div>
@@ -267,11 +292,11 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15402913817590.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/10/23</span>
+                   <a href="15505602742016.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2019/2/19</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Python.html'>Python</a></span>
+          					    <span class="posted-in"><a href='ScoreCard.html'>ScoreCard</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -285,25 +310,23 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15398508250689.html">
+                <a class="clearlink" href="15488325444778.html">
                 
-                  <h1>Isolation Forest</h1>
+                  <h1>XGBoost</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>scikit-learn返回:是异常点(-1)或者不是异常点(1)</p>
+                        	<h1 id="toc_0">XGBoost概述</h1>
 
-<p><img src="media/15398508250689/15398521143637.jpg" alt=""/></p>
-
-<p>孤立森林--&gt;查看数据页面,如上所示<br/>
-原始数据的所有列,预测出来是否是异常值,也即是是否偏离(偏移即是-1),偏移度也就是decision_function算出来的值,返回样本的异常评分，值越小表示越有可能是异常样本<br/>
-data,model.predict(X_train),model.decision_function(X_train)</p>
-
-<pre class="line-numbers"><code class="language-text">df=pd.concat([pd.DataFrame(X_train),pd.Series(clf.predict(X_train)), pd.Series(clf.decision_function(X_train))], axis=1)
-
-df.columns = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
-</code></pre>
+<ul>
+<li>XGBoost是GBDT算法的一种变种，是一种常用的有监督集成学习算法；是一种伸缩性强、便捷的可并行构建模型的Gradient Boosting算法。
+<ul>
+<li>XGBoost官网：<a href="http://xgboost.readthedocs.io">http://xgboost.readthedocs.io</a> </li>
+<li>XGBoost Github源码位置：<a href="https://github.com/dmlc/xgboost">https://github.com/dmlc/xgboost</a></li>
+<li>XGBoost支持开发语言：Python、R、Java、Scala、C++等。</li>
+</ul></li>
+</ul>
 
                         
                       </div>
@@ -312,7 +335,7 @@ df.columns = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2018/10/18</span>
+                    <span class="date">2019/1/30</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -329,26 +352,22 @@ df.columns = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15396891344806.html">
+                <a class="clearlink" href="15488325386128.html">
                 
-                  <h1>聚类算法评估指标</h1>
+                  <h1>GBDT</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h1 id="toc_0">Not Given Label</h1>
-
-<h2 id="toc_1">1、Compactness(紧密性)(CP)</h2>
-
-
+                        	
                         
                       </div>
                   </div>
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15396891344806.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/10/16</span>
+                  
+                    <span class="date">2019/1/30</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
@@ -417,6 +436,10 @@ df.columns = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
                 <div class="side-content">
 
       	<p class="cat-list">
+        
+            <a href="ScoreCard.html"><strong>ScoreCard</strong></a>
+        
+            <a href="Kg.html"><strong>Kg</strong></a>
         
             <a href="BigData.html"><strong>BigData</strong></a>
         
@@ -491,31 +514,31 @@ df.columns = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
 	      
 		      
 			      <li class="post">
-			        <a href="15423390877662.html">Pandas 中map, applymap and apply的区别</a>
+			        <a href="15520132048516.html">Neo4j导入方式</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15420931314995.html">Objective vs. Cost vs. Loss vs. Error Function</a>
+			        <a href="15517601129865.html">neo4j案例</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15402913817590.html">将python生成的base64图片,在浏览器上展示出来</a>
+			        <a href="15505602742016.html">构建信用风险类型的特征</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15398508250689.html">Isolation Forest</a>
+			        <a href="15488325444778.html">XGBoost</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15396891344806.html">聚类算法评估指标</a>
+			        <a href="15488325386128.html">GBDT</a>
 			      </li>
 		     
 		  

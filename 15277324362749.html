@@ -89,6 +89,10 @@
     <li><label>Categories</label></li>
 
         
+            <li><a href="ScoreCard.html">ScoreCard</a></li>
+        
+            <li><a href="Kg.html">Kg</a></li>
+        
             <li><a href="BigData.html">BigData</a></li>
         
             <li><a href="Python.html">Python</a></li>
@@ -200,10 +204,9 @@
 
 <ol>
 <li>从训练集合中获取K个离待预测样本距离最近的样本数据;</li>
-<li>根据获取得到的K个样本数据来预测当前待预测样本的目标属性值</li>
+<li>根据获取得到的K个样本数据来预测当前待预测样本的目标属性值
+<img src="https://raw.githubusercontent.com/Timehsw/gitnote-images/master/img/20190304155219.png" alt=""/></li>
 </ol>
-
-<p><img src="media/15277324362749/15277329582308.jpg" alt=""/></p>
 
 <p>如上图所示,绿色圆要被决定赋予那一个类呢,是红色三角形还是蓝色矩形?</p>
 
@@ -232,7 +235,7 @@
 
 <p>在KNN分类应用中,一般采用对数投票或者加权多数表决法.</p>
 
-<p><img src="media/15277324362749/15277370065477.jpg" alt=""/></p>
+<p><img src="https://raw.githubusercontent.com/Timehsw/gitnote-images/master/img/20190304155311.png" alt=""/></p>
 
 <ul>
 <li><p><strong>多数表决法</strong>: 每个邻近样本的权重是一样的,也就是说最终预测的结果为出现类别最多的那个类,比如上图中蓝色矩形的最终类别为红色圆;</p></li>
@@ -242,7 +245,7 @@
 <h2 id="toc_4">KNN回归预测规则</h2>
 
 <p>在KNN回归应用中,一般采用平均值法或者加权平均值法.<br/>
-<img src="media/15277324362749/15277369863901.jpg" alt=""/></p>
+<img src="https://raw.githubusercontent.com/Timehsw/gitnote-images/master/img/20190304155337.png" alt=""/></p>
 
 <ul>
 <li><p><strong>平均值法</strong>: 每个邻近样本的权重是一样的,也就是说最终预测的结果为所有邻近样本的目标属性值的均值;比如上图中,蓝色方块的最终预测值为\((3+3+3+2+2)/5=2.6\).</p></li>
@@ -271,22 +274,22 @@
 
 <p>KD树采用从m个样本的n维特征中,分别计算n个特征取值的方差,用方差最大的第k维特征\(n_k\)作为根节点.对于这个特征,选择取值的中位数\(n_{kv}\)作为样本的划分点,对于小于该值的样本划分到左子树,对于大于等于该值的样本划分到右子树,对于左右子树采用同样的方式找方差最大的特征最为根节点,递归即可产生KD树.(可以认为方差越大,越具有区分能力)</p>
 
-<p><img src="media/15277324362749/15277383424878.jpg" alt="KD树构建过程"/></p>
+<p><img src="https://raw.githubusercontent.com/Timehsw/gitnote-images/master/img/20190304155438.png" alt=""/></p>
 
 <p>比如我们有二维样本6个，{(2,3)，(5,4)，(9,6)，(4,7)，(8,1)，(7,2)}，构建kd树的具体步骤如草稿所示<br/>
-<img src="media/15277324362749/15277404253921.jpg" alt=""/></p>
+<img src="https://raw.githubusercontent.com/Timehsw/gitnote-images/master/img/20190304155459.png" alt=""/></p>
 
 <p>构建的完整子树就如图所示<br/>
-<img src="media/15277324362749/15278193600353.jpg" alt=""/></p>
+<img src="https://raw.githubusercontent.com/Timehsw/gitnote-images/master/img/20190304155520.png" alt=""/></p>
 
 <h2 id="toc_8">KD Tree查找最近邻</h2>
 
 <p>当我们生成KD树以后,就可以去预测测试集里面的样本目标点了.对于一个目标点,我们首先在KD树里面找到包含目标点的叶子节点.以目标点为圆心,以目标点到叶子节点样本实例的距离为半径,得到一个超球体,最近邻的点一定在这个超球体内部.然后返回叶子节点的父节点,检查另一个子节点包含的超矩形体是否和超球体相交,如果相交就到这个子节点寻找是否有更加近的近邻,有的话就更新最近邻.如果不相交那就简单了,我们直接返回父节点的父节点,在另一个子树继续搜索最近邻.当回溯到根节点时,算法结束,此时保存的最近邻节点就是最终的最近邻.</p>
 
 <p>具体过程如图所示<br/>
-<img src="media/15277324362749/15277426727922.jpg" alt=""/></p>
+<img src="https://raw.githubusercontent.com/Timehsw/gitnote-images/master/img/20190304155545.png" alt=""/></p>
 
-<p><img src="media/15277324362749/15278221391077.jpg" alt=""/></p>
+<p><img src="https://raw.githubusercontent.com/Timehsw/gitnote-images/master/img/20190304155617.png" alt=""/></p>
 
 <h1 id="toc_9">参考引用</h1>
 
@@ -389,6 +392,10 @@ s.setAttribute('data-timestamp', +new Date());
 
       	<p class="cat-list">
         
+            <a href="ScoreCard.html"><strong>ScoreCard</strong></a>
+        
+            <a href="Kg.html"><strong>Kg</strong></a>
+        
             <a href="BigData.html"><strong>BigData</strong></a>
         
             <a href="Python.html"><strong>Python</strong></a>
@@ -462,31 +469,31 @@ s.setAttribute('data-timestamp', +new Date());
 	      
 		      
 			      <li class="post">
-			        <a href="15423390877662.html">Pandas 中map, applymap and apply的区别</a>
+			        <a href="15520132048516.html">Neo4j导入方式</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15420931314995.html">Objective vs. Cost vs. Loss vs. Error Function</a>
+			        <a href="15517601129865.html">neo4j案例</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15402913817590.html">将python生成的base64图片,在浏览器上展示出来</a>
+			        <a href="15505602742016.html">构建信用风险类型的特征</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15398508250689.html">Isolation Forest</a>
+			        <a href="15488325444778.html">XGBoost</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15396891344806.html">聚类算法评估指标</a>
+			        <a href="15488325386128.html">GBDT</a>
 			      </li>
 		     
 		  

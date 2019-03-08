@@ -89,6 +89,10 @@
     <li><label>Categories</label></li>
 
         
+            <li><a href="ScoreCard.html">ScoreCard</a></li>
+        
+            <li><a href="Kg.html">Kg</a></li>
+        
             <li><a href="BigData.html">BigData</a></li>
         
             <li><a href="Python.html">Python</a></li>
@@ -168,91 +172,111 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15198738146695.html">
+                <a class="clearlink" href="15202215461896.html">
                 
-                  <h1>saltstack web halite 界面部署文档</h1>
+                  <h1>三言两语Redis</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>安装saltstack webui halite管理界面,方便查看和操作<br/>
-安装部署自动化管理工具SaltStack.在管理多台服务器上,这个工具还是非常好使的,另外由于是 Python写的,也可以很方便的对其进行个性化修改.</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15198738146695.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/4/15</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15198747024709.html">
-                
-                  <h1>mysql赋给用户权限grant all privileges on</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h1 id="toc_0">权限问题</h1>
+                        	<h2 id="toc_0">redis的数据结构与对象</h2>
 
 <ul>
-<li><p>问题</p>
-<pre class="line-numbers"><code class="language-text">遇到了 SQLException: access denied for  @&#39;localhost&#39; (using password: no)
-</code></pre></li>
-<li><p>解决办法</p>
-<pre class="line-numbers"><code class="language-text">grant all privileges on *.* to joe@localhost identified by &#39;1&#39;;
-flush privileges;
+<li>数据库键总是一个字符串对象(string object)</li>
+<li>而数据库键的值可以是... 这五种对象中的其中一种
+<ul>
+<li>字符串对象(string object)</li>
+<li>列表对象(list object)</li>
+<li>哈希对象(hash object)</li>
+<li>集合对象(set object)</li>
+<li>有序集合对象(sorted set object)</li>
+</ul></li>
+</ul>
+
+<h2 id="toc_1">list</h2>
+
+<h3 id="toc_2">redis常用命令</h3>
+
+<table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>说明</th>
+<th>举例</th>
+<th>备注</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>lpush</td>
+<td>在list的左侧插入一个新元素</td>
+<td>lpush mylist “1&quot;</td>
+<td></td>
+</tr>
+<tr>
+<td>rpush</td>
+<td>在list的右侧插入一个新元素</td>
+<td>rpush mylist “2&quot;</td>
+<td></td>
+</tr>
+<tr>
+<td>lrange</td>
+<td>从list中指定一个范围来提取元素</td>
+<td>lrange mylist 0 -1 </td>
+<td>列出mylist中从编号0到倒数第一个元素</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_3">说明</h3>
+
+<p>redis中的list底层实现不是数组,而是链表.那么在头部和尾部插入一个新元素时候,其时间复杂度是常数级别的.有利必有弊,同时,链表型的lists的元素定位会比较慢.</p>
+
+<h3 id="toc_4">list应用场景</h3>
+
+<ul>
+<li>我们可以利用lists来实现一个消息队列，而且可以确保先后顺序，不必像MySQL那样还需要通过ORDER BY来进行排序</li>
+<li>利用LRANGE还可以很方便的实现分页的功能</li>
+<li>在博客系统中，每片博文的评论也可以存入一个单独的list中</li>
+</ul>
+
+<h2 id="toc_5">redis的原子性</h2>
+
+<pre class="line-numbers"><code class="language-text">127.0.0.1:6379&gt; set mynum &quot;2&quot;
+OK
+127.0.0.1:6379&gt; get mynum
+&quot;2&quot;
+127.0.0.1:6379&gt; incr mynum
+(integer) 3
+127.0.0.1:6379&gt; incr mynum
+(integer) 4
+127.0.0.1:6379&gt; incr mynum
+(integer) 5
 </code></pre>
 
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15198747024709.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/4/9</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Mysql.html'>Mysql</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
+<p>由于INCR等指令本身就具有原子操作的特性，所以我们完全可以利用redis的INCR、INCRBY、DECR、DECRBY等指令来实现原子计数的效果，假如，在某种场景下有3个客户端同时读取了mynum的值（值为2），然后对其同时进行了加1的操作，那么，最后mynum的值一定是5。不少网站都利用redis的这个特性来实现业务上的统计计数需求</p>
 
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15220377896292.html">
-                
-                  <h1>grep-sed-awk</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	
+<h2 id="toc_6">redis持久化</h2>
+
+<blockquote>
+<p>redis提供了两种持久化的方式,分别是RDB(Redis DataBase)和AOF(Append Only File)</p>
+</blockquote>
+
+<h3 id="toc_7">RDB(Redis DataBase)</h3>
+
+<p>简而言之，就是在不同的时间点，将redis存储的数据生成快照并存储到磁盘等介质上.</p>
+
+<h3 id="toc_8">AOF(Append Only File)</h3>
+
+<p>将redis执行过的所有写指令记录下来，在下次redis重新启动时，只要把这些写指令从前到后再重复执行一遍，就可以实现数据恢复了</p>
+
+<h3 id="toc_9">补充</h3>
+
+<p>其实RDB和AOF两种方式也可以同时使用，在这种情况下，如果redis重启的话，则会优先采用AOF方式来进行数据恢复，这是因为AOF方式的数据恢复完整度更高。</p>
+
+<p>如果没有数据持久化的需求，也完全可以关闭RDB和AOF方式，这样的话，redis将变成一个纯内存数据库，就像memcache一样.</p>
+
                         
                       </div>
                   </div>
@@ -260,10 +284,10 @@ flush privileges;
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2017/3/26</span>
+                    <span class="date">2017/5/15</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
+          					    <span class="posted-in"><a href='Redis.html'>Redis</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -277,16 +301,17 @@ flush privileges;
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15198739653579.html">
+                <a class="clearlink" href="15202199632361.html">
                 
-                  <h1>Linux 文件同步工具——rsync</h1>
+                  <h1>加强MacBook的预览功能</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">介绍</h2>
+                        	<h1 id="toc_0">安装brew cask</h1>
 
-<p>rsync是类unix系统下的数据镜像备份工具，从软件的命名上就可以看出来了——remote sync</p>
+<pre class="line-numbers"><code class="language-text">brew cask
+</code></pre>
 
 
                         
@@ -295,11 +320,11 @@ flush privileges;
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15198739653579.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/3/22</span>
+                   <a href="15202199632361.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/5/5</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
+          					    <span class="posted-in"><a href='Mac.html'>Mac</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -313,22 +338,20 @@ flush privileges;
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15198735152940.html">
+                <a class="clearlink" href="15202197720939.html">
                 
-                  <h1>Shell Skills</h1>
+                  <h1>Mac Brew 服务管理Redis,MySQL</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<blockquote>
-<p>写 shell 脚本两三技巧</p>
-</blockquote>
+                        	<p>当我在macbook上用brew安装了redis或者mysql服务后,我希望可以方便的查看服务的运行状态,方便的启动停止服务.<br/>
+然而brew没有这个功能,但是通过安装brewservices就可以管理通过brew安装的相关服务了.这样在开发的过程中就非常的方便了.</p>
 
-<h1 id="toc_0">Shell脚本编程30分钟入门</h1>
+<h1 id="toc_0">安装Homebrew</h1>
 
-<p><a href="https://github.com/qinjx/30min_guides/blob/master/shell.md">https://github.com/qinjx/30min_guides/blob/master/shell.md</a></p>
-
-<h1 id="toc_1">获取脚本的所处的当前路径</h1>
+<pre class="line-numbers"><code class="language-text">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre>
 
 
                         
@@ -337,11 +360,81 @@ flush privileges;
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15198735152940.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/3/12</span>
+                   <a href="15202197720939.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/5/4</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Shell.html'>Shell</a></span>
+          					    <span class="posted-in"><a href='Mac.html'>Mac</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15198743666304.html">
+                
+                  <h1>PythonVirtualenv总结</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>我的电脑是macbookpro.我在电脑里面分别装了python2.7和python3.6.</p>
+
+<p>当我用pip安装了virtual后,我如果想要对应版本的python</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15198743666304.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/5/1</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Python.html'>Python</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15198713708585.html">
+                
+                  <h1>zabbix 部署文档</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>记录下搭建过程,以免以后又重复花时间找搭建文档</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15198713708585.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/4/20</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -407,6 +500,10 @@ flush privileges;
                 <div class="side-content">
 
       	<p class="cat-list">
+        
+            <a href="ScoreCard.html"><strong>ScoreCard</strong></a>
+        
+            <a href="Kg.html"><strong>Kg</strong></a>
         
             <a href="BigData.html"><strong>BigData</strong></a>
         
@@ -481,31 +578,31 @@ flush privileges;
 	      
 		      
 			      <li class="post">
-			        <a href="15423390877662.html">Pandas 中map, applymap and apply的区别</a>
+			        <a href="15520132048516.html">Neo4j导入方式</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15420931314995.html">Objective vs. Cost vs. Loss vs. Error Function</a>
+			        <a href="15517601129865.html">neo4j案例</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15402913817590.html">将python生成的base64图片,在浏览器上展示出来</a>
+			        <a href="15505602742016.html">构建信用风险类型的特征</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15398508250689.html">Isolation Forest</a>
+			        <a href="15488325444778.html">XGBoost</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15396891344806.html">聚类算法评估指标</a>
+			        <a href="15488325386128.html">GBDT</a>
 			      </li>
 		     
 		  

@@ -89,6 +89,10 @@
     <li><label>Categories</label></li>
 
         
+            <li><a href="ScoreCard.html">ScoreCard</a></li>
+        
+            <li><a href="Kg.html">Kg</a></li>
+        
             <li><a href="BigData.html">BigData</a></li>
         
             <li><a href="Python.html">Python</a></li>
@@ -168,19 +172,15 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15199545224004.html">
+                <a class="clearlink" href="15209079363420.html">
                 
-                  <h1>思考</h1>
+                  <h1>大数据框架-开源协议</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">为什么有些人能够突飞猛进?</h2>
+                        	<p>知道我们经常用的开源框架的开源协议么?</p>
 
-<ul>
-<li>智商高</li>
-<li>有想法,有思路</li>
-</ul>
 
                         
                       </div>
@@ -188,11 +188,11 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
-                    <span class="date">2018/3/2</span>
+                   <a href="15209079363420.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/3/13</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Life.html'>Life</a></span>
+          					    <span class="posted-in"><a href='BigData.html'>BigData</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -206,19 +206,129 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15199040835190.html">
+                <a class="clearlink" href="15209051281712.html">
                 
-                  <h1>kafka-sparkstreaming长时间运行后异常退出原因分析</h1>
+                  <h1>fabric自动化部署</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">报错信息</h2>
+                        	<h2 id="toc_0">简介</h2>
 
-<pre class="line-numbers"><code class="language-text">Couldn`t find leader offsets for set([xxxxxxxxxxx,xx])
+<p>Fabric是一个用Python开发的部署工具，最大特点是不用登录远程服务器，在本地运行远程命令，几行Python脚本就可以轻松部署。</p>
 
-# 或者
-numRecords must not be negative
+<p>Fabric提供几个简单的API来完成所有的部署，最常用的是local()和run()，分别在本地和远程执行命令，put()可以把本地文件上传到远程，当需要在远程指定当前目录时，只需用with cd(&#39;/path/to/dir/&#39;):即可。</p>
+
+<p>默认情况下，当命令执行失败时，Fabric会停止执行后续命令。有时，我们允许忽略失败的命令继续执行，比如run(&#39;rm /tmp/abc&#39;)在文件不存在的时候有可能失败，这时可以用with settings(warn_only=True):执行命令，这样Fabric只会打出警告信息而不会中断执行。</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15209051281712.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/3/13</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Python.html'>Python</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15205689785115.html">
+                
+                  <h1>Zookeeper笔记</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">基础知识</h2>
+
+<h3 id="toc_1">znode</h3>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15205689785115.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/3/9</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Zookeeper.html'>Zookeeper</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15203071412162.html">
+                
+                  <h1>kafka-sparkstreaming自己维护offset</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">auto.offset.reset</h2>
+
+<p>By default, it will start consuming from the latest offset of each Kafka partition. If you set configuration auto.offset.reset in Kafka parameters to smallest, then it will start consuming from the smallest offset.</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15203071412162.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/3/6</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Spark.html'>Spark</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15202200627560.html">
+                
+                  <h1>查看linux系统负荷</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h1 id="toc_0">uptime</h1>
+
+<pre class="line-numbers"><code class="language-text">~ uptime
+17:54:40 up 846 days, 55 min, 10 users,  load average: 0.36, 0.33, 0.48
 </code></pre>
 
 
@@ -228,129 +338,11 @@ numRecords must not be negative
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15199040835190.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/3/1</span>
+                   <a href="15202200627560.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/3/5</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='Spark.html'>Spark</a></span>
-          				  
-          					    <span class="posted-in"><a href='Kafka.html'>Kafka</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15198768495613.html">
-                
-                  <h1>Elasticsearch：用Curator辅助Marvel，实现自动删除旧marvel索引</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>Marvel几乎是所有Elasticsearch用户的标配。Marvel保留观测数据的代价是，<br/>
-它默认每天会新建一个index，命名规律像是这样：.marvel-2017-12-10。<br/>
-marvel自建的索引一天可以产生大概500M的数据，而且将会越来越多，占的容量也将越来越大。<br/>
-有没有什么办法能让它自动过期？比如说只保留最近两天的观测数据，其他的都抛弃掉。</p>
-
-<p>当然有办法,curator就可以帮你实现.</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15198768495613.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/12/11</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ELK.html'>ELK</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15198746079468.html">
-                
-                  <h1>机器学习实战之朴素贝叶斯</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>朴素贝叶斯就是利用先验知识来解决后验概率，因为训练集中我们已经知道了每个单词在类别0和1中的概率，即p(w|c),<br/>
-我们就是要利用这个知识去解决在出现这些单词的组合情况下，类别更可能是0还是1,即p(c|w)。<br/>
-如果说之前的训练样本少，那么这个p(w|c)就更可能不准确，所以样本越多我们会觉得这个p(w|c)越可信。</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15198746079468.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/11/26</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='MachineLearning.html'>MachineLearning</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15198745641385.html">
-                
-                  <h1>Presto的学习笔记</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h1 id="toc_0">是什么?可以做什么?</h1>
-
-<ol>
-<li>Presto是一个开源的分布式SQL查询引擎，适用于交互式分析查询，数据量支持GB到PB字节。</li>
-<li>Presto支持在线数据查询，包括Hive, Cassandra, 关系数据库以及专有数据存储。 一条Presto查询可以将多个数据源的数据进行合并，可以跨越整个组织进行分析。</li>
-<li>作为Hive和Pig（Hive和Pig都是通过MapReduce的管道流来完成HDFS数据的查询）的替代者，Presto不仅可以访问HDFS，也可以操作不同的数据源，包括：RDBMS和其他的数据源（例如：Cassandra）。</li>
-<li>查询后的数据自动分页,这个很不错.</li>
-</ol>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15198745641385.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/10/11</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Presto.html'>Presto</a></span>
+          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -416,6 +408,10 @@ marvel自建的索引一天可以产生大概500M的数据，而且将会越来�
                 <div class="side-content">
 
       	<p class="cat-list">
+        
+            <a href="ScoreCard.html"><strong>ScoreCard</strong></a>
+        
+            <a href="Kg.html"><strong>Kg</strong></a>
         
             <a href="BigData.html"><strong>BigData</strong></a>
         
@@ -490,31 +486,31 @@ marvel自建的索引一天可以产生大概500M的数据，而且将会越来�
 	      
 		      
 			      <li class="post">
-			        <a href="15423390877662.html">Pandas 中map, applymap and apply的区别</a>
+			        <a href="15520132048516.html">Neo4j导入方式</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15420931314995.html">Objective vs. Cost vs. Loss vs. Error Function</a>
+			        <a href="15517601129865.html">neo4j案例</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15402913817590.html">将python生成的base64图片,在浏览器上展示出来</a>
+			        <a href="15505602742016.html">构建信用风险类型的特征</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15398508250689.html">Isolation Forest</a>
+			        <a href="15488325444778.html">XGBoost</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15396891344806.html">聚类算法评估指标</a>
+			        <a href="15488325386128.html">GBDT</a>
 			      </li>
 		     
 		  

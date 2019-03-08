@@ -2,7 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
   <loc>http://dmlcoding.com/</loc>
-  <lastmod>2019-01-28T18:19:08+08:00</lastmod>
+  <lastmod>2019-03-08T18:31:30+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://dmlcoding.com/15520132048516.html</loc>
+  <lastmod>2019-03-08T10:46:44+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://dmlcoding.com/15517601129865.html</loc>
+  <lastmod>2019-03-05T12:28:32+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://dmlcoding.com/15505602742016.html</loc>
+  <lastmod>2019-02-19T15:11:14+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://dmlcoding.com/15488325444778.html</loc>
+  <lastmod>2019-01-30T15:15:44+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://dmlcoding.com/15488325386128.html</loc>
+  <lastmod>2019-01-30T15:15:38+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://dmlcoding.com/15488325277802.html</loc>
+  <lastmod>2019-01-30T15:15:27+08:00</lastmod>
 </url>
 
 <url>
@@ -643,7 +673,7 @@
 
 <url>
   <loc>http://dmlcoding.com/about.html</loc>
-  <lastmod>2018-08-03T12:06:26+08:00</lastmod>
+  <lastmod>2019-03-08T18:28:45+08:00</lastmod>
 </url>
 
 <url>
@@ -653,9 +683,17 @@
 
 <url>
   <loc>http://dmlcoding.com/tools.html</loc>
-  <lastmod>2018-05-02T12:17:43+08:00</lastmod>
+  <lastmod>2019-03-08T18:25:08+08:00</lastmod>
 </url>
 
+
+<url>
+  <loc>http://dmlcoding.com/ScoreCard.html</loc>
+</url>
+
+<url>
+  <loc>http://dmlcoding.com/Kg.html</loc>
+</url>
 
 <url>
   <loc>http://dmlcoding.com/BigData.html</loc>
